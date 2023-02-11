@@ -19,12 +19,8 @@ const AdvItem: FC<AdvItemPropsTypes> = ({
                     <Col span={24}>
                         <div className={styles.img}>
                             <motion.div 
-                                whileHover={{
-                                    scale: 1.15,
-                                    transition: {
-                                        type: 'spring'
-                                    }
-                                }}
+                                whileHover={{scale: 1.15}}
+                                transition={{ type: "spring", stiffness: 400, damping: 17 }}    
                                 className={styles.el}>
                                 <Image src={img} alt={label}/>
                             </motion.div>
