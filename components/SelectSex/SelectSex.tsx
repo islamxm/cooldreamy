@@ -7,7 +7,7 @@ import maleIcon from '@/public/assets/icons/male-icon.svg';
 import femaleIcon from '@/public/assets/icons/female-icon.svg';
 import { useEffect } from 'react';
 import Ripple from '../Ripple/Ripple';
-
+import {motion} from 'framer-motion';
 
 const SelectSex: FC<SelectSexPropsTypes>  = ({
     value = 'male',
@@ -18,7 +18,12 @@ const SelectSex: FC<SelectSexPropsTypes>  = ({
     return (
         <div className={styles.wrapper}>
            
-            <div onClick={() => onSelect('male')} className={`${styles.item} ${styles.male} ${value == 'male' ? styles.active : ''} ${shadow ? styles.shadow : ''}`}>
+            <motion.div 
+                whileTap={{
+                    scale: 0.9,
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}   
+                onClick={() => onSelect('male')} className={`${styles.item} ${styles.male} ${value == 'male' ? styles.active : ''} ${shadow ? styles.shadow : ''}`}>
                 
                 <Col span={24}>
                     <Row gutter={[16,16]}>
@@ -35,8 +40,13 @@ const SelectSex: FC<SelectSexPropsTypes>  = ({
                 <Ripple
                     color='var(--light_purp_2)'
                     />
-            </div>
-            <div onClick={() => onSelect('female')} className={`${styles.item} ${styles.female} ${value == 'female' ? styles.active : ''} ${shadow ? styles.shadow : ''}`}>
+            </motion.div>
+            <motion.div 
+                 whileTap={{
+                    scale: 0.9,
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }} 
+                onClick={() => onSelect('female')} className={`${styles.item} ${styles.female} ${value == 'female' ? styles.active : ''} ${shadow ? styles.shadow : ''}`}>
                 <Col span={24}>
                     <Row gutter={[16,16]}>
                         <Col span={24}>
@@ -52,7 +62,7 @@ const SelectSex: FC<SelectSexPropsTypes>  = ({
                 <Ripple
                     color='var(--light_purp_1)'
                     />
-            </div>
+            </motion.div>
         </div>
     )
 }

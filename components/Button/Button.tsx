@@ -1,7 +1,9 @@
 import styles from './Button.module.scss';
-import {FC} from 'react';
+import {FC, useEffect, useRef} from 'react';
 import { ButtonPropsTypes, ButtonVariants } from './types';
 import {motion} from 'framer-motion';
+import ripple from 'ripple-effects'
+
 
 const Button: FC<ButtonPropsTypes> = ({
     text,
@@ -9,6 +11,15 @@ const Button: FC<ButtonPropsTypes> = ({
     disabled,
     onClick
 }) => {
+    const ref = useRef(null);
+
+    // useEffect(() => {
+    //     ripple(ref?.current, {
+    //         background: 'var(--purp)',
+    //         duration: 1000,
+    //         opacity: 0.2
+    //     })
+    // }, [])
 
     const switchVariant = (variant: ButtonVariants) => {
         switch(variant) {
@@ -21,12 +32,11 @@ const Button: FC<ButtonPropsTypes> = ({
 
     return (
         <motion.button 
+            ref={ref}
             whileTap={{
-                scale: 0.95,
-                transition: {
-                    duration: 0.2
-                }
+                scale: 0.9,
             }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }} 
             whileHover={{
                 boxShadow: '0.872px 9.962px 20px rgba(148, 45, 217, 0.35)',
             }}
