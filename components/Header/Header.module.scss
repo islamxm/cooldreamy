@@ -1,0 +1,68 @@
+.header {
+    padding: 12px 0;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+
+    &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        content: '';
+        transform: translateY(-50%);
+    }
+
+    .inner {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logo {
+            width: 115px;
+            height: 50px;
+            
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: flex;
+            }
+        }
+
+        .main {
+
+            .auth {
+                display: flex;
+                align-items: center;
+
+
+                .item {
+                    color: var(--violet);
+                    transition: all .3s ease;
+                    text-transform: uppercase;
+                    font-size: 15px;
+                    line-height: 21px;
+                    margin: 0 12px;
+                    font-weight: 500;
+                    letter-spacing: 5px;
+                    &:hover {
+                        color: var(--purp);
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
