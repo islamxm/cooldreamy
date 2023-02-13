@@ -17,7 +17,6 @@ const SelectSex: FC<SelectSexPropsTypes>  = ({
 
     return (
         <div className={styles.wrapper}>
-           
             <motion.div 
                 whileTap={{
                     scale: 0.9,
