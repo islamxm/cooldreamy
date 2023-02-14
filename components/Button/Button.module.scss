@@ -7,6 +7,9 @@
     font-weight: 500;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:disabled {
         opacity: .7;
@@ -14,9 +17,28 @@
         touch-action: none;
         filter:grayscale(0.7)
     }
+
+    .before {
+        margin-right: 8px;
+        font-size: 24px;
+        line-height: 24px;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .button.default {
     color: #fff;
     background: linear-gradient(166deg, #A058EA 0%, #6A61EC 100%);
+}
+
+.button.simple {
+    background: unset;
+    box-shadow: none !important;
+    color: var(--violet);
+    font-weight: 400;
+
+
 }

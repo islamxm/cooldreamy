@@ -9,7 +9,9 @@ const Button: FC<ButtonPropsTypes> = ({
     text,
     variant = 'default',
     disabled,
-    onClick
+    onClick,
+    style,
+    before
 }) => {
     const ref = useRef(null);
 
@@ -25,6 +27,8 @@ const Button: FC<ButtonPropsTypes> = ({
         switch(variant) {
             case 'default':
                 return styles.default
+            case 'simple':
+                return styles.simple
             case 'danger':
                 return styles.danger
         }
@@ -42,7 +46,13 @@ const Button: FC<ButtonPropsTypes> = ({
             }}
             disabled={disabled}
             onClick={onClick}
+            style={style}
             className={`${styles.button} ${switchVariant(variant)}`}>
+            {
+                before ? (
+                    <div className={styles.before}>{before}</div>
+                ) : null
+            }
             {text}
         </motion.button>
     )

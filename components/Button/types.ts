@@ -1,7 +1,8 @@
+import { MotionStyle } from "framer-motion";
 import { HTMLProps } from "react";
 
 
-export type ButtonVariants = 'default' | 'danger'; 
+export type ButtonVariants = 'default' | 'danger' | 'simple'; 
 
 
 export type ButtonPropsTypes = {
@@ -9,5 +10,7 @@ export type ButtonPropsTypes = {
     variant?: ButtonVariants,
     onClick?: React.ReactEventHandler | (() => void) | undefined;
     disabled?: boolean,
+    style?: MotionStyle,
+    before?: React.ReactNode | undefined
 }
 

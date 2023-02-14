@@ -7,15 +7,24 @@ import { selectDefType } from './types';
 const SelectDef:FC<selectDefType> = ({
     placeholder,
     list,
-    value    
+    value,
+    width,
+    label
 }) => {
+
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={{width: width}}>
+            {
+                label ? (
+                    <div className={styles.label}>{label}</div>
+                ) : null
+            }
             <Select
-                style={{minWidth: 230}}
+                style={{width: '100%'}}
                 placeholder={placeholder}
-                defaultValue={value}
+                // defaultValue={value}
                 options={list}
+                // value={value ? value : placeholder}
                 />
         </div>
     )
