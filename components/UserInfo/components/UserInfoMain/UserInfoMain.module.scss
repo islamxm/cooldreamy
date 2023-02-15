@@ -1,0 +1,41 @@
+.wrapper {
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #fff;
+
+    .part {
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--light_purp_1);
+
+        .label {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 23px;
+            margin-bottom: 5px;
+            color: var(--gray);
+        }
+
+        .text {
+            font-size: 18px;
+            line-height: 140%;
+        }
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -5px;
+            margin-right: -5px;
+
+            .item {
+                margin: 5px;
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                line-height: 27px;
+
+                div {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}

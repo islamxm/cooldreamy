@@ -27,6 +27,16 @@
         align-items: center;
         justify-content: center;
     }
+
+    .after {
+        margin-left: 8px;
+        font-size: 24px;
+        line-height: 24px;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .button.default {
@@ -39,6 +49,14 @@
     box-shadow: none !important;
     color: var(--violet);
     font-weight: 400;
+}
 
+.button.bordered {
+    border: 2px solid var(--violet);
+    color: var(--violet);
+    font-weight: 500;
+    background-color: #fff;
+    box-shadow: none !important;
 
+    
 }

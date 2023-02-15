@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    .side {
+        width: 300px;
+        padding-right: 15px;
+        flex: 0 0 auto;
+    }
+
+    .main {
+        width: 100%;
+        overflow: hidden;
+    }
+}

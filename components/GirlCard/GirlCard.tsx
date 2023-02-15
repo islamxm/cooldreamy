@@ -6,6 +6,7 @@ import { girlCardType } from './types';
 import {FaRegSmileWink} from 'react-icons/fa';
 import {FiMail} from 'react-icons/fi';
 import {AiOutlineStar} from 'react-icons/ai';
+import {BsCamera, BsCheck} from 'react-icons/bs';
 
 const GirlCard:FC<girlCardType> = ({
     image,
@@ -20,12 +21,16 @@ const GirlCard:FC<girlCardType> = ({
     return (
         <div className={styles.card}>
             <div className={styles.main}>
-                <div className={styles.photo_count}>{photoCount}</div>
-                {
-                    verified ? (
-                        <div className={styles.verif}></div>
-                    ) : null
-                }
+                <div className={styles.badges}>
+                    <div className={styles.photo_count}><BsCamera/>{photoCount}</div>
+                        {
+                        verified ? (
+                            <div className={styles.verif}><BsCheck/></div>
+                        ) : null
+                    }
+                </div>
+                
+                
                 <div className={styles.img}>
                     <Image src={image} alt=""/>
                 </div>

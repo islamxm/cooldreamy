@@ -6,6 +6,50 @@
     overflow: hidden;
     filter: drop-shadow(1px 4px 11px rgba(62, 57, 176, 0.11));
 
+
+    .badges {
+        display: flex;
+        position: absolute;
+        top: 15px;
+        left: 0;
+        align-items: center;
+
+
+        .photo_count {
+            min-width: 37px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            margin-right: 4px;
+            border-radius: 0 8px 8px 0;
+            color: var(--violet);
+            font-size: 11px;
+            line-height: 11px;
+    
+            svg {
+                margin-right: 3px;
+            }
+    
+        }
+        .verif {
+            width: 18px;
+            height: 18px;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            flex: 0 0 auto;
+            color: var(--violet);
+            font-size: 20px;
+            line-height: 20px;
+        }
+
+    }
+    
+
     .main {
         height: 235px;
 

@@ -11,7 +11,9 @@ const Button: FC<ButtonPropsTypes> = ({
     disabled,
     onClick,
     style,
-    before
+    before,
+    after,
+    hover = {boxShadow: '0.872px 9.962px 20px rgba(148, 45, 217, 0.35)'}
 }) => {
     const ref = useRef(null);
 
@@ -29,6 +31,8 @@ const Button: FC<ButtonPropsTypes> = ({
                 return styles.default
             case 'simple':
                 return styles.simple
+            case 'bordered':
+                return styles.bordered
             case 'danger':
                 return styles.danger
         }
@@ -41,9 +45,7 @@ const Button: FC<ButtonPropsTypes> = ({
                 scale: 0.9,
             }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }} 
-            whileHover={{
-                boxShadow: '0.872px 9.962px 20px rgba(148, 45, 217, 0.35)',
-            }}
+            whileHover={hover}
             disabled={disabled}
             onClick={onClick}
             style={style}
@@ -54,6 +56,11 @@ const Button: FC<ButtonPropsTypes> = ({
                 ) : null
             }
             {text}
+            {
+                after ? (
+                    <div className={styles.after}>{after}</div>
+                ) : null
+            }
         </motion.button>
     )
 }
