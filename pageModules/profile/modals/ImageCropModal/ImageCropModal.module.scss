@@ -1,0 +1,22 @@
+.wrapper {
+    background-color: #fff;
+
+    .head {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 18px;
+        line-height: 140%;
+    }
+
+    .main {
+        height: 600px;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: var(--gray);
+        margin-bottom: 22px;
+    }
+    
+    .action {
+        
+    }
+}

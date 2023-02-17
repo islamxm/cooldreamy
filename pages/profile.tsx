@@ -7,11 +7,23 @@ import { Row, Col } from "antd";
 import img from '@/public/assets/images/my-img.png';
 import Button from "@/components/Button/Button";
 import UserInfo from "@/pageModules/profile/components/UserInfo/UserInfo";
+import ImageCropModal from "@/pageModules/profile/modals/ImageCropModal/ImageCropModal";
+import {useState} from 'react';
 
 const Profile = () => {
+    const [imageEditModal, setImageEditModal] = useState(false)
+
+    const closeImageEditModal = () => setImageEditModal(false)
+    const openImageEditModal = () => setImageEditModal(true)
 
     return (
         <Container>
+
+            {/* edit image */}
+            <ImageCropModal open={imageEditModal} onClose={closeImageEditModal}/>
+            {/* edit image */}
+
+
             <MainLayout>
                 <Sidebar/>
                 <UserLayout
