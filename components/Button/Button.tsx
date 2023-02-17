@@ -43,8 +43,8 @@ const Button: FC<ButtonPropsTypes> = ({
             ref={ref}
             whileTap={{
                 scale: 0.9,
-            }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }} 
+                transition: {type: "spring", stiffness: 400, damping: 17}
+            }} 
             whileHover={hover}
             disabled={disabled}
             onClick={onClick}

@@ -4,6 +4,9 @@ import { Row, Col } from 'antd';
 import UserImageSlider from './components/UserImageSlider/UserImageSlider';
 import UserInfoMain from './components/UserInfoMain/UserInfoMain';
 import UserInfoAction from './components/UserInfoAction/UserInfoAction';
+
+
+
 const UserInfo:FC = () => {
     return (
         <div className={styles.wrapper}>
