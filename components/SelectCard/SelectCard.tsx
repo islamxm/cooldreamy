@@ -31,7 +31,12 @@ const SelectCard:FC<selectCardPropsTypes> = ({
                 <Row gutter={[5,5]}>
                     <Col span={24}>
                         <div className={styles.img}>
-                            <Image width={90} height={90} src={image} alt={label}/>
+                            {
+                                image ? (
+                                    <Image width={90} height={90} src={image} alt={label}/>
+                                ) : null
+                            }
+                            
                         </div>
                     </Col>
                     <Col span={24}>

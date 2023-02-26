@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image"
 
 export type selectCardPropsTypes = {
-    image: StaticImageData,
+    image?: StaticImageData,
     label: string,
     onSelect: (e: string) => void,
     isSelect: boolean,

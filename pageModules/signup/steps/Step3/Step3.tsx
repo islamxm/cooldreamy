@@ -28,13 +28,13 @@ const interestVals: selectCardPropsTypes[] = [
         onSelect: () => {},
         isSelect: false
     },
-    {
-        label: 'Кино',
-        image: img3,
-        value: '3',
-        onSelect: () => {},
-        isSelect: false
-    },
+    // {
+    //     label: 'Кино',
+    //     image: img3,
+    //     value: '3',
+    //     onSelect: () => {},
+    //     isSelect: false
+    // },
     {
         label: 'Путешествия',
         image: img4,
@@ -50,12 +50,83 @@ const interestVals: selectCardPropsTypes[] = [
         isSelect: false
     },
     {
-        label: 'Авто',
+        label: 'Машины',
         image: img6,
         value: '6',
         onSelect: () => {},
         isSelect: false
     },
+    {
+        label: 'Искусство',
+        image: null,
+        value: '7',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'IT',
+        image: null,
+        value: '8',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'Финансы и инвестиции',
+        image: null,
+        value: '9',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'Наука',
+        image: null,
+        value: '9',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'Бары и рестораны',
+        image: null,
+        value: '10',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'Экстрим',
+        image: null,
+        value: '11',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'Природа',
+        image: null,
+        value: '12',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'Литература',
+        image: null,
+        value: '12',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'Шоппинг',
+        image: null,
+        value: '12',
+        onSelect: () => {},
+        isSelect: false
+    },
+    {
+        label: 'Танцы',
+        image: null,
+        value: '12',
+        onSelect: () => {},
+        isSelect: false
+    }
+    
 ]
 
 

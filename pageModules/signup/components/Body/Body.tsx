@@ -11,6 +11,12 @@ import { interestTypes, targetTypes } from '../../types';
 import Step1 from '../../steps/Step1/Step1';
 import Step2 from '../../steps/Step2/Step2';
 import Step3 from '../../steps/Step3/Step3';
+import Step4 from '../../steps/Step4/Step4';
+import Step5 from '../../steps/Step5/Step5';
+import Step6 from '../../steps/Step6/Step6';
+import Step7 from '../../steps/Step7/Step7';
+import Step8 from '../../steps/Step8/Step8';
+
 const Body:FC = () => {
     const [currentStep, setCurrentStep] = useState(0)
     const [nextBtn, setNextBtn] = useState(false)
@@ -46,6 +52,16 @@ const Body:FC = () => {
                 return <Step2/>
             case 2:
                 return <Step3/>
+            case 3:
+                return <Step4/>
+            case 4:
+                return <Step5/>
+            case 5:
+                return <Step6/>
+            case 6:
+                return <Step7/>
+            case 7:
+                return <Step8/>
             default:
                 return null; 
                 
@@ -86,7 +102,7 @@ const Body:FC = () => {
                                                 <div className={styles.action}>
                                                     <Button
                                                         disabled={nextBtn}
-                                                        onClick={() => setCurrentStep(s => ++s)}
+                                                        onClick={() => setCurrentStep(s => s < 7 ? ++s : 7)}
                                                         text='Продолжить'
                                                         />
                                                 </div>
