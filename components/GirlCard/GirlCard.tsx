@@ -32,7 +32,10 @@ const GirlCard:FC<girlCardType> = ({
                 
                 
                 <div className={styles.img}>
-                    <Image src={image} alt=""/>
+                    <Image
+                        placeholder={'blur'} 
+                        src={image} 
+                        alt=""/>
                 </div>
             </div>
             <div className={styles.body}>
