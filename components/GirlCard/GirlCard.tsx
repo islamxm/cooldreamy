@@ -7,6 +7,7 @@ import {FaRegSmileWink} from 'react-icons/fa';
 import {FiMail} from 'react-icons/fi';
 import {AiOutlineStar} from 'react-icons/ai';
 import {BsCamera, BsCheck} from 'react-icons/bs';
+import Link from 'next/link';
 
 const GirlCard:FC<girlCardType> = ({
     image,
@@ -15,7 +16,8 @@ const GirlCard:FC<girlCardType> = ({
     online,
     photoCount,
     verified,
-    age
+    age,
+    link = '/users/user_id'
 }) => {
 
     return (
@@ -31,12 +33,12 @@ const GirlCard:FC<girlCardType> = ({
                 </div>
                 
                 
-                <div className={styles.img}>
+                <Link href={link} className={styles.img}>
                     <Image
                         placeholder={'blur'} 
                         src={image} 
                         alt=""/>
-                </div>
+                </Link>
             </div>
             <div className={styles.body}>
                 <div className={styles.action}>

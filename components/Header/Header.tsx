@@ -29,7 +29,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                         {
                             auth ? (
                                 <div className={styles.auth}>
-                                    <Link className={styles.item} href={'/start'}>ВХОД</Link>
+                                    <Link className={styles.item} href={'/search'}>ВХОД</Link>
                                     <Link className={styles.item} href={'/signup'}>РЕГИСТРАЦИЯ</Link>
                                 </div>
                             ) : null

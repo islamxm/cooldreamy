@@ -5,5 +5,6 @@ export type girlCardType = {
     name?: string,
     location?: string,
     photoCount?: number,
-    age?: string | number
+    age?: string | number,
+    link?: URL
 }
