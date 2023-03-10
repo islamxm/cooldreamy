@@ -6,7 +6,7 @@ import {FiSearch} from 'react-icons/fi';
 import {IoChatbubblesOutline} from 'react-icons/io5';
 import {FiUsers, FiHeart, FiSettings} from 'react-icons/fi';
 import {RxExit} from 'react-icons/rx';
-
+import { useRouter } from 'next/router';
 
 const menuList:menuItemType[] = [
     {
@@ -15,39 +15,34 @@ const menuList:menuItemType[] = [
         icon: <FiSearch/>,
         badge: 0,
         onClick: () => {},
-        isActive: false
     },
     {
         label: 'Мои переписки',
-        link: '/',
+        link: '/chat',
         icon: <IoChatbubblesOutline/>,
         badge: 3,
         onClick: () => {},
-        isActive: false
     },
     {
         label: 'Знакомства',
-        link: '/',
+        link: '/dating',
         icon: <FiUsers/>,
         badge: 0,
         onClick: () => {},
-        isActive: false
     },
     {
         label: 'Симпатии',
-        link: '/',
+        link: '/sympathy',
         icon: <FiHeart/>,
         badge: 21,
         onClick: () => {},
-        isActive: false
     },
     {
         label: 'Настройки',
-        link: '/',
+        link: '/settings',
         icon: <FiSettings/>,
         badge: 0,
         onClick: () => {},
-        isActive: false
     },
     {
         label: 'Выход',
@@ -55,13 +50,14 @@ const menuList:menuItemType[] = [
         icon: <RxExit/>,
         badge: 0,
         onClick: () => {},
-        isActive: false
     },
     
 ]
 
 
 const Menu = () => {
+    const {pathname} = useRouter()
+
 
     return (
         <div className={styles.menu}>
@@ -70,6 +66,7 @@ const Menu = () => {
                     <div className={styles.item} key={index}>
                         <MenuItem
                             {...item}
+                            isActive={pathname === item.link}
                             />
                     </div>
                 ))

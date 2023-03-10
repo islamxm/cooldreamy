@@ -4,6 +4,9 @@ import Container from "@/components/Container/Container";
 import { Row, Col } from "antd";
 import Streams from "@/components/Streams/Streams";
 import SearchBody from "@/pageModules/search/components/searchBody/SearchBody";
+
+
+
 const SearchPage = () => {
     
     return (

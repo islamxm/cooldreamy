@@ -16,7 +16,7 @@ const MenuItem:FC<menuItemType> = ({
 
     if(link) {
         return (
-            <Link href={link} className={styles.item}>
+            <Link href={link} className={`${styles.item} ${isActive ? styles.active : ''}`}>
                 {
                     badge  ? (
                         <div className={styles.badge}>{badge < 100 ? badge : 99}</div>

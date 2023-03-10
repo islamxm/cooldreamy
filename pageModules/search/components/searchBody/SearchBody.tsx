@@ -6,6 +6,15 @@ import { girlCardType } from '@/components/GirlCard/types';
 import GirlCard from '@/components/GirlCard/GirlCard';
 import img from '@/public/assets/images/girl.png';
 import Pagination from '@/components/Pagination/Pagination';
+import { useState } from 'react';
+import { tabItemPropsTypes } from '../../types';
+
+const tabs:tabItemPropsTypes[] = [
+    {label: 'Все', id: '1'},
+    {label: 'Рядом', id: '2'},
+    {label: 'Новые', id: '3'},
+    {label: 'Онлайн', id: '4'},
+]
 
 
 const list:girlCardType[] = [
@@ -20,6 +29,9 @@ const list:girlCardType[] = [
 
 
 const SearchBody = () => {
+    // const [activeTab, setActiveTab]
+    const [activeTab, setActiveTab] = useState('1');
+
     return (
         <div className={styles.wrapper}>
             <Row gutter={[10,10]}>
@@ -27,7 +39,11 @@ const SearchBody = () => {
                     <SearchFilter/>
                 </Col>
                 <Col span={24}>
-                    <SearchInfo/>
+                    <SearchInfo
+                        tabs={tabs}
+                        activeTab={activeTab}
+                        onChange={setActiveTab}
+                        />
                 </Col>
                 <Col span={24}>
                     <Row gutter={[12,12]}>

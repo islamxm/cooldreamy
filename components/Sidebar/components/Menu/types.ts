@@ -3,6 +3,6 @@ export type menuItemType = {
     link: string | undefined,
     icon: React.ReactNode,
     badge: number,
-    onClick: () => void,
-    isActive: boolean
+    onClick: (...args: any[]) => void,
+    isActive?: boolean,
 }
