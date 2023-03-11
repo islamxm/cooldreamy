@@ -15,6 +15,7 @@ const Tabs:FC<tabsPropsType> = ({
             {
                 list?.map((item, index) => (
                     <motion.button 
+                        onClick={() => onChange(item.id)}
                         whileTap={{scale: 0.9}}
                         transition={{type: 'spring', stiffness: 400, damping: 17}}
                         className={`${styles.item} ${activeItem && activeItem === item.id ? styles.active : ''}`}

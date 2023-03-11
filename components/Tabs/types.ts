@@ -1,12 +1,12 @@
 export type tabsPropsType = {
-    onChange?: () => void,
+    onChange: (...args: any[]) => any,
     list: tabItemType[],
-    activeItem?: number
+    activeItem?: number | string
 }
 
 
-type tabItemType = {
-    id: number,
+export type tabItemType = {
+    id: number | string,
     badge?: number,
     label: string,
 }
