@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'standalone',
+  output: 'standalone', //ftp
   reactStrictMode: true,
   compiler: {
     styledComponents: true
   },
-  // images: {
-  //   unoptimized: true
-  // }
+  images: { //ftp
+    unoptimized: true
+  }
 }
 
 module.exports = nextConfig
