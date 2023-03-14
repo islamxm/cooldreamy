@@ -13,7 +13,8 @@ const Button: FC<ButtonPropsTypes> = ({
     style,
     before,
     after,
-    hover = {boxShadow: '0.872px 9.962px 20px rgba(148, 45, 217, 0.35)'}
+    hover = {boxShadow: '0.872px 9.962px 20px rgba(148, 45, 217, 0.35)'},
+    fill
 }) => {
     const ref = useRef(null);
 
@@ -49,7 +50,7 @@ const Button: FC<ButtonPropsTypes> = ({
             disabled={disabled}
             onClick={onClick}
             style={style}
-            className={`${styles.button} ${switchVariant(variant)}`}>
+            className={`${styles.button} ${switchVariant(variant)} ${fill ? styles.fill : ''}`}>
             {
                 before ? (
                     <div className={styles.before}>{before}</div>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import {FC} from 'react';
 import { userCardPropsTypes } from './types';
 import {BsCheck2} from 'react-icons/bs';
+import Link from 'next/link';
 
 const UserCard:FC<userCardPropsTypes> = ({
     children,

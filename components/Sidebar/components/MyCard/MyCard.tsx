@@ -2,11 +2,12 @@ import styles from './MyCard.module.scss';
 import avatar from '@/public/assets/images/my-avatar.png';
 import Image from 'next/image';
 import {FC} from 'react';
+import Link from 'next/link';
 
 const MyCard:FC = () => {
     
     return (
-        <div className={styles.card}>
+        <Link href={'/profile'} className={styles.card} >
             <div className={styles.main}>
                 <div className={styles.avatar}>
                     <Image src={avatar} alt="avatar"/>
@@ -23,7 +24,7 @@ const MyCard:FC = () => {
             <div className={styles.balance}>
                 Баланс: 5 кредитов
             </div>
-        </div>
+        </Link>
     )
 }
 

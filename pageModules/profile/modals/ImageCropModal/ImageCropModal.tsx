@@ -23,6 +23,7 @@ const ImageCropModal:FC<modalPropsType> = ({
             width={620}
             onCancel={onCancel}
             className={`${styles.wrapper} modal`}
+            footer={false}
             >
             <div className={styles.head}>Выбранная область будет показана на Вашей странице</div>
             <div className={styles.main}></div>
@@ -30,12 +31,14 @@ const ImageCropModal:FC<modalPropsType> = ({
                 <Row gutter={[10, 10]}>
                     <Col span={12}>
                         <Button
+                            fill
                             text='Сохранить'
                             style={{padding: '8px 10px', fontSize: 18}}
                             />
                     </Col>
                     <Col span={12}>
                         <Button
+                            fill
                             style={{padding: '8px 10px', fontSize: 18}}
                             text='Отменить'
                             variant={'bordered'}
