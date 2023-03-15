@@ -10,10 +10,13 @@ const Input: React.FC<InputPropsTypes> = ({
     valid,
     beforeIcon,
     placeholder,
-    onChange
+    onChange,
+    wrapperStyle,
+    style,
+    afterIcon
 }) => {
     return (
-        <div className={`${styles.wrapper} ${error ? styles.error : ''} ${beforeIcon ? styles.before : ''}`}>
+        <div className={`${styles.wrapper} ${error ? styles.error : ''} ${beforeIcon ? styles.before : ''}`} style={wrapperStyle}>
             <div className={styles.input_wrapper}>
                 {
                     valid && (
@@ -30,12 +33,20 @@ const Input: React.FC<InputPropsTypes> = ({
                     )
                 }
                 <input 
+                    style={style}
                     onChange={onChange} 
                     value={value} 
                     type={type} 
                     placeholder={placeholder}
                     className={styles.input}
                     />
+                {
+                    afterIcon && (
+                        <div className={styles.after_icon}>
+                            {afterIcon}
+                        </div>
+                    )
+                }
             </div>
             {
                 error && (

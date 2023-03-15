@@ -1,7 +1,11 @@
 export type tabsPropsType = {
     onChange: (...args: any[]) => any,
     list: tabItemType[],
-    activeItem?: number | string
+    activeItem?: number | string,
+    style?: React.CSSProperties,
+    activeColor?: string,
+    defaultColor?: string,
+    tabItemStyle?: React.CSSProperties
 }
 
 

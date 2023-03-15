@@ -3,6 +3,7 @@ import avatar from '@/public/assets/images/my-avatar.png';
 import Image from 'next/image';
 import {FC} from 'react';
 import Link from 'next/link';
+import UserTitle from '@/components/UserTitle/UserTitle';
 
 const MyCard:FC = () => {
     
@@ -13,9 +14,11 @@ const MyCard:FC = () => {
                     <Image src={avatar} alt="avatar"/>
                 </div>
                 <div className={styles.body}>
-                    <div className={styles.name}>
-                        Александр, 26
-                    </div>
+                    <UserTitle
+                        username='Александр'
+                        age='26'
+                        style={{fontSize: 18}}
+                        />
                     <div className={styles.loc}>
                     Киев,Украина
                     </div>

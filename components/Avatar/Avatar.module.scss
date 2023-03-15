@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+
+    .in {
+        overflow: hidden;
+        border-radius: 8px;
+        
+        img {
+            object-fit: cover;
+            display: flex;
+        }
+    }
+}
+
+.wrapper.round {
+    .in {
+        border-radius: 100%;
+
+    }
+}

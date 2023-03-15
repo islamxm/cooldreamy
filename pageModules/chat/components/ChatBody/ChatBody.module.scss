@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    
+    .sidebar {
+        width: 300px;
+        flex: 0 0 auto;
+    }
+
+    .main {
+        width: 100%;
+    }
+}

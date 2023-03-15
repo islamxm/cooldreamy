@@ -8,10 +8,14 @@ import Badge from '../Badge/Badge';
 const Tabs:FC<tabsPropsType> = ({
     onChange,
     activeItem,
-    list
+    list,
+    style,
+    defaultColor = '#fff',
+    activeColor = 'var(--light_purp_1)',
+    tabItemStyle
 }) => {
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={style}>
             {
                 list?.map((item, index) => (
                     <motion.button 
@@ -19,6 +23,7 @@ const Tabs:FC<tabsPropsType> = ({
                         whileTap={{scale: 0.9}}
                         transition={{type: 'spring', stiffness: 400, damping: 17}}
                         className={`${styles.item} ${activeItem && activeItem === item.id ? styles.active : ''}`}
+                        style={{backgroundColor: activeItem == item.id ? activeColor : defaultColor, ...tabItemStyle}}
                         key={index}
                         >   
                         <div className={styles.label}>{item.label}</div>
