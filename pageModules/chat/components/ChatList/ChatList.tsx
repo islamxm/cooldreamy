@@ -1,7 +1,7 @@
 import styles from './ChatList.module.scss';
 import ChatItem from '../ChatItem/ChatItem';
 import { useRouter } from 'next/router';
-import {useEffect} from 'react';
+import PromoBadge from '../PromoBadge/PromoBadge';
 
 const list = new Array(20).fill(1);
 
@@ -15,7 +15,7 @@ const ChatList = () => {
 
     return (
         <div className={`${styles.wrapper} custom-scroll-vertical`}>
-            
+            <PromoBadge/>
             {
                 list?.map((item, index) => (
                     <ChatItem

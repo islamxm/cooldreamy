@@ -4,14 +4,21 @@ import Image from 'next/image';
 import {FC} from 'react';
 import Link from 'next/link';
 import UserTitle from '@/components/UserTitle/UserTitle';
+import Avatar from '@/components/Avatar/Avatar';
 
 const MyCard:FC = () => {
     
     return (
         <Link href={'/profile'} className={styles.card} >
             <div className={styles.main}>
-                <div className={styles.avatar}>
+                {/* <div className={styles.avatar}>
                     <Image src={avatar} alt="avatar"/>
+                </div> */}
+                <div className={styles.avatar}>
+                    <Avatar
+                        round
+                        image={avatar}
+                        />
                 </div>
                 <div className={styles.body}>
                     <UserTitle

@@ -5,7 +5,7 @@ const Dialog = () => {
 
     return (
         <div className={styles.wrapper}>
-
+            
         </div>
     )
 }

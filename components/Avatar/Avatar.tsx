@@ -2,7 +2,7 @@ import Image from "next/image"
 import { avatarPropsTypes } from "./types"
 import styles from './Avatar.module.scss';
 import placeholder from '@/public/assets/images/avatar-placeholder.png';
-
+import {HiOutlineCheck} from 'react-icons/hi';
 
 const Avatar = ({
     image,
@@ -24,14 +24,17 @@ const Avatar = ({
                     alt={'avatar'}
                     />
 
-                {
-                    verified ? (
-                        <div className={styles.verified}>
-                            
-                        </div>
-                    ) : null
-                }
+                
             </div>
+            {
+                verified ? (
+                    <div className={styles.verified}>
+                        <HiOutlineCheck/>
+                    </div>
+                ) : null
+            }
         </div>
     )
 }
+
+export default Avatar;

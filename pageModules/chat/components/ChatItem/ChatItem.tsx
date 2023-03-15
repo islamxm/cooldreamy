@@ -9,7 +9,7 @@ import LinesEllipsis from 'react-lines-ellipsis'
 import Badge from '@/components/Badge/Badge';
 import {BiCheckDouble} from 'react-icons/bi';
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai';
-
+import Avatar from '@/components/Avatar/Avatar';
 
 const ChatItem = ({
     isActive,
@@ -21,14 +21,22 @@ const ChatItem = ({
 
     return (
         <Link href={`/chat/${id}`} className={`${styles.wrapper} ${isActive ? styles.active : ''}`}>
-            <div className={styles.avatar}>
+            {/* <div className={styles.avatar}>
                 <Image
                     src={avatarImg}
                     width={63}
                     height={63}
                     alt="avatar"
                     />
-            </div> 
+                
+            </div>  */}
+            <div className={styles.avatar}>
+                <Avatar
+                    size={63}
+                    verified
+                    image={avatarImg}    
+                    />
+            </div>
             <div className={styles.body}>
                 <div className={styles.main}>
                     <Row gutter={[2,2]}>

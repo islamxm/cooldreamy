@@ -2,7 +2,7 @@ import { MotionStyle, VariantLabels, TargetAndTransition } from "framer-motion";
 import { HTMLProps } from "react";
 
 
-export type ButtonVariants = 'default' | 'danger' | 'simple' | 'bordered'; 
+export type ButtonVariants = 'default' | 'danger' | 'simple' | 'bordered' | 'white'; 
 
 
 export type ButtonPropsTypes = {
@@ -14,6 +14,7 @@ export type ButtonPropsTypes = {
     before?: React.ReactNode | undefined,
     after?: React.ReactNode | undefined,
     hover?: VariantLabels | TargetAndTransition,
-    fill?: boolean
+    fill?: boolean,
+    small?: boolean
 }
 

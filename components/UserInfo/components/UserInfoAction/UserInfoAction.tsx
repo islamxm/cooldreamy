@@ -2,13 +2,20 @@ import styles from './UserInfoAction.module.scss';
 import {FiHeart} from 'react-icons/fi';
 import {FaRegSmileWink} from 'react-icons/fa';
 import {AiOutlineStar} from 'react-icons/ai';
+import UserTitle from '@/components/UserTitle/UserTitle';
+
 
 const UserInfoAction = () => {
     return (
         <div className={`${styles.wrapper} ${styles.online}`}>
             <div className={styles.main}>
                 <div className={styles.name}>
-                    Виктория, 23
+                    <UserTitle
+                        username='Виктория'
+                        age='23'
+                        isOnline
+                        style={{fontSize: 24}}
+                        />
                 </div>
                 <div className={styles.location}>
                     Киев, Украина
