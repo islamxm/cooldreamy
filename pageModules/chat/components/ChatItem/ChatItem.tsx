@@ -6,6 +6,7 @@ import { chatItemPropsTypes } from '../../types';
 import UserTitle from '@/components/UserTitle/UserTitle';
 import {Row, Col} from 'antd';
 import LinesEllipsis from 'react-lines-ellipsis'
+
 import Badge from '@/components/Badge/Badge';
 import {BiCheckDouble} from 'react-icons/bi';
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai';
