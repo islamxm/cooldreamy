@@ -8,6 +8,17 @@ const nextConfig = {
   // images: { //ftp
   //   unoptimized: true
   // }
+  // images: {
+  //   formats: ['image/png', 'image/jpg'],
+  //   remotePatterns: [
+  //     {
+  //       protocol: 'https',
+  //       hostname: 'zamanilka.ru',
+  //       port: '',
+  //       pathname: '/wp-content/uploads/**',
+  //     },
+  //   ],
+  // },
 }
 
 module.exports = nextConfig
