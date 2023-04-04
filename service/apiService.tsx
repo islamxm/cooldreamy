@@ -10,6 +10,31 @@ const headers = {
 
 class ApiService {
 
+
+    register = async (
+        name?: string,
+        email?: string,
+        password?: string,
+        gender?: 'male' | 'female',
+        state?: string,
+        country?: string,
+    ) => {
+        try {
+            let res = await fetch(endpoints.register + 
+            `?name=${name}&email=${email}&password=${password}&gender=${gender}&state=${state}&country=${country}`
+            , {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json',
+                }
+            })
+
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     getFeed = async () => {
         try {
             let res = await fetch(endpoints.feeds + `?page=4`, {

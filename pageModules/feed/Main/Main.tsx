@@ -6,27 +6,36 @@ import {HiHeart} from 'react-icons/hi';
 import {useEffect, useState, useCallback} from 'react';
 import Card from './components/Card/Card';
 import ApiService from '@/service/apiService';
+import { reverse } from 'dns';
 const service = new ApiService()
 
 const Main = ({data}: {data: IFeedCard[]}) => {
     const [currentCard, setCurrentCard] = useState<number>(0);
-    const [list, setList] = useState<IFeedCard[]>()
+    const [list, setList] = useState<IFeedCard[]>([])
     
-    const onLike = useCallback(() => {
+    const onLike = () => {
         if(currentCard) {
             service.feedItemLike(currentCard).then(res => {
                 console.log(res)
+                console.log(currentCard)
+                if(res?.message == 'success') {
+                    setList(s => s.filter((i, index) => index !== 0))
+                }
             })
-        }   
-    }, [currentCard])
+        } 
+    }
 
-    const onCancel = useCallback(() => {
+    const onCancel = () => {
         if(currentCard) {
             service.feedItemSkip(currentCard).then(res => {
                 console.log(res)
+                console.log(currentCard)
+                if(res?.message == 'success') {
+                    setList(s => s.filter((i, index) => index !== 0))
+                }
             })
         }
-    }, [currentCard])
+    } 
 
     useEffect(() => {
         if(data) {
@@ -36,6 +45,7 @@ const Main = ({data}: {data: IFeedCard[]}) => {
 
     useEffect(() => {
         if(list && list.length > 0) {
+            console.log(list)
             setCurrentCard(list[0].id)
         }
     }, [list])
@@ -51,7 +61,9 @@ const Main = ({data}: {data: IFeedCard[]}) => {
                             onLike={onLike}
                             onCancel={onCancel} 
                             {...item} 
-                            key={index}/>
+                            key={index}
+                            zindex={index + 1}
+                            />
                     ))
                 }
             </div>

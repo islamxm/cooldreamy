@@ -17,7 +17,8 @@ const Card:FC<cardPropsType> = ({
     name,
     state,
     onCancel,
-    onLike
+    onLike,
+    zindex
 }) => {
 
 
@@ -47,7 +48,9 @@ const Card:FC<cardPropsType> = ({
             
             onDragEnd={onDragEnd}
             dragSnapToOrigin 
-            className={styles.wrapper}>
+            className={styles.wrapper}
+            // style={{zIndex: zindex}}
+            >
             <div className={styles.img}>
                 {
                     avatar_url ? (
