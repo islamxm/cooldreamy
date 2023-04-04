@@ -35,18 +35,18 @@ const pusherConfig: pusherConfigType = {
 export default function App({ Component, pageProps }: AppProps) {
 	const [channels, setChannels] = useState<any>(null)
 
-	// useEffect(() => {
-	// 	const channels = getChannels(pusherConfig).private('App.User.304');
-	// 	setChannels(channels)
-	// }, [])
+	useEffect(() => {
+		const channels = getChannels(pusherConfig).private('App.User.304');
+		setChannels(channels)
+	}, [])
 
 	
 
-	// useEffect(() => {
-	// 	channels && channels.listen('new-message-event', (e: any) => {
-	// 		console.log(e)
-	// 	})
-	// }, [channels])
+	useEffect(() => {
+		channels && channels.listen('.new-message-event', (e: any) => {
+			console.log(e)
+		})
+	}, [channels])
 
 
 
