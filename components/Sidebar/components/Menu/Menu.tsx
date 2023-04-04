@@ -25,7 +25,7 @@ const menuList:menuItemType[] = [
     },
     {
         label: 'Знакомства',
-        link: '/dating',
+        link: '/feed',
         icon: <FiUsers/>,
         badge: 0,
         onClick: () => {},

@@ -1,6 +1,6 @@
 import endpoints from "./endpoints";
 
-const token = '12|ynL9Qf5suoACdYl32OZ2dVAtIexUpwLVUSn0lGS9';
+const token = '13|aUEWVFEBmwEThyR7nKWUsbsE12NBd74SDFYcn94l';
 
 const headers = {
     'Content-type': 'application/json',
