@@ -16,9 +16,9 @@ const SearchPage = () => {
                 <div style={{width: '100%'}}>
                     <Col span={24}>
                         <Row gutter={[15, 15]}>
-                            <Col span={24}>
+                            {/* <Col span={24}>
                                 <Streams/>
-                            </Col>
+                            </Col> */}
                             <Col span={24}>
                                 <SearchBody/>
                             </Col>

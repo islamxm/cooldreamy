@@ -10,6 +10,7 @@ import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
 import * as PusherTypes from 'pusher-js';
+import { tks } from '@/service/apiService';
 
 
 const pusherConfig: pusherConfigType = {
@@ -25,7 +26,7 @@ const pusherConfig: pusherConfigType = {
 	enabledTransports: ['ws', 'wss'],
 	auth: {
 		headers: {
-			Authorization: 'Bearer ' + '13|aUEWVFEBmwEThyR7nKWUsbsE12NBd74SDFYcn94l',
+			Authorization: 'Bearer ' + tks.boy_token,
 		}
 	}
 }
@@ -36,16 +37,19 @@ export default function App({ Component, pageProps }: AppProps) {
 	const [channels, setChannels] = useState<any>(null)
 
 	useEffect(() => {
-		const channels = getChannels(pusherConfig).private('App.User.304');
+		const channels = getChannels(pusherConfig).private('App.User.305');
 		setChannels(channels)
 	}, [])
 
 	
-
+	//new-chat-message-event
+	//chat-message-read-event
+	//new-letter-message-event
+	//letter-message-read-event
 	useEffect(() => {
-		channels && channels.listen('.new-message-event', (e: any) => {
-			console.log(e)
-		})
+		// channels && channels.listen('.new-letter-message-event', (e: any) => {
+		// 	console.log(e)
+		// })
 	}, [channels])
 
 

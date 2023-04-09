@@ -6,6 +6,8 @@ import { useState } from 'react';
 import {motion} from 'framer-motion';
 import { Row, Col } from 'antd';
 import RangeSlider from '@/components/RangeSlider/RangeSlider';
+import {FC, useEffect} from 'react';
+import { searchFilterType } from './types';
 
 const mock = [
     {
@@ -34,13 +36,21 @@ const years = [
 ]
 
 
-const SearchFilter = () => {
+const SearchFilter:FC<searchFilterType> = ({
+    targetList, 
+    financeList
+}) => {
 
     const [showAll, setShowAll] = useState<boolean>(false);
 
     const toggleFilter = () => {
         setShowAll(s => !s)
     }
+
+    useEffect(() => {
+        console.log(targetList)
+        console.log(financeList)
+    }, [targetList, financeList])
 
 
     return (
