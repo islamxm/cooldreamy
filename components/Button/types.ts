@@ -15,6 +15,7 @@ export type ButtonPropsTypes = {
     after?: React.ReactNode | undefined,
     hover?: VariantLabels | TargetAndTransition,
     fill?: boolean,
-    small?: boolean
+    small?: boolean,
+    load?: boolean
 }
 

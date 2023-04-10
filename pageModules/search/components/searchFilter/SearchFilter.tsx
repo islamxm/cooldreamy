@@ -9,36 +9,63 @@ import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import {FC, useEffect} from 'react';
 import { searchFilterType } from './types';
 
-const mock = [
+const countryList = [
     {
-        label: 'select 1',
         value: '1',
-    },
-    {
-        label: 'select 2',
-        value: '2',
-    },
-    {
-        label: 'select 3',
-        value: '3',
-    },
+        label: 'Россия'
+    }
 ]
 
-const years = [
+const ageList = [
     {
-        label: '18',
-        value: '18'
+        value: '1',
+        label: '18'
     },
     {
-        label: '19',
-        value: '19'
+        value: '2',
+        label: '19'
+    },
+    {
+        value: '3',
+        label: '20'
+    },
+    {
+        value: '4',
+        label: '21'
+    },
+    {
+        value: '5',
+        label: '22'
+    },
+    {
+        value: '6',
+        label: '23'
     }
 ]
 
 
+// const citiesList = [
+//     {
+
+//     }
+// ]
+
+
 const SearchFilter:FC<searchFilterType> = ({
     targetList, 
-    financeList
+    financeList,
+    age_range_start,
+    age_range_end,
+    prompt_target_id,
+    prompt_finance_state_id,
+    
+    setage_range_start,
+    setage_range_end,
+    setprompt_target_id,
+    setprompt_finance_state_id,
+
+    onSearch,
+    load
 }) => {
 
     const [showAll, setShowAll] = useState<boolean>(false);
@@ -47,10 +74,6 @@ const SearchFilter:FC<searchFilterType> = ({
         setShowAll(s => !s)
     }
 
-    useEffect(() => {
-        console.log(targetList)
-        console.log(financeList)
-    }, [targetList, financeList])
 
 
     return (
@@ -59,24 +82,24 @@ const SearchFilter:FC<searchFilterType> = ({
                 <Col span={24}>
                     <div className={styles.main}>
                         <div className={styles.list}>
-                            <div className={styles.item}>
+                            {/* <div className={styles.item}>
                                 <SelectDef
                                     label='Страна'
                                     width={230}
                                     placeholder='Страна'
                                     value=''
-                                    list={mock}
+                                    list={countryList}
                                     />
                             </div>
                             <div className={styles.item}>
                                 <SelectDef
-                                    label='Возраст'
+                                    label='Город'
                                     width={70}
                                     placeholder=''
                                     value=""
-                                    list={years}
+                                    list={ageList}
                                     />
-                            </div>
+                            </div> */}
                         </div>
                         <div className={styles.action}>
                             <div className={styles.action_item}>
@@ -89,7 +112,11 @@ const SearchFilter:FC<searchFilterType> = ({
                                     />
                             </div>
                             <div className={styles.action_item}>
-                                <Button style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px'}} text='Найти'/>
+                                <Button
+                                    load={load}
+                                    onClick={() => onSearch && onSearch()} 
+                                    style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px'}} 
+                                    text='Найти'/>
                             </div>
                         </div>
                     </div>
@@ -102,44 +129,52 @@ const SearchFilter:FC<searchFilterType> = ({
                                 <div className={styles.list}>
                                     <div className={styles.item}>
                                         <SelectDef
-                                            list={years}
-                                            value={""}
-                                            placeholder={'Город'}
-                                            label={'Город'}
-                                            width={230}
-                                            />
-                                    </div>
-                                    <div className={styles.item}>
-                                        <RangeSlider
-                                            style={{width: 140}}
-                                            min={0}
-                                            max={10}
-                                            range={true}
-                                            value={[0,5]}    
-                                            label={'Рост'}
-                                            unit={'см'}
-                                            />
-                                    </div>
-                                    <div className={styles.item}>
-                                        <RangeSlider
-                                            style={{width: 140}}
-                                            min={0}
-                                            max={10}
-                                            range={true}
-                                            value={[0,5]}    
-                                            label={'Рост'}
-                                            unit={'см'}
-                                            />
-                                    </div>
-                                    <div className={styles.item}>
-                                        <SelectDef
-                                            list={years}
-                                            value={""}
+                                            list={targetList}
+                                            value={prompt_target_id}
+                                            onChange={setprompt_target_id}
                                             placeholder={'Не указано'}
                                             label={'Цель знакомства'}
                                             width={230}
                                             />
                                     </div>
+                                    <div className={styles.item}>
+                                        <SelectDef
+                                            list={financeList}
+                                            value={prompt_finance_state_id}
+                                            onChange={setprompt_finance_state_id}
+                                            placeholder={'Не указано'}
+                                            label={'Финансовые цели'}
+                                            width={230}
+                                            />
+                                    </div>
+                                    <div className={styles.item}>
+                                        <RangeSlider
+                                            style={{width: 140}}
+                                            min={18}
+                                            max={70}
+                                            onChange={e => {
+                                                setage_range_start && setage_range_start(e[0])
+                                                setage_range_end && setage_range_end(e[1])
+                                            }}
+                                            range={true}
+                                            value={[age_range_start,age_range_end]}    
+                                            label={'Возраст'}
+                                            // unit={'год'}
+                                            />
+                                    </div>
+                                    {/* <div className={styles.item}>
+                                        <RangeSlider
+                                            style={{width: 140}}
+                                            min={0}
+                                            max={10}
+                                            range={true}
+                                            value={[0,5]}    
+                                            label={'Рост'}
+                                            unit={'см'}
+                                            />
+                                    </div> */}
+                                   
+                                    
                                 </div>
                                 <div className={styles.action}>
                                     <div className={styles.item}>

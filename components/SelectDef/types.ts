@@ -1,13 +1,14 @@
 type selectOptionType = {
     value: string,
     label: string,
-    id?: string
+    id?: number
 }
 
 export type selectDefType = {
     placeholder: string,
     list: selectOptionType[],
-    value: string,
+    value?: number,
     width?: number | string,
-    label?: string
+    label?: string,
+    onChange?: (...args: any[]) => any
 }

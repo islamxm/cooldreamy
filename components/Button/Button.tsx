@@ -3,7 +3,7 @@ import {FC, useEffect, useRef} from 'react';
 import { ButtonPropsTypes, ButtonVariants } from './types';
 import {motion} from 'framer-motion';
 import ripple from 'ripple-effects'
-
+import { PulseLoader } from 'react-spinners';
 
 const Button: FC<ButtonPropsTypes> = ({
     text,
@@ -15,7 +15,8 @@ const Button: FC<ButtonPropsTypes> = ({
     after,
     hover = {boxShadow: '0.872px 9.962px 20px rgba(148, 45, 217, 0.35)'},
     fill,
-    small
+    small,
+    load
 }) => {
     const ref = useRef(null);
 
@@ -53,13 +54,27 @@ const Button: FC<ButtonPropsTypes> = ({
             disabled={disabled}
             onClick={onClick}
             style={style}
-            className={`${styles.button} ${switchVariant(variant)} ${fill ? styles.fill : ''} ${small ? styles.sm : ''}`}>
+            className={`${styles.button} ${switchVariant(variant)} ${fill ? styles.fill : ''} ${small ? styles.sm : ''} ${load ? styles.load : ''}`}>
+            {
+                load ? (
+                    <div className={styles.load}>
+                        <PulseLoader color='#fff' size={10}/>
+                    </div>
+                ) : null
+            }
             {
                 before ? (
                     <div className={styles.before}>{before}</div>
                 ) : null
             }
-            {text}
+            {
+                text ? (
+                    <div className={styles.text}>
+                        {text}
+                    </div>
+                ) : null
+            }
+            
             {
                 after ? (
                     <div className={styles.after}>{after}</div>

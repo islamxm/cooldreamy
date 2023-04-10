@@ -9,7 +9,8 @@ const SelectDef:FC<selectDefType> = ({
     list,
     value,
     width,
-    label
+    label,
+    onChange
 }) => {
 
     return (
@@ -22,9 +23,10 @@ const SelectDef:FC<selectDefType> = ({
             <Select
                 style={{width: '100%'}}
                 placeholder={placeholder}
-                // defaultValue={value}
+                defaultValue={value}
+                onChange={onChange}
                 options={list}
-                // value={value ? value : placeholder}
+                value={value}
                 />
         </div>
     )
