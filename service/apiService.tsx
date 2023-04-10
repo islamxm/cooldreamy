@@ -391,6 +391,22 @@ class ApiService {
         }
     }
     
+
+    sendWink = async (user_id: number) => {
+        try {
+            let res = await fetch(endpoints.sendWink, {
+                method: 'POST',
+                headers: {
+                    ...headers
+                },
+                body: JSON.stringify({user_id})
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
 }
 
 

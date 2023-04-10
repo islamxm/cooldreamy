@@ -16,23 +16,11 @@ const service = new ApiService();
 
 
 
-
-// const list:girlCardType[] = [
-//     {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-//     {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-//     {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-//     {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-//     {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-//     {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-//     {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-// ]
-
-
 const SearchBody = () => {
     const [load, setLoad] = useState(false)
     const [searched, setSearched] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
-    
+
     
     const [targetList, setTargetList] = useState([])
     const [financeList, setFinanceList] = useState([])
@@ -115,7 +103,7 @@ const SearchBody = () => {
         if (searched && updateList) {
             updateList()
         }
-    }, [currentPage, updateList])
+    }, [currentPage])
 
 
 

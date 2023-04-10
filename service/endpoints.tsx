@@ -16,7 +16,10 @@ const endpoints = {
     setSkip: `${API_PATH}feed/set_skipe`,
 
 
-    
+    //wink
+    sendWink: `${API_PATH}wink/send_wink`,    
+
+
     getStickers: `${API_PATH}get_stickers`,
     getGifts: `${API_PATH}get_gifts`,
 
