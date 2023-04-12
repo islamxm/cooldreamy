@@ -42,15 +42,15 @@ const tabs: tabItemType[] = [
     }
 ]
 
-const list:girlCardType[] = [
-    {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-    {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-    {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-    {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-    {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-    {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-    {name:"Ксения", age: "19", verified: true, online: true, location: 'Киев', image: img, photoCount: 10},
-]
+// const list:girlCardType[] = [
+//     {name:"Ксения", age: 19, online: 1, image: img, photoCount: 10},
+//     {name:"Ксения", age: 19, online: 1, image: img, photoCount: 10},
+//     {name:"Ксения", age: 19, online: 1, image: img, photoCount: 10},
+//     {name:"Ксения", age: 19, online: 1, image: img, photoCount: 10},
+//     {name:"Ксения", age: 19, online: 1, image: img, photoCount: 10},
+//     {name:"Ксения", age: 19, online: 1, image: img, photoCount: 10},
+//     {name:"Ксения", age: 19, online: 1, image: img, photoCount: 10},
+// ]
 
 const SymPage = () => {
     const [activeTab, setActiveTab] = useState('1');
@@ -96,7 +96,7 @@ const SymPage = () => {
                         </Col>
                         <Col span={24}>
                             <List
-                                list={list}
+                                list={[]}
                                 />
                         </Col>
                     </Row>
