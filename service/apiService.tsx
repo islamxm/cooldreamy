@@ -104,9 +104,9 @@ class ApiService {
     }
 
 
-    getFeed = async () => {
+    getFeed = async (page: number) => {
         try {
-            let res = await fetch(endpoints.feeds + `?page=4`, {
+            let res = await fetch(endpoints.feeds + `?page=${page}`, {
                 method: 'GET',
                 headers,
             }) 

@@ -26,18 +26,18 @@ const service = new ApiService();
 
 
 const FeedPage = () => {
-    const [data, setData] = useState([])
-    useEffect(() => {
-        service.getFeed().then(res => {
-            setData(res?.data)
-        })
-    }, [])
+    // const [data, setData] = useState([])
+    // useEffect(() => {
+    //     service.getFeed().then(res => {
+    //         setData(res?.data)
+    //     })
+    // }, [])
 
     return (
         <Container>
             <MainLayout>
                 <Sidebar/>
-                <Main data={data}/>
+                <Main/>
             </MainLayout>
         </Container>
 
