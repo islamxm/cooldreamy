@@ -155,7 +155,7 @@ const Main = () => {
         setList(s => {
             return s.filter(i => i.id !== card.id)
         })
-        setResult((current) => ({ ...current, [type]: current[type]}));
+        // setResult((current) => ({ ...current, [type]: current[type]}));
     }
 
 
