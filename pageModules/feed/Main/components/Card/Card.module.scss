@@ -16,6 +16,12 @@
         z-index: 9;
     }
 
+    .status {
+        position: absolute;
+        top: calc(50% - 50px);
+        left: calc(50% - 50px);
+        z-index: 2;
+    }
 
     .img {
         width: 100%;

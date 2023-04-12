@@ -6,7 +6,9 @@ interface ICard extends IFeedCard {
     onCancel?: (...args: any[]) => any,
     zindex: number,
     setCanceling: (...args: any) => any
-    setLiking: (...args: any) => any
+    setLiking: (...args: any) => any,
+    liking: boolean,
+    canceling: boolean
 }
 
 

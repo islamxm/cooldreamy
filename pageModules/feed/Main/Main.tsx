@@ -175,7 +175,9 @@ const Main = () => {
                                         // onCancel: onCancel,
                                         zindex: index + 1,
                                         setCanceling,
-                                        setLiking
+                                        setLiking,
+                                        canceling,
+                                        liking
                                     }}
                                     />
                             ))
