@@ -2,29 +2,41 @@ import styles from './ChatList.module.scss';
 import ChatItem from '../ChatItem/ChatItem';
 import { useRouter } from 'next/router';
 import PromoBadge from '../PromoBadge/PromoBadge';
+import ApiService from '@/service/apiService';
+import {useEffect, useState} from 'react';
+import { chatItemPropsTypes } from '../../types';
+const service = new ApiService()
 
-const list = new Array(20).fill(1);
+// const list = new Array(20).fill(1);
 
 
 const ChatList = () => {
     const {pathname, query} = useRouter()
+    const [page, setPage] = useState(1)
+    const [list, setList] = useState<any[]>([])
 
+    const getInitList = () => {
+        service.getChatList(1, 10).then(res => {
+            console.log(res)
+            setList(res?.data)
+        })
+    }
 
+    useEffect(() => {
+        getInitList()
+    }, [])
     
 
 
     return (
         <div className={`${styles.wrapper} custom-scroll-vertical`}>
-            <PromoBadge/>
+            {/* <PromoBadge/> */}
             {
                 list?.map((item, index) => (
                     <ChatItem
-                        id={(index + 1).toString()}
-                        isActive={pathname.includes('/chat') && (index + 1).toString() === query?.id}
-                        isFavourite={index === 1}
                         key={index}
-                        unreadMesssageCount={index === 3 ? 3 : 0}
-                        status={index === 3 ? 'unread' : undefined}
+                        {...item}
+                        active={false}
                         />
                 ))
             }

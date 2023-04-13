@@ -53,6 +53,18 @@ const SearchBody = () => {
         })
     }
 
+    const getCountries = () => {
+        service.getCountries().then(res => {
+            console.log(res)
+        })
+    }
+
+    const getStates = (id: number) => {
+        service.getStates(id).then(res => {
+            console.log(res)
+        })
+    }
+
     const onSearch = useCallback(() => {
         setCurrentPage(1)
         setLoad(true)
@@ -110,6 +122,7 @@ const SearchBody = () => {
     useEffect(() => {
         getFinanceList()
         getTargetList()
+        // getCountries()
     }, [])
 
 

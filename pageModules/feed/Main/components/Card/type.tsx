@@ -4,7 +4,7 @@ import { CSSProperties } from "react";
 interface ICard extends IFeedCard {
     onLike?: (...args: any[]) => any,
     onCancel?: (...args: any[]) => any,
-    zindex: number,
+    index: number,
     setCanceling: (...args: any) => any
     setLiking: (...args: any) => any,
     liking: boolean,

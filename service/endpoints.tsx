@@ -9,6 +9,8 @@ const endpoints = {
     search: `${API_PATH}users/search`,
     getPromptTargets: `${API_PATH}get_prompt_targets_table`,
     getPromptFinanceState: `${API_PATH}get_prompt_finance_states_table`,
+    getCountries: `${API_PATH}get_countries`,
+    getStates: `${API_PATH}get_states`,
 
     //feed
     feeds: `${API_PATH}feeds`,

@@ -2,9 +2,7 @@ import MainLayout from "@/components/MainLayout/MainLayout";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Container from "@/components/Container/Container";
 import { Row, Col } from "antd";
-import Streams from "@/components/Streams/Streams";
 import SearchBody from "@/pageModules/search/components/searchBody/SearchBody";
-
 
 
 const SearchPage = () => {

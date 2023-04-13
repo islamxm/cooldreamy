@@ -1,5 +1,5 @@
 import styles from './GirlCard.module.scss';
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import Image from 'next/image';
 import { Row, Col } from 'antd';
 import { girlCardType } from './types';
@@ -9,7 +9,10 @@ import {AiOutlineStar} from 'react-icons/ai';
 import {BsCamera, BsCheck} from 'react-icons/bs';
 import Link from 'next/link';
 import logo from '@/public/assets/images/logo.svg'
+import ApiService from '@/service/apiService';
 
+
+const service = new ApiService();
 
 const GirlCard:FC<girlCardType> = ({
     // image,
@@ -34,10 +37,11 @@ const GirlCard:FC<girlCardType> = ({
     winkable
 }) => {
 
+    const [createChatModal, setCreateChatModal] = useState(false)
 
-    const goToChat = () => {
+    const openCreateChatModal = () => setCreateChatModal(true)
+    const closeCreateChatModal = () => setCreateChatModal(false)
 
-    }
 
     const goToMail = () => {
         
@@ -46,7 +50,7 @@ const GirlCard:FC<girlCardType> = ({
     const addToFav = () => {
 
     }
-
+    
     
 
     return (

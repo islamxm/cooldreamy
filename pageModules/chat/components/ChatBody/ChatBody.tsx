@@ -12,44 +12,23 @@ import Image from 'next/image';
 const service = new ApiService()
 
 const ChatBody = () => {
-    
-
-    useEffect(() => {
-        // service.getChatList().then(res => {
-        //     console.log(res)
-        // })
-        // service.readMessage({chat_message_id: 83}).then(res => {
-        //     console.log(res)
-        // })
-        // service.getChat(14, 30).then(res => console.log(res))
-        
-    }, [])
-
-
-    const test = () => {
-        
-    }
 
     
-
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.sidebar}>
                 <ChatSide/> 
-                
-                
             </div>         
             <div className={styles.main}>
-                {/* <Dialog/> */}
-                <Button 
-                    onClick={test}
-                    text='Test'/>
-               
+                <div className={styles.body}>
+                    <Dialog/>
+                </div>
+                <div className={styles.action}>
+                    <ChatAction/>
+                </div>
             </div>   
-            <div className={styles.action}>
-                <ChatAction/>
-            </div>
+           
         </div>
     )
 }

@@ -11,17 +11,28 @@ import Badge from '@/components/Badge/Badge';
 import {BiCheckDouble} from 'react-icons/bi';
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai';
 import Avatar from '@/components/Avatar/Avatar';
+import { useRouter } from 'next/router';
+
 
 const ChatItem = ({
-    isActive,
-    isFavourite,
-    status,
-    unreadMesssageCount,
-    id
+    favorite,
+    first_user_id,
+    id,
+    is_ignored_by_first_user,
+    is_ignored_by_second_user,
+    last_message,
+    another_user,
+    is_confirmed_user,
+    text,
+    active
 }:chatItemPropsTypes) => {
 
+
+    const {avatar_url, avatar_url_thumbnail, name} = another_user;
+
+
     return (
-        <Link href={`/chat/${id}`} className={`${styles.wrapper} ${isActive ? styles.active : ''}`}>
+        <Link href={`/chat/${id}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
             {/* <div className={styles.avatar}>
                 <Image
                     src={avatarImg}
@@ -34,8 +45,8 @@ const ChatItem = ({
             <div className={styles.avatar}>
                 <Avatar
                     size={63}
-                    verified
-                    image={avatarImg}    
+                    verified={is_confirmed_user == 1}
+                    image={avatar_url_thumbnail}    
                     />
             </div>
             <div className={styles.body}>
@@ -43,15 +54,15 @@ const ChatItem = ({
                     <Row gutter={[2,2]}>
                         <Col span={24}>
                             <UserTitle 
-                                username='Виктория'
+                                username={name}
                                 age='26'
                                 textBold
-                                isOnline/>
+                                isOnline={false}/>
                         </Col>
                         <Col span={24}>
                             <div className={styles.dialog}>
                                 <LinesEllipsis
-                                    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem illo odit modi magni architecto corrupti officia necessitatibus porro, harum animi laudantium, quaerat minima ab accusamus, libero expedita minus! Officia, nulla!"
+                                    text={last_message?.chat_messageable?.text}
                                     maxLine={2}
                                     />
                                 
@@ -60,7 +71,7 @@ const ChatItem = ({
                     </Row>
                 </div>    
                 <div className={styles.ex}>
-                    <div className={styles.item}>
+                    {/* <div className={styles.item}>
                         {
                             isFavourite ? (
                                 <AiFillStar/>
@@ -68,8 +79,8 @@ const ChatItem = ({
                                 <AiOutlineStar/>
                             )
                         }
-                    </div>
-                    <div className={styles.item}>
+                    </div> */}
+                    {/* <div className={styles.item}>
                         {
                             status === 'unread' ? (
                                 <Badge
@@ -79,7 +90,7 @@ const ChatItem = ({
                                 <BiCheckDouble/>
                             )
                         }
-                    </div>
+                    </div> */}
                 </div>
             </div> 
         </Link>

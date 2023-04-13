@@ -18,7 +18,8 @@ const Avatar = ({
             <div className={styles.in} style={{width: size, height: size, ...style}}>
                 <Image
                     src={image ? image : placeholder}
-                    placeholder={'blur'}
+                    loader={() => image ? image : ''}
+                    placeholder={!image ? 'blur' : 'empty'}
                     width={size}
                     height={size}
                     alt={'avatar'}

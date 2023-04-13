@@ -8,7 +8,7 @@ import IconButton from '@/components/IconButton/IconButton';
 import {motion, useMotionValue, PanInfo, useMotionValueEvent, AnimatePresence} from 'framer-motion';
 import {CgClose} from 'react-icons/cg';
 import {HiHeart} from 'react-icons/hi';
-
+import logo from '@/public/assets/images/logo-big.svg';
 
 
 const Card:FC<cardPropsType> = ({
@@ -29,7 +29,7 @@ const Card:FC<cardPropsType> = ({
         state,
         onCancel,
         onLike,
-        zindex,
+        index,
         setCanceling,
         setLiking,
         liking,
@@ -37,7 +37,7 @@ const Card:FC<cardPropsType> = ({
     } = card
 
     const [rotate, setRotate] = useState(1)
-    const [leaveX, setLeaveX] = useState(0);
+    const [leaveX, setLeaveX] = useState<number | string>(0);
     const [leaveY, setLeaveY] = useState(0);
 
     const onDragEnd = (_e: any, info: PanInfo) => {
@@ -47,12 +47,16 @@ const Card:FC<cardPropsType> = ({
         //   return;
         // }
         if (info.offset.x > 300) {
-          setLeaveX(1000);
+          setLeaveX('100%');
+          setLeaveY(info.offset.y)
           removeCard(card, "like");
+          onLike && onLike()
         }
         if (info.offset.x < -300) {
-          setLeaveX(-1000);
+          setLeaveX('-100%');
+          setLeaveY(info.offset.y)
           removeCard(card, "nope");
+          onCancel && onCancel()
         }
         setLiking(false)
         setCanceling(false)
@@ -62,7 +66,7 @@ const Card:FC<cardPropsType> = ({
     
     const onDrag = (e: any, info: PanInfo) => {
         setRotate(Math.round(info.offset.x / 40))
-        if (info.offset.x > 300) {
+        if (info.offset.x > 300) {  
             setLiking(true)
         } else {
             setLiking(false)
@@ -86,15 +90,16 @@ const Card:FC<cardPropsType> = ({
                     onDragEnd={onDragEnd}
                     onDrag={onDrag}
                     whileDrag={{ rotate: rotate === 0 ? 1 : rotate }}
-                    initial={{
-                    scale: 1,
-                    }}
-                    animate={{
-                    scale: 1.05,
-                    }}
+                    // initial={{
+                    // scale: 1,
+                    // }}
+                    // animate={{
+                    // scale: 1.05,
+                    // }}
                     exit={{
                     x: leaveX,
                     y: leaveY,
+                    // rotate,
                     opacity: 0,
                     scale: 0.5,
                     transition: { duration: 0.2 },
@@ -143,15 +148,18 @@ const Card:FC<cardPropsType> = ({
                     
                     <div className={styles.img}>
                         {
-                            avatar_url_thumbnail ? (
-                                <Image 
-                                    // loader={() => avatar_url_thumbnail} 
-                                    src={avatar_url_thumbnail} 
-                                    alt='' 
-                                    width={560} 
-                                    height={560}
-                                    // placeholder='blur'
-                                    />
+                            avatar_url ? (
+                                index === 0 || index === 1 ? (
+                                    <Image 
+                                        loader={() => avatar_url ? avatar_url : ''} 
+                                        src={avatar_url ? avatar_url : logo} 
+                                        alt='' 
+                                        unoptimized
+                                        width={560} 
+                                        height={560}
+                                        // placeholder='blur'
+                                        />
+                                ) : null
                             ) : null
                         }
                         
@@ -171,15 +179,18 @@ const Card:FC<cardPropsType> = ({
                 >
                 <div className={styles.img}>
                     {
-                        avatar_url_thumbnail ? (
-                            <Image 
-                                // loader={() => avatar_url_thumbnail} 
-                                src={avatar_url_thumbnail} 
-                                alt='' 
-                                width={560} 
-                                height={560}
-                                // placeholder='blur'
-                                />
+                        avatar_url ? (
+                            index === 0 || index === 1 ? (
+                                <Image 
+                                    loader={() => avatar_url ? avatar_url : ''} 
+                                    src={avatar_url ? avatar_url : logo} 
+                                    alt='' 
+                                    unoptimized
+                                    width={560} 
+                                    height={560}
+                                    // placeholder='blur'
+                                    />
+                            ) : null
                         ) : null
                     }
                     

@@ -3,7 +3,7 @@ import { StaticImageData } from "next/image";
 interface IFeedCard {
     age?: number,
     avatar_url?: string,
-    avatar_url_thumbnail: string | StaticImageData
+    avatar_url_thumbnail: string
     birthday?: string,
     country?: string,
     id: number,

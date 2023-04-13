@@ -19,27 +19,26 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        
+        position: relative;
+        z-index: 10000;
         .item {
             margin: 0 13px;
             transition: all .3s ease;
-
-            button {
-                position: relative;
-                z-index: 100000;
-            }
         }
 
         .item.active {
-            
             transform: scale(1.2);
 
             &:first-child {
                 filter: drop-shadow(0 0 10px #F46870);
+                
             }
 
             &:last-child {
                 filter: drop-shadow(0 0 10px #6862ED);
+                // button {
+                    
+                // }
             }
         }
     }

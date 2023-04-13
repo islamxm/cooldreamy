@@ -2,8 +2,8 @@ import endpoints from "./endpoints";
 
 
 export const tks = {
-    boy_token: '14|fKGAoFZ8v2EYVAZE57Xm4Jpfq1QXT3gAL13TmkbW',
-    girl_token: '15|b3FBYZgkB1keI0eRN8WCcYrfmwmlvdOR1vmM1sUS'
+    boy_token: '18|KaWz0k1FXHp0Ow01dIVCKaeVeRN9usZDvjxh2oqo',
+    girl_token: '19|2EfI6ecI8ZVKAgEJ9LbUag6XBhuV5hDFWuyTgZme'
 }
 
 
@@ -103,6 +103,30 @@ class ApiService {
         }
     }
 
+    getCountries = async () => {
+        try {
+            let res = await fetch(endpoints.getCountries, {
+                method: 'GET',
+                headers,
+            })
+
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getStates = async (country_id: number) => {
+        try {
+            let res = await fetch(endpoints.getStates + `?country_id=${country_id}`, {
+                method: 'GET',
+                headers,
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
     getFeed = async (page: number) => {
         try {
@@ -144,6 +168,7 @@ class ApiService {
     }
 
     //открытие чата
+    
     createChat = async (id: number) => {
         try {
             let res = await fetch(endpoints.createChat + `?user_id=${id}`, {
@@ -156,9 +181,9 @@ class ApiService {
         }
     }
 
-    getChatList = async (per_page?: number) => {
+    getChatList = async (page?: number, per_page?: number) => {
         try {
-            let res = await fetch(endpoints.getChatList + `?per_page=${per_page}`, {
+            let res = await fetch(endpoints.getChatList + `?page=${page}&per_page=${per_page}`, {
                 method: 'GET',
                 headers
             })
@@ -222,7 +247,7 @@ class ApiService {
         }
     }
 
-    getChat = async (id: number, per_page?: number) => {
+    getChat = async (id: number | string, per_page?: number) => {
         try {
             let res = await fetch(endpoints.getChat + `?chat_id=${id}&per_page=${per_page}`, {
                 method: 'GET',

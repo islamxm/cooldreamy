@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    border: 1px solid red;
+}
+
+.wrapper.left {
+    justify-content: flex-start;
+}
+
+.wrapper.right {
+    justify-content: flex-end;
+}
