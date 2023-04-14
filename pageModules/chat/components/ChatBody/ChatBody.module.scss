@@ -1,6 +1,8 @@
 .wrapper {
     display: flex;
-        
+    align-items: flex-end;
+    overflow: hidden;
+
     .sidebar {
         width: 300px;
         flex: 0 0 auto;
@@ -8,5 +10,20 @@
 
     .main {
         width: 100%;
+        position: relative;
+        
+
+        .body {
+            // border: 1px solid red;
+              
+        }
+
+        .action {
+            // position: absolute;
+            // bottom: 0;
+            // left: 0;
+            // width: 100%;
+            // z-index: 10;
+        }
     }
 }

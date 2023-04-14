@@ -4,7 +4,7 @@ import Dialog from '../Dialog/Dialog';
 import ChatAction from '../ChatAction/ChatAction';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@/components/Button/Button';
 import { tks } from '@/service/apiService';
 import testimg from '@/public/assets/images/test.jpg';
@@ -14,7 +14,11 @@ const service = new ApiService()
 
 
 const ChatBody = () => {
+    const [pb, setPb] = useState<number>(70)
 
+
+    
+    
     
 
     return (
@@ -22,12 +26,12 @@ const ChatBody = () => {
             <div className={styles.sidebar}>
                 <ChatSide/> 
             </div>         
-            <div className={styles.main}>
-                <div className={styles.body}>
+            <div className={styles.main} style={{maxHeight: `calc(100% - ${pb})`}}>
+                <div className={styles.body} >
                     <Dialog/>
                 </div>
                 <div className={styles.action}>
-                    <ChatAction/>
+                    <ChatAction setHeight={setPb}/>
                 </div>
             </div>   
            
