@@ -9,17 +9,36 @@ const service = new ApiService()
 
 
 const Dialog = () => {
+    const {query} = useRouter()
     const [id, setId] = useState<string>('')
     const [list, setList] = useState<dialogItemType[]>([])
 
-    
+
+    useEffect(() => {
+        if(query?.id && typeof query?.id === 'string') {
+            setId(query?.id)
+        }
+    }, [query])
+
+
+    useEffect(() => {
+        if(id) {
+            service.getChat(id, 10).then(res => {
+                setList(res?.chat_messages?.data)
+                console.log(res?.chat_messages?.data)
+            })
+        }
+    }, [id])
 
 
     return (
         <div className={styles.wrapper}>
             {
                 list?.map((item, index) => (
-                    <DialogItem {...item} key={index}/>
+                    <DialogItem
+                        {...item}
+                        me={item.sender_user_id === 3238} 
+                        key={index}/>
                 ))
             }
         </div>

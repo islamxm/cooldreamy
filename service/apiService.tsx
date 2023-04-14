@@ -197,15 +197,11 @@ class ApiService {
     sendMessage_text = async (body: {
         chat_id: number,
         text: string
-    }, token: string) => {
+    }, token?: string) => {
         try {
             let res = await fetch(endpoints.sendMessage_text, {
                 method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
+                headers,
                 body: JSON.stringify(body)
             })
 

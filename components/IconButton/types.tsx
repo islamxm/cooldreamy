@@ -10,4 +10,4 @@ export interface iconButtonPropsType {
     // hover?: VariantLabels | TargetAndTransition,
 }
 
-export type iconButtonVariants = 'danger' | 'default' | 'transparent';
+export type iconButtonVariants = 'danger' | 'default' | 'transparent' | 'bordered';

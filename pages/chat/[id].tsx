@@ -12,11 +12,7 @@ import {useEffect} from 'react';
 
 
 const ChatPage = () => {
-    const {query} = useRouter()
 
-    // useEffect(() => {
-    //     console.log(router)
-    // }, [router])
 
     return (
         <Container>

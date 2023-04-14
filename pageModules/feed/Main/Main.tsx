@@ -2,17 +2,20 @@ import styles from './Main.module.scss';
 import IFeedCard from '@/models/IFeedCard';
 import IconButton from '@/components/IconButton/IconButton';
 import {CgClose} from 'react-icons/cg';
+import {AiOutlineMessage} from 'react-icons/ai';
 import {HiHeart} from 'react-icons/hi';
 import {useEffect, useState, useCallback} from 'react';
 import Card from './components/Card/Card';
 import ApiService from '@/service/apiService';
 import img from '@/public/assets/images/girl-big.png';
 import { AnimatePresence } from 'framer-motion';
-
+import CreateChatModal from '@/components/CreateChatModal/CreateChatModal';
 const service = new ApiService()
-export type SwipeType = "like" | "nope" | "superlike";
 
+export type SwipeType = "like" | "nope" | "superlike";
 export type ResultType = { [k in SwipeType]: number };
+
+
 
 // const mock: IFeedCard[] = [
 //     {
@@ -56,6 +59,11 @@ export type ResultType = { [k in SwipeType]: number };
 
 
 const Main = () => {
+    const [createChatModal, setCreateChatModal] = useState(false)
+
+    const closeCreateChatModal = () => setCreateChatModal(false)
+    const openCreateChatModal = () => setCreateChatModal(true)
+
     // ** Список карточек
     const [list, setList] = useState<IFeedCard[]>([])
     
@@ -118,9 +126,6 @@ const Main = () => {
         if(currentCard) {
             service.feedItemLike(currentCard).then(res => {
                 console.log(res)
-                // if(res?.message == 'success') {
-                //     setList(s => s.filter((i, index) => index !== 0))
-                // }
             })
         } 
     }
@@ -130,9 +135,6 @@ const Main = () => {
         if(currentCard) {
             service.feedItemSkip(currentCard).then(res => {
                 console.log(res)
-                // if(res?.message == 'success') {
-                //     setList(s => s.filter((i, index) => index !== 0))
-                // }
             })
         }
     } 
@@ -142,7 +144,6 @@ const Main = () => {
     useEffect(() => {
         if(list && list.length > 0) {
             setCurrentCard(list[0].id)
-            console.log(list)
         }
     }, [list])
 
@@ -155,11 +156,23 @@ const Main = () => {
         setList(s => {
             return s.filter(i => i.id !== card.id)
         })
+
+        if(type === 'like') {
+            onLike()
+        }
+        if(type === 'nope') {
+            onCancel()
+        }
     }
 
 
     return (
         <div className={styles.wrapper}>
+            <CreateChatModal
+                open={createChatModal}
+                id={list[0]?.id}
+                onCancel={closeCreateChatModal}
+                />
             <div className={styles.slider}>
                 <AnimatePresence>
                         {
@@ -170,8 +183,8 @@ const Main = () => {
                                     key={item.name}
                                     card={{
                                         ...item,
-                                        onLike: onLike,
-                                        onCancel: onCancel,
+                                        // onLike: onLike,
+                                        // onCancel: onCancel,
                                         index: index,
                                         setCanceling,
                                         setLiking,
@@ -182,7 +195,6 @@ const Main = () => {
                             ))
                         }
                 </AnimatePresence>
-                
             </div>
             <div className={styles.action}>
                 <div className={`${styles.item} ${canceling ? styles.active : ''}`}>
@@ -192,7 +204,14 @@ const Main = () => {
                         icon={<CgClose size={40} color='#fff'/>}
                         />
                 </div>
-                {/* <div className={styles.item}></div> */}
+                <div className={styles.item}>
+                    <IconButton
+                        onClick={openCreateChatModal}
+                        size={50}
+                        variant={'bordered'}
+                        icon={<AiOutlineMessage size={25}/>}
+                        />
+                </div>
                 <div className={`${styles.item} ${liking ? styles.active : ''}`}>
                     <IconButton
                         onClick={() => removeCard(list[0], 'like')}

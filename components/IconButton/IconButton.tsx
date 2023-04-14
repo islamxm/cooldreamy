@@ -14,6 +14,8 @@ const IconButton:FC<iconButtonPropsType> = (props) => {
                 return styles.danger
             case 'transparent':
                 return styles.transparent
+            case 'bordered':
+                return styles.bordered
             default:
                 return styles.default
         }

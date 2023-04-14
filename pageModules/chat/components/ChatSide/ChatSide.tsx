@@ -8,7 +8,7 @@ const ChatSide = () => {
     return (
         <div className={styles.wrapper}>
             <Row>
-                <Col span={24} style={{padding: '5px'}}>
+                {/* <Col span={24} style={{padding: '5px'}}>
                     <Input
                         style={{
                             borderRadius: 8,
@@ -20,7 +20,7 @@ const ChatSide = () => {
 
                         //beforeIcon={<FiSearch/>}
                         />
-                </Col>
+                </Col> */}
                 <Col span={24}>
                     <ChatList/>
                 </Col>

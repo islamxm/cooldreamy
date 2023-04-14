@@ -27,8 +27,6 @@ const Card:FC<cardPropsType> = ({
         country,
         name,
         state,
-        onCancel,
-        onLike,
         index,
         setCanceling,
         setLiking,
@@ -50,13 +48,11 @@ const Card:FC<cardPropsType> = ({
           setLeaveX('100%');
           setLeaveY(info.offset.y)
           removeCard(card, "like");
-          onLike && onLike()
         }
         if (info.offset.x < -300) {
           setLeaveX('-100%');
           setLeaveY(info.offset.y)
           removeCard(card, "nope");
-          onCancel && onCancel()
         }
         setLiking(false)
         setCanceling(false)

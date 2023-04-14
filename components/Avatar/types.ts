@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image"
 
 export type avatarPropsTypes = {
-    image?: string,
+    image?: string | StaticImageData,
     size?: number,
     round?: boolean,
     wrapperStyle?: React.CSSProperties,

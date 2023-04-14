@@ -34,7 +34,12 @@ export type IMessageable = {
     text?: string,
     from_user_id?: number,
     to_user_id?: number,
+    thumbnail_url?: string,
+    image_url?: string
 }
+
+
+
 
 export type dialogItemType = {
     chat_id?: number,
@@ -44,9 +49,13 @@ export type dialogItemType = {
     created_at?: string,
     disabled?: 1 | 0,
     id: number,
-    is_read_by_recepient?: 1 | 0
-    me?: boolean
+    is_read_by_recepient?: 1 | 0,
+    sender_user_id?: number
+    me?: boolean,
+    updated_at?: string
 }
+
+
 
 type chatUserType = {
     avatar_url?: string,

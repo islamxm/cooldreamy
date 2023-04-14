@@ -3,29 +3,69 @@ import ChatItem from '../ChatItem/ChatItem';
 import { useRouter } from 'next/router';
 import PromoBadge from '../PromoBadge/PromoBadge';
 import ApiService from '@/service/apiService';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import { chatItemPropsTypes } from '../../types';
-const service = new ApiService()
+import {useCallback} from 'react';
+import { PulseLoader } from 'react-spinners';
+import { useInView } from 'react-intersection-observer';
 
-// const list = new Array(20).fill(1);
+const service = new ApiService()
 
 
 const ChatList = () => {
-    const {pathname, query} = useRouter()
+    const {query} = useRouter()
+    const {inView, ref} = useInView()
     const [page, setPage] = useState(1)
     const [list, setList] = useState<any[]>([])
+    const [loadMore, setLoadMore] = useState(true)
+    const [id, setId] = useState('')
 
-    const getInitList = () => {
-        service.getChatList(1, 10).then(res => {
-            console.log(res)
-            setList(res?.data)
+
+    //получение текущего чатрума
+    useEffect(() => {
+        if(query?.id && typeof query?.id === 'string') {
+            setId(query?.id)
+        }
+    }, [query])
+    
+
+    // получение списка чатов
+    const getChatList = (update?: boolean) => {
+        service.getChatList(page, 10).then(res => {
+            console.log(res?.data)
+            if(res?.data?.length < 10) {
+                setLoadMore(false)
+            } else {
+                setLoadMore(true)
+            }
+
+            if(update) {
+                setList(s => [...s, ...res?.data])
+            } else {
+                setList(res?.data)
+            }
         })
     }
 
+
+    // следующая страница в конце списка
     useEffect(() => {
-        getInitList()
-    }, [])
-    
+        if(inView && page <= 2) {
+            setPage(s => s + 1)
+        }
+    }, [inView])
+   
+
+
+    // догрузка списка
+    useEffect(() => {
+        if(page > 1) {
+            getChatList && getChatList(true)
+        } else {
+            getChatList && getChatList()
+        }
+    }, [page])
+
 
 
     return (
@@ -36,10 +76,20 @@ const ChatList = () => {
                     <ChatItem
                         key={index}
                         {...item}
-                        active={false}
+                        active={item?.id === Number(id)}
                         />
                 ))
+
             }
+            {
+                list?.length > 0 ? (
+                    loadMore ? (
+                        <div ref={ref} className={styles.loader}><PulseLoader color='var(--violet)'/></div>
+                    ) : null
+                ) : null
+            }
+            
+            
         </div>  
     )
 }

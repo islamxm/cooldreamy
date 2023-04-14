@@ -28,15 +28,22 @@ const CreateChatModal:FC<Type> = (props) => {
 
     const createChat = useCallback(() => {
         id && service.createChat(id).then(res => {
-            console.log(res)      
+            console.log(res)     
+            if(res?.chat_id) {
+                service.sendMessage_text({
+                    chat_id: res?.chat_id,
+                    text
+                }).then(res => {
+                    console.log(res)
+                })
+            }
         })
-    }, [id])
+    }, [id, text])
 
 
     return (
         <Modal
             {...props}
-            open
             footer={false}
             className={`modal`}
             title="Напишите сообщение"
@@ -62,7 +69,7 @@ const CreateChatModal:FC<Type> = (props) => {
                         </Col>
                         <Col span={12}>
                             <Button
-                                disabled={!text}
+                                // disabled={!text}
                                 onClick={createChat}
                                 load={load}
                                 style={{width: '100%'}}
