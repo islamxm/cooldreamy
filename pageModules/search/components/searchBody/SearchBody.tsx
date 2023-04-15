@@ -9,7 +9,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import { useState, useEffect, useCallback } from 'react';
 import { tabItemPropsTypes } from '../../types';
 import ApiService from '@/service/apiService';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
 const service = new ApiService();
@@ -17,6 +17,7 @@ const service = new ApiService();
 
 
 const SearchBody = () => {
+    const {token} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
     const [searched, setSearched] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
@@ -42,15 +43,20 @@ const SearchBody = () => {
 
 
     const getFinanceList = () => {
-        service.getPromptFinanceState().then(res => {
-            res && setFinanceList(res?.map((i: any) => ({...i, value: i.id, label: i.text})))
-        })
+        if(token) {
+            service.getPromptFinanceState(token).then(res => {
+                res && setFinanceList(res?.map((i: any) => ({...i, value: i.id, label: i.text})))
+            })
+        }
     }
 
     const getTargetList = () => {
-        service.getPromptTargets().then(res => {
-            res && setTargetList(res?.map((i: any) => ({...i, value: i.id, label: i.text})))
-        })
+        if(token) {
+            service.getPromptTargets(token).then(res => {
+                res && setTargetList(res?.map((i: any) => ({...i, value: i.id, label: i.text})))
+            })
+        }
+       
     }
 
     const getCountries = () => {
@@ -66,56 +72,62 @@ const SearchBody = () => {
     }
 
     const onSearch = useCallback(() => {
-        setCurrentPage(1)
-        setLoad(true)
-        setSearched(false)
-        service.search(
-            1,
-            isNew, 
-            isOnline, 
-            isNear,
-            state, 
-            country, 
-            age_range_start, 
-            age_range_end,
-            prompt_target_id, 
-            prompt_finance_state_id, 
-        ).then(res => {
-            console.log(res)
-            setTotalFound(res?.total)
-            setList(res?.data)
-        }).finally(() => {
-            setLoad(false)
-        })
-    }, [currentPage, state, country, age_range_start, age_range_end, prompt_target_id, prompt_finance_state_id, isNew, isOnline, isNear])
+        if(token) {
+            setCurrentPage(1)
+            setLoad(true)
+            setSearched(false)
+            service.search({
+                page: 1,
+                isNew, 
+                isOnline, 
+                isNear,
+                state, 
+                country, 
+                age_range_start, 
+                age_range_end,
+                prompt_target_id, 
+                prompt_finance_state_id, 
+            }, token
+            ).then(res => {
+                console.log(res)
+                setTotalFound(res?.total)
+                setList(res?.data)
+            }).finally(() => {
+                setLoad(false)
+            })
+        }
+        
+    }, [currentPage, token, state, country, age_range_start, age_range_end, prompt_target_id, prompt_finance_state_id, isNew, isOnline, isNear])
 
     const updateList = useCallback(() => {
-        service.search(
-            currentPage,
-            isNew, 
-            isOnline, 
-            isNear,
-            state, 
-            country, 
-            age_range_start, 
-            age_range_end,
-            prompt_target_id, 
-            prompt_finance_state_id, 
-        ).then(res => {
-            console.log(res)
-            setTotalFound(res?.total)
-            setList(res?.data)
-        }).finally(() => {
-            setLoad(false)
-        })
-    }, [currentPage, state, country, age_range_start, age_range_end, prompt_target_id, prompt_finance_state_id, isNew, isOnline, isNear])
+        if(token) {
+            service.search({
+                page: currentPage,
+                isNew, 
+                isOnline, 
+                isNear, 
+                state, 
+                country, 
+                age_range_start, 
+                age_range_end,
+                prompt_target_id, 
+                prompt_finance_state_id, 
+            }, token).then(res => {
+                console.log(res)
+                setTotalFound(res?.total)
+                setList(res?.data)
+            }).finally(() => {
+                setLoad(false)
+            })
+        }
+    }, [currentPage, token, state, country, age_range_start, age_range_end, prompt_target_id, prompt_finance_state_id, isNew, isOnline, isNear])
 
     useEffect(() => {
         setSearched(true)
         if (searched && updateList) {
             updateList()
         }
-    }, [currentPage])
+    }, [currentPage, token])
 
 
 
@@ -123,7 +135,7 @@ const SearchBody = () => {
         getFinanceList()
         getTargetList()
         // getCountries()
-    }, [])
+    }, [token])
 
 
 

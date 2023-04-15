@@ -1,6 +1,7 @@
 import styles from './Filter.module.scss';
 import Tabs from '@/components/Tabs/Tabs';
-import {useState} from 'react';
+import {useState, FC} from 'react';
+import { IChatFilterType, chatTabsType } from '../../types';
 
 const tabsList = [
     {
@@ -40,11 +41,26 @@ const modeTabs = [
 ]
 
 
-const Filter = () => {
+const Filter:FC<IChatFilterType> = ({
+    activeType,
+    onTypeChange
+}) => {
 
-    const [filterActiveTab, setFilterActiveTab] = useState()
-    const [modeActiveTab, setModeActiveTab] = useState()
 
+    const switchActiveType = (type: chatTabsType) => {
+        switch(type) {
+            case 'chat':
+                return {
+                    value: '1',
+                    type: 'chat'
+                }
+            case 'mail':
+                return {
+                    value: '2',
+                    type: 'mail'
+                }
+        }
+    }
 
 
     return (
@@ -52,8 +68,8 @@ const Filter = () => {
             <div className={styles.body}>
                 <div className={styles.part}>
                     <Tabs
-                        onChange={setFilterActiveTab}
-                        activeItem={filterActiveTab}
+                        onChange={() => {}}
+                        activeItem={'1'}
                         list={tabsList}
                         style={{backgroundColor: 'var(--light_purp_1)'}}
                         defaultColor="var(--light_purp_1)"
@@ -67,8 +83,16 @@ const Filter = () => {
                 <div className={styles.part}>
                     <Tabs
                         list={modeTabs}
-                        onChange={setModeActiveTab}
-                        activeItem={modeActiveTab}
+                        onChange={() => {}}
+                        // onChange={(e) => {
+                        //     if(e == '1') {
+                        //         onTypeChange('chat')
+                        //     }
+                        //     if(e == '2') {
+                        //         onTypeChange('mail')
+                        //     }
+                        // }}
+                        activeItem={switchActiveType(activeType).value}
                         style={{backgroundColor: 'var(--light_purp_1)'}}
                         defaultColor="var(--light_purp_1)"
                         activeColor='#fff'

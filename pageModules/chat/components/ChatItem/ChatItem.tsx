@@ -12,6 +12,7 @@ import {BiCheckDouble} from 'react-icons/bi';
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai';
 import Avatar from '@/components/Avatar/Avatar';
 import { useRouter } from 'next/router';
+import {useEffect} from 'react';
 
 
 const ChatItem = ({

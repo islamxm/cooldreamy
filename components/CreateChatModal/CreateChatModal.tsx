@@ -26,19 +26,19 @@ const CreateChatModal:FC<Type> = (props) => {
     }
 
 
-    const createChat = useCallback(() => {
-        id && service.createChat(id).then(res => {
-            console.log(res)     
-            if(res?.chat_id) {
-                service.sendMessage_text({
-                    chat_id: res?.chat_id,
-                    text
-                }).then(res => {
-                    console.log(res)
-                })
-            }
-        })
-    }, [id, text])
+    // const createChat = useCallback(() => {
+    //     id && service.createChat(id).then(res => {
+    //         console.log(res)     
+    //         if(res?.chat_id) {
+    //             service.sendMessage_text({
+    //                 chat_id: res?.chat_id,
+    //                 text
+    //             }).then(res => {
+    //                 console.log(res)
+    //             })
+    //         }
+    //     })
+    // }, [id, text])
 
 
     return (
@@ -70,7 +70,7 @@ const CreateChatModal:FC<Type> = (props) => {
                         <Col span={12}>
                             <Button
                                 // disabled={!text}
-                                onClick={createChat}
+                                // onClick={createChat}
                                 load={load}
                                 style={{width: '100%'}}
                                 text='Отправить'

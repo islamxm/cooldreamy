@@ -1,8 +1,9 @@
 .wrapper {
     display: flex;
-    align-items: flex-end;
+    //align-items: flex-end;
     overflow: hidden;
 
+    
     .sidebar {
         width: 300px;
         flex: 0 0 auto;
@@ -11,12 +12,13 @@
     .main {
         width: 100%;
         position: relative;
+        display: flex;
+        flex-direction: column;
         
 
         .body {
-            // border: 1px solid red;
-              
-        }
+            flex: 1 0 auto;
+        }   
 
         .action {
             // position: absolute;

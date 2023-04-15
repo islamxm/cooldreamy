@@ -5,7 +5,7 @@ import ApiService from '@/service/apiService';
 import Sticker from '@/components/Sticker/Sticker';
 import emojiData from '@/helpers/emojiData';
 import Smile from '@/components/Smile/Smile';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const service = new ApiService()
 
@@ -30,14 +30,19 @@ const Stickers = ({
     onSmileSelect?: (label: string) => any,
     onStickerSelect?: (id: number) => any
 }) => {
+    const {token} = useAppSelector(s => s)
+
     const [activeTab, setActiveTab] = useState<number>(1)
     const [list, setList] = useState<any[]>()
 
         
     useEffect(() => {
-        service.getStickers().then(res => {
-            setList(res)
-        })
+        if(token) {
+            service.getStickers(token).then(res => {
+                setList(res)
+            })
+        }
+       
     }, [])
 
 

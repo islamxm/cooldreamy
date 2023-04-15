@@ -1,10 +1,6 @@
 import endpoints from "./endpoints";
+import { IToken } from "@/models/IToken";
 
-
-export const tks = {
-    boy_token: '18|KaWz0k1FXHp0Ow01dIVCKaeVeRN9usZDvjxh2oqo',
-    girl_token: '19|2EfI6ecI8ZVKAgEJ9LbUag6XBhuV5hDFWuyTgZme'
-}
 
 
 
@@ -12,29 +8,25 @@ export const tks = {
 const headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': `Bearer ${tks.boy_token}`
 }
+
+//'Authorization': `Bearer ${token}`
 
 class ApiService {
 
 
     register = async (
-        name?: string,
-        email?: string,
-        password?: string,
-        gender?: 'male' | 'female',
-        state?: string,
-        country?: string,
+        body: {
+            name: string,
+            email: string,
+            password: string
+        }
     ) => {
         try {
-            let res = await fetch(endpoints.register + 
-            `?name=${name}&email=${email}&password=${password}&gender=${gender}&state=${state}&country=${country}`
-            , {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json',
-                    
-                }
+            let res = await fetch(endpoints.register, {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers
             })
 
             return await res?.json()
@@ -43,7 +35,35 @@ class ApiService {
         }
     }
 
-    search = async (
+    login = async (body: {
+        email: string,
+        password: string
+    }) => {
+
+        try {
+            let res = await fetch(endpoints.login, {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    search = async ({
+        page,
+        isNew,
+        isNear,
+        isOnline,
+        state,
+        country,
+        age_range_start,
+        age_range_end,
+        prompt_target_id,
+        prompt_finance_state_id
+    }: {
         page: number,
         isNew: 1 | 0,
         isOnline: 1 | 0,
@@ -54,13 +74,17 @@ class ApiService {
         age_range_end?: number,
         prompt_target_id?: number | string,
         prompt_finance_state_id?: number | string,
+    }, token: IToken
         
     ) => {
         try {
             let res = await fetch(endpoints.search + 
                 `?page=${page}&state=${state ? state : ''}&country=${country ? country : ''}&age_range_start=${age_range_start}&age_range_end=${age_range_end}&prompt_target_id=${prompt_target_id ? prompt_target_id : ''}&prompt_finance_state_id=${prompt_finance_state_id ? prompt_finance_state_id : ''}&new=${isNew}&near=${isNear}&online=${isOnline}`, {
                 method: 'GET',
-                headers
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             })
 
             return await res?.json()
@@ -70,14 +94,13 @@ class ApiService {
     }
 
 
-    getPromptTargets = async () => {
+    getPromptTargets = async (token: IToken) => {
         try {
             let res = await fetch(endpoints.getPromptTargets, {
                 method: "GET",
                 headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${tks.boy_token}`
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
                 }
             })
             return await res?.json()
@@ -87,14 +110,13 @@ class ApiService {
     }
 
 
-    getPromptFinanceState = async () => {
+    getPromptFinanceState = async (token: IToken) => {
         try {
             let res = await fetch(endpoints.getPromptFinanceState, {
                 method: "GET",
                 headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${tks.boy_token}`
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
                 }
             })
             return await res?.json()
@@ -128,11 +150,18 @@ class ApiService {
         }
     }
 
-    getFeed = async (page: number) => {
+    getFeed = async ({
+        page
+    }: {
+        page?: number
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.feeds + `?page=${page}`, {
                 method: 'GET',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
             }) 
             return await res?.json()
         } catch(err) {
@@ -140,11 +169,18 @@ class ApiService {
         }
     }
 
-    feedItemLike = async (id: number) => {
+    feedItemLike = async ({
+        id
+    }: {
+        id: number
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.setLike, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({id})
             })
             return await res?.json()
@@ -154,11 +190,18 @@ class ApiService {
     }
 
 
-    feedItemSkip = async (id: number) => {
+    feedItemSkip = async ({
+        id
+    }: {
+        id: number
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.setSkip, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({id})
             }) 
             return await res?.json()
@@ -169,11 +212,16 @@ class ApiService {
 
     //открытие чата
     
-    createChat = async (id: number) => {
+    createChat = async ({user_id}: {
+        user_id?: number
+    }, token: IToken) => {
         try {
-            let res = await fetch(endpoints.createChat + `?user_id=${id}`, {
+            let res = await fetch(endpoints.createChat + `?user_id=${user_id}`, {
                 method: 'GET',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
             })
             return await res?.json()
         } catch(err) {
@@ -181,11 +229,18 @@ class ApiService {
         }
     }
 
-    getChatList = async (page?: number, per_page?: number) => {
+    getChatList = async ({page, per_page = 10}: 
+        {
+            page?: number, 
+            per_page?: number
+        }, token: IToken) => {
         try {
             let res = await fetch(endpoints.getChatList + `?page=${page}&per_page=${per_page}`, {
                 method: 'GET',
-                headers
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             })
             return await res?.json()
         } catch(err) {
@@ -197,11 +252,14 @@ class ApiService {
     sendMessage_text = async (body: {
         chat_id: number,
         text: string
-    }, token?: string) => {
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.sendMessage_text, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(body)
             })
 
@@ -214,11 +272,14 @@ class ApiService {
     sendMessage_sticker = async (body: {
         chat_id: number,
         sticker_id: number
-    }) => {
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.sendMessage_sticker, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(body)
             }) 
             return await res?.json()
@@ -230,11 +291,14 @@ class ApiService {
     sendMessage_gift = async (body: {
         chat_id: string,
         gifts: string //string: [1,2,3]
-    }) => {
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.sendMessage_gift, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(body)
             })
             return await res?.json()
@@ -243,11 +307,19 @@ class ApiService {
         }
     }
 
-    getChat = async (id: number | string, per_page?: number) => {
+    getChat = async ({id, page, per_page = 10}: 
+        {
+            id: number,
+            page: number,
+            per_page?: number
+        }, token: IToken) => {
         try {
-            let res = await fetch(endpoints.getChat + `?chat_id=${id}&per_page=${per_page}`, {
+            let res = await fetch(endpoints.getChat + `?page=${page}&chat_id=${id}&per_page=${per_page}`, {
                 method: 'GET',
-                headers
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             }) 
             return await res?.json()
         } catch(err) {
@@ -255,10 +327,13 @@ class ApiService {
         }
     }
 
-    getStickers = async () => {
+    getStickers = async (token: IToken) => {
         try {
             let res = await fetch(endpoints.getStickers, {
-                headers
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             })
             return await res?.json()
         } catch(err) {
@@ -266,10 +341,13 @@ class ApiService {
         }
     }
 
-    getGifts = async () => {
+    getGifts = async (token: IToken) => {
         try {
             let res = await fetch(endpoints.getGifts, {
-                headers
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             })
             return await res?.json()
         } catch(err) {
@@ -279,11 +357,14 @@ class ApiService {
 
     readMessage = async (body: {
         chat_message_id: number
-    }, token: string) => {
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.readMessage, {
                 method: 'POST',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(body)
             })
             return await res?.json()
@@ -295,11 +376,14 @@ class ApiService {
 
 
     //mail
-    createMail = async (id: number) => {
+    createMail = async ({id}:{id: number}, token: IToken) => {
         try {
             let res = await fetch(endpoints.createMail + `?user_id=${id}`, {
                 method: 'GET',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
             })
             return await res?.json()
         } catch(err) {
@@ -307,11 +391,14 @@ class ApiService {
         }
     }
 
-    getMailList = async (per_page?: number) => {
+    getMailList = async ({per_page}:{per_page?: number}, token: IToken) => {
         try {
             let res = await fetch(endpoints.getMailList + `?per_page=${per_page}`, {
                 method: 'GET',
-                headers
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             })
             return await res?.json()
         } catch(err) {
@@ -323,14 +410,13 @@ class ApiService {
     sendMail_text = async (body: {
         letter_id: number,
         text: string
-    }) => {
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.sendMail_text, {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${tks.girl_token}`
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(body)
             })
@@ -344,14 +430,13 @@ class ApiService {
     sendMail_sricker = async (body: {
         letter_id: number,
         sticker_id: number
-    }) => {
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.sendMail_sticker, {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${tks.girl_token}`
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(body)
             }) 
@@ -364,14 +449,13 @@ class ApiService {
     sendMail_gift = async (body: {
         letter_id: string,
         gifts: string //string: [1,2,3]
-    }) => {
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.sendMail_gift, {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${tks.girl_token}`
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(body)
             })
@@ -381,11 +465,14 @@ class ApiService {
         }
     }
 
-    getMail = async (id: number, per_page?: number) => {
+    getMail = async ({id, per_page}:{id: number, per_page?: number}, token: IToken) => {
         try {
             let res = await fetch(endpoints.getMail + `?letter_id=${id}&per_page=${per_page}`, {
                 method: 'GET',
-                headers
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             }) 
             return await res?.json()
         } catch(err) {
@@ -396,13 +483,13 @@ class ApiService {
 
     readMail = async (body: {
         letter_message_id: number
-    }) => {
+    }, token: IToken) => {
         try {
             let res = await fetch(endpoints.readMail, {
                 method: 'POST',
                 headers: {
                     ...headers,
-                    'Authorization': `Bearer ${tks.girl_token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(body)
             })
@@ -413,12 +500,13 @@ class ApiService {
     }
     
 
-    sendWink = async (user_id: number) => {
+    sendWink = async ({user_id}:{user_id: number}, token: IToken) => {
         try {
             let res = await fetch(endpoints.sendWink, {
                 method: 'POST',
                 headers: {
-                    ...headers
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({user_id})
             })

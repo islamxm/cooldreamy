@@ -3,68 +3,33 @@ import ChatItem from '../ChatItem/ChatItem';
 import { useRouter } from 'next/router';
 import PromoBadge from '../PromoBadge/PromoBadge';
 import ApiService from '@/service/apiService';
-import {useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import { chatItemPropsTypes } from '../../types';
 import {useCallback} from 'react';
 import { PulseLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
+import { IDialogs } from '../../types';
 
-const service = new ApiService()
 
-
-const ChatList = () => {
-    const {query} = useRouter()
+const ChatList:FC<IDialogs> = ({
+    activeDialogId,
+    dialogsList = [],
+    updateDialogsPage
+}) => {
     const {inView, ref} = useInView()
-    const [page, setPage] = useState(1)
-    const [list, setList] = useState<any[]>([])
-    const [loadMore, setLoadMore] = useState(true)
-    const [id, setId] = useState('')
+    const [loadMore, setLoadMore] = useState(false)
 
-
-    //получение текущего чатрума
-    useEffect(() => {
-        if(query?.id && typeof query?.id === 'string') {
-            setId(query?.id)
-        }
-    }, [query])
     
-
-    // получение списка чатов
-    const getChatList = (update?: boolean) => {
-        service.getChatList(page, 10).then(res => {
-            console.log(res?.data)
-            if(res?.data?.length < 10) {
-                setLoadMore(false)
-            } else {
-                setLoadMore(true)
-            }
-
-            if(update) {
-                setList(s => [...s, ...res?.data])
-            } else {
-                setList(res?.data)
-            }
-        })
-    }
-
-
-    // следующая страница в конце списка
     useEffect(() => {
-        if(inView && page <= 2) {
-            setPage(s => s + 1)
-        }
-    }, [inView])
-   
+        dialogsList && dialogsList?.length % 10 ? setLoadMore(false) : setLoadMore(true)
+    }, [dialogsList])
 
 
-    // догрузка списка
     useEffect(() => {
-        if(page > 1) {
-            getChatList && getChatList(true)
-        } else {
-            getChatList && getChatList()
+        if(loadMore && inView) {
+            updateDialogsPage && updateDialogsPage((s: number) => s + 1)
         }
-    }, [page])
+    }, [inView, loadMore, updateDialogsPage])
 
 
 
@@ -72,17 +37,16 @@ const ChatList = () => {
         <div className={`${styles.wrapper} custom-scroll-vertical`}>
             {/* <PromoBadge/> */}
             {
-                list?.map((item, index) => (
+                dialogsList?.map((item, index) => (
                     <ChatItem
                         key={index}
                         {...item}
-                        active={item?.id === Number(id)}
+                        active={item?.id === activeDialogId}
                         />
                 ))
-
             }
             {
-                list?.length > 0 ? (
+                dialogsList && dialogsList?.length > 0 ? (
                     loadMore ? (
                         <div ref={ref} className={styles.loader}><PulseLoader color='var(--violet)'/></div>
                     ) : null

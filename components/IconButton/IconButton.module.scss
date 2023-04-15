@@ -13,6 +13,11 @@
         transform: scale(0.95);
     }
 
+    &:disabled {
+        pointer-events: none;
+        touch-action: none;
+        opacity: .7;
+    }
 }
 
 .wrapper.default {

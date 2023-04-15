@@ -64,4 +64,28 @@ type chatUserType = {
     name?: string,
 }
 
+// диалог (чат лист)
+export interface IDialogs {
+    dialogsList?: any[],
+    activeDialogId?: number,
+    updateDialogsPage?: (...args: any[]) => any
+}
+
+// сообщения в чате
+export interface IChat {
+    chatList?: any[],
+    id?: number,
+    updateChatListPage?: (...args: any[]) => any
+}
+
+export type chatTabsType = 'chat' | 'mail'
+
+
+export interface IChatFilterType {
+    activeType: chatTabsType,
+    onTypeChange: (type: chatTabsType) => any
+}
+
+
+
 export type messageStatuses = 'send' | 'read' | 'proccess' | 'unread'

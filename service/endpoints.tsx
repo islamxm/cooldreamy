@@ -4,6 +4,7 @@ const API_PATH = `${BASE_DOMAIN}api/`;
 const endpoints = {
     //auth
     register: `${API_PATH}register`,
+    login: `${API_PATH}token`,
 
     //users
     search: `${API_PATH}users/search`,

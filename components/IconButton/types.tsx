@@ -4,9 +4,9 @@ export interface iconButtonPropsType {
     icon?: React.ReactNode,
     variant?: iconButtonVariants,
     size?: number,
-    
     onClick?: (...args: any[]) => any,
-    style?: CSSStyleSheet
+    style?: CSSStyleSheet,
+    disabled?: boolean
     // hover?: VariantLabels | TargetAndTransition,
 }
 

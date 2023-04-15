@@ -10,6 +10,9 @@ import ApiService from '@/service/apiService';
 import img from '@/public/assets/images/girl-big.png';
 import { AnimatePresence } from 'framer-motion';
 import CreateChatModal from '@/components/CreateChatModal/CreateChatModal';
+import Router from 'next/router';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+
 const service = new ApiService()
 
 export type SwipeType = "like" | "nope" | "superlike";
@@ -59,10 +62,9 @@ export type ResultType = { [k in SwipeType]: number };
 
 
 const Main = () => {
-    const [createChatModal, setCreateChatModal] = useState(false)
+    const {token} = useAppSelector(s => s);
 
-    const closeCreateChatModal = () => setCreateChatModal(false)
-    const openCreateChatModal = () => setCreateChatModal(true)
+
 
     // ** Список карточек
     const [list, setList] = useState<IFeedCard[]>([])
@@ -84,27 +86,35 @@ const Main = () => {
     
     // ** Первое получение списка
     const getInitFeed = () => {
-        service.getFeed(page).then(res => {
-            setList(res?.data)
-        })
+        if(token) {
+            service.getFeed({
+                page
+            }, token).then(res => {
+                setList(res?.data)
+                console.log(res?.data)
+            })
+        }
     }
 
     // ** дополнение списка по мере необходимости
     const updateFeed = useCallback(() => {
-        page && service.getFeed(page).then(res => {
-            console.log(res)
-            if(res?.data?.length > 0) {
-                setList(s => [...s, ...res?.data])
-            } else {
-                // карточки закончились
-            }
-        })
-    }, [page])
+        if(token) {
+            page && service.getFeed({page}, token).then(res => {
+                console.log(res?.data)
+                if(res?.data?.length > 0) {
+                    setList(s => [...s, ...res?.data])
+                } else {
+                    // карточки закончились
+                }
+            })
+        }
+        
+    }, [page, token])
 
     // ** первая загрузка карточек
     useEffect(() => {
         getInitFeed()
-    }, [])
+    }, [token])
 
     // ** изменение страницы когда в списке остается меньше или равно 3 карточек (догрузка)
     useEffect(() => {
@@ -123,19 +133,24 @@ const Main = () => {
 
     // ** лайк
     const onLike = () => {
-        if(currentCard) {
-            service.feedItemLike(currentCard).then(res => {
-                console.log(res)
-            })
-        } 
+        if(token) {
+            if(currentCard) {
+                service.feedItemLike({id: currentCard}, token).then(res => {
+                    console.log(res)
+                })
+            } 
+        }
+        
     }
 
     // ** отмена
     const onCancel = () => {
-        if(currentCard) {
-            service.feedItemSkip(currentCard).then(res => {
-                console.log(res)
-            })
+        if(token) {
+            if(currentCard) {
+                service.feedItemSkip({id: currentCard}, token).then(res => {
+                    console.log(res)
+                })
+            }
         }
     } 
 
@@ -166,13 +181,30 @@ const Main = () => {
     }
 
 
+    const createChat = () => {
+        if(token) {
+            if(currentCard) {
+                service.createChat({
+                    user_id: currentCard
+                }, token).then(res => {
+                    // console.log(res)
+                    if(res?.chat_id) {
+                        Router.push(`/chat/${res?.chat_id}`)
+                    }
+                })
+            }
+        }
+       
+    }
+
+
     return (
         <div className={styles.wrapper}>
-            <CreateChatModal
+            {/* <CreateChatModal
                 open={createChatModal}
                 id={list[0]?.id}
                 onCancel={closeCreateChatModal}
-                />
+                /> */}
             <div className={styles.slider}>
                 <AnimatePresence>
                         {
@@ -199,6 +231,7 @@ const Main = () => {
             <div className={styles.action}>
                 <div className={`${styles.item} ${canceling ? styles.active : ''}`}>
                     <IconButton
+                        disabled={list?.length === 0}
                         onClick={() => removeCard(list[0], 'nope')}
                         variant={'danger'}
                         icon={<CgClose size={40} color='#fff'/>}
@@ -206,7 +239,8 @@ const Main = () => {
                 </div>
                 <div className={styles.item}>
                     <IconButton
-                        onClick={openCreateChatModal}
+                        disabled={list?.length === 0}
+                        onClick={createChat}
                         size={50}
                         variant={'bordered'}
                         icon={<AiOutlineMessage size={25}/>}
@@ -214,6 +248,7 @@ const Main = () => {
                 </div>
                 <div className={`${styles.item} ${liking ? styles.active : ''}`}>
                     <IconButton
+                        disabled={list?.length === 0}
                         onClick={() => removeCard(list[0], 'like')}
                         icon={<HiHeart size={35}/>}
                         />

@@ -3,7 +3,16 @@ import {Row, Col} from 'antd';
 import Input from '@/components/Input/Input';
 import {FiSearch} from 'react-icons/fi';
 import ChatList from '../ChatList/ChatList';
-const ChatSide = () => {
+import { IDialogs } from '../../types';
+import {FC} from 'react';
+
+
+
+const ChatSide:FC<IDialogs> = ({
+    dialogsList,
+    activeDialogId,
+    updateDialogsPage
+}) => {
 
     return (
         <div className={styles.wrapper}>
@@ -22,7 +31,11 @@ const ChatSide = () => {
                         />
                 </Col> */}
                 <Col span={24}>
-                    <ChatList/>
+                    <ChatList
+                        updateDialogsPage={updateDialogsPage}
+                        dialogsList={dialogsList}
+                        activeDialogId={activeDialogId}
+                        />
                 </Col>
             </Row>
         </div>

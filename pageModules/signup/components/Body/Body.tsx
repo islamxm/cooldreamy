@@ -6,6 +6,11 @@ import StepLine from '../StepLine/StepLine';
 import Button from '@/components/Button/Button';
 import { useEffect, useState } from 'react';
 import { interestTypes, targetTypes } from '../../types';
+import ApiService from '@/service/apiService';
+import { useAppDispatch } from '@/hooks/useTypesRedux';
+import { updateToken, updateUserId } from '@/store/actions';
+import Router from 'next/router';
+import { Cookies } from 'typescript-cookie';
 
 //steps
 import Step1 from '../../steps/Step1/Step1';
@@ -17,7 +22,11 @@ import Step6 from '../../steps/Step6/Step6';
 import Step7 from '../../steps/Step7/Step7';
 import Step8 from '../../steps/Step8/Step8';
 
+const service = new ApiService()
+
+
 const Body:FC = () => {
+    const dispatch = useAppDispatch()
     const [currentStep, setCurrentStep] = useState(0)
     const [nextBtn, setNextBtn] = useState(false)
 
@@ -47,7 +56,16 @@ const Body:FC = () => {
     const switchStep = (step: number) => {
         switch(step) {
             case 0: 
-                return <Step1/>
+                return (
+                    <Step1
+                        email={email}
+                        password={password}
+                        name={name}
+                        setEmail={setEmail}
+                        setPassword={setPassword}
+                        setName={setName}
+                        />
+                )
             case 1:
                 return <Step2/>
             case 2:
@@ -71,6 +89,28 @@ const Body:FC = () => {
     useEffect(() => {
         setNextBtn(false)
     }, [currentStep])
+
+
+
+    const onRegister = () => {
+        const body = {
+            email,
+            name,
+            password
+        }
+        service.register(body).then(res => {
+            console.log(res)
+            if(res?.token && res?.id) {
+                dispatch(updateToken(res?.token))
+                dispatch(updateUserId(res?.id))
+                Cookies.set('cooldate-web-user-id', res?.id)
+                Cookies.set('cooldate-web-token', res?.token)
+                Router.push('/search')
+            }
+        })
+    }
+
+
 
     return (
         <div className={styles.body}>
@@ -101,9 +141,11 @@ const Body:FC = () => {
                                             <Col span={24}>
                                                 <div className={styles.action}>
                                                     <Button
-                                                        disabled={nextBtn}
-                                                        onClick={() => setCurrentStep(s => s < 7 ? ++s : 7)}
-                                                        text='Продолжить'
+                                                        // disabled={nextBtn}
+                                                        // onClick={() => setCurrentStep(s => s < 7 ? ++s : 7)}
+                                                        disabled={!(email && name && password)}
+                                                        onClick={onRegister}
+                                                        text='Регистрация'
                                                         />
                                                 </div>
                                             </Col>

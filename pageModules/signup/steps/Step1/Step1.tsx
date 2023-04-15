@@ -7,8 +7,26 @@ import SelectSex from '@/components/SelectSex/SelectSex';
 import Link from 'next/link';
 import {motion} from 'framer-motion';
 
-const Step1:FC = ({
-    
+
+interface IStep1 {
+    email: string,
+    name: string,
+    password: string,
+
+    setEmail: (...args: any[]) => any,
+    setName: (...args: any[]) => any,
+    setPassword: (...args: any[]) => any,
+}
+
+
+const Step1:FC<IStep1> = ({
+    name,
+    email,
+    password,
+
+    setEmail,
+    setName,
+    setPassword
 }) => {
     return (
         <motion.div 
@@ -30,17 +48,23 @@ const Step1:FC = ({
                         <Row gutter={[12,12]}>
                             <Col span={24}>
                                 <Input
+                                    value={name}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                                     placeholder='Имя'
                                     />
                             </Col>
                             <Col span={24}>
                                 <Input
+                                    value={email}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                     placeholder='E-mail'
                                     type={'email'}
                                     />
                             </Col>
                             <Col span={24}>
                                 <Input
+                                    value={password}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                     placeholder='Пароль'
                                     type={'password'}
                                     />

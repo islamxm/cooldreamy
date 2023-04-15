@@ -4,7 +4,7 @@ import {FC} from 'react';
 import {motion} from 'framer-motion';
 
 const IconButton:FC<iconButtonPropsType> = (props) => {
-    const {icon, variant = 'default', size = 62, style, onClick = () => {}} = props;
+    const {icon, variant = 'default', size = 62, style, onClick = () => {}, disabled} = props;
 
     const switchVariant = (variant: iconButtonVariants) => {
         switch(variant) {
@@ -34,6 +34,7 @@ const IconButton:FC<iconButtonPropsType> = (props) => {
 
     return (
         <button
+            disabled={disabled}
             type='button'
             onClick={onClick}
             style={{...style, width: size, height: size}}

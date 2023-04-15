@@ -10,6 +10,8 @@ import {BsCamera, BsCheck} from 'react-icons/bs';
 import Link from 'next/link';
 import logo from '@/public/assets/images/logo.svg'
 import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import Router from 'next/router';
 
 
 const service = new ApiService();
@@ -36,11 +38,8 @@ const GirlCard:FC<girlCardType> = ({
     state,
     winkable
 }) => {
-
-    const [createChatModal, setCreateChatModal] = useState(false)
-
-    const openCreateChatModal = () => setCreateChatModal(true)
-    const closeCreateChatModal = () => setCreateChatModal(false)
+    const {token} = useAppSelector(s => s)
+    
 
 
     const goToMail = () => {
@@ -49,6 +48,17 @@ const GirlCard:FC<girlCardType> = ({
 
     const addToFav = () => {
 
+    }
+
+
+    const createChat = () => {
+        if(id && token) {
+            service.createChat({user_id: id}, token).then(res => {
+                if(res?.chat_id) {
+                    Router.push(`/chat/${res?.chat_id}`)
+                }
+            })
+        }
     }
     
     
@@ -86,7 +96,9 @@ const GirlCard:FC<girlCardType> = ({
                             <button className={styles.button}><AiOutlineStar/></button>
                         </Col>
                         <Col span={10}>
-                            <button className={styles.button}>
+                            <button 
+                                onClick={createChat}
+                                className={styles.button}>
                                 <span>Написать</span> <FiMail/>
                             </button>
                         </Col>
