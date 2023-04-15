@@ -5,14 +5,24 @@ import logoImage from '@/public/assets/images/logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import {motion} from 'framer-motion';
+import LoginModal from '../LoginModal/LoginModal';
+import { useState } from 'react';
+
 
 const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
+    const [loginModal, setLoginModal] = useState(false)
+
     return (
         <motion.header 
             initial={{y: '-100%'}}
             animate={{y: '0%'}}
             transition={{type: 'spring'}}
             className={styles.header}>
+
+            <LoginModal
+                open={loginModal}
+                onCancel={() => setLoginModal(false)}
+                />
             <Container>
                 <motion.div 
                     // сделать анимацию поочередного появления opacity: 0 => 1
@@ -29,7 +39,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                         {
                             auth ? (
                                 <div className={styles.auth}>
-                                    <Link className={styles.item} href={'/search'}>ВХОД</Link>
+                                    <span onClick={() => setLoginModal(true)} className={styles.item}>ВХОД</span>
                                     <Link className={styles.item} href={'/signup'}>РЕГИСТРАЦИЯ</Link>
                                 </div>
                             ) : null

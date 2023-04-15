@@ -6,10 +6,14 @@ import {HiOutlineGift} from 'react-icons/hi';
 import {HiOutlineChatBubbleOvalLeftEllipsis} from 'react-icons/hi2';
 import IconButton from '@/components/IconButton/IconButton';
 import {motion} from 'framer-motion';
+import ChatMock from '../ChatMock/ChatMock';
+import { useState } from 'react';
 
 
-const ChatStart = () => {
 
+
+
+const ChatStart = ({avatar, onSelect}: {avatar?: string, onSelect: (type: 'wink' | 'gift' | 'text' | '') => void}) => {
 
     return (
         <div className={styles.wrapper}>
@@ -24,7 +28,11 @@ const ChatStart = () => {
                         <Image
                             width={180}
                             height={180}
-                            src={placeholder}
+                            unoptimized
+                            loader={(p) => {
+                                return p?.src && typeof p?.src === 'string' ? p.src : ''
+                            }}
+                            src={avatar ? avatar : placeholder}
                             alt=''
                             />
                     </div>
@@ -34,6 +42,7 @@ const ChatStart = () => {
                     <div className={styles.item}>
                         <button className={styles.button}>
                             <IconButton
+                                onClick={() => onSelect('wink')}
                                 size={60}
                                 icon={<FaRegSmileWink size={30}/>}
                                 />
@@ -43,6 +52,7 @@ const ChatStart = () => {
                     <div className={styles.item}>
                         <button className={styles.button}>
                             <IconButton
+                                onClick={() => onSelect('gift')}
                                 size={60}
                                 icon={<HiOutlineGift size={30}/>}
                                 />
@@ -52,6 +62,7 @@ const ChatStart = () => {
                     <div className={styles.item}>
                         <button className={styles.button}>
                             <IconButton
+                                onClick={() => onSelect('text')}
                                 size={60}
                                 icon={<HiOutlineChatBubbleOvalLeftEllipsis size={30}/>}
                                 />

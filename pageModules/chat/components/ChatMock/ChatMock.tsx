@@ -35,13 +35,16 @@ const mockList = [
 ]
 
 
-const ChatMock = () => {
+const ChatMock = ({
+    onClose,
+    onSend
+}: {
+    onClose: (e: any) => void,
+    onSend: (text: string) => void
+}) => {
     const [selectValue, setSelectValue] = useState('') 
 
 
-    useEffect(() => {
-        console.log(selectValue)
-    }, [selectValue])
 
     return (
         <div className={styles.wrapper}>
@@ -73,12 +76,14 @@ const ChatMock = () => {
                             <Button
                                 disabled={!selectValue}
                                 text='Отправить'
+                                onClick={() => onSend(selectValue)}
                                 />
                         </Col>
                         <Col span={12}>
                             <Button
                                 variant={'bordered'}
                                 text='Назад'
+                                onClick={onClose}
                                 />
                         </Col>
                     </Row>

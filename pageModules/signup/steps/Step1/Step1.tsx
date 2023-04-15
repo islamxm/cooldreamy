@@ -12,10 +12,12 @@ interface IStep1 {
     email: string,
     name: string,
     password: string,
+    sex: 'male' | 'female'
 
     setEmail: (...args: any[]) => any,
     setName: (...args: any[]) => any,
     setPassword: (...args: any[]) => any,
+    setSex: (sex: 'male' | 'female') => any
 }
 
 
@@ -23,10 +25,11 @@ const Step1:FC<IStep1> = ({
     name,
     email,
     password,
-
+    sex,
     setEmail,
     setName,
-    setPassword
+    setPassword,
+    setSex
 }) => {
     return (
         <motion.div 
@@ -84,8 +87,8 @@ const Step1:FC<IStep1> = ({
                     </Col>
                     <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
                         <SelectSex
-                            onSelect={(e) => {}}
-                            value={'male'}
+                            onSelect={(e) => setSex(e)}
+                            value={sex}
                             />
                     </Col>
                     <Col span={24}>

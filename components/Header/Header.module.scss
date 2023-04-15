@@ -53,7 +53,9 @@
                     line-height: 21px;
                     margin: 0 12px;
                     font-weight: 500;
+                    cursor: pointer;
                     letter-spacing: 5px;
+                    
                     &:hover {
                         color: var(--purp);
                     }

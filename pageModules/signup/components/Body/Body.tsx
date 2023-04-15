@@ -36,7 +36,7 @@ const Body:FC = () => {
     const [password, setPassword] = useState('')
     const [city, setCity] = useState('')
     const [dob, setDob] = useState('')
-    const [sex, setSex] = useState<'male' | 'female' | ''>('')
+    const [sex, setSex] = useState<'male' | 'female'>('male')
 
 
     // 2 STEP
@@ -58,12 +58,14 @@ const Body:FC = () => {
             case 0: 
                 return (
                     <Step1
+                        sex={sex}
                         email={email}
                         password={password}
                         name={name}
                         setEmail={setEmail}
                         setPassword={setPassword}
                         setName={setName}
+                        setSex={setSex}
                         />
                 )
             case 1:
@@ -96,7 +98,8 @@ const Body:FC = () => {
         const body = {
             email,
             name,
-            password
+            password,
+            gender: sex
         }
         service.register(body).then(res => {
             console.log(res)
@@ -143,7 +146,7 @@ const Body:FC = () => {
                                                     <Button
                                                         // disabled={nextBtn}
                                                         // onClick={() => setCurrentStep(s => s < 7 ? ++s : 7)}
-                                                        disabled={!(email && name && password)}
+                                                        disabled={!(email && name && password && sex)}
                                                         onClick={onRegister}
                                                         text='Регистрация'
                                                         />
