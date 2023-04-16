@@ -108,8 +108,8 @@ const Body:FC = () => {
                 dispatch(updateUserId(res?.id))
                 Cookies.set('cooldate-web-user-id', res?.id)
                 Cookies.set('cooldate-web-token', res?.token)
-                
-                Router.push('/search')
+
+                window.location.replace('/search')
             }
         })
     }
