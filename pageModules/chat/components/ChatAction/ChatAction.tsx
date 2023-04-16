@@ -10,6 +10,8 @@ import ApiService from '@/service/apiService';
 import { useRouter } from 'next/router';
 import { PulseLoader } from 'react-spinners';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import moment from 'moment';
+
 
 const service = new ApiService()
 
@@ -17,7 +19,9 @@ const ChatAction = ({
     setHeight,
     updateChat,
     getGifts,
-    updateDialogsList
+    updateDialogsList,
+
+    
 }: {
     setHeight: (...args: any[]) => any, 
     updateChat: (...args: any[]) => any,
@@ -58,16 +62,13 @@ const ChatAction = ({
                     chat_id: Number(query?.id),
                     text
                 }, token).then(res => {
-                    
-                    console.log(res)
-                    
                     updateDialogsList && updateDialogsList((s: any) => {
                         const m = s;
                         const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                        return [...m]
+                        return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
                     })
                     
-                    updateChat()
+                    updateChat(res?.chat?.last_message)
 
                 }).finally(() => {
                     setLoad(false)

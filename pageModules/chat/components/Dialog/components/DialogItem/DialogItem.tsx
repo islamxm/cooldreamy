@@ -6,6 +6,8 @@ import img from '@/public/assets/images/avatar-placeholder.png';
 import {BsCheckAll} from 'react-icons/bs';
 import Moment from 'react-moment';
 import Image from 'next/image';
+import {motion} from 'framer-motion';
+import moment from 'moment';
 
 
 const DialogItem:FC<dialogItemType> = ({
@@ -14,6 +16,7 @@ const DialogItem:FC<dialogItemType> = ({
     chat_messageable,
     chat_messageable_type,
     updated_at,
+    created_at,
     index
 }) => {
 
@@ -36,7 +39,7 @@ const DialogItem:FC<dialogItemType> = ({
                                     />
                             </div>
                         </div>
-                        <div className={styles.time}><Moment format='HH:MM'>{updated_at}</Moment></div>
+                        <div className={styles.time}>{moment(updated_at).format('hh:mm')}</div>
                     </div>
                 ) 
             case "App\\Models\\ChatTextMessage":
@@ -48,7 +51,7 @@ const DialogItem:FC<dialogItemType> = ({
                             </p>
                             
                         </div>
-                        <div className={styles.time}><Moment format='HH:MM'>{updated_at}</Moment></div>
+                        <div className={styles.time}>{moment(updated_at).format('hh:mm')}</div>
                     </div>      
                 )
             case "App\\Models\\ChatWinkMessage":
@@ -72,7 +75,7 @@ const DialogItem:FC<dialogItemType> = ({
             {
                 me ? (
                     <div className={`${styles.body} ${styles.me}`}>
-                        <div className={styles.message}>
+                        <motion.div className={styles.message}>
                             {switchMessageType(chat_messageable_type)}
                             {
                                 is_read_by_recepient === 1 ? (
@@ -82,7 +85,7 @@ const DialogItem:FC<dialogItemType> = ({
                                     </div>
                                 ) : null
                             }
-                        </div>
+                        </motion.div>
                         <div className={styles.avatar}>
                             <Avatar
                                 round
@@ -100,9 +103,14 @@ const DialogItem:FC<dialogItemType> = ({
                                 size={40}
                                 />
                         </div>
-                        <div className={styles.message}>
+                        <motion.div 
+                            initial={{opacity: 0, scale: 0}}
+                            animate={{opacity: 1, scale: 1}}
+                            exit={{opacity: 0, scale: 0}}
+                            transition={{type: 'spring', damping: 17, stiffness: 400}}
+                            className={styles.message}>
                             {switchMessageType(chat_messageable_type)}
-                        </div>
+                        </motion.div>
                     </div>
                 )   
             }

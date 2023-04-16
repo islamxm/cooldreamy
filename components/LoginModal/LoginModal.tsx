@@ -6,18 +6,20 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Link from 'next/link';
 import ApiService from '@/service/apiService';
-import { useAppDispatch } from '@/hooks/useTypesRedux';
+import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import { Cookies } from 'typescript-cookie';
 import { updateToken, updateUserId } from '@/store/actions';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
-
+import { RootState } from '@/store/store';
+import { useDispatch, useSelector } from 'react-redux';
 
 const service = new ApiService()
 
 const LoginModal:FC<ModalFuncProps> = (props) => {
     const router = useRouter()
-    const dispatch = useAppDispatch()
+
+    const dispatch = useDispatch()
     const {onCancel} = props
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -46,17 +48,15 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             email,
             password
         }).then(res => {
-            
-            console.log(res)
+
             if(res?.token) {
                 Cookies.set('cooldate-web-token', res?.token)
                 Cookies.set('cooldate-web-user-id', res?.id)
                 dispatch(updateToken(res?.token))
                 dispatch(updateUserId(res?.id))
-
                 
-                // router.replace('/search')
-                window.location.replace('/search')
+                Router.push('/search')
+                
 
                 setErrors({
                     email: '',
@@ -77,6 +77,8 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             onClose()
         })
     }
+
+
 
 
     return (

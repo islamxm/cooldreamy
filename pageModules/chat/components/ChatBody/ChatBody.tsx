@@ -73,8 +73,8 @@ const ChatBody:FC<IDialogs & IChat & testType> = ({
                     return [...m]
                 })
 
-                updateChat()
-                // setMockType('')
+                updateChat(res?.chat?.last_message)
+                setMockType('')
             })
         }
     }, [token, activeDialogId, updateChat])
@@ -91,7 +91,8 @@ const ChatBody:FC<IDialogs & IChat & testType> = ({
                     return [...m]
                 })
 
-                updateChat()
+                updateChat(res?.chat?.last_message)
+                setMockType('')
             })
         }
     }, [token, activeDialogId])

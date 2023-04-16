@@ -7,7 +7,7 @@ import { dialogItemType, IChat } from '../../types';
 import { PulseLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-
+import { AnimatePresence } from 'framer-motion';
 import {useChatScroll, useDataLoader} from 'use-chat-scroll'
 
 
@@ -56,14 +56,17 @@ const Dialog:FC<I> = ({
 
     return (
         <div className={styles.wrapper} style={{maxHeight: height}}>
-            {
-                chatList?.map((item, index) => (
-                    <DialogItem
-                        {...item}
-                        me={item.sender_user_id === Number(userId)} 
-                        key={index}/>
-                ))
-            }
+            <AnimatePresence>
+                {
+                    chatList?.map((item, index) => (
+                        <DialogItem
+                            {...item}
+                            me={item.sender_user_id === Number(userId)} 
+                            key={index}/>
+                    ))
+                }
+            </AnimatePresence>
+            
             {
                 chatList && chatList?.length > 0 ? (
                     loadMore ? (

@@ -6,6 +6,9 @@ import ApiService from '@/service/apiService';
 import {FC, useState, useEffect, useCallback, ChangeEvent} from 'react';
 import { useRouter } from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import moment from 'moment';
+import notify from '@/helpers/notify';
+
 
 const service = new ApiService()
 
@@ -48,7 +51,6 @@ const ChatLayout = () => {
     }, [query])
 
 
-    useEffect(() => console.log(token), [token])
 
 
     // ** получение диалогов (чат лист)
@@ -57,6 +59,7 @@ const ChatLayout = () => {
             service.getChatList({
                 page: dialogsPage,
             }, token).then(res => {
+                
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -106,11 +109,12 @@ const ChatLayout = () => {
 
 
 
-
-    // !! тестовая функция для обновления чата
-    const updateChat = () => {
-        getChat()
-    }
+    // ?? обновление чата
+    const updateChat = useCallback((item: any) => {
+        setChatList(s => {
+            return [item, ...s]
+        })
+    }, [chatList])
 
 
 
@@ -123,7 +127,7 @@ const ChatLayout = () => {
                 setDialogsList(s => {
                     const m = s;
                     const rm = m.splice(m.findIndex((i: any) => i.id === data?.chat_list_item?.chat?.id), 1, data?.chat_list_item?.chat)
-                    return [...m]
+                    return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
                 })
 
                 if(currentChatId && currentChatId == data?.chat_list_item?.chat?.id) {
@@ -131,6 +135,7 @@ const ChatLayout = () => {
                         return [data?.chat_message, ...s]
                     })
                 }
+                notify('text text text', 'ERROR')
             })
         }
     }, [socketChannel, currentChatId])
@@ -163,7 +168,7 @@ const ChatLayout = () => {
 
 
                             // !!тестовый проп
-                            updateChat={() => {}}
+                            updateChat={updateChat}
                             />
                     </div>
                 </Col>

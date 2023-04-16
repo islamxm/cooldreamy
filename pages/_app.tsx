@@ -4,7 +4,7 @@ import '@/styles/styles.scss';
 import type { AppProps } from 'next/app'
 import AppLayout from '@/components/AppLayout/AppLayout';
 import {Provider} from 'react-redux';
-import store from '@/store/store';
+
 import { useEffect, useState } from 'react';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
@@ -12,29 +12,35 @@ import Pusher from 'pusher-js';
 import * as PusherTypes from 'pusher-js';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import MainWrapper from '@/components/MainWrapper/MainWrapper';
+import store from '@/store/store';
+import PrivateRoute from '@/hoc/CheckAuth';
+import { ToastContainer } from 'react-toastify';
 
 
 
+function App({ Component, pageProps }: AppProps) {
 
-
-export default function App({ Component, pageProps }: AppProps) {
-	
 	
 
 
 	return (
 		<Provider store={store}>
-			<MainWrapper>
-				<Header
-					auth={true}
-					/>
-				<main>
-					<Component {...pageProps} />
-				</main>
-				<Footer/>
-			</MainWrapper>
-			
+			<PrivateRoute>
+				<MainWrapper>
+						<ToastContainer/>
+						<Header
+							auth={true}
+							/>
+						<main>
+							<Component {...pageProps} />
+						</main>
+						<Footer/>
+					</MainWrapper>
+			</PrivateRoute>
 		</Provider>
 		
 	)
 }
+
+
+export default App;

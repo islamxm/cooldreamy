@@ -25,14 +25,14 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
         socketChannel?.unsubscribe()
 
         dispatch(updateToken(''))
-        dispatch(updateUserId(0))
+        dispatch(updateUserId(null))
         dispatch(updateSocket(null))
 
         Cookies.remove('cooldate-web-user-id')
         Cookies.remove('cooldate-web-token')
-
-        // Router.push('/')
-        window.location.replace('/')
+        
+        Router.push('/')
+        
     }
 
 

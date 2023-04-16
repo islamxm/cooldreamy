@@ -102,14 +102,14 @@ const Body:FC = () => {
             gender: sex
         }
         service.register(body).then(res => {
-            console.log(res)
+            // console.log(res)
             if(res?.token && res?.id) {
                 dispatch(updateToken(res?.token))
                 dispatch(updateUserId(res?.id))
                 Cookies.set('cooldate-web-user-id', res?.id)
                 Cookies.set('cooldate-web-token', res?.token)
 
-                window.location.replace('/search')
+                Router.push('/search')
             }
         })
     }

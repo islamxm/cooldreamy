@@ -12,7 +12,7 @@ import logo from '@/public/assets/images/logo.svg'
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
-
+import { useSelector } from 'react-redux';
 
 const service = new ApiService();
 

@@ -21,9 +21,6 @@ const Hero: FC = ({}) => {
         setSex(value)
     }
 
-    useEffect(()=> {
-        console.log(scale)
-    }, [scale])
 
     return (
         <div className={styles.hero}>
