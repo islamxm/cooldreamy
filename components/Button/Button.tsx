@@ -16,7 +16,8 @@ const Button: FC<ButtonPropsTypes> = ({
     hover = {boxShadow: '0.872px 9.962px 20px rgba(148, 45, 217, 0.35)'},
     fill,
     small,
-    load
+    load,
+    middle
 }) => {
     const ref = useRef(null);
 
@@ -50,11 +51,15 @@ const Button: FC<ButtonPropsTypes> = ({
                 scale: 0.9,
                 transition: {type: "spring", stiffness: 400, damping: 17}
             }} 
+            transition={{type: 'spring', stiffness: 400, damping: 17}}
+            initial={{scale: 0, opacity: 0}}
+            animate={{scale: 1, opacity: 1}}
+            exit={{scale: 0, opacity: 0}}
             whileHover={hover}
             disabled={disabled}
             onClick={onClick}
             style={style}
-            className={`${styles.button} ${switchVariant(variant)} ${fill ? styles.fill : ''} ${small ? styles.sm : ''} ${load ? styles.load : ''}`}>
+            className={`${styles.button} ${switchVariant(variant)} ${fill ? styles.fill : ''} ${small ? styles.sm : ''} ${load ? styles.load : ''} ${middle ? styles.md : ''}`}>
             {
                 load ? (
                     <div className={styles.load}>

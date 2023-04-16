@@ -19,7 +19,7 @@ import MainWrapper from '@/components/MainWrapper/MainWrapper';
 
 export default function App({ Component, pageProps }: AppProps) {
 	
-
+	
 
 
 	return (

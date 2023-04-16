@@ -14,7 +14,7 @@ const DialogItem:FC<dialogItemType> = ({
     chat_messageable,
     chat_messageable_type,
     updated_at,
-
+    index
 }) => {
 
 
@@ -54,6 +54,10 @@ const DialogItem:FC<dialogItemType> = ({
             case "App\\Models\\ChatWinkMessage":
                 return (
                     <h1 style={{color: 'red'}}>Wink</h1>
+                )
+            case "App\\Models\\ChatGiftMessage":
+                return (
+                    <h1 style={{color: 'red'}}>Gift</h1>
                 )
             default:
                 return null

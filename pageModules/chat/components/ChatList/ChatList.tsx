@@ -14,15 +14,16 @@ import { IDialogs } from '../../types';
 const ChatList:FC<IDialogs> = ({
     activeDialogId,
     dialogsList = [],
-    updateDialogsPage
+    updateDialogsPage,
+    totalDialogItemCount
 }) => {
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
 
     
     useEffect(() => {
-        dialogsList && dialogsList?.length % 10 ? setLoadMore(false) : setLoadMore(true)
-    }, [dialogsList])
+        dialogsList?.length === totalDialogItemCount ? setLoadMore(false) : setLoadMore(true)
+    }, [dialogsList, totalDialogItemCount])
 
 
     useEffect(() => {

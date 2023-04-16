@@ -1,6 +1,5 @@
 .wrapper {
     display: flex;
-    //align-items: flex-end;
     overflow: hidden;
 
     
@@ -15,17 +14,14 @@
         display: flex;
         flex-direction: column;
         
-
-        .body {
-            flex: 1 0 auto;
+        
+        .body {   
+            display: flex;
+            align-items: flex-end;
         }   
 
         .action {
-            // position: absolute;
-            // bottom: 0;
-            // left: 0;
-            // width: 100%;
-            // z-index: 10;
+
         }
     }
 }

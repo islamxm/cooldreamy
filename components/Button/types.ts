@@ -16,6 +16,7 @@ export type ButtonPropsTypes = {
     hover?: VariantLabels | TargetAndTransition,
     fill?: boolean,
     small?: boolean,
+    middle?: boolean,
     load?: boolean
 }
 

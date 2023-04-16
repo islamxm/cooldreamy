@@ -11,7 +11,8 @@ import {FC} from 'react';
 const ChatSide:FC<IDialogs> = ({
     dialogsList,
     activeDialogId,
-    updateDialogsPage
+    updateDialogsPage,
+    totalDialogItemCount
 }) => {
 
     return (
@@ -32,6 +33,7 @@ const ChatSide:FC<IDialogs> = ({
                 </Col> */}
                 <Col span={24}>
                     <ChatList
+                        totalDialogItemCount={totalDialogItemCount}
                         updateDialogsPage={updateDialogsPage}
                         dialogsList={dialogsList}
                         activeDialogId={activeDialogId}

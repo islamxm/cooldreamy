@@ -15,8 +15,15 @@ const service = new ApiService()
 
 const ChatAction = ({
     setHeight,
-    updateChat
-}: {setHeight: (...args: any[]) => any, updateChat: (...args: any[]) => any}) => {
+    updateChat,
+    getGifts,
+    updateDialogsList
+}: {
+    setHeight: (...args: any[]) => any, 
+    updateChat: (...args: any[]) => any,
+    getGifts: (type: 'gift') => any,
+    updateDialogsList?: (...args: any[]) => any
+}) => {
     const {token} = useAppSelector(s => s)
     const {query} = useRouter()
 
@@ -51,8 +58,17 @@ const ChatAction = ({
                     chat_id: Number(query?.id),
                     text
                 }, token).then(res => {
+                    
                     console.log(res)
+                    
+                    updateDialogsList && updateDialogsList((s: any) => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                        return [...m]
+                    })
+                    
                     updateChat()
+
                 }).finally(() => {
                     setLoad(false)
                     setText('')
@@ -116,6 +132,7 @@ const ChatAction = ({
                         </div>
                         <div className={styles.item}>
                             <IconButton
+                                onClick={getGifts}
                                 variant={'bordered'}
                                 size={30}
                                 icon={<AiOutlineGift size={20}/>}

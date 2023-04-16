@@ -14,7 +14,7 @@ const service = new ApiService()
 const ChatLayout = () => {
     // !! глобальные инстанции
     const {query} = useRouter()
-    const {token} = useAppSelector(s => s)
+    const {token, socketChannel} = useAppSelector(s => s)
 
 
 
@@ -35,6 +35,8 @@ const ChatLayout = () => {
     const [dialogsPage, setDialogsPage] = useState<number>(1)
     const [chatListPage, setChatListPage] = useState(1)
 
+    const [totalDialogItemCount, setTotalDialogItemCount] = useState(0)
+    const [totalChatItemCount, setTotalChatItemCount] = useState(0)
 
     // ?? получение ид текущего чата из роута (опционально)
     useEffect(() => {
@@ -53,7 +55,7 @@ const ChatLayout = () => {
             service.getChatList({
                 page: dialogsPage,
             }, token).then(res => {
-                console.log(res)
+                setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
                 } else {
@@ -75,8 +77,7 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
-                    console.log(res)
-    
+                    setTotalChatItemCount(res?.chat_messages?.total)
                     if(chatListPage === 1) {
                         setChatList(res?.chat_messages?.data)
                     } else {
@@ -87,21 +88,6 @@ const ChatLayout = () => {
             }
         }
         
-    }
-
-    // ** отправка сообщения (текст, медиа, гифт, подмигивание)
-    const sendMessage = (payload: any, type: string) => {
-        if(payload) {
-            switch(type) {
-
-            }
-        }
-    }
-
-
-    // ** заливка медиа файла
-    const uploadMedia = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e)
     }
 
 
@@ -125,6 +111,17 @@ const ChatLayout = () => {
     }
 
 
+
+    // !! подписка на события по сокету
+    useEffect(() => {
+        if(socketChannel) {
+            socketChannel?.listen('.new-chat-message-event', (data: any) => {
+                console.log(data)
+            })
+        }
+    }, [socketChannel])
+
+
     return (
         <div className={styles.wrapper}>
             <Row>
@@ -139,14 +136,20 @@ const ChatLayout = () => {
                 <Col span={24}>
                     <div className={styles.main}>
                         <ChatBody
-                            updateDialogsPage={setDialogsPage}
+                            chatList={chatList}
                             dialogsList={dialogsList}
                             activeDialogId={currentChatId}
+                            totalChatItemCount={totalChatItemCount}
+                            totalDialogItemCount={totalDialogItemCount}      
+
+                            updateDialogsPage={setDialogsPage}
                             updateChatListPage={setChatListPage}
-                            chatList={chatList}
+                            updateDialogsList={setDialogsList}
+                                         
+
 
                             // !!тестовый проп
-                            updateChat={updateChat}
+                            updateChat={() => {}}
                             />
                     </div>
                 </Col>

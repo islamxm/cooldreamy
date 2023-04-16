@@ -52,7 +52,9 @@ export type dialogItemType = {
     is_read_by_recepient?: 1 | 0,
     sender_user_id?: number
     me?: boolean,
-    updated_at?: string
+    updated_at?: string,
+
+    index?: number
 }
 
 
@@ -68,14 +70,17 @@ type chatUserType = {
 export interface IDialogs {
     dialogsList?: any[],
     activeDialogId?: number,
-    updateDialogsPage?: (...args: any[]) => any
+    updateDialogsPage?: (...args: any[]) => any,
+    updateDialogsList?: (...args: any[]) => any,
+    totalDialogItemCount?: number
 }
 
 // сообщения в чате
 export interface IChat {
-    chatList?: any[],
+    chatList: any[],
     id?: number,
-    updateChatListPage?: (...args: any[]) => any
+    updateChatListPage: (...args: any[]) => any,
+    totalChatItemCount?: number
 }
 
 export type chatTabsType = 'chat' | 'mail'
