@@ -13,6 +13,7 @@ import * as PusherTypes from 'pusher-js';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import MainWrapper from '@/components/MainWrapper/MainWrapper';
 import store from '@/store/store';
+import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from '@/hoc/CheckAuth';
 import { ToastContainer } from 'react-toastify';
 
