@@ -48,6 +48,8 @@ const ChatLayout = () => {
     }, [query])
 
 
+    useEffect(() => console.log(token), [token])
+
 
     // ** получение диалогов (чат лист)
     const getDialogs = () => {
@@ -117,9 +119,21 @@ const ChatLayout = () => {
         if(socketChannel) {
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
                 console.log(data)
+                
+                setDialogsList(s => {
+                    const m = s;
+                    const rm = m.splice(m.findIndex((i: any) => i.id === data?.chat_list_item?.chat?.id), 1, data?.chat_list_item?.chat)
+                    return [...m]
+                })
+
+                if(currentChatId && currentChatId == data?.chat_list_item?.chat?.id) {
+                    setChatList(s => {
+                        return [data?.chat_message, ...s]
+                    })
+                }
             })
         }
-    }, [socketChannel])
+    }, [socketChannel, currentChatId])
 
 
     return (

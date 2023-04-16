@@ -7,10 +7,34 @@ import Link from 'next/link';
 import {motion} from 'framer-motion';
 import LoginModal from '../LoginModal/LoginModal';
 import { useState } from 'react';
+import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
+import { Cookies } from 'typescript-cookie';
+import { updateToken, updateUserId, updateSocket } from '@/store/actions';
+import Router from 'next/router';
+
 
 
 const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
+    const dispatch = useAppDispatch()
+    const {token, socketChannel} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
+
+
+
+    const onLogout = () => {
+        socketChannel?.unsubscribe()
+
+        dispatch(updateToken(''))
+        dispatch(updateUserId(0))
+        dispatch(updateSocket(null))
+
+        Cookies.remove('cooldate-web-user-id')
+        Cookies.remove('cooldate-web-token')
+
+        // Router.push('/')
+        window.location.replace('/')
+    }
+
 
     return (
         <motion.header 
@@ -37,12 +61,16 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                     </Link>
                     <div className={styles.main}>
                         {
-                            auth ? (
+                            !token ? (
                                 <div className={styles.auth}>
                                     <span onClick={() => setLoginModal(true)} className={styles.item}>ВХОД</span>
                                     <Link className={styles.item} href={'/signup'}>РЕГИСТРАЦИЯ</Link>
                                 </div>
-                            ) : null
+                            ) : (
+                                <div className={styles.auth}>
+                                    <span onClick={onLogout} className={styles.item}>ВЫХОД</span>
+                                </div>
+                            )
                         }
                     </div>
                 </motion.div>

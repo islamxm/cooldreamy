@@ -10,11 +10,13 @@ import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { Cookies } from 'typescript-cookie';
 import { updateToken, updateUserId } from '@/store/actions';
 import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 
 const service = new ApiService()
 
 const LoginModal:FC<ModalFuncProps> = (props) => {
+    const router = useRouter()
     const dispatch = useAppDispatch()
     const {onCancel} = props
     const [email, setEmail] = useState('')
@@ -52,8 +54,9 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 dispatch(updateToken(res?.token))
                 dispatch(updateUserId(res?.id))
 
-
-                Router.push('/search')
+                
+                // router.replace('/search')
+                window.location.replace('/search')
 
                 setErrors({
                     email: '',

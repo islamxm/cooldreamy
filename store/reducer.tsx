@@ -2,7 +2,9 @@ import Echo from "laravel-echo";
 import { PusherPrivateChannel } from "laravel-echo/dist/channel";
 import { Cookies } from "typescript-cookie";
 
-interface IGlobalState {
+
+
+export interface IGlobalState {
     userId: string | { [property: string]: string; } | null | undefined,
     token: string | { [property: string]: string; } | null | undefined,
     socketChannel: PusherPrivateChannel | null
