@@ -76,7 +76,7 @@ const ChatLayout = () => {
     const getChat = () => {
         if(token) {
             if(currentChatId && chatListPage) {
-            
+                
                 service.getChat({
                     id: currentChatId,
                     page: chatListPage,
@@ -120,9 +120,9 @@ const ChatLayout = () => {
 
     // !! подписка на события по сокету
     useEffect(() => {
-        if(socketChannel) {
+        if(socketChannel && currentChatId) {
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
-                console.log(data)
+                // console.log(data)
                 
                 setDialogsList(s => {
                     const m = s;
@@ -135,7 +135,7 @@ const ChatLayout = () => {
                         return [data?.chat_message, ...s]
                     })
                 }
-                notify('text text text', 'ERROR')
+                
             })
         }
     }, [socketChannel, currentChatId])

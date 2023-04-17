@@ -4,15 +4,15 @@ import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
 import { updateSocket } from '@/store/actions';
-
+import notify from '@/helpers/notify';
 
 const MainWrapper = ({
     children
 }: {children?: React.ReactNode}) => {
 	const dispatch = useAppDispatch()
-    const {token, userId} = useAppSelector(s => s);
+    const {token, userId, socketChannel} = useAppSelector(s => s);
 
-    const [channels, setChannels] = useState<any>(null)
+
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
 	useEffect(() => {
@@ -47,7 +47,7 @@ const MainWrapper = ({
 			const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {
-				console.log('ready')
+				notify('Соединение установлено', 'SUCCESS')
 			})
 		}
 	}, [pusherConfig, userId])
@@ -57,11 +57,22 @@ const MainWrapper = ({
 	//chat-message-read-event
 	//new-letter-message-event
 	//letter-message-read-event
-	// useEffect(() => {
-	// 	// channels && channels.listen('.new-letter-message-event', (e: any) => {
-	// 	// 	console.log(e)
-	// 	// })
-	// }, [channels])
+	
+
+	useEffect(() => {
+		if(socketChannel) {
+			//?? получение сообщений
+            socketChannel?.listen('.new-chat-message-event', (data: any) => {
+				if(data?.chat_message?.chat_messageable_type === 'App\\Models\\ChatTextMessage') {
+					notify(data?.chat_message?.chat_messageable?.text, 'AVATAR')
+				} else {
+					notify('Сообщение не текстового типа', 'AVATAR')
+				}
+            })
+        }
+	}, [socketChannel])
+
+
 
     return (
         <>

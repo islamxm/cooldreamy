@@ -5,6 +5,7 @@ import {FC} from 'react';
 import { userCardPropsTypes } from './types';
 import {BsCheck2} from 'react-icons/bs';
 import Link from 'next/link';
+import placeholder from '@/public/assets/images/avatar-placeholder.png'
 
 const UserCard:FC<userCardPropsTypes> = ({
     children,
@@ -26,7 +27,12 @@ const UserCard:FC<userCardPropsTypes> = ({
                             ) : null
                         }
                         <div className={styles.img}>
-                            <Image src={image} alt=""/>
+                            <Image 
+                                loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                                src={image ? image : placeholder}
+                                width={275}
+                                height={285}
+                                alt=""/>
                         </div>
                     </div>
                 </Col>

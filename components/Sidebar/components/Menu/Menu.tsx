@@ -20,7 +20,7 @@ const menuList:menuItemType[] = [
         label: 'Мои переписки',
         link: '/chat',
         icon: <IoChatbubblesOutline/>,
-        badge: 3,
+        badge: 0,
         onClick: () => {},
     },
     {
@@ -34,7 +34,7 @@ const menuList:menuItemType[] = [
         label: 'Симпатии',
         link: '/sympathy',
         icon: <FiHeart/>,
-        badge: 21,
+        badge: 0,
         onClick: () => {},
     },
     {

@@ -13,7 +13,7 @@ const PrivateRoute = ({
 
     const router = useRouter()
     const [auth, setAuth] = useState(false)
-    const {token} = useAppSelector(s => s)
+    const {token, socketChannel} = useAppSelector(s => s)
 
     const dispatch = useAppDispatch()
 
@@ -23,12 +23,15 @@ const PrivateRoute = ({
                 process?.browser && Cookies.remove('')
                 process?.browser && Cookies.remove('')
 
+                socketChannel && socketChannel?.unsubscribe()
+
                 dispatch(updateToken(null))
                 dispatch(updateUserId(null))
                 dispatch(updateSocket(null))
 
+                
 
-                if(router?.pathname !== '/') {
+                if(router?.pathname !== '/' && router?.pathname !== '/signup') {
                     router.replace('/')
                 } else {
                     return;
@@ -45,16 +48,17 @@ const PrivateRoute = ({
             }
         }
         
-    }, [token, router, dispatch])
+    }, [token, router, dispatch, socketChannel])
 
 
     return auth ? (
         children
     ) : (
-        router?.pathname === '/' ? (
+        router?.pathname === '/' || router?.pathname === '/signup'  ? (
             children    
         ) : (
-            <h1 style={{color: 'red', fontSize: 40, lineHeight: '60px'}}>Not auth</h1>
+            null
+            // можно показать лоадер
         )
         
     )

@@ -10,6 +10,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { tabItemPropsTypes } from '../../types';
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import { selectOptionType } from '@/components/SelectDef/types';
 
 
 const service = new ApiService();
@@ -26,8 +27,8 @@ const SearchBody = () => {
     const [targetList, setTargetList] = useState([])
     const [financeList, setFinanceList] = useState([])
 
-    const [state, setState] = useState('Балашиха')
-    const [country, setCountry] = useState('Россия')
+    const [state, setState] = useState<{value: string, id: string, label: string}>()
+    const [country, setCountry] = useState<{value: string, id: string, label: string}>()
     const [age_range_start, setage_range_start] = useState(18)
     const [age_range_end, setage_range_end] = useState(70)
     const [prompt_target_id, setprompt_target_id] = useState()
@@ -40,6 +41,8 @@ const SearchBody = () => {
     const [totalFound, setTotalFound] = useState(0);
 
     const [list, setList] = useState<girlCardType[]>([])
+
+    const [countriesList, setCountriesList] = useState<selectOptionType[]>([])
 
 
     const getFinanceList = () => {
@@ -60,16 +63,31 @@ const SearchBody = () => {
     }
 
     const getCountries = () => {
-        service.getCountries().then(res => {
-            console.log(res)
-        })
+        if(token) {
+            service.getCountries(token).then(res => {
+                console.log(res)
+                setCountriesList(res?.map((i: any) => ({value: i?.id, id: i.id, label: i?.title})))
+            })
+        }
     }
 
     const getStates = (id: number) => {
-        service.getStates(id).then(res => {
-            console.log(res)
-        })
+        if(token) {
+            service.getStates(id, token).then(res => {
+                console.log(res)
+            })
+        }
+       
     }
+
+
+    useEffect(() => {
+        if(country && token) {
+            service.getStates(Number(country?.id), token).then(res => {
+                console.log(res)
+            })
+        }
+    }, [country, token])
 
     const onSearch = useCallback(() => {
         if(token) {
@@ -81,8 +99,8 @@ const SearchBody = () => {
                 isNew, 
                 isOnline, 
                 isNear,
-                state, 
-                country, 
+                state: state?.value, 
+                country: country?.value, 
                 age_range_start, 
                 age_range_end,
                 prompt_target_id, 
@@ -106,8 +124,8 @@ const SearchBody = () => {
                 isNew, 
                 isOnline, 
                 isNear, 
-                state, 
-                country, 
+                state: state?.value, 
+                country: country?.value, 
                 age_range_start, 
                 age_range_end,
                 prompt_target_id, 
@@ -134,9 +152,13 @@ const SearchBody = () => {
     useEffect(() => {
         getFinanceList()
         getTargetList()
-        // getCountries()
+        getCountries()
     }, [token])
 
+
+    useEffect(() => {
+        console.log(list)
+    }, [list])
 
 
     return (    
@@ -156,6 +178,10 @@ const SearchBody = () => {
                         setprompt_target_id={setprompt_target_id}
                         setprompt_finance_state_id={setprompt_finance_state_id}
                         onSearch={onSearch}
+
+                        countries={countriesList}
+                        // country={country}
+
                         />
 
 

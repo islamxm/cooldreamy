@@ -2,6 +2,6 @@ import { StaticImageData } from "next/image";
 
 export type userCardPropsTypes = {
     children?: React.ReactNode;
-    image: StaticImageData,
+    image: string,
     verify?: boolean
 }

@@ -1,4 +1,4 @@
-type selectOptionType = {
+export type selectOptionType = {
     value: string,
     label: string,
     id?: number

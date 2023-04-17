@@ -13,6 +13,7 @@ import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
 import { useSelector } from 'react-redux';
+import placeholder from '@/public/assets/images/logo.svg';
 
 const service = new ApiService();
 
@@ -42,13 +43,13 @@ const GirlCard:FC<girlCardType> = ({
     
 
 
-    const goToMail = () => {
+    // const goToMail = () => {
         
-    }
+    // }
 
-    const addToFav = () => {
+    // const addToFav = () => {
 
-    }
+    // }
 
 
     const createChat = () => {
@@ -61,6 +62,10 @@ const GirlCard:FC<girlCardType> = ({
         }
     }
     
+
+    const sendWink = () => {
+        
+    }
     
 
     return (
@@ -78,9 +83,9 @@ const GirlCard:FC<girlCardType> = ({
                 
                 <Link href={`/users/${id}`} className={styles.img}>
                     <Image
-                        loader={() => avatar_url ? avatar_url : logo}
-                        placeholder={avatar_url ? 'empty' : 'blur'} 
-                        src={avatar_url ? avatar_url : logo} 
+                        // loader={() => placeholder}
+                        placeholder={placeholder ? 'empty' : 'blur'} 
+                        src={placeholder} 
                         width={300}
                         height={300}
                         alt=""/>

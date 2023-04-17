@@ -8,7 +8,7 @@ import Moment from 'react-moment';
 import Image from 'next/image';
 import {motion} from 'framer-motion';
 import moment from 'moment';
-
+import {FaSmileWink} from 'react-icons/fa';
 
 const DialogItem:FC<dialogItemType> = ({
     me,
@@ -56,11 +56,40 @@ const DialogItem:FC<dialogItemType> = ({
                 )
             case "App\\Models\\ChatWinkMessage":
                 return (
-                    <h1 style={{color: 'red'}}>Wink</h1>
+                    <div className={styles.bubble}>
+                        <div className={styles.text}>
+                            <motion.div
+                                initial={{opacity: 0, scale: 0}}
+                                animate={{opacity: 1, scale: 1}}
+                                transition={{type: 'spring', damping: 17, stiffness: 400}}
+                                >
+                                <FaSmileWink size={50} color='var(--violet)'/>
+                            </motion.div>
+                        </div>
+                    </div>
                 )
             case "App\\Models\\ChatGiftMessage":
                 return (
-                    <h1 style={{color: 'red'}}>Gift</h1>
+                    <div className={styles.media}>
+                        <div className={styles.body}>
+                            {
+                                chat_messageable?.gifts?.map((item,index) => (
+                                    <div className={styles.item} key={index}>
+                                         <Image
+                                            src={item?.picture_url ? item?.picture_url : ''}
+                                            loader={(p) => {
+                                                return p?.src && typeof p?.src === 'string' ? p?.src : ''
+                                            }}
+                                            alt=''
+                                            width={100}
+                                            height={100}
+                                            />
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                   
                 )
             default:
                 return null
@@ -103,14 +132,10 @@ const DialogItem:FC<dialogItemType> = ({
                                 size={40}
                                 />
                         </div>
-                        <motion.div 
-                            initial={{opacity: 0, scale: 0}}
-                            animate={{opacity: 1, scale: 1}}
-                            exit={{opacity: 0, scale: 0}}
-                            transition={{type: 'spring', damping: 17, stiffness: 400}}
+                        <div
                             className={styles.message}>
                             {switchMessageType(chat_messageable_type)}
-                        </motion.div>
+                        </div>
                     </div>
                 )   
             }

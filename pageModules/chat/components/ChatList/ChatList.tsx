@@ -22,6 +22,7 @@ const ChatList:FC<IDialogs> = ({
 
     
     useEffect(() => {
+        
         dialogsList?.length === totalDialogItemCount ? setLoadMore(false) : setLoadMore(true)
     }, [dialogsList, totalDialogItemCount])
 

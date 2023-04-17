@@ -1,3 +1,5 @@
+import { selectOptionType } from "@/components/SelectDef/types"
+
 export type searchFilterType = {
     load?: boolean,
     targetList: any[],
@@ -11,4 +13,8 @@ export type searchFilterType = {
     prompt_finance_state_id?: number,
     setprompt_finance_state_id?: (...args: any[]) => any,
     onSearch?: (...args: any[]) => any,
+
+
+    countries: selectOptionType[],
+    country?: string
 }

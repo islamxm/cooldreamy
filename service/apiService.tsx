@@ -1,6 +1,6 @@
 import endpoints from "./endpoints";
 import { IToken } from "@/models/IToken";
-
+import checkAuth from "./checkAuth";
 
 
 
@@ -46,7 +46,7 @@ class ApiService {
                 body: JSON.stringify(body),
                 headers
             })
-            return await res?.json()
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -125,11 +125,14 @@ class ApiService {
         }
     }
 
-    getCountries = async () => {
+    getCountries = async (token: IToken) => {
         try {
             let res = await fetch(endpoints.getCountries, {
                 method: 'GET',
-                headers,
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
             })
 
             return await res?.json()
@@ -138,7 +141,7 @@ class ApiService {
         }
     }
 
-    getStates = async (country_id: number) => {
+    getStates = async (country_id: number, token: IToken) => {
         try {
             let res = await fetch(endpoints.getStates + `?country_id=${country_id}`, {
                 method: 'GET',
@@ -243,6 +246,24 @@ class ApiService {
                 }
             })
             return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getChatListFavorite = async ({page, per_page = 10}: {
+        page?: number,
+        per_page?: number
+    }, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getChatListFavorite  + `?page=${page}&per_page=${per_page}`, {
+                method: 'GET',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -511,6 +532,63 @@ class ApiService {
                 body: JSON.stringify({user_id})
             })
             return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
+
+    getMyProfile = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getMyProfile, {
+                method: 'GET',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
+    getProfile = async ({user_id}: {user_id:number}, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getProfile + `?user_id=${user_id}`, {
+                method: 'GET',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    // updateMyProfile = async (token: IToken) => {
+    //     try {
+    //         let res = await fetch(endpoints.updateMyProfile, {
+    //             method: 'PUT',
+    //         })
+    //     }
+    // }
+
+
+    getAllPrompts = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getAllPrompts, {
+                method: 'GET',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }

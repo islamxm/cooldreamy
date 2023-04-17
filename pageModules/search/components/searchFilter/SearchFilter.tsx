@@ -65,7 +65,10 @@ const SearchFilter:FC<searchFilterType> = ({
     setprompt_finance_state_id,
 
     onSearch,
-    load
+    load,
+
+
+    countries
 }) => {
 
     const [showAll, setShowAll] = useState<boolean>(false);
@@ -73,6 +76,8 @@ const SearchFilter:FC<searchFilterType> = ({
     const toggleFilter = () => {
         setShowAll(s => !s)
     }
+
+
 
 
 
@@ -87,11 +92,11 @@ const SearchFilter:FC<searchFilterType> = ({
                                     label='Страна'
                                     width={230}
                                     placeholder='Страна'
-                                    value=''
-                                    list={countryList}
+                                    value={1}
+                                    list={countries}
                                     />
-                            </div>
-                            <div className={styles.item}>
+                            </div> */}
+                            {/* <div className={styles.item}>
                                 <SelectDef
                                     label='Город'
                                     width={70}

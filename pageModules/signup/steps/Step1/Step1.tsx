@@ -1,12 +1,15 @@
 import styles from './Step1.module.scss';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Input from '@/components/Input/Input';
 import { Row, Col } from 'antd';
 import {RxCalendar} from 'react-icons/rx';
 import SelectSex from '@/components/SelectSex/SelectSex';
 import Link from 'next/link';
 import {motion} from 'framer-motion';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import ApiService from '@/service/apiService';
 
+const service = new ApiService()
 
 interface IStep1 {
     email: string,
@@ -31,6 +34,21 @@ const Step1:FC<IStep1> = ({
     setPassword,
     setSex
 }) => {
+    const {token} = useAppSelector(s => s)
+    // const [countryList, setCountryList] = useState([])
+
+
+
+    // useEffect(() => {
+    //     if(token) {
+    //         service.getCountries(token).then(res => {
+    //             console.log(res)
+    //         })
+    //     }
+    // }, [token])
+
+
+
     return (
         <motion.div 
             initial={{

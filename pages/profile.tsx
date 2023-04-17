@@ -8,13 +8,43 @@ import img from '@/public/assets/images/my-img.png';
 import Button from "@/components/Button/Button";
 import UserInfo from "@/pageModules/profile/components/UserInfo/UserInfo";
 import ImageCropModal from "@/pageModules/profile/modals/ImageCropModal/ImageCropModal";
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import ApiService from "@/service/apiService";
+import { useAppSelector } from "@/hooks/useTypesRedux";
+import { IUser } from "@/models/IUser";
+
+
+const service = new ApiService()
 
 const Profile = () => {
+    const {token} = useAppSelector(s => s)
+
+    //userCard data
+    const [data, setData] = useState<IUser | null>()
+
+
+
+    useEffect(() => {
+        if(token) {
+            service.getMyProfile(token).then(res => {
+                console.log(res)
+                setData(res)
+            })
+
+            service.getAllPrompts(token).then(res => {
+                console.log(res)
+            })
+        }
+    }, [token])
+
     const [imageEditModal, setImageEditModal] = useState(false)
 
     const closeImageEditModal = () => setImageEditModal(false)
     const openImageEditModal = () => setImageEditModal(true)
+
+
+
+
 
     return (
         <Container>
@@ -29,10 +59,11 @@ const Profile = () => {
                 <UserLayout
                     side={
                         <UserCard
-                            image={img}
-                            verify={true}
+                            image={data?.avatar_url_big_thumbnail ? data?.avatar_url_big_thumbnail : ''}
+                            verify={false}
                             >
                             <Button
+                                disabled
                                 text='Подтвердить фото'
                                 style={{
                                     padding: '8px 10px',
@@ -44,7 +75,9 @@ const Profile = () => {
                         </UserCard>
                     }
                     main={
-                        <UserInfo/>
+                        <UserInfo
+                            {...data}
+                            />
                     }
                     />
             </MainLayout>

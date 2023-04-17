@@ -3,6 +3,8 @@ import UserImageItem from '../UserImageItem/UserImageItem';
 import {BsCamera} from 'react-icons/bs';
 import {motion} from 'framer-motion';
 import img from '@/public/assets/images/my-img.png';
+import {FC} from 'react';
+
 
 const list = [
     {image: img},
@@ -11,7 +13,11 @@ const list = [
 ]
 
 
-const UserImages = () => {
+const UserImages:FC<{
+    profile_photo?: any[]
+}> = ({
+    profile_photo
+}) => {
 
     return (
         <div className={styles.wrapper}>
@@ -23,7 +29,7 @@ const UserImages = () => {
                 <div className={styles.label}>Добавить фото</div>
             </motion.button>
             {
-                list?.map((item, index) => (
+                profile_photo?.map((item, index) => (
                     <UserImageItem
                         key={index}
                         image={item.image}

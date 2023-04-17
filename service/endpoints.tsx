@@ -36,6 +36,7 @@ const endpoints = {
     getChat: `${API_PATH}chats/get_current_chat`,
     createChat: `${API_PATH}chats/get_chat_with_user`,
     getChatList: `${API_PATH}chats/get_my_chat_list`,
+    getChatListFavorite: `${API_PATH}chats/get_my_favorite_chat_list`,
     readMessage: `${API_PATH}chats/set_chat_message_is_read`,
 
 
@@ -48,10 +49,16 @@ const endpoints = {
     getMail: `${API_PATH}letters/get_current_letter`,
     createMail: `${API_PATH}letters/get_letter_with_user`,
     getMailList: `${API_PATH}letters/get_my_letter_list`,
-    readMail: `${API_PATH}letters/set_letter_message_is_read`
+    readMail: `${API_PATH}letters/set_letter_message_is_read`,
     
 
+    //profile
+    getMyProfile: `${API_PATH}profile/get_my_profile`,
+    getProfile: `${API_PATH}profile/get_profile`,
+    updateMyProfile: `${API_PATH}profile/update_my_profile`,
 
+
+    getAllPrompts: `${API_PATH}get_all_prompts`,
 }
 
 export default endpoints;

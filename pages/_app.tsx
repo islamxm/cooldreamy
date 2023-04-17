@@ -22,7 +22,7 @@ import { ToastContainer } from 'react-toastify';
 function App({ Component, pageProps }: AppProps) {
 
 	
-
+	
 
 	return (
 		<Provider store={store}>
