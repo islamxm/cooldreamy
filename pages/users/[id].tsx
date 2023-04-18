@@ -5,10 +5,9 @@ import Sidebar from '@/components/Sidebar/Sidebar';
 import { Row, Col } from 'antd';
 import UserCard from '@/pageModules/user/components/UserCard/UserCard';
 import UserLayout from '@/components/UserLayout/UserLayout';
-import img from '@/public/assets/images/girl-big.png';
+
 import Button from '@/components/Button/Button';
 import StartGift from '@/pageModules/user/components/StartGift/StartGift';
-import giftImg from '@/public/assets/images/gift-1.png';
 import {GoMail} from 'react-icons/go'
 import UserInfo from '@/components/UserInfo/UserInfo';
 import { useRouter } from 'next/router';
