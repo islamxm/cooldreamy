@@ -610,6 +610,22 @@ class ApiService {
         }
     }
 
+
+    updateMyProfile = async (body: any, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.updateMyProfile, {
+                method:'PUT',
+                body: JSON.stringify(body),
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

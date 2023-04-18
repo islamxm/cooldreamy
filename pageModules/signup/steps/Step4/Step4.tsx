@@ -11,7 +11,7 @@ import img4 from '@/public/assets/icons/interest-4.svg';
 import img5 from '@/public/assets/icons/interest-5.svg';
 import img6 from '@/public/assets/icons/interest-6.svg';
 import SelectCard from '@/components/SelectCard/SelectCard';
-
+import { IPromptSelect } from '../../types';
 
 const interestVals: selectCardPropsTypes[] = [
     {
@@ -39,7 +39,11 @@ const interestVals: selectCardPropsTypes[] = [
 ]
 
 
-const Step4:FC = () => {
+const Step4:FC<IPromptSelect> = ({
+    list,
+    setSelectedList,
+    selectedList
+}) => {
     return (
         <motion.div 
             initial={{
@@ -59,12 +63,16 @@ const Step4:FC = () => {
             </h3>
             <div className={styles.list}>
                 {
-                    interestVals?.map((item,index) => (
+                    list?.map((item,index) => (
                         <div className={styles.item} key={index}>
                             <SelectCard
-                                {...item}
-                                isSelect={index === 0}
-                                />
+                                label={item.text}
+                                value={item.id.toString()}
+                                onSelect={() => {
+                                    setSelectedList(item.id)
+                                }}
+                                isSelect={item?.id === Number(selectedList)}
+                            />
                         </div>
                     ))
                 }

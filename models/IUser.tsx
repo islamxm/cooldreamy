@@ -30,5 +30,6 @@ export interface IUser {
     top_expire?: any,
     type?: any,
     updated_at?: string,
-    profile_photo?: any[]
+    profile_photo?: any[],
+    age?: number
 }

@@ -7,7 +7,7 @@ import img3 from '@/public/assets/images/target-3.png'
 import img4 from '@/public/assets/images/target-4.png'
 import { selectCardPropsTypes } from '@/components/SelectCard/types';
 import {motion} from 'framer-motion';
-
+import { IPromptSelect } from '../../types';
 
 const targetVals: selectCardPropsTypes[] = [
     {
@@ -40,7 +40,11 @@ const targetVals: selectCardPropsTypes[] = [
     }
 ];
 
-const Step2:FC = () => {
+const Step2:FC<IPromptSelect> = ({
+    list,
+    selectedList,
+    setSelectedList
+}) => {
 
 
     return (
@@ -59,12 +63,42 @@ const Step2:FC = () => {
             className={styles.wrapper}>
             <h3 className={styles.head}>Расскажите о своих целях на сайте</h3>
             <div className={styles.list}>
-                {
+                {/* {
                     targetVals?.map((item,index) => (
                         <div className={styles.item} key={index}>
                             <SelectCard
                                 {...item}
                                 />
+                        </div>
+                    ))
+                } */}
+                {
+                    list?.map((item, index) => (
+                        <div className={styles.item} key={index}>
+                            {/* <SelectCard
+                                label={item.text}
+                                value={item.id.toString()}
+                                onSelect={() => {
+                                    if(selectedList?.find(i => Number(i) === Number(item.id))) {
+                                        setSelectedList((s:any[]) => {
+                                            const r = s;
+                                            const rm = s.splice(r.findIndex(r => Number(r) === Number(item.id)), 1)
+                                            return [...r]
+                                        })
+                                    } else {
+                                        setSelectedList((s: any[]) => [...s, Number(item.id)])
+                                    }
+                                }}
+                                isSelect={selectedList?.find(i => Number(i) === Number(item.id)) ? true : false}
+                                /> */}
+                            <SelectCard
+                                label={item.text}
+                                value={item.id.toString()}
+                                onSelect={() => {
+                                    setSelectedList(item.id)
+                                }}
+                                isSelect={item?.id === Number(selectedList)}
+                            />
                         </div>
                     ))
                 }

@@ -4,19 +4,28 @@ import { Row, Col } from 'antd';
 import UserImageSlider from './components/UserImageSlider/UserImageSlider';
 import UserInfoMain from './components/UserInfoMain/UserInfoMain';
 import UserInfoAction from './components/UserInfoAction/UserInfoAction';
+import { IUser } from '@/models/IUser';
 
 
 
-const UserInfo:FC = () => {
+
+const UserInfo:FC<IUser> = (props) => {
+    const {profile_photo} = props
+
     return (
         <div className={styles.wrapper}>
             <Row gutter={[15,15]}>
                 <Col span={24}>
-                    <UserInfoAction/>
+                    <UserInfoAction {...props}/>
                 </Col>
-                <Col span={24}>
-                    <UserImageSlider/>
-                </Col>    
+                {
+                    profile_photo && profile_photo?.length > 0 ? (
+                        <Col span={24}>
+                            <UserImageSlider {...props}/>
+                        </Col> 
+                    ) : null
+                }
+                   
                 <Col span={24}>
                     <UserInfoMain/>
                 </Col>

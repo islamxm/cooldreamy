@@ -5,7 +5,7 @@ import Button from '@/components/Button/Button';
 import StepItem from './components/StepItem/StepItem';
 import {Row, Col} from 'antd';
 import { container, item } from '@/helpers/variantsOrderAnim';
-
+import Router from 'next/router';
 
 const Steps = () => {
     return (
@@ -85,6 +85,7 @@ const Steps = () => {
                     </motion.div>
                     <div className={styles.action}>
                         <Button
+                            onClick={() => Router.push('/signup')}
                             // disabled={true}
                             text='Перейти к знакомствам'
                             />

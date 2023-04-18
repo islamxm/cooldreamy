@@ -3,28 +3,35 @@ import {FC} from 'react';
 import { userImageSliderPropsType } from './types';
 import Image from 'next/image';
 import img from '@/public/assets/images/girl.png';
-
-const mock = [
-    {image:img },
-    {image:img },
-    {image:img },
-    {image:img },
-]
+import { IUser } from '@/models/IUser';
+import UserImageItem from '@/pageModules/profile/components/UserImageItem/UserImageItem';
 
 
 
-const UserImageSlider:FC<userImageSliderPropsType> = ({
-    list = mock
+const UserImageSlider:FC<IUser> = ({
+    profile_photo
 }) => {
+
+
+
     return (
         <div className={styles.wrapper}>
-            {
+            {/* {
                 list?.map((item, index) => (
                     <div className={styles.item} key={index}>
                         <Image
                             src={item.image}
                             alt=""
                             />
+                    </div>
+                ))
+            } */}
+            {
+                profile_photo?.map((item, index) => (
+                    <div className={styles.item} key={index}>
+                        <UserImageItem
+                            image={item?.thumbnail_url}
+                        />
                     </div>
                 ))
             }

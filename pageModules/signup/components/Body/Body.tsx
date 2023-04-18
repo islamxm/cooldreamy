@@ -7,8 +7,8 @@ import Button from '@/components/Button/Button';
 import { useEffect, useState } from 'react';
 import { interestTypes, targetTypes } from '../../types';
 import ApiService from '@/service/apiService';
-import { useAppDispatch } from '@/hooks/useTypesRedux';
-import { updateToken, updateUserId } from '@/store/actions';
+import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
+import { updateToken, updateUserId, updateUserData } from '@/store/actions';
 import Router from 'next/router';
 import { Cookies } from 'typescript-cookie';
 
@@ -21,13 +21,20 @@ import Step5 from '../../steps/Step5/Step5';
 import Step6 from '../../steps/Step6/Step6';
 import Step7 from '../../steps/Step7/Step7';
 import Step8 from '../../steps/Step8/Step8';
+import { IUser } from '@/models/IUser';
+import notify from '@/helpers/notify';
 
 const service = new ApiService()
 
 
 const Body:FC = () => {
+    // !! для теста
+    const {token} = useAppSelector(s => s)
+    const [load, setLoad] = useState(false)
+
+
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(2)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -39,18 +46,41 @@ const Body:FC = () => {
     const [sex, setSex] = useState<'male' | 'female'>('male')
 
 
-    // 2 STEP
-    const [target, setTarget] = useState<targetTypes>('');
     
+    const [prompt_targets, setPrompt_targets] = useState([])
+    const [prompt_interests, setPrompt_interests] = useState([])
+    const [prompt_finance_states, setPrompt_finance_states] = useState([])
+    const [prompt_sources, setPrompt_sources] = useState([])
+    const [prompt_want_kids, setPrompt_want_kids] = useState([])
+    const [prompt_relationships, setPrompt_relationships] = useState([])
+    const [prompt_careers, setPrompt_careers] = useState([])   
 
-    // 3 STEP
-    const [interests, setInterests] = useState<interestTypes[]>([''])
-    
-    
-    // 4 STEP
+
+    const [selectedTargets, setSelectedTargets] = useState(null)
+    const [selectedInterests, setSelectedIntersets] = useState(null)
+    const [selectedFinance, setSelectedFinance] = useState(null)
+    const [selectedSources, setSelectedSources] = useState(null)
+    const [selectedKids, setSelectedKids] = useState(null)
+    const [selectedRl, setSelectedRl] = useState(null)
+    const [selectedCareers, setSelectedCareers] = useState(null)
 
 
 
+
+    useEffect(() => {
+        if(token) {
+            service.getAllPrompts(token).then(res => {
+                console.log(res)
+                setPrompt_targets(res?.prompt_targets)
+                setPrompt_careers(res?.prompt_careers)
+                setPrompt_finance_states(res?.prompt_finance_states)
+                setPrompt_sources(res?.prompt_sources)
+                setPrompt_interests(res?.prompt_interests)
+                setPrompt_want_kids(res?.prompt_want_kids)
+                setPrompt_relationships(res?.prompt_relationships)
+            })
+        }
+    }, [token])
 
 
     const switchStep = (step: number) => {
@@ -69,19 +99,19 @@ const Body:FC = () => {
                         />
                 )
             case 1:
-                return <Step2/>
+                return <Step2 list={prompt_targets} selectedList={selectedTargets} setSelectedList={setSelectedTargets}/>
             case 2:
-                return <Step3/>
+                return <Step3 list={prompt_interests} selectedList={selectedInterests} setSelectedList={setSelectedIntersets}/>
             case 3:
-                return <Step4/>
+                return <Step4 list={prompt_finance_states} selectedList={selectedFinance} setSelectedList={setSelectedFinance}/>
             case 4:
-                return <Step5/>
+                return <Step5 list={prompt_sources} selectedList={selectedSources} setSelectedList={setSelectedSources}/>
             case 5:
-                return <Step6/>
+                return <Step6 list={prompt_want_kids} selectedList={selectedKids} setSelectedList={setSelectedKids}/>
             case 6:
-                return <Step7/>
+                return <Step7 list={prompt_relationships} selectedList={selectedRl} setSelectedList={setSelectedRl}/>
             case 7:
-                return <Step8/>
+                return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
             default:
                 return null; 
                 
@@ -94,26 +124,77 @@ const Body:FC = () => {
 
 
 
-    const onRegister = () => {
-        const body = {
-            email,
-            name,
-            password,
-            gender: sex
-        }
-        service.register(body).then(res => {
-            // console.log(res)
-            if(res?.token && res?.id) {
-                dispatch(updateToken(res?.token))
-                dispatch(updateUserId(res?.id))
-                Cookies.set('cooldate-web-user-id', res?.id)
-                Cookies.set('cooldate-web-token', res?.token)
+    // const onRegister = () => {
+    //     const body = {
+    //         email,
+    //         name,
+    //         password,
+    //         gender: sex
+    //     }
+    //     service.register(body).then(res => {
+    //         // console.log(res)
+    //         if(res?.token && res?.id) {
+    //             dispatch(updateToken(res?.token))
+    //             dispatch(updateUserId(res?.id))
+    //             Cookies.set('cooldate-web-user-id', res?.id)
+    //             Cookies.set('cooldate-web-token', res?.token)
 
-                Router.push('/search')
+    //             Router.push('/search')
+    //         }
+    //     })
+    // }
+
+
+    // const firstStepConfirm = () => {
+        
+    // }
+
+
+    const stepChange = () => {
+        if(currentStep === 0) {
+            setLoad(true)
+            const body = {
+                email,
+                name,
+                password,
+                gender: sex
             }
-        })
-    }
+            service.register(body).then(res => {
+                if(res?.token && res?.id) {
+                    dispatch(updateToken(res?.token))
+                    dispatch(updateUserId(res?.id))
+                    Cookies.set('cooldate-web-user-id', res?.id)
+                    Cookies.set('cooldate-web-token', res?.token)
+    
+                    setCurrentStep(s => s + 1)
+                }
+            }).finally(() => setLoad(false))
+        }
+        if(currentStep > 0 && currentStep < 7) {
+            setCurrentStep(s => s + 1)
+        }
+        if(currentStep === 7) {
+            setLoad(true)
+            const updateBody: IUser = {
+                prompt_career_id: selectedCareers,
+                prompt_finance_state_id: selectedFinance,
+                prompt_source_id: selectedSources,
+                prompt_target_id: selectedTargets,
+                prompt_want_kids_id: selectedKids,
+                prompt_relationship_id: selectedRl,
+            }
+            if(token) {
+                service.updateMyProfile(updateBody, token).then(res => {
+                    console.log(res)
+                    if(res?.id) {
+                        notify('Настройки сохранены', 'SUCCESS')
+                        Router.push(`/profile`)
+                    }
 
+                }).finally(() => setLoad(false))
+            }
+        }
+    }
 
 
     return (
@@ -145,11 +226,11 @@ const Body:FC = () => {
                                             <Col span={24}>
                                                 <div className={styles.action}>
                                                     <Button
-                                                        // disabled={nextBtn}
-                                                        // onClick={() => setCurrentStep(s => s < 7 ? ++s : 7)}
+                                                        load={load}
+                                                        //disabled={nextBtn}
+                                                        onClick={stepChange}
                                                         disabled={!(email && name && password && sex)}
-                                                        onClick={onRegister}
-                                                        text='Регистрация'
+                                                        text={currentStep === 7 ? 'Завершить' : 'Дальше'}
                                                         />
                                                 </div>
                                             </Col>

@@ -90,17 +90,17 @@ const Step1:FC<IStep1> = ({
                                     type={'password'}
                                     />
                             </Col>
-                            <Col span={24}>
+                            {/* <Col span={24}>
                                 <Input
                                     placeholder='Город'
                                     />
-                            </Col>
-                            <Col span={24}>
+                            </Col> */}
+                            {/* <Col span={24}>
                                 <Input
                                     placeholder='Дата рождения'
                                     beforeIcon={<RxCalendar color='#9B9B9B'/>}
                                     />
-                            </Col>
+                            </Col> */}
                         </Row>
                     </Col>
                     <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
