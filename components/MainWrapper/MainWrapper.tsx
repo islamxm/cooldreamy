@@ -43,6 +43,7 @@ const MainWrapper = ({
 				}
 			)
 			service.getMyProfile(token).then(res => {
+				console.log(res)
 				dispatch(updateUserData(res))
 			})
 		}

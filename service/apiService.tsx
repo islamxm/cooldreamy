@@ -594,6 +594,22 @@ class ApiService {
         }
     }
 
+
+    addProfileImage = async (data: FormData, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.addProfileImage, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
 }
 
 

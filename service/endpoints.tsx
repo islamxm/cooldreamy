@@ -32,6 +32,7 @@ const endpoints = {
     sendMessage_text: `${API_PATH}chats/send_chat_text_message`,
     sendMessage_sticker: `${API_PATH}chats/send_chat_sticker_message`,
     sendMessage_gift: `${API_PATH}chats/send_chat_gift_message`,
+    sendMessage_image: `${API_PATH}chats/send_chat_image_mesage`,
 
     getChat: `${API_PATH}chats/get_current_chat`,
     createChat: `${API_PATH}chats/get_chat_with_user`,
@@ -56,7 +57,7 @@ const endpoints = {
     getMyProfile: `${API_PATH}profile/get_my_profile`,
     getProfile: `${API_PATH}profile/get_profile`,
     updateMyProfile: `${API_PATH}profile/update_my_profile`,
-
+    addProfileImage: `${API_PATH}image_store`,
 
     getAllPrompts: `${API_PATH}get_all_prompts`,
 }

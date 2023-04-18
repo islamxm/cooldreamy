@@ -5,10 +5,12 @@ import {FC, useState, useCallback, useEffect} from 'react';
 import { modalPropsType } from '@/models/modalTypes';
 import Button from '@/components/Button/Button';
 import {Row, Col} from 'antd';
-import getCroppedImg from '@/helpers/cropImage';
+import getCroppedImg, { createFile, getBase64 } from '@/helpers/cropImage';
 import Cropper from 'react-easy-crop'
 import ApiService from '@/service/apiService';
-import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
+import notify from '@/helpers/notify';
+import { updateUserData } from '@/store/actions';
 
 const service = new ApiService()
 
@@ -22,6 +24,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
     onClose,
     uploadedFile
 }) => {
+    const dispatch = useAppDispatch()
     const {token} = useAppSelector(s => s);
     const [srcImg, setSrcImg] = useState<string | null>(null)
     const [crop, setCrop] = useState({x: 0, y: 0})
@@ -29,6 +32,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null)
     const [croppedImage, setCroppedImage] = useState<any>(null)
+    const [load, setLoad] = useState(false)
 
     const onCancel = () => {
         setSrcImg(null)
@@ -77,8 +81,29 @@ const ImageCropModal:FC<cropModalPropsType> = ({
 
     const onSave = () => {
         console.log('saving')
-        if(token) {
+        if(token && croppedImage) {
+            setLoad(true)
+            const data = new FormData()
+            createFile(croppedImage).then(res => {
+                data.append('category_id', '5')
+                data.append('image', res)
 
+                service.addProfileImage(data, token).then(res => {
+                    // console.log(res)
+                    if(res?.id) {
+                        service.getMyProfile(token).then(userData => {
+                            if(userData) {
+                                dispatch(updateUserData(userData))
+                            }
+                        })
+                        notify('Фотография добавлена', 'SUCCESS')
+                        onCancel()
+                    }
+                }).finally(() => {
+                    setLoad(false)
+                    
+                })
+            })
         }
     }
    
@@ -132,6 +157,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                 <Row gutter={[10, 10]}>
                     <Col span={12}>
                         <Button
+                            load={load}
                             onClick={croppedImage ? onSave : showCroppedImage}
                             fill
                             text={croppedImage ? 'Загрузить' : 'Сохранить'}

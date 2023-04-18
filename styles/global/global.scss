@@ -18,6 +18,20 @@
     }
 }
 
+.horizontal-scroll {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        height: 6px;
+        background-color: var(--violet_light);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--violet); 
+        border-radius: 10px;
+    }
+}
+
 li {
     list-style: none;
 }

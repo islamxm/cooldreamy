@@ -5,13 +5,19 @@ import Image, { StaticImageData } from 'next/image';
 const UserImageItem = ({
     image
 }: {
-    image: StaticImageData
+    image: StaticImageData | string
 }) => {
 
 
     return (
         <div className={styles.item}>
-            <Image src={image} alt=""/>
+            <Image
+                width={150}
+                height={150}
+                loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''} 
+                src={image} 
+                unoptimized
+                alt=""/>
         </div>
     )
 }

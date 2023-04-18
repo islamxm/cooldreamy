@@ -29,5 +29,6 @@ export interface IUser {
     tags?: any,
     top_expire?: any,
     type?: any,
-    updated_at?: string
+    updated_at?: string,
+    profile_photo?: any[]
 }

@@ -94,8 +94,39 @@ export default async function getCroppedImg(
   })
 }
 
-export const getBase64fromBlob = async (blob: Blob | any) => {
-  if(blob === Blob) {
-    
-  }
+// export const getBase64fromBlob = async (blob: Blob | any) => {
+//   if(blob === Blob) {
+
+//   }
+// }
+
+export function blobToBase64(blob: Blob | any) {
+  return new Promise((resolve, _) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+}
+
+export function getBase64(file: File) {
+  var reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
+    console.log(reader.result);
+  };
+  reader.onerror = function (error) {
+    console.log('Error: ', error);
+  };
+}
+
+export async function createFile(img: string | Blob | any){
+  let response = await fetch(img);
+  let data = await response.blob();
+  let metadata = {
+    type: 'image/png'
+  };
+  let file = new File([data], "img.png", metadata);
+
+  return file;
+  // ... do something with the file or return it
 }

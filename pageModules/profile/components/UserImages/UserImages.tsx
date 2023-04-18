@@ -23,6 +23,10 @@ const UserImages:FC<{
     const ref = useRef<HTMLInputElement>(null)
     const [uploadedFile, setUploadedFile] = useState<File | null>(null)
 
+    useEffect(() => {
+        console.log(profile_photo)
+    }, [profile_photo])
+
     const closeCropModal = () => {
         // if(ref) {
         //     ref?.current?.r
@@ -49,7 +53,7 @@ const UserImages:FC<{
 
 
     return (
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} horizontal-scroll`}>
             <ImageCropModal
                 uploadedFile={uploadedFile}
                 open={imageCropModal}
@@ -65,10 +69,11 @@ const UserImages:FC<{
             </div>
             {
                 profile_photo?.map((item, index) => (
-                    <UserImageItem
-                        key={index}
-                        image={item.image}
+                    <div className={styles.item} key={index}>
+                        <UserImageItem
+                            image={item?.thumbnail_url}
                         />
+                    </div>
                 ))
             }
         </div>
