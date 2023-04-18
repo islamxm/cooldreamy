@@ -4,7 +4,6 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import UserLayout from "@/components/UserLayout/UserLayout";
 import UserCard from "@/pageModules/user/components/UserCard/UserCard";
 import { Row, Col } from "antd";
-import img from '@/public/assets/images/my-img.png';
 import Button from "@/components/Button/Button";
 import UserInfo from "@/pageModules/profile/components/UserInfo/UserInfo";
 import ImageCropModal from "@/pageModules/profile/modals/ImageCropModal/ImageCropModal";
@@ -45,8 +44,7 @@ const Profile = () => {
                 <UserLayout
                     side={
                         <UserCard
-                            image={userData?.avatar_url_big_thumbnail ? userData?.avatar_url_big_thumbnail : ''}
-                            verify={false}
+                            {...userData}
                             >
                             <Button
                                 disabled

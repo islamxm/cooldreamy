@@ -5,7 +5,6 @@ import {FC} from 'react';
 import { userCardPropsTypes } from './types';
 import {BsCheck2} from 'react-icons/bs';
 import Link from 'next/link';
-import placeholder from '@/public/assets/images/avatar-placeholder.png'
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useRouter } from 'next/router';
