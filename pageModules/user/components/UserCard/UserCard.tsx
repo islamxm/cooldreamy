@@ -9,6 +9,7 @@ import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useRouter } from 'next/router';
 import { IUser } from '@/models/IUser';
+import placeholder from '@/public/assets/images/avatar-placeholder.png';
 
 
 const service = new ApiService()
