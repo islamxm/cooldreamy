@@ -3,8 +3,14 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
-import { updateSocket } from '@/store/actions';
+import { updateSocket, updateUserData } from '@/store/actions';
 import notify from '@/helpers/notify';
+import ApiService from '@/service/apiService';
+
+
+
+const service = new ApiService()
+
 
 const MainWrapper = ({
     children
@@ -12,13 +18,11 @@ const MainWrapper = ({
 	const dispatch = useAppDispatch()
     const {token, userId, socketChannel} = useAppSelector(s => s);
 
-
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
+
 	useEffect(() => {
-        
 		if(token) {
-            
 			setPusherConfig(
 				{
 					key: 's3cr3t',
@@ -38,19 +42,25 @@ const MainWrapper = ({
 					}
 				}
 			)
+			service.getMyProfile(token).then(res => {
+				dispatch(updateUserData(res))
+			})
 		}
 	}, [token])
 
 
-	useEffect(() => {
-		if(pusherConfig && userId) {
-			const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
-			dispatch(updateSocket(channels))
-			channels.subscribed(() => {
-				notify('Соединение установлено', 'SUCCESS')
-			})
-		}
-	}, [pusherConfig, userId])
+	// useEffect(() => {
+	// 	if(pusherConfig && userId) {
+	// 		if(socketChannel) {
+	// 			socketChannel?.unsubscribe()
+	// 		}
+	// 		const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
+	// 		dispatch(updateSocket(channels))
+	// 		channels.subscribed(() => {
+	// 			notify('Соединение установлено', 'SUCCESS')
+	// 		})
+	// 	}
+	// }, [pusherConfig, userId])
 
 	
 	//new-chat-message-event
@@ -63,10 +73,19 @@ const MainWrapper = ({
 		if(socketChannel) {
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
-				if(data?.chat_message?.chat_messageable_type === 'App\\Models\\ChatTextMessage') {
-					notify(data?.chat_message?.chat_messageable?.text, 'AVATAR')
-				} else {
-					notify('Сообщение не текстового типа', 'AVATAR')
+				console.log(data)
+				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
+
+				switch(data?.chat_message?.chat_messageable_type) {
+					case 'App\\Models\\ChatTextMessage':
+						notify(data?.chat_message?.chat_messageable?.text, 'AVATAR', avatar)
+						break;
+					case "App\\Models\\ChatGiftMessage":
+						notify(`Вы получили ${data?.chat_message?.chat_messageable?.gifts?.length} подарок`, 'AVATAR', avatar)
+						break;
+					default:
+						return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
+						break;
 				}
             })
         }

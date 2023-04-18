@@ -68,7 +68,17 @@ const SearchFilter:FC<searchFilterType> = ({
     load,
 
 
-    countries
+    countries,
+    country,
+    setCountry,
+
+    states,
+    state,
+    setState,
+    clearStates,
+
+    clearFilter
+    
 }) => {
 
     const [showAll, setShowAll] = useState<boolean>(false);
@@ -79,6 +89,7 @@ const SearchFilter:FC<searchFilterType> = ({
 
 
 
+    
 
 
     return (
@@ -87,24 +98,34 @@ const SearchFilter:FC<searchFilterType> = ({
                 <Col span={24}>
                     <div className={styles.main}>
                         <div className={styles.list}>
-                            {/* <div className={styles.item}>
+                            <div className={styles.item}>
                                 <SelectDef
                                     label='Страна'
                                     width={230}
                                     placeholder='Страна'
-                                    value={1}
+                                    onChange={(e,v) => {
+                                        setCountry(v)
+                                    }}
+                                    onClear={clearStates}
                                     list={countries}
                                     />
-                            </div> */}
-                            {/* <div className={styles.item}>
-                                <SelectDef
-                                    label='Город'
-                                    width={70}
-                                    placeholder=''
-                                    value=""
-                                    list={ageList}
-                                    />
-                            </div> */}
+                            </div>
+                            {
+                                states?.length > 0 ? (
+                                    <div className={styles.item}>
+                                        <SelectDef
+                                            label='Город'
+                                            width={230}
+                                            onChange={(e, v) => {
+                                                setState(v)
+                                            }}
+                                            placeholder='Город'
+                                            list={states}
+                                            />
+                                    </div>
+                                ) : null
+                            }
+                            
                         </div>
                         <div className={styles.action}>
                             <div className={styles.action_item}>
@@ -135,7 +156,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                     <div className={styles.item}>
                                         <SelectDef
                                             list={targetList}
-                                            value={prompt_target_id}
+                                            // value={prompt_target_id}
                                             onChange={setprompt_target_id}
                                             placeholder={'Не указано'}
                                             label={'Цель знакомства'}
@@ -145,7 +166,8 @@ const SearchFilter:FC<searchFilterType> = ({
                                     <div className={styles.item}>
                                         <SelectDef
                                             list={financeList}
-                                            value={prompt_finance_state_id}
+                                            // value={country?.label}
+                                            // value={prompt_finance_state_id}
                                             onChange={setprompt_finance_state_id}
                                             placeholder={'Не указано'}
                                             label={'Финансовые цели'}
@@ -181,13 +203,15 @@ const SearchFilter:FC<searchFilterType> = ({
                                    
                                     
                                 </div>
-                                <div className={styles.action}>
+                                {/* <div className={styles.action}>
                                     <div className={styles.item}>
-                                        <button className={styles.reset}>
+                                        <button 
+                                            onClick={clearFilter}
+                                            className={styles.reset}>
                                             Очистить
                                         </button>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </Col>
                     ) : null

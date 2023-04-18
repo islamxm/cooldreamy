@@ -8,13 +8,21 @@ export type searchFilterType = {
     setage_range_start?: (...args: any[]) => any,
     age_range_end: number,
     setage_range_end?: (...args: any[]) => any,
-    prompt_target_id?: number,
+    prompt_target_id?: number | string,
     setprompt_target_id?: (...args: any[]) => any,
-    prompt_finance_state_id?: number,
+    prompt_finance_state_id?: number | string,
     setprompt_finance_state_id?: (...args: any[]) => any,
     onSearch?: (...args: any[]) => any,
 
 
     countries: selectOptionType[],
-    country?: string
+    setCountry: (...args: any[]) => any, 
+    country?: {label: string, value: string, id: string} | null
+
+
+    states: selectOptionType[],
+    clearStates: (...args: any[]) => any
+    setState: (...args: any[]) => any,
+    state?: {label: string, value: string, id: string} | null,
+    clearFilter: (...args: any[]) => any
 }

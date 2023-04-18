@@ -1,6 +1,6 @@
 import styles from './SearchInfo.module.scss';
 import { tabsPropsTypes } from '../../types';
-import {FC} from 'react';
+import {FC, useState, useEffect} from 'react';
 import { searchInfoType } from './types';
 import { tabItemPropsTypes } from '../../types';
 
@@ -22,7 +22,40 @@ const SearchInfo:FC<searchInfoType> = ({
     setIsOnline
 }) => {
 
-
+    const [activeId, setActiveId] = useState<string>('1');
+    
+    
+    useEffect(() => {
+        if(activeId && setIsNear && setIsOnline && setIsNew) {
+            switch(activeId) {
+                case '1':
+                    setIsNear(0)
+                    setIsOnline(0)
+                    setIsNew(0)
+                    break;
+                case '2':
+                    setIsNear(1)
+                    setIsOnline(0)
+                    setIsNew(0)
+                    break;
+                case '3':
+                    setIsNear(0)
+                    setIsOnline(0)
+                    setIsNew(1)
+                    break;
+                case '4':
+                    setIsNear(0)
+                    setIsOnline(1)
+                    setIsNew(0)
+                    break;
+                default:
+                    setIsNear(0)
+                    setIsOnline(0)
+                    setIsNew(0)
+                    break;
+            }
+        }
+    }, [activeId, setIsNear, setIsNew, setIsOnline])
 
 
     return (
@@ -35,8 +68,8 @@ const SearchInfo:FC<searchInfoType> = ({
                     tabs?.map((item, index) => (
                         <button 
                             key={index} 
-                            // onClick={() => onChange(item.id)}
-                            className={`${styles.item}`}>
+                            onClick={() => setActiveId(item.id)}
+                            className={`${styles.item} ${activeId === item.id ? styles.active : ''}`}>
                                 {item.label}
                             </button>
                     ))

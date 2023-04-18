@@ -6,5 +6,5 @@ export type tabsPropsTypes = {
 
 export type tabItemPropsTypes = {
     label?:string,
-    id?:string
+    id:string
 }

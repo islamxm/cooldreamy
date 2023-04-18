@@ -17,25 +17,11 @@ import { IUser } from "@/models/IUser";
 const service = new ApiService()
 
 const Profile = () => {
-    const {token} = useAppSelector(s => s)
+    const {token, userData} = useAppSelector(s => s)
 
     //userCard data
-    const [data, setData] = useState<IUser | null>()
+    // const [data, setData] = useState<IUser | null>()
 
-
-
-    useEffect(() => {
-        if(token) {
-            service.getMyProfile(token).then(res => {
-                console.log(res)
-                setData(res)
-            })
-
-            service.getAllPrompts(token).then(res => {
-                console.log(res)
-            })
-        }
-    }, [token])
 
     const [imageEditModal, setImageEditModal] = useState(false)
 
@@ -50,7 +36,7 @@ const Profile = () => {
         <Container>
 
             {/* edit image */}
-            <ImageCropModal open={imageEditModal} onClose={closeImageEditModal}/>
+            {/* <ImageCropModal open={imageEditModal} onClose={closeImageEditModal}/> */}
             {/* edit image */}
 
 
@@ -59,7 +45,7 @@ const Profile = () => {
                 <UserLayout
                     side={
                         <UserCard
-                            image={data?.avatar_url_big_thumbnail ? data?.avatar_url_big_thumbnail : ''}
+                            image={userData?.avatar_url_big_thumbnail ? userData?.avatar_url_big_thumbnail : ''}
                             verify={false}
                             >
                             <Button
@@ -76,7 +62,7 @@ const Profile = () => {
                     }
                     main={
                         <UserInfo
-                            {...data}
+                            {...userData}
                             />
                     }
                     />

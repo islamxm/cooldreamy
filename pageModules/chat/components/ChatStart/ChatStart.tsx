@@ -39,7 +39,7 @@ const ChatStart = ({avatar, onSelect}: {avatar?: string, onSelect: (type: 'wink'
                 </div>
                 <h3 className={styles.title}>Начните общаться прямо сейчас!</h3>
                 <div className={styles.action}>
-                    <div className={styles.item}>
+                    {/* <div className={styles.item}>
                         <button className={styles.button}>
                             <IconButton
                                 onClick={() => onSelect('wink')}
@@ -48,7 +48,7 @@ const ChatStart = ({avatar, onSelect}: {avatar?: string, onSelect: (type: 'wink'
                                 />
                             <div className={styles.label}>ПОДМИГНУТЬ</div>
                         </button>
-                    </div>
+                    </div> */}
                     <div className={styles.item}>
                         <button className={styles.button}>
                             <IconButton

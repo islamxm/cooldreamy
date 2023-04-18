@@ -1,5 +1,5 @@
 import styles from './GirlCard.module.scss';
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 import Image from 'next/image';
 import { Row, Col } from 'antd';
 import { girlCardType } from './types';
@@ -14,6 +14,7 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import placeholder from '@/public/assets/images/logo.svg';
+import notify from '@/helpers/notify';
 
 const service = new ApiService();
 
@@ -41,7 +42,9 @@ const GirlCard:FC<girlCardType> = ({
 }) => {
     const {token} = useAppSelector(s => s)
     
-
+    useEffect(() => {
+        console.log(winkable)
+    }, [winkable])
 
     // const goToMail = () => {
         
@@ -64,7 +67,23 @@ const GirlCard:FC<girlCardType> = ({
     
 
     const sendWink = () => {
-        
+        if(id && token) {
+            service.createChat({user_id: id}, token).then(res => {
+                console.log(res)
+                if(res?.chat_id) {
+                    service.sendWink({user_id: id}, token).then(r => {
+                        if(r?.error) {
+                            notify('Вы уже подмигнули', 'ERROR')
+                        } else {
+                            Router.push(`/chat/${res?.chat_id}`)
+                        }
+                        
+                        // условие
+                        
+                    })
+                }
+            })
+        }
     }
     
 
@@ -94,13 +113,18 @@ const GirlCard:FC<girlCardType> = ({
             <div className={styles.body}>
                 <div className={styles.action}>
                     <Row gutter={[2,2]}>
-                        <Col span={7}>
-                            <button className={styles.button}><FaRegSmileWink/></button>
-                        </Col>
-                        <Col span={7}>
+                        {
+                            winkable === 1 ? (
+                                <Col span={7}>
+                                    <button onClick={sendWink} className={styles.button}><FaRegSmileWink/></button>
+                                </Col>
+                            ) : null
+                        }
+                        
+                        <Col span={winkable === 1 ? 7 : 12}>
                             <button className={styles.button}><AiOutlineStar/></button>
                         </Col>
-                        <Col span={10}>
+                        <Col span={winkable === 1 ? 10 : 12}>
                             <button 
                                 onClick={createChat}
                                 className={styles.button}>

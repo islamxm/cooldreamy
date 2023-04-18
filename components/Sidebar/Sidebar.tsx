@@ -11,17 +11,7 @@ const service = new ApiService()
 
 
 const Sidebar:FC = () => {
-    const {token} = useAppSelector(s => s)
-    const [userData, setUserData] = useState<IUser>();
-
-
-    useEffect(() => {
-        if(token) {
-            service.getMyProfile(token).then(res => {
-                setUserData(res)
-            })
-        }
-    }, [token])
+    const {userData} = useAppSelector(s => s)
 
     return (
         <div className={styles.wrapper}>

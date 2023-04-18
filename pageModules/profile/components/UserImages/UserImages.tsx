@@ -3,8 +3,8 @@ import UserImageItem from '../UserImageItem/UserImageItem';
 import {BsCamera} from 'react-icons/bs';
 import {motion} from 'framer-motion';
 import img from '@/public/assets/images/my-img.png';
-import {FC} from 'react';
-
+import {FC, useCallback, useEffect, useState, useRef} from 'react';
+import ImageCropModal from '../../modals/ImageCropModal/ImageCropModal';
 
 const list = [
     {image: img},
@@ -19,15 +19,50 @@ const UserImages:FC<{
     profile_photo
 }) => {
 
+    const [imageCropModal, setImageCropModal] = useState(false)
+    const ref = useRef<HTMLInputElement>(null)
+    const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+
+    const closeCropModal = () => {
+        // if(ref) {
+        //     ref?.current?.r
+        // }
+        setUploadedFile(null)
+        setImageCropModal(false)
+    }
+
+    const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if(e.target.files !== null ) {
+            console.log(e.target.files[0])
+            setUploadedFile(e.target.files[0])
+        }
+    }
+
+    useEffect(() => {
+        if(uploadedFile) {
+            setImageCropModal(true)
+        }
+    }, [uploadedFile])
+
+ 
+
+
+
     return (
         <div className={styles.wrapper}>
-            <motion.button 
-                whileTap={{scale: 0.9}}
-                transition={{type: 'spring', stiffness: 400, damping: 17}}
+            <ImageCropModal
+                uploadedFile={uploadedFile}
+                open={imageCropModal}
+                onClose={closeCropModal}
+                />
+            <div
                 className={styles.add}>
-                <BsCamera/>
-                <div className={styles.label}>Добавить фото</div>
-            </motion.button>
+                <input value={''} ref={ref} id='upload-photo' type="file" accept='.png, .jpg, .jpeg' onChange={uploadFile}/>
+                <label htmlFor='upload-photo' className={styles.label}>
+                    <div className={styles.icon}><BsCamera/></div>
+                    <div className={styles.text}>Добавить фото</div>
+                </label>
+            </div>
             {
                 profile_photo?.map((item, index) => (
                     <UserImageItem

@@ -1,14 +1,14 @@
 import Echo from "laravel-echo";
 import { PusherPrivateChannel } from "laravel-echo/dist/channel";
 import { Cookies } from "typescript-cookie";
-
+import { IUser } from "@/models/IUser";
 
 
 export interface IGlobalState {
     userId: string | { [property: string]: string; } | null | undefined,
     token: string | { [property: string]: string; } | null | undefined,
     socketChannel: PusherPrivateChannel | null,
-    test: boolean
+    userData: IUser | null
 }
 
 
@@ -16,7 +16,8 @@ export const globalState: IGlobalState = {
     userId: process?.browser && Cookies.get('cooldate-web-user-id') ? Cookies.get('cooldate-web-user-id') : null,
     token: process?.browser && Cookies.get('cooldate-web-token') ? Cookies.get('cooldate-web-token') : null,
     socketChannel: null,
-    test: false
+    userData: null
+    
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -36,10 +37,10 @@ const reducer = (state = globalState, action: any) => {
                 ...state,
                 userId: action.id
             }
-        case 'TEST':
+        case 'UPDATE_USER_DATA':
             return {
                 ...state,
-                test: !globalState.test
+                userData: action.data
             }
         default:
             return state;

@@ -27,12 +27,12 @@ const SearchBody = () => {
     const [targetList, setTargetList] = useState([])
     const [financeList, setFinanceList] = useState([])
 
-    const [state, setState] = useState<{value: string, id: string, label: string}>()
-    const [country, setCountry] = useState<{value: string, id: string, label: string}>()
+    const [state, setState] = useState<{value: string, id: string, label: string} | null>(null)
+    const [country, setCountry] = useState<{value: string, id: string, label: string} | null>(null)
     const [age_range_start, setage_range_start] = useState(18)
     const [age_range_end, setage_range_end] = useState(70)
-    const [prompt_target_id, setprompt_target_id] = useState()
-    const [prompt_finance_state_id, setprompt_finance_state_id] = useState()
+    const [prompt_target_id, setprompt_target_id] = useState<number | string>()
+    const [prompt_finance_state_id, setprompt_finance_state_id] = useState<number | string>()
 
     const [isNew, setIsNew] = useState<1 | 0>(0)
     const [isOnline, setIsOnline] = useState<1 | 0>(0)
@@ -43,6 +43,7 @@ const SearchBody = () => {
     const [list, setList] = useState<girlCardType[]>([])
 
     const [countriesList, setCountriesList] = useState<selectOptionType[]>([])
+    const [statesList, setStatesList] = useState<selectOptionType[]>([])
 
 
     const getFinanceList = () => {
@@ -74,20 +75,18 @@ const SearchBody = () => {
     const getStates = (id: number) => {
         if(token) {
             service.getStates(id, token).then(res => {
-                console.log(res)
+                setStatesList(res?.map((i: any) => ({value: i?.id, id: i?.id, label: i?.title})))
             })
         }
        
     }
 
-
     useEffect(() => {
-        if(country && token) {
-            service.getStates(Number(country?.id), token).then(res => {
-                console.log(res)
-            })
+        if(country?.id && token) {
+            getStates && getStates(Number(country?.id))
         }
-    }, [country, token])
+    }, [token, country])
+
 
     const onSearch = useCallback(() => {
         if(token) {
@@ -99,8 +98,8 @@ const SearchBody = () => {
                 isNew, 
                 isOnline, 
                 isNear,
-                state: state?.value, 
-                country: country?.value, 
+                state: state?.label, 
+                country: country?.label, 
                 age_range_start, 
                 age_range_end,
                 prompt_target_id, 
@@ -124,8 +123,8 @@ const SearchBody = () => {
                 isNew, 
                 isOnline, 
                 isNear, 
-                state: state?.value, 
-                country: country?.value, 
+                state: state?.label, 
+                country: country?.label, 
                 age_range_start, 
                 age_range_end,
                 prompt_target_id, 
@@ -157,14 +156,37 @@ const SearchBody = () => {
 
 
     useEffect(() => {
-        console.log(list)
-    }, [list])
+        console.log(state)
+        console.log(country)
+    }, [state, country])
+
+
+    const clearFilter = () => {
+        setState(null)
+        setCountry(null)
+        setStatesList([])
+        setage_range_start(18)
+        setage_range_end(70)
+        setprompt_target_id(0)
+        setprompt_finance_state_id(0)
+    }
+
+
+
+
+    useEffect(() => {
+        console.log(prompt_finance_state_id)
+        console.log(prompt_target_id)
+    },[prompt_finance_state_id, prompt_target_id])
+
 
 
     return (    
         <div className={styles.wrapper}>
             <Row gutter={[10,10]}>
                 <Col span={24}>
+
+
                     <SearchFilter
                         load={load}
                         targetList={targetList}
@@ -180,8 +202,17 @@ const SearchBody = () => {
                         onSearch={onSearch}
 
                         countries={countriesList}
-                        // country={country}
+                        country={country}
+                        setCountry={setCountry}
 
+                        states={statesList}
+                        clearStates={() => setStatesList([])}
+                        state={state}
+                        setState={setState}
+                    
+
+
+                        clearFilter={clearFilter}
                         />
 
 

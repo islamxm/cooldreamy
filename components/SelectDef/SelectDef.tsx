@@ -1,6 +1,7 @@
 import styles from './SelectDef.module.scss';
 import {Select} from 'antd';
-import {FC} from 'react';
+
+import {FC, useRef, useEffect} from 'react';
 import { selectDefType } from './types';
 
 
@@ -10,8 +11,13 @@ const SelectDef:FC<selectDefType> = ({
     value,
     width,
     label,
-    onChange
+    onChange,
+    onClear
 }) => {
+
+    const ref = useRef<any>()
+
+    
 
     return (
         <div className={styles.wrapper} style={{width: width}}>
@@ -21,10 +27,13 @@ const SelectDef:FC<selectDefType> = ({
                 ) : null
             }
             <Select
+                ref={ref}
+                allowClear
                 style={{width: '100%'}}
                 placeholder={placeholder}
                 defaultValue={value}
                 onChange={onChange}
+                onClear={onClear}
                 options={list}
                 value={value}
                 />
