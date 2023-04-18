@@ -45,6 +45,12 @@ const Body:FC = () => {
     const [dob, setDob] = useState('')
     const [sex, setSex] = useState<'male' | 'female'>('male')
 
+    const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
+        name: [],
+        email: [],
+        password: []
+    })
+
 
     
     const [prompt_targets, setPrompt_targets] = useState([])
@@ -96,6 +102,8 @@ const Body:FC = () => {
                         setPassword={setPassword}
                         setName={setName}
                         setSex={setSex}
+
+                        errors={errors}
                         />
                 )
             case 1:
@@ -160,12 +168,24 @@ const Body:FC = () => {
                 gender: sex
             }
             service.register(body).then(res => {
+                console.log(res)
+                if(res?.error) {
+                    setErrors(s => ({
+                        ...s,
+                        ...res?.error
+                    }))
+                }
                 if(res?.token && res?.id) {
+                    setErrors({
+                        email: [],
+                        name: [],
+                        password: []
+                    })
                     dispatch(updateToken(res?.token))
                     dispatch(updateUserId(res?.id))
                     Cookies.set('cooldate-web-user-id', res?.id)
                     Cookies.set('cooldate-web-token', res?.token)
-    
+                    
                     setCurrentStep(s => s + 1)
                 }
             }).finally(() => setLoad(false))

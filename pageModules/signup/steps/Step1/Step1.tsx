@@ -20,7 +20,13 @@ interface IStep1 {
     setEmail: (...args: any[]) => any,
     setName: (...args: any[]) => any,
     setPassword: (...args: any[]) => any,
-    setSex: (sex: 'male' | 'female') => any
+    setSex: (sex: 'male' | 'female') => any,
+
+    errors: {
+        email: string[],
+        password: string[],
+        name: string[]
+    }
 }
 
 
@@ -32,7 +38,8 @@ const Step1:FC<IStep1> = ({
     setEmail,
     setName,
     setPassword,
-    setSex
+    setSex,
+    errors
 }) => {
     const {token} = useAppSelector(s => s)
     // const [countryList, setCountryList] = useState([])
@@ -72,6 +79,7 @@ const Step1:FC<IStep1> = ({
                                     value={name}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                                     placeholder='Имя'
+                                    error={errors.name?.length === 1 ? errors.name[0] : false}
                                     />
                             </Col>
                             <Col span={24}>
@@ -80,6 +88,7 @@ const Step1:FC<IStep1> = ({
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                     placeholder='E-mail'
                                     type={'email'}
+                                    error={errors.email?.length === 1 ? errors.email[0] : false}
                                     />
                             </Col>
                             <Col span={24}>
@@ -88,6 +97,7 @@ const Step1:FC<IStep1> = ({
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                     placeholder='Пароль'
                                     type={'password'}
+                                    error={errors.password?.length === 1 ? errors.password[0] : false}
                                     />
                             </Col>
                             {/* <Col span={24}>

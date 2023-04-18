@@ -110,7 +110,10 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 </Col>
                 <Col span={24}>
                     <div className={styles.ex}>
-                        <Link href={'/signup'} className={styles.item}>Регистрация</Link>
+                        <span onClick={() => {
+                            onClose()
+                            Router.push('/signup')
+                        }} className={styles.item}>Регистрация</span>
                         <span className={styles.item}>Забыли пароль?</span>
                     </div>
                 </Col>
