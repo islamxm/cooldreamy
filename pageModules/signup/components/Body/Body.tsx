@@ -76,7 +76,6 @@ const Body:FC = () => {
     useEffect(() => {
         if(token) {
             service.getAllPrompts(token).then(res => {
-                console.log(res)
                 setPrompt_targets(res?.prompt_targets)
                 setPrompt_careers(res?.prompt_careers)
                 setPrompt_finance_states(res?.prompt_finance_states)
@@ -168,7 +167,6 @@ const Body:FC = () => {
                 gender: sex
             }
             service.register(body).then(res => {
-                console.log(res)
                 if(res?.error) {
                     setErrors(s => ({
                         ...s,
@@ -205,7 +203,6 @@ const Body:FC = () => {
             }
             if(token) {
                 service.updateMyProfile(updateBody, token).then(res => {
-                    console.log(res)
                     if(res?.id) {
                         notify('Настройки сохранены', 'SUCCESS')
                         Router.push(`/profile`)

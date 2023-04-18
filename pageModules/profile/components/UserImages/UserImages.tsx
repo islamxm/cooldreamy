@@ -23,9 +23,6 @@ const UserImages:FC<{
     const ref = useRef<HTMLInputElement>(null)
     const [uploadedFile, setUploadedFile] = useState<File | null>(null)
 
-    useEffect(() => {
-        console.log(profile_photo)
-    }, [profile_photo])
 
     const closeCropModal = () => {
         // if(ref) {
@@ -37,7 +34,6 @@ const UserImages:FC<{
 
     const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(e.target.files !== null ) {
-            console.log(e.target.files[0])
             setUploadedFile(e.target.files[0])
         }
     }

@@ -91,7 +91,6 @@ const Main = () => {
                 page
             }, token).then(res => {
                 setList(res?.data)
-                console.log(res?.data)
             })
         }
     }
@@ -100,7 +99,6 @@ const Main = () => {
     const updateFeed = useCallback(() => {
         if(token) {
             page && service.getFeed({page}, token).then(res => {
-                console.log(res?.data)
                 if(res?.data?.length > 0) {
                     setList(s => [...s, ...res?.data])
                 } else {
@@ -136,7 +134,7 @@ const Main = () => {
         if(token) {
             if(currentCard) {
                 service.feedItemLike({id: currentCard}, token).then(res => {
-                    console.log(res)
+                    // console.log(res)
                 })
             } 
         }
@@ -148,7 +146,7 @@ const Main = () => {
         if(token) {
             if(currentCard) {
                 service.feedItemSkip({id: currentCard}, token).then(res => {
-                    console.log(res)
+                    // console.log(res)
                 })
             }
         }

@@ -8,8 +8,7 @@
     border-radius: 30px;
     display: block;
     width: 100%;
-    transition: all .3s ease;
-    resize: none;
+    transition: box-shadow .3s ease;
 
     &:focus {
         box-shadow: 0 0 0 3px rgba(#D9D4FF, .7);

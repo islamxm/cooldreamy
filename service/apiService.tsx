@@ -8,6 +8,7 @@ import checkAuth from "./checkAuth";
 const headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
+    'X-Localization': 'ru'
 }
 
 //'Authorization': `Bearer ${token}`

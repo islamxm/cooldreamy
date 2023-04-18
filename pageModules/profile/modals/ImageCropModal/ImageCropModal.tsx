@@ -66,7 +66,6 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                     rotation
                 )
 
-                console.log('donee', { croppedImage })
                 setCroppedImage(croppedImage)
 
             } catch(err) {
@@ -80,7 +79,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
     // !! upload test
 
     const onSave = () => {
-        console.log('saving')
+  
         if(token && croppedImage) {
             setLoad(true)
             const data = new FormData()

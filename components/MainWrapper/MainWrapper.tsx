@@ -43,7 +43,6 @@ const MainWrapper = ({
 				}
 			)
 			service.getMyProfile(token).then(res => {
-				console.log(res)
 				dispatch(updateUserData(res))
 			})
 		}
@@ -74,7 +73,7 @@ const MainWrapper = ({
 		if(socketChannel) {
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
-				console.log(data)
+				console.log('socket', data)
 				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
 
 				switch(data?.chat_message?.chat_messageable_type) {

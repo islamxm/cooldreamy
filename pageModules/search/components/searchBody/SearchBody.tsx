@@ -66,7 +66,6 @@ const SearchBody = () => {
     const getCountries = () => {
         if(token) {
             service.getCountries(token).then(res => {
-                console.log(res)
                 setCountriesList(res?.map((i: any) => ({value: i?.id, id: i.id, label: i?.title})))
             })
         }
@@ -106,7 +105,7 @@ const SearchBody = () => {
                 prompt_finance_state_id, 
             }, token
             ).then(res => {
-                console.log(res)
+             
                 setTotalFound(res?.total)
                 setList(res?.data)
             }).finally(() => {
@@ -130,7 +129,7 @@ const SearchBody = () => {
                 prompt_target_id, 
                 prompt_finance_state_id, 
             }, token).then(res => {
-                console.log(res)
+                
                 setTotalFound(res?.total)
                 setList(res?.data)
             }).finally(() => {
@@ -155,10 +154,7 @@ const SearchBody = () => {
     }, [token])
 
 
-    useEffect(() => {
-        console.log(state)
-        console.log(country)
-    }, [state, country])
+ 
 
 
     const clearFilter = () => {
@@ -172,12 +168,6 @@ const SearchBody = () => {
     }
 
 
-
-
-    useEffect(() => {
-        console.log(prompt_finance_state_id)
-        console.log(prompt_target_id)
-    },[prompt_finance_state_id, prompt_target_id])
 
 
 
