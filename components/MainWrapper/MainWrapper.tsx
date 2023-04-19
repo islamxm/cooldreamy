@@ -49,18 +49,18 @@ const MainWrapper = ({
 	}, [token])
 
 
-	// useEffect(() => {
-	// 	if(pusherConfig && userId) {
-	// 		if(socketChannel) {
-	// 			socketChannel?.unsubscribe()
-	// 		}
-	// 		const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
-	// 		dispatch(updateSocket(channels))
-	// 		channels.subscribed(() => {
-	// 			notify('Соединение установлено', 'SUCCESS')
-	// 		})
-	// 	}
-	// }, [pusherConfig, userId])
+	useEffect(() => {
+		if(pusherConfig && userId) {
+			if(socketChannel) {
+				socketChannel?.unsubscribe()
+			}
+			const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
+			dispatch(updateSocket(channels))
+			channels.subscribed(() => {
+				notify('Соединение установлено', 'SUCCESS')
+			})
+		}
+	}, [pusherConfig, userId])
 
 	
 	//new-chat-message-event
