@@ -24,9 +24,9 @@ const UserInfoAction:FC<{
                         age={age ? age?.toString() : ''}
                         style={{fontSize: 24}}
                         />
-                    <button>
+                    {/* <button>
                         <RiPencilLine/>
-                    </button>
+                    </button> */}
                 </div>
                 <div className={styles.location}>
                     {state}

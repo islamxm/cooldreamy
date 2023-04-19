@@ -1,44 +1,10 @@
 import styles from './Step2.module.scss';
 import SelectCard from '@/components/SelectCard/SelectCard';
 import { FC } from 'react';
-import img1 from '@/public/assets/images/target-1.png'
-import img2 from '@/public/assets/images/target-2.png'
-import img3 from '@/public/assets/images/target-3.png'
-import img4 from '@/public/assets/images/target-4.png'
 import { selectCardPropsTypes } from '@/components/SelectCard/types';
 import {motion} from 'framer-motion';
 import { IPromptSelect } from '../../types';
 
-const targetVals: selectCardPropsTypes[] = [
-    {
-        image: img1,
-        label: 'Найти идеальную пару',
-        onSelect: () => {},
-        isSelect: false,
-        value: '1'
-    },
-    {
-        image: img2,
-        label: 'Вместе путешествовать',
-        onSelect: () => {},
-        isSelect: false,
-        value: '2'
-    },
-    {
-        image: img3,
-        label: 'Серьезные отношения',
-        onSelect: () => {},
-        isSelect: false,
-        value: '3'
-    },
-    {
-        image: img4,
-        label: 'Хочу на свидание',
-        onSelect: () => {},
-        isSelect: false,
-        value: '4'
-    }
-];
 
 const Step2:FC<IPromptSelect> = ({
     list,

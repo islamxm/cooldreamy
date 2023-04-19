@@ -34,50 +34,50 @@ const EditModalText:FC<I> = (props) => {
     }
 
     const onSave = (type: editItemT | '') => {
+        console.log(type)
         if(token && value) {
             setLoad(true)
-            switch(type) {
-                case 'name':
-                    service.updateMyProfile({name: value}, token).then(res => {
-                        console.log(res)
-                        if(res?.id) {
-                            notify('Настройки успешно сохранены', 'SUCCESS')
-                            dispatch(updateUserData(res))
-                            onClose()
-                        } else {
-                            notify('Произошла ошибка, повторите еще раз', 'ERROR')
-                        }
-                    }).finally(() => {
-                        setLoad(false)
-                    })
-                case 'email':
-                    service.updateMyProfile({email: value}, token).then(res => {
-                        console.log(res)
-                        if(res?.id) {
-                            notify('Настройки успешно сохранены', 'SUCCESS')
-                            dispatch(updateUserData(res))
-                            onClose()
-                        } else {
-                            notify('Произошла ошибка, повторите еще раз', 'ERROR')
-                        }
-                    }).finally(() => {
-                        setLoad(false)
-                    })
-                case 'about':
-                    service.updateMyProfile({about_self: value}, token).then(res => {
-                        console.log(res)
-                        if(res?.id) {
-                            notify('Настройки успешно сохранены', 'SUCCESS')
-                            dispatch(updateUserData(res))
-                            onClose()
-                        } else {
-                            notify('Произошла ошибка, повторите еще раз', 'ERROR')
-                        }
-                    }).finally(() => {
-                        setLoad(false)
-                    })
-                default:
-                    return;
+            if(type === 'name') {
+                service.updateMyProfile({name: value}, token).then(res => {
+                    console.log(res)
+                    if(res?.id) {
+                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        dispatch(updateUserData(res))
+                        onClose()
+                    } else {
+                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                    }
+                }).finally(() => {
+                    setLoad(false)
+                })
+            }
+            if(type === 'email') {
+                service.updateMyProfile({email: value}, token).then(res => {
+                    console.log(res)
+                    if(res?.id) {
+                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        dispatch(updateUserData(res))
+                        onClose()
+                    } else {
+                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                    }
+                }).finally(() => {
+                    setLoad(false)
+                })
+            }
+            if(type === 'about') {
+                service.updateMyProfile({about_self: value}, token).then(res => {
+                    console.log(res)
+                    if(res?.id) {
+                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        dispatch(updateUserData(res))
+                        onClose()
+                    } else {
+                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                    }
+                }).finally(() => {
+                    setLoad(false)
+                })
             }
         }
 

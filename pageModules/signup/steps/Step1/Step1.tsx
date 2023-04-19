@@ -8,6 +8,8 @@ import Link from 'next/link';
 import {motion} from 'framer-motion';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
+import BthPicker from '@/components/BthPicker/BthPicker';
+import moment from 'moment';
 
 const service = new ApiService()
 
@@ -15,13 +17,14 @@ interface IStep1 {
     email: string,
     name: string,
     password: string,
-    sex: 'male' | 'female'
+    sex: 'male' | 'female',
+    birthday: string,
 
     setEmail: (...args: any[]) => any,
     setName: (...args: any[]) => any,
     setPassword: (...args: any[]) => any,
     setSex: (sex: 'male' | 'female') => any,
-
+    setBirthday: (...args: any[]) => any
     errors: {
         email: string[],
         password: string[],
@@ -35,15 +38,17 @@ const Step1:FC<IStep1> = ({
     email,
     password,
     sex,
+    birthday,
     setEmail,
     setName,
     setPassword,
     setSex,
+    setBirthday,
     errors
 }) => {
     const {token} = useAppSelector(s => s)
     // const [countryList, setCountryList] = useState([])
-
+    
 
 
     // useEffect(() => {
@@ -98,6 +103,16 @@ const Step1:FC<IStep1> = ({
                                     placeholder='Пароль'
                                     type={'password'}
                                     error={errors.password?.length === 1 ? errors.password[0] : false}
+                                    />
+                            </Col>
+                            <Col span={24}>
+                                <BthPicker
+                                    showToday={false}
+                                    onChange={(e,b) => {
+                                        // const date = new Date(b)
+                                        // console.log(date)
+                                        setBirthday(moment(b).format())
+                                    }}
                                     />
                             </Col>
                             {/* <Col span={24}>

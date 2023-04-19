@@ -7,7 +7,6 @@ import Menu from './components/Menu/Menu';
 import { IUser } from '@/models/IUser';
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-const service = new ApiService()
 
 
 const Sidebar:FC = () => {

@@ -45,6 +45,9 @@ const Body:FC = () => {
     const [dob, setDob] = useState('')
     const [sex, setSex] = useState<'male' | 'female'>('male')
 
+    const [birthday, setBirthday] = useState<any>('')
+
+
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
         name: [],
         email: [],
@@ -97,10 +100,13 @@ const Body:FC = () => {
                         email={email}
                         password={password}
                         name={name}
+                        birthday={birthday}
+
                         setEmail={setEmail}
                         setPassword={setPassword}
                         setName={setName}
                         setSex={setSex}
+                        setBirthday={setBirthday}
 
                         errors={errors}
                         />
@@ -128,7 +134,6 @@ const Body:FC = () => {
     useEffect(() => {
         setNextBtn(false)
     }, [currentStep])
-
 
 
     // const onRegister = () => {
@@ -183,7 +188,7 @@ const Body:FC = () => {
                     dispatch(updateUserId(res?.id))
                     Cookies.set('cooldate-web-user-id', res?.id)
                     Cookies.set('cooldate-web-token', res?.token)
-                    
+
                     setCurrentStep(s => s + 1)
                 }
             }).finally(() => setLoad(false))
@@ -205,6 +210,7 @@ const Body:FC = () => {
                 service.updateMyProfile(updateBody, token).then(res => {
                     if(res?.id) {
                         notify('Настройки сохранены', 'SUCCESS')
+                        dispatch(updateUserData(res))
                         Router.push(`/profile`)
                     }
 
@@ -212,6 +218,17 @@ const Body:FC = () => {
             }
         }
     }
+
+
+    useEffect(() => {
+        if(currentStep === 1 && token && birthday) {
+            console.log(birthday)
+            service.updateMyProfile({birthday: birthday}, token).then(res => {
+                console.log(res)
+                console.log('birthday',res?.birthday)
+            })
+        }
+    }, [currentStep, token, birthday])
 
 
     return (
@@ -246,7 +263,7 @@ const Body:FC = () => {
                                                         load={load}
                                                         //disabled={nextBtn}
                                                         onClick={stepChange}
-                                                        disabled={!(email && name && password && sex)}
+                                                        disabled={!(email && name && password && sex && birthday)}
                                                         text={currentStep === 7 ? 'Завершить' : 'Дальше'}
                                                         />
                                                 </div>

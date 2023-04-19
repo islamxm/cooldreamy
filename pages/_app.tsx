@@ -16,8 +16,8 @@ import store from '@/store/store';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from '@/hoc/CheckAuth';
 import { ToastContainer } from 'react-toastify';
-
-
+import { ConfigProvider } from 'antd';
+import ruRu from 'antd/locale/ru_RU';
 
 function App({ Component, pageProps }: AppProps) {
 
@@ -26,18 +26,21 @@ function App({ Component, pageProps }: AppProps) {
 
 	return (
 		<Provider store={store}>
-			<PrivateRoute>
-				<MainWrapper>
-						<ToastContainer/>
-						<Header
-							auth={true}
-							/>
-						<main>
-							<Component {...pageProps} />
-						</main>
-						<Footer/>
-					</MainWrapper>
-			</PrivateRoute>
+			<ConfigProvider locale={ruRu}>
+				<PrivateRoute>
+					<MainWrapper>
+							<ToastContainer/>
+							<Header
+								auth={true}
+								/>
+							<main>
+								<Component {...pageProps} />
+							</main>
+							<Footer/>
+						</MainWrapper>
+				</PrivateRoute>
+			</ConfigProvider>
+			
 		</Provider>
 		
 	)

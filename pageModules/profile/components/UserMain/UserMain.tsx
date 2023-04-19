@@ -38,14 +38,15 @@ const UserMain:FC<IUser> = (props) => {
 
     const [modalHead, setModalHead] = useState('')
 
+    const [promptActive, setPromptActive] = useState(0)
 
-    const [prompt_targets, setPrompt_targets] = useState([])
-    const [prompt_interests, setPrompt_interests] = useState([])
-    const [prompt_finance_states, setPrompt_finance_states] = useState([])
-    const [prompt_sources, setPrompt_sources] = useState([])
-    const [prompt_want_kids, setPrompt_want_kids] = useState([])
-    const [prompt_relationships, setPrompt_relationships] = useState([])
-    const [prompt_careers, setPrompt_careers] = useState([])   
+    const [prompt_targets, setPrompt_targets] = useState<any[]>([])
+    const [prompt_interests, setPrompt_interests] = useState<any[]>([])
+    const [prompt_finance_states, setPrompt_finance_states] = useState<any[]>([])
+    const [prompt_sources, setPrompt_sources] = useState<any[]>([])
+    const [prompt_want_kids, setPrompt_want_kids] = useState<any[]>([])
+    const [prompt_relationships, setPrompt_relationships] = useState<any[]>([])
+    const [prompt_careers, setPrompt_careers] = useState<any[]>([])   
 
 
 
@@ -85,8 +86,18 @@ const UserMain:FC<IUser> = (props) => {
                 return 'Редактировать e-mail'
             case 'about':
                 return 'Расскажите о себе'
+            case 'finance':
+                return 'Финансовые предпочтения'
+            case 'career':
+                return 'Карьера'
+            case 'kids':
+                return 'Дети'
+            case 'rl':
+                return 'Семейное положение'
+            case 'target':
+                return 'Цели знакомства'
             default:
-                return 'Заголовок'
+                return 'Редактировать'
         }
     }
 
@@ -116,6 +127,16 @@ const UserMain:FC<IUser> = (props) => {
                 return name
             case 'email':
                 return email
+            case 'career':
+                return prompt_career_id
+            case 'finance':
+                return prompt_finance_state_id
+            case 'kids':
+                return prompt_want_kids_id
+            case 'rl':
+                return prompt_relationship_id
+            case 'target':
+                return prompt_target_id
             default:
                 return ''
         }
@@ -138,9 +159,6 @@ const UserMain:FC<IUser> = (props) => {
     }
 
 
-    useEffect(() => {
-        console.log(editItemType)
-    }, [editItemType])
 
 
     return (
@@ -152,6 +170,7 @@ const UserMain:FC<IUser> = (props) => {
                 editItemType={editItemType}
                 open={promptModal}
                 onCancel={closeEditModal}
+                activeId={switchInitValue(editItemType)}
                 />
 
             <EditModalText
@@ -221,10 +240,17 @@ const UserMain:FC<IUser> = (props) => {
                     <div className={styles.part}>
                         <div className={styles.label}>
                             Цели знакомства
-                            <button><RiPencilLine/></button>
+                            <button
+                                onClick={() => {
+                                    setModalProps('target')
+                                    openModal('prompt')
+                                }}
+                                >
+                                <RiPencilLine/>
+                            </button>
                         </div>
                         <div className={styles.text} style={{color: prompt_target_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_target_id ? prompt_target_id : 'Не указано'}
+                            {prompt_target_id && prompt_targets ? prompt_targets.find(i => i?.id === prompt_target_id)?.text : 'Не указано'}
                         </div>
                     </div>
                 </Col>
@@ -232,10 +258,15 @@ const UserMain:FC<IUser> = (props) => {
                     <div className={styles.part}>
                         <div className={styles.label}>
                             Финансовые предпочтения
-                            <button><RiPencilLine/></button>
+                            <button
+                                onClick={() => {
+                                    setModalProps('finance')
+                                    openModal('prompt')
+                                }}
+                                ><RiPencilLine/></button>
                         </div>
                         <div className={styles.text} style={{color: prompt_finance_state_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_finance_state_id ? prompt_finance_state_id : 'Не указано'}
+                            {prompt_finance_state_id && prompt_finance_states ? prompt_finance_states.find(i => i?.id === prompt_finance_state_id)?.text : 'Не указано'}
                         </div>
                     </div>
                 </Col>
@@ -243,10 +274,15 @@ const UserMain:FC<IUser> = (props) => {
                     <div className={styles.part}>
                         <div className={styles.label}>
                             Карьера
-                            <button><RiPencilLine/></button>
+                            <button
+                                onClick={() => {
+                                    setModalProps('career')
+                                    openModal('prompt')
+                                }}
+                                ><RiPencilLine/></button>
                         </div>
                         <div className={styles.text} style={{color: prompt_career_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_career_id ? prompt_career_id : 'Не указано'}
+                            {prompt_career_id && prompt_careers ? prompt_careers.find(i => i?.id === prompt_career_id)?.text : 'Не указано'}
                         </div>
                     </div>
                 </Col>
@@ -254,10 +290,15 @@ const UserMain:FC<IUser> = (props) => {
                     <div className={styles.part}>
                         <div className={styles.label}>
                             Семейное положение
-                            <button><RiPencilLine/></button>
+                            <button
+                                onClick={() => {
+                                    setModalProps('rl')
+                                    openModal('prompt')
+                                }}
+                                ><RiPencilLine/></button>
                         </div>
                         <div className={styles.text} style={{color: prompt_relationship_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_relationship_id ? prompt_relationship_id : 'Не указано'}
+                            {prompt_relationship_id && prompt_relationships ? prompt_relationships.find(i => i?.id === prompt_relationship_id)?.text : 'Не указано'}
                         </div>
                     </div>
                 </Col>
@@ -265,10 +306,15 @@ const UserMain:FC<IUser> = (props) => {
                     <div className={styles.part}>
                         <div className={styles.label}>
                             Дети
-                            <button><RiPencilLine/></button>
+                            <button
+                                onClick={() => {
+                                    setModalProps('kids')
+                                    openModal('prompt')
+                                }}
+                                ><RiPencilLine/></button>
                         </div>
                         <div className={styles.text} style={{color: prompt_want_kids_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_want_kids_id ? prompt_want_kids_id : 'Не указано'}
+                            {prompt_want_kids_id && prompt_want_kids ? prompt_want_kids.find(i => i?.id === prompt_want_kids_id)?.text : 'Не указано'}
                         </div>
                     </div>
                 </Col>
