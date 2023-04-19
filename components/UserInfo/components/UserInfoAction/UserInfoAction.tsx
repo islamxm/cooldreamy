@@ -83,19 +83,19 @@ const UserInfoAction:FC<IUser> = ({
                     <div className={styles.icon}>
                         <FiHeart/>
                     </div>
-                    <div className={styles.text}>НРАВИТСЯ</div>
+                    {/* <div className={styles.text}>НРАВИТСЯ</div> */}
                 </button>
                 <button onClick={onWink} className={styles.item}>
                     <div className={styles.icon}>
                         <FaRegSmileWink/>
                     </div>
-                    <div className={styles.text}>ПОДМИГНУТЬ</div>
+                    {/* <div className={styles.text}>ПОДМИГНУТЬ</div> */}
                 </button>
                 <button onClick={onFavorite} className={styles.item}>
                     <div className={styles.icon}>
                         <AiOutlineStar/>
                     </div>
-                    <div className={styles.text}>ИЗБРАННОЕ</div>
+                    {/* <div className={styles.text}>ИЗБРАННОЕ</div> */}
                 </button>
             </div>
         </div>

@@ -38,10 +38,7 @@ const UserMain:FC<IUser> = (props) => {
 
     const [modalHead, setModalHead] = useState('')
 
-    const [promptActive, setPromptActive] = useState(0)
-
     const [prompt_targets, setPrompt_targets] = useState<any[]>([])
-    const [prompt_interests, setPrompt_interests] = useState<any[]>([])
     const [prompt_finance_states, setPrompt_finance_states] = useState<any[]>([])
     const [prompt_sources, setPrompt_sources] = useState<any[]>([])
     const [prompt_want_kids, setPrompt_want_kids] = useState<any[]>([])
@@ -50,11 +47,6 @@ const UserMain:FC<IUser> = (props) => {
 
 
 
-
-    useEffect(() => {
-        console.log(props)
-    }, [props])
-
     useEffect(() => {
         if(token) {
             service.getAllPrompts(token).then(res => {
@@ -62,7 +54,7 @@ const UserMain:FC<IUser> = (props) => {
                 setPrompt_careers(res?.prompt_careers)
                 setPrompt_finance_states(res?.prompt_finance_states)
                 setPrompt_sources(res?.prompt_sources)
-                setPrompt_interests(res?.prompt_interests)
+
                 setPrompt_want_kids(res?.prompt_want_kids)
                 setPrompt_relationships(res?.prompt_relationships)
             })

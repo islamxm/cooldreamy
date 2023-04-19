@@ -22,7 +22,7 @@ interface IUserCard extends IUser {
 
 const UserCard:FC<IUserCard> = ({
     children,
-    avatar_url_big_thumbnail
+    avatar_url
 }) => {
     const {token} = useAppSelector(s => s)
 
@@ -48,7 +48,7 @@ const UserCard:FC<IUserCard> = ({
                         <div className={styles.img}>
                             <Image 
                                 loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                                src={avatar_url_big_thumbnail ? avatar_url_big_thumbnail : placeholder}
+                                src={avatar_url ? avatar_url : placeholder}
                                 width={275}
                                 height={285}
                                 unoptimized
