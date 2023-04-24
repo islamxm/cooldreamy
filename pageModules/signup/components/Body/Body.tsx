@@ -21,6 +21,8 @@ import Step5 from '../../steps/Step5/Step5';
 import Step6 from '../../steps/Step6/Step6';
 import Step7 from '../../steps/Step7/Step7';
 import Step8 from '../../steps/Step8/Step8';
+import Step9 from '../../steps/Step9/Step9';
+import Step10 from '../../steps/Step10/Step10';
 import { IUser } from '@/models/IUser';
 import notify from '@/helpers/notify';
 
@@ -34,7 +36,7 @@ const Body:FC = () => {
 
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(9)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -44,7 +46,8 @@ const Body:FC = () => {
     const [city, setCity] = useState('')
     const [dob, setDob] = useState('')
     const [sex, setSex] = useState<'male' | 'female'>('male')
-
+    const [avatar, setAvatar] = useState<File | null | undefined>(null)
+    const [about, setAbout] = useState('')
     const [birthday, setBirthday] = useState<any>('')
 
 
@@ -125,6 +128,10 @@ const Body:FC = () => {
                 return <Step7 list={prompt_relationships} selectedList={selectedRl} setSelectedList={setSelectedRl}/>
             case 7:
                 return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
+            case 8:
+                return <Step9 onSave={(file) => setAvatar(file)}/>
+            case 9:
+                return <Step10 about={about} setAbout={setAbout}/>
             default:
                 return null; 
                 
@@ -161,6 +168,8 @@ const Body:FC = () => {
         
     // }
 
+    
+
 
     const stepChange = () => {
         if(currentStep === 0) {
@@ -193,10 +202,25 @@ const Body:FC = () => {
                 }
             }).finally(() => setLoad(false))
         }
-        if(currentStep > 0 && currentStep < 7) {
+        if(currentStep > 0 && currentStep < 9 && currentStep !== 8) {
             setCurrentStep(s => s + 1)
         }
-        if(currentStep === 7) {
+        if(currentStep === 8) {
+            if(avatar && token) {
+                console.log('avatar', avatar)
+                // setLoad(true)
+                // const data = new FormData()
+                // data.append('category_id', '1')
+                // data.append('image', avatar)
+
+                // service.addProfileImage(data, token).then(res => {
+                //     console.log(res)
+                // }).finally(() => {
+                //     setLoad(false)
+                // })
+            }
+        }
+        if(currentStep === 9) {
             setLoad(true)
             const updateBody: IUser = {
                 prompt_career_id: selectedCareers,
@@ -205,6 +229,7 @@ const Body:FC = () => {
                 prompt_target_id: selectedTargets,
                 prompt_want_kids_id: selectedKids,
                 prompt_relationship_id: selectedRl,
+                about_self: about
             }
             if(token) {
                 service.updateMyProfile(updateBody, token).then(res => {
@@ -246,7 +271,7 @@ const Body:FC = () => {
                                 <div className={styles.panel}>
                                     <div className={styles.head}>
                                         <StepLine
-                                            total={8}
+                                            total={10}
                                             currentIndex={currentStep}
                                             />
                                     </div>
@@ -264,7 +289,7 @@ const Body:FC = () => {
                                                         //disabled={nextBtn}
                                                         onClick={stepChange}
                                                         disabled={!(email && name && password && sex && birthday)}
-                                                        text={currentStep === 7 ? 'Завершить' : 'Дальше'}
+                                                        text={currentStep === 9 ? 'Завершить' : 'Дальше'}
                                                         />
                                                 </div>
                                             </Col>

@@ -1,16 +1,12 @@
 import styles from './UserImages.module.scss';
 import UserImageItem from '../UserImageItem/UserImageItem';
 import {BsCamera} from 'react-icons/bs';
-import {motion} from 'framer-motion';
-import img from '@/public/assets/images/my-img.png';
-import {FC, useCallback, useEffect, useState, useRef} from 'react';
+import {FC, useEffect, useState, useRef} from 'react';
 import ImageCropModal from '../../modals/ImageCropModal/ImageCropModal';
+import { createFile } from '@/helpers/cropImage';
+import ApiService from '@/service/apiService';
 
-const list = [
-    {image: img},
-    {image: img},
-    {image: img},
-]
+
 
 
 const UserImages:FC<{
@@ -18,7 +14,6 @@ const UserImages:FC<{
 }> = ({
     profile_photo
 }) => {
-
     const [imageCropModal, setImageCropModal] = useState(false)
     const ref = useRef<HTMLInputElement>(null)
     const [uploadedFile, setUploadedFile] = useState<File | null>(null)
@@ -44,7 +39,19 @@ const UserImages:FC<{
         }
     }, [uploadedFile])
 
- 
+    
+
+    const onUpload = (image: any) => {
+        console.log(image)
+
+        if(image) {
+            const data = new FormData()
+            createFile(image).then(res => {
+                data.append('category_id', '2')
+                data.append('image', res)
+            })
+        }
+    }
 
 
 
@@ -54,6 +61,7 @@ const UserImages:FC<{
                 uploadedFile={uploadedFile}
                 open={imageCropModal}
                 onClose={closeCropModal}
+                onSave={onUpload}
                 />
             <div
                 className={styles.add}>

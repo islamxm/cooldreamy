@@ -15,14 +15,16 @@ import { updateUserData } from '@/store/actions';
 const service = new ApiService()
 
 interface cropModalPropsType extends modalPropsType {
-    uploadedFile: File | null
+    uploadedFile: File | null,
+    onSave?: (file?: File | null, id?: number) => any
 }
 
 
 const ImageCropModal:FC<cropModalPropsType> = ({
     open,
     onClose,
-    uploadedFile
+    uploadedFile,
+    onSave
 }) => {
     const dispatch = useAppDispatch()
     const {token} = useAppSelector(s => s);
@@ -78,33 +80,33 @@ const ImageCropModal:FC<cropModalPropsType> = ({
 
     // !! upload test
 
-    const onSave = () => {
-  
-        if(token && croppedImage) {
-            setLoad(true)
-            const data = new FormData()
-            createFile(croppedImage).then(res => {
-                data.append('category_id', '5')
-                data.append('image', res)
+    // const onSave = () => {
 
-                service.addProfileImage(data, token).then(res => {
-                    // console.log(res)
-                    if(res?.id) {
-                        service.getMyProfile(token).then(userData => {
-                            if(userData) {
-                                dispatch(updateUserData(userData))
-                            }
-                        })
-                        notify('Фотография добавлена', 'SUCCESS')
-                        onCancel()
-                    }
-                }).finally(() => {
-                    setLoad(false)
+    //     if(token && croppedImage) {
+    //         setLoad(true)
+    //         const data = new FormData()
+    //         createFile(croppedImage).then(res => {
+    //             data.append('category_id', '5')
+    //             data.append('image', res)
+
+    //             service.addProfileImage(data, token).then(res => {
+    //                 // console.log(res)
+    //                 if(res?.id) {
+    //                     service.getMyProfile(token).then(userData => {
+    //                         if(userData) {
+    //                             dispatch(updateUserData(userData))
+    //                         }
+    //                     })
+    //                     notify('Фотография добавлена', 'SUCCESS')
+    //                     onCancel()
+    //                 }
+    //             }).finally(() => {
+    //                 setLoad(false)
                     
-                })
-            })
-        }
-    }
+    //             })
+    //         })
+    //     }
+    // }
    
 
 
@@ -157,7 +159,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                     <Col span={12}>
                         <Button
                             load={load}
-                            onClick={croppedImage ? onSave : showCroppedImage}
+                            onClick={croppedImage && onSave ? onSave(croppedImage) : showCroppedImage}
                             fill
                             text={croppedImage ? 'Загрузить' : 'Сохранить'}
                             style={{padding: '8px 10px', fontSize: 18}}
