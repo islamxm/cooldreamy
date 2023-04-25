@@ -9,7 +9,7 @@ import UserImageItem from '@/pageModules/profile/components/UserImageItem/UserIm
 
 
 const UserImageSlider:FC<IUser> = ({
-    profile_photo
+    profile_photos
 }) => {
 
 
@@ -27,7 +27,7 @@ const UserImageSlider:FC<IUser> = ({
                 ))
             } */}
             {
-                profile_photo?.map((item, index) => (
+                profile_photos?.map((item, index) => (
                     <div className={styles.item} key={index}>
                         <UserImageItem
                             image={item?.thumbnail_url}
