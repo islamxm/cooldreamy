@@ -3,20 +3,16 @@ import styles from './Step9.module.scss';
 import {motion} from 'framer-motion';
 import img from '@/public/assets/images/signup-avatar-placeholder.svg';
 import Image from 'next/image';
-import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ImageCropModal from '@/pageModules/profile/modals/ImageCropModal/ImageCropModal';
 
 
-
-const service = new ApiService()
-
 interface I {
-    onSave: (file?: File | null, id?: number) => any
+    nextStep: (...args: any[]) => any
 }
 
 const Step9:FC<I> = ({
-    onSave
+    nextStep
 }) => {
     const {token} = useAppSelector(s => s)
     const [file, setFile] = useState<File | null>(null)
@@ -36,6 +32,9 @@ const Step9:FC<I> = ({
             setFile(e.target.files[0])
         }
     }
+
+
+    
 
 
 
@@ -61,7 +60,7 @@ const Step9:FC<I> = ({
                     setFile(null)
                 }}
                 uploadedFile={file}
-                onSave={onSave}
+                onAfterUpload={nextStep}
                 />
             
             <div className={styles.head}>

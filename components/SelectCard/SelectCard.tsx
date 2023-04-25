@@ -11,7 +11,8 @@ const SelectCard:FC<selectCardPropsTypes> = ({
     label,
     isSelect,
     onSelect,
-    value
+    value,
+    disabled
 }) => {
     return (
         <motion.div 
@@ -20,7 +21,7 @@ const SelectCard:FC<selectCardPropsTypes> = ({
                 scale: 0.9,
             }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}  
-            className={`${styles.card} ${isSelect ? styles.active : ''}`}>
+            className={`${styles.card} ${isSelect ? styles.active : ''} ${disabled ? styles.disabled : ''}`}>
             
             {
                 isSelect && <motion.div className={styles.ind}></motion.div>

@@ -12,7 +12,8 @@ const MyCard:FC<IUser> = ({
     name,
     state,
     credits,
-    avatar_url_thumbnail
+    avatar_url_thumbnail,
+    age
 }) => {
     
     return (
@@ -27,7 +28,7 @@ const MyCard:FC<IUser> = ({
                 <div className={styles.body}>
                     <UserTitle
                         username={name}
-                        age='26'
+                        age={age ? age.toString() : ''}
                         style={{fontSize: 18}}
                         />
                     {

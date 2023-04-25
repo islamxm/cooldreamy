@@ -5,3 +5,4 @@ export interface IEditModal extends ModalFuncProps {
     head?: string,
     editItemType: editItemT | ''
 }
+

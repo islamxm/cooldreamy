@@ -168,6 +168,9 @@ const SearchBody = () => {
     }
 
 
+    useEffect(() => {
+        console.log(list)
+    }, [list])
 
 
 

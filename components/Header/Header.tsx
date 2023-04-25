@@ -11,6 +11,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { Cookies } from 'typescript-cookie';
 import { updateToken, updateUserId, updateSocket } from '@/store/actions';
 import Router from 'next/router';
+import PromptModal from '@/popups/PromptModal/PromptModal';
 
 
 
@@ -19,6 +20,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
     const {token, socketChannel} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
 
+    const [logoutModal, setLogoutModal] = useState(false)
 
 
     const onLogout = () => {
@@ -32,6 +34,8 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
         Cookies.remove('cooldate-web-token')
         
         Router.push('/')
+
+        setLogoutModal(false)
         
     }
 
@@ -47,6 +51,15 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                 open={loginModal}
                 onCancel={() => setLoginModal(false)}
                 />
+
+            <PromptModal
+                text='Вы уверены что хотите выйти?'
+                open={logoutModal}
+                onCancel={() => setLogoutModal(false)}
+                onAccept={onLogout}
+                onReject={() => setLogoutModal(false)}
+                />
+
             <Container>
                 <motion.div 
                     // сделать анимацию поочередного появления opacity: 0 => 1
@@ -68,7 +81,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                 </div>
                             ) : (
                                 <div className={styles.auth}>
-                                    <span onClick={onLogout} className={styles.item}>ВЫХОД</span>
+                                    <span onClick={() => setLogoutModal(true)} className={styles.item}>ВЫХОД</span>
                                 </div>
                             )
                         }

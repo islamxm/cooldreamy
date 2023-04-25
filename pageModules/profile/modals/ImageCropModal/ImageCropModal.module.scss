@@ -7,6 +7,18 @@
         font-size: 18px;
         line-height: 140%;
     }
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: -10px;
+        margin-right: -10px;
+        margin-top: 20px;
+        .item {
+            margin: 0 10px;
+            margin-bottom: 20px;
+        }
+    }
 
     .main {
         height: 600px;
@@ -17,6 +29,8 @@
         margin-bottom: 22px;
         position: relative; 
         width: 600px;
+
+        
         
 
         .cropped_img {

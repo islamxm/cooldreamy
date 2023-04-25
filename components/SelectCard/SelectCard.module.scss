@@ -51,6 +51,10 @@
 
 .card.active {
     border-color: var(--violet);
+}
 
-
+.card.disabled {
+    pointer-events: none;
+    touch-action: none;
+    opacity: .5;
 }

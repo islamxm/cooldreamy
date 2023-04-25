@@ -40,7 +40,7 @@ const UserInfo:FC<IUser> = (props) => {
         top_expire,
         type,
         updated_at,
-        profile_photo
+        profile_photos
     } = props
 
     return (
@@ -55,7 +55,7 @@ const UserInfo:FC<IUser> = (props) => {
                 </Col>
                 <Col span={24}>
                     <UserImages
-                        profile_photo={profile_photo}
+                        profile_photos={profile_photos}
                         />
                 </Col>
                 <Col span={24}>

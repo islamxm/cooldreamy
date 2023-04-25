@@ -16,9 +16,14 @@ const MainWrapper = ({
     children
 }: {children?: React.ReactNode}) => {
 	const dispatch = useAppDispatch()
-    const {token, userId, socketChannel} = useAppSelector(s => s);
+    const {token, userId, socketChannel, userData} = useAppSelector(s => s);
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
+
+
+	useEffect(() => {
+		console.log(userData)
+	}, [userData])
 
 
 	useEffect(() => {

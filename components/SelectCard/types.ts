@@ -5,5 +5,6 @@ export type selectCardPropsTypes = {
     label: string,
     onSelect: (e: string) => void,
     isSelect: boolean,
-    value: string
+    value: string,
+    disabled?: boolean
 }

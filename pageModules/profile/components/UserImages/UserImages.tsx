@@ -10,9 +10,9 @@ import ApiService from '@/service/apiService';
 
 
 const UserImages:FC<{
-    profile_photo?: any[]
+    profile_photos?: any[]
 }> = ({
-    profile_photo
+    profile_photos
 }) => {
     const [imageCropModal, setImageCropModal] = useState(false)
     const ref = useRef<HTMLInputElement>(null)
@@ -72,7 +72,7 @@ const UserImages:FC<{
                 </label>
             </div>
             {
-                profile_photo?.map((item, index) => (
+                profile_photos?.map((item, index) => (
                     <div className={styles.item} key={index}>
                         <UserImageItem
                             image={item?.thumbnail_url}

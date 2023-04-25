@@ -102,9 +102,9 @@ const GirlCard:FC<girlCardType> = ({
                 
                 <Link href={`/users/${id}`} className={styles.img}>
                     <Image
-                        // loader={() => placeholder}
-                        placeholder={placeholder ? 'empty' : 'blur'} 
-                        src={placeholder} 
+                        loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                        placeholder={!avatar_url_thumbnail ? 'blur' : 'empty'} 
+                        src={avatar_url_thumbnail ? avatar_url_thumbnail : placeholder} 
                         width={300}
                         height={300}
                         alt=""/>

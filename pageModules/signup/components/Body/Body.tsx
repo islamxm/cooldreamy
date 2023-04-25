@@ -36,7 +36,7 @@ const Body:FC = () => {
 
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(9)
+    const [currentStep, setCurrentStep] = useState(0)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -110,7 +110,7 @@ const Body:FC = () => {
                         setName={setName}
                         setSex={setSex}
                         setBirthday={setBirthday}
-
+                        
                         errors={errors}
                         />
                 )
@@ -129,7 +129,7 @@ const Body:FC = () => {
             case 7:
                 return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
             case 8:
-                return <Step9 onSave={(file) => setAvatar(file)}/>
+                return <Step9 nextStep={() => setCurrentStep(s => s + 1)}/>
             case 9:
                 return <Step10 about={about} setAbout={setAbout}/>
             default:
@@ -143,36 +143,18 @@ const Body:FC = () => {
     }, [currentStep])
 
 
-    // const onRegister = () => {
-    //     const body = {
-    //         email,
-    //         name,
-    //         password,
-    //         gender: sex
-    //     }
-    //     service.register(body).then(res => {
-    //         // console.log(res)
-    //         if(res?.token && res?.id) {
-    //             dispatch(updateToken(res?.token))
-    //             dispatch(updateUserId(res?.id))
-    //             Cookies.set('cooldate-web-user-id', res?.id)
-    //             Cookies.set('cooldate-web-token', res?.token)
-
-    //             Router.push('/search')
-    //         }
-    //     })
-    // }
 
 
-    // const firstStepConfirm = () => {
-        
-    // }
+
+
+  
 
     
 
 
     const stepChange = () => {
         if(currentStep === 0) {
+            
             setLoad(true)
             const body = {
                 email,
@@ -206,19 +188,7 @@ const Body:FC = () => {
             setCurrentStep(s => s + 1)
         }
         if(currentStep === 8) {
-            if(avatar && token) {
-                console.log('avatar', avatar)
-                // setLoad(true)
-                // const data = new FormData()
-                // data.append('category_id', '1')
-                // data.append('image', avatar)
-
-                // service.addProfileImage(data, token).then(res => {
-                //     console.log(res)
-                // }).finally(() => {
-                //     setLoad(false)
-                // })
-            }
+            
         }
         if(currentStep === 9) {
             setLoad(true)
@@ -247,13 +217,12 @@ const Body:FC = () => {
 
     useEffect(() => {
         if(currentStep === 1 && token && birthday) {
-            console.log(birthday)
             service.updateMyProfile({birthday: birthday}, token).then(res => {
                 console.log(res)
                 console.log('birthday',res?.birthday)
             })
         }
-    }, [currentStep, token, birthday])
+    }, [currentStep, token, birthday, about])
 
 
     return (
@@ -307,3 +276,4 @@ const Body:FC = () => {
 }
 
 export default Body;
+

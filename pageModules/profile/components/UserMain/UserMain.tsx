@@ -9,10 +9,10 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import { updateUserData } from '@/store/actions';
 import EditModalPl from '../../modals/EditModals/EditModalPl/EditModalPl';
 import EditModalText from '../../modals/EditModals/EditModalText/EditModalText';
-
+import EditModalRegion from '../../modals/EditModals/EditModalRegion/EditModalRegion';
 const service = new ApiService()
 
-export type editItemT = 'career' | 'finance' | 'rl' | 'target' | 'kids' | 'name' | 'email' | 'about'
+export type editItemT = 'career' | 'finance' | 'rl' | 'target' | 'kids' | 'name' | 'email' | 'about' | 'country'
 
 
 const UserMain:FC<IUser> = (props) => {
@@ -20,6 +20,8 @@ const UserMain:FC<IUser> = (props) => {
         about_self,
         name,
         email,
+        country,
+        state,
 
         prompt_career_id,
         prompt_relationship_id,
@@ -35,6 +37,7 @@ const UserMain:FC<IUser> = (props) => {
 
     const [promptModal, setPromptModal] = useState(false)
     const [textModal, setTextModal] = useState(false)
+    const [regionModal, setRegionModal] = useState(false)
 
     const [modalHead, setModalHead] = useState('')
 
@@ -67,6 +70,7 @@ const UserMain:FC<IUser> = (props) => {
         setModalHead('')
         setPromptModal(false)
         setTextModal(false)
+        setRegionModal(false)
 
     }
 
@@ -88,6 +92,8 @@ const UserMain:FC<IUser> = (props) => {
                 return 'Семейное положение'
             case 'target':
                 return 'Цели знакомства'
+            case 'country':
+                return 'Страна/Регион'
             default:
                 return 'Редактировать'
         }
@@ -141,12 +147,15 @@ const UserMain:FC<IUser> = (props) => {
 
     }
 
-    const openModal = (modalType: 'prompt' | 'text') => {
+    const openModal = (modalType: 'prompt' | 'text' | 'region') => {
         if(modalType === 'text') {
             setTextModal(true)
         }
         if(modalType === 'prompt'){
             setPromptModal(true)
+        }
+        if(modalType === 'region') {
+            setRegionModal(true)
         }
     }
 
@@ -171,6 +180,15 @@ const UserMain:FC<IUser> = (props) => {
                 editItemType={editItemType}
                 open={textModal}
                 onCancel={closeEditModal}
+                />
+
+            <EditModalRegion
+                head={modalHead}
+                editItemType={editItemType}
+                open={regionModal}
+                onCancel={closeEditModal}
+                state={state}
+                country={country}
                 />
 
             <Row gutter={[10,10]}>
@@ -225,6 +243,24 @@ const UserMain:FC<IUser> = (props) => {
                         </div>
                         <div className={styles.text} style={{color: about_self ? 'var(--text)' : 'var(--red)'}}>
                             {about_self ? about_self : 'Не указано'}
+                        </div>
+                    </div>
+                </Col>
+                <Col span={24}>
+                    <div className={styles.part}>
+                        <div className={styles.label}>
+                            Страна/Регион
+                            <button
+                                onClick={() => {
+                                    setModalProps('country')
+                                    openModal('region')
+                                }}
+                                >
+                                <RiPencilLine/>
+                            </button>
+                        </div>
+                        <div className={styles.text}>
+                            {state ? `${state}/${country}` : 'Не указано'}
                         </div>
                     </div>
                 </Col>
