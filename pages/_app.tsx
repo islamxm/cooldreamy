@@ -27,14 +27,6 @@ function App({ Component, pageProps }: AppProps) {
 	const [wc, setWc] = useState(true)
 
 
-	// useEffect(() => {
-	// 	const tm = setTimeout(() => {
-	// 		setWc(false)
-	// 	}, 4000)
-	// 	return () => {
-	// 		clearTimeout(tm)
-	// 	}
-	// }, [])
 
 	useEffect(() => {
 		setWc(false)

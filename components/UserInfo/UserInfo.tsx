@@ -10,7 +10,7 @@ import { IUser } from '@/models/IUser';
 
 
 const UserInfo:FC<IUser> = (props) => {
-    const {profile_photo} = props
+    const {profile_photos} = props
 
     return (
         <div className={styles.wrapper}>
@@ -19,7 +19,7 @@ const UserInfo:FC<IUser> = (props) => {
                     <UserInfoAction {...props}/>
                 </Col>
                 {
-                    profile_photo && profile_photo?.length > 0 ? (
+                    profile_photos && profile_photos?.length > 0 ? (
                         <Col span={24}>
                             <UserImageSlider {...props}/>
                         </Col> 
