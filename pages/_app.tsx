@@ -38,7 +38,10 @@ function App({ Component, pageProps }: AppProps) {
 			setWc(true)
 		}
 	}
-	const routeChangeEnd = () => setWc(false)
+	const routeChangeEnd = (url: any) => {
+		console.log(url)
+		setWc(false)
+	}
 
 
 	useEffect(() => {

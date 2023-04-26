@@ -13,6 +13,7 @@ import Router from 'next/router';
 import { useRouter } from 'next/router';
 import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
+import notify from '@/helpers/notify';
 
 const service = new ApiService()
 
@@ -48,7 +49,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             email,
             password
         }).then(res => {
-
+            console.log(res)
             if(res?.token) {
                 Cookies.set('cooldate-web-token', res?.token)
                 Cookies.set('cooldate-web-user-id', res?.id)
@@ -56,13 +57,16 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 dispatch(updateUserId(res?.id))
                 
                 Router.push('/search')
-                
+                onClose()
 
                 setErrors({
                     email: '',
                     password: ''
                 })
-            } 
+                
+            } else {
+                notify('Произошла ошибка', 'ERROR')
+            }
             if(res?.error) {
                 setErrors(s => {
                     return {
@@ -74,7 +78,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
 
         }).finally(() => {
             setLoad(false)
-            onClose()
+            
         })
     }
 

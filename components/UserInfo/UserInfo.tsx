@@ -39,4 +39,5 @@ const UserInfo:FC<IUser> = (props) => {
     )
 }
 
+
 export default UserInfo;
