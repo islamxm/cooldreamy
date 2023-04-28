@@ -112,7 +112,6 @@ const ChatLayout = () => {
             service.getMailList({
                 page: dialogsPage,
             }, token).then(res => {
-                console.log(res)
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -137,11 +136,12 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
-                    setTotalChatItemCount(res?.chat_messages?.total)
+                    
+                    setTotalChatItemCount(res?.letter_messages?.total)
                     if(chatListPage === 1) {
-                        setChatList(res?.chat_messages?.data)
+                        setChatList(res?.letter_messages?.data)
                     } else {
-                        setChatList(s => [...s, ...res?.chat_messages?.data])
+                        setChatList(s => [...s, ...res?.letter_messages?.data])
                     }
                 }).finally(() => {
                     setLoadMain(false)
@@ -200,8 +200,6 @@ const ChatLayout = () => {
     useEffect(() => {
         if(socketChannel && currentChatId) {
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
-                // console.log(data)
-                
                 setDialogsList(s => {
                     const m = s;
                     const rm = m.splice(m.findIndex((i: any) => i.id === data?.chat_list_item?.chat?.id), 1, data?.chat_list_item?.chat)

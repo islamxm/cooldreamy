@@ -144,7 +144,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                             updateChatListPage={updateChatListPage}
                                             />
                                     ) : (
-                                        activeDialogId && !mockType && !loadMain ? (
+                                        activeDialogId && !mockType ? (
                                             <ChatStart
                                                 onSelect={setMockType} 
                                                 avatar={dialogsList?.find(i => i.id === activeDialogId)?.another_user?.avatar_url_thumbnail}/>
@@ -188,8 +188,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                 
 
                 <div className={styles.action}>
-                    
-                   
                     <ChatAction 
                         getGifts={() => {
                             if(mockType !== 'gift') {

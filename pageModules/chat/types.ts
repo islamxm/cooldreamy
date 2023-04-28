@@ -87,7 +87,6 @@ export type dialogItemType = {
     sender_user_id?: number
     me?: boolean,
     updated_at?: string,
-
     index?: number
 }
 
@@ -101,7 +100,8 @@ export type mailItemType = {
     id?: number,
     is_read_by_recepient?: 1 | 0,
     sender_user_id?: number,
-    updated_at?: string
+    updated_at?: string,
+    sender_user?: chatUserType
 }
 
 
@@ -111,6 +111,7 @@ type chatUserType = {
     avatar_url_thumbnail?: string,
     id?: number,
     name?: string,
+    age?: number
 }
 
 // диалог (чат лист)

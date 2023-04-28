@@ -20,17 +20,19 @@ import { ConfigProvider } from 'antd';
 import ruRu from 'antd/locale/ru_RU';
 import WcLoader from '@/components/WcLoader/WcLoader';
 import { useRouter } from 'next/router';
-
+import 'moment/locale/ru'
+import moment from 'moment';
 
 function App({ Component, pageProps }: AppProps) {
 	const router = useRouter()
 	const [wc, setWc] = useState(true)
 
-
+	
 
 
 
 	useEffect(() => {
+		moment.locale('ru')
 		setWc(false)
 	}, [])
 
