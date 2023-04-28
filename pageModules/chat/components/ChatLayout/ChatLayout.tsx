@@ -22,6 +22,10 @@ const ChatLayout = () => {
 
 
 
+    // ?? лоадер элементов чата
+    const [loadSide, setLoadSide] = useState(false)
+    const [loadMain, setLoadMain] = useState(false)
+
 
 
     // ?? ид текущего чата (опционально)
@@ -49,6 +53,10 @@ const ChatLayout = () => {
                 setCurrentChatId(Number(query?.id))
             }
         }
+
+        if(query?.type === 'mail' || query?.type === 'chat') {
+            setChatType(query?.type)
+        }
     }, [query])
 
 
@@ -57,6 +65,7 @@ const ChatLayout = () => {
     // ** получение диалогов (чат лист)
     const getDialogs = () => {
         if(token) {
+            setLoadSide(true)
             service.getChatList({
                 page: dialogsPage,
             }, token).then(res => {
@@ -66,6 +75,8 @@ const ChatLayout = () => {
                 } else {
                     setDialogsList(s => [...s, ...res?.data])
                 }
+            }).finally(() => {
+                setLoadSide(false)
             })
         }
     }
@@ -75,7 +86,7 @@ const ChatLayout = () => {
     const getChat = () => {
         if(token) {
             if(currentChatId && chatListPage) {
-                
+                setLoadMain(true)
                 service.getChat({
                     id: currentChatId,
                     page: chatListPage,
@@ -87,32 +98,32 @@ const ChatLayout = () => {
                     } else {
                         setChatList(s => [...s, ...res?.chat_messages?.data])
                     }
+                }).finally(() => {
+                    setLoadMain(false)
                 })
-    
             }
         }
-        
     }
 
 
     const getMailDialogs = () => {
         if(token) {
+            setLoadSide(true)
             service.getMailList({
                 page: dialogsPage,
             }, token).then(res => {
+                console.log(res)
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
                 } else {
                     setDialogsList(s => [...s, ...res?.data])
                 }
+            }).finally(() => {
+                setLoadSide(false)
             })
         }
     }
-
-    useEffect(() => {
-        console.log(dialogsList?.map(i => i.id))
-    }, [dialogsList])
 
 
 
@@ -120,7 +131,7 @@ const ChatLayout = () => {
     const getMailChat = () => {
         if(token) {
             if(currentChatId && chatListPage) {
-                
+                setLoadMain(true)
                 service.getMail({
                     id: currentChatId,
                     page: chatListPage,
@@ -132,17 +143,15 @@ const ChatLayout = () => {
                     } else {
                         setChatList(s => [...s, ...res?.chat_messages?.data])
                     }
+                }).finally(() => {
+                    setLoadMain(false)
                 })
     
             }
         }
     }
 
-    useEffect(() => {
-        if(query?.type === 'mail' || query?.type === 'chat') {
-            setChatType(query?.type)
-        }
-    }, [query])
+    
 
 
 
@@ -158,11 +167,9 @@ const ChatLayout = () => {
     // ?? обновление списка диалогов (чат лист)
     useEffect(() => {
         if(chatType === 'chat') {
-            console.log('chat')
             getDialogs && getDialogs()
         }
         if(chatType === 'mail') {
-            console.log('mail')
             getMailDialogs && getMailDialogs()
         }
     }, [dialogsPage, token, chatType])
@@ -241,6 +248,8 @@ const ChatLayout = () => {
                             // !!тестовый проп
                             updateChat={updateChat}
                             ChatType={chatType}
+                            loadMain={loadMain}
+                            loadSide={loadSide}
                             />
                     </div>
                 </Col>

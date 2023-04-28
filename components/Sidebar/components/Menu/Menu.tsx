@@ -12,13 +12,15 @@ const menuList:menuItemType[] = [
     {
         label: 'Поиск',
         link: '/search',
+        root: '/search',
         icon: <FiSearch/>,
         badge: 0,
         onClick: () => {},
     },
     {
         label: 'Мои переписки',
-        link: '/chat',
+        link: '/chat?type=chat',
+        root: '/chat',
         icon: <IoChatbubblesOutline/>,
         badge: 0,
         onClick: () => {},
@@ -26,6 +28,7 @@ const menuList:menuItemType[] = [
     {
         label: 'Знакомства',
         link: '/feed',
+        root: '/feed',
         icon: <FiUsers/>,
         badge: 0,
         onClick: () => {},
@@ -66,7 +69,7 @@ const Menu = () => {
                     <div className={styles.item} key={index}>
                         <MenuItem
                             {...item}
-                            isActive={pathname === item.link}
+                            isActive={item?.root && pathname?.includes(item.root) ? true : false}
                             />
                     </div>
                 ))

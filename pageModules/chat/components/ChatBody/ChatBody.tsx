@@ -15,19 +15,22 @@ import ChatStart from '../ChatStart/ChatStart';
 import ChatMock from '../ChatMock/ChatMock';
 import Gifts from '../Gifts/Gifts';
 import Mail from '../Mail/Mail';
-
+import Loader from '@/components/Loader/Loader';
 
 const service = new ApiService()
 
 
 
-type testType = {
+type ChatBodyComponentType = {
     ChatType?: 'mail' | 'chat'
-    updateChat: (...args: any[]) => any
+    updateChat: (...args: any[]) => any,
+
+    loadSide?: boolean,
+    loadMain?: boolean
 }
 
 
-const ChatBody:FC<IDialogs & IChat & testType> = ({
+const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     // для диалогов
     dialogsList,
     activeDialogId,
@@ -43,7 +46,9 @@ const ChatBody:FC<IDialogs & IChat & testType> = ({
 
     // !! тестовый проп
     updateChat,
-    ChatType
+    ChatType,
+    loadSide,
+    loadMain
 }) => {
     
     const {token} = useAppSelector(s => s)
@@ -102,42 +107,49 @@ const ChatBody:FC<IDialogs & IChat & testType> = ({
     }, [token, activeDialogId])
     
 
-    useEffect(() => {
-        console.log(chatList)
-    }, [chatList])
+
 
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.sidebar}>
-
-                <ChatSide
-                    updateDialogsPage={updateDialogsPage}
-                    dialogsList={dialogsList}
-                    activeDialogId={activeDialogId}
-                    totalDialogItemCount={totalDialogItemCount}
-                    /> 
-
+                {
+                    loadSide ? (
+                        <Loader/>
+                    ) : (
+                        <ChatSide
+                            updateDialogsPage={updateDialogsPage}
+                            dialogsList={dialogsList}
+                            activeDialogId={activeDialogId}
+                            totalDialogItemCount={totalDialogItemCount}
+                            /> 
+                    )
+                }
             </div>         
             <div className={styles.main} >
                 {
                     ChatType === 'chat' ? (
+                        
                         <div className={styles.body} style={{height: `calc(100vh - 165px - 75px - 50px - ${pb}px)`}}>
                             {
-                                chatList && chatList?.length > 0 ? (
-                                    <Dialog
-                                        totalChatItemCount={totalChatItemCount}
-                                        height={`calc(100vh - 165px - 75px - 50px - ${pb}px)`}
-                                        chatList={chatList}
-                                        id={id || activeDialogId}
-                                        updateChatListPage={updateChatListPage}
-                                        />
+                                loadMain ? (
+                                    <Loader/>
                                 ) : (
-                                    activeDialogId && !mockType ? (
-                                        <ChatStart
-                                            onSelect={setMockType} 
-                                            avatar={dialogsList?.find(i => i.id === activeDialogId)?.another_user?.avatar_url_thumbnail}/>
-                                    ) : null
+                                    chatList && chatList?.length > 0 ? (
+                                        <Dialog
+                                            totalChatItemCount={totalChatItemCount}
+                                            height={`calc(100vh - 165px - 75px - 50px - ${pb}px)`}
+                                            chatList={chatList}
+                                            id={id || activeDialogId}
+                                            updateChatListPage={updateChatListPage}
+                                            />
+                                    ) : (
+                                        activeDialogId && !mockType && !loadMain ? (
+                                            <ChatStart
+                                                onSelect={setMockType} 
+                                                avatar={dialogsList?.find(i => i.id === activeDialogId)?.another_user?.avatar_url_thumbnail}/>
+                                        ) : null
+                                    )
                                 )
                             }
                             {
@@ -150,21 +162,25 @@ const ChatBody:FC<IDialogs & IChat & testType> = ({
                     ChatType === 'mail' ? (
                         <div className={styles.mail} style={{height: `calc(100vh - 165px - 75px - 50px - ${pb}px)`}}>
                             {
-                                chatList && chatList?.length > 0 ? (
-                                    // <Dialog
-                                    //     totalChatItemCount={totalChatItemCount}
-                                    //     height={`calc(100vh - 165px - 75px - 50px - ${pb}px)`}
-                                    //     chatList={chatList}
-                                    //     id={id || activeDialogId}
-                                    //     updateChatListPage={updateChatListPage}
-                                    //     />
-                                    <Mail
-                                        height={`calc(100vh - 165px - 75px - 50px - ${pb}px)`}
-                                        chatList={chatList}
-                                        id={id || activeDialogId}
-                                        updateChatListPage={updateChatListPage}
-                                        />
-                                ) : null
+                                loadMain ? (
+                                    <Loader/>
+                                ) : (
+                                    chatList && chatList?.length > 0 ? (
+                                        // <Dialog
+                                        //     totalChatItemCount={totalChatItemCount}
+                                        //     height={`calc(100vh - 165px - 75px - 50px - ${pb}px)`}
+                                        //     chatList={chatList}
+                                        //     id={id || activeDialogId}
+                                        //     updateChatListPage={updateChatListPage}
+                                        //     />
+                                        <Mail
+                                            height={`calc(100vh - 165px - 75px - 50px - ${pb}px)`}
+                                            chatList={chatList}
+                                            id={id || activeDialogId}
+                                            updateChatListPage={updateChatListPage}
+                                            />
+                                    ) : null
+                                )
                             }
                         </div>
                     ) : null
@@ -172,8 +188,8 @@ const ChatBody:FC<IDialogs & IChat & testType> = ({
                 
 
                 <div className={styles.action}>
-
                     
+                   
                     <ChatAction 
                         getGifts={() => {
                             if(mockType !== 'gift') {

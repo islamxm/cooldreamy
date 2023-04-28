@@ -186,7 +186,7 @@ const Main = () => {
                     user_id: currentCard
                 }, token).then(res => {
                     if(res?.chat_id) {
-                        Router.push(`/chat/${res?.chat_id}`)
+                        Router.push(`/chat/${res?.chat_id}?type=chat`)
                     }
                 })
 

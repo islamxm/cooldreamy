@@ -31,91 +31,124 @@ const ChatItem = ({
     
     const {avatar_url, avatar_url_thumbnail, name} = another_user;
 
-    useEffect(() => {
-        console.log(type)
-    }, [type])
-
-    return (
-        <Link href={`/chat/${id}?type=${type}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
-            {/* <div className={styles.avatar}>
-                <Image
-                    src={avatarImg}
-                    width={63}
-                    height={63}
-                    alt="avatar"
-                    />
-                
-            </div>  */}
-            <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                zIndex: 10,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                color: 'red',
-                fontSize: 25,
-                lineHeight: '25px',
-                fontWeight: 700,
-                backgroundColor: 'rgba(255,255,255,.5)',
-                border: '1px solid red',
-                width: '100%',
-                height: '100%'
-            }}>{id}</div>
-            <div className={styles.avatar}>
-                <Avatar
-                    size={63}
-                    verified={is_confirmed_user == 1}
-                    image={avatar_url_thumbnail}    
-                    />
-            </div>
-            <div className={styles.body}>
-                <div className={styles.main}>
-                    <Row gutter={[2,2]}>
-                        <Col span={24}>
-                            <UserTitle 
-                                username={name}
-                                age='26'
-                                textBold
-                                isOnline={false}/>
-                        </Col>
-                        <Col span={24}>
-                            <div className={styles.dialog}>
-                                <LinesEllipsis
-                                    text={last_message?.chat_messageable?.text}
-                                    maxLine={2}
-                                    />
-                                
-                            </div>
-                        </Col>
-                    </Row>
-                </div>    
-                <div className={styles.ex}>
-                    {/* <div className={styles.item}>
-                        {
-                            isFavourite ? (
-                                <AiFillStar/>
-                            ) : (
-                                <AiOutlineStar/>
-                            )
-                        }
-                    </div> */}
-                    {/* <div className={styles.item}>
-                        {
-                            status === 'unread' ? (
-                                <Badge
-                                    value={unreadMesssageCount}
-                                    />
-                            ) : (
-                                <BiCheckDouble/>
-                            )
-                        }
-                    </div> */}
+    if(type === 'chat') {
+        return (
+            <Link href={`/chat/${id}?type=${type}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
+                <div className={styles.avatar}>
+                    <Avatar
+                        size={63}
+                        verified={is_confirmed_user == 1}
+                        image={avatar_url_thumbnail}    
+                        />
                 </div>
-            </div> 
-        </Link>
-    )
+                <div className={styles.body}>
+                    <div className={styles.main}>
+                        <Row gutter={[2,2]}>
+                            <Col span={24}>
+                                <UserTitle 
+                                    username={name}
+                                    age='26'
+                                    textBold
+                                    isOnline={false}/>
+                            </Col>
+                            <Col span={24}>
+                                <div className={styles.dialog}>
+                                    <LinesEllipsis
+                                        text={last_message?.chat_messageable?.text}
+                                        maxLine={2}
+                                        />
+                                    
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>    
+                    <div className={styles.ex}>
+                        {/* <div className={styles.item}>
+                            {
+                                isFavourite ? (
+                                    <AiFillStar/>
+                                ) : (
+                                    <AiOutlineStar/>
+                                )
+                            }
+                        </div> */}
+                        {/* <div className={styles.item}>
+                            {
+                                status === 'unread' ? (
+                                    <Badge
+                                        value={unreadMesssageCount}
+                                        />
+                                ) : (
+                                    <BiCheckDouble/>
+                                )
+                            }
+                        </div> */}
+                    </div>
+                </div> 
+            </Link>
+        )
+    }
+
+    if(type === 'mail') {
+        return (
+            <Link href={`/chat/${id}?type=${type}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
+                <div className={styles.avatar}>
+                    <Avatar
+                        size={63}
+                        verified={is_confirmed_user == 1}
+                        image={avatar_url_thumbnail}    
+                        />
+                </div>
+                <div className={styles.body}>
+                    <div className={styles.main}>
+                        <Row gutter={[2,2]}>
+                            <Col span={24}>
+                                <UserTitle 
+                                    username={name}
+                                    age='26'
+                                    textBold
+                                    isOnline={false}/>
+                            </Col>
+                            <Col span={24}>
+                                <div className={styles.dialog}>
+                                    <LinesEllipsis
+                                        text={last_message?.letter_messageable?.text}
+                                        maxLine={2}
+                                        />
+                                    
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>    
+                    <div className={styles.ex}>
+                        {/* <div className={styles.item}>
+                            {
+                                isFavourite ? (
+                                    <AiFillStar/>
+                                ) : (
+                                    <AiOutlineStar/>
+                                )
+                            }
+                        </div> */}
+                        {/* <div className={styles.item}>
+                            {
+                                status === 'unread' ? (
+                                    <Badge
+                                        value={unreadMesssageCount}
+                                        />
+                                ) : (
+                                    <BiCheckDouble/>
+                                )
+                            }
+                        </div> */}
+                    </div>
+                </div> 
+            </Link>
+        )
+    }
+    return null
+
+    
 }
 
 export default ChatItem;

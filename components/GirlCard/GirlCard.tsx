@@ -49,7 +49,7 @@ const GirlCard:FC<girlCardType> = ({
         if(id && token) {
             service.createChat({user_id: id}, token).then(res => {
                 if(res?.chat_id) {
-                    Router.push(`/chat/${res?.chat_id}`)
+                    Router.push(`/chat/${res?.chat_id}?type=chat`)
                 }
             })
 
@@ -71,7 +71,7 @@ const GirlCard:FC<girlCardType> = ({
                         if(r?.error) {
                             notify('Вы уже подмигнули', 'ERROR')
                         } else {
-                            Router.push(`/chat/${res?.chat_id}`)
+                            Router.push(`/chat/${res?.chat_id}?type=chat`)
                         }
                         
                         // условие

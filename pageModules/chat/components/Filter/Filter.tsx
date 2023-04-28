@@ -73,7 +73,7 @@ const Filter:FC<IChatFilterType> = ({
         <div className={styles.wrapper}>
             <div className={styles.body}>
                 <div className={styles.part}>
-                    <Tabs
+                    {/* <Tabs
                         onChange={() => {}}
                         activeItem={'1'}
                         list={tabsList}
@@ -84,7 +84,7 @@ const Filter:FC<IChatFilterType> = ({
                             paddingTop: 10,
                             paddingBottom: 10
                         }}
-                        />
+                        /> */}
                 </div>
                 <div className={styles.part}>
                     <Tabs

@@ -28,6 +28,8 @@ function App({ Component, pageProps }: AppProps) {
 
 
 
+
+
 	useEffect(() => {
 		setWc(false)
 	}, [])

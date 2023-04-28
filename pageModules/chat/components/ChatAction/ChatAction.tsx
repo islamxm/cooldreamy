@@ -28,7 +28,7 @@ const ChatAction = ({
 }) => {
     const {token} = useAppSelector(s => s)
     const {query} = useRouter()
-    const {id, chat_type} = query || {}
+    const {type} = query
 
     
     const [stickers, setStickers] = useState(false)
@@ -57,45 +57,50 @@ const ChatAction = ({
     const sendMessage = useCallback(() => {
         if(token) {
             if(query?.id && typeof query?.id === 'string') {
-                setLoad(true)
-                service.sendMessage_text({
-                    chat_id: Number(query?.id),
-                    text
-                }, token).then(res => {
-                    updateDialogsList && updateDialogsList((s: any) => {
-                        const m = s;
-                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                        return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                if(type === 'chat') {
+                    setLoad(true)
+                    service.sendMessage_text({
+                        chat_id: Number(query?.id),
+                        text
+                    }, token).then(res => {
+                        updateDialogsList && updateDialogsList((s: any) => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                            return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                        })
+                        
+                        updateChat(res?.chat?.last_message)
+
+                    }).finally(() => {
+                        setLoad(false)
+                        setText('')
                     })
-                    
-                    updateChat(res?.chat?.last_message)
+                }
+                if(type === 'mail') {
+                    setLoad(true)
+                    service.sendMail_text({
+                        letter_id: Number(query?.id),
+                        text
+                    }, token).then(res => {
+                        updateDialogsList && updateDialogsList((s: any) => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                            return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                        })
 
-                }).finally(() => {
-                    setLoad(false)
-                    setText('')
-                })
+                        updateChat(res?.chat?.last_message)
+                    }).finally(() => {
+                        setLoad(false)
+                        setText('')
+                    })
+                }
             }
         }
-       
-    }, [text, query, token])
+    }, [text, query, token, type])
 
 
-    const testSendMail = useCallback(() => {
-        if(token) {
-            if(id) {
-                setLoad(true)
-                service.sendMail_text({
-                    letter_id: Number(id),
-                    text: 'test mail'
-                }, token).then(res => {
-                    console.log(res)
-                }).finally(() => {
-                    setLoad(false)
-                    setText('')
-                })
-            }
-        }
-    }, [text, id, token])
+    
+
 
 
 
@@ -172,7 +177,6 @@ const ChatAction = ({
                     <IconButton
                         disabled={!text}
                         onClick={sendMessage}
-                        // onClick={testSendMail}
                         size={45}
                         icon={<BsArrowUpShort size={40}/>}
                         />

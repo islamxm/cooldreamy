@@ -5,12 +5,14 @@ export type chatItemPropsTypes = {
     id: number,
     is_ignored_by_first_user?: 0 | 1,
     is_ignored_by_second_user?: 0 | 1,
-    last_message?: lastMessageType,
+    last_message?: lastMessageType & lastMailType,
     another_user: chatUserType,
     is_confirmed_user?: 1 | 0
     text?: string,
     active: boolean
 }
+
+
 
 
 
@@ -27,6 +29,22 @@ export type lastMessageType = {
     updated_at?: string,
     chat_messageable?: IMessageable
 }
+
+export type lastMailType = {
+    chat_id?: number,
+    letter_messageable_id?: number,
+    letter_messageable_type?: string,
+    created_at?: string,
+    disabled?: 0 | 1,
+    id?: number,
+    is_read_by_recepient?: 0 | 1,
+    recepient_user_id?: number,
+    sender_user_id?: number,
+    updated_at?: string,
+    letter_messageable?: ILetterable
+}
+
+
 
 
 
