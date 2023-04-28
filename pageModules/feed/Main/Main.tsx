@@ -185,10 +185,16 @@ const Main = () => {
                 service.createChat({
                     user_id: currentCard
                 }, token).then(res => {
-                    // console.log(res)
                     if(res?.chat_id) {
                         Router.push(`/chat/${res?.chat_id}`)
                     }
+                })
+
+                // !! параллельное создание чата писем
+                service.createMail({
+                    user_id: currentCard
+                }, token).then(res => {
+                    console.log(res)
                 })
             }
         }

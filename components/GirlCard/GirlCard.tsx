@@ -41,18 +41,8 @@ const GirlCard:FC<girlCardType> = ({
     winkable
 }) => {
     const {token} = useAppSelector(s => s)
-    
-    useEffect(() => {
-        console.log(winkable)
-    }, [winkable])
 
-    // const goToMail = () => {
-        
-    // }
 
-    // const addToFav = () => {
-
-    // }
 
 
     const createChat = () => {
@@ -62,14 +52,20 @@ const GirlCard:FC<girlCardType> = ({
                     Router.push(`/chat/${res?.chat_id}`)
                 }
             })
+
+            // !! параллельное создание чата писем
+            service.createMail({user_id: id}, token).then(res => {
+                console.log(res)
+            })
         }
     }
+
+    
     
 
     const sendWink = () => {
         if(id && token) {
             service.createChat({user_id: id}, token).then(res => {
-                console.log(res)
                 if(res?.chat_id) {
                     service.sendWink({user_id: id}, token).then(r => {
                         if(r?.error) {

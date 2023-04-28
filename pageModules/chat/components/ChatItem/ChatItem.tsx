@@ -27,13 +27,16 @@ const ChatItem = ({
     text,
     active
 }:chatItemPropsTypes) => {
-
-
+    const {query: {type}} = useRouter()
+    
     const {avatar_url, avatar_url_thumbnail, name} = another_user;
 
+    useEffect(() => {
+        console.log(type)
+    }, [type])
 
     return (
-        <Link href={`/chat/${id}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
+        <Link href={`/chat/${id}?type=${type}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
             {/* <div className={styles.avatar}>
                 <Image
                     src={avatarImg}
@@ -43,6 +46,23 @@ const ChatItem = ({
                     />
                 
             </div>  */}
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 10,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'red',
+                fontSize: 25,
+                lineHeight: '25px',
+                fontWeight: 700,
+                backgroundColor: 'rgba(255,255,255,.5)',
+                border: '1px solid red',
+                width: '100%',
+                height: '100%'
+            }}>{id}</div>
             <div className={styles.avatar}>
                 <Avatar
                     size={63}

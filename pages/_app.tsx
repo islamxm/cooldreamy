@@ -33,15 +33,14 @@ function App({ Component, pageProps }: AppProps) {
 	}, [])
 
 	const routeChangeStart = (url: any) => {
-		console.log(url)
 		if(url === '/start' || url === '/') {
 			setWc(true)
 		}
 	}
 	const routeChangeEnd = (url: any) => {
-		console.log(url)
 		setWc(false)
 	}
+
 
 
 	useEffect(() => {

@@ -2,26 +2,27 @@ import styles from './Filter.module.scss';
 import Tabs from '@/components/Tabs/Tabs';
 import {useState, FC} from 'react';
 import { IChatFilterType, chatTabsType } from '../../types';
+import Router from 'next/router';
 
 const tabsList = [
     {
         id: '1',
-        badge: 3,
+        // badge: 3,
         label: 'Все переписки'
     },
     {
         id: '2',
-        badge: 3,
+        // badge: 3,
         label: 'Непрочитанные'
     },
     {
         id: '3',
-        badge: 0,
+        // badge: 0,
         label: 'Избранные'
     },
     {
         id: '4',
-        badge: 0,
+        // badge: 0,
         label: 'Игнорируемые'
     }
 ]
@@ -30,12 +31,12 @@ const tabsList = [
 const modeTabs = [
     {
         id: '1',
-        badge: 3,
+        // badge: 3,
         label: 'Чат'
     },
     {
         id: '2',
-        badge: 3,
+        // badge: 3,
         label: 'Письма'
     }
 ]
@@ -47,7 +48,7 @@ const Filter:FC<IChatFilterType> = ({
 }) => {
 
 
-    const switchActiveType = (type: chatTabsType) => {
+    const switchActiveType = (type?: chatTabsType) => {
         switch(type) {
             case 'chat':
                 return {
@@ -58,6 +59,11 @@ const Filter:FC<IChatFilterType> = ({
                 return {
                     value: '2',
                     type: 'mail'
+                }
+            default:
+                return {
+                    value: '',
+                    type: ''
                 }
         }
     }
@@ -83,15 +89,17 @@ const Filter:FC<IChatFilterType> = ({
                 <div className={styles.part}>
                     <Tabs
                         list={modeTabs}
-                        onChange={() => {}}
-                        // onChange={(e) => {
-                        //     if(e == '1') {
-                        //         onTypeChange('chat')
-                        //     }
-                        //     if(e == '2') {
-                        //         onTypeChange('mail')
-                        //     }
-                        // }}
+                        onChange={(e) => {
+                            if(e == '1') {
+                                // onTypeChange('chat')
+                                Router.push('/chat?type=chat')
+                            }
+                            if(e == '2') {
+                                // onTypeChange('mail')
+                                Router.push('/chat?type=mail')
+                            }
+                            
+                        }}
                         activeItem={switchActiveType(activeType).value}
                         style={{backgroundColor: 'var(--light_purp_1)'}}
                         defaultColor="var(--light_purp_1)"

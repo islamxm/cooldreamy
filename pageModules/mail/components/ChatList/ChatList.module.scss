@@ -1,0 +1,11 @@
+.wrapper {
+    height: calc(100vh - 165px - 75px - 50px);
+    // border: 1px solid red;
+
+    .loader {
+        padding: 15px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

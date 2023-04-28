@@ -12,6 +12,8 @@ export type chatItemPropsTypes = {
     active: boolean
 }
 
+
+
 export type lastMessageType = {
     chat_id?: number,
     chat_messageable_id?: number,
@@ -26,6 +28,10 @@ export type lastMessageType = {
     chat_messageable?: IMessageable
 }
 
+
+
+
+
 export type IMessageable = {
     created_at?: string,
     updated_at?: string
@@ -38,6 +44,16 @@ export type IMessageable = {
     image_url?: string
 }
 
+
+export type ILetterable = {
+    created_at?: string,
+    gifts?: any[],
+    id?: number
+    is_payed?: 1 | 0,
+    sticker?: any,
+    text?: string,
+    updated_at?: string
+}
 
 
 
@@ -55,6 +71,19 @@ export type dialogItemType = {
     updated_at?: string,
 
     index?: number
+}
+
+export type mailItemType = {
+    letter_id?: number
+    letter_messageable?: ILetterable,
+    letter_messageable_id?: number,
+    letter_messageable_type?: string,
+    created_at?: string,
+    disabled?: 1 | 0,
+    id?: number,
+    is_read_by_recepient?: 1 | 0,
+    sender_user_id?: number,
+    updated_at?: string
 }
 
 
@@ -83,11 +112,15 @@ export interface IChat {
     totalChatItemCount?: number
 }
 
+
+
+
+
 export type chatTabsType = 'chat' | 'mail'
 
 
 export interface IChatFilterType {
-    activeType: chatTabsType,
+    activeType?: chatTabsType,
     onTypeChange: (type: chatTabsType) => any
 }
 

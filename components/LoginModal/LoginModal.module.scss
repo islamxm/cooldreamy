@@ -1,5 +1,10 @@
 .wrapper {
 
+    .error {
+        color: var(--red);
+        line-height: 120%;
+    }
+
     .ex {
         display: flex;
         align-items: center;

@@ -47,7 +47,7 @@ class ApiService {
                 body: JSON.stringify(body),
                 headers
             })
-            return await checkAuth(res)
+            return await res?.json()
         } catch(err) {
             console.log(err)
         }
@@ -398,9 +398,9 @@ class ApiService {
 
 
     //mail
-    createMail = async ({id}:{id: number}, token: IToken) => {
+    createMail = async ({user_id}:{user_id: number}, token: IToken) => {
         try {
-            let res = await fetch(endpoints.createMail + `?user_id=${id}`, {
+            let res = await fetch(endpoints.createMail + `?user_id=${user_id}`, {
                 method: 'GET',
                 headers: {
                     ...headers,
@@ -413,9 +413,9 @@ class ApiService {
         }
     }
 
-    getMailList = async ({per_page}:{per_page?: number}, token: IToken) => {
+    getMailList = async ({per_page, page}:{page?: number, per_page?: number}, token: IToken) => {
         try {
-            let res = await fetch(endpoints.getMailList + `?per_page=${per_page}`, {
+            let res = await fetch(endpoints.getMailList + `?per_page=${per_page}&page=${page}`, {
                 method: 'GET',
                 headers: {
                     ...headers,
@@ -449,7 +449,7 @@ class ApiService {
         }
     }
 
-    sendMail_sricker = async (body: {
+    sendMail_sticker = async (body: {
         letter_id: number,
         sticker_id: number
     }, token: IToken) => {
@@ -487,9 +487,9 @@ class ApiService {
         }
     }
 
-    getMail = async ({id, per_page}:{id: number, per_page?: number}, token: IToken) => {
+    getMail = async ({id, page, per_page}:{id: number, page?: number, per_page?: number | string}, token: IToken) => {
         try {
-            let res = await fetch(endpoints.getMail + `?letter_id=${id}&per_page=${per_page}`, {
+            let res = await fetch(endpoints.getMail + `?letter_id=${id}&page=${page}&per_page=${per_page}`, {
                 method: 'GET',
                 headers: {
                     ...headers,

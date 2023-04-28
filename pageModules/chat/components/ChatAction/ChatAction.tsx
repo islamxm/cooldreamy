@@ -20,8 +20,6 @@ const ChatAction = ({
     updateChat,
     getGifts,
     updateDialogsList,
-
-    
 }: {
     setHeight: (...args: any[]) => any, 
     updateChat: (...args: any[]) => any,
@@ -30,7 +28,9 @@ const ChatAction = ({
 }) => {
     const {token} = useAppSelector(s => s)
     const {query} = useRouter()
+    const {id, chat_type} = query || {}
 
+    
     const [stickers, setStickers] = useState(false)
     const [gifts, setGifts] = useState(false);
     const [drawerPos, setDrawerPos] = useState(70);
@@ -78,6 +78,26 @@ const ChatAction = ({
         }
        
     }, [text, query, token])
+
+
+    const testSendMail = useCallback(() => {
+        if(token) {
+            if(id) {
+                setLoad(true)
+                service.sendMail_text({
+                    letter_id: Number(id),
+                    text: 'test mail'
+                }, token).then(res => {
+                    console.log(res)
+                }).finally(() => {
+                    setLoad(false)
+                    setText('')
+                })
+            }
+        }
+    }, [text, id, token])
+
+
 
 
     return (
@@ -152,6 +172,7 @@ const ChatAction = ({
                     <IconButton
                         disabled={!text}
                         onClick={sendMessage}
+                        // onClick={testSendMail}
                         size={45}
                         icon={<BsArrowUpShort size={40}/>}
                         />

@@ -5,6 +5,7 @@ import ChatBody from '../ChatBody/ChatBody';
 import ApiService from '@/service/apiService';
 import {FC, useState, useEffect, useCallback, ChangeEvent} from 'react';
 import { useRouter } from 'next/router';
+import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import moment from 'moment';
 import notify from '@/helpers/notify';
@@ -16,9 +17,8 @@ const service = new ApiService()
 
 const ChatLayout = () => {
     // !! глобальные инстанции
-    const {query} = useRouter()
+    const {query, push} = useRouter()
     const {token, socketChannel} = useAppSelector(s => s)
-
 
 
 
@@ -28,7 +28,7 @@ const ChatLayout = () => {
     const [currentChatId, setCurrentChatId] = useState<number>()
 
     // !! фильтры
-    const [chatType, setChatType] = useState<'chat' | 'mail'>('chat')
+    const [chatType, setChatType] = useState<'chat' | 'mail'>()
 
 
     // !! данные
@@ -43,10 +43,11 @@ const ChatLayout = () => {
 
     // ?? получение ид текущего чата из роута (опционально)
     useEffect(() => {
-        
-        if(query?.id && typeof query?.id === 'string') {
-            setChatListPage(1)
-            setCurrentChatId(Number(query?.id))
+        if(query) {
+            if(query?.id && typeof query?.id === 'string') {
+                setChatListPage(1)
+                setCurrentChatId(Number(query?.id))
+            }
         }
     }, [query])
 
@@ -59,7 +60,6 @@ const ChatLayout = () => {
             service.getChatList({
                 page: dialogsPage,
             }, token).then(res => {
-                
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -68,7 +68,6 @@ const ChatLayout = () => {
                 }
             })
         }
-       
     }
 
 
@@ -96,16 +95,88 @@ const ChatLayout = () => {
     }
 
 
+    const getMailDialogs = () => {
+        if(token) {
+            service.getMailList({
+                page: dialogsPage,
+            }, token).then(res => {
+                setTotalDialogItemCount(res?.total)
+                if(dialogsPage === 1) {
+                    setDialogsList(res?.data)
+                } else {
+                    setDialogsList(s => [...s, ...res?.data])
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        console.log(dialogsList?.map(i => i.id))
+    }, [dialogsList])
+
+
+
+    // ** получение чата писем (конкрентного)
+    const getMailChat = () => {
+        if(token) {
+            if(currentChatId && chatListPage) {
+                
+                service.getMail({
+                    id: currentChatId,
+                    page: chatListPage,
+                    per_page: 10
+                }, token).then(res => {
+                    setTotalChatItemCount(res?.chat_messages?.total)
+                    if(chatListPage === 1) {
+                        setChatList(res?.chat_messages?.data)
+                    } else {
+                        setChatList(s => [...s, ...res?.chat_messages?.data])
+                    }
+                })
+    
+            }
+        }
+    }
+
+    useEffect(() => {
+        if(query?.type === 'mail' || query?.type === 'chat') {
+            setChatType(query?.type)
+        }
+    }, [query])
+
+
+
+    useEffect(() => {
+        setDialogsPage(1)
+        setChatListPage(1)
+    }, [chatType])
+
+
+    
+
+
     // ?? обновление списка диалогов (чат лист)
     useEffect(() => {
-        getDialogs()
-    }, [dialogsPage, token])
+        if(chatType === 'chat') {
+            console.log('chat')
+            getDialogs && getDialogs()
+        }
+        if(chatType === 'mail') {
+            console.log('mail')
+            getMailDialogs && getMailDialogs()
+        }
+    }, [dialogsPage, token, chatType])
 
 
     // ?? обновление списка сообщений в чате
     useEffect(() => {
-        getChat()
-    }, [chatListPage, currentChatId, token])
+        if(chatType === 'chat') {
+            getChat && getChat()
+        }
+        if(chatType === 'mail') {
+            getMailChat && getMailChat()
+        }
+    }, [chatListPage, currentChatId, token, chatType])
 
 
 
@@ -169,6 +240,7 @@ const ChatLayout = () => {
 
                             // !!тестовый проп
                             updateChat={updateChat}
+                            ChatType={chatType}
                             />
                     </div>
                 </Col>

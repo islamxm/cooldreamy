@@ -105,7 +105,7 @@ const SearchBody = () => {
                 prompt_finance_state_id, 
             }, token
             ).then(res => {
-             
+                console.log(res)
                 setTotalFound(res?.total)
                 setList(res?.data)
             }).finally(() => {

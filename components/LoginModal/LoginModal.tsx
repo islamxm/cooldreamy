@@ -70,7 +70,6 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             if(res?.error) {
                 setErrors(s => {
                     return {
-                        ...s,
                         ...res?.error
                     }
                 })
@@ -102,6 +101,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                         placeholder='E-mail'
                         />
+                    {errors?.email && <div className={styles.error}>{errors?.email}</div>}
                 </Col>
                 <Col span={24}>
                     <Input
@@ -111,6 +111,8 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                         placeholder='Пароль'
                         />
+                    {errors?.password && <div className={styles.error}>{errors?.password}</div>}
+                    
                 </Col>
                 <Col span={24}>
                     <div className={styles.ex}>

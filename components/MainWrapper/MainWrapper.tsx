@@ -21,10 +21,6 @@ const MainWrapper = ({
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
 
-	useEffect(() => {
-		console.log(userData)
-	}, [userData])
-
 
 	useEffect(() => {
 		if(token) {
