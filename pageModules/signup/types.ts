@@ -7,6 +7,6 @@ export type interestTypes = '1' | '2' | '3' | '4' | '5' | '6' | '';
 export interface IPromptSelect {
     list?: {id: number, text: string}[],
     // selectedList?: {id: number, text: string}[],
-    selectedList?: number | null
+    selectedList?: any[]
     setSelectedList: (...args: any[]) => void
 }

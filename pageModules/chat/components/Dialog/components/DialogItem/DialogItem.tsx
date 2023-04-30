@@ -9,15 +9,24 @@ import Image from 'next/image';
 import {motion} from 'framer-motion';
 import moment from 'moment';
 import {FaSmileWink} from 'react-icons/fa';
+import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 
-const DialogItem:FC<dialogItemType> = ({
+
+interface I extends dialogItemType {
+    showAvatar?: boolean
+}
+
+
+
+const DialogItem:FC<I> = ({
     me,
     is_read_by_recepient,
     chat_messageable,
     chat_messageable_type,
     updated_at,
     created_at,
-    index
+    index,
+    showAvatar
 }) => {
 
 
@@ -26,19 +35,22 @@ const DialogItem:FC<dialogItemType> = ({
             case 'App\\Models\\ChatImageMessage':
                 return (
                     <div className={styles.media}>
-                        <div className={styles.body}>
-                            <div className={styles.item}>
-                                <Image
-                                    src={chat_messageable?.thumbnail_url ? chat_messageable?.thumbnail_url : ''}
-                                    loader={(p) => {
-                                        return p?.src && typeof p?.src === 'string' ? p?.src : ''
-                                    }}
-                                    alt=''
-                                    width={100}
-                                    height={100}
-                                    />
+                        <FancyboxWrapper>
+                            <div className={styles.body}>
+                                <a data-fancybox="gallery" href={chat_messageable?.image_url} className={styles.item}>
+                                    <Image
+                                        src={chat_messageable?.thumbnail_url ? chat_messageable?.thumbnail_url : ''}
+                                        loader={(p) => {
+                                            return p?.src && typeof p?.src === 'string' ? p?.src : ''
+                                        }}
+                                        alt=''
+                                        width={100}
+                                        height={100}
+                                        />
+                                </a>
                             </div>
-                        </div>
+                        </FancyboxWrapper>
+                        
                         <div className={styles.time}>{moment(updated_at).format('hh:mm')}</div>
                     </div>
                 ) 
@@ -115,7 +127,8 @@ const DialogItem:FC<dialogItemType> = ({
                                 ) : null
                             }
                         </motion.div>
-                        <div className={styles.avatar}>
+                        
+                        <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
                                 image={img}

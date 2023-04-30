@@ -4,7 +4,11 @@ import Avatar from '@/components/Avatar/Avatar';
 import UserTitle from '@/components/UserTitle/UserTitle';
 import { mailItemType } from '@/pageModules/chat/types';
 import moment from 'moment';
-import {useEffect, useCallback} from 'react';
+import {useState, useEffect} from 'react';
+import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+
+const service = new ApiService()
 
 
 const MailItem:FC<mailItemType> = ({
@@ -20,14 +24,14 @@ const MailItem:FC<mailItemType> = ({
     updated_at,
     sender_user
 }) => {
+    const {token} = useAppSelector(s => s)
+    const [openLoad, setOpenLoad] = useState(false)
 
-
-    // useEffect(() => {
-    //     console.log(letter_messageable_type)
-    //     console.log(letter_messageable)
-    // }, [letter_messageable, letter_messageable_type])
-
-    const switchMessageType = useCallback((letter_messageable_type?: string) => {
+    useEffect(() => {
+        console.log(letter_messageable)
+    }, [letter_messageable])
+    
+    const switchMessageType = (letter_messageable_type?: string) => {
         switch(letter_messageable_type) {
             case 'App\\Models\\ChatImageMessage':
                 return (
@@ -36,7 +40,15 @@ const MailItem:FC<mailItemType> = ({
             case "App\\Models\\LetterTextMessage":
                 return (
                     <div className={styles.content_text}>
+                        <div className={styles.text_body}>
                         {letter_messageable?.text}
+                        </div>
+                        {/* {
+                            letter_messageable?.
+                        } */}
+                        <div className={styles.media}>
+                            
+                        </div>
                     </div>
                 )
             case "App\\Models\\ChatWinkMessage":
@@ -49,9 +61,22 @@ const MailItem:FC<mailItemType> = ({
                 )
             default:
                 return null
-
+    
         }
-    }, [letter_messageable_type, letter_messageable, updated_at])
+    }
+
+
+    const openMail = () => {
+        if(token && id) {
+            setOpenLoad(true)
+            service.mailOpenPay({letter_text_message_id: id}, token).then(res => {
+                console.log(res)
+            }).finally(() => {
+                setOpenLoad(false)
+            })
+        }        
+    }
+
 
     return (
         <div className={styles.wrapper}>
@@ -77,11 +102,18 @@ const MailItem:FC<mailItemType> = ({
                 <div className={styles.content}>
                     {switchMessageType(letter_messageable_type)}
                 </div>
-                <div className={styles.action}>
-                    <div className={styles.item}>
-                        <button className={styles.open}>Открыть письмо</button>
-                    </div>
-                </div>
+                {
+                    letter_messageable?.is_payed === 1 ? (
+                        null
+                    ) : (
+                        <div className={styles.action}>
+                            <div className={styles.item}>
+                                <button onClick={openMail} className={styles.open}>Открыть письмо</button>
+                            </div>
+                        </div>
+                    )
+                }
+                
             </div>
         </div>
     )

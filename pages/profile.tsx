@@ -28,7 +28,7 @@ const Profile = () => {
     const openImageEditModal = () => setImageEditModal(true)
 
 
-
+    
 
 
     return (

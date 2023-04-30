@@ -4,10 +4,13 @@ import Container from "@/components/Container/Container";
 import { Row, Col } from "antd";
 import SearchBody from "@/pageModules/search/components/searchBody/SearchBody";
 import { useAppSelector } from "@/hooks/useTypesRedux";
+import {useEffect} from 'react';
+
 
 const SearchPage = () => {
-
     const {token} = useAppSelector(s => s)
+
+    
 
     return (
         <Container>

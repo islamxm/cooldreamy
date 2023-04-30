@@ -4,7 +4,7 @@ import {FC} from 'react';
 import {motion} from 'framer-motion';
 
 const IconButton:FC<iconButtonPropsType> = (props) => {
-    const {icon, variant = 'default', size = 62, style, onClick = () => {}, disabled} = props;
+    const {icon, variant = 'default', size = 62, style, onClick = () => {}, disabled, fileId} = props;
 
     const switchVariant = (variant: iconButtonVariants) => {
         switch(variant) {
@@ -32,6 +32,24 @@ const IconButton:FC<iconButtonPropsType> = (props) => {
         }
     }
 
+    if(fileId) {
+        return (
+            <motion.label
+                initial={{scale: 0, opacity: 0}}
+                animate={{scale: 1, opacity: 1}}
+                exit={{scale: 0, opacity: 0}}
+                transition={{type: 'spring', damping: 17, stiffness: 400}}
+                whileTap={{scale: 0.9}}
+                // disabled={disabled}
+                // type='button'
+                htmlFor={fileId}
+                style={{...style, width: size, height: size}}
+                className={`${styles.wrapper} ${switchVariant(variant)} ${disabled ? styles.disabled : ''}`}
+                >
+                {icon}
+            </motion.label>
+        )
+    }
     return (
         <motion.button
             initial={{scale: 0, opacity: 0}}

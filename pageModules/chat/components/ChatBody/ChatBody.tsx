@@ -109,6 +109,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
 
 
+    
+
+
 
     return (
         <div className={styles.wrapper}>
@@ -156,7 +159,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 switchMock()
                             }
                         </div>
-                    ) : null
+                    ) : null    
                 }
                 {
                     ChatType === 'mail' ? (

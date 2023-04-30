@@ -32,7 +32,7 @@ const endpoints = {
     sendMessage_text: `${API_PATH}chats/send_chat_text_message`,
     sendMessage_sticker: `${API_PATH}chats/send_chat_sticker_message`,
     sendMessage_gift: `${API_PATH}chats/send_chat_gift_message`,
-    sendMessage_image: `${API_PATH}chats/send_chat_image_mesage`,
+    sendMessage_image: `${API_PATH}chats/send_chat_image_message`,
 
     getChat: `${API_PATH}chats/get_current_chat`,
     createChat: `${API_PATH}chats/get_chat_with_user`,
@@ -51,6 +51,9 @@ const endpoints = {
     createMail: `${API_PATH}letters/get_letter_with_user`,
     getMailList: `${API_PATH}letters/get_my_letter_list`,
     readMail: `${API_PATH}letters/set_letter_message_is_read`,
+
+    mailOpenPay: `${API_PATH}letters/pay_for_letter_text_message`,
+    mailImagePay: `${API_PATH}letters/pay_for_letter_image`,
     
 
     //profile

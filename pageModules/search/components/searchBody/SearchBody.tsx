@@ -31,8 +31,8 @@ const SearchBody = () => {
     const [country, setCountry] = useState<{value: string, id: string, label: string} | null>(null)
     const [age_range_start, setage_range_start] = useState(18)
     const [age_range_end, setage_range_end] = useState(70)
-    const [prompt_target_id, setprompt_target_id] = useState<number | string>()
-    const [prompt_finance_state_id, setprompt_finance_state_id] = useState<number | string>()
+    const [prompt_targets, setprompt_targets] = useState<number | string>()
+    const [prompt_finance_states, setprompt_finance_states] = useState<number | string>()
 
     const [isNew, setIsNew] = useState<1 | 0>(0)
     const [isOnline, setIsOnline] = useState<1 | 0>(0)
@@ -101,11 +101,10 @@ const SearchBody = () => {
                 country: country?.label, 
                 age_range_start, 
                 age_range_end,
-                prompt_target_id, 
-                prompt_finance_state_id, 
+                prompt_targets, 
+                prompt_finance_states, 
             }, token
             ).then(res => {
-                console.log(res)
                 setTotalFound(res?.total)
                 setList(res?.data)
             }).finally(() => {
@@ -113,7 +112,7 @@ const SearchBody = () => {
             })
         }
         
-    }, [currentPage, token, state, country, age_range_start, age_range_end, prompt_target_id, prompt_finance_state_id, isNew, isOnline, isNear])
+    }, [currentPage, token, state, country, age_range_start, age_range_end, prompt_targets, prompt_finance_states, isNew, isOnline, isNear])
 
     const updateList = useCallback(() => {
         if(token) {
@@ -126,17 +125,16 @@ const SearchBody = () => {
                 country: country?.label, 
                 age_range_start, 
                 age_range_end,
-                prompt_target_id, 
-                prompt_finance_state_id, 
+                prompt_targets, 
+                prompt_finance_states, 
             }, token).then(res => {
-                
                 setTotalFound(res?.total)
                 setList(res?.data)
             }).finally(() => {
                 setLoad(false)
             })
         }
-    }, [currentPage, token, state, country, age_range_start, age_range_end, prompt_target_id, prompt_finance_state_id, isNew, isOnline, isNear])
+    }, [currentPage, token, state, country, age_range_start, age_range_end, prompt_targets, prompt_finance_states, isNew, isOnline, isNear])
 
     useEffect(() => {
         setSearched(true)
@@ -163,14 +161,11 @@ const SearchBody = () => {
         setStatesList([])
         setage_range_start(18)
         setage_range_end(70)
-        setprompt_target_id(0)
-        setprompt_finance_state_id(0)
+        setprompt_targets('')
+        setprompt_finance_states('')
     }
 
 
-    useEffect(() => {
-        console.log(list)
-    }, [list])
 
 
 
@@ -184,14 +179,14 @@ const SearchBody = () => {
                         load={load}
                         targetList={targetList}
                         financeList={financeList}
-                        prompt_target_id={prompt_target_id}
-                        prompt_finance_state_id={prompt_finance_state_id}
+                        // prompt_target_id={prompt_target_id}
+                        // prompt_finance_state_id={prompt_finance_state_id}
                         age_range_end={age_range_end}
                         age_range_start={age_range_start}
                         setage_range_start={setage_range_start}
                         setage_range_end={setage_range_end}
-                        setprompt_target_id={setprompt_target_id}
-                        setprompt_finance_state_id={setprompt_finance_state_id}
+                        // setprompt_target_id={setprompt_target_id}
+                        // setprompt_finance_state_id={setprompt_finance_state_id}
                         onSearch={onSearch}
 
                         countries={countriesList}
@@ -239,11 +234,11 @@ const SearchBody = () => {
                     </Row>
                 </Col>
                 {
-                    list?.length > 0 && Math.floor(totalFound / 8) >= 2 ? (
+                    list?.length > 0 && Math.ceil(totalFound / 8) >= 2 ? (
                         <Col span={24}>
                             <Pagination
                                 current={currentPage}
-                                total={Math.floor(totalFound / 8)}
+                                total={Math.ceil(totalFound / 8)}
                                 defaultPageSize={1}
                                 showTitle={false}
                                 onChange={e => setCurrentPage(e)}

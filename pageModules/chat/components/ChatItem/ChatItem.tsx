@@ -31,6 +31,37 @@ const ChatItem = ({
     
     const {avatar_url, avatar_url_thumbnail, name} = another_user;
 
+    useEffect(() => {
+        console.log(last_message)
+    }, [last_message])
+
+
+    const switchChatType = (type?: string) => {
+        switch(type) {
+            case 'App\\Models\\ChatImageMessage':
+                return (
+                    'Картинка'
+                )
+            case 'App\\Models\\ChatTextMessage':
+                return (
+                    <LinesEllipsis
+                        text={last_message?.chat_messageable?.text}
+                        maxLine={2}
+                        />
+                )
+            case 'App\\Models\\ChatWinkMessage':
+                return (
+                    'Подмигивание'
+                )
+            case 'App\\Models\\ChatGiftMessage':
+                return (
+                    'Подарок'
+                )
+            default:
+                return null
+        }
+    }
+
     if(type === 'chat') {
         return (
             <Link href={`/chat/${id}?type=${type}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
@@ -53,11 +84,7 @@ const ChatItem = ({
                             </Col>
                             <Col span={24}>
                                 <div className={styles.dialog}>
-                                    <LinesEllipsis
-                                        text={last_message?.chat_messageable?.text}
-                                        maxLine={2}
-                                        />
-                                    
+                                    {switchChatType(last_message?.chat_messageable_type)}
                                 </div>
                             </Col>
                         </Row>
@@ -115,7 +142,6 @@ const ChatItem = ({
                                         text={last_message?.letter_messageable?.text}
                                         maxLine={2}
                                         />
-                                    
                                 </div>
                             </Col>
                         </Row>

@@ -68,13 +68,14 @@ const Body:FC = () => {
     const [prompt_careers, setPrompt_careers] = useState([])   
 
 
-    const [selectedTargets, setSelectedTargets] = useState(null)
-    const [selectedInterests, setSelectedIntersets] = useState(null)
-    const [selectedFinance, setSelectedFinance] = useState(null)
-    const [selectedSources, setSelectedSources] = useState(null)
-    const [selectedKids, setSelectedKids] = useState(null)
-    const [selectedRl, setSelectedRl] = useState(null)
-    const [selectedCareers, setSelectedCareers] = useState(null)
+    const [selectedTargets, setSelectedTargets] = useState<any[]>([])
+    const [selectedInterests, setSelectedIntersets] = useState<any[]>([])
+    const [selectedFinance, setSelectedFinance] = useState<any[]>([])
+    const [selectedSources, setSelectedSources] = useState<any[]>([])
+    const [selectedKids, setSelectedKids] = useState<any[]>([])
+    const [selectedRl, setSelectedRl] = useState<any[]>([])
+    const [selectedCareers, setSelectedCareers] = useState<any[]>([])
+
 
 
 
@@ -193,12 +194,12 @@ const Body:FC = () => {
         if(currentStep === 9) {
             setLoad(true)
             const updateBody: IUser = {
-                prompt_career_id: selectedCareers,
-                prompt_finance_state_id: selectedFinance,
-                prompt_source_id: selectedSources,
-                prompt_target_id: selectedTargets,
-                prompt_want_kids_id: selectedKids,
-                prompt_relationship_id: selectedRl,
+                prompt_careers: `[${selectedCareers?.join(',')}]`,
+                prompt_finance_states: `[${selectedFinance?.join(',')}]`,
+                prompt_sources: `[${selectedSources?.join(',')}]`,
+                prompt_targets: `[${selectedTargets?.join(',')}]`,
+                prompt_want_kids: `[${selectedKids?.join(',')}]`,
+                prompt_relationships: `[${selectedRl?.join(',')}]`,
                 about_self: about
             }
             if(token) {

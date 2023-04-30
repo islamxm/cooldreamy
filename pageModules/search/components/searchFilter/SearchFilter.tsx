@@ -153,7 +153,7 @@ const SearchFilter:FC<searchFilterType> = ({
                             <div
                                 className={styles.ex}>
                                 <div className={styles.list}>
-                                    <div className={styles.item}>
+                                    {/* <div className={styles.item}>
                                         <SelectDef
                                             list={targetList}
                                             // value={prompt_target_id}
@@ -173,7 +173,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                             label={'Финансовые цели'}
                                             width={230}
                                             />
-                                    </div>
+                                    </div> */}
                                     <div className={styles.item}>
                                         <RangeSlider
                                             style={{width: 140}}
@@ -189,19 +189,6 @@ const SearchFilter:FC<searchFilterType> = ({
                                             // unit={'год'}
                                             />
                                     </div>
-                                    {/* <div className={styles.item}>
-                                        <RangeSlider
-                                            style={{width: 140}}
-                                            min={0}
-                                            max={10}
-                                            range={true}
-                                            value={[0,5]}    
-                                            label={'Рост'}
-                                            unit={'см'}
-                                            />
-                                    </div> */}
-                                   
-                                    
                                 </div>
                                 {/* <div className={styles.action}>
                                     <div className={styles.item}>

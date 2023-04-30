@@ -6,7 +6,8 @@ export interface iconButtonPropsType {
     size?: number,
     onClick?: (...args: any[]) => any,
     style?: CSSStyleSheet,
-    disabled?: boolean
+    disabled?: boolean,
+    fileId?: string
     // hover?: VariantLabels | TargetAndTransition,
 }
 

@@ -29,19 +29,10 @@ const Step2:FC<IPromptSelect> = ({
             className={styles.wrapper}>
             <h3 className={styles.head}>Расскажите о своих целях на сайте</h3>
             <div className={styles.list}>
-                {/* {
-                    targetVals?.map((item,index) => (
-                        <div className={styles.item} key={index}>
-                            <SelectCard
-                                {...item}
-                                />
-                        </div>
-                    ))
-                } */}
                 {
                     list?.map((item, index) => (
                         <div className={styles.item} key={index}>
-                            {/* <SelectCard
+                            <SelectCard
                                 label={item.text}
                                 value={item.id.toString()}
                                 onSelect={() => {
@@ -52,18 +43,11 @@ const Step2:FC<IPromptSelect> = ({
                                             return [...r]
                                         })
                                     } else {
+                                        console.log(item.id)
                                         setSelectedList((s: any[]) => [...s, Number(item.id)])
                                     }
                                 }}
                                 isSelect={selectedList?.find(i => Number(i) === Number(item.id)) ? true : false}
-                                /> */}
-                            <SelectCard
-                                label={item.text}
-                                value={item.id.toString()}
-                                onSelect={() => {
-                                    setSelectedList(item.id)
-                                }}
-                                isSelect={item?.id === Number(selectedList)}
                             />
                         </div>
                     ))

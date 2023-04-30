@@ -65,6 +65,26 @@
             .item {
                 margin: 0 4px;
             }
+
+            .item.upload {
+
+                input {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: -1;
+                    pointer-events: none;
+                    touch-action: none;
+                    visibility: hidden;
+                }
+
+                .label {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid red;
+                }   
+            }
         }
     }
 

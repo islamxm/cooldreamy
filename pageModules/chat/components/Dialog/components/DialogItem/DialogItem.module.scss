@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     // border: 1px solid red;
-    padding: 10px 20px;
+    padding: 5px 20px;
 
     .body {
        display: flex;
@@ -45,14 +45,13 @@
 
 
                     .item {
-                        width: 100px;
-                        height: 100px;
+                        width: 130px;
+                        height: 130px;
                         overflow: hidden;
-                        border-radius: 15px;
                         margin: 0 5px;
                         margin-bottom: 10px;
-                        background-color: var(--light_purp_1);
-                        padding: 4px;
+                        // background-color: var(--light_purp_1);
+                        // padding: 4px;
     
                         img {
                             width: 100%;
@@ -100,6 +99,10 @@
 
         .avatar {
 
+        }
+
+        .avatar.hide {
+            opacity: 0;
         }
 
     }

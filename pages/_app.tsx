@@ -10,7 +10,6 @@ import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
 import * as PusherTypes from 'pusher-js';
-import { useAppSelector } from '@/hooks/useTypesRedux';
 import MainWrapper from '@/components/MainWrapper/MainWrapper';
 import store from '@/store/store';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,12 +22,12 @@ import { useRouter } from 'next/router';
 import 'moment/locale/ru'
 import moment from 'moment';
 
+
 function App({ Component, pageProps }: AppProps) {
 	const router = useRouter()
 	const [wc, setWc] = useState(true)
 
 	
-
 
 
 	useEffect(() => {

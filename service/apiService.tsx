@@ -5,7 +5,7 @@ import checkAuth from "./checkAuth";
 
 
 
-const headers = {
+export const headers = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
     'X-Localization': 'ru'
@@ -62,8 +62,8 @@ class ApiService {
         country,
         age_range_start,
         age_range_end,
-        prompt_target_id,
-        prompt_finance_state_id
+        prompt_targets,
+        prompt_finance_states
     }: {
         page: number,
         isNew: 1 | 0,
@@ -73,14 +73,14 @@ class ApiService {
         country?: string,
         age_range_start?: number,
         age_range_end?: number,
-        prompt_target_id?: number | string,
-        prompt_finance_state_id?: number | string,
+        prompt_targets?: number | string,
+        prompt_finance_states?: number | string,
     }, token: IToken
         
     ) => {
         try {
             let res = await fetch(endpoints.search + 
-                `?page=${page}&state=${state ? state : ''}&country=${country ? country : ''}&age_range_start=${age_range_start}&age_range_end=${age_range_end}&prompt_target_id=${prompt_target_id ? prompt_target_id : ''}&prompt_finance_state_id=${prompt_finance_state_id ? prompt_finance_state_id : ''}&new=${isNew}&near=${isNear}&online=${isOnline}`, {
+                `?page=${page}&state=${state ? state : ''}&country=${country ? country : ''}&age_range_start=${age_range_start}&age_range_end=${age_range_end}&prompt_target_id=${prompt_targets ? prompt_targets : ''}&prompt_finance_state_id=${prompt_finance_states ? prompt_finance_states : ''}&new=${isNew}&near=${isNear}&online=${isOnline}`, {
                 method: 'GET',
                 headers: {
                     ...headers,
@@ -270,7 +270,6 @@ class ApiService {
         }
     }
 
-
     sendMessage_text = async (body: {
         chat_id: number,
         text: string
@@ -324,6 +323,26 @@ class ApiService {
                 body: JSON.stringify(body)
             })
             return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    sendMessage_image = async (body: {
+        chat_id: number | string,
+        thumbnail_url: string,
+        image_url: string
+    }, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.sendMessage_image, {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }
@@ -430,8 +449,9 @@ class ApiService {
 
 
     sendMail_text = async (body: {
-        letter_id: number,
-        text: string
+        letter_id: number | string,
+        text: string,
+        images?: string
     }, token: IToken) => {
         try {
             let res = await fetch(endpoints.sendMail_text, {
@@ -487,6 +507,8 @@ class ApiService {
         }
     }
 
+
+
     getMail = async ({id, page, per_page}:{id: number, page?: number, per_page?: number | string}, token: IToken) => {
         try {
             let res = await fetch(endpoints.getMail + `?letter_id=${id}&page=${page}&per_page=${per_page}`, {
@@ -516,6 +538,37 @@ class ApiService {
                 body: JSON.stringify(body)
             })
             return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    mailOpenPay = async (body: {letter_text_message_id: number | string}, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.mailOpenPay, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    mailImagePay = async (image_in_letter_id: number | string, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.mailImagePay + `?image_in_letter_id=${image_in_letter_id}`, {
+                method: 'GET',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }

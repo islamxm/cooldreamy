@@ -216,7 +216,7 @@ const Main = () => {
                                 <Card 
                                     removeCard={removeCard}
                                     active={activeIndex === index}
-                                    key={item.name}
+                                    key={item.id}
                                     card={{
                                         ...item,
                                         // onLike: onLike,

@@ -14,122 +14,6 @@ import SelectCard from '@/components/SelectCard/SelectCard';
 import { IPromptSelect } from '../../types';
 
 
-const interestVals: selectCardPropsTypes[] = [
-    {
-        label: 'Музыка',
-        image: img1,
-        value: '1',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Спорт',
-        image: img2,
-        value: '2',
-        onSelect: () => {},
-        isSelect: false
-    },
-    // {
-    //     label: 'Кино',
-    //     image: img3,
-    //     value: '3',
-    //     onSelect: () => {},
-    //     isSelect: false
-    // },
-    {
-        label: 'Путешествия',
-        image: img4,
-        value: '4',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Кулинария',
-        image: img5,
-        value: '5',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Машины',
-        image: img6,
-        value: '6',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Искусство',
-        image: null,
-        value: '7',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'IT',
-        image: null,
-        value: '8',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Финансы и инвестиции',
-        image: null,
-        value: '9',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Наука',
-        image: null,
-        value: '9',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Бары и рестораны',
-        image: null,
-        value: '10',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Экстрим',
-        image: null,
-        value: '11',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Природа',
-        image: null,
-        value: '12',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Литература',
-        image: null,
-        value: '12',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Шоппинг',
-        image: null,
-        value: '12',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Танцы',
-        image: null,
-        value: '12',
-        onSelect: () => {},
-        isSelect: false
-    }
-    
-]
-
 
 const Step3:FC<IPromptSelect> = ({
     list,
@@ -162,9 +46,18 @@ const Step3:FC<IPromptSelect> = ({
                                 label={item.text}
                                 value={item.id.toString()}
                                 onSelect={() => {
-                                    setSelectedList(item.id)
+                                    if(selectedList?.find(i => Number(i) === Number(item.id))) {
+                                        setSelectedList((s:any[]) => {
+                                            const r = s;
+                                            const rm = s.splice(r.findIndex(r => Number(r) === Number(item.id)), 1)
+                                            return [...r]
+                                        })
+                                    } else {
+                                        console.log(item.id)
+                                        setSelectedList((s: any[]) => [...s, Number(item.id)])
+                                    }
                                 }}
-                                isSelect={item?.id === Number(selectedList)}
+                                isSelect={selectedList?.find(i => Number(i) === Number(item.id)) ? true : false}
                             />
                         </div>
                     ))

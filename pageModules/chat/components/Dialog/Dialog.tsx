@@ -36,8 +36,6 @@ const Dialog:FC<I> = ({
         if(totalChatItemCount !== undefined) {
             chatList?.length >= totalChatItemCount ? setLoadMore(false) : setLoadMore(true)
         }
-
-        console.log('chat list', chatList)
        
     }, [chatList, totalChatItemCount])
 
@@ -56,16 +54,16 @@ const Dialog:FC<I> = ({
 
     return (
         <div className={styles.wrapper} style={{maxHeight: height}}>
-            <AnimatePresence>
-                {
-                    chatList?.map((item, index) => (
-                        <DialogItem
-                            {...item}
-                            me={item.sender_user_id === Number(userId)} 
-                            key={index}/>
-                    ))
-                }
-            </AnimatePresence>
+            {
+                chatList?.map((item, index) => (
+                    <DialogItem
+                        {...item}
+                        me={item.sender_user_id === Number(userId)} 
+                        key={index}
+                        showAvatar={item.sender_user_id !== chatList[index - 1]?.sender_user_id}
+                        />
+                ))
+            }
             
             {
                 chatList && chatList?.length > 0 ? (

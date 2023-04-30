@@ -28,9 +28,9 @@ const ChatAction = ({
 }) => {
     const {token} = useAppSelector(s => s)
     const {query} = useRouter()
-    const {type} = query
+    const {type, id} = query
 
-    
+    const [uploadedMedia, setUploadedMedia] = useState<any[]>([])
     const [stickers, setStickers] = useState(false)
     const [gifts, setGifts] = useState(false);
     const [drawerPos, setDrawerPos] = useState(70);
@@ -101,7 +101,81 @@ const ChatAction = ({
 
     
 
+    const uploadMedia = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if(type === 'chat') {
+            if(e.target?.files && token && (id && typeof id === 'string')) {
+                const data = new FormData()
+                data.append('category_id', '3')
+                data.append('image', e.target.files[0])
 
+                setLoad(true)
+                service.addProfileImage(data,token).then(res => {
+                    console.log(res)
+                    if(res?.thumbnail_url && res?.image_url) {
+                        service.sendMessage_image({
+                            chat_id: id,
+                            thumbnail_url: res.thumbnail_url,
+                            image_url: res.image_url
+                        }, token).then(r => {
+                            updateDialogsList && updateDialogsList((s: any) => {
+                                const m = s;
+                                const rm = m.splice(m.findIndex((i: any) => i.id === r?.chat?.id), 1, r?.chat)
+                                return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                            })
+                            
+                            updateChat(r?.chat?.last_message)
+                        }).finally(() => {
+                            setLoad(false)
+                        })
+                    }
+                })
+            }
+        }
+
+        if(type === 'mail') {
+            if(e.target?.files) {
+                const files = Array.from(e.target.files)
+                if(files?.length > 0 && token && (id && typeof id === 'string')) {
+                    const resList: any = []
+                    files.forEach((file: string | Blob) => {
+                        const data = new FormData()
+                        data.append('category_id', '3')
+                        data.append('image', file)
+                        resList.push(service.addProfileImage(data, token))
+                    })
+                    setLoad(true)
+                    Promise.all(resList).then(res => {
+                        const filtered = res?.filter(i => i.id).map(i => i.id)
+                        service.sendMail_text({
+                            letter_id: Number(id),
+                            text: text,
+                            images: `[${filtered.join(',')}]`
+                        }, token).then(r => {
+                            console.log(filtered)
+                            console.log(r)
+
+                            // !! нужно включить после того как Даниил поправить модель
+                            // updateDialogsList && updateDialogsList((s: any) => {
+                            //     const m = s;
+                            //     const rm = m.splice(m.findIndex((i: any) => i.id === r?.chat?.id), 1, r?.chat)
+                            //     return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                            // })
+                            
+                            // updateChat(r?.chat?.last_message)
+                        }).finally(() => {
+                            setLoad(false)
+                        })
+                    })
+                }
+            }
+        }
+
+        
+        
+    }
+
+
+  
 
 
 
@@ -132,6 +206,7 @@ const ChatAction = ({
                 <div className={styles.main}>
                     <div className={styles.input}>
                         <TextareaAutosize 
+                            maxLength={300}
                             // onKeyDown={(e) => {
                             //     if(e.key === 'Enter' && text) {
                             //         sendMessage()
@@ -164,12 +239,22 @@ const ChatAction = ({
                                 icon={<AiOutlineGift size={20}/>}
                                 />
                         </div>
-                        <div className={styles.item}>
-                            <IconButton
+                        <div className={`${styles.item} ${styles.upload}`}>
+                            <input 
+                                id='chat_media_upload'
+                                type="file" 
+                                multiple={type === 'mail'}
+                                onChange={uploadMedia}
+                                accept='.png, .jpg, .jpeg'
+                                value=''
+                                />
+                             <IconButton 
+                                fileId='chat_media_upload' 
                                 variant={'bordered'}
                                 size={30}
                                 icon={<AiOutlineCamera size={20}/>}
-                                />
+                                /> 
+                            
                         </div>
                     </div>
                 </div>

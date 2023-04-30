@@ -79,6 +79,11 @@ const GirlCard:FC<girlCardType> = ({
                     })
                 }
             })
+
+            // !! параллельное создание чата писем
+            service.createMail({user_id: id}, token).then(res => {
+                console.log(res)
+            })
         }
     }
     

@@ -65,10 +65,13 @@ const ChatLayout = () => {
     // ** получение диалогов (чат лист)
     const getDialogs = () => {
         if(token) {
-            setLoadSide(true)
+            if(dialogsPage === 1) {
+                setLoadSide(true)
+            }
             service.getChatList({
                 page: dialogsPage,
             }, token).then(res => {
+
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -86,7 +89,9 @@ const ChatLayout = () => {
     const getChat = () => {
         if(token) {
             if(currentChatId && chatListPage) {
-                setLoadMain(true)
+                if(chatListPage === 1) {
+                    setLoadMain(true)
+                }
                 service.getChat({
                     id: currentChatId,
                     page: chatListPage,
@@ -108,7 +113,9 @@ const ChatLayout = () => {
 
     const getMailDialogs = () => {
         if(token) {
-            setLoadSide(true)
+            if(dialogsPage === 1) {
+                setLoadSide(true)
+            }
             service.getMailList({
                 page: dialogsPage,
             }, token).then(res => {
@@ -130,7 +137,9 @@ const ChatLayout = () => {
     const getMailChat = () => {
         if(token) {
             if(currentChatId && chatListPage) {
-                setLoadMain(true)
+                if(chatListPage === 1) {
+                    setLoadMain(true)
+                }
                 service.getMail({
                     id: currentChatId,
                     page: chatListPage,
@@ -151,7 +160,6 @@ const ChatLayout = () => {
         }
     }
 
-    
 
 
 

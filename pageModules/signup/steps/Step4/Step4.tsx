@@ -13,30 +13,7 @@ import img6 from '@/public/assets/icons/interest-6.svg';
 import SelectCard from '@/components/SelectCard/SelectCard';
 import { IPromptSelect } from '../../types';
 
-const interestVals: selectCardPropsTypes[] = [
-    {
-        label: 'Не в чем не нуждаюсь',
-        image: undefined,
-        value: '1',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Ищу спонсора',
-        image: undefined,
-        value: '2',
-        onSelect: () => {},
-        isSelect: false
-    },
-    {
-        label: 'Могу быть спонсором',
-        image: undefined,
-        value: '3',
-        onSelect: () => {},
-        isSelect: false
-    },
-    
-]
+
 
 
 const Step4:FC<IPromptSelect> = ({
@@ -69,9 +46,9 @@ const Step4:FC<IPromptSelect> = ({
                                 label={item.text}
                                 value={item.id.toString()}
                                 onSelect={() => {
-                                    setSelectedList(item.id)
+                                    setSelectedList([item.id])
                                 }}
-                                isSelect={item?.id === Number(selectedList)}
+                                isSelect={selectedList && Number(selectedList[0]) === item.id ? true : false}
                             />
                         </div>
                     ))

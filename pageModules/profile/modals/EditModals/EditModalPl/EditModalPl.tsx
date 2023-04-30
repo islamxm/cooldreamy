@@ -14,7 +14,7 @@ const service = new ApiService()
 
 interface I extends IEditModal {
     promptList: any[],
-    activeId?: number | null
+    activeIds?: any[]
 }
 
 
@@ -22,30 +22,38 @@ const EditModalPl:FC<I> = (props) => {
     const {token} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const [load, setLoad] = useState(false)
-    const {head, activeId, promptList, onCancel, editItemType} = props;
-    const [active, setActive] = useState<number>(0)
+    const {head, activeIds, promptList, onCancel, editItemType} = props;
+    const [activeList, setActiveList] = useState<any[]>([])
+
+    const [isUnitSelect, setIsUnitSelect] = useState(false)
 
     useEffect(() => {
-        setActive(activeId ? activeId : 0)
-    }, [activeId])
+        activeIds && activeIds?.length > 0 ? setActiveList(activeIds?.map(i => i.id)) : setActiveList([])
+    }, [activeIds])
 
 
-    useEffect(() => {
-
-    }, [promptList])
-
+    
 
     const onClose = () => {
-        setActive(0)
+        setActiveList([])
         onCancel && onCancel()
     }
+
+
+    useEffect(() => {
+        if(editItemType === 'kids' || editItemType === 'rl' || editItemType === 'finance') {
+            setIsUnitSelect(true)
+        } else {
+            setIsUnitSelect(false)
+        }
+    }, [editItemType])
 
 
     const onSave = (type: editItemT | '') => {
         if(type && token) {
             setLoad(true)
             if(type === 'target') {
-                service.updateMyProfile({prompt_target_id: active}, token).then(res => {
+                service.updateMyProfile({prompt_targets: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify('Настройки успешно сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))
@@ -58,7 +66,7 @@ const EditModalPl:FC<I> = (props) => {
                 })
             }
             if(type === 'finance') {
-                service.updateMyProfile({prompt_finance_state_id: active}, token).then(res => {
+                service.updateMyProfile({prompt_finance_states: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify('Настройки успешно сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))
@@ -71,7 +79,7 @@ const EditModalPl:FC<I> = (props) => {
                 })
             }
             if(type === 'career') {
-                service.updateMyProfile({prompt_career_id: active}, token).then(res => {
+                service.updateMyProfile({prompt_careers: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify('Настройки успешно сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))
@@ -84,7 +92,7 @@ const EditModalPl:FC<I> = (props) => {
                 })
             }
             if(type === 'kids') {
-                service.updateMyProfile({prompt_want_kids_id: active}, token).then(res => {
+                service.updateMyProfile({prompt_want_kids: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify('Настройки успешно сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))
@@ -97,7 +105,7 @@ const EditModalPl:FC<I> = (props) => {
                 })
             }
             if(type === 'rl') {
-                service.updateMyProfile({prompt_relationship_id: active}, token).then(res => {
+                service.updateMyProfile({prompt_relationships: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify('Настройки успешно сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))
@@ -129,12 +137,34 @@ const EditModalPl:FC<I> = (props) => {
                         {
                             promptList?.map((item,index) => (
                                 <div className={styles.item} key={index}>
-                                    <SelectCard
-                                        label={item?.text}
-                                        value={item?.id?.toString()}
-                                        onSelect={() => setActive(Number(item?.id))}
-                                        isSelect={active === item?.id}
-                                        />
+                                    {
+                                        isUnitSelect ? (
+                                            <SelectCard
+                                                label={item?.text}
+                                                value={item?.id?.toString()}
+                                                onSelect={() => setActiveList([item.id])}
+                                                isSelect={activeList && Number(activeList[0]) === item.id ? true : false}
+                                            />
+                                        ) : (
+                                            <SelectCard
+                                                label={item?.text}
+                                                value={item?.id?.toString()}
+                                                onSelect={() => {
+                                                    if(activeList?.find(i => Number(i) === Number(item.id))) {
+                                                        setActiveList((s:any[]) => {
+                                                            const r = s;
+                                                            const rm = s.splice(r.findIndex(r => Number(r) === Number(item.id)), 1)
+                                                            return [...r]
+                                                        })
+                                                    } else {
+                                                        setActiveList((s: any[]) => [...s, Number(item.id)])
+                                                    }
+                                                }}
+                                                isSelect={activeList?.find(i => Number(i) === Number(item.id)) ? true : false}
+                                            />
+                                        )
+                                    }
+                                   
                                 </div>
                             ))
                         }
@@ -154,7 +184,7 @@ const EditModalPl:FC<I> = (props) => {
                             <Col span={12}>
                                 <Button
                                     load={load}
-                                    disabled={!active}
+                                    disabled={activeList?.length === 0}
                                     style={{width: '100%'}}
                                     text='Сохранить'
                                     onClick={() => onSave(editItemType)}
