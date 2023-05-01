@@ -118,6 +118,7 @@ const ChatLayout = () => {
             }
             service.getMailList({
                 page: dialogsPage,
+                per_page: 10
             }, token).then(res => {
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
@@ -145,6 +146,7 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
+                    console.log(res)
                     
                     setTotalChatItemCount(res?.letter_messages?.total)
                     if(chatListPage === 1) {

@@ -450,7 +450,7 @@ class ApiService {
 
     sendMail_text = async (body: {
         letter_id: number | string,
-        text: string,
+        text?: string,
         images?: string
     }, token: IToken) => {
         try {

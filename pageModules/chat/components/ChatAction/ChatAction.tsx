@@ -82,13 +82,14 @@ const ChatAction = ({
                         letter_id: Number(query?.id),
                         text
                     }, token).then(res => {
+                        
                         updateDialogsList && updateDialogsList((s: any) => {
                             const m = s;
-                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
                             return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
                         })
 
-                        updateChat(res?.chat?.last_message)
+                        updateChat(res?.letter?.last_message)
                     }).finally(() => {
                         setLoad(false)
                         setText('')
@@ -151,20 +152,20 @@ const ChatAction = ({
                             text: text,
                             images: `[${filtered.join(',')}]`
                         }, token).then(r => {
-                            console.log(filtered)
                             console.log(r)
 
                             // !! нужно включить после того как Даниил поправить модель
-                            // updateDialogsList && updateDialogsList((s: any) => {
-                            //     const m = s;
-                            //     const rm = m.splice(m.findIndex((i: any) => i.id === r?.chat?.id), 1, r?.chat)
-                            //     return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
-                            // })
+                            updateDialogsList && updateDialogsList((s: any) => {
+                                const m = s;
+                                const rm = m.splice(m.findIndex((i: any) => i.id === r?.letter?.id), 1, r?.letter)
+                                return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                            })
                             
-                            // updateChat(r?.chat?.last_message)
+                            updateChat(r?.letter?.last_message)
                         }).finally(() => {
                             setLoad(false)
                         })
+                        
                     })
                 }
             }
@@ -174,6 +175,8 @@ const ChatAction = ({
         
     }
 
+
+    
 
   
 
