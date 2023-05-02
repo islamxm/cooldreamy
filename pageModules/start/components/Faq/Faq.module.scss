@@ -41,3 +41,19 @@
 
     }
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+        overflow: hidden;
+        
+        .bg {
+            width: 100%;
+            max-height: unset;
+            display: none;
+        }
+
+        .inner {
+            padding: 0 0 50px 0;
+        }
+    }
+}

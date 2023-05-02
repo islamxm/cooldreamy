@@ -6,8 +6,12 @@ import StepItem from './components/StepItem/StepItem';
 import {Row, Col} from 'antd';
 import { container, item } from '@/helpers/variantsOrderAnim';
 import Router from 'next/router';
+import { useWindowSize } from 'usehooks-ts';
 
 const Steps = () => {
+
+    const {width, height} = useWindowSize()
+
     return (
         <motion.div
             initial={{
@@ -44,50 +48,42 @@ const Steps = () => {
                                 },
                             }}
                             className={styles.line}></motion.div>
-                        <Col span={24}>
-                            <Row gutter={[100,100]}>
-                                <Col span={8}>
-                                    <div
-                                        className={styles.item}
-                                        >
-                                        <StepItem
-                                            value={1}
-                                            total={3}
-                                            label={'Регистрируйся'}
-                                            />
-                                    </div>
-                                </Col>
-                                <Col span={8}>
-                                    <div
-                                        className={styles.item}
-                                        >
-                                        <StepItem
-                                            value={2}
-                                            total={3}
-                                            label={'Смотри анкеты'}
-                                            />
-                                    </div>
-                                    
-                                </Col>
-                                <Col span={8}>
-                                    <div
-                                        className={styles.item}
-                                        >
-                                        <StepItem
-                                            value={3}
-                                            total={3}
-                                            label={'Общайся'}
-                                            />
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Col>
+                            <div className={styles.list}>
+                                <div
+                                    className={styles.item}
+                                    >
+                                    <StepItem
+                                        value={1}
+                                        total={3}
+                                        label={'Регистрируйся'}
+                                        />
+                                </div>
+                                <div
+                                    className={styles.item}
+                                    >
+                                    <StepItem
+                                        value={2}
+                                        total={3}
+                                        label={'Смотри анкеты'}
+                                        />
+                                </div>
+                                <div
+                                    className={styles.item}
+                                    >
+                                    <StepItem
+                                        value={3}
+                                        total={3}
+                                        label={'Общайся'}
+                                        />
+                                </div>
+                            </div>
                     </motion.div>
                     <div className={styles.action}>
                         <Button
                             onClick={() => Router.push('/signup')}
                             // disabled={true}
                             text='Перейти к знакомствам'
+                            middle={width <= 768}
                             />
                     </div>
                 </div>

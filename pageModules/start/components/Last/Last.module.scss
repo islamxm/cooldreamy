@@ -70,3 +70,42 @@
     }
     
 }
+
+@media (max-width: 768px) {
+
+    .wrapper {
+
+        .inner {
+            padding: 30px 0;
+            flex-wrap: wrap;
+
+            .content {
+                margin-bottom: 20px;
+                max-width: unset;
+
+                .text {
+                    font-size: 16px;
+                    line-height: 22px;
+                }
+                .action {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
+            .motion {
+                width: 100%;
+
+                .img {
+                    width: 100%;
+                }
+                .pn, .pl {
+                    padding: 10px;
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+}

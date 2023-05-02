@@ -172,11 +172,11 @@ const UserMain:FC<IUser> = (props) => {
                 editItemType={editItemType}
                 open={promptModal}
                 onCancel={closeEditModal}
-                activeIds={switchInitValue(editItemType)}
+                activeIds={typeof switchInitValue(editItemType) === 'object' ? switchInitValue(editItemType) : []}
                 />
 
             <EditModalText
-                textValue={switchInitValue(editItemType)}
+                textValue={typeof switchInitValue(editItemType) === 'string' ? switchInitValue(editItemType) : null}
                 head={modalHead}
                 editItemType={editItemType}
                 open={textModal}

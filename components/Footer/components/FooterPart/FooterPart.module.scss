@@ -45,3 +45,28 @@
         }
     }
 }
+
+
+@media (max-width: 768px) {
+
+    .part {
+
+
+        .head {
+            font-size: 10px;
+            line-height: 18px;
+        }
+
+        .list {
+            .item {
+                margin-bottom: 5px;
+                display: flex;
+                
+                a {
+                    font-size: 12px;
+                    line-height: 23px;
+                }
+            }
+        }
+    }
+}

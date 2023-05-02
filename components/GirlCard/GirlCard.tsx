@@ -59,7 +59,7 @@ const GirlCard:FC<girlCardType> = ({
             })
         }
     }
-
+    
     
     
 

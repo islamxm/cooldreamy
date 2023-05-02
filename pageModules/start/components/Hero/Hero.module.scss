@@ -32,6 +32,7 @@
                 font-size: 24px;
                 line-height: 34px;
                 font-weight: 500;margin-top: 15px;
+                margin-bottom: 120px;
             }
 
 
@@ -71,6 +72,68 @@
                     &:nth-child(2) {
                         bottom: 0;
                         right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hero {
+
+        .inner {
+
+            .main {
+                margin-bottom: 30px;
+                .title {
+                    font-size: 24px;
+                    line-height: 33px;
+
+                    span {
+                        font-size: 16px;
+                        line-height: 22px;
+                    }
+                }
+
+                .subtitle {
+                    font-size: 12px;
+                    line-height: 140%;
+                    margin-bottom: 20px;
+                }
+
+                .selects {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+            }
+
+            .motion {
+                position: static;
+                height: auto;
+                justify-content: center;
+
+                .phones {
+                    height: 300px;
+                    max-width: 300px;
+                    .item {
+                        height: 200px;
+                        width: 50%;
+
+                        &:first-child {
+
+                        }
+
+                        &:last-child {
+                            right: 20px;
+                        }
+
+                        img {
+                            object-fit: contain;
+                        }
                     }
                 }
             }

@@ -20,8 +20,8 @@ const PrivateRoute = ({
     useEffect(() => {
         if(router) {
             if(!token) {
-                process?.browser && Cookies.remove('')
-                process?.browser && Cookies.remove('')
+                process?.browser && Cookies.remove('cooldate-web-token')
+                process?.browser && Cookies.remove('cooldate-web-user-id')
 
                 socketChannel && socketChannel?.unsubscribe()
 

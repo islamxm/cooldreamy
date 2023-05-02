@@ -34,3 +34,20 @@
         text-align: center;
     }
 }
+
+
+@media (max-width: 768px) {
+
+    .item {
+
+        .label {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .text {
+            font-size: 12px;
+            line-height: 16px;
+        }
+    }
+}

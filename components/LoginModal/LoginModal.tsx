@@ -49,7 +49,6 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             email,
             password
         }).then(res => {
-            console.log(res)
             if(res?.token) {
                 Cookies.set('cooldate-web-token', res?.token)
                 Cookies.set('cooldate-web-user-id', res?.id)

@@ -31,28 +31,23 @@ const Hero: FC = ({}) => {
                     variants={container} 
                     className={styles.inner}>
                     <div className={styles.main} >
-                        <Col span={24}>
-                            <Row gutter={[0, 120]}>
-                                <Col span={24}>
-                                    <motion.h1 variants={item} className={styles.title}>
-                                    Более 16 000 пользователей 
-                                    <br></br>
-                                    <span>нашли идеальную пару</span>  
-                                    </motion.h1>
-                                    <motion.div variants={item} className={styles.subtitle}>
-                                        Всего за 3 простых шага 
-                                    </motion.div>
-                                </Col>
-                                <Col span={24}>
-                                    <motion.div variants={item}>
-                                        <SelectSex
-                                            value={sex}
-                                            onSelect={sexChange}
-                                            />
-                                    </motion.div>
-                                </Col>
-                            </Row>
-                        </Col>
+                        <motion.h1 variants={item} className={styles.title}>
+                        Более 16 000 пользователей 
+                        <br></br>
+                        <span>нашли идеальную пару</span>  
+                        </motion.h1>
+                        <motion.div variants={item} className={styles.subtitle}>
+                            Всего за 3 простых шага 
+                        </motion.div>
+                        <div className={styles.selects}>
+                            <motion.div variants={item}>
+                                <SelectSex
+                                    value={sex}
+                                    onSelect={sexChange}
+                                    />
+                            </motion.div>
+                        </div>
+                        
                     </div>
                     <div className={styles.motion}>
                             <div className={styles.clouds}>

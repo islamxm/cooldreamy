@@ -7,9 +7,11 @@ import Container from '@/components/Container/Container';
 import Image from 'next/image';
 import {motion} from 'framer-motion';
 import { container, item } from '@/helpers/variantsOrderAnim';
+import useWindowSize from 'usehooks-ts/dist/esm/useWindowSize/useWindowSize';
 
 
 const Last:FC = () => {
+    const {width, height} = useWindowSize()
     return (
         <div className={styles.wrapper}>
             <Container>
@@ -33,8 +35,9 @@ const Last:FC = () => {
                                     </motion.div>
                                 </Col>
                                 <Col span={24}>
-                                    <motion.div variants={item}>
+                                    <motion.div className={styles.action} variants={item}>
                                         <Button
+                                            middle={width <= 768}
                                             text='Заполнить анкету'
                                             />
                                     </motion.div>
