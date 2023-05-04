@@ -65,6 +65,12 @@ main {
     overflow: hidden;
 }
 
+@media (max-width: 768px) {
+    main {
+        padding-top: 40px;
+    }
+}
+
 .block-title {
     font-weight: 600;
     font-size: 40px;

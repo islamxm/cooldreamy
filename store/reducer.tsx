@@ -8,7 +8,8 @@ export interface IGlobalState {
     userId: string | { [property: string]: string; } | null | undefined,
     token: string | { [property: string]: string; } | null | undefined,
     socketChannel: PusherPrivateChannel | null,
-    userData: IUser | null
+    userData: IUser | null,
+    isMenuOpen: boolean
 }
 
 
@@ -16,7 +17,8 @@ export const globalState: IGlobalState = {
     userId: process?.browser && Cookies.get('cooldate-web-user-id') ? Cookies.get('cooldate-web-user-id') : null,
     token: process?.browser && Cookies.get('cooldate-web-token') ? Cookies.get('cooldate-web-token') : null,
     socketChannel: null,
-    userData: null
+    userData: null,
+    isMenuOpen: false
     
 }
 
@@ -41,6 +43,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 userData: action.data
+            }
+        case 'UPDATE_MENU':
+            return {
+                ...state,
+                isMenuOpen: !state?.isMenuOpen
             }
         default:
             return state;

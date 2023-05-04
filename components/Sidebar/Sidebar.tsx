@@ -6,14 +6,20 @@ import { Row, Col } from 'antd';
 import Menu from './components/Menu/Menu';
 import { IUser } from '@/models/IUser';
 import ApiService from '@/service/apiService';
-import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
+import { useWindowSize } from 'usehooks-ts';
+import { updateMenu } from '@/store/actions';
 
 
 const Sidebar:FC = () => {
-    const {userData} = useAppSelector(s => s)
+    const {userData, isMenuOpen} = useAppSelector(s => s)
+    const dispatch = useAppDispatch()
+    const {width} = useWindowSize()
+
+
 
     return (
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} ${isMenuOpen ? styles.active : ''}`}>
             <Col span={24}>
                 <Row gutter={[15, 15]}>
                     <Col span={24}>

@@ -25,9 +25,8 @@ const UserInfo:FC<IUser> = (props) => {
                         </Col> 
                     ) : null
                 }
-                   
                 <Col span={24}>
-                    <UserInfoMain/>
+                    <UserInfoMain {...props}/>
                 </Col>
                 <Col span={24}>
                     <div className={styles.action}>

@@ -10,36 +10,36 @@ const service = new ApiService()
 
 const UserInfoMain:FC<IUser> = (props) => {
     const {token} = useAppSelector(s => s)
+
     const {
         about_self,
 
-        prompt_career_id,
-        prompt_relationship_id,
-        prompt_finance_state_id,
-        prompt_target_id,
-        prompt_want_kids_id
+        prompt_careers,
+        prompt_relationships,
+        prompt_finance_states,
+        prompt_targets,
+        prompt_want_kids
     } = props
 
 
-    const [prompt_targets, setPrompt_targets] = useState<any[]>([])
-    const [prompt_finance_states, setPrompt_finance_states] = useState<any[]>([])
-    const [prompt_want_kids, setPrompt_want_kids] = useState<any[]>([])
-    const [prompt_relationships, setPrompt_relationships] = useState<any[]>([])
-    const [prompt_careers, setPrompt_careers] = useState<any[]>([])   
+    // const [prompt_targets_list, setPrompt_targets_list] = useState<any[]>([])
+    // const [prompt_finance_states_list, setPrompt_finance_states_list] = useState<any[]>([])
+    // const [prompt_want_kids_list, setPrompt_want_kids_list] = useState<any[]>([])
+    // const [prompt_relationships_list, setPrompt_relationships_list] = useState<any[]>([])
+    // const [prompt_careers_list, setPrompt_careers_list] = useState<any[]>([])   
 
 
-    useEffect(() => {
-        if(token) {
-            service.getAllPrompts(token).then(res => {
-                setPrompt_targets(res?.prompt_targets)
-                setPrompt_careers(res?.prompt_careers)
-                setPrompt_finance_states(res?.prompt_finance_states)
-                setPrompt_want_kids(res?.prompt_want_kids)
-                setPrompt_relationships(res?.prompt_relationships)
-            })
-        }
-    }, [token])
-
+    // useEffect(() => {
+    //     if(token) {
+    //         service.getAllPrompts(token).then(res => {
+    //             setPrompt_targets_list(res?.prompt_targets)
+    //             setPrompt_careers_list(res?.prompt_careers)
+    //             setPrompt_finance_states_list(res?.prompt_finance_states)
+    //             setPrompt_want_kids_list(res?.prompt_want_kids)
+    //             setPrompt_relationships_list(res?.prompt_relationships)
+    //         })
+    //     }
+    // }, [token])
 
 
     return (
@@ -60,8 +60,21 @@ const UserInfoMain:FC<IUser> = (props) => {
                         <div className={styles.label}>
                             Цели знакомства
                         </div>
-                        <div className={styles.text} style={{color: prompt_target_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_target_id && prompt_targets ? prompt_targets.find(i => i?.id === prompt_target_id)?.text : 'Не указано'}
+                        <div className={styles.interests}>
+                            {
+                                prompt_targets?.length > 0 ? (
+                                    prompt_targets?.map((item: any,index: number) => (
+                                        <div className={styles.item} key={index}>
+                                            <Badge/>
+                                            {item.text}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
+                                        {'Не указано'}
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </Col>
@@ -70,8 +83,21 @@ const UserInfoMain:FC<IUser> = (props) => {
                         <div className={styles.label}>
                             Финансовые предпочтения
                         </div>
-                        <div className={styles.text} style={{color: prompt_finance_state_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_finance_state_id && prompt_finance_states ? prompt_finance_states.find(i => i?.id === prompt_finance_state_id)?.text : 'Не указано'}
+                        <div className={styles.interests}>
+                            {
+                                prompt_finance_states?.length > 0 ? (
+                                    prompt_finance_states?.map((item: any,index: number) => (
+                                        <div className={styles.item} key={index}>
+                                            <Badge/>
+                                            {item.text}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
+                                        {'Не указано'}
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </Col>
@@ -80,8 +106,21 @@ const UserInfoMain:FC<IUser> = (props) => {
                         <div className={styles.label}>
                             Карьера
                         </div>
-                        <div className={styles.text} style={{color: prompt_career_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_career_id && prompt_careers ? prompt_careers.find(i => i?.id === prompt_career_id)?.text : 'Не указано'}
+                        <div className={styles.interests}>
+                            {
+                                prompt_careers?.length > 0 ? (
+                                    prompt_careers?.map((item: any,index: number) => (
+                                        <div className={styles.item} key={index}>
+                                            <Badge/>
+                                            {item.text}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
+                                        {'Не указано'}
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </Col>
@@ -90,8 +129,21 @@ const UserInfoMain:FC<IUser> = (props) => {
                         <div className={styles.label}>
                             Семейное положение
                         </div>
-                        <div className={styles.text} style={{color: prompt_relationship_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_relationship_id && prompt_relationships ? prompt_relationships.find(i => i?.id === prompt_relationship_id)?.text : 'Не указано'}
+                        <div className={styles.interests}>
+                            {
+                                prompt_relationships?.length > 0 ? (
+                                    prompt_relationships?.map((item: any,index: number) => (
+                                        <div className={styles.item} key={index}>
+                                            <Badge/>
+                                            {item.text}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
+                                        {'Не указано'}
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </Col>
@@ -100,8 +152,21 @@ const UserInfoMain:FC<IUser> = (props) => {
                         <div className={styles.label}>
                             Дети
                         </div>
-                        <div className={styles.text} style={{color: prompt_want_kids_id ? 'var(--text)' : 'var(--red)'}}>
-                            {prompt_want_kids_id && prompt_want_kids ? prompt_want_kids.find(i => i?.id === prompt_want_kids_id)?.text : 'Не указано'}
+                        <div className={styles.interests}>
+                            {
+                                prompt_want_kids?.length > 0 ? (
+                                    prompt_want_kids?.map((item: any,index: number) => (
+                                        <div className={styles.item} key={index}>
+                                            <Badge/>
+                                            {item.text}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
+                                        {'Не указано'}
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </Col>
@@ -115,7 +180,6 @@ const UserInfoMain:FC<IUser> = (props) => {
                         </div>
                     </div>
                 </Col> */}
-                
             </Row>
         </div>
     )

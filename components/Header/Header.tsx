@@ -9,7 +9,7 @@ import LoginModal from '../LoginModal/LoginModal';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { Cookies } from 'typescript-cookie';
-import { updateToken, updateUserId, updateSocket } from '@/store/actions';
+import { updateToken, updateUserId, updateSocket, updateMenu } from '@/store/actions';
 import Router from 'next/router';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 
@@ -17,7 +17,7 @@ import PromptModal from '@/popups/PromptModal/PromptModal';
 
 const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
     const dispatch = useAppDispatch()
-    const {token, socketChannel} = useAppSelector(s => s)
+    const {token, socketChannel, isMenuOpen} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
 
     const [logoutModal, setLogoutModal] = useState(false)
@@ -64,6 +64,15 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                 <motion.div 
                     // сделать анимацию поочередного появления opacity: 0 => 1
                     className={styles.inner}>
+                    {
+                        token ? (
+                            <button className={`${styles.burger} ${isMenuOpen ? styles.active : ''}`} onClick={() => dispatch(updateMenu())}>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        ) : null
+                    }
                     <Link href={'/start'} className={styles.logo}>
                         <motion.div
                             whileHover={{scale: 1.2}}

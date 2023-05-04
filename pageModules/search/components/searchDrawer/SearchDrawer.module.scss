@@ -1,0 +1,44 @@
+.wrapper {
+    background-color: #fff;
+    z-index: 1000;
+    min-height: 520px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 0 20px;
+
+    .head {
+        padding: 12px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid var(--light_purp_1);
+
+        .title {
+            color: var(--violet);
+        }
+
+        .close {
+
+        }
+    }
+
+    .main {
+        padding: 25px 0;
+        
+        .body {
+            margin-bottom: 25px;
+        }
+
+        .action {
+
+            .item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+    }
+}

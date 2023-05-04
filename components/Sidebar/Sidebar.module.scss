@@ -8,3 +8,19 @@
     // min-height: 426px;
     margin-right: 18px;
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+        position: fixed;    
+        width: 250px;
+        bottom: 0;
+        left: 0;
+        height: calc(100vh - 42px);
+        transform: translateX(-100%);
+        z-index: 1000;
+    }
+
+    .wrapper.active {
+        transform: translateX(0);
+    }
+}

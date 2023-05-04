@@ -8,6 +8,7 @@ import { Row, Col } from 'antd';
 import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import {FC, useEffect} from 'react';
 import { searchFilterType } from './types';
+import { useWindowSize } from 'usehooks-ts';
 
 const countryList = [
     {
@@ -77,12 +78,14 @@ const SearchFilter:FC<searchFilterType> = ({
     setState,
     clearStates,
 
-    clearFilter
+    clearFilter,
+    onToggleDrawer
     
 }) => {
 
     const [showAll, setShowAll] = useState<boolean>(false);
-
+    const {width} = useWindowSize()
+    
     const toggleFilter = () => {
         setShowAll(s => !s)
     }
@@ -128,15 +131,30 @@ const SearchFilter:FC<searchFilterType> = ({
                             
                         </div>
                         <div className={styles.action}>
-                            <div className={styles.action_item}>
-                                <Button
-                                    before={<GoSettings/>}
-                                    variant={'simple'}
-                                    text={showAll ? 'Скрыть' : 'Все фильтры'}
-                                    style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px', boxShadow: 'none !important'}}
-                                    onClick={toggleFilter}
-                                    />
-                            </div>
+                            {
+                                width <= 768 ? (
+                                    <div className={styles.action_item}>
+                                        <Button
+                                            before={<GoSettings/>}
+                                            variant={'simple'}
+                                            text={showAll ? 'Скрыть' : 'Все фильтры'}
+                                            style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px', boxShadow: 'none !important'}}
+                                            onClick={onToggleDrawer}
+                                            />
+                                    </div>
+                                ) : (
+                                    <div className={styles.action_item}>
+                                        <Button
+                                            before={<GoSettings/>}
+                                            variant={'simple'}
+                                            text={showAll ? 'Скрыть' : 'Все фильтры'}
+                                            style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px', boxShadow: 'none !important'}}
+                                            onClick={toggleFilter}
+                                            />
+                                    </div>
+                                )
+                            }
+                            
                             <div className={styles.action_item}>
                                 <Button
                                     load={load}

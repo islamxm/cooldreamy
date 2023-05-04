@@ -11,7 +11,7 @@ import { tabItemPropsTypes } from '../../types';
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { selectOptionType } from '@/components/SelectDef/types';
-
+import SearchDrawer from '../searchDrawer/searchDrawer';
 
 const service = new ApiService();
 
@@ -20,6 +20,7 @@ const service = new ApiService();
 const SearchBody = () => {
     const {token} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
+
     const [searched, setSearched] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -44,6 +45,8 @@ const SearchBody = () => {
 
     const [countriesList, setCountriesList] = useState<selectOptionType[]>([])
     const [statesList, setStatesList] = useState<selectOptionType[]>([])
+
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
 
     const getFinanceList = () => {
@@ -201,6 +204,8 @@ const SearchBody = () => {
 
 
                         clearFilter={clearFilter}
+
+                        onToggleDrawer={() => setIsDrawerOpen(s => !s)}
                         />
 
 
@@ -224,7 +229,11 @@ const SearchBody = () => {
                     <Row gutter={[12,12]}>
                         {
                             list?.map((item, index) => (
-                                <Col span={6} key={index}>
+                                <Col 
+                                    span={12}
+                                    md={8} 
+                                    lg={6}
+                                    key={index}>
                                     <GirlCard
                                         {...item}
                                         />
@@ -248,7 +257,40 @@ const SearchBody = () => {
                 }
                 
             </Row>
+                
+            <SearchDrawer
+                isOpen={isDrawerOpen}
+                onClose={() => setIsDrawerOpen(false)}
+                onOpen={() => setIsDrawerOpen(true)}
+
+                load={load}
+                targetList={targetList}
+                financeList={financeList}
+                // prompt_target_id={prompt_target_id}
+                // prompt_finance_state_id={prompt_finance_state_id}
+                age_range_end={age_range_end}
+                age_range_start={age_range_start}
+                setage_range_start={setage_range_start}
+                setage_range_end={setage_range_end}
+                // setprompt_target_id={setprompt_target_id}
+                // setprompt_finance_state_id={setprompt_finance_state_id}
+                onSearch={onSearch}
+
+                countries={countriesList}
+                country={country}
+                setCountry={setCountry}
+
+                states={statesList}
+                clearStates={() => setStatesList([])}
+                state={state}
+                setState={setState}
             
+
+
+                clearFilter={clearFilter}
+
+                onToggleDrawer={() => setIsDrawerOpen(s => !s)}
+                />
             
             
         </div>  

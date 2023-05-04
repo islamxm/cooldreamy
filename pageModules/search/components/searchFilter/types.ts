@@ -24,5 +24,8 @@ export type searchFilterType = {
     clearStates: (...args: any[]) => any
     setState: (...args: any[]) => any,
     state?: {label: string, value: string, id: string} | null,
-    clearFilter: (...args: any[]) => any
+    clearFilter: (...args: any[]) => any,
+
+
+    onToggleDrawer: (...args: any[]) => any
 }

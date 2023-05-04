@@ -63,3 +63,27 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+
+    .wrapper {
+
+        .main {
+            .list {
+                display: none;
+            }
+            .action {
+
+                .action_item {
+                    button {
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
+                    }
+                    &:last-child {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
