@@ -52,3 +52,17 @@
         }
     }
 }
+
+
+@media (max-width: 768px) {
+    .body {
+        .inner {
+            padding: 15px 0;
+
+            .panel {
+                padding: 20px;
+                border-radius: 20px;
+            }
+        }
+    }
+}

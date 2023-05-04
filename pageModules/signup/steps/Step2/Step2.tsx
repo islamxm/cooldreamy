@@ -43,7 +43,6 @@ const Step2:FC<IPromptSelect> = ({
                                             return [...r]
                                         })
                                     } else {
-                                        console.log(item.id)
                                         setSelectedList((s: any[]) => [...s, Number(item.id)])
                                     }
                                 }}

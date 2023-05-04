@@ -20,3 +20,10 @@
         }
     }
 }
+
+
+@media (max-width: 768px) {
+    .wrapper {
+        max-width: unset;
+    }
+}

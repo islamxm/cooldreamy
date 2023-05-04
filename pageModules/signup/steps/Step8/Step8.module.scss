@@ -24,3 +24,16 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+        max-width: unset;
+
+        .head {
+            font-size: 16px;
+            line-height: 150%;
+        }
+
+
+    }
+}

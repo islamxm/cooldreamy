@@ -47,17 +47,7 @@ const Step1:FC<IStep1> = ({
     errors
 }) => {
     const {token} = useAppSelector(s => s)
-    // const [countryList, setCountryList] = useState([])
-    
 
-
-    // useEffect(() => {
-    //     if(token) {
-    //         service.getCountries(token).then(res => {
-    //             console.log(res)
-    //         })
-    //     }
-    // }, [token])
 
 
 

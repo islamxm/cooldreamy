@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import { updateToken, updateUserId, updateUserData } from '@/store/actions';
 import Router from 'next/router';
 import { Cookies } from 'typescript-cookie';
+import { useWindowSize } from 'usehooks-ts';
 
 //steps
 import Step1 from '../../steps/Step1/Step1';
@@ -30,13 +31,14 @@ const service = new ApiService()
 
 
 const Body:FC = () => {
+    const {width} = useWindowSize()
     // !! для теста
     const {token} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
 
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(9)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -81,8 +83,8 @@ const Body:FC = () => {
 
 
     useEffect(() => {
-        if(token) {
-            service.getAllPrompts(token).then(res => {
+        if('35|UZnCuTbIOcO4liLohFqV6QjMxT09XjCs59huCCPh') {
+            service.getAllPrompts('35|UZnCuTbIOcO4liLohFqV6QjMxT09XjCs59huCCPh').then(res => {
                 setPrompt_targets(res?.prompt_targets)
                 setPrompt_careers(res?.prompt_careers)
                 setPrompt_finance_states(res?.prompt_finance_states)
@@ -144,13 +146,6 @@ const Body:FC = () => {
     }, [currentStep])
 
 
-
-
-
-
-  
-
-    
 
 
     const stepChange = () => {
@@ -219,8 +214,7 @@ const Body:FC = () => {
     useEffect(() => {
         if(currentStep === 1 && token && birthday) {
             service.updateMyProfile({birthday: birthday}, token).then(res => {
-                console.log(res)
-                console.log('birthday',res?.birthday)
+                //
             })
         }
     }, [currentStep, token, birthday, about])
@@ -257,6 +251,7 @@ const Body:FC = () => {
                                                     <Button
                                                         load={load}
                                                         //disabled={nextBtn}
+                                                        middle={width <= 768}
                                                         onClick={stepChange}
                                                         disabled={!(email && name && password && sex && birthday)}
                                                         text={currentStep === 9 ? 'Завершить' : 'Дальше'}

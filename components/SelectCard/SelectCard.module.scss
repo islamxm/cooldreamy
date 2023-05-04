@@ -58,3 +58,31 @@
     touch-action: none;
     opacity: .5;
 }
+
+@media (max-width: 768px) {
+
+    .card {
+        width: 105px;
+        height: 105px;
+        border-radius: 16px;
+
+        .img {
+            width: 45px;
+            height: 45px;
+
+            
+        }
+
+        .ind {
+            top: 10px;
+            right: 10px;
+            width: 10px;
+            height: 10px;
+        }
+
+        .label {
+            font-size: 10px;
+            line-height: 15px;
+        }
+    }
+}
