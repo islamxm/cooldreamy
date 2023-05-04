@@ -76,6 +76,12 @@
         .tabs {
             justify-content: center;
             margin: 0 auto;
+         
+            .item {
+                font-size: 16px;
+                line-height: 24px;
+                margin: 0 8px;
+            }
         }
 
     }

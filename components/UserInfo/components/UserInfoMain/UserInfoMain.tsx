@@ -13,7 +13,7 @@ const UserInfoMain:FC<IUser> = (props) => {
 
     const {
         about_self,
-
+        
         prompt_careers,
         prompt_relationships,
         prompt_finance_states,

@@ -22,7 +22,7 @@ const UserMain:FC<IUser> = (props) => {
         email,
         country,
         state,
-
+        
         prompt_careers,
         prompt_relationships,
         prompt_finance_states,
@@ -72,8 +72,8 @@ const UserMain:FC<IUser> = (props) => {
         setPromptModal(false)
         setTextModal(false)
         setRegionModal(false)
-
     }
+
 
     const switchHead = (type: editItemT | '') => {
         switch(type) {

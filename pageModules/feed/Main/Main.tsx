@@ -81,7 +81,7 @@ const Main = () => {
     const activeIndex = 0;
     const [liking, setLiking] = useState(false)
     const [canceling, setCanceling] = useState(false)
-
+        
 
     
     // ** Первое получение списка

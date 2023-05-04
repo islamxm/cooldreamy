@@ -56,14 +56,14 @@ const SearchDrawer:FC<I> = ({
 
 
     const onLayerClick = (e: any) => {
-        if(e.target.hasAttribute('layer')) {
-            onClose
+        if(e.target.dataset.layer === 'true') {
+            onClose()
         }
     }
 
 
     return (
-        <div onClick={onLayerClick} className={`${styles.wrapper} ${isOpen ? styles.active : ''}`}>
+        <div data-layer onClick={onLayerClick} className={`${styles.wrapper} ${isOpen ? styles.active : ''}`}>
             <div className={styles.in}>
                 <div className={styles.head}>
                     <div className={styles.title}>Фильтр</div>

@@ -11,8 +11,8 @@ import { tabItemPropsTypes } from '../../types';
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { selectOptionType } from '@/components/SelectDef/types';
-import SearchDrawer from '../searchDrawer/searchDrawer';
-
+import SearchDrawer from '../searchDrawer/SearchDrawer';
+import { useWindowSize } from 'usehooks-ts';
 const service = new ApiService();
 
 
@@ -20,7 +20,7 @@ const service = new ApiService();
 const SearchBody = () => {
     const {token} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
-
+   
     const [searched, setSearched] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -47,6 +47,9 @@ const SearchBody = () => {
     const [statesList, setStatesList] = useState<selectOptionType[]>([])
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+
+
 
 
     const getFinanceList = () => {

@@ -90,7 +90,11 @@ const SearchFilter:FC<searchFilterType> = ({
         setShowAll(s => !s)
     }
 
-
+    useEffect(() => {
+        if(width <= 768) {
+            setShowAll(false)
+        }
+    }, [width])
 
     
 
@@ -135,9 +139,10 @@ const SearchFilter:FC<searchFilterType> = ({
                                 width <= 768 ? (
                                     <div className={styles.action_item}>
                                         <Button
+                                            
                                             before={<GoSettings/>}
                                             variant={'simple'}
-                                            text={showAll ? 'Скрыть' : 'Все фильтры'}
+                                            text={'Фильтр'}
                                             style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px', boxShadow: 'none !important'}}
                                             onClick={onToggleDrawer}
                                             />

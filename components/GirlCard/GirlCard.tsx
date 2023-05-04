@@ -116,16 +116,16 @@ const GirlCard:FC<girlCardType> = ({
                     <Row gutter={[2,2]}>
                         {
                             winkable === 1 ? (
-                                <Col span={7}>
+                                <Col span={8} md={7}>
                                     <button onClick={sendWink} className={styles.button}><FaRegSmileWink/></button>
                                 </Col>
                             ) : null
                         }
                         
-                        <Col span={winkable === 1 ? 7 : 12}>
+                        <Col span={winkable === 1 ? 8 : 12} md={winkable === 1 ? 7 : 12}>
                             <button className={styles.button}><AiOutlineStar/></button>
                         </Col>
-                        <Col span={winkable === 1 ? 10 : 12}>
+                        <Col span={winkable === 1 ? 8 : 12} md={winkable === 1 ? 10 : 12}>
                             <button 
                                 onClick={createChat}
                                 className={styles.button}>

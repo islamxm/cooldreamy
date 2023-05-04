@@ -1,6 +1,6 @@
 .card {
-    height: 322px;
-
+    min-height: 322px;
+    height: 100%;
     border-radius: 12px;
     background-color: #fff;
     overflow: hidden;
@@ -107,6 +107,46 @@
             font-size: 15px;
             line-height: 23px;
             color: #888888;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .card {
+        min-height: 200px;
+
+        .main {
+            height: 140px;
+        }
+
+        .body {
+            .action {
+
+                .button {
+                    height: 20px;
+                    span {
+                        font-size: 13px;
+                        line-height: 13px;
+                        display: none;
+                       }
+                }
+               
+            }
+        }
+
+        .info {
+            padding: 2px 5px;
+
+            .name {
+                font-size: 12px;
+                line-height: 14px;
+                margin-bottom: 2px;
+            }
+            .loc {
+                font-size: 10px;
+                line-height: 14px;
+            }
         }
     }
 }
