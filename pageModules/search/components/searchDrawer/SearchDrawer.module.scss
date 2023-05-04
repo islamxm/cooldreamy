@@ -1,12 +1,25 @@
+.wrapper.active {
+    transform: translateY(0);
+}
+
 .wrapper {
-    background-color: #fff;
     z-index: 1000;
-    min-height: 520px;
+    height: 100vh;
     width: 100%;
     position: fixed;
     bottom: 0;
     left: 0;
-    padding: 0 20px;
+    display: flex;
+    align-items: flex-end;
+    transform: translateY(100%);
+    transition: all .3s ease;
+
+    .in {
+        padding: 0 20px;
+        min-height: 520px;
+        background-color: #fff;
+        border: 1px solid red;
+    }
 
     .head {
         padding: 12px 0;
