@@ -12,7 +12,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import notify from '@/helpers/notify';
 import { updateUserData } from '@/store/actions';
 import SelectCard from '@/components/SelectCard/SelectCard';
-
+import { useWindowSize } from 'usehooks-ts';
 const service = new ApiService()
 
 interface cropModalPropsType extends modalPropsType {
@@ -39,7 +39,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
 }) => {
     const dispatch = useAppDispatch()
     const {token} = useAppSelector(s => s);
-    
+    const {width} = useWindowSize()
 
     const [category, setCategory] = useState<number>(0)
     const [srcImg, setSrcImg] = useState<string | null>(null)
@@ -224,6 +224,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                                 {
                                     croppedImage && onSave ? (
                                         <Button
+                                            middle={width <= 768}
                                             load={load}
                                             onClick={onSave}
                                             fill
@@ -232,6 +233,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                                             />
                                     ) : (
                                         <Button
+                                            middle={width <= 768}
                                             load={load}
                                             onClick={showCroppedImage}
                                             fill
@@ -244,6 +246,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                             </Col>
                             <Col span={12}>
                                 <Button
+                                    middle={width <= 768}
                                     fill
                                     style={{padding: '8px 10px', fontSize: 18}}
                                     text='Отменить'

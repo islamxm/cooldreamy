@@ -38,7 +38,7 @@ const Body:FC = () => {
 
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(9)
+    const [currentStep, setCurrentStep] = useState(8)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP

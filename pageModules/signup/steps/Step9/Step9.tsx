@@ -73,6 +73,7 @@ const Step9:FC<I> = ({
                         onChange={uploadFile}
                         id='signup-avatar' 
                         type="file" 
+                        value={''}
                         accept='.png, .jpg, .jpeg'/>
                     <motion.label 
                         transition={{type: 'spring', stiffness: 400, damping: 17}}

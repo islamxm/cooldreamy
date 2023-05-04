@@ -21,14 +21,20 @@
     }
 
     .main {
-        height: 600px;
         border-radius: 12px;
         overflow: hidden;
         background-color: #D9D4FF;
         margin: 0 auto;
         margin-bottom: 22px;
         position: relative; 
-        width: 600px;
+
+        display: block;
+
+        &:after {
+            content: '';
+            display: block;
+            padding-top: 100%;
+        }
 
         
         
@@ -48,5 +54,14 @@
     
     .action {
         
+    }
+}
+
+@media (max-width: 768px) {
+
+    .wrapper {
+        .head {
+            margin-top: 20px;
+        }
     }
 }
