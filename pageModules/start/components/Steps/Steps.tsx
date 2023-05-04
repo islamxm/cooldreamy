@@ -83,7 +83,7 @@ const Steps = () => {
                             onClick={() => Router.push('/signup')}
                             // disabled={true}
                             text='Перейти к знакомствам'
-                            middle={width <= 768}
+                            // middle={width <= 768}
                             />
                     </div>
                 </div>

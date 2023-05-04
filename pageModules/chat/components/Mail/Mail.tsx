@@ -21,6 +21,10 @@ const Mail:FC<I> = ({
     const {userId} = useAppSelector(s => s)
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
+
+    useEffect(() => {
+        console.log(chatList)
+    }, [chatList])
     
         
     useEffect(() => {
@@ -51,8 +55,25 @@ const Mail:FC<I> = ({
                     //     me={item.sender_user_id === Number(userId)} 
                     //     key={index}/>
                     <MailItem
-                        {...item}
                         key={index}
+                        id={item.id}
+                        index={index}
+                        type={item?.letter_messageable_type}
+                        avatar={item?.sender_user?.avatar_url_thumbnail}
+                        name={item?.sender_user?.name}
+                        age={item?.sender_user?.age}
+                        isPayed={item?.letter_messageable?.is_payed === 1 ? true : false}
+                        images={item?.letter_messageable.images?.map((i:any) => ({
+                            image: i.image_url,
+                            thumbnail: i.thumbnail_url,
+                            big_thumbnail: i.big_thumbnail_url,
+                            blur: i.blur_thumbnail_url
+                        }))}
+                        gifts={item?.letter_messageable?.gifts}
+                        sticker={item?.letter_messageable?.sticker}
+                        text={item?.letter_messageable?.text}
+                        updatedAt={item.updated_at}
+                        createdAt={item.created_at}
                         />
                 ))
             }

@@ -20,7 +20,7 @@ const ChatLayout = () => {
     const {query, push} = useRouter()
     const {token, socketChannel} = useAppSelector(s => s)
 
-
+    
 
     // ?? лоадер элементов чата
     const [loadSide, setLoadSide] = useState(false)

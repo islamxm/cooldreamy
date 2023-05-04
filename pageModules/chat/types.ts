@@ -55,7 +55,7 @@ export type IMessageable = {
     updated_at?: string
     gifts?: any[],
     id?: number,
-    text?: string,
+    text?: string | null,
     from_user_id?: number,
     to_user_id?: number,
     thumbnail_url?: string,
@@ -145,4 +145,93 @@ export interface IChatFilterType {
 
 
 
-export type messageStatuses = 'send' | 'read' | 'proccess' | 'unread'
+
+
+
+export type chatTypes = 'chat' | 'mail'
+
+export type messageStatusTypes = 'send' | 'read' | 'proccess' | 'unread'
+
+
+export type chatMessageTypes = 
+    'App\\Models\\ChatImageMessage' |
+    'App\\Models\\ChatTextMessage' |
+    'App\\Models\\ChatWinkMessage' | 
+    'App\\Models\\ChatGiftMessage' |
+    'App\\Models\\ChatStickerMessage'
+
+
+export type chatMailTypes = 
+    'App\\Models\\LetterTextMessage'
+
+export type messageGiftType = {
+    id: number | string,
+    category?: any,
+    credits?: any,
+    name?: string,
+    picture_url?: string,
+}
+
+export type messageStickerType = {
+    id: number | string,
+    category?: any,
+    credits?: any,
+    name?: string,
+    picture_url?: string,
+}
+
+export interface IDialogItem {
+    id: number | string
+    index?: number
+    avatar?: string,
+    age?: number | string,
+    last_message?: unknown,
+    unread_count?: number,
+    status?: messageStatusTypes
+    isVerified?: boolean,
+    isFav?: boolean
+}
+
+export interface IMessage {
+    id: number | string,
+    index?: number,
+    type: chatMessageTypes,
+    avatar?: string,
+    isSelf?: boolean,
+    status?: messageStatusTypes
+
+    createdAt?: string,
+    updatedAt?: string,
+
+    text?: string | null,
+    images: {image?: string, thumbnail?: string}[] | [],
+    gifts?: messageGiftType[] | [],
+    sticker?: messageStickerType | null,
+}
+
+
+export interface IMail {
+    id: number | string,
+    index?: number,
+    type: chatMailTypes,
+    avatar?: string,
+    name?: string,
+    age?: number
+    isPayed?: boolean,
+    images: {
+        image: string, 
+        thumbnail: string
+        big_thumbnail: string,
+        blur: string
+    }[] | [],
+    gifts?: messageGiftType[] | [],
+
+    createdAt?: string,
+    updatedAt?: string,
+    sticker?: messageStickerType | null,
+    text?: string | null
+}
+
+
+
+

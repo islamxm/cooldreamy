@@ -1,6 +1,6 @@
 import styles from './DialogItem.module.scss';
-import {FC, useState, useEffect, useCallback} from 'react';
-import { dialogItemType } from '@/pageModules/chat/types';
+import {FC, useState, useEffect, useCallback, memo} from 'react';
+import { chatMessageTypes, dialogItemType } from '@/pageModules/chat/types';
 import Avatar from '@/components/Avatar/Avatar';
 import img from '@/public/assets/images/avatar-placeholder.png';
 import {BsCheckAll} from 'react-icons/bs';
@@ -11,35 +11,42 @@ import moment from 'moment';
 import {FaSmileWink} from 'react-icons/fa';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 
+import { IMessage } from '@/pageModules/chat/types';
 
-interface I extends dialogItemType {
+
+interface I extends IMessage {
     showAvatar?: boolean
 }
 
 
 
-const DialogItem:FC<I> = ({
-    me,
-    is_read_by_recepient,
-    chat_messageable,
-    chat_messageable_type,
-    updated_at,
-    created_at,
+const DialogItemComponent:FC<I> = ({
+    id,
+    avatar,
+    createdAt,
+    updatedAt,
+    status,
+    isSelf,
+    type,
+    text,
+    images,
+    sticker,
+    gifts,
     index,
     showAvatar
 }) => {
 
 
-    const switchMessageType = useCallback((chat_messageable_type?: string) => {
-        switch(chat_messageable_type) {
+    const switchMessageType = (type?: chatMessageTypes) => {
+        switch(type) {
             case 'App\\Models\\ChatImageMessage':
                 return (
                     <div className={styles.media}>
                         <FancyboxWrapper>
                             <div className={styles.body}>
-                                <a data-fancybox="gallery" href={chat_messageable?.image_url} className={styles.item}>
+                                <a data-fancybox="gallery" href={images[0].image} className={styles.item}>
                                     <Image
-                                        src={chat_messageable?.thumbnail_url ? chat_messageable?.thumbnail_url : ''}
+                                        src={images[0].thumbnail ? images[0].thumbnail : ''}
                                         loader={(p) => {
                                             return p?.src && typeof p?.src === 'string' ? p?.src : ''
                                         }}
@@ -51,7 +58,7 @@ const DialogItem:FC<I> = ({
                             </div>
                         </FancyboxWrapper>
                         
-                        <div className={styles.time}>{moment(updated_at).format('hh:mm')}</div>
+                        <div className={styles.time}>{moment(updatedAt).format('hh:mm')}</div>
                     </div>
                 ) 
             case "App\\Models\\ChatTextMessage":
@@ -59,11 +66,11 @@ const DialogItem:FC<I> = ({
                     <div className={styles.bubble}>
                         <div className={styles.text}>
                             <p>
-                                {chat_messageable?.text}
+                                {text}
                             </p>
                             
                         </div>
-                        <div className={styles.time}>{moment(updated_at).format('hh:mm')}</div>
+                        <div className={styles.time}>{moment(updatedAt).format('hh:mm')}</div>
                     </div>      
                 )
             case "App\\Models\\ChatWinkMessage":
@@ -85,7 +92,7 @@ const DialogItem:FC<I> = ({
                     <div className={styles.media}>
                         <div className={styles.body}>
                             {
-                                chat_messageable?.gifts?.map((item,index) => (
+                                gifts?.map((item,index) => (
                                     <div className={styles.item} key={index}>
                                          <Image
                                             src={item?.picture_url ? item?.picture_url : ''}
@@ -103,23 +110,40 @@ const DialogItem:FC<I> = ({
                     </div>
                    
                 )
+            case "App\\Models\\ChatStickerMessage":
+                return (
+                    <div className={styles.media}>
+                        <div className={styles.body}>
+                            <div className={styles.item}>
+                                    <Image
+                                    src={sticker?.picture_url ? sticker?.picture_url : ''}
+                                    loader={(p) => {
+                                        return p?.src && typeof p?.src === 'string' ? p?.src : ''
+                                    }}
+                                    alt=''
+                                    width={100}
+                                    height={100}
+                                    />
+                            </div>
+                        </div>
+                    </div>
+                )
             default:
                 return null
 
         }
-    }, [chat_messageable_type, chat_messageable, updated_at])
-
+    }
 
 
     return (
-        <div className={`${styles.wrapper} ${me ? styles.right : styles.left}`}>
+        <div className={`${styles.wrapper} ${isSelf ? styles.right : styles.left}`}>
             {
-                me ? (
+                isSelf ? (
                     <div className={`${styles.body} ${styles.me}`}>
                         <motion.div className={styles.message}>
-                            {switchMessageType(chat_messageable_type)}
+                            {switchMessageType(type)}
                             {
-                                is_read_by_recepient === 1 ? (
+                                status === 'read' ? (
                                     <div className={styles.ex}>
                                         Просмотрено
                                         <div className={styles.icon}><BsCheckAll/></div>
@@ -147,7 +171,7 @@ const DialogItem:FC<I> = ({
                         </div>
                         <div
                             className={styles.message}>
-                            {switchMessageType(chat_messageable_type)}
+                            {switchMessageType(type)}
                         </div>
                     </div>
                 )   
@@ -156,5 +180,5 @@ const DialogItem:FC<I> = ({
     )
 }
 
-
+const DialogItem = memo(DialogItemComponent)
 export default DialogItem;

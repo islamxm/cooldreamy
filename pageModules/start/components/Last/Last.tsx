@@ -7,7 +7,7 @@ import Container from '@/components/Container/Container';
 import Image from 'next/image';
 import {motion} from 'framer-motion';
 import { container, item } from '@/helpers/variantsOrderAnim';
-import useWindowSize from 'usehooks-ts/dist/esm/useWindowSize/useWindowSize';
+import { useWindowSize } from 'usehooks-ts';
 
 
 const Last:FC = () => {

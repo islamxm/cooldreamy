@@ -45,6 +45,24 @@ const ChatAction = ({
 
     const onStickerSelect = (id: number) => {
         console.log(id)
+        if(token && id) {
+            if(query?.id && typeof query?.id === 'string') {
+                if(type === 'chat') {
+                    setLoad(true)
+                    service.sendMessage_sticker({
+                        chat_id: Number(query?.id),
+                        sticker_id: id
+                    }, token).then(res => {
+                        console.log(res)
+                    }).finally(() => {
+                        setLoad(false)
+                    })
+                }
+                if(type === 'mail') {
+                    // 
+                }
+            }
+        }
     }
 
     const onSmileSelect = (label: string) => {
@@ -176,6 +194,15 @@ const ChatAction = ({
     }
 
 
+    const onEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        // if (e.keyCode == 13 && e.shiftKey)
+        if(e.keyCode === 13 && !(e.keyCode == 13 && e.shiftKey)) {
+            e.preventDefault()
+            if(text) {
+                sendMessage()
+            }
+        }
+    }
     
 
   
@@ -209,6 +236,7 @@ const ChatAction = ({
                 <div className={styles.main}>
                     <div className={styles.input}>
                         <TextareaAutosize 
+                            onKeyDown={onEnter}
                             maxLength={300}
                             // onKeyDown={(e) => {
                             //     if(e.key === 'Enter' && text) {

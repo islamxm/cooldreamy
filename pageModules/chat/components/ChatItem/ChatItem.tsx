@@ -31,9 +31,7 @@ const ChatItem = ({
     
     const {avatar_url, avatar_url_thumbnail, name} = another_user;
 
-    useEffect(() => {
-        console.log(last_message)
-    }, [last_message])
+
 
 
     const switchChatType = (type?: string) => {
@@ -43,11 +41,15 @@ const ChatItem = ({
                     'Картинка'
                 )
             case 'App\\Models\\ChatTextMessage':
-                return (
-                    <LinesEllipsis
+                
+                return  (
+                    typeof last_message?.chat_messageable?.text === 'string' ? (
+                                            <LinesEllipsis
                         text={last_message?.chat_messageable?.text}
                         maxLine={2}
                         />
+                    ) : null
+
                 )
             case 'App\\Models\\ChatWinkMessage':
                 return (
@@ -138,10 +140,15 @@ const ChatItem = ({
                             </Col>
                             <Col span={24}>
                                 <div className={styles.dialog}>
-                                    <LinesEllipsis
-                                        text={last_message?.letter_messageable?.text}
-                                        maxLine={2}
+                                    {
+                                        typeof last_message?.letter_messageable?.text === 'string' ? (
+                                            <LinesEllipsis
+                                                text={last_message?.letter_messageable?.text}
+                                                maxLine={2}
                                         />
+                                        ) : null
+                                    }
+                                    
                                 </div>
                             </Col>
                         </Row>
