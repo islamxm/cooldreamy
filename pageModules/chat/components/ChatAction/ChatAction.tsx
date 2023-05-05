@@ -81,12 +81,15 @@ const ChatAction = ({
                         chat_id: Number(query?.id),
                         text
                     }, token).then(res => {
+                        console.log(res)
+                        // const sender_user = res?.ch
+                        // console.log(res)
                         updateDialogsList && updateDialogsList((s: any) => {
                             const m = s;
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
                             return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
                         })
-                        
+                        console.log(res?.chat?.last_message)
                         updateChat(res?.chat?.last_message)
 
                     }).finally(() => {

@@ -199,8 +199,13 @@ const ChatLayout = () => {
 
     // ?? обновление чата
     const updateChat = useCallback((item: any) => {
+        
         setChatList(s => {
-            return [item, ...s]
+            const sender_user = s.find(i => i.sender_user?.id === item.sender_user_id)?.sender_user
+            if(sender_user) {
+                return [{...item, sender_user}, ...s]
+            } else return [item, ...s]
+            
         })
     }, [chatList])
 

@@ -26,7 +26,6 @@ const UserCard:FC<IUserCard> = ({
 }) => {
     const {token} = useAppSelector(s => s)
 
-
     
 
 

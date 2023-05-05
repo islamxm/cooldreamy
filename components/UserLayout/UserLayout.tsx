@@ -2,6 +2,7 @@ import styles from './UserLayout.module.scss';
 import {FC} from 'react';
 import { userLayoutPropsType } from './types';
 
+
 const UserLayout:FC<userLayoutPropsType> = ({
     side,
     main
@@ -11,6 +12,7 @@ const UserLayout:FC<userLayoutPropsType> = ({
         <div className={styles.wrapper}>
             <div className={styles.side}>
                 {side}
+
             </div>
             <div className={styles.main}>
                 {main}

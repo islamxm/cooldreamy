@@ -9,9 +9,9 @@ import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
-import {FixedSizeList} from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import InfiniteLoader from 'react-window-infinite-loader'
+// import {FixedSizeList} from 'react-window';
+// import AutoSizer from 'react-virtualized-auto-sizer';
+// import InfiniteLoader from 'react-window-infinite-loader'
 
 interface I extends IChat {
     height?: string
@@ -43,9 +43,9 @@ const Dialog:FC<I> = ({
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
 
-    useEffect(() => {
-        console.log(chatList)
-    }, [chatList])
+    // useEffect(() => {
+    //     console.log(chatList)
+    // }, [chatList])
     
 
     
@@ -63,8 +63,7 @@ const Dialog:FC<I> = ({
         }
     }, [inView, loadMore, updateChatListPage])
    
-   
-    useEffect(() => console.log(chatList), [chatList])
+
 
     return (
         <div className={styles.wrapper} style={{maxHeight: height}}>

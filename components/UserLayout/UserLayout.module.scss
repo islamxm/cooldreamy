@@ -14,3 +14,18 @@
         overflow: hidden;
     }
 }
+
+@media (max-width: 1000px) {
+    .wrapper {
+        flex-wrap: wrap;
+
+        .side {
+            flex: unset;
+            width: 100%;
+        }
+
+        .main {
+            width: 100%;
+        }
+    }
+}

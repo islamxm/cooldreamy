@@ -11,13 +11,13 @@ import {useEffect, useState} from 'react';
 import ApiService from "@/service/apiService";
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import { IUser } from "@/models/IUser";
-
-
+import UserCardMob from "@/pageModules/profile/components/UserCardMob/UserCardMob";
+import { useWindowSize } from "usehooks-ts";
 const service = new ApiService()
 
 const Profile = () => {
     const {token, userData} = useAppSelector(s => s)
-
+    const {width} = useWindowSize()
     //userCard data
     // const [data, setData] = useState<IUser | null>()
 
@@ -43,20 +43,24 @@ const Profile = () => {
                 <Sidebar/>
                 <UserLayout
                     side={
-                        <UserCard
-                            {...userData}
-                            >
-                            <Button
-                                disabled
-                                text='Подтвердить фото'
-                                style={{
-                                    padding: '8px 10px',
-                                    fontSize: 18,
-                                    lineHeight: '27px',
-                                    width: '100%'
-                                }}
-                                />
-                        </UserCard>
+                        width <= 1000 ? (
+                            <UserCardMob {...userData}/>
+                        ) : (
+                            <UserCard
+                                {...userData}
+                                >
+                                <Button
+                                    disabled
+                                    text='Подтвердить фото'
+                                    style={{
+                                        padding: '8px 10px',
+                                        fontSize: 18,
+                                        lineHeight: '27px',
+                                        width: '100%'
+                                    }}
+                                    />
+                            </UserCard>
+                        )
                     }
                     main={
                         <UserInfo
