@@ -54,7 +54,6 @@ const menuList:menuItemType[] = [
         badge: 0,
         onClick: () => {},
     },
-    
 ]
 
 

@@ -38,7 +38,7 @@ const Body:FC = () => {
 
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(8)
+    const [currentStep, setCurrentStep] = useState(0)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -83,8 +83,8 @@ const Body:FC = () => {
 
 
     useEffect(() => {
-        if('35|UZnCuTbIOcO4liLohFqV6QjMxT09XjCs59huCCPh') {
-            service.getAllPrompts('35|UZnCuTbIOcO4liLohFqV6QjMxT09XjCs59huCCPh').then(res => {
+        if(token) {
+            service.getAllPrompts(token).then(res => {
                 setPrompt_targets(res?.prompt_targets)
                 setPrompt_careers(res?.prompt_careers)
                 setPrompt_finance_states(res?.prompt_finance_states)

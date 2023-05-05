@@ -5,11 +5,24 @@ import Descr from "@/pageModules/start/components/Descr/Descr";
 import Adv from "@/pageModules/start/components/Adv/Adv";
 import Last from "@/pageModules/start/components/Last/Last";
 import Faq from "@/pageModules/start/components/Faq/Faq";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import { useWindowSize } from "usehooks-ts";
+import { useAppSelector } from "@/hooks/useTypesRedux";
 
 
 const StartPage: React.FC = () => {
+    const {width} = useWindowSize()
+    const {token} = useAppSelector(s => s)
+
+    
+
     return (
         <>
+            {
+                token && width <= 768 ? (
+                    <Sidebar/>
+                ) : null
+            }
             <Hero/>
             <Steps/>
             <Descr/>

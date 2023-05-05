@@ -27,7 +27,8 @@ const MailItem:FC<IMail> = ({
     createdAt,
     updatedAt,
     sticker,
-    text
+    text,
+    isSelf
     // letter_id,
     // letter_messageable,
     // letter_messageable_id,
@@ -47,7 +48,7 @@ const MailItem:FC<IMail> = ({
     const switchMessageType = (type?: chatMailTypes) => {
         switch(type) {
             case "App\\Models\\LetterTextMessage":
-                return (
+                return  (
                     <div className={styles.content_text}>
                         {
                             text ? (
@@ -66,7 +67,7 @@ const MailItem:FC<IMail> = ({
                                                 width={100}
                                                 height={100}
                                                 alt=''
-                                                src={isPayed ? item.thumbnail : item.blur}
+                                                src={isPayed && item?.thumbnail ? item.thumbnail : (item.blur ? item?.blur : '')}
                                                 loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
                                                 />
                                         </div>

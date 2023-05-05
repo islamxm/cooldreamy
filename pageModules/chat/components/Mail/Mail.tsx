@@ -43,7 +43,7 @@ const Mail:FC<I> = ({
 
 
 
-
+    useEffect(() => console.log(chatList), [chatList])
     
 
     return (
@@ -74,6 +74,7 @@ const Mail:FC<I> = ({
                         text={item?.letter_messageable?.text}
                         updatedAt={item.updated_at}
                         createdAt={item.created_at}
+                        isSelf={item.sender_user_id === Number(userId)}
                         />
                 ))
             }

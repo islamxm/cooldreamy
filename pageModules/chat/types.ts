@@ -229,7 +229,8 @@ export interface IMail {
     createdAt?: string,
     updatedAt?: string,
     sticker?: messageStickerType | null,
-    text?: string | null
+    text?: string | null,
+    isSelf?: boolean
 }
 
 

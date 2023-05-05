@@ -100,7 +100,7 @@ const ChatAction = ({
                         letter_id: Number(query?.id),
                         text
                     }, token).then(res => {
-                        
+                        console.log(res)
                         updateDialogsList && updateDialogsList((s: any) => {
                             const m = s;
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
