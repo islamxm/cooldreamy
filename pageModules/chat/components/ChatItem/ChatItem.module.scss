@@ -64,3 +64,14 @@
         top: 0;
     }
 }
+
+@media (max-width: 768px) {
+
+    .wrapper {
+
+        .body {
+            width: 100%;
+        }
+        
+    }
+}

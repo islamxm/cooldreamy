@@ -3,6 +3,7 @@
     overflow: hidden;
 
     
+    
     .sidebar {
         width: 300px;
         flex: 0 0 auto;
@@ -27,6 +28,56 @@
         }
 
         .action {
+
+        }
+    }
+}
+
+
+@media (max-width: 768px) {
+    .wrapper {
+
+        .bc {
+            height: 42px;
+            background: #F3F3F3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0 50px;
+
+            
+
+            .back {
+                position: absolute;
+                top: calc(50% - 15px);
+                left: 15px;
+            }
+
+            .main {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 21px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .avatar {
+                position: absolute;
+                top: calc(50% - 15px);
+                right: 15px;
+            }
+        }
+
+        .sidebar {
+            width: 100%;
 
         }
     }

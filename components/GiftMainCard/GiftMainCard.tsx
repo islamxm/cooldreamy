@@ -5,7 +5,10 @@ import Image from 'next/image';
 import placeholder from '@/public/assets/images/logo.svg';
 import Button from '../Button/Button';
 import {AiOutlineGift} from 'react-icons/ai'
-
+import IconButton from '../IconButton/IconButton';
+import {FiShoppingCart} from 'react-icons/fi';
+import {BsTrash, BsPlus} from 'react-icons/bs';
+import { useWindowSize } from 'usehooks-ts';
 const GiftMainCard:FC<giftCardPropsType> = ({
     onSelect,
     image,
@@ -14,7 +17,7 @@ const GiftMainCard:FC<giftCardPropsType> = ({
     id,
     active
 }) => {
-
+    const {width} = useWindowSize()
 
     return (
         <div className={styles.wrapper}>
@@ -41,23 +44,49 @@ const GiftMainCard:FC<giftCardPropsType> = ({
             <div className={styles.action}>
                 {
                     active ? (
-                        <Button
-                            text='Добавлен'
-                            after={<AiOutlineGift/>}
-                            middle
-                            onClick={() => {
-                                onSelect && onSelect('remove', id)
-                            }}
-                            />
+                        width <= 768 ? (
+                            <IconButton
+                                size={35}
+                                icon={<BsTrash size={15}/>}
+                                variant={'danger'}
+                                onClick={() => {
+                                    onSelect && onSelect('remove', id)
+                                }}
+                                />
+                        ) : (
+                            <Button
+                                text='Добавлен'
+                                after={<AiOutlineGift/>}
+                                middle={width > 768}
+                                small={width <= 768}
+                                onClick={() => {
+                                    onSelect && onSelect('remove', id)
+                                }}
+                                />
+                        )
+                        
                     ) : (
-                        <Button
-                            onClick={() => {
-                                onSelect && onSelect('add', id)
-                            }} 
-                            middle
-                            variant={'bordered'}
-                            after={<AiOutlineGift/>}
-                            text='Добавить'/>
+                        width <= 768 ? (
+                            <IconButton
+                                size={35}
+                                icon={<BsPlus size={30}/>}
+                                variant={'default'}
+                                onClick={() => {
+                                    onSelect && onSelect('add', id)
+                                }} 
+                                />
+                        ) : (
+                            <Button
+                                onClick={() => {
+                                    onSelect && onSelect('add', id)
+                                }} 
+                                middle={width > 768}
+                                small={width <= 768}
+                                variant={'bordered'}
+                                after={<AiOutlineGift/>}
+                                text='Добавить'/>
+                        )
+                        
                     )
                 }
                

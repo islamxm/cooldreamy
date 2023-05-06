@@ -3,7 +3,7 @@ import {Row, Col} from 'antd';
 import Button from '@/components/Button/Button';
 import Radio from '@/components/Radio/Radio';
 import {useState, useEffect} from 'react';
-
+import { useWindowSize } from 'usehooks-ts'; 
 
 
 const mockList = [
@@ -42,6 +42,7 @@ const ChatMock = ({
     onClose: (e: any) => void,
     onSend: (text: string) => void
 }) => {
+    const {width} = useWindowSize()
     const [selectValue, setSelectValue] = useState('') 
 
 

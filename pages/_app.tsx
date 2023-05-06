@@ -21,12 +21,13 @@ import WcLoader from '@/components/WcLoader/WcLoader';
 import { useRouter } from 'next/router';
 import 'moment/locale/ru'
 import moment from 'moment';
+import { useWindowSize } from 'usehooks-ts';
 
 
 function App({ Component, pageProps }: AppProps) {
 	const router = useRouter()
 	const [wc, setWc] = useState(true)
-
+	const {width} = useWindowSize()
 	
 
 
@@ -71,13 +72,24 @@ function App({ Component, pageProps }: AppProps) {
 							
 
 							<ToastContainer/>
-							<Header
-								auth={true}
-								/>
+							{
+								width <= 768 && router?.pathname?.includes('/chat') && router?.query?.id ? (
+									null
+								) : (
+									<Header
+										auth={true}
+										/>
+								)
+							}
+
 							<main>
 								<Component {...pageProps} />
 							</main>
-							<Footer/>
+							{
+								width <= 768 && router?.pathname?.includes('/chat') ? (
+									null
+								) : <Footer/>
+							}
 						</MainWrapper>
 				</PrivateRoute>
 			</ConfigProvider>

@@ -95,3 +95,21 @@
         margin-left: 12px;
     }
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+        border-radius: 0;
+
+        .main {
+
+            .input {
+                
+                textarea {
+                    font-size: 14px;
+                    // line-height: 100%;
+                    line-height: 19px;
+                }
+            }
+        }
+    }
+}

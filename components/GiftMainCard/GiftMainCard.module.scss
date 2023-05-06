@@ -47,3 +47,21 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+
+        .head {
+            .label {
+                font-size: 14px;
+                line-height: 150%;
+            }
+
+
+        }
+        .img {
+            width: 70px;
+            height: 70px;
+        }
+    }
+}

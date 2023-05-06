@@ -37,3 +37,15 @@
 
     }
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+
+        .list {
+
+            .item {
+                width: calc((100% / 2) - 20px);
+            }
+        }
+    }
+}

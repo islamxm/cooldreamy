@@ -63,6 +63,21 @@ const endpoints = {
     addProfileImage: `${API_PATH}image_store`,
 
     getAllPrompts: `${API_PATH}get_all_prompts`,
+
+
+
+    // activity
+    getActivityWatchers: `${API_PATH}activities/get_my_watchers`,
+    getActivityMyFavs: `${API_PATH}activities/get_my_favorite`,
+    getActivityOtherFavs: `${API_PATH}activities/get_favorited_me`,
+    getActivityMutualFavs: `${API_PATH}activities/get_mutual_favorite`,
+
+    getActivityMyLikes: `${API_PATH}activities/get_my_likes`,
+    getActivityOtherLikes: `${API_PATH}activities/get_liked_me`,
+    getActivityMutualLikes: `${API_PATH}activities/get_mutual_likes`,
+
+    addUserToFav: `${API_PATH}activities/add_favorite`,
+    deleteUserFromFav: `${API_PATH}activities/disable_from_favorite`,
 }
 
 export default endpoints;

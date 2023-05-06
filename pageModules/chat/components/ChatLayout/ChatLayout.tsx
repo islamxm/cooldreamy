@@ -10,6 +10,8 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import moment from 'moment';
 import notify from '@/helpers/notify';
 import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
+import { useWindowSize } from 'usehooks-ts';
+
 
 const service = new ApiService()
 
@@ -17,6 +19,7 @@ const service = new ApiService()
 
 const ChatLayout = () => {
     // !! глобальные инстанции
+    const {width} = useWindowSize()
     const {query, push} = useRouter()
     const {token, socketChannel} = useAppSelector(s => s)
 
@@ -30,6 +33,7 @@ const ChatLayout = () => {
 
     // ?? ид текущего чата (опционально)
     const [currentChatId, setCurrentChatId] = useState<number>()
+    const [currentUser, setCurrentUser] = useState<any>(null)
 
     // !! фильтры
     const [chatType, setChatType] = useState<'chat' | 'mail'>()
@@ -99,6 +103,7 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
+                    setCurrentUser(res?.another_user)
                     setTotalChatItemCount(res?.chat_messages?.total)
                     if(chatListPage === 1) {
                         setChatList(res?.chat_messages?.data)
@@ -148,8 +153,7 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
-                    console.log(res)
-                    
+                    setCurrentUser(res?.another_user)
                     setTotalChatItemCount(res?.letter_messages?.total)
                     if(chatListPage === 1) {
                         setChatList(res?.letter_messages?.data)
@@ -248,14 +252,30 @@ const ChatLayout = () => {
     return (
         <div className={styles.wrapper}>
             <Row>
-                <Col span={24}>
-                    <div className={styles.top}>
-                        <Filter
-                            activeType={chatType}
-                            onTypeChange={setChatType}
-                            />
-                    </div>
-                </Col>
+                {
+                    width <= 768 ? (
+                        !currentChatId ? (
+                            <Col span={24}>
+                                <div className={styles.top}>
+                                    <Filter
+                                        activeType={chatType}
+                                        onTypeChange={setChatType}
+                                        />
+                                </div>
+                            </Col>
+                        ) : null
+                    ) : (
+                        <Col span={24}>
+                            <div className={styles.top}>
+                                <Filter
+                                    activeType={chatType}
+                                    onTypeChange={setChatType}
+                                    />
+                            </div>
+                        </Col>
+                    )
+                }
+                
                 <Col span={24}>
                     <div className={styles.main}>
                         <ChatBody
@@ -276,6 +296,8 @@ const ChatLayout = () => {
                             ChatType={chatType}
                             loadMain={loadMain}
                             loadSide={loadSide}
+
+                            currentUser={currentUser}
                             />
                     </div>
                 </Col>

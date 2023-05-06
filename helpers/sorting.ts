@@ -12,9 +12,7 @@ export const sortingChatList = (array: any[]) => {
 
 export const sortingDialogList = (array: any[]) => {
     if(array?.length > 0) {
-        return [...array].sort((a, b) => {
-            return moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1
-        })
+        return [...array].sort((a, b) => moment(a?.updated_at).valueOf() < moment(b?.updated_at).valueOf() ? 1 : -1)
     } else {
         return array
     }

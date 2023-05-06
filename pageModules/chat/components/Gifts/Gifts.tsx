@@ -7,6 +7,7 @@ import GiftCard from '@/components/GiftCard/GiftCard';
 import {AiOutlineGift} from 'react-icons/ai';
 import GiftMainCard from '@/components/GiftMainCard/GiftMainCard';
 import {AnimatePresence} from 'framer-motion';
+import { useWindowSize } from 'usehooks-ts';
 
 
 const service = new ApiService()
@@ -23,6 +24,7 @@ const Gifts = ({
     onSend: (list: string) => any,
     onClose: (...args: any[]) => any
 }) => {
+    const {width} = useWindowSize()
     const {token} = useAppSelector(s => s);
     const [list, setList] = useState<any[]>([])
     const [selected, setSelected] = useState<number[]>([])
@@ -83,6 +85,7 @@ const Gifts = ({
                         <div 
                             className={styles.action}>
                             <Button
+                                middle={width <= 768}
                                 onClick={onSubmit}
                                 after={<AiOutlineGift/>}
                                 text={`Купить ${selected?.length} ${selected?.length > 1 ? 'подарка' : 'подарок'}`}

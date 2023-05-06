@@ -12,6 +12,7 @@ import { PulseLoader } from 'react-spinners';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import moment from 'moment';
 import { sortingDialogList, sortingChatList } from '@/helpers/sorting';
+import { useWindowSize } from 'usehooks-ts';
 
 
 const service = new ApiService()
@@ -27,6 +28,7 @@ const ChatAction = ({
     getGifts: (type: 'gift') => any,
     updateDialogsList?: (...args: any[]) => any
 }) => {
+    const {width} = useWindowSize()
     const {token} = useAppSelector(s => s)
     const {query} = useRouter()
     const {type, id} = query
@@ -83,14 +85,14 @@ const ChatAction = ({
                         text
                     }, token).then(res => {
                         updateDialogsList && updateDialogsList((s: any) => {
-                            
+                            console.log(s)
                             const m = s;
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                            
+
                             return sortingDialogList([...m])
+                            
                         })
                         updateChat(res?.chat?.last_message)
-
                     }).finally(() => {
                         setLoad(false)
                         setText('')
@@ -234,62 +236,69 @@ const ChatAction = ({
                         <TextareaAutosize 
                             onKeyDown={onEnter}
                             maxLength={300}
-                            // onKeyDown={(e) => {
-                            //     if(e.key === 'Enter' && text) {
-                            //         sendMessage()
-                            //     } 
-                            // }}
                             value={text}
                             onChange={e => setText(e.target.value)}
                             maxRows={8}
                             onHeightChange={e => {
-                                setHeight(e + 47)
-                                setDrawerPos(e + 47)
+                                if(width <= 768) {
+                                    setHeight(e + 42)
+                                    setDrawerPos(e + 42)
+                                } else {
+                                    setHeight(e + 47)
+                                    setDrawerPos(e + 47)
+                                }
+                                
                             }}
                             placeholder='Напишите сообщение...'
                             />
                     </div>
-                    <div className={styles.action}>
-                        <div className={styles.item}>
-                            <IconButton
-                                onClick={() => setStickers(s => !s)}
-                                variant={'bordered'}
-                                size={30}
-                                icon={<AiOutlineSmile size={20}/>}
-                                />
-                        </div>
-                        <div className={styles.item}>
-                            <IconButton
-                                onClick={getGifts}
-                                variant={'bordered'}
-                                size={30}
-                                icon={<AiOutlineGift size={20}/>}
-                                />
-                        </div>
-                        <div className={`${styles.item} ${styles.upload}`}>
-                            <input 
-                                id='chat_media_upload'
-                                type="file" 
-                                multiple={type === 'mail'}
-                                onChange={uploadMedia}
-                                accept='.png, .jpg, .jpeg'
-                                value=''
-                                />
-                             <IconButton 
-                                fileId='chat_media_upload' 
-                                variant={'bordered'}
-                                size={30}
-                                icon={<AiOutlineCamera size={20}/>}
-                                /> 
-                            
-                        </div>
-                    </div>
+                    {
+                        width <= 768 ? (
+                            null
+                        ) : (
+                            <div className={styles.action}>
+                                <div className={styles.item}>
+                                    <IconButton
+                                        onClick={() => setStickers(s => !s)}
+                                        variant={'bordered'}
+                                        size={30}
+                                        icon={<AiOutlineSmile size={20}/>}
+                                        />
+                                </div>
+                                <div className={styles.item}>
+                                    <IconButton
+                                        onClick={getGifts}
+                                        variant={'bordered'}
+                                        size={30}
+                                        icon={<AiOutlineGift size={20}/>}
+                                        />
+                                </div>
+                                <div className={`${styles.item} ${styles.upload}`}>
+                                    <input 
+                                        id='chat_media_upload'
+                                        type="file" 
+                                        multiple={type === 'mail'}
+                                        onChange={uploadMedia}
+                                        accept='.png, .jpg, .jpeg'
+                                        value=''
+                                        />
+                                    <IconButton 
+                                        fileId='chat_media_upload' 
+                                        variant={'bordered'}
+                                        size={30}
+                                        icon={<AiOutlineCamera size={20}/>}
+                                        /> 
+                                    
+                                </div>
+                            </div>
+                        )
+                    }
                 </div>
                 <div className={styles.send}>
                     <IconButton
                         disabled={!text}
                         onClick={sendMessage}
-                        size={45}
+                        size={width <= 768 ? 30: 45}
                         icon={<BsArrowUpShort size={40}/>}
                         />
                 </div>

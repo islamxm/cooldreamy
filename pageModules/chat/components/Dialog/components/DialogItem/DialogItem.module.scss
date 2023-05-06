@@ -143,3 +143,55 @@
 .wrapper.right {
     justify-content: flex-end;
 }
+
+@media (max-width: 768px) {
+
+    .wrapper {
+        padding: 5px;
+
+        .body {
+
+            .message {
+
+                .bubble {
+
+                    .text {
+                        font-size: 14px;
+                        line-height: 18px;
+                    }
+                }
+            }
+        }
+
+        .body.me {
+
+            .message {
+
+            }
+            .avatar {
+                margin-left: 10px;
+            }
+        }
+        .body.you {
+
+            .message {
+
+            }
+            .avatar {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .wrapper {
+        .body {
+            .message {
+                .bubble {
+                    max-width: 275px;
+                }
+            }
+        }
+    }
+}
