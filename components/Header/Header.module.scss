@@ -134,7 +134,14 @@
             }
 
             .main {
-                display: none;
+                .auth {
+                    .item {
+                        font-size: 10px;
+                        line-height: 15px;
+                        margin: 0 5px;
+                        letter-spacing: 3px;
+                    }
+                }
             }
         }
     }

@@ -81,6 +81,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                             <Image src={logoImage} alt="Cool Date" />
                         </motion.div>
                     </Link>
+                    
                     <div className={styles.main}>
                         {
                             !token ? (

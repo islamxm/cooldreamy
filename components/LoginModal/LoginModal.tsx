@@ -14,10 +14,11 @@ import { useRouter } from 'next/router';
 import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import notify from '@/helpers/notify';
-
+import { useWindowSize } from 'usehooks-ts';
 const service = new ApiService()
 
 const LoginModal:FC<ModalFuncProps> = (props) => {
+    const {width} = useWindowSize() 
     const router = useRouter()
 
     const dispatch = useDispatch()
@@ -124,6 +125,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 </Col>
                 <Col span={24}>
                     <Button
+                        middle={width <= 768}
                         onClick={onSubmit}
                         load={load}
                         disabled={!(email && password)}
