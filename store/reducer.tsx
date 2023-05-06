@@ -19,7 +19,6 @@ export const globalState: IGlobalState = {
     socketChannel: null,
     userData: null,
     isMenuOpen: false
-    
 }
 
 const reducer = (state = globalState, action: any) => {

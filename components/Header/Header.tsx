@@ -12,6 +12,7 @@ import { Cookies } from 'typescript-cookie';
 import { updateToken, updateUserId, updateSocket, updateMenu } from '@/store/actions';
 import Router from 'next/router';
 import PromptModal from '@/popups/PromptModal/PromptModal';
+import { useWindowSize } from 'usehooks-ts';
 
 
 
@@ -19,7 +20,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
     const dispatch = useAppDispatch()
     const {token, socketChannel, isMenuOpen} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
-
+    const {width} = useWindowSize()
     const [logoutModal, setLogoutModal] = useState(false)
 
 
@@ -81,21 +82,49 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                             <Image src={logoImage} alt="Cool Date" />
                         </motion.div>
                     </Link>
-                    
-                    <div className={styles.main}>
-                        {
-                            !token ? (
-                                <div className={styles.auth}>
-                                    <span onClick={() => setLoginModal(true)} className={styles.item}>ВХОД</span>
-                                    <Link className={styles.item} href={'/signup'}>РЕГИСТРАЦИЯ</Link>
-                                </div>
+                    {
+                        !token ? (
+                            <div className={styles.main}>
+                                {
+                                    !token ? (
+                                        <div className={styles.auth}>
+                                            <span onClick={() => setLoginModal(true)} className={styles.item}>ВХОД</span>
+                                            <Link className={styles.item} href={'/signup'}>РЕГИСТРАЦИЯ</Link>
+                                        </div>
+                                    ) : (
+                                        width > 768 ? (
+                                            <div className={styles.auth}>
+                                                <span onClick={() => setLogoutModal(true)} className={styles.item}>ВЫХОД</span>
+                                            </div>
+                                        ) : null
+                                    )
+                                }
+                            </div>
+                        ) : (
+                            width <= 768 ? (
+                                null
                             ) : (
-                                <div className={styles.auth}>
-                                    <span onClick={() => setLogoutModal(true)} className={styles.item}>ВЫХОД</span>
+                                <div className={styles.main}>
+                                    {
+                                        !token ? (
+                                            <div className={styles.auth}>
+                                                <span onClick={() => setLoginModal(true)} className={styles.item}>ВХОД</span>
+                                                <Link className={styles.item} href={'/signup'}>РЕГИСТРАЦИЯ</Link>
+                                            </div>
+                                        ) : (
+                                            width > 768 ? (
+                                                <div className={styles.auth}>
+                                                    <span onClick={() => setLogoutModal(true)} className={styles.item}>ВЫХОД</span>
+                                                </div>
+                                            ) : null
+                                        )
+                                    }
                                 </div>
                             )
-                        }
-                    </div>
+                            
+                        )
+                    }
+                    
                 </motion.div>
             </Container>
         </motion.header>

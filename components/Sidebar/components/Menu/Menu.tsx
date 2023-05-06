@@ -7,6 +7,7 @@ import {IoChatbubblesOutline} from 'react-icons/io5';
 import {FiUsers, FiHeart, FiSettings} from 'react-icons/fi';
 import {RxExit} from 'react-icons/rx';
 import { useRouter } from 'next/router';
+import { Cookies } from 'typescript-cookie';
 
 const menuList:menuItemType[] = [
     {
@@ -52,7 +53,11 @@ const menuList:menuItemType[] = [
         link: undefined,
         icon: <RxExit/>,
         badge: 0,
-        onClick: () => {},
+        onClick: () => {
+            process?.browser && Cookies.remove('cooldate-web-user-id')
+            process?.browser && Cookies.remove('cooldate-web-token')
+            process?.browser && window.location.replace('/start')
+        },
     },
 ]
 

@@ -30,7 +30,9 @@ const MenuItem:FC<menuItemType> = ({
         )
     } else {
         return (
-            <div className={styles.item}>
+            <div 
+                onClick={onClick}
+                className={styles.item}>
                 {
                     badge  ? (
                         <div className={styles.badge}>{badge < 100 ? badge : 99}</div>
