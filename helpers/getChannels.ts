@@ -18,8 +18,6 @@ export type pusherConfigType = {
             Authorization: string
         }
     }
-
-
 }
 
 const getChannels = (pusherConfig: pusherConfigType) => {

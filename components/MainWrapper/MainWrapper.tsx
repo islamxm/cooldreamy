@@ -6,7 +6,7 @@ import Pusher from 'pusher-js';
 import { updateSocket, updateUserData } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
-
+import chatMessageTypeVariants from '@/helpers/messageVariants';
 
 
 const service = new ApiService()
@@ -20,9 +20,6 @@ const MainWrapper = ({
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
-	useEffect(() => {
-		console.log(userData)
-	}, [userData])
 
 	
 	useEffect(() => {
@@ -54,17 +51,17 @@ const MainWrapper = ({
 
 
 	useEffect(() => {
-		if(pusherConfig && userId) {
-			if(socketChannel) {
-				socketChannel?.unsubscribe()
-			}
+		if(pusherConfig && userId && !socketChannel) {
+			// if(socketChannel) {
+			// 	socketChannel?.unsubscribe()
+			// }
 			const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {
 				notify('Соединение установлено', 'SUCCESS')
 			})
 		}
-	}, [pusherConfig, userId])
+	}, [pusherConfig, userId, socketChannel])
 
 	
 	//new-chat-message-event
@@ -77,21 +74,32 @@ const MainWrapper = ({
 		if(socketChannel) {
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
-				console.log('socket', data)
+				
 				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
 
 				switch(data?.chat_message?.chat_messageable_type) {
-					case 'App\\Models\\ChatTextMessage':
+					case chatMessageTypeVariants.messageText:
 						notify(data?.chat_message?.chat_messageable?.text, 'AVATAR', avatar)
 						break;
-					case "App\\Models\\ChatGiftMessage":
-						notify(`Вы получили ${data?.chat_message?.chat_messageable?.gifts?.length} подарок`, 'AVATAR', avatar)
+					case chatMessageTypeVariants.messageGift:
+						notify(`Вы получили подарок(${data?.chat_message?.chat_messageable?.gifts?.length})`, 'AVATAR', avatar)
+						break;
+					case chatMessageTypeVariants.messageImage:
+						notify('Фотография', 'AVATAR', avatar)
+						break;
+					case chatMessageTypeVariants.messageSticker:
+						notify('Вы получили стикер', 'AVATAR', avatar)
 						break;
 					default:
 						return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
-						break;
 				}
             })
+			socketChannel?.listen('.new-letter-message-event', (data: any) => {
+				// const avatar = data?.letter_message?.
+				if(data) {
+					notify('Вы получили письмо', 'AVATAR')
+				}
+			})
         }
 	}, [socketChannel])
 

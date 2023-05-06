@@ -3,40 +3,88 @@ import Image from 'next/image';
 import { IUser } from '@/models/IUser';
 import {FC} from 'react';
 import Avatar from 'antd/es/avatar/avatar';
-
+import UserTitle from '@/components/UserTitle/UserTitle';
+import {Row, Col} from 'antd';
+import UserLocation from '@/components/UserLocation/UserLocation';
+import Button from '@/components/Button/Button';
+import {motion} from 'framer-motion';
 
 
 const UserCardMob:FC<IUser> = ({
-    avatar_url_thumbnail
+    avatar_url_thumbnail,
+    name,
+    age,
+    state,
+    country,
+    credits,
+    is_premium
 }) => {
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.main}>
                 <div className={styles.avatar}>
-                    <Image
-                        width={120}
-                        height={120}
-                        src={avatar_url_thumbnail ? avatar_url_thumbnail : ''}
-                        loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        alt=''
-                        />  
+                <Image
+                    width={120}
+                    height={120}
+                    src={avatar_url_thumbnail ? avatar_url_thumbnail : ''}
+                    loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                    alt=''
+                    />  
                 </div>
                 <div className={styles.body}>
-
+                    <Row gutter={[5,5]}>
+                        <Col span={24}>
+                            <UserTitle
+                                username={name}
+                                age={age ? age?.toString() : ''}
+                                isOnline
+                                />
+                        </Col>
+                        <Col span={24}>
+                            <UserLocation
+                                size={12}
+                                state={state}
+                                country={country}
+                                />
+                        </Col>
+                        <Col span={24}>
+                            {/* images */}
+                        </Col>
+                        <Col span={24}>
+                            <div className={styles.action}>
+                                <Button
+                                    text='Подтвердить фото'
+                                    variant={'simple'}
+                                    small
+                                    />
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
             </div>
             <div className={styles.action}>
                 <div className={styles.item}>
-                    <button className={styles.btn}>
-                        Баланс: 5 кредитов
-                    </button>
+                    <motion.button
+                        whileTap={{scale: 0.9}} 
+                        transition={{type: 'spring', damping: 17, stiffness: 400}}
+                        className={styles.btn}>
+                        Баланс: {credits} кредитов
+                    </motion.button>
                 </div>
-                <div className={styles.item}>
-                    <button className={styles.btn}>
-                        Премиум статус
-                    </button>
-                </div>
+                {
+                    is_premium === 1 ? (
+                        <div className={styles.item}>
+                            <motion.button 
+                                whileTap={{scale: 0.9}} 
+                                transition={{type: 'spring', damping: 17, stiffness: 400}}
+                                className={styles.btn}>
+                                Премиум статус
+                            </motion.button>
+                        </div>
+                    ) : null
+                }
+                
             </div>
         </div>
     )

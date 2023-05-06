@@ -9,7 +9,7 @@ import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import moment from 'moment';
 import notify from '@/helpers/notify';
-
+import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
 
 const service = new ApiService()
 
@@ -58,6 +58,8 @@ const ChatLayout = () => {
             setChatType(query?.type)
         }
     }, [query])
+
+
 
 
 
@@ -199,13 +201,11 @@ const ChatLayout = () => {
 
     // ?? обновление чата
     const updateChat = useCallback((item: any) => {
-        
         setChatList(s => {
             const sender_user = s.find(i => i.sender_user?.id === item.sender_user_id)?.sender_user
             if(sender_user) {
-                return [{...item, sender_user}, ...s]
-            } else return [item, ...s]
-            
+                return sortingChatList([{...item, sender_user}, ...s])
+            } else return sortingChatList([item, ...s])
         })
     }, [chatList])
 
@@ -213,23 +213,36 @@ const ChatLayout = () => {
 
     // !! подписка на события по сокету
     useEffect(() => {
-        if(socketChannel && currentChatId) {
-            socketChannel?.listen('.new-chat-message-event', (data: any) => {
-                setDialogsList(s => {
-                    const m = s;
-                    const rm = m.splice(m.findIndex((i: any) => i.id === data?.chat_list_item?.chat?.id), 1, data?.chat_list_item?.chat)
-                    return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
-                })
-
-                if(currentChatId && currentChatId == data?.chat_list_item?.chat?.id) {
-                    setChatList(s => {
-                        return [data?.chat_message, ...s]
+        if(socketChannel) {
+            if(chatType === 'chat') {
+                socketChannel?.listen('.new-chat-message-event', (data: any) => {
+                    setDialogsList(s => {
+                        const m = s;
+                        const findItem = m.findIndex((i: any) => i.id === data?.chat_list_item?.chat?.id)
+                        if(findItem) {
+                            const rm = m.splice(findItem, 1, data?.chat_list_item?.chat)
+                            return sortingDialogList([...m])
+                        } else {
+                            return sortingDialogList([data?.chat_list_item?.chat, ...s])
+                        }
+                        
                     })
-                }
-                
-            })
+    
+                    if(currentChatId && currentChatId == data?.chat_list_item?.chat?.id) {
+                        setChatList(s => {
+                            return sortingChatList([{...data?.chat_message, sender_user: data?.chat_list_item?.chat?.last_message?.sender_user}, ...s])
+                        })
+                    }
+                })
+            }
+            if(chatType === 'mail') {
+                socketChannel?.listen('.new-letter-message-event', (data: any) => {
+                    console.log(data)
+                })
+            }
+            
         }
-    }, [socketChannel, currentChatId])
+    }, [socketChannel, currentChatId, chatType])
 
 
     return (

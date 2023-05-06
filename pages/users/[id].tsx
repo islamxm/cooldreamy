@@ -15,11 +15,12 @@ import ApiService from '@/service/apiService';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { IUser } from '@/models/IUser';
 import Router from 'next/router';
-
+import { useWindowSize } from 'usehooks-ts';
 
 const service = new ApiService()
 
 const UserPage:FC = () => {
+    const {width} = useWindowSize()
     const [createChatLoad, setCreateChatLoad] = useState(false)
     const {query} = useRouter()
     const {token} = useAppSelector(s => s)
@@ -30,7 +31,6 @@ const UserPage:FC = () => {
         if(query && query?.id && typeof query?.id === 'string' && token) {
             service.getProfile({user_id: Number(query?.id)}, token).then(res => {
                 setData(res)
-                console.log(res)
             })
         }
     }, [query, token])

@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { PulseLoader } from 'react-spinners';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import moment from 'moment';
+import { sortingDialogList, sortingChatList } from '@/helpers/sorting';
 
 
 const service = new ApiService()
@@ -81,15 +82,13 @@ const ChatAction = ({
                         chat_id: Number(query?.id),
                         text
                     }, token).then(res => {
-                        console.log(res)
-                        // const sender_user = res?.ch
-                        // console.log(res)
                         updateDialogsList && updateDialogsList((s: any) => {
+                            
                             const m = s;
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                            return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                            
+                            return sortingDialogList([...m])
                         })
-                        console.log(res?.chat?.last_message)
                         updateChat(res?.chat?.last_message)
 
                     }).finally(() => {
@@ -103,13 +102,11 @@ const ChatAction = ({
                         letter_id: Number(query?.id),
                         text
                     }, token).then(res => {
-                        console.log(res)
                         updateDialogsList && updateDialogsList((s: any) => {
                             const m = s;
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
-                            return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                            return sortingDialogList([...m])
                         })
-
                         updateChat(res?.letter?.last_message)
                     }).finally(() => {
                         setLoad(false)
@@ -132,7 +129,6 @@ const ChatAction = ({
 
                 setLoad(true)
                 service.addProfileImage(data,token).then(res => {
-                    console.log(res)
                     if(res?.thumbnail_url && res?.image_url) {
                         service.sendMessage_image({
                             chat_id: id,
@@ -142,9 +138,8 @@ const ChatAction = ({
                             updateDialogsList && updateDialogsList((s: any) => {
                                 const m = s;
                                 const rm = m.splice(m.findIndex((i: any) => i.id === r?.chat?.id), 1, r?.chat)
-                                return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                                return sortingDialogList([...m])
                             })
-                            
                             updateChat(r?.chat?.last_message)
                         }).finally(() => {
                             setLoad(false)
@@ -173,13 +168,11 @@ const ChatAction = ({
                             text: text,
                             images: `[${filtered.join(',')}]`
                         }, token).then(r => {
-                            console.log(r)
-
                             // !! нужно включить после того как Даниил поправить модель
                             updateDialogsList && updateDialogsList((s: any) => {
                                 const m = s;
                                 const rm = m.splice(m.findIndex((i: any) => i.id === r?.letter?.id), 1, r?.letter)
-                                return [...m].sort((a, b) => moment(a?.last_message?.updated_at).valueOf() < moment(b?.last_message?.updated_at).valueOf() ? 1 : -1)
+                                return sortingDialogList([...m])
                             })
                             
                             updateChat(r?.letter?.last_message)

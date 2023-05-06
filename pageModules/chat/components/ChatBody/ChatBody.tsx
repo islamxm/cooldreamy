@@ -16,6 +16,8 @@ import ChatMock from '../ChatMock/ChatMock';
 import Gifts from '../Gifts/Gifts';
 import Mail from '../Mail/Mail';
 import Loader from '@/components/Loader/Loader';
+import { useRouter } from 'next/router';
+import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
 
 const service = new ApiService()
 
@@ -50,7 +52,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     loadSide,
     loadMain
 }) => {
-    
     const {token} = useAppSelector(s => s)
     const [pb, setPb] = useState<number>(70)
 
@@ -73,38 +74,43 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
 
     const sendTextMessage = useCallback((text: string) => {
-        if(text && activeDialogId && token) {
-            service.sendMessage_text({chat_id: Number(activeDialogId), text}, token).then(res => {
-                console.log(res)
-                updateDialogsList && updateDialogsList((s: any) => {
-                    const m = s;
-                    const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                    return [...m]
+        if(text && activeDialogId && token && ChatType) {
+            if(ChatType === 'chat') {
+                service.sendMessage_text({chat_id: Number(activeDialogId), text}, token).then(res => {
+                    console.log(res)
+                    updateDialogsList && updateDialogsList((s: any) => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                        return sortingDialogList([...m])
+                    })
+                    updateChat(res?.chat?.last_message)
+                    setMockType('')
                 })
-
-                updateChat(res?.chat?.last_message)
-                setMockType('')
-            })
+            }
+            
         }
-    }, [token, activeDialogId, updateChat])
+    }, [token, activeDialogId, updateChat, ChatType])
     
 
 
     const sendGiftMessage = useCallback((gifts: string) => {
-        if(gifts && token && activeDialogId) {
-            service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts}, token).then(res => {
+        if(gifts && token && activeDialogId && ChatType) {
+            if(ChatType === 'chat') {
+                service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts}, token).then(res => {
                 
-                updateDialogsList && updateDialogsList((s: any) => {
-                    const m = s;
-                    const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                    return [...m]
+                    updateDialogsList && updateDialogsList((s: any) => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                        return sortingDialogList([...m])
+                    })
+    
+                    updateChat(res?.chat?.last_message)
+                    setMockType('')
                 })
-
-                updateChat(res?.chat?.last_message)
-                setMockType('')
-            })
+            }
+            
         }
-    }, [token, activeDialogId])
+    }, [token, activeDialogId, ChatType])
     
 
 

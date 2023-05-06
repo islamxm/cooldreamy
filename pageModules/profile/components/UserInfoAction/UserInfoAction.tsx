@@ -2,17 +2,15 @@ import styles from './UserInfoAction.module.scss';
 import {FC} from 'react';
 import {RiPencilLine} from 'react-icons/ri';
 import UserTitle from '@/components/UserTitle/UserTitle';
+import { IUser } from '@/models/IUser';
+import UserLocation from '@/components/UserLocation/UserLocation';
 
-const UserInfoAction:FC<{
-    name?: string,
-    age?: number,
-    state?: string,
-    credits?: number
-}> = ({
+const UserInfoAction:FC<IUser> = ({
     name,
     age,
     state,
-    credits
+    credits,
+    country
 }) => {
     
     return (
@@ -29,7 +27,11 @@ const UserInfoAction:FC<{
                     </button> */}
                 </div>
                 <div className={styles.location}>
-                    {state}
+                    <UserLocation
+                        country={country}
+                        state={state}
+                        
+                        />
                 </div>
             </div>
             <div className={styles.action}>

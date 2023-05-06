@@ -6,11 +6,12 @@ import Link from 'next/link';
 import UserTitle from '@/components/UserTitle/UserTitle';
 import Avatar from '@/components/Avatar/Avatar';
 import { IUser } from '@/models/IUser';
-
+import UserLocation from '@/components/UserLocation/UserLocation';
 
 const MyCard:FC<IUser> = ({
     name,
     state,
+    country,
     credits,
     avatar_url_thumbnail,
     age
@@ -31,13 +32,11 @@ const MyCard:FC<IUser> = ({
                         age={age ? age.toString() : ''}
                         style={{fontSize: 18}}
                         />
-                    {
-                        state ? (
-                            <div className={styles.loc}>
-                                {state}
-                            </div>
-                        ) : null
-                    }
+                    <UserLocation
+                        state={state}
+                        country={country}
+                        size={14}
+                        />
                 </div>
             </div>
             <div className={styles.balance}>

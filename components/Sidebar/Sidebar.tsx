@@ -9,6 +9,8 @@ import ApiService from '@/service/apiService';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import { useWindowSize } from 'usehooks-ts';
 import { updateMenu } from '@/store/actions';
+import {motion} from 'framer-motion';
+
 
 const Sidebar:FC = () => {
     const {userData, isMenuOpen} = useAppSelector(s => s)
@@ -21,9 +23,10 @@ const Sidebar:FC = () => {
         }
     }
 
+    
 
     return (
-        <div
+        <motion.div
             onClick={onClose}
             data-close
             className={`${styles.wrapper} ${isMenuOpen ? styles.active : ''}`}>
@@ -45,7 +48,7 @@ const Sidebar:FC = () => {
                 </Col>
             </div>
             
-        </div>
+        </motion.div>
     )
 }
 

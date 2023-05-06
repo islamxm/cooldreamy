@@ -5,9 +5,10 @@ import UserInfoAction from '../UserInfoAction/UserInfoAction';
 import UserImages from '../UserImages/UserImages';
 import UserMain from '../UserMain/UserMain';
 import { IUser } from '@/models/IUser';
+import { useWindowSize } from 'usehooks-ts';
+
 
 const UserInfo:FC<IUser> = (props) => {
-
     const {
         about_self,
         avatar_url,
@@ -42,22 +43,30 @@ const UserInfo:FC<IUser> = (props) => {
         updated_at,
         profile_photos
     } = props
+    const {width} = useWindowSize()
+
 
     return (
         <div className={styles.wrapper}>
             <Row gutter={[15,15]}>
-                <Col span={24}>
-                    <UserInfoAction
-                        name={name}
-                        state={state}
-                        credits={credits}
-                        />
-                </Col>
-                <Col span={24}>
-                    <UserImages
-                        profile_photos={profile_photos}
-                        />
-                </Col>
+                {
+                    width > 1000 ? (
+                        <>
+                            <Col span={24}>
+                                <UserInfoAction
+                                    {...props}
+                                    />
+                            </Col>
+                            <Col span={24}>
+                                <UserImages
+                                    profile_photos={profile_photos}
+                                    />
+                            </Col>
+                        </>
+                    ) : null
+                }
+                
+                
                 <Col span={24}>
                     <UserMain {...props}/>
                 </Col>
