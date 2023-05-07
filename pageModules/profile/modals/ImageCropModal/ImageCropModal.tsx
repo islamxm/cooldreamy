@@ -18,7 +18,8 @@ const service = new ApiService()
 interface cropModalPropsType extends modalPropsType {
     uploadedFile: File | null,
     onSave?: (file?: File | null, id?: number) => any,
-    onAfterUpload?: (...args: any[]) => any
+    onAfterUpload?: (...args: any[]) => any,
+    initCategory?: number
 }
 
 
@@ -35,7 +36,8 @@ const ImageCropModal:FC<cropModalPropsType> = ({
     open,
     onClose,
     uploadedFile,
-    onAfterUpload
+    onAfterUpload,
+    initCategory
 }) => {
     const dispatch = useAppDispatch()
     const {token} = useAppSelector(s => s);
@@ -59,6 +61,10 @@ const ImageCropModal:FC<cropModalPropsType> = ({
         setCroppedImage(null)
         onClose()
     }
+
+    useEffect(() => {
+        if(initCategory) setCategory(initCategory)
+    }, [initCategory]) 
 
 
     useEffect(() => {

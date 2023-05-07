@@ -61,6 +61,7 @@ const Step9:FC<I> = ({
                 }}
                 uploadedFile={file}
                 onAfterUpload={nextStep}
+                initCategory={1}
                 />
             
             <div className={styles.head}>
