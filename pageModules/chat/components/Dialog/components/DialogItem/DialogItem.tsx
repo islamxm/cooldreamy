@@ -45,24 +45,18 @@ const DialogItemComponent:FC<I> = ({
         triggerOnce: true,
     })
 
-    useEffect(() => {
-        console.log(status)
-    }, [status])
+
 
     useEffect(() => {
 
         if(status === 'unread' && id && inView && !isSelf) {
             if(token) {
-                service.readMessage({chat_message_id: Number(id)}, token).then(res => {
-                    console.log(res)
-                })
+                service.readMessage({chat_message_id: Number(id)}, token)
             }
         }
     }, [status, token, id, inView, isSelf])
 
-    // useEffect(() => {
-    //     console.log(inView)
-    // }, [inView])
+
 
 
     const switchMessageType = (type?: chatMessageTypes) => {
