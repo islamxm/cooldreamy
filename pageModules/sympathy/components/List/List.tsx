@@ -10,7 +10,7 @@ const List = ({list}: {list: any[]}) => {
             <Row gutter={[12,12]}>
                 {
                     list?.map((item,index) => (
-                        <Col span={6} key={index}>
+                        <Col sm={8} md={6} span={12} key={index}>
                             <GirlCard
                                 {...item}
                                 />

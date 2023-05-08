@@ -67,13 +67,13 @@ const endpoints = {
 
 
     // activity
-    getActivityWatchers: `${API_PATH}activities/get_my_watchers`,
-    getActivityMyFavs: `${API_PATH}activities/get_my_favorite`,
-    getActivityOtherFavs: `${API_PATH}activities/get_favorited_me`,
+    getActivityViews: `${API_PATH}activities/get_my_watchers`,
+    getActivityFavs: `${API_PATH}activities/get_my_favorite`,
+    getActivityInFavs: `${API_PATH}activities/get_favorited_me`,
     getActivityMutualFavs: `${API_PATH}activities/get_mutual_favorite`,
 
-    getActivityMyLikes: `${API_PATH}activities/get_my_likes`,
-    getActivityOtherLikes: `${API_PATH}activities/get_liked_me`,
+    getActivityLikes: `${API_PATH}activities/get_my_likes`,
+    getActivityInLikes: `${API_PATH}activities/get_liked_me`,
     getActivityMutualLikes: `${API_PATH}activities/get_mutual_likes`,
 
     addUserToFav: `${API_PATH}activities/add_favorite`,

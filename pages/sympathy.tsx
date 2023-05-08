@@ -4,40 +4,47 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import {Row, Col} from 'antd';
 import Tabs from "@/components/Tabs/Tabs";
 import { tabItemType } from "@/components/Tabs/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import List from "@/pageModules/sympathy/components/List/List";
 import { girlCardType } from "@/components/GirlCard/types";
 import img from '@/public/assets/images/girl.png';
+import Router, { useRouter } from "next/router";
+import { sympGroupTypes } from "@/pageModules/sympathy/components/List/types";
+import ApiService from "@/service/apiService";
+import { useAppSelector } from "@/hooks/useTypesRedux";
+import Loader from "@/components/Loader/Loader";
+
+const service = new ApiService()
 
 const tabs: tabItemType[] = [
     {
-        id: '1',
-        badge: 0,
+        id: 'views',
+        // badge: 0,
         label: 'Просмотр'
     },
     {
-        id: '2',
-        badge: 3,
+        id: 'matches',
+        // badge: 3,
         label: 'Совпадения'
     },
+    // {
+    //     id: 'favs',
+    //     // badge: 0,
+    //     label: 'Избранные'
+    // },
+    // {
+    //     id: 'infavs',
+    //     // badge: 0,
+    //     label: 'В избранных'
+    // },
     {
-        id: '3',
-        badge: 0,
-        label: 'Избранные'
-    },
-    {
-        id: '4',
-        badge: 0,
-        label: 'В избранных'
-    },
-    {
-        id: '5',
-        badge: 3,
+        id: 'likes',
+        // badge: 3,
         label: 'Вам нравятся'
     },
     {
-        id: '6',
-        badge: 3,
+        id: 'inlikes',
+        // badge: 3,
         label: 'Вы нравитесь'
     }
 ]
@@ -53,30 +60,71 @@ const tabs: tabItemType[] = [
 // ]
 
 const SymPage = () => {
-    const [activeTab, setActiveTab] = useState('1');
+    const {token} = useAppSelector(s => s)
+    const {query} = useRouter()
+    const [activeTab, setActiveTab] = useState<sympGroupTypes | any>('');
+    const [load, setLoad] = useState(false)
+    const [list, setList] = useState([])
 
+
+    useEffect(() => {
+        if(query?.type && typeof query?.type === 'string') {
+            setActiveTab(query.type)
+        }
+    }, [query])
 
     
-    const switchDescr = (activeTab: string) => {
+    const switchDescr = (activeTab: sympGroupTypes) => {
         switch(activeTab) {
-            case '1':
+            case 'views':
                 return 'Девушка просмотрела Вашу анету - считайте, она уже готова начать общение. Напишите ей!'
-            case '2':
+            case 'matches':
                 return 'Вы поставили друг другу лайк в “Знакомства”. Начните общение прямо сейчас'
-            case '3':
-                return ''
-            case '3':
-                return ''
-            case '4':
+            case 'likes':
                 return 'В этой вкладке находятся пользователи, которым Вы ставите лайк'
-            case '5':
+            case 'inlikes':
                 return 'В этой вкладке находятся пользователи, которым Вы нравитесь'
             default:
                 return ''
         }
     }
 
-    
+    useEffect(() => {
+        if(activeTab) {
+            Router.push(`/sympathy?type=${activeTab}`)
+            setLoad(true)
+            if(token) {
+                if(activeTab === 'views') {
+                    service.getActivityViews(token).then(res => {
+                        console.log(res)
+                        setList(res)
+                    }).finally(() => setLoad(false))
+                }
+                if(activeTab )
+                if(activeTab === 'likes') {
+                    service.getActivityLikes(token).then(res => {
+                        console.log(res)
+                        setList(res)
+                    }).finally(() => setLoad(false))
+                }
+                if(activeTab === 'matches') {
+                    service.getActivityMutualLikes(token).then(res => {
+                        setList(res)
+                    }).finally(() => setLoad(false))
+                }
+                if(activeTab === 'inlikes') {
+                    service.getActivityInLikes(token).then(res => {
+                        console.log(res)
+                        setList(res)
+                    }).finally(() => setLoad(false))
+                }
+            }
+
+        }
+    }, [activeTab, token])
+
+
+
 
     return (
         <Container>
@@ -95,9 +143,10 @@ const SymPage = () => {
                             {switchDescr(activeTab)}
                         </Col>
                         <Col span={24}>
-                            <List
-                                list={[]}
-                                />
+                            {
+                                load ? <Loader/> : <List list={list}/>
+                            }
+                            
                         </Col>
                     </Row>
                 </div>

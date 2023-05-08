@@ -680,6 +680,64 @@ class ApiService {
             console.log(err)
         }
     }
+
+
+    //activity
+    getActivityViews = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getActivityViews, {
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getActivityLikes = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getActivityLikes, {
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getActivityInLikes = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getActivityInLikes, {
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getActivityMutualLikes = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getActivityMutualLikes, {
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

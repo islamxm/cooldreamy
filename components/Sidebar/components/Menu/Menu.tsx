@@ -34,13 +34,13 @@ const menuList:menuItemType[] = [
         badge: 0,
         onClick: () => {},
     },
-    // {
-    //     label: 'Симпатии',
-    //     link: '/sympathy',
-    //     icon: <FiHeart/>,
-    //     badge: 0,
-    //     onClick: () => {},
-    // },
+    {
+        label: 'Симпатии',
+        link: '/sympathy?type=views',
+        icon: <FiHeart/>,
+        badge: 0,
+        onClick: () => {},
+    },
     // {
     //     label: 'Настройки',
     //     link: '/settings',
