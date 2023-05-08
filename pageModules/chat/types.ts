@@ -207,6 +207,7 @@ export interface IMessage {
     images: {image?: string, thumbnail?: string}[] | [],
     gifts?: messageGiftType[] | [],
     sticker?: messageStickerType | null,
+    isRead?: boolean
 }
 
 

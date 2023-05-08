@@ -738,6 +738,38 @@ class ApiService {
             console.log(err)
         }
     }
+
+    addUserToFav = async (body: {user_id: number | string}, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.addUserToFav, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            return await res
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    deleteUserFromFav = async (body: {user_id: number | string}, token: IToken) => {
+        try {
+            let res = await fetch(endpoints.deleteUserFromFav, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            return await res
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

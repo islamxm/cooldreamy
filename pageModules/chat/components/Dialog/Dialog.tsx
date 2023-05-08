@@ -7,7 +7,7 @@ import { dialogItemType, IChat } from '../../types';
 import { PulseLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-
+import { AnimatePresence } from 'framer-motion';
 
 // import {FixedSizeList} from 'react-window';
 // import AutoSizer from 'react-virtualized-auto-sizer';
@@ -67,26 +67,29 @@ const Dialog:FC<I> = ({
 
     return (
         <div className={styles.wrapper} style={{maxHeight: height}}>
-            {
-                chatList?.map((item, index) => (
-                    <DialogItem
-                        key={index}
-                        id={item.id}
-                        avatar={item?.sender_user?.avatar_url_thumbnail}
-                        status={item?.is_read_by_recepient === 1 ? 'read' : 'unread'}
-                        text={item.chat_messageable?.text}
-                        images={[{image: item.chat_messageable?.image_url, thumbnail: item?.chat_messageable?.thumbnail_url}]}
-                        gifts={item.chat_messageable?.gifts}
-                        sticker={item.chat_messageable?.sticker}
-                        type={item?.chat_messageable_type}
-                        isSelf={item.sender_user_id === Number(userId)} 
-                        createdAt={item.created_at}
-                        updatedAt={item.updated_at}
-                        index={index}
-                        showAvatar={item.sender_user_id !== chatList[index - 1]?.sender_user_id}
-                        />
-                ))
-            }
+            <AnimatePresence>
+                {
+                    chatList?.map((item, index) => (
+                        <DialogItem
+                            key={index}
+                            id={item.id}
+                            avatar={item?.sender_user?.avatar_url_thumbnail}
+                            status={item?.is_read_by_recepient === 1 ? 'read' : 'unread'}
+                            text={item.chat_messageable?.text}
+                            images={[{image: item.chat_messageable?.image_url, thumbnail: item?.chat_messageable?.thumbnail_url}]}
+                            gifts={item.chat_messageable?.gifts}
+                            sticker={item.chat_messageable?.sticker}
+                            type={item?.chat_messageable_type}
+                            isSelf={item.sender_user_id === Number(userId)} 
+                            createdAt={item.created_at}
+                            updatedAt={item.updated_at}
+                            index={index}
+                            showAvatar={item.sender_user_id !== chatList[index - 1]?.sender_user_id}
+                            />
+                    ))
+                }
+            </AnimatePresence>
+            
            
             
             

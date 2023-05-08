@@ -19,18 +19,47 @@ const UserInfoAction:FC<IUser> = ({
     age,
     state,
     country,
-    id
+    id,
 }) => {
     const {token} = useAppSelector(s => s)
 
 
     const onLike = () => {
-
-    }
-
-    const onFavorite = () => {
+        if(token) {
+            service.feedItemLike({id: Number(id)}, token).then(res => {
+                console.log(res)
+                if(res?.status === 200) {
+                    notify('Вы поставили лайк', 'SUCCESS')
+                } else {
+                    notify('Вы уже поставили лайк данному пользователю', 'ERROR')
+                }
+            })
+        }
         
     }
+
+    const onFavorite = () => {  
+        if(token) {
+            service.addUserToFav({user_id: Number(id)}, token).then(res => {
+                console.log(res)
+                if(res?.status === 200) {
+                    notify('Вы добавили в избранное', 'SUCCESS')
+                } else {
+                    notify('Вы уже добавили данного пользователя в избранные', 'ERROR')
+                }
+            })
+        }
+    }
+
+    const removeFavorite = () => {
+        if(token) {
+            service.deleteUserFromFav({user_id: Number(id)}, token).then(res => {
+                console.log(res)
+            })
+        }
+    }
+
+
 
 
     const onWink = () => {

@@ -10,8 +10,13 @@ import {motion} from 'framer-motion';
 import moment from 'moment';
 import {FaSmileWink} from 'react-icons/fa';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
-
 import { IMessage } from '@/pageModules/chat/types';
+import { useInView } from 'react-intersection-observer';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import ApiService from '@/service/apiService';
+
+
+const service = new ApiService()
 
 
 interface I extends IMessage {
@@ -33,8 +38,31 @@ const DialogItemComponent:FC<I> = ({
     sticker,
     gifts,
     index,
-    showAvatar
+    showAvatar,
 }) => {
+    const {token} = useAppSelector(s => s)
+    const {inView, ref} = useInView({
+        triggerOnce: true,
+    })
+
+    useEffect(() => {
+        console.log(status)
+    }, [status])
+
+    useEffect(() => {
+
+        if(status === 'unread' && id && inView && !isSelf) {
+            if(token) {
+                service.readMessage({chat_message_id: Number(id)}, token).then(res => {
+                    console.log(res)
+                })
+            }
+        }
+    }, [status, token, id, inView, isSelf])
+
+    // useEffect(() => {
+    //     console.log(inView)
+    // }, [inView])
 
 
     const switchMessageType = (type?: chatMessageTypes) => {
@@ -136,11 +164,16 @@ const DialogItemComponent:FC<I> = ({
 
 
     return (
-        <div className={`${styles.wrapper} ${isSelf ? styles.right : styles.left}`}>
+        <div ref={ref} className={`${styles.wrapper} ${isSelf ? styles.right : styles.left}`}>
             {
                 isSelf ? (
                     <div className={`${styles.body} ${styles.me}`}>
-                        <motion.div className={styles.message}>
+                        <motion.div 
+                            transition={{type: 'spring', stiffness: 400, damping: 17}}
+                            initial={{scale: 0, opacity: 0}}
+                            animate={{scale: 1, opacity: 1}}
+                            exit={{scale: 0, opacity: 0}}
+                            className={styles.message}>
                             {switchMessageType(type)}
                             {
                                 status === 'read' ? (
