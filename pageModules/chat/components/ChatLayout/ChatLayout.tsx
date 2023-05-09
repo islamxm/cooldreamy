@@ -155,6 +155,7 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
+                    
                     setCurrentUser(res?.another_user)
                     setTotalChatItemCount(res?.letter_messages?.total)
                     if(chatListPage === 1) {
@@ -224,9 +225,18 @@ const ChatLayout = () => {
                 socketChannel?.listen('.new-chat-message-event', (data: any) => {
                     setDialogsList(s => {
                         const m = s;
-                        const findItem = m.findIndex((i: any) => i.id === data?.chat_list_item?.chat?.id)
+                        const findItem = m.find((i: any) => i.id === data?.chat_list_item?.chat?.id)
                         if(findItem) {
-                            const rm = m.splice(findItem, 1, data?.chat_list_item?.chat)
+                            const rm = m.splice(m.findIndex(i => i.id == findItem.id), 1, data?.chat_list_item?.chat)
+
+                            // console.log(s)
+                            // console.log([...m])
+                            // console.log(sortingDialogList([...m]))
+                            
+                            // console.log([...m].map(i => i.updated_at))
+                            // console.log([...m].map(i => moment(i.updated_at).valueOf() / 1000000000))
+                            // console.log(sortingDialogList([...m]).map(i => moment(i.updated_at).valueOf() / 1000000000))
+
                             return sortingDialogList([...m])
                         } else {
                             return sortingDialogList([data?.chat_list_item?.chat, ...s])
