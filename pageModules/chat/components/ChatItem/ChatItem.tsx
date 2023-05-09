@@ -11,9 +11,19 @@ import Badge from '@/components/Badge/Badge';
 import {BiCheckDouble} from 'react-icons/bi';
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai';
 import Avatar from '@/components/Avatar/Avatar';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import {useEffect} from 'react';
+import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import IconButton from '@/components/IconButton/IconButton';
+import notify from '@/helpers/notify';
 
+const service = new ApiService()
+
+
+interface I extends chatItemPropsTypes {
+    updateDialogsList: (...args: any[]) => any
+}
 
 const ChatItem = ({
     favorite,
@@ -25,13 +35,13 @@ const ChatItem = ({
     another_user,
     is_confirmed_user,
     text,
-    active
-}:chatItemPropsTypes) => {
+    active,
+
+    updateDialogsList
+}:I) => {
     const {query: {type}} = useRouter()
-    
+    const {token} = useAppSelector(s => s)
     const {avatar_url, avatar_url_thumbnail, name} = another_user;
-
-
 
 
     const switchChatType = (type?: string) => {
@@ -64,18 +74,62 @@ const ChatItem = ({
         }
     }
 
+
+    const addToFav = () => {
+        if(token && id && another_user?.id) {
+            service.addUserToFav({user_id: another_user.id}, token).then(res => {
+                console.log(res)
+                if(res?.status === 200) {
+                    notify('Пользователь добавлен в избранные', 'SUCCESS')
+                    updateDialogsList((s: any | any[]) => {
+                        const findItem = s.find((i: any) => i.id === id)
+                        if(findItem) {
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i:any) => i.id === findItem.id), 1, {...findItem, favorite: true})
+                            return [...m]
+                        } else return s;
+                    })
+                } else {
+                    notify('Произошла ошибка', 'ERROR')
+                }
+            })
+        }
+    }
+
+    const deleteFromFav = () => {
+        if(token && id && another_user?.id) {
+            service.deleteUserFromFav({user_id: another_user?.id}, token).then(res => {
+                console.log(res)
+                if(res?.status === 200) {
+                    notify('Пользователь удален из избранных', 'SUCCESS')
+                    updateDialogsList((s: any | any[]) => {
+                        const findItem = s.find((i: any) => i.id === id)
+                        if(findItem) {
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i:any) => i.id === findItem.id), 1, {...findItem, favorite: false})
+                            return [...m]
+                        } else return s;
+                    })
+                } else {
+                    notify('Произошла ошибка', 'ERROR')
+                }
+            })
+        }
+    }
+    
+
     if(type === 'chat') {
         return (
-            <Link href={`/chat/${id}?type=${type}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
-                <div className={styles.avatar}>
+            <div  className={`${styles.wrapper} ${active ? styles.active : ''}`}>
+                <Link href={`/users/${another_user?.id}`} className={styles.avatar}>
                     <Avatar
                         size={63}
                         verified={is_confirmed_user == 1}
                         image={avatar_url_thumbnail}    
                         />
-                </div>
+                </Link>
                 <div className={styles.body}>
-                    <div className={styles.main}>
+                    <Link href={`/chat/${id}?type=${type}`} className={styles.main}>
                         <Row gutter={[2,2]}>
                             <Col span={24}>
                                 <UserTitle 
@@ -90,22 +144,33 @@ const ChatItem = ({
                                 </div>
                             </Col>
                         </Row>
-                    </div>    
+                    </Link>    
                     <div className={styles.ex}>
-                        {/* <div className={styles.item}>
+                        <div className={styles.item}>
                             {
-                                isFavourite ? (
-                                    <AiFillStar/>
+                                favorite ? (
+                                    <IconButton
+                                        onClick={deleteFromFav}
+                                        size={20}
+                                        variant={'transparent'}
+                                        icon={<AiFillStar color='var(--violet)'/>}
+                                        />
+                                    
                                 ) : (
-                                    <AiOutlineStar/>
+                                    <IconButton
+                                        onClick={addToFav}
+                                        size={20}
+                                        variant={'transparent'}
+                                        icon={<AiOutlineStar color='var(--violet)'/>}
+                                        />
                                 )
                             }
-                        </div> */}
+                        </div>
                         {/* <div className={styles.item}>
                             {
                                 status === 'unread' ? (
                                     <Badge
-                                        value={unreadMesssageCount}
+                                         value={unreadMesssageCount}
                                         />
                                 ) : (
                                     <BiCheckDouble/>
@@ -114,7 +179,7 @@ const ChatItem = ({
                         </div> */}
                     </div>
                 </div> 
-            </Link>
+            </div>
         )
     }
 

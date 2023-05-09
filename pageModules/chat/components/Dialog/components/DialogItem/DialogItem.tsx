@@ -172,34 +172,38 @@ const DialogItemComponent:FC<I> = ({
                             {
                                 status === 'read' ? (
                                     <div className={styles.ex}>
-                                        Просмотрено
+                                        <div className={styles.label}>Просмотрено</div>
                                         <div className={styles.icon}><BsCheckAll/></div>
                                     </div>
                                 ) : null
                             }
                         </motion.div>
                         
-                        <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
+                        {/* <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
                                 image={avatar}
                                 size={40}
                                 />
-                        </div>
+                        </div> */}
                     </div>
                 ) : (
                     <div className={`${styles.body} ${styles.you}`}>
-                        <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
+                        {/* <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
                                 image={avatar}
                                 size={40}
                                 />
-                        </div>
-                        <div
+                        </div> */}
+                        <motion.div 
+                            transition={{type: 'spring', stiffness: 400, damping: 17}}
+                            initial={{scale: 0, opacity: 0}}
+                            animate={{scale: 1, opacity: 1}}
+                            exit={{scale: 0, opacity: 0}}
                             className={styles.message}>
                             {switchMessageType(type)}
-                        </div>
+                        </motion.div >
                     </div>
                 )   
             }

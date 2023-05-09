@@ -11,20 +11,20 @@ const tabsList = [
         label: 'Все переписки'
     },
     {
-        id: '2',
-        // badge: 3,
-        label: 'Непрочитанные'
-    },
-    {
         id: '3',
         // badge: 0,
         label: 'Избранные'
     },
-    {
-        id: '4',
-        // badge: 0,
-        label: 'Игнорируемые'
-    }
+    // {
+    //     id: '2',
+    //     // badge: 3,
+    //     label: 'Непрочитанные'
+    // },
+    // {
+    //     id: '4',
+    //     // badge: 0,
+    //     label: 'Игнорируемые'
+    // }
 ]
 
 
@@ -91,11 +91,9 @@ const Filter:FC<IChatFilterType> = ({
                         list={modeTabs}
                         onChange={(e) => {
                             if(e == '1') {
-                                // onTypeChange('chat')
                                 Router.push('/chat?type=chat')
                             }
                             if(e == '2') {
-                                // onTypeChange('mail')
                                 Router.push('/chat?type=mail')
                             }
                             

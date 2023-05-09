@@ -147,17 +147,29 @@
 @media (max-width: 768px) {
 
     .wrapper {
-        padding: 1px 5px;
+        padding: 0 5px;
 
         .body {
 
             .message {
-                padding-bottom: 5px;
+                padding-bottom: 3px !important;
                 .bubble {
 
                     .text {
                         font-size: 14px;
                         line-height: 18px;
+                    }
+
+                    .time {
+                        font-size: 8px;
+                        line-height: 10px;
+                        margin-left: 8px;
+                    }
+                }
+
+                .ex {
+                    .label {
+                        display: none;
                     }
                 }
             }
@@ -167,6 +179,11 @@
 
             .message {
 
+                .bubble {
+                 
+
+                    
+                }
             }
             .avatar {
                 margin-left: 10px;

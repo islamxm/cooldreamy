@@ -164,6 +164,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 ) : (
                                     <ChatSide
                                         updateDialogsPage={updateDialogsPage}
+                                        updateDialogsList={updateDialogsList}
                                         dialogsList={dialogsList}
                                         activeDialogId={activeDialogId}
                                         totalDialogItemCount={totalDialogItemCount}
@@ -179,6 +180,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 <Loader/>
                             ) : (
                                 <ChatSide
+                                    updateDialogsList={updateDialogsList}
                                     updateDialogsPage={updateDialogsPage}
                                     dialogsList={dialogsList}
                                     activeDialogId={activeDialogId}

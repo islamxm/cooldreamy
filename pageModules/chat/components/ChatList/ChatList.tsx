@@ -11,11 +11,16 @@ import { useInView } from 'react-intersection-observer';
 import { IDialogs } from '../../types';
 
 
+
+
+
 const ChatList:FC<IDialogs> = ({
     activeDialogId,
     dialogsList = [],
     updateDialogsPage,
-    totalDialogItemCount
+    totalDialogItemCount,
+
+    updateDialogsList
 }) => {
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
@@ -43,6 +48,7 @@ const ChatList:FC<IDialogs> = ({
                         key={index}
                         {...item}
                         active={item?.id === activeDialogId}
+                        updateDialogsList={updateDialogsList}
                         />
                 ))
             }

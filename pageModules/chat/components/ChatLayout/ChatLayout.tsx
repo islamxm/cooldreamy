@@ -127,6 +127,7 @@ const ChatLayout = () => {
                 page: dialogsPage,
                 per_page: 10
             }, token).then(res => {
+                console.log(res)
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -144,6 +145,7 @@ const ChatLayout = () => {
     // ** получение чата писем (конкрентного)
     const getMailChat = () => {
         if(token) {
+            // service.getChatListFavorite().then(res => {})
             if(currentChatId && chatListPage) {
                 if(chatListPage === 1) {
                     setLoadMain(true)

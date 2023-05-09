@@ -12,6 +12,7 @@ const ChatSide:FC<IDialogs> = ({
     dialogsList,
     activeDialogId,
     updateDialogsPage,
+    updateDialogsList,
     totalDialogItemCount
 }) => {
 
@@ -35,6 +36,7 @@ const ChatSide:FC<IDialogs> = ({
                     <ChatList
                         totalDialogItemCount={totalDialogItemCount}
                         updateDialogsPage={updateDialogsPage}
+                        updateDialogsList={updateDialogsList}
                         dialogsList={dialogsList}
                         activeDialogId={activeDialogId}
                         />

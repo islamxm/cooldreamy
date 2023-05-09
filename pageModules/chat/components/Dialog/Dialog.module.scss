@@ -3,6 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column-reverse;
+    overflow-x: hidden;
 
     .load {
         display: flex;
