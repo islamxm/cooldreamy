@@ -162,11 +162,7 @@ const DialogItemComponent:FC<I> = ({
             {
                 isSelf ? (
                     <div className={`${styles.body} ${styles.me}`}>
-                        <motion.div 
-                            transition={{type: 'spring', stiffness: 400, damping: 17}}
-                            initial={{scale: 0, opacity: 0}}
-                            animate={{scale: 1, opacity: 1}}
-                            exit={{scale: 0, opacity: 0}}
+                        <div 
                             className={styles.message}>
                             {switchMessageType(type)}
                             {
@@ -177,7 +173,7 @@ const DialogItemComponent:FC<I> = ({
                                     </div>
                                 ) : null
                             }
-                        </motion.div>
+                        </div>
                         
                         {/* <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
@@ -189,21 +185,17 @@ const DialogItemComponent:FC<I> = ({
                     </div>
                 ) : (
                     <div className={`${styles.body} ${styles.you}`}>
-                        {/* <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
+                        <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
                                 image={avatar}
                                 size={40}
                                 />
-                        </div> */}
-                        <motion.div 
-                            transition={{type: 'spring', stiffness: 400, damping: 17}}
-                            initial={{scale: 0, opacity: 0}}
-                            animate={{scale: 1, opacity: 1}}
-                            exit={{scale: 0, opacity: 0}}
+                        </div>
+                        <div
                             className={styles.message}>
                             {switchMessageType(type)}
-                        </motion.div >
+                        </div >
                     </div>
                 )   
             }

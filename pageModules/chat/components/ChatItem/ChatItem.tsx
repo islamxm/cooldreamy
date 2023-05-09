@@ -78,9 +78,7 @@ const ChatItem = ({
     const addToFav = () => {
         if(token && id && another_user?.id) {
             service.addUserToFav({user_id: another_user.id}, token).then(res => {
-                console.log(res)
                 if(res?.status === 200) {
-                    notify('Пользователь добавлен в избранные', 'SUCCESS')
                     updateDialogsList((s: any | any[]) => {
                         const findItem = s.find((i: any) => i.id === id)
                         if(findItem) {
@@ -99,9 +97,7 @@ const ChatItem = ({
     const deleteFromFav = () => {
         if(token && id && another_user?.id) {
             service.deleteUserFromFav({user_id: another_user?.id}, token).then(res => {
-                console.log(res)
                 if(res?.status === 200) {
-                    notify('Пользователь удален из избранных', 'SUCCESS')
                     updateDialogsList((s: any | any[]) => {
                         const findItem = s.find((i: any) => i.id === id)
                         if(findItem) {
