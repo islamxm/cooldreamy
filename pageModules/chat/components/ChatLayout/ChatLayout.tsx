@@ -49,6 +49,10 @@ const ChatLayout = () => {
     const [totalDialogItemCount, setTotalDialogItemCount] = useState(0)
     const [totalChatItemCount, setTotalChatItemCount] = useState(0)
 
+
+    const [listening, setListening] = useState(false)
+
+
     // ?? получение ид текущего чата из роута (опционально)
     useEffect(() => {
         if(query) {
@@ -217,53 +221,61 @@ const ChatLayout = () => {
     }, [chatList])
 
 
+    useEffect(() => {
+        console.log(currentChatId)
+    }, [currentChatId])
+
 
     // !! подписка на события по сокету
     useEffect(() => {
         if(socketChannel) {
             if(chatType === 'chat') {
-                socketChannel?.listen('.new-chat-message-event', (data: any) => {
-                    setDialogsList(s => {
-                        const m = s;
-                        const findItem = m.find((i: any) => i.id === data?.chat_list_item?.chat?.id)
-                        if(findItem) {
-                            const rm = m.splice(m.findIndex(i => i.id == findItem.id), 1, data?.chat_list_item?.chat)
-
-                            // console.log(s)
-                            // console.log([...m])
-                            // console.log(sortingDialogList([...m]))
-                            
-                            // console.log([...m].map(i => i.updated_at))
-                            // console.log([...m].map(i => moment(i.updated_at).valueOf() / 1000000000))
-                            // console.log(sortingDialogList([...m]).map(i => moment(i.updated_at).valueOf() / 1000000000))
-
-                            return sortingDialogList([...m])
-                        } else {
-                            return sortingDialogList([data?.chat_list_item?.chat, ...s])
-                        }
-                        
-                    })
-    
-                    if(currentChatId && currentChatId == data?.chat_list_item?.chat?.id) {
-                        setChatList(s => {
-                            return sortingChatList([{...data?.chat_message, sender_user: data?.chat_list_item?.chat?.last_message?.sender_user}, ...s])
-                        })
-                    }
-                })
-                socketChannel?.listen('.chat-message-read-event', (data: any) => {
-                    if(currentChatId && currentChatId == data?.chat_id) {
-                        setChatList(s => {
-                            const findItem = s.find(i => i.id == data?.chat_message_id)
+                if(!listening) {
+                    socketChannel?.listen('.new-chat-message-event', (data: any) => {
+                        setListening(true)
+                        setDialogsList(s => {
+                            const m = s;
+                            const findItem = m.find((i: any) => i.id === data?.chat_list_item?.chat?.id)
                             if(findItem) {
-                                const m = s;
-                                const rm = s.splice(m.findIndex(i => i.id == findItem.id), 1, {...findItem, is_read_by_recepient: 1})
-                                return sortingChatList([...m])
+                                const rm = m.splice(m.findIndex(i => i.id == findItem.id), 1, data?.chat_list_item?.chat)
+    
+                                // console.log(s)
+                                // console.log([...m])
+                                // console.log(sortingDialogList([...m]))
+                                
+                                // console.log([...m].map(i => i.updated_at))
+                                // console.log([...m].map(i => moment(i.updated_at).valueOf() / 1000000000))
+                                // console.log(sortingDialogList([...m]).map(i => moment(i.updated_at).valueOf() / 1000000000))
+    
+                                return sortingDialogList([...m])
                             } else {
-                                return s;
+                                return sortingDialogList([data?.chat_list_item?.chat, ...s])
                             }
+                            
                         })
-                    }
-                })
+        
+                        if(currentChatId === data?.chat_list_item?.chat?.id) {
+                            setChatList(s => {
+                                return sortingChatList([{...data?.chat_message, sender_user: data?.chat_list_item?.chat?.last_message?.sender_user}, ...s])
+                            })
+                        }
+                    })
+                }
+                
+                // socketChannel?.listen('.chat-message-read-event', (data: any) => {
+                //     if(currentChatId && currentChatId == data?.chat_id) {
+                //         setChatList(s => {
+                //             const findItem = s.find(i => i.id == data?.chat_message_id)
+                //             if(findItem) {
+                //                 const m = s;
+                //                 const rm = s.splice(m.findIndex(i => i.id == findItem.id), 1, {...findItem, is_read_by_recepient: 1})
+                //                 return sortingChatList([...m])
+                //             } else {
+                //                 return s;
+                //             }
+                //         })
+                //     }
+                // })
             }
             if(chatType === 'mail') {
                 socketChannel?.listen('.new-letter-message-event', (data: any) => {
@@ -272,7 +284,7 @@ const ChatLayout = () => {
             }
             
         }
-    }, [socketChannel, currentChatId, chatType])
+    }, [socketChannel, currentChatId, chatType, listening, dialogsList])
 
 
     return (

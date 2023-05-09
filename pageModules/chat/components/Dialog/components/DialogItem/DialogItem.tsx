@@ -47,14 +47,14 @@ const DialogItemComponent:FC<I> = ({
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if(status === 'unread' && id && inView && !isSelf) {
-            if(token) {
-                service.readMessage({chat_message_id: Number(id)}, token)
-            }
-        }
-    }, [status, token, id, inView, isSelf])
+    //     if(status === 'unread' && id && inView && !isSelf) {
+    //         if(token) {
+    //             service.readMessage({chat_message_id: Number(id)}, token)
+    //         }
+    //     }
+    // }, [status, token, id, inView, isSelf])
 
 
 
