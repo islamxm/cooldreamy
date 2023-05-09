@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
-import { updateSocket, updateUserData } from '@/store/actions';
+import { updateNewMessage, updateSocket, updateUserData } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
@@ -76,7 +76,7 @@ const MainWrapper = ({
 		if(socketChannel) {
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
-				
+				dispatch(updateNewMessage(data))
 				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
 
 				switch(data?.chat_message?.chat_messageable_type) {
@@ -96,6 +96,9 @@ const MainWrapper = ({
 						return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
 				}
             })
+			socketChannel?.listen('.chat-message-read-even', (data: any) => {
+				console.log(data)
+			})
 			socketChannel?.listen('.new-letter-message-event', (data: any) => {
 				// const avatar = data?.letter_message?.
 				if(data) {

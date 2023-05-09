@@ -9,7 +9,9 @@ export interface IGlobalState {
     token: string | { [property: string]: string; } | null | undefined,
     socketChannel: PusherPrivateChannel | null,
     userData: IUser | null,
-    isMenuOpen: boolean
+    isMenuOpen: boolean,
+
+    newMessage: any
 }
 
 
@@ -18,7 +20,8 @@ export const globalState: IGlobalState = {
     token: process?.browser && Cookies.get('cooldate-web-token') ? Cookies.get('cooldate-web-token') : null,
     socketChannel: null,
     userData: null,
-    isMenuOpen: false
+    isMenuOpen: false,
+    newMessage: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -47,6 +50,12 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 isMenuOpen: !state?.isMenuOpen
+            }
+
+        case 'UPDATE_NEW_MESSAGE':
+            return {
+                ...state,
+                newMessage: action.data
             }
         default:
             return state;
