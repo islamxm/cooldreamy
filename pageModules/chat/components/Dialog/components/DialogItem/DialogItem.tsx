@@ -45,7 +45,7 @@ const DialogItemComponent:FC<I> = ({
         triggerOnce: true,
     })
 
-
+    
 
     useEffect(() => {
         if(status === 'unread' && id && inView && !isSelf) {
