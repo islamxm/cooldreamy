@@ -57,16 +57,16 @@ const UserInfo:FC<IUser> = (props) => {
                                     {...props}
                                     />
                             </Col>
-                            <Col span={24}>
-                                <UserImages
-                                    profile_photos={profile_photos}
-                                    />
-                            </Col>
+                            
                         </>
                     ) : null
                 }
                 
-                
+                <Col span={24}>
+                    <UserImages
+                        profile_photos={profile_photos}
+                        />
+                </Col>
                 <Col span={24}>
                     <UserMain {...props}/>
                 </Col>

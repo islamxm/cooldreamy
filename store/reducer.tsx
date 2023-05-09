@@ -11,7 +11,8 @@ export interface IGlobalState {
     userData: IUser | null,
     isMenuOpen: boolean,
 
-    newMessage: any
+    newMessage: any,
+    newMail: any
 }
 
 
@@ -21,7 +22,8 @@ export const globalState: IGlobalState = {
     socketChannel: null,
     userData: null,
     isMenuOpen: false,
-    newMessage: null
+    newMessage: null,
+    newMail: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -56,6 +58,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 newMessage: action.data
+            }
+        case 'UPDATE_NEW_MAIL':
+            return {
+                ...state,
+                newMail: action.data
             }
         default:
             return state;

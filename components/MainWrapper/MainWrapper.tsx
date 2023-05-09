@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
-import { updateNewMessage, updateSocket, updateUserData } from '@/store/actions';
+import { updateNewMail, updateNewMessage, updateSocket, updateUserData } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
@@ -96,14 +96,30 @@ const MainWrapper = ({
 						return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
 				}
             })
-			socketChannel?.listen('.chat-message-read-even', (data: any) => {
+			socketChannel?.listen('.chat-message-read-event', (data: any) => {
 				console.log(data)
 			})
 			socketChannel?.listen('.new-letter-message-event', (data: any) => {
-				// const avatar = data?.letter_message?.
+				dispatch(updateNewMail(data))
+				console.log(data)
+				const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;
 				if(data) {
-					notify('Вы получили письмо', 'AVATAR')
+					notify(
+						<>
+							Вы получили письмо
+							{
+								data?.letter_message?.letter_messageable?.text ? (
+									<div style={{color: '#aaa', fontSize: 12, lineHeight: '16px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '100%'}}>{data?.letter_message?.letter_messageable?.text}</div>
+								) : null
+							}
+							
+						</>, 
+						'AVATAR', 
+						avatar)
 				}
+			})
+			socketChannel?.listen('.letter-message-read-event', (data: any) => {
+				console.log(data)
 			})
         }
 	}, [socketChannel])

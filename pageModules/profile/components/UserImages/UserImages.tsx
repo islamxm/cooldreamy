@@ -5,7 +5,7 @@ import {FC, useEffect, useState, useRef} from 'react';
 import ImageCropModal from '../../modals/ImageCropModal/ImageCropModal';
 import { createFile } from '@/helpers/cropImage';
 import ApiService from '@/service/apiService';
-
+import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 
 
 
@@ -56,31 +56,35 @@ const UserImages:FC<{
 
 
     return (
-        <div className={`${styles.wrapper} horizontal-scroll`}>
-            <ImageCropModal
-                uploadedFile={uploadedFile}
-                open={imageCropModal}
-                onClose={closeCropModal}
-                onSave={onUpload}
-                />
-            <div
-                className={styles.add}>
-                <input value={''} ref={ref} id='upload-photo' type="file" accept='.png, .jpg, .jpeg' onChange={uploadFile}/>
-                <label htmlFor='upload-photo' className={styles.label}>
-                    <div className={styles.icon}><BsCamera/></div>
-                    <div className={styles.text}>Добавить фото</div>
-                </label>
+        <FancyboxWrapper>
+
+            <div className={`${styles.wrapper} horizontal-scroll`}>
+                <ImageCropModal
+                    uploadedFile={uploadedFile}
+                    open={imageCropModal}
+                    onClose={closeCropModal}
+                    onSave={onUpload}
+                    />
+                <div
+                    className={styles.add}>
+                    <input value={''} ref={ref} id='upload-photo' type="file" accept='.png, .jpg, .jpeg' onChange={uploadFile}/>
+                    <label htmlFor='upload-photo' className={styles.label}>
+                        <div className={styles.icon}><BsCamera/></div>
+                        <div className={styles.text}>Добавить фото</div>
+                    </label>
+                </div>
+                {
+                    profile_photos?.map((item, index) => (
+                        <a data-fancybox="gallery" href={item.image_url} className={styles.item} key={index}>
+                            <UserImageItem
+                                image={item?.thumbnail_url}
+                            />
+                        </a>
+                    ))
+                }
             </div>
-            {
-                profile_photos?.map((item, index) => (
-                    <div className={styles.item} key={index}>
-                        <UserImageItem
-                            image={item?.thumbnail_url}
-                        />
-                    </div>
-                ))
-            }
-        </div>
+        </FancyboxWrapper>
+        
     )
 }
 

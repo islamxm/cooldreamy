@@ -14,6 +14,7 @@ import { IMessage } from '@/pageModules/chat/types';
 import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
+import Router from 'next/router';
 
 
 const service = new ApiService()
@@ -39,6 +40,8 @@ const DialogItemComponent:FC<I> = ({
     gifts,
     index,
     showAvatar,
+    senderUser
+    
 }) => {
     const {token} = useAppSelector(s => s)
     const {inView, ref} = useInView({
@@ -88,9 +91,9 @@ const DialogItemComponent:FC<I> = ({
                     <div className={styles.bubble}>
                         <div className={styles.text}>
                             <p>
-                                {/* {text} */}
-                                {id} <br/>
-                                {status}
+                                {text}
+                                {/* {id} <br/>
+                                {status} */}
                             </p>
                             
                         </div>
@@ -187,7 +190,7 @@ const DialogItemComponent:FC<I> = ({
                     </div>
                 ) : (
                     <div className={`${styles.body} ${styles.you}`}>
-                        <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
+                        <div onClick={() => Router.push(`/users/${senderUser?.id}`)} className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
                                 image={avatar}

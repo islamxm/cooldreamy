@@ -9,15 +9,22 @@ import UserLocation from '@/components/UserLocation/UserLocation';
 import Button from '@/components/Button/Button';
 import {motion} from 'framer-motion';
 
+interface I extends IUser {
+    children?: React.ReactNode
+}
 
-const UserCardMob:FC<IUser> = ({
+
+const UserCardMob:FC<I> = ({
     avatar_url_thumbnail,
     name,
     age,
     state,
     country,
     credits,
-    is_premium
+    is_premium,
+
+    children
+
 }) => {
 
     return (
@@ -48,44 +55,52 @@ const UserCardMob:FC<IUser> = ({
                                 country={country}
                                 />
                         </Col>
-                        <Col span={24}>
-                            {/* images */}
-                        </Col>
-                        <Col span={24}>
-                            <div className={styles.action}>
-                                <Button
-                                    text='Подтвердить фото'
-                                    variant={'simple'}
-                                    small
-                                    />
-                            </div>
-                        </Col>
+                        {
+                            children ? (
+                                children
+                            ) : (
+                                <Col span={24}>
+                                    <div className={styles.action}>
+                                        <Button
+                                            text='Подтвердить фото'
+                                            variant={'simple'}
+                                            small
+                                            />
+                                    </div>
+                                </Col>
+                            )
+                        }
                     </Row>
                 </div>
             </div>
-            <div className={styles.action}>
-                <div className={styles.item}>
-                    <motion.button
-                        whileTap={{scale: 0.9}} 
-                        transition={{type: 'spring', damping: 17, stiffness: 400}}
-                        className={styles.btn}>
-                        Баланс: {credits} кредитов
-                    </motion.button>
-                </div>
-                {
-                    is_premium === 1 ? (
+            {
+                !children && (
+                    <div className={styles.action}>
                         <div className={styles.item}>
-                            <motion.button 
+                            <motion.button
                                 whileTap={{scale: 0.9}} 
                                 transition={{type: 'spring', damping: 17, stiffness: 400}}
                                 className={styles.btn}>
-                                Премиум статус
+                                Баланс: {credits} кредитов
                             </motion.button>
                         </div>
-                    ) : null
-                }
-                
-            </div>
+                        {
+                            is_premium === 1 ? (
+                                <div className={styles.item}>
+                                    <motion.button 
+                                        whileTap={{scale: 0.9}} 
+                                        transition={{type: 'spring', damping: 17, stiffness: 400}}
+                                        className={styles.btn}>
+                                        Премиум статус
+                                    </motion.button>
+                                </div>
+                            ) : null
+                        }
+                        
+                    </div>
+                )
+            }
+            
         </div>
     )
 }

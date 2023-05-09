@@ -31,5 +31,8 @@ export interface IUser {
     type?: any,
     updated_at?: string,
     profile_photos?: any[],
-    age?: number
+    age?: number,
+
+
+    profile_photo?: any[]
 }

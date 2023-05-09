@@ -16,6 +16,8 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { IUser } from '@/models/IUser';
 import Router from 'next/router';
 import { useWindowSize } from 'usehooks-ts';
+import UserCardMob from '@/pageModules/profile/components/UserCardMob/UserCardMob';
+import UserMobAction from '@/pageModules/user/components/UserMobAction/UserMobAction';
 
 const service = new ApiService()
 
@@ -51,37 +53,50 @@ const UserPage:FC = () => {
     }
 
 
+ 
+
     return (
         <Container>
             <MainLayout>
                 <Sidebar/>
                 <UserLayout
                     side={
-                        <Row gutter={[20,20]}>
-                            <Col span={24}>
-                                <UserCard
-                                    {...data}
-                                    >
-                                    <Button
-                                        onClick={createChat}
-                                        load={createChatLoad}
-                                        after={<GoMail/>}
-                                        text='Написать'
-                                        style={{
-                                            padding: '8px 10px',
-                                            fontSize: 18,
-                                            lineHeight: '27px',
-                                            width: '100%'
-                                        }}
+                        width <= 1000 ? (
+                            <UserCardMob
+                                {...data}
+                                >
+                                <UserMobAction
+                                    id={data?.id}
+                                    />        
+                            </UserCardMob>
+                        ) : (
+                            <Row gutter={[20,20]}>
+                                <Col span={24}>
+                                    <UserCard
+                                        {...data}
+                                        >
+                                        <Button
+                                            onClick={createChat}
+                                            load={createChatLoad}
+                                            after={<GoMail/>}
+                                            text='Написать'
+                                            style={{
+                                                padding: '8px 10px',
+                                                fontSize: 18,
+                                                lineHeight: '27px',
+                                                width: '100%'
+                                            }}
+                                            />
+                                    </UserCard>
+                                </Col>
+                                {/* <Col span={24}>
+                                    <StartGift
+                                        image={giftImg}
                                         />
-                                </UserCard>
-                            </Col>
-                            {/* <Col span={24}>
-                                <StartGift
-                                    image={giftImg}
-                                    />
-                            </Col> */}
-                        </Row>
+                                </Col> */}
+                            </Row>
+                        )
+                        
                     }
                     main={
                         <UserInfo {...data}/>

@@ -85,6 +85,7 @@ const Dialog:FC<I> = ({
                             updatedAt={item.updated_at}
                             index={index}
                             showAvatar={item.sender_user_id !== chatList[index - 1]?.sender_user_id}
+                            senderUser={item?.sender_user}
                             />
                     ))
                 }

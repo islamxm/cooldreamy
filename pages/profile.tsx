@@ -28,6 +28,9 @@ const Profile = () => {
     const openImageEditModal = () => setImageEditModal(true)
 
 
+    useEffect(() => {
+        console.log(userData)
+    }, [userData])
     
 
 

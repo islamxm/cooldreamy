@@ -7,8 +7,9 @@ import moment from 'moment';
 import {useState, useEffect} from 'react';
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-
+import chatMessageTypeVariants from '@/helpers/messageVariants';
 import { IMail } from '@/pageModules/chat/types';
+import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import Image from 'next/image';
 
 const service = new ApiService()
@@ -29,25 +30,16 @@ const MailItem:FC<IMail> = ({
     sticker,
     text,
     isSelf
-    // letter_id,
-    // letter_messageable,
-    // letter_messageable_id,
-    // letter_messageable_type,
-    // created_at,
-    // disabled,
-    // id,
-    // is_read_by_recepient,
-    // sender_user_id,
-    // updated_at,
-    // sender_user
 }) => {
     const {token} = useAppSelector(s => s)
     const [openLoad, setOpenLoad] = useState(false)
 
+
+   
     
     const switchMessageType = (type?: chatMailTypes) => {
         switch(type) {
-            case "App\\Models\\LetterTextMessage":
+            case chatMessageTypeVariants?.letterText:
                 return  (
                     <div className={styles.content_text}>
                         {
@@ -57,27 +49,73 @@ const MailItem:FC<IMail> = ({
                                 </div>
                             ) : null
                         }
-                        
                         {
-                            images?.length > 0 ? (
-                                <div className={styles.media}>
-                                    {images?.map((item, index) => (
-                                        <div className={styles.item} key={index}>
-                                            <Image
-                                                width={100}
-                                                height={100}
-                                                alt=''
-                                                src={isPayed && item?.thumbnail ? item.thumbnail : (item.blur ? item?.blur : '')}
-                                                loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                                                />
+                            isSelf ? (
+                                images?.length > 0 ? (
+                                    <FancyboxWrapper>
+                                        <div className={styles.media}>
+                                            {images?.map((item, index) => (
+                                                <a data-fancybox="gallery" href={item.image} className={styles.item} key={index}>
+                                                    <Image
+                                                        width={100}
+                                                        height={100}
+                                                        alt=''
+                                                        src={item?.thumbnail ? item.thumbnail : ''}
+                                                        loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                                                        />
+                                                </a>
+                                            ))}
                                         </div>
-                                    ))}
-                                </div>
-                            ) : null
+                                    </FancyboxWrapper>
+                                    
+                                ) : null
+                            ) : (
+                                isPayed ? (
+                                    images?.length > 0 ? (
+                                        <FancyboxWrapper>
+                                            <div className={styles.media}>
+                                                {images?.map((item, index) => (
+                                                    <a data-fancybox="gallery" href={item.image} className={styles.item} key={index}>
+                                                        <Image
+                                                            width={100}
+                                                            height={100}
+                                                            alt=''
+                                                            src={item?.thumbnail ? item.thumbnail : ''}
+                                                            loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                                                            />
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        </FancyboxWrapper>
+                                        
+                                    ) : null
+                                ) : (
+                                    images?.length > 0 ? (
+                                        <div className={styles.media}>
+                                            {images?.map((item, index) => (
+                                                <div className={styles.item} key={index}>
+                                                    <Image
+                                                        width={100}
+                                                        height={100}
+                                                        alt=''
+                                                        src={item?.blur ? item.blur : ''}
+                                                        loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                                                        />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : null
+                                )
+                            )
                         }
+                        
                         
                     </div>
                 )
+            // case chatMessageTypeVariants?.letterGift:
+            //     return (
+
+            //     )
             default:
                 return null
     
@@ -121,8 +159,8 @@ const MailItem:FC<IMail> = ({
                 <div className={styles.content}>
                     {switchMessageType(type)}
                 </div>
-                {
-                    isPayed ? (
+                {/* {
+                    isPayed || isSelf ? (
                         null
                     ) : (
                         <div className={styles.action}>
@@ -131,7 +169,7 @@ const MailItem:FC<IMail> = ({
                             </div>
                         </div>
                     )
-                }
+                } */}
                 
             </div>
         </div>

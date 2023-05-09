@@ -15,6 +15,7 @@
         width: 130px;
         height: 130px;
         flex: 0 0 auto;
+        display: block;
 
         img {
             width: 100%;
@@ -68,6 +69,40 @@
                 text-align: center;font-size: 15px;
                 line-height: 140%;
                 margin-top: 5px;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        margin-left: -2px;
+        margin-right: -2px;
+        padding: 5px;
+        .item {
+            width: 80px;
+            height: 80px;
+            margin: 0 2px;
+        }
+
+        .add {
+            margin: 0 2px;
+            width: 80px;
+            height: 80px;
+            .label {
+                width: 80px;
+                height: 80px;
+                font-size: 25px;
+                line-height: 25px;
+
+                .icon {
+                    
+                }
+    
+                .text {
+                    font-size: 10px;
+                    line-height: 120%;
+                }
             }
         }
     }

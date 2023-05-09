@@ -11,3 +11,4 @@ export const updateMenu = () => ({type: 'UPDATE_MENU'})
 
 
 export const updateNewMessage = (data: any) => ({type: 'UPDATE_NEW_MESSAGE', data})
+export const updateNewMail = (data: any) => ({type: 'UPDATE_NEW_MAIL', data})
