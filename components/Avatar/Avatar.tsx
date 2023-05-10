@@ -1,9 +1,11 @@
 import Image from "next/image"
 import { avatarPropsTypes } from "./types"
 import styles from './Avatar.module.scss';
-import placeholder from '@/public/assets/images/avatar-placeholder.png';
+import placeholder from '@/public/assets/images/placeholder.png';
 import {HiOutlineCheck} from 'react-icons/hi';
 import {useEffect} from 'react';
+
+
 
 const Avatar = ({
     image,
@@ -26,7 +28,8 @@ const Avatar = ({
                     loader={(p) => {
                         return p?.src && typeof p?.src === 'string' ? p?.src : '' 
                     }}
-                    placeholder={!image ? 'blur' : 'empty'}
+                    placeholder={'blur'}
+                    blurDataURL={'@/public/assets/images/placeholder.png'}
                     width={size}
                     height={size}
                     alt={'avatar'}

@@ -11,6 +11,10 @@ const service = new ApiService()
 const UserMobAction = ({id}: {id?: number}) => {
     const {width} = useWindowSize()
 
+
+    
+
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.main}>

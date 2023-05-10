@@ -8,6 +8,7 @@ import Avatar from '@/components/Avatar/Avatar';
 import { IUser } from '@/models/IUser';
 import UserLocation from '@/components/UserLocation/UserLocation';
 
+
 const MyCard:FC<IUser> = ({
     name,
     state,

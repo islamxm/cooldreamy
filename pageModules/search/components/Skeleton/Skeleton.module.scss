@@ -1,0 +1,21 @@
+.wrapper {
+
+    .item {
+        height: 322px;
+        border-radius: 12px;
+        background-color: var(--light_purp_1);
+        animation: sk-anim 1s linear infinite;
+    }
+}
+
+@keyframes sk-anim {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

@@ -13,6 +13,8 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import { selectOptionType } from '@/components/SelectDef/types';
 import SearchDrawer from '../searchDrawer/SearchDrawer';
 import { useWindowSize } from 'usehooks-ts';
+import Loader from '@/components/Loader/Loader';
+import Skeleton from '../Skeleton/Skeleton';
 const service = new ApiService();
 
 
@@ -93,11 +95,10 @@ const SearchBody = () => {
     }, [token, country])
 
 
-    const onSearch = useCallback(() => {
+    const onSearch = () => {
         if(token) {
             setCurrentPage(1)
             setLoad(true)
-            setSearched(false)
             service.search({
                 page: 1,
                 isNew, 
@@ -117,11 +118,11 @@ const SearchBody = () => {
                 setLoad(false)
             })
         }
-        
-    }, [currentPage, token, state, country, age_range_start, age_range_end, prompt_targets, prompt_finance_states, isNew, isOnline, isNear])
+    }
 
-    const updateList = useCallback(() => {
+    const updateList = () => {
         if(token) {
+            setLoad(true)
             service.search({
                 page: currentPage,
                 isNew, 
@@ -140,15 +141,16 @@ const SearchBody = () => {
                 setLoad(false)
             })
         }
-    }, [currentPage, token, state, country, age_range_start, age_range_end, prompt_targets, prompt_finance_states, isNew, isOnline, isNear])
+    }
 
     useEffect(() => {
-        setSearched(true)
-        if (searched && updateList) {
-            updateList()
-        }
+        updateList()
     }, [currentPage, token])
 
+
+    useEffect(()=> {
+        console.log(currentPage)
+    }, [currentPage])
 
 
     useEffect(() => {
@@ -229,21 +231,28 @@ const SearchBody = () => {
 
                 </Col>
                 <Col span={24}>
-                    <Row gutter={[12,12]}>
-                        {
-                            list?.map((item, index) => (
-                                <Col 
-                                    span={12}
-                                    md={8} 
-                                    lg={6}
-                                    key={index}>
-                                    <GirlCard
-                                        {...item}
-                                        />
-                                </Col>
-                            ))
-                        }
-                    </Row>
+                    {
+                        load ? (
+                            <Skeleton/>
+                        ) : (
+                            <Row gutter={[12,12]}>
+                                {
+                                    list?.map((item, index) => (
+                                        <Col 
+                                            span={12}
+                                            md={8} 
+                                            lg={6}
+                                            key={index}>
+                                            <GirlCard
+                                                {...item}
+                                                />
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                        )
+                    }
+                    
                 </Col>
                 {
                     list?.length > 0 && Math.ceil(totalFound / 8) >= 2 ? (
