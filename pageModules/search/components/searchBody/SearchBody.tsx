@@ -16,7 +16,10 @@ import { useWindowSize } from 'usehooks-ts';
 import SkGirlCardList from '@/components/Skeleton/SkGirlCardList/SkGirlCardList';
 
 
+
 const service = new ApiService();
+
+
 
 
 

@@ -84,6 +84,7 @@ const ChatAction = ({
                         chat_id: Number(query?.id),
                         text
                     }, token).then(res => {
+                        console.log(res)
                         updateDialogsList && updateDialogsList((s: any) => {
                             console.log(s)
                             const m = s;
@@ -104,7 +105,9 @@ const ChatAction = ({
                         letter_id: Number(query?.id),
                         text
                     }, token).then(res => {
+                        console.log(res)
                         updateDialogsList && updateDialogsList((s: any) => {
+                            console.log(s)
                             const m = s;
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
                             return sortingDialogList([...m])

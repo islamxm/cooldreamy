@@ -27,7 +27,7 @@ const WcLoader = () => {
                     stiffness: 400
                 }}
                 className={styles.main}>
-                <Image placeholder={'blur'} src={logo} alt=''/>
+                <Image src={logo} alt=''/>
             </motion.div>
         </motion.div>
     )

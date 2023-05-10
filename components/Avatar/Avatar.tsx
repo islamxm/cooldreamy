@@ -28,8 +28,6 @@ const Avatar = ({
                     loader={(p) => {
                         return p?.src && typeof p?.src === 'string' ? p?.src : '' 
                     }}
-                    placeholder={'blur'}
-                    blurDataURL={'@/public/assets/images/placeholder.png'}
                     width={size}
                     height={size}
                     alt={'avatar'}

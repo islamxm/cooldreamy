@@ -35,7 +35,9 @@ const MailItem:FC<IMail> = ({
     const [openLoad, setOpenLoad] = useState(false)
 
 
-   
+    useEffect(() => {
+        console.log(images)
+    }, [images])
     
     const switchMessageType = (type?: chatMailTypes) => {
         switch(type) {
@@ -75,15 +77,28 @@ const MailItem:FC<IMail> = ({
                                         <FancyboxWrapper>
                                             <div className={styles.media}>
                                                 {images?.map((item, index) => (
-                                                    <a data-fancybox="gallery" href={item.image} className={styles.item} key={index}>
-                                                        <Image
-                                                            width={100}
-                                                            height={100}
-                                                            alt=''
-                                                            src={item?.thumbnail ? item.thumbnail : ''}
-                                                            loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                                                            />
-                                                    </a>
+                                                    item?.image ? (
+                                                        <a data-fancybox="gallery" href={item.image} className={styles.item} key={index}>
+                                                            <Image
+                                                                width={100}
+                                                                height={100}
+                                                                alt=''
+                                                                src={item?.thumbnail ? item.thumbnail : ''}
+                                                                loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                                                                />
+                                                        </a>
+                                                    ) : (
+                                                        <div className={styles.item} key={index}>
+                                                            <Image
+                                                                width={100}
+                                                                height={100}
+                                                                alt=''
+                                                                src={item?.blur ? item.blur : ''}
+                                                                loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                                                                />
+                                                        </div>
+                                                    )
+                                                    
                                                 ))}
                                             </div>
                                         </FancyboxWrapper>
@@ -159,7 +174,7 @@ const MailItem:FC<IMail> = ({
                 <div className={styles.content}>
                     {switchMessageType(type)}
                 </div>
-                {/* {
+                {
                     isPayed || isSelf ? (
                         null
                     ) : (
@@ -169,7 +184,7 @@ const MailItem:FC<IMail> = ({
                             </div>
                         </div>
                     )
-                } */}
+                }
                 
             </div>
         </div>

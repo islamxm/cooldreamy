@@ -22,9 +22,7 @@ const Mail:FC<I> = ({
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
 
-    useEffect(() => {
-        console.log(chatList)
-    }, [chatList])
+   
     
         
     useEffect(() => {

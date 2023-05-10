@@ -42,6 +42,9 @@ const ChatItem = ({
     const {query: {type}} = useRouter()
     const {token} = useAppSelector(s => s)
     const {avatar_url, avatar_url_thumbnail, name} = another_user;
+    
+
+
 
 
     const switchChatType = (type?: string) => {
