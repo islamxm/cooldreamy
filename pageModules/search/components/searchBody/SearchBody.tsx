@@ -13,8 +13,9 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import { selectOptionType } from '@/components/SelectDef/types';
 import SearchDrawer from '../searchDrawer/SearchDrawer';
 import { useWindowSize } from 'usehooks-ts';
-import Loader from '@/components/Loader/Loader';
-import Skeleton from '../Skeleton/Skeleton';
+import SkGirlCardList from '@/components/Skeleton/SkGirlCardList/SkGirlCardList';
+
+
 const service = new ApiService();
 
 
@@ -233,7 +234,7 @@ const SearchBody = () => {
                 <Col span={24}>
                     {
                         load ? (
-                            <Skeleton/>
+                            <SkGirlCardList count={8}/>
                         ) : (
                             <Row gutter={[12,12]}>
                                 {
