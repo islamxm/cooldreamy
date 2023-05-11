@@ -14,6 +14,7 @@ import { selectOptionType } from '@/components/SelectDef/types';
 import SearchDrawer from '../searchDrawer/SearchDrawer';
 import { useWindowSize } from 'usehooks-ts';
 import SkGirlCardList from '@/components/Skeleton/SkGirlCardList/SkGirlCardList';
+import { IUser } from '@/models/IUser';
 
 
 
@@ -47,7 +48,7 @@ const SearchBody = () => {
 
     const [totalFound, setTotalFound] = useState(0);
 
-    const [list, setList] = useState<girlCardType[]>([])
+    const [list, setList] = useState<IUser[]>([])
 
     const [countriesList, setCountriesList] = useState<selectOptionType[]>([])
     const [statesList, setStatesList] = useState<selectOptionType[]>([])
@@ -118,6 +119,7 @@ const SearchBody = () => {
             ).then(res => {
                 setTotalFound(res?.total)
                 setList(res?.data)
+
             }).finally(() => {
                 setLoad(false)
             })
@@ -141,6 +143,7 @@ const SearchBody = () => {
             }, token).then(res => {
                 setTotalFound(res?.total)
                 setList(res?.data)
+                console.log(res?.data)
             }).finally(() => {
                 setLoad(false)
             })

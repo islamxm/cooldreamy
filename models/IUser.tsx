@@ -32,6 +32,7 @@ export interface IUser {
     updated_at?: string,
     profile_photos?: any[],
     age?: number,
+    winkable?: 1 | 0
 
 
     profile_photo?: any[]

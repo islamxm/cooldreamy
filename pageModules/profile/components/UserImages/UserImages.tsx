@@ -6,13 +6,11 @@ import ImageCropModal from '../../modals/ImageCropModal/ImageCropModal';
 import { createFile } from '@/helpers/cropImage';
 import ApiService from '@/service/apiService';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
+import { IUser } from '@/models/IUser';
 
 
-
-const UserImages:FC<{
-    profile_photos?: any[]
-}> = ({
-    profile_photos
+const UserImages:FC<IUser> = ({
+    profile_photo
 }) => {
     const [imageCropModal, setImageCropModal] = useState(false)
     const ref = useRef<HTMLInputElement>(null)
@@ -42,7 +40,6 @@ const UserImages:FC<{
     
 
     const onUpload = (image: any) => {
-        console.log(image)
 
         if(image) {
             const data = new FormData()
@@ -74,7 +71,7 @@ const UserImages:FC<{
                     </label>
                 </div>
                 {
-                    profile_photos?.map((item, index) => (
+                    profile_photo?.map((item, index) => (
                         <a data-fancybox="gallery" href={item.image_url} className={styles.item} key={index}>
                             <UserImageItem
                                 image={item?.thumbnail_url}

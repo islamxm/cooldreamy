@@ -15,19 +15,11 @@ import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import placeholder from '@/public/assets/images/logo.svg';
 import notify from '@/helpers/notify';
+import { IUser } from '@/models/IUser';
 
 const service = new ApiService();
 
-const GirlCard:FC<girlCardType> = ({
-    // image,
-    // name,
-    // location,
-    // online,
-    // photoCount,
-    // verified,
-    // age,
-    // link = '/users/user_id'
-
+const GirlCard:FC<IUser> = ({
     age,
     avatar_url,
     avatar_url_thumbnail,
@@ -36,7 +28,6 @@ const GirlCard:FC<girlCardType> = ({
     created_at,
     id,
     name,
-    online,
     state,
     winkable
 }) => {
@@ -138,7 +129,7 @@ const GirlCard:FC<girlCardType> = ({
                     <Col span={24}>
                         <Row gutter={[2,2]}>
                             <Col span={24}>
-                                <div className={`${styles.name} ${online ? styles.online : ''}`}>{name}, {age}</div>
+                                <div className={`${styles.name} ${styles.online}`}>{name}, {age}</div>
                             </Col>
                             <Col span={24}>
                                 <div className={styles.loc}>{`${country} ${state ? ',' + state : ''}`}</div>

@@ -64,7 +64,7 @@ const UserInfo:FC<IUser> = (props) => {
                 
                 <Col span={24}>
                     <UserImages
-                        profile_photos={profile_photos}
+                        {...props}
                         />
                 </Col>
                 <Col span={24}>

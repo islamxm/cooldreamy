@@ -35,9 +35,7 @@ const MailItem:FC<IMail> = ({
     const [openLoad, setOpenLoad] = useState(false)
 
 
-    useEffect(() => {
-        console.log(images)
-    }, [images])
+
     
     const switchMessageType = (type?: chatMailTypes) => {
         switch(type) {
@@ -142,7 +140,7 @@ const MailItem:FC<IMail> = ({
         if(token && id) {
             setOpenLoad(true)
             service.mailOpenPay({letter_text_message_id: id}, token).then(res => {
-                console.log(res)
+                // console.log(res)
             }).finally(() => {
                 setOpenLoad(false)
             })
