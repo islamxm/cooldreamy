@@ -12,7 +12,8 @@ const SelectDef:FC<selectDefType> = ({
     width,
     label,
     onChange,
-    onClear
+    onClear,
+    multiple
 }) => {
 
     const ref = useRef<any>()
@@ -26,17 +27,34 @@ const SelectDef:FC<selectDefType> = ({
                     <div className={styles.label}>{label}</div>
                 ) : null
             }
-            <Select
-                ref={ref}
-                allowClear
-                style={{width: '100%'}}
-                placeholder={placeholder}
-                defaultValue={value}
-                onChange={onChange}
-                onClear={onClear}
-                options={list}
-                value={value}
-                />
+            {
+                multiple ? (
+                    <Select
+                        mode='multiple'
+                        ref={ref}
+                        allowClear
+                        style={{width: '100%'}}
+                        placeholder={placeholder}
+                        defaultValue={value}
+                        onChange={onChange}
+                        onClear={onClear}
+                        options={list}
+                        value={value}
+                        />
+                ) : (
+                    <Select
+                        ref={ref}
+                        allowClear
+                        style={{width: '100%'}}
+                        placeholder={placeholder}
+                        defaultValue={value}
+                        onChange={onChange}
+                        onClear={onClear}
+                        options={list}
+                        value={value}
+                        />
+                )
+            }
         </div>
     )
 }

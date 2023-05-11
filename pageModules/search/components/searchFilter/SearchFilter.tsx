@@ -176,14 +176,19 @@ const SearchFilter:FC<searchFilterType> = ({
                             <div
                                 className={styles.ex}>
                                 <div className={styles.list}>
-                                    {/* <div className={styles.item}>
+                                    <div className={styles.item}>
                                         <SelectDef
                                             list={targetList}
                                             // value={prompt_target_id}
-                                            onChange={setprompt_target_id}
+                                            onChange={(e, v) => {
+                                                console.log(v)
+                                                setprompt_target_id && setprompt_target_id(e)
+                                            }}
                                             placeholder={'Не указано'}
                                             label={'Цель знакомства'}
                                             width={230}
+                                            multiple
+                                            
                                             />
                                     </div>
                                     <div className={styles.item}>
@@ -191,12 +196,16 @@ const SearchFilter:FC<searchFilterType> = ({
                                             list={financeList}
                                             // value={country?.label}
                                             // value={prompt_finance_state_id}
-                                            onChange={setprompt_finance_state_id}
+                                            onChange={(e, v) => {
+                                                console.log(v)
+                                                setprompt_finance_state_id && setprompt_finance_state_id(e)
+                                            }}
                                             placeholder={'Не указано'}
                                             label={'Финансовые цели'}
                                             width={230}
-                                            />
-                                    </div> */}
+                                            multiple
+                                            />  
+                                    </div>
                                     <div className={styles.item}>
                                         <RangeSlider
                                             style={{width: 140}}

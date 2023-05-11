@@ -8,9 +8,9 @@ export type searchFilterType = {
     setage_range_start?: (...args: any[]) => any,
     age_range_end: number,
     setage_range_end?: (...args: any[]) => any,
-    prompt_target_id?: number | string,
+    prompt_target_id?: any[],
     setprompt_target_id?: (...args: any[]) => any,
-    prompt_finance_state_id?: number | string,
+    prompt_finance_state_id?: any[],
     setprompt_finance_state_id?: (...args: any[]) => any,
     onSearch?: (...args: any[]) => any,
 

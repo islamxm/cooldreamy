@@ -10,6 +10,7 @@ export type selectDefType = {
     value?: number | string,
     width?: number | string,
     label?: string,
+    multiple?: boolean,
     onChange?: (...args: any[]) => any,
     onClear?: (...args: any[]) => any
 }

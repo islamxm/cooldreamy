@@ -6,7 +6,20 @@
         background: #FFFFFF !important;
         border: 2px solid #F0EBFF !important;
         border-radius: 12px !important;
+
+        .ant-select-selection-overflow {
+            .ant-select-selection-overflow-item {
+                .ant-select-selection-item {
+                    border-radius: 8px;
+                    background-color: var(--light_purp_1);
+                }
+                
+            }
+        }
+        
     }
+
+    
 }
 
 .ant-select-dropdown {

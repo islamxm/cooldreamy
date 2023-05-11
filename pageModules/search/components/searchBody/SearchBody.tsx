@@ -34,13 +34,21 @@ const SearchBody = () => {
     
     const [targetList, setTargetList] = useState([])
     const [financeList, setFinanceList] = useState([])
+    const [careerList, setCareerList] = useState([])
+    const [rlList, setRlList] = useState([])
+    const [interestsList, setInterestsList] = useState([])
+    const [kidsList, setKidsList] = useState([])
 
     const [state, setState] = useState<{value: string, id: string, label: string} | null>(null)
     const [country, setCountry] = useState<{value: string, id: string, label: string} | null>(null)
     const [age_range_start, setage_range_start] = useState(18)
     const [age_range_end, setage_range_end] = useState(70)
-    const [prompt_targets, setprompt_targets] = useState<number | string>()
-    const [prompt_finance_states, setprompt_finance_states] = useState<number | string>()
+
+    const [prompt_targets, setprompt_targets] = useState<number[]>([])
+    const [prompt_finance_states, setprompt_finance_states] = useState<number[]>([])
+    // const [prompt_interests, setprompt_interests] = useState<number[]>([])
+    // const [prompt_relationship, setprompt_relationship] = useState<number[]>([])
+    // const [prompt_kids, setprompt_kids] = useState<number[]>([])
 
     const [isNew, setIsNew] = useState<1 | 0>(0)
     const [isOnline, setIsOnline] = useState<1 | 0>(0)
@@ -59,22 +67,34 @@ const SearchBody = () => {
 
 
 
-    const getFinanceList = () => {
-        if(token) {
-            service.getPromptFinanceState(token).then(res => {
-                res && setFinanceList(res?.map((i: any) => ({...i, value: i.id, label: i.text})))
-            })
-        }
-    }
+    // const getFinanceList = () => {
+    //     if(token) {
+    //         service.getPromptFinanceState(token).then(res => {
+    //             res && setFinanceList(res?.map((i: any) => ({...i, value: i.id, label: i.text})))
+    //         })
+    //     }
+    // }
 
-    const getTargetList = () => {
+    // const getTargetList = () => {
+    //     if(token) {
+    //         service.getPromptTargets(token).then(res => {
+    //             res && setTargetList(res?.map((i: any) => ({...i, value: i.id, label: i.text})))
+    //         })
+    //     }
+    // }
+
+    useEffect(() => {
         if(token) {
-            service.getPromptTargets(token).then(res => {
-                res && setTargetList(res?.map((i: any) => ({...i, value: i.id, label: i.text})))
+            service.getAllPrompts(token).then(res => {
+                console.log(res)
+                if(res) {
+                    setFinanceList(res?.prompt_finance_states?.map((i: any) => ({...i, value: i.id, label: i.text})))
+                    setTargetList(res?.prompt_targets?.map((i: any) => ({...i, value: i.id, label: i.text})))
+                }
+                
             })
         }
-       
-    }
+    }, [token])
 
     const getCountries = () => {
         if(token) {
@@ -113,8 +133,8 @@ const SearchBody = () => {
                 country: country?.label, 
                 age_range_start, 
                 age_range_end,
-                prompt_targets, 
-                prompt_finance_states, 
+                prompt_targets: `[${prompt_targets?.join(',')}]`, 
+                prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
             }, token
             ).then(res => {
                 setTotalFound(res?.total)
@@ -138,8 +158,8 @@ const SearchBody = () => {
                 country: country?.label, 
                 age_range_start, 
                 age_range_end,
-                prompt_targets, 
-                prompt_finance_states, 
+                prompt_targets: `[${prompt_targets?.join(',')}]`, 
+                prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
             }, token).then(res => {
                 setTotalFound(res?.total)
                 setList(res?.data)
@@ -161,8 +181,6 @@ const SearchBody = () => {
 
 
     useEffect(() => {
-        getFinanceList()
-        getTargetList()
         getCountries()
     }, [token])
 
@@ -176,8 +194,8 @@ const SearchBody = () => {
         setStatesList([])
         setage_range_start(18)
         setage_range_end(70)
-        setprompt_targets('')
-        setprompt_finance_states('')
+        setprompt_targets([])
+        setprompt_finance_states([])
     }
 
 
@@ -189,19 +207,20 @@ const SearchBody = () => {
             <Row gutter={[10,10]}>
                 <Col span={24}>
 
-
                     <SearchFilter
                         load={load}
                         targetList={targetList}
                         financeList={financeList}
-                        // prompt_target_id={prompt_target_id}
+                        prompt_target_id={prompt_targets}
                         // prompt_finance_state_id={prompt_finance_state_id}
                         age_range_end={age_range_end}
                         age_range_start={age_range_start}
                         setage_range_start={setage_range_start}
                         setage_range_end={setage_range_end}
-                        // setprompt_target_id={setprompt_target_id}
-                        // setprompt_finance_state_id={setprompt_finance_state_id}
+
+                        setprompt_target_id={setprompt_targets}
+                        setprompt_finance_state_id={setprompt_finance_states}
+                        
                         onSearch={onSearch}
 
                         countries={countriesList}
