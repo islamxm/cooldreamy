@@ -55,6 +55,9 @@ body {
     line-height: 36px;
     color: var(--text);
     overflow-x: hidden;
+
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
     
 }
 

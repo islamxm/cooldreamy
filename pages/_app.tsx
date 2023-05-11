@@ -24,6 +24,13 @@ import moment from 'moment';
 import { useWindowSize } from 'usehooks-ts';
 
 
+
+if(process?.browser) {
+	const vh = process?.browser && window.innerHeight / 100;
+	document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+
 function App({ Component, pageProps }: AppProps) {
 	const router = useRouter()
 	const [wc, setWc] = useState(true)

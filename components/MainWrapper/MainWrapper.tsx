@@ -7,7 +7,7 @@ import { updateNewMail, updateNewMessage, updateSocket, updateUserData } from '@
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
-
+import LinesEllipsis from 'react-lines-ellipsis';
 
 const service = new ApiService()
 
@@ -78,10 +78,10 @@ const MainWrapper = ({
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
 				dispatch(updateNewMessage(data))
 				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
-
+	
 				switch(data?.chat_message?.chat_messageable_type) {
 					case chatMessageTypeVariants.messageText:
-						notify(data?.chat_message?.chat_messageable?.text, 'AVATAR', avatar)
+						notify(<LinesEllipsis text={data?.chat_message?.chat_messageable?.text} maxLine={2}/>, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageGift:
 						notify(`Вы получили подарок(${data?.chat_message?.chat_messageable?.gifts?.length})`, 'AVATAR', avatar)
@@ -96,12 +96,11 @@ const MainWrapper = ({
 						return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
 				}
             })
-			socketChannel?.listen('.chat-message-read-event', (data: any) => {
-				console.log(data)
-			})
+			// socketChannel?.listen('.chat-message-read-event', (data: any) => {
+				
+			// })
 			socketChannel?.listen('.new-letter-message-event', (data: any) => {
 				dispatch(updateNewMail(data))
-				console.log(data)
 				const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;
 				if(data) {
 					notify(
@@ -118,9 +117,9 @@ const MainWrapper = ({
 						avatar)
 				}
 			})
-			socketChannel?.listen('.letter-message-read-event', (data: any) => {
-				console.log(data)
-			})
+			// socketChannel?.listen('.letter-message-read-event', (data: any) => {
+			// 	console.log(data)
+			// })
         }
 	}, [socketChannel])
 

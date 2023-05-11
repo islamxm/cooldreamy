@@ -9,8 +9,9 @@ import {useCallback} from 'react';
 import { PulseLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import { IDialogs } from '../../types';
-
-
+import {Col} from 'antd';
+import Input from '@/components/Input/Input';
+import { FiSearch } from 'react-icons/fi';
 
 
 
@@ -41,16 +42,30 @@ const ChatList:FC<IDialogs> = ({
 
     return (
         <div className={`${styles.wrapper} custom-scroll-vertical`}>
-            {/* <PromoBadge/> */}
+             <div style={{padding: '5px'}}>
+                <Input
+                    style={{
+                        borderRadius: 8,
+                        paddingTop: 5,
+                        paddingBottom: 5,
+                    }}
+                    placeholder='Поиск...'
+                    afterIcon={<FiSearch color='#888888'/>}
+
+                    //beforeIcon={<FiSearch/>}
+                    />
+            </div>
+            <PromoBadge/>
             {
-                dialogsList?.map((item, index) => (
+                dialogsList?.length > 0 ? dialogsList?.map((item, index) => (
                     <ChatItem
                         key={index}
                         {...item}
                         active={item?.id === activeDialogId}
                         updateDialogsList={updateDialogsList}
                         />
-                ))
+                )) : null
+                // <div className={styles.empty}>Нет переписок</div>
             }
             {
                 dialogsList && dialogsList?.length > 0 ? (

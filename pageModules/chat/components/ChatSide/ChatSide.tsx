@@ -18,30 +18,13 @@ const ChatSide:FC<IDialogs> = ({
 
     return (
         <div className={styles.wrapper}>
-            <Row>
-                {/* <Col span={24} style={{padding: '5px'}}>
-                    <Input
-                        style={{
-                            borderRadius: 8,
-                            paddingTop: 5,
-                            paddingBottom: 5,
-                        }}
-                        placeholder='Поиск...'
-                        afterIcon={<FiSearch color='#888888'/>}
-
-                        //beforeIcon={<FiSearch/>}
-                        />
-                </Col> */}
-                <Col span={24}>
-                    <ChatList
-                        totalDialogItemCount={totalDialogItemCount}
-                        updateDialogsPage={updateDialogsPage}
-                        updateDialogsList={updateDialogsList}
-                        dialogsList={dialogsList}
-                        activeDialogId={activeDialogId}
-                        />
-                </Col>
-            </Row>
+            <ChatList
+                totalDialogItemCount={totalDialogItemCount}
+                updateDialogsPage={updateDialogsPage}
+                updateDialogsList={updateDialogsList}
+                dialogsList={dialogsList}
+                activeDialogId={activeDialogId}
+                />
         </div>
     )
 }

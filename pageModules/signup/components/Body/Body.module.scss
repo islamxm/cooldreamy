@@ -62,6 +62,13 @@
             .panel {
                 padding: 20px;
                 border-radius: 20px;
+
+                .action {
+                    position: fixed;
+                    bottom: 20px;
+                    left: 0;
+                    width: 100%;
+                }
             }
         }
     }

@@ -57,6 +57,15 @@ const ChatAction = ({
                         sticker_id: id
                     }, token).then(res => {
                         console.log(res)
+                        updateDialogsList && updateDialogsList((s: any) => {
+                            console.log(s)
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+
+                            return sortingDialogList([...m])
+                            
+                        })
+                        updateChat(res?.chat?.last_message)
                     }).finally(() => {
                         setLoad(false)
                     })
@@ -148,6 +157,7 @@ const ChatAction = ({
                             updateChat(r?.chat?.last_message)
                         }).finally(() => {
                             setLoad(false)
+                            setText('')
                         })
                     }
                 })
@@ -183,6 +193,7 @@ const ChatAction = ({
                             updateChat(r?.letter?.last_message)
                         }).finally(() => {
                             setLoad(false)
+                            setText('')
                         })
                         
                     })

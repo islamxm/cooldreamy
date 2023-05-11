@@ -29,6 +29,7 @@ const ChatLayout = () => {
     const [loadSide, setLoadSide] = useState(false)
     const [loadMain, setLoadMain] = useState(false)
 
+    const [loadedDialogs, setLoadedDialogs] = useState(false)
 
 
     // ?? ид текущего чата (опционально)
@@ -90,6 +91,7 @@ const ChatLayout = () => {
                 }
             }).finally(() => {
                 setLoadSide(false)
+                setLoadedDialogs(true)
             })
         }
     }
@@ -140,6 +142,7 @@ const ChatLayout = () => {
                 }
             }).finally(() => {
                 setLoadSide(false)
+                setLoadedDialogs(true)
             })
         }
     }
@@ -221,9 +224,6 @@ const ChatLayout = () => {
     }, [chatList])
 
 
-    useEffect(() => {
-        console.log(currentChatId)
-    }, [currentChatId])
 
 
     // !! подписка на события по сокету
@@ -250,8 +250,6 @@ const ChatLayout = () => {
                         })
                     }
                 }
-
-                
                 // socketChannel?.listen('.chat-message-read-event', (data: any) => {
                 //     if(currentChatId && currentChatId == data?.chat_id) {
                 //         setChatList(s => {
@@ -340,6 +338,8 @@ const ChatLayout = () => {
                             ChatType={chatType}
                             loadMain={loadMain}
                             loadSide={loadSide}
+
+                            loadedDialogs={loadedDialogs}
 
                             currentUser={currentUser}
                             />

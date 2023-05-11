@@ -22,6 +22,8 @@ import { useWindowSize } from 'usehooks-ts';
 import IconButton from '@/components/IconButton/IconButton';
 import {BiArrowBack} from 'react-icons/bi';
 import Avatar from '@/components/Avatar/Avatar';
+import DialogEmpty from '../DialogEmpty/DialogEmpty';
+
 
 const service = new ApiService()
 
@@ -33,6 +35,8 @@ type ChatBodyComponentType = {
 
     loadSide?: boolean,
     loadMain?: boolean,
+
+    loadedDialogs?: boolean
 
     currentUser?: any
 }
@@ -57,6 +61,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     ChatType,
     loadSide,
     loadMain,
+
+    loadedDialogs,
 
     currentUser
 }) => {
@@ -124,7 +130,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     
 
     
-    
+    useEffect(() => {
+        console.log(chatList)
+    }, [chatList])
     
 
 
@@ -191,15 +199,25 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     </div> 
                 )
             }
-             
             {
                 width <= 768 && !id ? (
-                    null
+                    
+                        !id && loadedDialogs && dialogsList?.length === 0 ? (
+                            <div className={styles.main}>
+                                <DialogEmpty height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`}/>
+                            </div>
+                        ) : null
+                    
                 ) : (
-                    <div className={styles.main} >
+                    
+                    <div className={styles.main}>
+                        {
+                            !id && loadedDialogs && dialogsList?.length === 0 ? (
+                                <DialogEmpty absolute height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`}/>
+                            ) : null
+                        }
                         {
                             ChatType === 'chat' ? (
-                                
                                 <div className={styles.body} style={{
                                     height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`
                                 }}>
