@@ -10,6 +10,7 @@ export interface IGlobalState {
     socketChannel: PusherPrivateChannel | null,
     userData: IUser | null,
     isMenuOpen: boolean,
+    currentProfileId: number | null
 
     newMessage: any,
     newMail: any
@@ -23,7 +24,8 @@ export const globalState: IGlobalState = {
     userData: null,
     isMenuOpen: false,
     newMessage: null,
-    newMail: null
+    newMail: null,
+    currentProfileId: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -63,6 +65,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 newMail: action.data
+            }
+        case 'UPDATE_CURRENT_PROFILE_ID':
+            return {
+                ...state,
+                currentProfileId: action.data
             }
         default:
             return state;

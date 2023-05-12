@@ -1,13 +1,31 @@
 import styles from './ChatPricing.module.scss';
-
-
-
+import ApiService from '@/service/apiService';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import {useEffect, useState} from 'react';
+const service = new ApiService()
 const ChatPricing = () => {
+    const {token} = useAppSelector(s => s)
+    const [list, setList] = useState<any[]>([])
 
+    useEffect(() => {
+        if(token) {
+            service.getActionPricing(token).then(res => {
+                console.log(res)
+                setList(res)
+            })
+        }
+    }, [token])
 
     return (
         <div className={styles.wrapper}>
-
+            <div className={styles.head}>Стоимость действий в чате</div>
+            <div className={styles.body}>
+                {
+                    list?.map(i => (
+                        <div key={i.id} className={styles.item}>{i.name}: {i.price}</div>
+                    ))
+                }
+            </div>
         </div>
     )
 }

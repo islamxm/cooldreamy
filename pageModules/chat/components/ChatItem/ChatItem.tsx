@@ -14,9 +14,10 @@ import Avatar from '@/components/Avatar/Avatar';
 import Router, { useRouter } from 'next/router';
 import {useEffect} from 'react';
 import ApiService from '@/service/apiService';
-import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import IconButton from '@/components/IconButton/IconButton';
 import notify from '@/helpers/notify';
+import { updateCurrentProfileId } from '@/store/actions';
 
 const service = new ApiService()
 
@@ -39,6 +40,7 @@ const ChatItem = ({
 
     updateDialogsList
 }:I) => {
+    const dispatch = useAppDispatch()
     const {query: {type}} = useRouter()
     const {token} = useAppSelector(s => s)
     const {avatar_url, avatar_url_thumbnail, name} = another_user;
@@ -120,13 +122,24 @@ const ChatItem = ({
     if(type === 'chat') {
         return (
             <div  className={`${styles.wrapper} ${active ? styles.active : ''}`}>
-                <Link href={`/users/${another_user?.id}`} className={styles.avatar}>
+                {/* <Link href={`/users/${another_user?.id}`} className={styles.avatar}>
                     <Avatar
                         size={63}
                         verified={is_confirmed_user == 1}
                         image={avatar_url_thumbnail}    
                         />
-                </Link>
+                </Link> */}
+                <div onClick={() => {
+                    if(another_user?.id) {
+                        dispatch(updateCurrentProfileId(another_user?.id))
+                    }
+                }} className={styles.avatar}>
+                    <Avatar
+                        size={63}
+                        verified={is_confirmed_user == 1}
+                        image={avatar_url_thumbnail}    
+                        />
+                </div>
                 <div className={styles.body}>
                     <Link href={`/chat/${id}?type=${type}`} className={styles.main}>
                         <Row gutter={[2,2]}>

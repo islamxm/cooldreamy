@@ -15,8 +15,8 @@ import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import Router from 'next/router';
-
-
+import { updateCurrentProfileId } from '@/store/actions';
+import { useAppDispatch } from '@/hooks/useTypesRedux';
 const service = new ApiService()
 
 
@@ -43,6 +43,7 @@ const DialogItemComponent:FC<I> = ({
     senderUser
     
 }) => {
+    const dispatch = useAppDispatch()
     const {token} = useAppSelector(s => s)
     const {inView, ref} = useInView({
         triggerOnce: true,
@@ -190,7 +191,8 @@ const DialogItemComponent:FC<I> = ({
                     </div>
                 ) : (
                     <div className={`${styles.body} ${styles.you}`}>
-                        <div onClick={() => Router.push(`/users/${senderUser?.id}`)} className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
+                        {/* onClick={() => Router.push(`/users/${senderUser?.id}`)} */}
+                        <div onClick={() => dispatch(updateCurrentProfileId(senderUser?.id))} className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
                                 image={avatar}

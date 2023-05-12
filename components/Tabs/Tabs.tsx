@@ -12,7 +12,7 @@ const Tabs:FC<tabsPropsType> = ({
     style,
     defaultColor = '#fff',
     activeColor = 'var(--light_purp_1)',
-    tabItemStyle
+    tabItemStyle,
 }) => {
     return (
         <div className={styles.wrapper} style={style}>

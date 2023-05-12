@@ -18,7 +18,7 @@ import Router from 'next/router';
 import { useWindowSize } from 'usehooks-ts';
 import UserCardMob from '@/pageModules/profile/components/UserCardMob/UserCardMob';
 import UserMobAction from '@/pageModules/user/components/UserMobAction/UserMobAction';
-
+import giftImg from '@/public/assets/images/gift-1.png'
 const service = new ApiService()
 
 const UserPage:FC = () => {
@@ -89,11 +89,14 @@ const UserPage:FC = () => {
                                             />
                                     </UserCard>
                                 </Col>
-                                {/* <Col span={24}>
+                                <Col span={24}>
                                     <StartGift
                                         image={giftImg}
                                         />
-                                </Col> */}
+                                </Col>
+                                <Col span={24}>
+                                    <Button onClick={() => Router.back()} text='Вернутся' middle fill/>
+                                </Col>
                             </Row>
                         )
                         

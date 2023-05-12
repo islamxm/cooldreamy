@@ -12,8 +12,8 @@ import { IDialogs } from '../../types';
 import {Col} from 'antd';
 import Input from '@/components/Input/Input';
 import { FiSearch } from 'react-icons/fi';
-
-
+import ChatPricing from '../ChatPricing/ChatPricing';
+import { useWindowSize } from 'usehooks-ts';
 
 const ChatList:FC<IDialogs> = ({
     activeDialogId,
@@ -25,7 +25,7 @@ const ChatList:FC<IDialogs> = ({
 }) => {
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
-
+    const {width} = useWindowSize()
     
     useEffect(() => {
         dialogsList?.length === totalDialogItemCount ? setLoadMore(false) : setLoadMore(true)
@@ -74,7 +74,7 @@ const ChatList:FC<IDialogs> = ({
                     ) : null
                 ) : null
             }
-            
+            {width > 768 && <ChatPricing/>}
             
         </div>  
     )

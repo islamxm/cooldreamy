@@ -53,18 +53,8 @@ class ApiService {
         }
     }
 
-    search = async ({
-        page,
-        isNew,
-        isNear,
-        isOnline,
-        state,
-        country,
-        age_range_start,
-        age_range_end,
-        prompt_targets,
-        prompt_finance_states
-    }: {
+    search = async (
+        body: {
         page: number,
         isNew: 1 | 0,
         isOnline: 1 | 0,
@@ -73,19 +63,19 @@ class ApiService {
         country?: string,
         age_range_start?: number,
         age_range_end?: number,
-        prompt_targets?: number | string,
-        prompt_finance_states?: number | string,
+        prompt_targets?: any,
+        prompt_finance_states?: any,
     }, token: IToken
         
     ) => {
         try {
-            let res = await fetch(endpoints.search + 
-                `?page=${page}&state=${state ? state : ''}&country=${country ? country : ''}&age_range_start=${age_range_start}&age_range_end=${age_range_end}&prompt_target_id=${prompt_targets ? prompt_targets : ''}&prompt_finance_state_id=${prompt_finance_states ? prompt_finance_states : ''}&new=${isNew}&near=${isNear}&online=${isOnline}`, {
-                method: 'GET',
+            let res = await fetch(endpoints.search, {
+                method: 'POST',
                 headers: {
                     ...headers,
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                body: JSON.stringify(body)
             })
 
             return await res?.json()
@@ -768,6 +758,21 @@ class ApiService {
                 body: JSON.stringify(body)
             })
             return await res
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getActionPricing = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getActionPricing, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await res?.json()
         } catch(err) {
             console.log(err)
         }

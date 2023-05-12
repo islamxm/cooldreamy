@@ -3,11 +3,12 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
-import { updateNewMail, updateNewMessage, updateSocket, updateUserData } from '@/store/actions';
+import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
 import LinesEllipsis from 'react-lines-ellipsis';
+import ProfileModal from '@/popups/ProfileModal/ProfileModal';
 
 const service = new ApiService()
 
@@ -16,7 +17,8 @@ const MainWrapper = ({
     children
 }: {children?: React.ReactNode}) => {
 	const dispatch = useAppDispatch()
-    const {token, userId, socketChannel, userData} = useAppSelector(s => s);
+    const {token, userId, socketChannel, userData, currentProfileId} = useAppSelector(s => s);
+
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
@@ -125,8 +127,13 @@ const MainWrapper = ({
 
 
 
+
     return (
         <>
+			<ProfileModal
+				onCancel={() => dispatch(updateCurrentProfileId(null))}
+				open={currentProfileId ? true : false}
+				/>
             {children}
         </>
     )

@@ -7,7 +7,8 @@ import UserTitle from '@/components/UserTitle/UserTitle';
 import Avatar from '@/components/Avatar/Avatar';
 import { IUser } from '@/models/IUser';
 import UserLocation from '@/components/UserLocation/UserLocation';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import {useEffect} from 'react';
 
 const MyCard:FC<IUser> = ({
     name,
@@ -17,7 +18,9 @@ const MyCard:FC<IUser> = ({
     avatar_url_thumbnail,
     age
 }) => {
-    
+    const {userData} = useAppSelector(s => s)
+
+    useEffect(() => console.log(userData),[userData])
     return (
         <Link href={'/profile'} className={styles.card} >
             <div className={styles.main}>
@@ -41,7 +44,7 @@ const MyCard:FC<IUser> = ({
                 </div>
             </div>
             <div className={styles.balance}>
-                Баланс: {credits} кредитов
+                Баланс: {credits ? credits : 0} кредитов
             </div>
         </Link>
     )

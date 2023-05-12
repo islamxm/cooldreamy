@@ -7,6 +7,8 @@ import { startGiftPropsType } from './types';
 import Button from '@/components/Button/Button';
 import {HiOutlineGift} from 'react-icons/hi';
 
+
+
 const StartGift:FC<startGiftPropsType> = ({
     image
 }) => {

@@ -35,7 +35,7 @@ const UserInfoAction:FC<IUser> = ({
                 </div>
             </div>
             <div className={styles.action}>
-                Баланс: {credits} кредитов
+                Баланс: {credits ? credits: 0} кредитов
             </div>
         </div>
     )
