@@ -29,7 +29,11 @@ const MailItem:FC<IMail> = ({
     updatedAt,
     sticker,
     text,
-    isSelf
+    isSelf,
+
+
+    updateChat,
+    updateDialog
 }) => {
     const {token} = useAppSelector(s => s)
     const [openLoad, setOpenLoad] = useState(false)
@@ -141,6 +145,7 @@ const MailItem:FC<IMail> = ({
             setOpenLoad(true)
             service.mailOpenPay({letter_text_message_id: id}, token).then(res => {
                 // console.log(res)
+                console.log(res)
             }).finally(() => {
                 setOpenLoad(false)
             })

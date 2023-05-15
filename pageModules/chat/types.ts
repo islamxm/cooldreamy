@@ -233,7 +233,10 @@ export interface IMail {
     updatedAt?: string,
     sticker?: messageStickerType | null,
     text?: string | null,
-    isSelf?: boolean
+    isSelf?: boolean,
+
+    updateChat?: (...args: any[]) => any,
+    updateDialog?: (...args: any[]) => any
 }
 
 

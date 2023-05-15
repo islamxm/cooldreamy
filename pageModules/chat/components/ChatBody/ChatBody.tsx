@@ -23,7 +23,7 @@ import IconButton from '@/components/IconButton/IconButton';
 import {BiArrowBack} from 'react-icons/bi';
 import Avatar from '@/components/Avatar/Avatar';
 import DialogEmpty from '../DialogEmpty/DialogEmpty';
-
+import Skeleton from '../Skeleton/Skeleton';
 
 const service = new ApiService()
 
@@ -223,7 +223,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 }}>
                                     {
                                         loadMain ? (
-                                            <Loader/>
+                                            <Skeleton/>
                                         ) : (
                                             chatList && chatList?.length > 0 ? (
                                                 <Dialog

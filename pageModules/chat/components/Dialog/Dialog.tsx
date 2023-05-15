@@ -8,6 +8,7 @@ import { PulseLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { AnimatePresence } from 'framer-motion';
+import Skeleton from '../Skeleton/Skeleton';
 
 // import {FixedSizeList} from 'react-window';
 // import AutoSizer from 'react-virtualized-auto-sizer';
@@ -63,7 +64,6 @@ const Dialog:FC<I> = ({
         }
     }, [inView, loadMore, updateChatListPage])
    
-
 
     return (
         <div className={styles.wrapper} style={{maxHeight: height}}>
