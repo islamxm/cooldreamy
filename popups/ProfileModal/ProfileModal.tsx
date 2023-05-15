@@ -14,6 +14,8 @@ import UserLocation from '@/components/UserLocation/UserLocation';
 import Textarea from '@/components/Textarea/Textarea';
 import Button from '@/components/Button/Button';
 import Router from 'next/router';
+import placeholder from '@/public/assets/images/avatar-placeholder.png'
+
 const service = new ApiService()
 
 
@@ -78,7 +80,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                             spaceBetween={10}
                                             >
                                             {
-                                                profile_photo?.map(i => (
+                                                (profile_photo && profile_photo?.length > 0) ? profile_photo?.map(i => (
                                                     <SwiperSlide className={styles.slider_item} key={i.id}>
                                                         <Image
                                                             width={300}
@@ -88,36 +90,51 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                             loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
                                                             />
                                                     </SwiperSlide>
-                                                ))
+                                                )) : (
+                                                    <SwiperSlide className={styles.slider_item}>
+                                                        <Image
+                                                            width={300}
+                                                            height={300}
+                                                            src={placeholder}
+                                                            alt=''
+                                                            loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                            />
+                                                    </SwiperSlide>
+                                                )
                                             }
                                         </SwiperWrap>
                                     </div>
                                 ) 
                             }
-                            <div className={styles.thumbs}>
-                                <SwiperWrap
-                                    modules={[Thumbs]}
-                                    className={styles.thumbs_body}
-                                    slidesPerView={3}
-                                    watchSlidesProgress
-                                    onSwiper={setThumbsSwiper}
-                                    spaceBetween={10}
-                                    >
-                                    {
-                                        profile_photo?.map(i => (
-                                            <SwiperSlide className={styles.thumbs_item} key={i.id}>
-                                                <Image
-                                                    src={i.thumbnail_url}
-                                                    alt=''
-                                                    width={70}
-                                                    height={70}
-                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                    />
-                                            </SwiperSlide>
-                                        ))
-                                    }
-                                </SwiperWrap>
-                            </div>
+                            {
+                                profile_photo && profile_photo?.length > 1 ? (
+                                    <div className={styles.thumbs}>
+                                        <SwiperWrap
+                                            modules={[Thumbs]}
+                                            className={styles.thumbs_body}
+                                            slidesPerView={3}
+                                            watchSlidesProgress
+                                            onSwiper={setThumbsSwiper}
+                                            spaceBetween={10}
+                                            >
+                                            {
+                                                profile_photo?.map(i => (
+                                                    <SwiperSlide className={styles.thumbs_item} key={i.id}>
+                                                        <Image
+                                                            src={i.thumbnail_url}
+                                                            alt=''
+                                                            width={70}
+                                                            height={70}
+                                                            loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                            />
+                                                    </SwiperSlide>
+                                                ))
+                                            }
+                                        </SwiperWrap>
+                                    </div>
+                                ) : null
+                            }
+                            
                         </div>
                         <div className={styles.body}>
                             <Row gutter={[15,15]}>

@@ -14,9 +14,10 @@
             background-color: #fff;
             padding: 15px;
             border-radius: 10px;
+            flex: 0 0 auto;
 
             .slider {
-                margin-bottom: 15px;
+                
 
                 .slider_item {
                     border-radius: 10px;
@@ -33,6 +34,7 @@
             }
 
             .thumbs {
+                margin-top: 15px;
                 .thumbs_item {
                     height: 80px;
                     border-radius: 10px;

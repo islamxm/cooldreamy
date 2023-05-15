@@ -13,7 +13,7 @@ import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
 import { useSelector } from 'react-redux';
-import placeholder from '@/public/assets/images/logo.svg';
+import placeholder from '@/public/assets/images/avatar-placeholder.png';
 import notify from '@/helpers/notify';
 import { IUser } from '@/models/IUser';
 
@@ -50,6 +50,10 @@ const GirlCard:FC<IUser> = ({
             })
         }
     }
+
+    useEffect(() => {
+        console.log(avatar_url_thumbnail)
+    }, [avatar_url_thumbnail])
     
     
     
@@ -95,11 +99,11 @@ const GirlCard:FC<IUser> = ({
                 <Link href={`/users/${id}`} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        // placeholder={!avatar_url_thumbnail ? 'blur' : 'empty'} 
-                        src={avatar_url_thumbnail ? avatar_url_thumbnail : placeholder} 
+                        src={placeholder} 
                         width={300}
                         height={300}
                         alt=""/>
+                   
                 </Link>
             </div>
             <div className={styles.body}>
