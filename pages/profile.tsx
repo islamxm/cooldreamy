@@ -37,10 +37,6 @@ const Profile = () => {
     return (
         <Container>
 
-            {/* edit image */}
-            {/* <ImageCropModal open={imageEditModal} onClose={closeImageEditModal}/> */}
-            {/* edit image */}
-
 
             <MainLayout>
                 <Sidebar/>

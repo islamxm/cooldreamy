@@ -38,7 +38,9 @@ const ChatList:FC<IDialogs> = ({
         }
     }, [inView, loadMore, updateDialogsPage])
 
-
+    useEffect(() => {
+        console.log(dialogsList)
+    }, [dialogsList])
 
     return (
         <div className={`${styles.wrapper} custom-scroll-vertical`}>

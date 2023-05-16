@@ -78,10 +78,12 @@ const MainWrapper = ({
 		if(socketChannel) {
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
+				console.log(data)
 				dispatch(updateNewMessage(data))
 				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
 	
 				switch(data?.chat_message?.chat_messageable_type) {
+					
 					case chatMessageTypeVariants.messageText:
 						notify(<LinesEllipsis text={data?.chat_message?.chat_messageable?.text} maxLine={2}/>, 'AVATAR', avatar)
 						break;

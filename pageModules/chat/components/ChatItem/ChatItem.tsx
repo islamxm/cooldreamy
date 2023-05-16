@@ -19,6 +19,8 @@ import IconButton from '@/components/IconButton/IconButton';
 import notify from '@/helpers/notify';
 import { updateCurrentProfileId } from '@/store/actions';
 
+
+
 const service = new ApiService()
 
 
@@ -37,13 +39,13 @@ const ChatItem = ({
     is_confirmed_user,
     text,
     active,
-
+    
     updateDialogsList
 }:I) => {
     const dispatch = useAppDispatch()
     const {query: {type}} = useRouter()
     const {token} = useAppSelector(s => s)
-    const {avatar_url, avatar_url_thumbnail, name} = another_user;
+    const {avatar_url, avatar_url_thumbnail, name, online} = another_user;
     
 
 
@@ -148,7 +150,7 @@ const ChatItem = ({
                                     username={name}
                                     age='26'
                                     textBold
-                                    isOnline={false}/>
+                                    isOnline={online === 1}/>
                             </Col>
                             <Col span={24}>
                                 <div className={styles.dialog}>

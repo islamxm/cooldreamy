@@ -8,13 +8,16 @@ import Faq from "@/pageModules/start/components/Faq/Faq";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { useWindowSize } from "usehooks-ts";
 import { useAppSelector } from "@/hooks/useTypesRedux";
-
+import ru from "@/helpers/localeMock";
+import { useEffect } from "react";
 
 const StartPage: React.FC = () => {
     const {width} = useWindowSize()
     const {token} = useAppSelector(s => s)
 
-    
+    useEffect(() => {
+        console.log(JSON.stringify(ru))
+    }, [])
 
     return (
         <>

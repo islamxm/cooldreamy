@@ -10,7 +10,7 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useRouter } from 'next/router';
 import { IUser } from '@/models/IUser';
 import placeholder from '@/public/assets/images/avatar-placeholder.png';
-
+import { useState } from 'react';
 
 const service = new ApiService()
 
@@ -26,7 +26,7 @@ const UserCard:FC<IUserCard> = ({
 }) => {
     const {token} = useAppSelector(s => s)
 
-    
+    const [imgLoaded, setImgLoaded] = useState(false)
 
 
 
@@ -44,11 +44,14 @@ const UserCard:FC<IUserCard> = ({
                                 </div>
                             ) : null
                         } */}
-                        <div className={styles.img}>
+                        <div className={`${styles.img} ${imgLoaded ? styles.active : ''}`}>
+
                             <Image 
+                                className={styles.img_el}
                                 loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
                                 src={avatar_url ? avatar_url : placeholder}
                                 width={275}
+                                onLoadingComplete={() => setImgLoaded(true)}
                                 height={285}
                                 unoptimized
                                 alt=""/>
