@@ -16,6 +16,7 @@
     .body {
         padding-left: 10px;
         width: 100%;
+        overflow: hidden;
 
         .head {
             margin-bottom: 5px;
@@ -25,6 +26,8 @@
 
 
             .user {
+                overflow: hidden;
+
                 div {
                     font-weight: 600;
                 }
@@ -33,6 +36,7 @@
             .tm {
                 display: flex;
                 align-items: center;
+                white-space: nowrap;
 
                 .status {
 
@@ -101,5 +105,44 @@
                 }
             }
         }
+
+        .bottom {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .tm {
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+
+                .status {
+
+                }
+
+                .label {
+                    font-size: 10px;
+                    line-height: 140%;
+                    color: rgba(53, 53, 53, 0.5);
+                }
+            }   
+        }
     }
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+        .body {
+            .content {
+                .content_text {
+                    .media {
+                        .item {
+                            width: 75px;
+                            height: 75px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

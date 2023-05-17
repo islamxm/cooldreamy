@@ -65,6 +65,7 @@ class ApiService {
         age_range_end?: number,
         prompt_targets?: any,
         prompt_finance_states?: any,
+        per_page?: number
     }, token: IToken
         
     ) => {

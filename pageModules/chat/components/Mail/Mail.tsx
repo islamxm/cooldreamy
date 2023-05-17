@@ -40,8 +40,6 @@ const Mail:FC<I> = ({
     }, [inView, loadMore, updateChatListPage])
 
 
-
-    useEffect(() => console.log(chatList), [chatList])
     
 
     return (

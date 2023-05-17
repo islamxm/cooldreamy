@@ -99,7 +99,7 @@ const GirlCard:FC<IUser> = ({
                 <Link href={`/users/${id}`} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        src={placeholder} 
+                        src={avatar_url_thumbnail ? avatar_url_thumbnail : placeholder} 
                         width={300}
                         height={300}
                         alt=""/>
@@ -135,9 +135,14 @@ const GirlCard:FC<IUser> = ({
                             <Col span={24}>
                                 <div className={`${styles.name} ${styles.online}`}>{name}, {age}</div>
                             </Col>
-                            <Col span={24}>
-                                <div className={styles.loc}>{`${country} ${state ? ',' + state : ''}`}</div>
-                            </Col>
+                            {
+                                !(!state && !country) && (
+                                    <Col span={24}>
+                                        <div className={styles.loc}>{`${country} ${state ? ',' + state : ''}`}</div>
+                                    </Col>
+                                )
+                            }
+                            
                         </Row>
                     </Col>
                 </div>

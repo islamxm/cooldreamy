@@ -11,6 +11,7 @@ import moment from 'moment';
 import notify from '@/helpers/notify';
 import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
 import { useWindowSize } from 'usehooks-ts';
+import { sortingMailChatList } from '@/helpers/sorting';
 
 
 const service = new ApiService()
@@ -215,15 +216,28 @@ const ChatLayout = () => {
 
     // ?? обновление чата
     const updateChat = useCallback((item: any) => {
-        setChatList(s => {
-            const sender_user = s.find(i => i.sender_user?.id === item.sender_user_id)?.sender_user
-            if(sender_user) {
-                return sortingChatList([{...item, sender_user}, ...s])
-            } else return sortingChatList([item, ...s])
-        })
-    }, [chatList])
+        if(chatType === 'chat') {
+            setChatList(s => {
+                const sender_user = s.find(i => i.sender_user?.id === item.sender_user_id)?.sender_user
+                if(sender_user) {
+                    return sortingChatList([{...item, sender_user}, ...s])
+                } else return sortingChatList([item, ...s])
+            })
+        } else {
+            setChatList(s => {
+                const sender_user = s.find(i => i.sender_user?.id === item.sender_user_id)?.sender_user
+                if(sender_user) {
+                    return sortingMailChatList([{...item, sender_user}, ...s])
+                } else return sortingMailChatList([item, ...s])
+            })
+        }
+        
+    }, [chatList, chatType])
 
 
+    useEffect(() => {
+        
+    }, [])
 
 
     // !! подписка на события по сокету

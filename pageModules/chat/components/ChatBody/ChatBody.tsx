@@ -128,11 +128,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
         }
     }, [token, activeDialogId, ChatType])
     
-
-    
-    useEffect(() => {
-        console.log(chatList)
-    }, [chatList])
     
 
 

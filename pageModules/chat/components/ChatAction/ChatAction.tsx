@@ -255,11 +255,11 @@ const ChatAction = ({
                             maxRows={8}
                             onHeightChange={e => {
                                 if(width <= 768) {
-                                    setHeight(e + 42)
-                                    setDrawerPos(e + 42)
+                                    setHeight(e + 48)
+                                    setDrawerPos(e + 48)
                                 } else {
-                                    setHeight(e + 47)
-                                    setDrawerPos(e + 47)
+                                    setHeight(e + 44)
+                                    setDrawerPos(e + 44)
                                 }
                                 
                             }}

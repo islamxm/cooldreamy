@@ -11,7 +11,7 @@ import chatMessageTypeVariants from '@/helpers/messageVariants';
 import { IMail } from '@/pageModules/chat/types';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import Image from 'next/image';
-
+import { useWindowSize } from 'usehooks-ts';
 const service = new ApiService()
 
 
@@ -30,6 +30,7 @@ const MailItem:FC<IMail> = ({
     sticker,
     text,
     isSelf,
+    
 
 
     updateChat,
@@ -37,7 +38,7 @@ const MailItem:FC<IMail> = ({
 }) => {
     const {token} = useAppSelector(s => s)
     const [openLoad, setOpenLoad] = useState(false)
-
+    const {width} = useWindowSize()
 
 
     
@@ -169,10 +170,15 @@ const MailItem:FC<IMail> = ({
                             age={age?.toString()}
                             />
                     </div>
-                    <div className={styles.tm}>
-                        <div className={styles.status}></div>
-                        <div className={styles.label}>{moment(updatedAt).format('D MMMM YYYY, h:mm')}</div>
-                    </div>
+                    {
+                        width > 768 && (
+                            <div className={styles.tm}>
+                                <div className={styles.status}></div>
+                                <div className={styles.label}>{moment(updatedAt).format('D MMMM YYYY, h:mm')}</div>
+                            </div>
+                        )
+                    }
+                   
                 </div>
                 <div className={styles.content}>
                     {switchMessageType(type)}
@@ -188,7 +194,16 @@ const MailItem:FC<IMail> = ({
                         </div>
                     )
                 }
-                
+                {
+                    width <= 768 && (
+                        <div className={styles.bottom}>
+                             <div className={styles.tm}>
+                                <div className={styles.status}></div>
+                                <div className={styles.label}>{moment(updatedAt).format('D MMMM YYYY, h:mm')}</div>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
         </div>
     )

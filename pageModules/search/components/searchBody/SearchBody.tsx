@@ -135,6 +135,7 @@ const SearchBody = () => {
                 age_range_end,
                 prompt_targets: `[${prompt_targets?.join(',')}]`, 
                 prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
+                per_page: 24
             }, token
             ).then(res => {
                 setTotalFound(res?.total)
@@ -160,6 +161,7 @@ const SearchBody = () => {
                 age_range_end,
                 prompt_targets: `[${prompt_targets?.join(',')}]`, 
                 prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
+                per_page: 24
             }, token).then(res => {
                 setTotalFound(res?.total)
                 setList(res?.data)
@@ -281,11 +283,12 @@ const SearchBody = () => {
                     
                 </Col>
                 {
-                    list?.length > 0 && Math.ceil(totalFound / 8) >= 2 ? (
+                    list?.length > 0 && Math.ceil(totalFound / 24) >= 2 ? (
                         <Col span={24}>
                             <Pagination
+                                showQuickJumper={false}
                                 current={currentPage}
-                                total={Math.ceil(totalFound / 8)}
+                                total={Math.ceil(totalFound / 24)}
                                 defaultPageSize={1}
                                 showTitle={false}
                                 onChange={e => setCurrentPage(e)}

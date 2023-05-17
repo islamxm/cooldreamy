@@ -74,14 +74,14 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                             </button>
                         ) : null
                     }
-                    <Link href={'/start'} className={styles.logo}>
+                    <div className={styles.logo}>
                         <motion.div
                             whileHover={{scale: 1.2}}
                             transition={{ type: "spring", stiffness: 400, damping: 17 }}    
                             >
                             <Image src={logoImage} alt="Cool Date" />
                         </motion.div>
-                    </Link>
+                    </div>
                     {
                         !token ? (
                             <div className={styles.main}>
