@@ -5,6 +5,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
+  i18n: {
+    locales: ['en', 'ru'],
+    defaultLocale: 'ru'
+  }
   // images: { //ftp
   //   unoptimized: true
   // }

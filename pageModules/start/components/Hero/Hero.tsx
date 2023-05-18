@@ -9,11 +9,13 @@ import Image from 'next/image';
 import phone1 from '@/public/assets/images/phone-1.svg';
 import phone2 from '@/public/assets/images/phone-2.svg';
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
 const Hero: FC = ({}) => {
     const [sex, setSex] = useState<'male' | 'female'>('male')
     const {scrollYProgress} = useScroll()
+    const {locale} = useAppSelector(s => s)
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
 
@@ -32,7 +34,7 @@ const Hero: FC = ({}) => {
                     className={styles.inner}>
                     <div className={styles.main} >
                         <motion.h1 variants={item} className={styles.title}>
-                        Более 16 000 пользователей 
+                        
                         <br></br>
                         <span>нашли идеальную пару</span>  
                         </motion.h1>

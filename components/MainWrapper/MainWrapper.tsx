@@ -9,6 +9,12 @@ import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
 import LinesEllipsis from 'react-lines-ellipsis';
 import ProfileModal from '@/popups/ProfileModal/ProfileModal';
+import { useRouter } from 'next/router';
+import { updateLocale } from '@/store/actions';
+import ru from '@/locales/ru';
+import en from '@/locales/en';
+
+
 
 const service = new ApiService()
 
@@ -16,12 +22,21 @@ const service = new ApiService()
 const MainWrapper = ({
     children
 }: {children?: React.ReactNode}) => {
+	const {locale} = useRouter()
 	const dispatch = useAppDispatch()
     const {token, userId, socketChannel, userData, currentProfileId} = useAppSelector(s => s);
 
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
+	useEffect(() => {
+		if(locale === 'ru') {
+			dispatch(updateLocale(ru))
+		}
+		if(locale === 'en') {
+			dispatch(updateLocale(en))
+		}
+	}, [locale])
 
 	
 	useEffect(() => {

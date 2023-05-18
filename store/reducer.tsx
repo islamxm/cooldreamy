@@ -2,6 +2,7 @@ import Echo from "laravel-echo";
 import { PusherPrivateChannel } from "laravel-echo/dist/channel";
 import { Cookies } from "typescript-cookie";
 import { IUser } from "@/models/IUser";
+import ru from "@/locales/ru";
 
 
 export interface IGlobalState {
@@ -13,7 +14,8 @@ export interface IGlobalState {
     currentProfileId: number | null
 
     newMessage: any,
-    newMail: any
+    newMail: any,
+    locale: any
 }
 
 
@@ -25,7 +27,8 @@ export const globalState: IGlobalState = {
     isMenuOpen: false,
     newMessage: null,
     newMail: null,
-    currentProfileId: null
+    currentProfileId: null,
+    locale: ru
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -71,6 +74,12 @@ const reducer = (state = globalState, action: any) => {
                 ...state,
                 currentProfileId: action.data
             }
+        case 'UPDATE_LOCALE': {
+            return {
+                ...state,
+                
+            }
+        }
         default:
             return state;
     }
