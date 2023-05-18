@@ -17,4 +17,17 @@
             display: flex;
         }
     }
+
+    .title {
+        text-align: center;
+        font-weight: 500;
+        font-size: 21px;
+        line-height: 23px;
+    }
+
+    .text {
+        text-align: center;
+        font-size: 18px;
+        line-height: 23px;
+    }
 }

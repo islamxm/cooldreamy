@@ -12,5 +12,6 @@ export type selectDefType = {
     label?: string,
     multiple?: boolean,
     onChange?: (...args: any[]) => any,
-    onClear?: (...args: any[]) => any
+    onClear?: (...args: any[]) => any,
+    disabled?: boolean
 }

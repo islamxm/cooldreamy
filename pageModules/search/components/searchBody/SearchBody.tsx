@@ -264,8 +264,9 @@ const SearchBody = () => {
                                     list?.map((item, index) => (
                                         <Col 
                                             span={12}
-                                            md={8} 
+                                            md={8}
                                             lg={6}
+                                            // xl={4}
                                             key={index}>
                                             <GirlCard
                                                 {...item}

@@ -10,6 +10,7 @@ import {FC, useEffect} from 'react';
 import { searchFilterType } from './types';
 import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import OnlyPremium from '@/components/OnlyPremium/OnlyPremium';
 
 const countryList = [
     {
@@ -85,7 +86,7 @@ const SearchFilter:FC<searchFilterType> = ({
 
     const [showAll, setShowAll] = useState<boolean>(false);
     const {width} = useWindowSize()
-    const {locale} = useAppSelector(s => s)
+    const {locale, userData} = useAppSelector(s => s)
     
     const toggleFilter = () => {
         setShowAll(s => !s)
@@ -127,10 +128,12 @@ const SearchFilter:FC<searchFilterType> = ({
                                             onChange={(e, v) => {
                                                 setState(v)
                                             }}
+                                            
                                             placeholder={locale?.searchPage.filter.list.filter_state.placeholder ?? ''}
                                             list={states}
                                             />
                                     </div>
+                                   
                                 ) : null
                             }
                             
@@ -177,29 +180,34 @@ const SearchFilter:FC<searchFilterType> = ({
                                 className={styles.ex}>
                                 <div className={styles.list}>
                                     <div className={styles.item}>
-                                        <SelectDef
-                                            list={targetList}
-                                            onChange={(e, v) => {
-                                                setprompt_target_id && setprompt_target_id(e)
-                                            }}
-                                            placeholder={'Не указано'}
-                                            label={locale?.searchPage.filter.list.filter_target.label}
-                                            width={230}
-                                            multiple
-                                            
-                                            />
+                                        <OnlyPremium>
+                                            <SelectDef
+                                                disabled={userData?.is_premium !== 1}
+                                                list={targetList}
+                                                onChange={(e, v) => {
+                                                    setprompt_target_id && setprompt_target_id(e)
+                                                }}
+                                                placeholder={'Не указано'}
+                                                label={locale?.searchPage.filter.list.filter_target.label}
+                                                width={230}
+                                                multiple
+                                                
+                                                />
+                                        </OnlyPremium>
                                     </div>
                                     <div className={styles.item}>
-                                        <SelectDef
-                                            list={financeList}
-                                            onChange={(e, v) => {
-                                                setprompt_finance_state_id && setprompt_finance_state_id(e)
-                                            }}
-                                            placeholder={'Не указано'}
-                                            label={locale?.searchPage.filter.list.filter_finance.label}
-                                            width={230}
-                                            multiple
-                                            />  
+                                        <OnlyPremium>
+                                            <SelectDef
+                                                list={financeList}
+                                                onChange={(e, v) => {
+                                                    setprompt_finance_state_id && setprompt_finance_state_id(e)
+                                                }}
+                                                placeholder={'Не указано'}
+                                                label={locale?.searchPage.filter.list.filter_finance.label}
+                                                width={230}
+                                                multiple
+                                                />  
+                                        </OnlyPremium>
                                     </div>
                                     <div className={styles.item}>
                                         <RangeSlider

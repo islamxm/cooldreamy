@@ -13,7 +13,8 @@ const SelectDef:FC<selectDefType> = ({
     label,
     onChange,
     onClear,
-    multiple
+    multiple,
+    disabled
 }) => {
 
     const ref = useRef<any>()
@@ -40,6 +41,7 @@ const SelectDef:FC<selectDefType> = ({
                         onClear={onClear}
                         options={list}
                         value={value}
+                        disabled={disabled}
                         />
                 ) : (
                     <Select
@@ -52,6 +54,7 @@ const SelectDef:FC<selectDefType> = ({
                         onClear={onClear}
                         options={list}
                         value={value}
+                        disabled={disabled}
                         />
                 )
             }

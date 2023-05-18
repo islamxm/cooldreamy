@@ -53,9 +53,7 @@ const GirlCard:FC<IUser> = ({
         }
     }
 
-    useEffect(() => {
-        console.log(avatar_url_thumbnail)
-    }, [avatar_url_thumbnail])
+
     
     
     
