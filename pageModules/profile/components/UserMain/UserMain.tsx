@@ -31,7 +31,7 @@ const UserMain:FC<IUser> = (props) => {
     } = props
     
 
-    const {token, userData} = useAppSelector(s => s)
+    const {token, userData, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const [editItemType, setEditItemType] = useState<editItemT | ''>('')
 
@@ -196,7 +196,7 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Имя
+                            {locale?.profilePage.info.name}
                             <button
                                 onClick={() => {
                                     setModalProps('name')
@@ -232,7 +232,7 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            О себе
+                        {locale?.profilePage.info.about}    
                             <button
                                 onClick={() => {
                                     setModalProps('about')
@@ -250,7 +250,7 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Страна/Регион
+                            {locale?.profilePage.info.country}
                             <button
                                 onClick={() => {
                                     setModalProps('country')
@@ -268,7 +268,7 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Цели знакомства
+                        {locale?.profilePage.info.target}
                             <button
                                 onClick={() => {
                                     setModalProps('target')
@@ -299,7 +299,7 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Финансовые предпочтения
+                        {locale?.profilePage.info.finance}
                             <button
                                 onClick={() => {
                                     setModalProps('finance')
@@ -328,7 +328,7 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Карьера
+                        {locale?.profilePage.info.career}
                             <button
                                 onClick={() => {
                                     setModalProps('career')
@@ -357,7 +357,7 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Семейное положение
+                        {locale?.profilePage.info.relationship}
                             <button
                                 onClick={() => {
                                     setModalProps('rl')
@@ -386,7 +386,7 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Дети
+                        {locale?.profilePage.info.kids}
                             <button
                                 onClick={() => {
                                     setModalProps('kids')

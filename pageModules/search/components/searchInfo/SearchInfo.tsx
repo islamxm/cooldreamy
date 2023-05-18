@@ -3,13 +3,9 @@ import { tabsPropsTypes } from '../../types';
 import {FC, useState, useEffect} from 'react';
 import { searchInfoType } from './types';
 import { tabItemPropsTypes } from '../../types';
+import { useSelector } from 'react-redux';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
-const tabs:tabItemPropsTypes[] = [
-    {label: 'Все', id: '1'},
-    {label: 'Рядом', id: '2'},
-    {label: 'Новые', id: '3'},
-    {label: 'Онлайн', id: '4'},
-]
 
 
 const SearchInfo:FC<searchInfoType> = ({
@@ -21,8 +17,15 @@ const SearchInfo:FC<searchInfoType> = ({
     setIsNew,
     setIsOnline
 }) => {
-
+    const {locale} = useAppSelector(s => s)
     const [activeId, setActiveId] = useState<string>('1');
+
+    const tabs:tabItemPropsTypes[] = [
+        {label: locale?.searchPage.filter.tabs.all, id: '1'},
+        {label: locale?.searchPage.filter.tabs.near, id: '2'},
+        {label: locale?.searchPage.filter.tabs.new, id: '3'},
+        {label: locale?.searchPage.filter.tabs.online, id: '4'},
+    ]
     
     
     useEffect(() => {
@@ -61,7 +64,7 @@ const SearchInfo:FC<searchInfoType> = ({
     return (
         <div className={styles.wrapper}>
             <div className={styles.value}>
-                Найдено: {total}
+                {locale?.searchPage.filter.found}: {total}
             </div>
             <div className={styles.tabs}>
                 {

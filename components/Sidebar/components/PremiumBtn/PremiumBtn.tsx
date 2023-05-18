@@ -1,10 +1,12 @@
 import styles from './PremiumBtn.module.scss';
 import {FC} from 'react';
 import {motion} from 'framer-motion';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 const PremiumBtn:FC = ({
     
 }) => {
+    const {locale} = useAppSelector(s => s)
+
 
     return (
         <motion.button 
@@ -17,7 +19,7 @@ const PremiumBtn:FC = ({
             }}
             className={styles.button}>
             <div className={styles.icon}></div>
-            <div className={styles.text}>Стань premium</div>
+            <div className={styles.text}>{locale?.global.menu.get_premium}</div>
         </motion.button>
     )
 

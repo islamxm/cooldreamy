@@ -16,38 +16,7 @@ import Loader from "@/components/Loader/Loader";
 
 const service = new ApiService()
 
-const tabs: tabItemType[] = [
-    {
-        id: 'views',
-        // badge: 0,
-        label: 'Просмотр'
-    },
-    {
-        id: 'matches',
-        // badge: 3,
-        label: 'Совпадения'
-    },
-    // {
-    //     id: 'favs',
-    //     // badge: 0,
-    //     label: 'Избранные'
-    // },
-    // {
-    //     id: 'infavs',
-    //     // badge: 0,
-    //     label: 'В избранных'
-    // },
-    {
-        id: 'likes',
-        // badge: 3,
-        label: 'Вам нравятся'
-    },
-    {
-        id: 'inlikes',
-        // badge: 3,
-        label: 'Вы нравитесь'
-    }
-]
+
 
 // const list:girlCardType[] = [
 //     {name:"Ксения", age: 19, online: 1, image: img, photoCount: 10},
@@ -60,7 +29,7 @@ const tabs: tabItemType[] = [
 // ]
 
 const SymPage = () => {
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const {query} = useRouter()
     const [activeTab, setActiveTab] = useState<sympGroupTypes | any>('');
     const [load, setLoad] = useState(false)
@@ -73,6 +42,38 @@ const SymPage = () => {
         }
     }, [query])
 
+    const tabs: tabItemType[] = [
+        {
+            id: 'views',
+            // badge: 0,
+            label: locale?.sympathyPage.tabs.views ?? ''
+        },
+        {
+            id: 'matches',
+            // badge: 3,
+            label: locale?.sympathyPage.tabs.matches ?? ''
+        },
+        // {
+        //     id: 'favs',
+        //     // badge: 0,
+        //     label: 'Избранные'
+        // },
+        // {
+        //     id: 'infavs',
+        //     // badge: 0,
+        //     label: 'В избранных'
+        // },
+        {
+            id: 'likes',
+            // badge: 3,
+            label: locale?.sympathyPage.tabs.you_like ?? ''
+        },
+        {
+            id: 'inlikes',
+            // badge: 3,
+            label: locale?.sympathyPage.tabs.likes_you ?? ''
+        }
+    ]
     
     const switchDescr = (activeTab: sympGroupTypes) => {
         switch(activeTab) {

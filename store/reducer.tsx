@@ -3,6 +3,7 @@ import { PusherPrivateChannel } from "laravel-echo/dist/channel";
 import { Cookies } from "typescript-cookie";
 import { IUser } from "@/models/IUser";
 import ru from "@/locales/ru";
+import { ILocale } from "@/models/ILocale";
 
 
 export interface IGlobalState {
@@ -15,7 +16,7 @@ export interface IGlobalState {
 
     newMessage: any,
     newMail: any,
-    locale: any
+    locale: null | ILocale
 }
 
 

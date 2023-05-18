@@ -25,7 +25,7 @@ const UserPage:FC = () => {
     const {width} = useWindowSize()
     const [createChatLoad, setCreateChatLoad] = useState(false)
     const {query} = useRouter()
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const [data, setData] = useState<IUser | null>(null)
 
 
@@ -79,7 +79,7 @@ const UserPage:FC = () => {
                                             onClick={createChat}
                                             load={createChatLoad}
                                             after={<GoMail/>}
-                                            text='Написать'
+                                            text={locale?.global.user_card.send_message}
                                             style={{
                                                 padding: '8px 10px',
                                                 fontSize: 18,

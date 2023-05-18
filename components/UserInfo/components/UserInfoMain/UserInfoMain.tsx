@@ -9,7 +9,7 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 const service = new ApiService()
 
 const UserInfoMain:FC<IUser> = (props) => {
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
 
     const {
         about_self,
@@ -22,24 +22,7 @@ const UserInfoMain:FC<IUser> = (props) => {
     } = props
 
 
-    // const [prompt_targets_list, setPrompt_targets_list] = useState<any[]>([])
-    // const [prompt_finance_states_list, setPrompt_finance_states_list] = useState<any[]>([])
-    // const [prompt_want_kids_list, setPrompt_want_kids_list] = useState<any[]>([])
-    // const [prompt_relationships_list, setPrompt_relationships_list] = useState<any[]>([])
-    // const [prompt_careers_list, setPrompt_careers_list] = useState<any[]>([])   
 
-
-    // useEffect(() => {
-    //     if(token) {
-    //         service.getAllPrompts(token).then(res => {
-    //             setPrompt_targets_list(res?.prompt_targets)
-    //             setPrompt_careers_list(res?.prompt_careers)
-    //             setPrompt_finance_states_list(res?.prompt_finance_states)
-    //             setPrompt_want_kids_list(res?.prompt_want_kids)
-    //             setPrompt_relationships_list(res?.prompt_relationships)
-    //         })
-    //     }
-    // }, [token])
 
 
     return (
@@ -48,7 +31,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            О себе
+                            {locale?.profilePage.info.about}
                         </div>
                         <div className={styles.text} style={{color: about_self ? 'var(--text)' : 'var(--red)'}}>
                         {about_self ? about_self : 'Не указано'}
@@ -58,7 +41,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Цели знакомства
+                            {locale?.profilePage.info.target}
                         </div>
                         <div className={styles.interests}>
                             {
@@ -81,7 +64,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Финансовые предпочтения
+                            {locale?.profilePage.info.finance}
                         </div>
                         <div className={styles.interests}>
                             {
@@ -104,7 +87,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Карьера
+                            {locale?.profilePage.info.career}
                         </div>
                         <div className={styles.interests}>
                             {
@@ -127,7 +110,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Семейное положение
+                            {locale?.profilePage.info.relationship}
                         </div>
                         <div className={styles.interests}>
                             {
@@ -150,7 +133,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
-                            Дети
+                            {locale?.profilePage.info.kids}
                         </div>
                         <div className={styles.interests}>
                             {

@@ -3,6 +3,8 @@ import Tabs from '@/components/Tabs/Tabs';
 import {useState, FC} from 'react';
 import { IChatFilterType, chatTabsType } from '../../types';
 import Router from 'next/router';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+
 
 const tabsList = [
     {
@@ -28,25 +30,27 @@ const tabsList = [
 ]
 
 
-const modeTabs = [
-    {
-        id: '1',
-        // badge: 3,
-        label: 'Чат'
-    },
-    {
-        id: '2',
-        // badge: 3,
-        label: 'Письма'
-    }
-]
+
 
 
 const Filter:FC<IChatFilterType> = ({
     activeType,
     onTypeChange
 }) => {
+    const {locale} = useAppSelector(s => s)
 
+    const modeTabs = [
+        {
+            id: '1',
+            // badge: 3,
+            label: locale?.chatPage.type_tabs.chat ?? ''
+        },
+        {
+            id: '2',
+            // badge: 3,
+            label: locale?.chatPage.type_tabs.mail ?? ''
+        }
+    ]
 
     const switchActiveType = (type?: chatTabsType) => {
         switch(type) {

@@ -1,4 +1,6 @@
-const ru = {
+import { ILocale } from "@/models/ILocale";
+
+const ru: ILocale = {
     global: {
         prompts: {
             targets: {
@@ -135,7 +137,17 @@ const ru = {
             cancel_btn: 'отменить',
             upload_btn: 'загрузить'
         },
-
+        login: {
+            title: 'Войти',
+            fields: {
+                password: 'Пароль'
+            },
+            links: {
+                register: 'Регистрация',
+                forgot_password: 'Забыли пароль?'
+            },
+            login_btn: 'Войти'
+        }
     },
     startPage: {
         start_hero_title: 'Более 16 000 пользователей',
@@ -214,7 +226,9 @@ const ru = {
             },
             action: {
                 show: 'Все фильтры',
-                hide: 'Скрыть'
+                hide: 'Скрыть',
+                search_btn: 'Найти',
+                mobile_filter_btn: 'Фильтр'
             },
             tabs: {
                 all: 'Все',

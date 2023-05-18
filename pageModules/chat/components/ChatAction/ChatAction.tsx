@@ -29,7 +29,7 @@ const ChatAction = ({
     updateDialogsList?: (...args: any[]) => any
 }) => {
     const {width} = useWindowSize()
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const {query} = useRouter()
     const {type, id} = query
 
@@ -263,7 +263,7 @@ const ChatAction = ({
                                 }
                                 
                             }}
-                            placeholder='Напишите сообщение...'
+                            placeholder={`${locale?.chatPage.action.placeholder}...`}
                             />
                     </div>
                     {

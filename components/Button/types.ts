@@ -6,7 +6,7 @@ export type ButtonVariants = 'default' | 'danger' | 'simple' | 'bordered' | 'whi
 
 
 export type ButtonPropsTypes = {
-    text: string,
+    text?: string,
     variant?: ButtonVariants,
     onClick?: React.ReactEventHandler | (() => void) | undefined;
     disabled?: boolean,

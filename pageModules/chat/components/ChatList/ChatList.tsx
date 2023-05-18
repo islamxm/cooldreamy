@@ -14,7 +14,7 @@ import Input from '@/components/Input/Input';
 import { FiSearch } from 'react-icons/fi';
 import ChatPricing from '../ChatPricing/ChatPricing';
 import { useWindowSize } from 'usehooks-ts';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 const ChatList:FC<IDialogs> = ({
     activeDialogId,
     dialogsList = [],
@@ -23,6 +23,7 @@ const ChatList:FC<IDialogs> = ({
 
     updateDialogsList
 }) => {
+    const {locale} = useAppSelector(s => s)
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
     const {width} = useWindowSize()
@@ -51,7 +52,7 @@ const ChatList:FC<IDialogs> = ({
                         paddingTop: 5,
                         paddingBottom: 5,
                     }}
-                    placeholder='Поиск...'
+                    placeholder={`...${locale?.chatPage.search}`}
                     afterIcon={<FiSearch color='#888888'/>}
 
                     //beforeIcon={<FiSearch/>}

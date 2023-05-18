@@ -16,7 +16,7 @@ import { useWindowSize } from "usehooks-ts";
 const service = new ApiService()
 
 const Profile = () => {
-    const {token, userData} = useAppSelector(s => s)
+    const {token, userData, locale} = useAppSelector(s => s)
     const {width} = useWindowSize()
     //userCard data
     // const [data, setData] = useState<IUser | null>()
@@ -28,9 +28,6 @@ const Profile = () => {
     const openImageEditModal = () => setImageEditModal(true)
 
 
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
     
 
 
@@ -50,7 +47,7 @@ const Profile = () => {
                                 >
                                 <Button
                                     disabled
-                                    text='Подтвердить фото'
+                                    text={locale?.profilePage.images.verify_btn}
                                     style={{
                                         padding: '8px 10px',
                                         fontSize: 18,

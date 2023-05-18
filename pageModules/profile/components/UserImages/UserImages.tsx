@@ -7,11 +7,12 @@ import { createFile } from '@/helpers/cropImage';
 import ApiService from '@/service/apiService';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import { IUser } from '@/models/IUser';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const UserImages:FC<IUser> = ({
     profile_photo
 }) => {
+    const {locale} = useAppSelector(s => s)
     const [imageCropModal, setImageCropModal] = useState(false)
     const ref = useRef<HTMLInputElement>(null)
     const [uploadedFile, setUploadedFile] = useState<File | null>(null)
@@ -67,7 +68,7 @@ const UserImages:FC<IUser> = ({
                     <input value={''} ref={ref} id='upload-photo' type="file" accept='.png, .jpg, .jpeg' onChange={uploadFile}/>
                     <label htmlFor='upload-photo' className={styles.label}>
                         <div className={styles.icon}><BsCamera/></div>
-                        <div className={styles.text}>Добавить фото</div>
+                        <div className={styles.text}>{locale?.profilePage.images.add_btn}</div>
                     </label>
                 </div>
                 {

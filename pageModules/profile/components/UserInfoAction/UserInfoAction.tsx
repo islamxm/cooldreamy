@@ -4,7 +4,7 @@ import {RiPencilLine} from 'react-icons/ri';
 import UserTitle from '@/components/UserTitle/UserTitle';
 import { IUser } from '@/models/IUser';
 import UserLocation from '@/components/UserLocation/UserLocation';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 const UserInfoAction:FC<IUser> = ({
     name,
     age,
@@ -12,7 +12,9 @@ const UserInfoAction:FC<IUser> = ({
     credits,
     country
 }) => {
-    
+    const {locale} = useAppSelector(s => s);
+
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.main}>
@@ -35,7 +37,7 @@ const UserInfoAction:FC<IUser> = ({
                 </div>
             </div>
             <div className={styles.action}>
-                Баланс: {credits ? credits: 0} кредитов
+                {locale?.global.my_card.balance.title}: {credits ? credits: 0} {locale?.global.my_card.balance.label}
             </div>
         </div>
     )

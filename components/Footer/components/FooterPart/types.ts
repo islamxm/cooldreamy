@@ -1,4 +1,4 @@
 export type FooterPartPropsTypes = {
-    head: string,
-    list: Array<{label: string, link: string}>
+    head?: string,
+    list: Array<{label?: string, link: string}>
 }

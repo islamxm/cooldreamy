@@ -17,6 +17,8 @@ import placeholder from '@/public/assets/images/avatar-placeholder.png';
 import notify from '@/helpers/notify';
 import { IUser } from '@/models/IUser';
 
+
+
 const service = new ApiService();
 
 const GirlCard:FC<IUser> = ({
@@ -31,7 +33,7 @@ const GirlCard:FC<IUser> = ({
     state,
     winkable
 }) => {
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
 
 
 
@@ -124,7 +126,7 @@ const GirlCard:FC<IUser> = ({
                             <button 
                                 onClick={createChat}
                                 className={styles.button}>
-                                <span>Написать</span> <FiMail/>
+                                <span>{locale?.global.user_card.send_message}</span> <FiMail/>
                             </button>
                         </Col>
                     </Row>

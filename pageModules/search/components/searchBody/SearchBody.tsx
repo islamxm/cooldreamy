@@ -177,10 +177,6 @@ const SearchBody = () => {
     }, [currentPage, token])
 
 
-    useEffect(()=> {
-        console.log(currentPage)
-    }, [currentPage])
-
 
     useEffect(() => {
         getCountries()

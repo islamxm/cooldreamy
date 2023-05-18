@@ -18,7 +18,7 @@ const MyCard:FC<IUser> = ({
     avatar_url_thumbnail,
     age
 }) => {
-    const {userData} = useAppSelector(s => s)
+    const {userData, locale} = useAppSelector(s => s)
 
     useEffect(() => console.log(userData),[userData])
     return (
@@ -44,7 +44,7 @@ const MyCard:FC<IUser> = ({
                 </div>
             </div>
             <div className={styles.balance}>
-                Баланс: {credits ? credits : 0} кредитов
+                {locale?.global.my_card.balance.title}: {credits ? credits : 0} {locale?.global.my_card.balance.label}
             </div>
         </Link>
     )

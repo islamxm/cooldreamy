@@ -1,4 +1,6 @@
-const en = {
+import { ILocale } from "@/models/ILocale";
+
+const en: ILocale = {
   global: {
     prompts: {
       targets: {
@@ -132,7 +134,18 @@ const en = {
       save_btn: "Save",
       cancel_btn: "Cancel",
       upload_btn: "Upload"
-    }
+    },
+    login: {
+      title: 'Login',
+      fields: {
+          password: 'Password'
+      },
+      links: {
+          register: 'Join us',
+          forgot_password: 'Forgot password?'
+      },
+      login_btn: 'Login'
+  }
   },
   startPage: {
     start_hero_title: "Over 16,000 users",
@@ -202,7 +215,9 @@ const en = {
       },
       action: {
         show: "Show All Filters",
-        hide: "Hide"
+        hide: "Hide",
+        search_btn: 'Search',
+        mobile_filter_btn: 'Filter'
       },
       tabs: {
         all: "All",

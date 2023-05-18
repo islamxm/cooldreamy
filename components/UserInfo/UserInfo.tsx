@@ -12,7 +12,7 @@ import { useWindowSize } from 'usehooks-ts';
 const UserInfo:FC<IUser> = (props) => {
     const {profile_photo} = props
     const {width} = useWindowSize()
-
+   
     
 
     return (
@@ -36,11 +36,11 @@ const UserInfo:FC<IUser> = (props) => {
                 <Col span={24}>
                     <UserInfoMain {...props}/>
                 </Col>
-                <Col span={24}>
+                {/* <Col span={24}>
                     <div className={styles.action}>
                         <button>ПОЖАЛОВАТЬСЯ</button>
                     </div>
-                </Col>
+                </Col> */}
             </Row>            
         </div>
     )

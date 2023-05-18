@@ -9,6 +9,7 @@ import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import {FC, useEffect} from 'react';
 import { searchFilterType } from './types';
 import { useWindowSize } from 'usehooks-ts';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const countryList = [
     {
@@ -80,11 +81,11 @@ const SearchFilter:FC<searchFilterType> = ({
 
     clearFilter,
     onToggleDrawer
-    
 }) => {
 
     const [showAll, setShowAll] = useState<boolean>(false);
     const {width} = useWindowSize()
+    const {locale} = useAppSelector(s => s)
     
     const toggleFilter = () => {
         setShowAll(s => !s)
@@ -107,9 +108,9 @@ const SearchFilter:FC<searchFilterType> = ({
                         <div className={styles.list}>
                             <div className={styles.item}>
                                 <SelectDef
-                                    label='Страна'
+                                    label={locale?.searchPage.filter.list.filter_country.label}
                                     width={230}
-                                    placeholder='Страна'
+                                    placeholder={locale?.searchPage.filter.list.filter_country.placeholder ?? ''}
                                     onChange={(e,v) => {
                                         setCountry(v)
                                     }}
@@ -121,12 +122,12 @@ const SearchFilter:FC<searchFilterType> = ({
                                 states?.length > 0 ? (
                                     <div className={styles.item}>
                                         <SelectDef
-                                            label='Город'
+                                            label={locale?.searchPage.filter.list.filter_state.label}
                                             width={230}
                                             onChange={(e, v) => {
                                                 setState(v)
                                             }}
-                                            placeholder='Город'
+                                            placeholder={locale?.searchPage.filter.list.filter_state.placeholder ?? ''}
                                             list={states}
                                             />
                                     </div>
@@ -139,10 +140,9 @@ const SearchFilter:FC<searchFilterType> = ({
                                 width <= 768 ? (
                                     <div className={styles.action_item}>
                                         <Button
-                                            
                                             before={<GoSettings/>}
                                             variant={'simple'}
-                                            text={'Фильтр'}
+                                            text={locale?.searchPage.filter.action.mobile_filter_btn ?? ''}
                                             style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px', boxShadow: 'none !important'}}
                                             onClick={onToggleDrawer}
                                             />
@@ -152,7 +152,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                         <Button
                                             before={<GoSettings/>}
                                             variant={'simple'}
-                                            text={showAll ? 'Скрыть' : 'Все фильтры'}
+                                            text={showAll ? locale?.searchPage.filter.action.hide : locale?.searchPage.filter.action.show}
                                             style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px', boxShadow: 'none !important'}}
                                             onClick={toggleFilter}
                                             />
@@ -165,7 +165,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                     load={load}
                                     onClick={() => onSearch && onSearch()} 
                                     style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px'}} 
-                                    text='Найти'/>
+                                    text={locale?.searchPage.filter.action.search_btn ?? ''}/>
                             </div>
                         </div>
                     </div>
@@ -179,13 +179,11 @@ const SearchFilter:FC<searchFilterType> = ({
                                     <div className={styles.item}>
                                         <SelectDef
                                             list={targetList}
-                                            // value={prompt_target_id}
                                             onChange={(e, v) => {
-                                                console.log(v)
                                                 setprompt_target_id && setprompt_target_id(e)
                                             }}
                                             placeholder={'Не указано'}
-                                            label={'Цель знакомства'}
+                                            label={locale?.searchPage.filter.list.filter_target.label}
                                             width={230}
                                             multiple
                                             
@@ -194,14 +192,11 @@ const SearchFilter:FC<searchFilterType> = ({
                                     <div className={styles.item}>
                                         <SelectDef
                                             list={financeList}
-                                            // value={country?.label}
-                                            // value={prompt_finance_state_id}
                                             onChange={(e, v) => {
-                                                console.log(v)
                                                 setprompt_finance_state_id && setprompt_finance_state_id(e)
                                             }}
                                             placeholder={'Не указано'}
-                                            label={'Финансовые цели'}
+                                            label={locale?.searchPage.filter.list.filter_finance.label}
                                             width={230}
                                             multiple
                                             />  
@@ -217,7 +212,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                             }}
                                             range={true}
                                             value={[age_range_start,age_range_end]}    
-                                            label={'Возраст'}
+                                            label={locale?.searchPage.filter.list.filter_age.label}
                                             // unit={'год'}
                                             />
                                     </div>

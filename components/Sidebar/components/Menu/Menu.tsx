@@ -8,62 +8,66 @@ import {FiUsers, FiHeart, FiSettings} from 'react-icons/fi';
 import {RxExit} from 'react-icons/rx';
 import { useRouter } from 'next/router';
 import { Cookies } from 'typescript-cookie';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
-const menuList:menuItemType[] = [
-    {
-        label: 'Поиск',
-        link: '/search',
-        root: '/search',
-        icon: <FiSearch/>,
-        badge: 0,
-        onClick: () => {},
-    },
-    {
-        label: 'Мои переписки',
-        link: '/chat?type=chat',
-        root: '/chat',
-        icon: <IoChatbubblesOutline/>,
-        badge: 0,
-        onClick: () => {},
-    },
-    {
-        label: 'Знакомства',
-        link: '/feed',
-        root: '/feed',
-        icon: <FiUsers/>,
-        badge: 0,
-        onClick: () => {},
-    },
-    {
-        label: 'Симпатии',
-        link: '/sympathy?type=views',
-        icon: <FiHeart/>,
-        badge: 0,
-        onClick: () => {},
-    },
-    // {
-    //     label: 'Настройки',
-    //     link: '/settings',
-    //     icon: <FiSettings/>,
-    //     badge: 0,
-    //     onClick: () => {},
-    // },
-    {
-        label: 'Выход',
-        link: undefined,
-        icon: <RxExit/>,
-        badge: 0,
-        onClick: () => {
-            process?.browser && Cookies.remove('cooldate-web-user-id')
-            process?.browser && Cookies.remove('cooldate-web-token')
-            process?.browser && window.location.replace('/start')
-        },
-    },
-]
+
 
 
 const Menu = () => {
+    const {locale} = useAppSelector(s => s)
     const {pathname} = useRouter()
+
+    const menuList:menuItemType[] = [
+        {
+            label: locale?.global.menu.search ?? '',
+            link: '/search',
+            root: '/search',
+            icon: <FiSearch/>,
+            badge: 0,
+            onClick: () => {},
+        },
+        {
+            label: locale?.global.menu.chats ?? '',
+            link: '/chat?type=chat',
+            root: '/chat',
+            icon: <IoChatbubblesOutline/>,
+            badge: 0,
+            onClick: () => {},
+        },
+        {
+            label: locale?.global.menu.feed ?? '',
+            link: '/feed',
+            root: '/feed',
+            icon: <FiUsers/>,
+            badge: 0,
+            onClick: () => {},
+        },
+        {
+            label: locale?.global.menu.sympathy ?? '',
+            link: '/sympathy?type=views',
+            icon: <FiHeart/>,
+            badge: 0,
+            onClick: () => {},
+        },
+        // {
+        //     label: 'Настройки',
+        //     link: '/settings',
+        //     icon: <FiSettings/>,
+        //     badge: 0,
+        //     onClick: () => {},
+        // },
+        // {
+        //     label: 'Выход',
+        //     link: undefined,
+        //     icon: <RxExit/>,
+        //     badge: 0,
+        //     onClick: () => {
+        //         process?.browser && Cookies.remove('cooldate-web-user-id')
+        //         process?.browser && Cookies.remove('cooldate-web-token')
+        //         process?.browser && window.location.replace('/start')
+        //     },
+        // },
+    ]
 
 
     return (
