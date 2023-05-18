@@ -77,6 +77,7 @@ const reducer = (state = globalState, action: any) => {
         case 'UPDATE_LOCALE': {
             return {
                 ...state,
+                locale: action.data
                 
             }
         }

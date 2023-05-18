@@ -7,35 +7,39 @@ import Image from 'next/image';
 import logo from '@/public/assets/images/logo-big.svg';
 import FooterPart from './components/FooterPart/FooterPart';
 import { FooterPartPropsTypes } from './components/FooterPart/types';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
-const footerList: FooterPartPropsTypes[] = [
-    {
-        head: 'поддержка',
-        list: [
-            {label: 'О проекте', link: '/'},
-            {label: 'Помощь', link: '/'},
-        ]
-    },
-    {
-        head: 'справка',
-        list: [
-            {label: 'Правила оплаты', link: '/'},
-            {label: 'Безопасность', link: '/'},
-        ]
-    },
-    {
-        head: 'Документы',
-        list: [
-            {label: 'Политика приватности', link: '/'},
-            {label: 'Лицензионное соглашение', link: '/'},
-            {label: 'Правила сайта', link: '/'},
-        ]
-    }
-]
 
 
 const Footer:FC = () => {
+    const {locale} = useAppSelector(s => s)
+
+    const footerList: FooterPartPropsTypes[] = [
+        {
+            head: locale?.global?.footer?.menu?.part_1?.title,
+            list: [
+                {label: locale?.global?.footer?.menu?.part_1?.list?.item_1, link: '/'},
+                {label: locale?.global?.footer?.menu?.part_1?.list?.item_2, link: '/'},
+            ]
+        },
+        {
+            head: locale?.global?.footer?.menu?.part_2?.title,
+            list: [
+                {label: locale?.global?.footer?.menu?.part_2?.list?.item_1, link: '/'},
+                {label: locale?.global?.footer?.menu?.part_2?.list?.item_2, link: '/'},
+            ]
+        },
+        {
+            head: locale?.global?.footer?.menu?.part_3?.title,
+            list: [
+                {label: locale?.global?.footer?.menu?.part_3?.list?.item_1, link: '/'},
+                {label: locale?.global?.footer?.menu?.part_3?.list?.item_2, link: '/'},
+                {label: locale?.global?.footer?.menu?.part_3?.list?.item_3, link: '/'},
+            ]
+        }
+    ]
+
     return (
         <footer className={styles.footer}>
             <Container>

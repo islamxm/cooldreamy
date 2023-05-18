@@ -15,10 +15,9 @@ import PromptModal from '@/popups/PromptModal/PromptModal';
 import { useWindowSize } from 'usehooks-ts';
 
 
-
 const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
     const dispatch = useAppDispatch()
-    const {token, socketChannel, isMenuOpen} = useAppSelector(s => s)
+    const {token, socketChannel, isMenuOpen, locale} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
     const {width} = useWindowSize()
     const [logoutModal, setLogoutModal] = useState(false)
@@ -37,7 +36,6 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
         Router.push('/')
 
         setLogoutModal(false)
-        
     }
 
 
@@ -88,13 +86,13 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                 {
                                     !token ? (
                                         <div className={styles.auth}>
-                                            <span onClick={() => setLoginModal(true)} className={styles.item}>ВХОД</span>
-                                            <Link className={styles.item} href={'/signup'}>РЕГИСТРАЦИЯ</Link>
+                                            <span onClick={() => setLoginModal(true)} className={styles.item}>{locale?.global?.header?.login_btn}</span>
+                                            <Link className={styles.item} href={'/signup'}>{locale?.global?.header?.join_btn}</Link>
                                         </div>
                                     ) : (
                                         width > 768 ? (
                                             <div className={styles.auth}>
-                                                <span onClick={() => setLogoutModal(true)} className={styles.item}>ВЫХОД</span>
+                                                <span onClick={() => setLogoutModal(true)} className={styles.item}>{locale?.global?.header?.logout_btn}</span>
                                             </div>
                                         ) : null
                                     )

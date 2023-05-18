@@ -8,10 +8,17 @@ import Image from 'next/image';
 import {motion} from 'framer-motion';
 import { container, item } from '@/helpers/variantsOrderAnim';
 import { useWindowSize } from 'usehooks-ts';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import parse from 'html-react-parser';
+
+
 
 
 const Last:FC = () => {
+    const {locale} = useAppSelector(s => s)
     const {width, height} = useWindowSize()
+
+
     return (
         <div className={styles.wrapper}>
             <Container>
@@ -25,20 +32,18 @@ const Last:FC = () => {
                         <Col span={24}>
                             <Row gutter={[25, 25]}>
                                 <Col span={24}>
-                                    <motion.h2 variants={item} className="block-title">Начни общение</motion.h2>
+                                    <motion.h2 variants={item} className="block-title">{locale?.startPage?.start_meet_title}</motion.h2>
                                 </Col>
                                 <Col span={24}>
                                     <motion.div variants={item} className={styles.text}>
-                                        <p>
-                                        В наше время приложения для знакомств стали неотъемлемой частью нашей жизни. Они позволяют вам проверить профиль одиночек, живущих рядом с вами, пообщаться с ними, познакомиться с ними и, возможно, влюбиться.
-                                        </p>
+                                        {parse(locale?.startPage?.start_meet_text)}
                                     </motion.div>
                                 </Col>
                                 <Col span={24}>
                                     <motion.div className={styles.action} variants={item}>
                                         <Button
                                             middle={width <= 768}
-                                            text='Заполнить анкету'
+                                            text={locale?.startPage?.start_meet_btn}
                                             />
                                     </motion.div>
                                 </Col>
@@ -53,10 +58,10 @@ const Last:FC = () => {
                                 />
                         </motion.div>
                         <motion.div variants={item} className={styles.pn}>
-                            Присоединяйся, чтобы построить счастливые отношения  
+                            {locale?.startPage?.start_meet_message_1}
                         </motion.div>
                         <motion.div variants={item} className={styles.pl}>
-                            Найти половинку стало просто!
+                            {locale?.startPage?.start_meet_message_2}
                         </motion.div>
                     </div>
                 </motion.div>

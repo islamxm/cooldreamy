@@ -30,6 +30,7 @@ const MainWrapper = ({
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
 	useEffect(() => {
+		console.log(locale)
 		if(locale === 'ru') {
 			dispatch(updateLocale(ru))
 		}

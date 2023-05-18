@@ -6,9 +6,13 @@ import Image from 'next/image';
 import {Row, Col} from 'antd';
 import {motion} from 'framer-motion';
 import { container, item } from '@/helpers/variantsOrderAnim';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import parse from 'html-react-parser';
 
 const Descr:FC = () => {
+    const {locale} = useAppSelector(s => s)
+
+
     return (
         <div className={styles.wrapper}>
             <Container>
@@ -32,24 +36,16 @@ const Descr:FC = () => {
                         <Col span={24}>
                             <Row gutter={[25, 25]}>
                                 <Col span={24}>
-                                    <motion.h2 variants={item} className="block-title">Что такое Dating service?</motion.h2>
+                                    <motion.h2 variants={item} className="block-title">{locale?.startPage?.start_what_title}</motion.h2>
                                 </Col>
                                 <Col span={24}>
                                     <motion.div variants={item} className={styles.text}>
-                                        <p>
-                                        Это один из самых популярных и развитых сервисов для современных знакомств женщин и мужчин, которые ищут любовь в Интернете.
-                                        </p>
-                                        <br>
-                                        </br>
-                                        <p>
-                                        Этот сайт может помочь Вам быстро и эффективно найти свою половинку благодаря современным технологиям и многолетнему опыту работы в сфере знакомств!
-                                        </p>
+                                        {parse(locale?.startPage?.start_what_text)}
                                     </motion.div>
-                                    
                                 </Col>
                                 <Col span={24}>
                                     <motion.div variants={item} className={styles.ex}>
-                                    Знакомься с новыми людьми уже сегодня!
+                                        {locale?.startPage?.start_what_ex}
                                     </motion.div>
                                 </Col>
                             </Row>

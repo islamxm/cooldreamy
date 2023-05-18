@@ -23,6 +23,10 @@ const Hero: FC = ({}) => {
         setSex(value)
     }
 
+    useEffect(() => {
+        console.log(locale)
+    }, [locale])
+
 
     return (
         <div className={styles.hero}>
@@ -34,12 +38,12 @@ const Hero: FC = ({}) => {
                     className={styles.inner}>
                     <div className={styles.main} >
                         <motion.h1 variants={item} className={styles.title}>
-                        
+                        {locale?.startPage?.start_hero_title}
                         <br></br>
-                        <span>нашли идеальную пару</span>  
+                        <span>{locale?.startPage?.start_hero_subtitle}</span>  
                         </motion.h1>
                         <motion.div variants={item} className={styles.subtitle}>
-                            Всего за 3 простых шага 
+                            {locale?.startPage?.start_hero_steps}
                         </motion.div>
                         <div className={styles.selects}>
                             <motion.div variants={item}>

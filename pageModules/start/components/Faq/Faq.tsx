@@ -9,19 +9,23 @@ import FaqItem from './components/FaqItem/FaqItem';
 import { useState } from 'react';
 import { FaqItemPropsTypes } from './components/FaqItem/types';
 import { container, item } from '@/helpers/variantsOrderAnim';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
-const faqItems:FaqItemPropsTypes[] = [
-    {head: 'Как работает поиск партнера?', text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 1, isOpen: false, onChange: () => {}},
-    {head: 'Как удалить анкету?', text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 2, isOpen: false, onChange: () => {}},
-    {head: 'Как правильно сортировать анкеты?', text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 3, isOpen: false, onChange: () => {}},
-]
+
 
 
 
 
 const Faq:FC = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+    const {locale} = useAppSelector(s => s)
+
+    const faqItems:FaqItemPropsTypes[] = [
+        {head: locale?.startPage?.start_faq_list?.start_faq_item_1?.title, text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 1, isOpen: false, onChange: () => {}},
+        {head: locale?.startPage?.start_faq_list?.start_faq_item_2?.title, text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 2, isOpen: false, onChange: () => {}},
+        {head: locale?.startPage?.start_faq_list?.start_faq_item_3?.title, text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 3, isOpen: false, onChange: () => {}},
+    ]
 
 
     return (
@@ -42,7 +46,7 @@ const Faq:FC = () => {
                     <Col span={24}>
                         <Row gutter={[40,40]}>
                             <Col span={24}>
-                                <motion.h2 variants={item} className='block-title'>Популярные вопросы</motion.h2>
+                                <motion.h2 variants={item} className='block-title'>{locale?.startPage?.start_faq_title}</motion.h2>
                             </Col>
                             <Col span={24}>
                                 <div className={styles.body}>

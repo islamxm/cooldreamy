@@ -7,9 +7,10 @@ import {Row, Col} from 'antd';
 import { container, item } from '@/helpers/variantsOrderAnim';
 import Router from 'next/router';
 import { useWindowSize } from 'usehooks-ts';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const Steps = () => {
-
+    const {locale} = useAppSelector(s => s)
     const {width, height} = useWindowSize()
 
     return (
@@ -55,7 +56,7 @@ const Steps = () => {
                                     <StepItem
                                         value={1}
                                         total={3}
-                                        label={'Регистрируйся'}
+                                        label={locale?.startPage?.start_steps_1}
                                         />
                                 </div>
                                 <div
@@ -64,7 +65,7 @@ const Steps = () => {
                                     <StepItem
                                         value={2}
                                         total={3}
-                                        label={'Смотри анкеты'}
+                                        label={locale?.startPage?.start_steps_2}
                                         />
                                 </div>
                                 <div
@@ -73,7 +74,7 @@ const Steps = () => {
                                     <StepItem
                                         value={3}
                                         total={3}
-                                        label={'Общайся'}
+                                        label={locale?.startPage?.start_steps_3}
                                         />
                                 </div>
                             </div>
@@ -82,7 +83,7 @@ const Steps = () => {
                         <Button
                             onClick={() => Router.push('/signup')}
                             // disabled={true}
-                            text='Перейти к знакомствам'
+                            text={locale?.startPage?.start_steps_btn}
                             // middle={width <= 768}
                             />
                     </div>

@@ -7,9 +7,12 @@ import adv1 from '@/public/assets/images/adv-1.svg';
 import adv2 from '@/public/assets/images/adv-2.svg';
 import adv3 from '@/public/assets/images/adv-3.svg';
 import { container, item } from '@/helpers/variantsOrderAnim';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const Adv:FC = () => {
+    const {locale} = useAppSelector(s => s)
+
+    
     return (
         <motion.div 
             initial={{
@@ -36,22 +39,22 @@ const Adv:FC = () => {
                         <motion.div variants={item} className={styles.item}>
                             <AdvItem
                                 img={adv1}
-                                label={'Умный фильтр'}
-                                text={'Специальный алгоритм позволит быстро найти подходящую пару'}
+                                label={locale?.startPage?.start_adv_1?.title}
+                                text={locale?.startPage?.start_adv_1?.text}
                                 />
                         </motion.div>
                         <motion.div variants={item} className={styles.item}>
                             <AdvItem
                                 img={adv2}
-                                label={'Безопасность'}
-                                text={'Вы можете быть уверенны за приватность данных на сервисе'}
+                                label={locale?.startPage?.start_adv_2?.title}
+                                text={locale?.startPage?.start_adv_2?.text}
                                 />
                         </motion.div>
                         <motion.div variants={item} className={styles.item}>
                             <AdvItem
                                 img={adv2}
-                                label={'Проверка'}
-                                text={'Пользователи существуют и заинтересованы в отношениях'}
+                                label={locale?.startPage?.start_adv_3?.title}
+                                text={locale?.startPage?.start_adv_3?.text}
                                 />
                         </motion.div>
                     </div>
