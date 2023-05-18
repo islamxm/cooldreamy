@@ -16,7 +16,7 @@ export interface IGlobalState {
 
     newMessage: any,
     newMail: any,
-    locale: null | ILocale
+    locale: ILocale
 }
 
 

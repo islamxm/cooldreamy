@@ -14,4 +14,4 @@ export const updateCurrentProfileId = (data:number | null) => ({type: 'UPDATE_CU
 export const updateNewMessage = (data: any) => ({type: 'UPDATE_NEW_MESSAGE', data})
 export const updateNewMail = (data: any) => ({type: 'UPDATE_NEW_MAIL', data})
 
-export const updateLocale = (data: ILocale | null) => ({type: 'UPDATE_LOCALE', data})
+export const updateLocale = (data: ILocale) => ({type: 'UPDATE_LOCALE', data})
