@@ -11,6 +11,7 @@ import ApiService from '@/service/apiService';
 import BthPicker from '@/components/BthPicker/BthPicker';
 import moment from 'moment';
 
+
 const service = new ApiService()
 
 interface IStep1 {
@@ -46,7 +47,7 @@ const Step1:FC<IStep1> = ({
     setBirthday,
     errors
 }) => {
-    const {token} = useAppSelector(s => s)
+    const {locale} = useAppSelector(s => s)
 
 
 

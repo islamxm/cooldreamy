@@ -36,7 +36,7 @@ const service = new ApiService()
 const Body:FC = () => {
     const {width} = useWindowSize()
     // !! для теста
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
 
 
@@ -97,6 +97,18 @@ const Body:FC = () => {
                 setPrompt_relationships(res?.prompt_relationships)
             })
         }
+        // if('132|HIfnot3MCS5eFvVauuOrb1szbjVhLck4JYWtLuk4') {
+        //     service.getAllPrompts('132|HIfnot3MCS5eFvVauuOrb1szbjVhLck4JYWtLuk4').then(res => {
+        //         setPrompt_targets(res?.prompt_targets)
+        //         setPrompt_careers(res?.prompt_careers)
+        //         setPrompt_finance_states(res?.prompt_finance_states)
+        //         setPrompt_sources(res?.prompt_sources)
+        //         setPrompt_interests(res?.prompt_interests)
+        //         setPrompt_want_kids(res?.prompt_want_kids)
+        //         setPrompt_relationships(res?.prompt_relationships)
+        //     })
+        // }
+        
     }, [token])
 
 
@@ -183,12 +195,15 @@ const Body:FC = () => {
                 }
             }).finally(() => setLoad(false))
         }
-        if(currentStep > 0 && currentStep < 9 && currentStep !== 8) {
+        // if(currentStep > 0 && currentStep < 9 && currentStep !== 8) {
+        //     setCurrentStep(s => s + 1)
+        // }
+        if(currentStep > 0 && currentStep < 9) {
             setCurrentStep(s => s + 1)
         }
-        if(currentStep === 8) {
+        // if(currentStep === 8) {
             
-        }
+        // }
         if(currentStep === 9) {
             setLoad(true)
             const updateBody: IUser = {
@@ -205,7 +220,13 @@ const Body:FC = () => {
                     if(res?.id) {
                         notify('Настройки сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))
-                        Router.push(`/profile`)
+                        // 
+                        service.getMyProfile(token).then(profile => {
+                            console.log(profile)
+                            if(!profile?.avatar_url) {
+                                Router.push(`/profile`)
+                            } else Router.push(`/search`)
+                        })
                     }
 
                 }).finally(() => setLoad(false))

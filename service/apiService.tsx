@@ -626,13 +626,15 @@ class ApiService {
     // }
 
 
-    getAllPrompts = async (token: IToken) => {
+    getAllPrompts = async (token: IToken, locale?: string) => {
         try {
             let res = await fetch(endpoints.getAllPrompts, {
                 method: 'GET',
                 headers: {
                     ...headers,
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Accept-Language': locale ?? 'ru',
+                    'X-Localization': locale ?? 'ru'
                 }
             })
             return await checkAuth(res)
