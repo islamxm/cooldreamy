@@ -4,14 +4,14 @@ import { FC } from 'react';
 import { selectCardPropsTypes } from '@/components/SelectCard/types';
 import {motion} from 'framer-motion';
 import { IPromptSelect } from '../../types';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const Step2:FC<IPromptSelect> = ({
     list,
     selectedList,
     setSelectedList
 }) => {
-
+    const {locale} = useAppSelector(s => s)
 
     return (
         <motion.div 
@@ -27,7 +27,7 @@ const Step2:FC<IPromptSelect> = ({
             }}
             transition={{type: 'spring', stiffness: 400, damping: 17 }}
             className={styles.wrapper}>
-            <h3 className={styles.head}>Расскажите о своих целях на сайте</h3>
+            <h3 className={styles.head}>{locale.signupPage.steps.step_2.title}</h3>
             <div className={styles.list}>
                 {
                     list?.map((item, index) => (

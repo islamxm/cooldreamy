@@ -634,7 +634,7 @@ class ApiService {
                     ...headers,
                     'Authorization': `Bearer ${token}`,
                     'Accept-Language': locale ?? 'ru',
-                    'X-Localization': locale ?? 'ru'
+                    'X-localization': locale ?? 'ru'
                 }
             })
             return await checkAuth(res)

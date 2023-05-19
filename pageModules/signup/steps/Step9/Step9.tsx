@@ -14,7 +14,7 @@ interface I {
 const Step9:FC<I> = ({
     nextStep
 }) => {
-    const {token} = useAppSelector(s => s)
+    const {locale} = useAppSelector(s => s)
     const [file, setFile] = useState<File | null>(null)
     const [editModal, setEditModal] = useState(false)
 
@@ -65,8 +65,8 @@ const Step9:FC<I> = ({
                 />
             
             <div className={styles.head}>
-                <h2 className={styles.title}>Добавьте фото</h2>
-                <div className={styles.subtitle}>Загрузите свое лучшее фото - это привлечет больше внимания пользователей к профилю</div>
+                <h2 className={styles.title}>{locale?.signupPage.steps.step_9.title}</h2>
+                <div className={styles.subtitle}>{locale?.signupPage.steps.step_9.text}</div>
             </div>
             <div className={styles.body}>
                 <div className={styles.place}>

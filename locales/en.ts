@@ -312,6 +312,37 @@ const en: ILocale = {
           link: "the terms of service and privacy policy"
         }
       },
+      step_2: {
+        title: 'Please share your dating goals'  
+      },
+      step_3: {
+        title: 'Tell us about your interests'
+      },
+      step_4: {
+        title:'Financial status'
+      },
+      step_5: {
+        title: 'How did you hear about us?'
+      },
+      step_6: {
+        title: 'Kids'
+      },
+      step_7: {
+        title: 'Marital status'
+      },
+      step_8: {
+        title: 'Occupation'
+      },
+      step_9: {
+        title: 'Add photo',
+        text: 'Upload your best photo - it will attract more attention to your profile'
+      },
+      step_10: {
+        title: 'Tell us about yourself',
+        text: "A few sentences about yourself will attract the attention of users",
+        ex: 'According to the website rules, it is prohibited to provide contact information',
+        placeholder: 'Not less than 20 characters...'
+      },
       upload_avatar: {
         title: "Add Photo",
         text: "Upload your best photo - it will attract more attention to your profile"

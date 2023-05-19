@@ -74,7 +74,7 @@ const Step1:FC<IStep1> = ({
                                 <Input
                                     value={name}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-                                    placeholder='Имя'
+                                    placeholder={locale?.signupPage.steps.step_1.name}
                                     error={errors.name?.length === 1 ? errors.name[0] : false}
                                     />
                             </Col>
@@ -91,13 +91,14 @@ const Step1:FC<IStep1> = ({
                                 <Input
                                     value={password}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                                    placeholder='Пароль'
+                                    placeholder={locale?.signupPage.steps.step_1.password}
                                     type={'password'}
                                     error={errors.password?.length === 1 ? errors.password[0] : false}
                                     />
                             </Col>
                             <Col span={24}>
                                 <BthPicker
+                                    placeholder={locale.signupPage.steps.step_1.birthday}
                                     showToday={false}
                                     onChange={(e,b) => {
                                         // const date = new Date(b)
@@ -127,7 +128,7 @@ const Step1:FC<IStep1> = ({
                     </Col>
                     <Col span={24}>
                         <div className={styles.pr}>
-                            Продолжив, Вы принимаете <Link href={'/'} target={'_blank'}>условия пользовательского соглашения и конфидициальности</Link>
+                            {locale?.signupPage.steps.step_1.privacy.label} <Link href={'/'} target={'_blank'}>{locale?.signupPage.steps.step_1.privacy.link}</Link>
                         </div>
                     </Col>
                 </Row>

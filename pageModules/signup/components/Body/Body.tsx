@@ -9,7 +9,7 @@ import { interestTypes, targetTypes } from '../../types';
 import ApiService from '@/service/apiService';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import { updateToken, updateUserId, updateUserData } from '@/store/actions';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { Cookies } from 'typescript-cookie';
 import { useWindowSize } from 'usehooks-ts';
 
@@ -38,10 +38,10 @@ const Body:FC = () => {
     // !! для теста
     const {token, locale} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
-
+    const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(2)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -86,19 +86,8 @@ const Body:FC = () => {
 
 
     useEffect(() => {
-        if(token) {
-            service.getAllPrompts(token).then(res => {
-                setPrompt_targets(res?.prompt_targets)
-                setPrompt_careers(res?.prompt_careers)
-                setPrompt_finance_states(res?.prompt_finance_states)
-                setPrompt_sources(res?.prompt_sources)
-                setPrompt_interests(res?.prompt_interests)
-                setPrompt_want_kids(res?.prompt_want_kids)
-                setPrompt_relationships(res?.prompt_relationships)
-            })
-        }
-        // if('132|HIfnot3MCS5eFvVauuOrb1szbjVhLck4JYWtLuk4') {
-        //     service.getAllPrompts('132|HIfnot3MCS5eFvVauuOrb1szbjVhLck4JYWtLuk4').then(res => {
+        // if(token && router?.locale) {
+        //     service.getAllPrompts(token, router.locale).then(res => {
         //         setPrompt_targets(res?.prompt_targets)
         //         setPrompt_careers(res?.prompt_careers)
         //         setPrompt_finance_states(res?.prompt_finance_states)
@@ -108,8 +97,19 @@ const Body:FC = () => {
         //         setPrompt_relationships(res?.prompt_relationships)
         //     })
         // }
+        if('132|HIfnot3MCS5eFvVauuOrb1szbjVhLck4JYWtLuk4' && router?.locale) {
+            service.getAllPrompts('132|HIfnot3MCS5eFvVauuOrb1szbjVhLck4JYWtLuk4', router?.locale).then(res => {
+                setPrompt_targets(res?.prompt_targets)
+                setPrompt_careers(res?.prompt_careers)
+                setPrompt_finance_states(res?.prompt_finance_states)
+                setPrompt_sources(res?.prompt_sources)
+                setPrompt_interests(res?.prompt_interests)
+                setPrompt_want_kids(res?.prompt_want_kids)
+                setPrompt_relationships(res?.prompt_relationships)
+            })
+        }
         
-    }, [token])
+    }, [token, router])
 
 
     const switchStep = (step: number) => {
@@ -252,7 +252,7 @@ const Body:FC = () => {
                         <Row gutter={[24,24]}>
                             <Col span={24}>
                                 <h2 className="block-title center">
-                                    Регистрация
+                                    {locale?.signupPage.main.title}
                                 </h2>
                             </Col>
                             <Col span={24}>
@@ -278,7 +278,7 @@ const Body:FC = () => {
                                                         middle={width <= 768}
                                                         onClick={stepChange}
                                                         disabled={!(email && name && password && sex && birthday)}
-                                                        text={currentStep === 9 ? 'Завершить' : 'Дальше'}
+                                                        text={currentStep === 9 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
                                                         />
                                                 </div>
                                             </Col>

@@ -320,6 +320,37 @@ export interface ILocale {
                     link: string
                 }
             },
+            step_2: {
+                title: string
+            },
+            step_3: {
+                title: string
+            },
+            step_4: {
+                title: string
+            },
+            step_5: {
+                title: string
+            },
+            step_6: {
+                title: string
+            },
+            step_7: {
+                title: string
+            },
+            step_8: {
+                title: string
+            },
+            step_9: {
+                title: string,
+                text: string
+            },
+            step_10: {
+                title: string,
+                text: string,
+                placeholder: string,
+                ex: string
+            },
             upload_avatar: {
                 title: string,
                 text: string,

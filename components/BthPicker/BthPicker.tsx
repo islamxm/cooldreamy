@@ -11,9 +11,10 @@ const BthPicker:FC<DatePickerProps> = (props) => {
     return (
         <div className={styles.wrapper}>
             <DatePicker
+                placeholder='День рождения'
                 {...props}
                 className={styles.picker}
-                placeholder='День рождения'
+                
                 format={'DD-MM-YYYY'}
                 />
         </div>

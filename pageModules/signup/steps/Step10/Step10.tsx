@@ -17,7 +17,7 @@ const Step10:FC<I> = ({
     about,
     setAbout
 }) => {
-    
+    const {locale} = useAppSelector(s => s)
 
 
     return (
@@ -36,8 +36,8 @@ const Step10:FC<I> = ({
             className={styles.wrapper}>
 
             <div className={styles.head}>
-                <h2 className={styles.title}>Расскажите о себе</h2>
-                <div className={styles.subtitle}>Пара фраз о себе привлечет внимание пользователей</div>
+                <h2 className={styles.title}>{locale?.signupPage.steps.step_10.title}</h2>
+                <div className={styles.subtitle}>{locale?.signupPage.steps.step_10.text}</div>
             </div>
             <div className={styles.body}>
                 <div className={styles.field}>
@@ -46,10 +46,10 @@ const Step10:FC<I> = ({
                         height={100}
                         value={about}
                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAbout(e.target.value)}
-                        placeholder='Не менее 20 символов...'
+                        placeholder={locale?.signupPage.steps.step_10.placeholder}
                         />
                 </div>
-                <div className={styles.ex}>Согласно правилам сайта запрещено указывать контактные данные</div>
+                <div className={styles.ex}>{locale?.signupPage.steps.step_10.ex}</div>
             </div>
             
         </motion.div>

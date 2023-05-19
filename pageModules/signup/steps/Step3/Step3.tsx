@@ -12,7 +12,7 @@ import img5 from '@/public/assets/icons/interest-5.svg';
 import img6 from '@/public/assets/icons/interest-6.svg';
 import SelectCard from '@/components/SelectCard/SelectCard';
 import { IPromptSelect } from '../../types';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
 const Step3:FC<IPromptSelect> = ({
@@ -20,6 +20,8 @@ const Step3:FC<IPromptSelect> = ({
     selectedList,
     setSelectedList
 }) => {
+    const {locale} = useAppSelector(s => s)
+
     return (
         <motion.div 
             initial={{
@@ -36,7 +38,7 @@ const Step3:FC<IPromptSelect> = ({
             className={styles.wrapper}>
             
             <h3 className={styles.head}>
-                Расскажите о своих интересах
+                {locale?.signupPage.steps.step_3.title}
             </h3>
             <div className={styles.list}>
                 {
