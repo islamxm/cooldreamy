@@ -134,6 +134,7 @@ const ChatLayout = () => {
                 page: dialogsPage,
                 per_page: 10
             }, token).then(res => {
+
                 console.log(res)
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
@@ -163,7 +164,7 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
-                    
+                    console.log(res)
                     setCurrentUser(res?.another_user)
                     setTotalChatItemCount(res?.letter_messages?.total)
                     if(chatListPage === 1) {
@@ -280,7 +281,8 @@ const ChatLayout = () => {
                     console.log(newMail)
                     // setDialogsList(s => {
                     //     const m = s;
-                    //     const findItem = m.find((i: any) => i.id === newMail?.letter_message?.letter_id)
+                    //     const findItem = m.find((i: any) => i.id === newMail?.letter_message?.letter?.id)
+                    //     console.log('findItem', findItem)
                     //     if(findItem) {
                     //         const rm = m.splice(m.findIndex(i => i.id == findItem.id), 1, newMail?.letter_message)
                     //         return sortingDialogList([...m])
@@ -288,12 +290,28 @@ const ChatLayout = () => {
                     //         return sortingDialogList([newMail?.letter_message, ...s])
                     //     }
                     // })
-    
-                    // if(currentChatId === newMail?.letter_message?.letter_id) {
-                    //     setChatList(s => {
-                    //         return sortingChatList([newMail?.letter_message, ...s])
-                    //     })
-                    // }
+                    setDialogsList(s => {
+                        const m = s;
+                        const findItem = m.find((i: any) => i.id === newMail?.letter_list_item?.letter?.id)
+                        if(findItem) {
+                            const rm = m.splice(m.findIndex(i => i.id == findItem.id), 1, newMail?.letter_list_item?.letter)
+                            
+                            return sortingDialogList([...m])
+                        } else {
+                            return sortingDialogList([newMail?.letter_list_item?.letter, ...s])
+                        }
+                    })
+                    updateChat(newMail?.letter_message)
+
+
+
+
+                    // updateDialogsList && updateDialogsList((s: any) => {
+                    //     const m = s;
+                    //     const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
+                    //     return sortingDialogList([...m])
+                    // })
+                    // updateChat(res?.letter?.last_message)   
                 }
             }
             

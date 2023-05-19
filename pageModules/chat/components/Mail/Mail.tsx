@@ -27,6 +27,8 @@ const Mail:FC<I> = ({
         
     useEffect(() => {
         if(totalChatItemCount !== undefined) {
+            console.log(chatList?.length)
+            console.log(totalChatItemCount)
             chatList?.length >= totalChatItemCount ? setLoadMore(false) : setLoadMore(true)
         }
        
@@ -38,7 +40,6 @@ const Mail:FC<I> = ({
             updateChatListPage && updateChatListPage((s: number) => s + 1)
         }
     }, [inView, loadMore, updateChatListPage])
-
 
     
 
@@ -59,7 +60,7 @@ const Mail:FC<I> = ({
                         name={item?.sender_user?.name}
                         age={item?.sender_user?.age}
                         isPayed={item?.letter_messageable?.is_payed === 1 ? true : false}
-                        images={item?.letter_messageable.images?.map((i:any) => ({
+                        images={item?.letter_messageable?.images?.map((i:any) => ({
                             image: i.image_url,
                             thumbnail: i.thumbnail_url,
                             big_thumbnail: i.big_thumbnail_url,
