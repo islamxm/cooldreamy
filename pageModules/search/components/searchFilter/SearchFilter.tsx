@@ -108,6 +108,21 @@ const SearchFilter:FC<searchFilterType> = ({
                     <div className={styles.main}>
                         <div className={styles.list}>
                             <div className={styles.item}>
+                                <RangeSlider
+                                    style={{width: 140}}
+                                    min={18}
+                                    max={70}
+                                    onChange={e => {
+                                        setage_range_start && setage_range_start(e[0])
+                                        setage_range_end && setage_range_end(e[1])
+                                    }}
+                                    range={true}
+                                    value={[age_range_start,age_range_end]}    
+                                    label={locale?.searchPage.filter.list.filter_age.label}
+                                    // unit={'год'}
+                                    />
+                            </div>
+                            <div className={styles.item}>
                                 <SelectDef
                                     label={locale?.searchPage.filter.list.filter_country.label}
                                     width={230}
@@ -136,6 +151,36 @@ const SearchFilter:FC<searchFilterType> = ({
                                    
                                 ) : null
                             }
+                            <div className={styles.item}>
+                                <OnlyPremium>
+                                    <SelectDef
+                                        disabled={userData?.is_premium !== 1}
+                                        list={targetList}
+                                        onChange={(e, v) => {
+                                            setprompt_target_id && setprompt_target_id(e)
+                                        }}
+                                        placeholder={'Не указано'}
+                                        label={locale?.searchPage.filter.list.filter_target.label}
+                                        width={230}
+                                        multiple
+                                        
+                                        />
+                                </OnlyPremium>
+                            </div>
+                            <div className={styles.item}>
+                                <OnlyPremium>
+                                    <SelectDef
+                                        list={financeList}
+                                        onChange={(e, v) => {
+                                            setprompt_finance_state_id && setprompt_finance_state_id(e)
+                                        }}
+                                        placeholder={'Не указано'}
+                                        label={locale?.searchPage.filter.list.filter_finance.label}
+                                        width={230}
+                                        multiple
+                                        />  
+                                </OnlyPremium>
+                            </div>
                             
                         </div>
                         <div className={styles.action}>
@@ -150,17 +195,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                             onClick={onToggleDrawer}
                                             />
                                     </div>
-                                ) : (
-                                    <div className={styles.action_item}>
-                                        <Button
-                                            before={<GoSettings/>}
-                                            variant={'simple'}
-                                            text={showAll ? locale?.searchPage.filter.action.hide : locale?.searchPage.filter.action.show}
-                                            style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px', boxShadow: 'none !important'}}
-                                            onClick={toggleFilter}
-                                            />
-                                    </div>
-                                )
+                                ) : null
                             }
                             
                             <div className={styles.action_item}>
@@ -179,51 +214,7 @@ const SearchFilter:FC<searchFilterType> = ({
                             <div
                                 className={styles.ex}>
                                 <div className={styles.list}>
-                                    <div className={styles.item}>
-                                        <OnlyPremium>
-                                            <SelectDef
-                                                disabled={userData?.is_premium !== 1}
-                                                list={targetList}
-                                                onChange={(e, v) => {
-                                                    setprompt_target_id && setprompt_target_id(e)
-                                                }}
-                                                placeholder={'Не указано'}
-                                                label={locale?.searchPage.filter.list.filter_target.label}
-                                                width={230}
-                                                multiple
-                                                
-                                                />
-                                        </OnlyPremium>
-                                    </div>
-                                    <div className={styles.item}>
-                                        <OnlyPremium>
-                                            <SelectDef
-                                                list={financeList}
-                                                onChange={(e, v) => {
-                                                    setprompt_finance_state_id && setprompt_finance_state_id(e)
-                                                }}
-                                                placeholder={'Не указано'}
-                                                label={locale?.searchPage.filter.list.filter_finance.label}
-                                                width={230}
-                                                multiple
-                                                />  
-                                        </OnlyPremium>
-                                    </div>
-                                    <div className={styles.item}>
-                                        <RangeSlider
-                                            style={{width: 140}}
-                                            min={18}
-                                            max={70}
-                                            onChange={e => {
-                                                setage_range_start && setage_range_start(e[0])
-                                                setage_range_end && setage_range_end(e[1])
-                                            }}
-                                            range={true}
-                                            value={[age_range_start,age_range_end]}    
-                                            label={locale?.searchPage.filter.list.filter_age.label}
-                                            // unit={'год'}
-                                            />
-                                    </div>
+                                    
                                 </div>
                                 {/* <div className={styles.action}>
                                     <div className={styles.item}>

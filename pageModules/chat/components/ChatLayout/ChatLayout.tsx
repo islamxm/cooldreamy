@@ -223,7 +223,8 @@ const ChatLayout = () => {
                     return sortingChatList([{...item, sender_user}, ...s])
                 } else return sortingChatList([item, ...s])
             })
-        } else {
+        } 
+        if(chatType === 'mail') {
             setChatList(s => {
                 const sender_user = s.find(i => i.sender_user?.id === item.sender_user_id)?.sender_user
                 if(sender_user) {
@@ -231,13 +232,8 @@ const ChatLayout = () => {
                 } else return sortingMailChatList([item, ...s])
             })
         }
-        
     }, [chatList, chatType])
 
-
-    useEffect(() => {
-        
-    }, [])
 
 
     // !! подписка на события по сокету

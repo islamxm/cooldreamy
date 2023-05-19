@@ -124,6 +124,7 @@ const MainWrapper = ({
 				
 			// })
 			socketChannel?.listen('.new-letter-message-event', (data: any) => {
+				console.log(data)
 				dispatch(updateNewMail(data))
 				const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;
 				if(data) {
@@ -141,9 +142,6 @@ const MainWrapper = ({
 						avatar)
 				}
 			})
-			// socketChannel?.listen('.letter-message-read-event', (data: any) => {
-			// 	console.log(data)
-			// })
         }
 	}, [socketChannel])
 

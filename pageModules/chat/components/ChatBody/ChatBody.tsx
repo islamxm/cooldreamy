@@ -89,7 +89,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     }, [mockType])
 
 
-    const sendTextMessage = useCallback((text: string) => {
+    const sendTextMessage = (text: string) => {
         if(text && activeDialogId && token && ChatType) {
             if(ChatType === 'chat') {
                 service.sendMessage_text({chat_id: Number(activeDialogId), text}, token).then(res => {
@@ -103,30 +103,49 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     setMockType('')
                 })
             }
-            
-        }
-    }, [token, activeDialogId, updateChat, ChatType])
-    
-
-
-    const sendGiftMessage = useCallback((gifts: string) => {
-        if(gifts && token && activeDialogId && ChatType) {
-            if(ChatType === 'chat') {
-                service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts}, token).then(res => {
-                
+            if(ChatType === 'mail') {
+                service.sendMail_text({text: text, letter_id: Number(activeDialogId)}, token).then(res => {
+                    console.log(res)
                     updateDialogsList && updateDialogsList((s: any) => {
                         const m = s;
-                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
                         return sortingDialogList([...m])
                     })
-    
-                    updateChat(res?.chat?.last_message)
+                    updateChat(res?.letter?.last_message)
                     setMockType('')
                 })
             }
             
         }
-    }, [token, activeDialogId, ChatType])
+    }
+
+
+    const sendGiftMessage = (gifts: string) => {
+        if(gifts && token && activeDialogId && ChatType) {
+            if(ChatType === 'chat') {
+                service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts}, token).then(res => {
+                    updateDialogsList && updateDialogsList((s: any) => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                        return sortingDialogList([...m])
+                    })
+                    updateChat(res?.chat?.last_message)
+                    setMockType('')
+                })
+            }
+            if(ChatType === 'mail') {
+                service.sendMail_gift({letter_id: activeDialogId.toString(), gifts}, token).then(res => {
+                    updateDialogsList && updateDialogsList((s: any) => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
+                        return sortingDialogList([...m])
+                    })
+                    updateChat(res?.letter?.last_message)
+                    setMockType('')
+                })
+            }
+        }
+    }
     
     
 
@@ -259,14 +278,21 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                     id={activeDialogId}
                                                     updateChatListPage={updateChatListPage}
                                                     />
-                                            ) : null
+                                            ) : (
+                                                activeDialogId && !mockType ? (
+                                                    <ChatStart
+                                                        onSelect={setMockType} 
+                                                        avatar={currentUser?.avatar_url_thumbnail}/>
+                                                ) : null
+                                            )
                                         )
+                                    }
+                                    {
+                                        switchMock()
                                     }
                                 </div>
                             ) : null
                         }
-                        
-
                         <div className={styles.action}>
                             <ChatAction 
                                 getGifts={() => {
@@ -280,8 +306,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 setHeight={setPb}
                                 updateDialogsList={updateDialogsList}
                                 />
-
-
                         </div>
                     </div>          
                 )

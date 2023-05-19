@@ -23,7 +23,7 @@ const SelectDef:FC<selectDefType> = ({
     
 
     return (
-        <div className={styles.wrapper} style={{width: width}}>
+        <div className={`${styles.wrapper} ${!label ? styles.nonlabel : ''}`} style={{width: width}}>
             {
                 label ? (
                     <div className={styles.label}>{label}</div>
