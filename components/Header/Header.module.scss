@@ -43,6 +43,14 @@
         }
 
         .main {
+            display: flex;
+            align-items: center;
+
+            .locale {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
             .auth {
                 display: flex;

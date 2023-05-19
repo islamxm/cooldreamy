@@ -135,9 +135,10 @@ const SearchBody = () => {
                 age_range_end,
                 prompt_targets: `[${prompt_targets?.join(',')}]`, 
                 prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
-                per_page: 24
+                per_page: 25
             }, token
             ).then(res => {
+                console.log(res.data)
                 setTotalFound(res?.total)
                 setList(res?.data)
 
@@ -161,7 +162,7 @@ const SearchBody = () => {
                 age_range_end,
                 prompt_targets: `[${prompt_targets?.join(',')}]`, 
                 prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
-                per_page: 24
+                per_page: 25
             }, token).then(res => {
                 setTotalFound(res?.total)
                 setList(res?.data)
@@ -257,35 +258,48 @@ const SearchBody = () => {
                 <Col span={24}>
                     {
                         load ? (
-                            <SkGirlCardList count={8}/>
+                            <SkGirlCardList count={25}/>
                         ) : (
-                            <Row gutter={[12,12]}>
+                            <div className={styles.body}>
                                 {
                                     list?.map((item, index) => (
-                                        <Col 
-                                            span={12}
-                                            md={8}
-                                            lg={6}
-                                            // xl={4}
+                                        <div
+                                            className={styles.item}
                                             key={index}>
                                             <GirlCard
                                                 {...item}
                                                 />
-                                        </Col>
+                                        </div>
                                     ))
                                 }
-                            </Row>
+                            </div>
+                            // <Row gutter={[12,12]}>
+                            //     {
+                            //         list?.map((item, index) => (
+                            //             <Col 
+                            //                 span={12}
+                            //                 md={8}
+                            //                 lg={6}
+                            //                 // xl={4}
+                            //                 key={index}>
+                            //                 <GirlCard
+                            //                     {...item}
+                            //                     />
+                            //             </Col>
+                            //         ))
+                            //     }
+                            // </Row>
                         )
                     }
                     
                 </Col>
                 {
-                    list?.length > 0 && Math.ceil(totalFound / 24) >= 2 ? (
+                    list?.length > 0 && Math.ceil(totalFound / 25) >= 2 ? (
                         <Col span={24}>
                             <Pagination
                                 showQuickJumper={false}
                                 current={currentPage}
-                                total={Math.ceil(totalFound / 24)}
+                                total={Math.ceil(totalFound / 25)}
                                 defaultPageSize={1}
                                 showTitle={false}
                                 onChange={e => setCurrentPage(e)}

@@ -13,5 +13,6 @@ export type selectDefType = {
     multiple?: boolean,
     onChange?: (...args: any[]) => any,
     onClear?: (...args: any[]) => any,
-    disabled?: boolean
+    disabled?: boolean,
+    clearIcon?: boolean
 }

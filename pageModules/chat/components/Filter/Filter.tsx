@@ -108,7 +108,7 @@ const Filter:FC<IChatFilterType> = ({
                         activeColor='#fff'
                         tabItemStyle={{
                             padding: '8px 50px',
-                            border: '1px solid #ACA7F6'
+                            border: '2px solid #ACA7F6'
                         }}
                         />
                 </div>

@@ -14,7 +14,8 @@ const SelectDef:FC<selectDefType> = ({
     onChange,
     onClear,
     multiple,
-    disabled
+    disabled,
+    clearIcon
 }) => {
 
     const ref = useRef<any>()
@@ -31,6 +32,7 @@ const SelectDef:FC<selectDefType> = ({
             {
                 multiple ? (
                     <Select
+                        clearIcon={clearIcon}
                         mode='multiple'
                         ref={ref}
                         allowClear
@@ -45,6 +47,7 @@ const SelectDef:FC<selectDefType> = ({
                         />
                 ) : (
                     <Select
+                        clearIcon={clearIcon}
                         ref={ref}
                         allowClear
                         style={{width: '100%'}}

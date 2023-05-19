@@ -9,10 +9,17 @@ import LoginModal from '../LoginModal/LoginModal';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { Cookies } from 'typescript-cookie';
-import { updateToken, updateUserId, updateSocket, updateMenu } from '@/store/actions';
-import Router from 'next/router';
+import { updateToken, updateUserId, updateSocket, updateMenu, updateLocale } from '@/store/actions';
+import Router, { useRouter } from 'next/router';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import { useWindowSize } from 'usehooks-ts';
+import SelectDef from '../SelectDef/SelectDef';
+import en from '@/locales/en';
+import ru from '@/locales/ru';
+const locales = [
+    {value: '1', label: 'RU'},
+    {value: '2', label: 'EN'}
+]
 
 
 const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
@@ -20,6 +27,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
     const {token, socketChannel, isMenuOpen, locale} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
     const {width} = useWindowSize()
+    const router = useRouter()
     const [logoutModal, setLogoutModal] = useState(false)
 
 
@@ -83,6 +91,24 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                     {
                         !token ? (
                             <div className={styles.main}>
+                                <div className={styles.locale}>
+                                    <SelectDef
+                                        clearIcon={false}
+                                        onChange={(e) => {
+                                            if(e === '1') {
+                                                // dispatch(updateLocale(ru))
+                                                router.push(router.pathname, router.pathname, {locale: 'ru'})
+                                            } 
+                                            if(e === '2') {
+                                                // dispatch(updateLocale(en))
+                                                router.push(router.pathname, router.pathname, {locale: 'en'})
+                                            }
+                                        }}
+                                        list={locales}
+                                        placeholder='Выбор языка'
+                                        value={router?.locale === 'ru' ? '1' : '2'}
+                                        />
+                                </div>
                                 {
                                     !token ? (
                                         <div className={styles.auth}>
@@ -103,6 +129,24 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                 null
                             ) : (
                                 <div className={styles.main}>
+                                    <div className={styles.locale}>
+                                        <SelectDef
+                                            clearIcon={false}
+                                            onChange={(e) => {
+                                                if(e === '1') {
+                                                    // dispatch(updateLocale(ru))
+                                                    router.push(router.pathname, router.pathname, {locale: 'ru'})
+                                                } 
+                                                if(e === '2') {
+                                                    // dispatch(updateLocale(en))
+                                                    router.push(router.pathname, router.pathname, {locale: 'en'})
+                                                }
+                                            }}
+                                            list={locales}
+                                            placeholder='Выбор языка'
+                                            value={router?.locale === 'ru' ? '1' : '2'}
+                                            />
+                                    </div>
                                     {
                                         !token ? (
                                             <div className={styles.auth}>

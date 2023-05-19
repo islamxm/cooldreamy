@@ -12,22 +12,20 @@ const SkGirlCardList = ({count}: {count: number}) => {
 
     return (
         <div className={styles.wrapper}>
-            <Row gutter={[12,12]}>
+            <div className={styles.body}>
                 {
                     array?.map((i, index) => (
-                        <Col 
-                        key={index}
-                            span={12}
-                            md={8} 
-                            lg={6}
+                        <div
+                            key={index}
+                            className={styles.card}
                             >
                             <div className={styles.item}>
 
                             </div>
-                        </Col>
+                        </div>
                     ))
                 }
-            </Row>
+            </div>
         </div>
     )
 }
