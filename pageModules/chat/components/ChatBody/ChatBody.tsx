@@ -25,6 +25,8 @@ import Avatar from '@/components/Avatar/Avatar';
 import DialogEmpty from '../DialogEmpty/DialogEmpty';
 import Skeleton from '../Skeleton/Skeleton';
 
+import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
+
 const service = new ApiService()
 
 
@@ -264,12 +266,12 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         }
                         {
                             ChatType === 'mail' ? (
-                                <div className={styles.body} style={{
+                                <div className={styles.mail} style={{
                                     height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`
                                 }}>
                                     {
                                         loadMain ? (
-                                            <Loader/>
+                                            <SkeletonMail/>
                                         ) : (
                                             chatList && chatList?.length > 0 ? (
                                                 <Mail
@@ -277,6 +279,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                     chatList={chatList}
                                                     id={activeDialogId}
                                                     updateChatListPage={updateChatListPage}
+                                                    totalChatItemCount={totalChatItemCount}
                                                     />
                                             ) : (
                                                 activeDialogId && !mockType ? (

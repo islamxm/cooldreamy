@@ -15,6 +15,7 @@ import Textarea from '@/components/Textarea/Textarea';
 import Button from '@/components/Button/Button';
 import Router from 'next/router';
 import placeholder from '@/public/assets/images/avatar-placeholder.png'
+import Avatar from '@/components/Avatar/Avatar';
 
 const service = new ApiService()
 
@@ -35,7 +36,8 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         country,
         state,
         about_self,
-        id
+        id,
+        avatar_url_thumbnail
     } = data || {}
 
     const onClose = () => {
@@ -139,12 +141,19 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                         <div className={styles.body}>
                             <Row gutter={[15,15]}>
                                 <Col span={24}>
-                                    <UserTitle
-                                        isOnline
-                                        username={name}
-                                        age={age ? age.toString() : ''}
-                                        style={{fontSize: 20}}
-                                        />
+                                    <div className={styles.user}>
+                                        <Avatar
+                                            image={avatar_url_thumbnail}
+                                            style={{marginRight: 15}}
+                                            />
+                                        <UserTitle
+                                            isOnline
+                                            username={name}
+                                            age={age ? age.toString() : ''}
+                                            style={{fontSize: 20}}
+                                            />
+                                    </div>
+                                    
                                 </Col>
                                 <Col span={24}>
                                     <UserLocation

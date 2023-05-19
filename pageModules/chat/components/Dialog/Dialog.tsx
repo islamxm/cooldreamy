@@ -29,7 +29,6 @@ const Item = ({data, index, style}: {data: any, index: number, style: any}) => (
     </div>
 )
 
-const cache: any = {}
 
 
 const Dialog:FC<I> = ({
@@ -44,9 +43,6 @@ const Dialog:FC<I> = ({
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
 
-    // useEffect(() => {
-    //     console.log(chatList)
-    // }, [chatList])
     
 
     
@@ -98,7 +94,8 @@ const Dialog:FC<I> = ({
                 chatList && chatList?.length > 0 ? (
                     loadMore ? (
                         <div ref={ref} className={styles.load}>
-                            <PulseLoader color='var(--violet)'/>
+                            {/* <PulseLoader color='var(--violet)'/> */}
+                            <Skeleton/>
                         </div>
                     ) : null
                 ) : null

@@ -10,13 +10,13 @@ import {BsCamera, BsCheck} from 'react-icons/bs';
 import Link from 'next/link';
 import logo from '@/public/assets/images/logo.svg'
 import ApiService from '@/service/apiService';
-import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import placeholder from '@/public/assets/images/avatar-placeholder.png';
 import notify from '@/helpers/notify';
 import { IUser } from '@/models/IUser';
-
+import { updateCurrentProfileId } from '@/store/actions';
 
 
 const service = new ApiService();
@@ -34,6 +34,7 @@ const GirlCard:FC<IUser> = ({
     winkable
 }) => {
     const {token, locale} = useAppSelector(s => s)
+    const dispatch = useAppDispatch()
 
 
 
@@ -96,7 +97,7 @@ const GirlCard:FC<IUser> = ({
                 </div>
                 
                 
-                <Link href={`/users/${id}`} className={styles.img}>
+                <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
                         src={avatar_url_thumbnail ? avatar_url_thumbnail : placeholder} 
@@ -104,7 +105,7 @@ const GirlCard:FC<IUser> = ({
                         height={300}
                         alt=""/>
                    
-                </Link>
+                </div>
             </div>
             <div className={styles.body}>
                 <div className={styles.action}>
