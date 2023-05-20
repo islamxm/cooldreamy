@@ -18,17 +18,7 @@ const service = new ApiService()
 const Profile = () => {
     const {token, userData, locale} = useAppSelector(s => s)
     const {width} = useWindowSize()
-    //userCard data
-    // const [data, setData] = useState<IUser | null>()
 
-
-    const [imageEditModal, setImageEditModal] = useState(false)
-
-    const closeImageEditModal = () => setImageEditModal(false)
-    const openImageEditModal = () => setImageEditModal(true)
-
-
-    
 
 
     return (

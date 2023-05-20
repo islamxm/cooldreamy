@@ -16,7 +16,8 @@ const MyCard:FC<IUser> = ({
     country,
     credits,
     avatar_url_thumbnail,
-    age
+    age,
+    online
 }) => {
     const {userData, locale} = useAppSelector(s => s)
 
@@ -32,9 +33,10 @@ const MyCard:FC<IUser> = ({
                 </div>
                 <div className={styles.body}>
                     <UserTitle
-                        username={name}
+                        username={name ? name : ''}
                         age={age ? age.toString() : ''}
                         style={{fontSize: 18}}
+                        isOnline={online === 1}
                         />
                     <UserLocation
                         state={state}

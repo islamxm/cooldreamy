@@ -1,7 +1,7 @@
-import styles from './Skeleton.module.scss';
+import styles from './SkeletonChat.module.scss';
 
 
-const Skeleton = () => {
+const SkeletonChat = () => {
 
     return (
         <div className={styles.wrapper}>
@@ -19,4 +19,4 @@ const Skeleton = () => {
     )
 }
 
-export default Skeleton;
+export default SkeletonChat;

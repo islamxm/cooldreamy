@@ -23,9 +23,10 @@ import IconButton from '@/components/IconButton/IconButton';
 import {BiArrowBack} from 'react-icons/bi';
 import Avatar from '@/components/Avatar/Avatar';
 import DialogEmpty from '../DialogEmpty/DialogEmpty';
-import Skeleton from '../Skeleton/Skeleton';
 
+import SkeletonChat from '../SkeletonChat/SkeletonChat';
 import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
+import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
 
 const service = new ApiService()
 
@@ -184,7 +185,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         <div className={styles.sidebar}>
                             {
                                 loadSide ? (
-                                    <Loader/>
+                                    <SkeletonChatList/>
                                 ) : (
                                     <ChatSide
                                         updateDialogsPage={updateDialogsPage}
@@ -201,7 +202,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     <div className={styles.sidebar}>
                         {
                             loadSide ? (
-                                <Loader/>
+                                <SkeletonChatList/>
                             ) : (
                                 <ChatSide
                                     updateDialogsList={updateDialogsList}
@@ -239,7 +240,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 }}>
                                     {
                                         loadMain ? (
-                                            <Skeleton/>
+                                            <SkeletonChat/>
                                         ) : (
                                             chatList && chatList?.length > 0 ? (
                                                 <Dialog

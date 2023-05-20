@@ -55,7 +55,7 @@ const UserImages:FC<IUser> = ({
 
     return (
         <FancyboxWrapper>
-
+            
             <div className={`${styles.wrapper} horizontal-scroll`}>
                 <ImageCropModal
                     uploadedFile={uploadedFile}

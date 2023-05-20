@@ -199,8 +199,12 @@ const ChatItem = ({
 
     if(type === 'mail') {
         return (
-            <Link href={`/chat/${id}?type=${type}`} className={`${styles.wrapper} ${active ? styles.active : ''}`}>
-                <div className={styles.avatar}>
+            <div className={`${styles.wrapper} ${active ? styles.active : ''}`}>
+                <div onClick={() => {
+                    if(another_user?.id) {
+                        dispatch(updateCurrentProfileId(another_user?.id))
+                    }
+                }} className={styles.avatar}>
                     <Avatar
                         size={63}
                         verified={is_confirmed_user == 1}
@@ -208,14 +212,14 @@ const ChatItem = ({
                         />
                 </div>
                 <div className={styles.body}>
-                    <div className={styles.main}>
+                    <Link href={`/chat/${id}?type=${type}`} className={styles.main}>
                         <Row gutter={[2,2]}>
                             <Col span={24}>
                                 <UserTitle 
                                     username={name}
                                     age='26'
                                     textBold
-                                    isOnline={false}/>
+                                    isOnline={online === 1}/>
                             </Col>
                             <Col span={24}>
                                 <div className={styles.dialog}>
@@ -231,7 +235,7 @@ const ChatItem = ({
                                 </div>
                             </Col>
                         </Row>
-                    </div>    
+                    </Link>    
                     <div className={styles.ex}>
                         {/* <div className={styles.item}>
                             {
@@ -255,7 +259,7 @@ const ChatItem = ({
                         </div> */}
                     </div>
                 </div> 
-            </Link>
+            </div>
         )
     }
     return null

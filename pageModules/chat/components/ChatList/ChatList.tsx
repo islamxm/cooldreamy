@@ -15,6 +15,7 @@ import { FiSearch } from 'react-icons/fi';
 import ChatPricing from '../ChatPricing/ChatPricing';
 import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import SkeletonChatList from './components/SkeletonChatList/SkeletonChatList';
 const ChatList:FC<IDialogs> = ({
     activeDialogId,
     dialogsList = [],
@@ -39,10 +40,7 @@ const ChatList:FC<IDialogs> = ({
         }
     }, [inView, loadMore, updateDialogsPage])
 
-    useEffect(() => {
-        console.log(dialogsList)
-    }, [dialogsList])
-
+  
     return (
         <div className={`${styles.wrapper} custom-scroll-vertical`}>
              <div style={{padding: '5px'}}>
@@ -73,7 +71,7 @@ const ChatList:FC<IDialogs> = ({
             {
                 dialogsList && dialogsList?.length > 0 ? (
                     loadMore ? (
-                        <div ref={ref} className={styles.loader}><PulseLoader color='var(--violet)'/></div>
+                        <div ref={ref} className={styles.loader}><SkeletonChatList/></div>
                     ) : null
                 ) : null
             }

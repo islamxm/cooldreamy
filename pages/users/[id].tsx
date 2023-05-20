@@ -44,7 +44,7 @@ const UserPage:FC = () => {
             setCreateChatLoad(true)
             service.createChat({user_id: Number(query?.id)}, token).then(res => {
                 if(res?.chat_id) {
-                    Router.push(`/chat/${res?.chat_id}`)
+                    Router.push(`/chat/${res?.chat_id}?type=chat`)
                 }
             }).finally(() => {
                 setCreateChatLoad(false)

@@ -5,22 +5,28 @@ import UserTitle from '@/components/UserTitle/UserTitle';
 import { IUser } from '@/models/IUser';
 import UserLocation from '@/components/UserLocation/UserLocation';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import SkeletonUserInfoAction from './components/SkeletonUserInfoAction/SkeletonUserInfoAction';
+
 const UserInfoAction:FC<IUser> = ({
+    online,
     name,
     age,
     state,
     credits,
-    country
-}) => {
+    country}) => {
     const {locale} = useAppSelector(s => s);
 
+    if(!name) {
+        return <SkeletonUserInfoAction/>
+    }
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.main}>
                 <div className={styles.name}>
                     <UserTitle
-                        username={name}
+                        isOnline={online === 1}
+                        username={name ? name : ''}
                         age={age ? age?.toString() : ''}
                         style={{fontSize: 24}}
                         />

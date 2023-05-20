@@ -8,7 +8,7 @@ import { PulseLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { AnimatePresence } from 'framer-motion';
-import Skeleton from '../Skeleton/Skeleton';
+import SkeletonChat from '../SkeletonChat/SkeletonChat';
 
 // import {FixedSizeList} from 'react-window';
 // import AutoSizer from 'react-virtualized-auto-sizer';
@@ -87,7 +87,6 @@ const Dialog:FC<I> = ({
                 }
             </AnimatePresence>
             
-           
             
             
             {
@@ -95,7 +94,7 @@ const Dialog:FC<I> = ({
                     loadMore ? (
                         <div ref={ref} className={styles.load}>
                             {/* <PulseLoader color='var(--violet)'/> */}
-                            <Skeleton/>
+                            <SkeletonChat/>
                         </div>
                     ) : null
                 ) : null

@@ -45,7 +45,6 @@ const UserCard:FC<IUserCard> = ({
                             ) : null
                         } */}
                         <div className={`${styles.img} ${imgLoaded ? styles.active : ''}`}>
-
                             <Image 
                                 className={styles.img_el}
                                 loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
