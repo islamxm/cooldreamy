@@ -86,19 +86,8 @@ const Body:FC = () => {
 
 
     useEffect(() => {
-        // if(token && router?.locale) {
-        //     service.getAllPrompts(token, router.locale).then(res => {
-        //         setPrompt_targets(res?.prompt_targets)
-        //         setPrompt_careers(res?.prompt_careers)
-        //         setPrompt_finance_states(res?.prompt_finance_states)
-        //         setPrompt_sources(res?.prompt_sources)
-        //         setPrompt_interests(res?.prompt_interests)
-        //         setPrompt_want_kids(res?.prompt_want_kids)
-        //         setPrompt_relationships(res?.prompt_relationships)
-        //     })
-        // }
-        if('132|HIfnot3MCS5eFvVauuOrb1szbjVhLck4JYWtLuk4' && router?.locale) {
-            service.getAllPrompts('132|HIfnot3MCS5eFvVauuOrb1szbjVhLck4JYWtLuk4', router?.locale).then(res => {
+        if(token && router?.locale) {
+            service.getAllPrompts(token, router.locale).then(res => {
                 setPrompt_targets(res?.prompt_targets)
                 setPrompt_careers(res?.prompt_careers)
                 setPrompt_finance_states(res?.prompt_finance_states)
@@ -108,6 +97,7 @@ const Body:FC = () => {
                 setPrompt_relationships(res?.prompt_relationships)
             })
         }
+        
         
     }, [token, router])
 
