@@ -71,9 +71,8 @@ const UserInfoAction:FC<IUser> = ({
                         if(r?.error) {
                             notify('Вы уже подмигнули', 'ERROR')
                         } else {
-                            Router.push(`/chat/${res?.chat_id}`)
+                            Router.push(`/chat/${res?.chat_id}?type=chat`)
                         }
-                        
                         // условие
                         
                     })
