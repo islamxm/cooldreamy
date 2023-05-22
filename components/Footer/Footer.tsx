@@ -16,13 +16,13 @@ const Footer:FC = () => {
     const {locale} = useAppSelector(s => s)
 
     const footerList: FooterPartPropsTypes[] = [
-        {
-            head: locale?.global?.footer?.menu?.part_1?.title,
-            list: [
-                {label: locale?.global?.footer?.menu?.part_1?.list?.item_1, link: '/'},
-                {label: locale?.global?.footer?.menu?.part_1?.list?.item_2, link: '/'},
-            ]
-        },
+        // {
+        //     head: locale?.global?.footer?.menu?.part_1?.title,
+        //     list: [
+        //         {label: locale?.global?.footer?.menu?.part_1?.list?.item_1, link: '/'},
+        //         {label: locale?.global?.footer?.menu?.part_1?.list?.item_2, link: '/'},
+        //     ]
+        // },
         {
             head: locale?.global?.footer?.menu?.part_2?.title,
             list: [
