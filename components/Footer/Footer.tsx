@@ -26,16 +26,16 @@ const Footer:FC = () => {
         {
             head: locale?.global?.footer?.menu?.part_2?.title,
             list: [
-                {label: locale?.global?.footer?.menu?.part_2?.list?.item_1, link: '/'},
-                {label: locale?.global?.footer?.menu?.part_2?.list?.item_2, link: '/'},
+                {label: locale?.global?.footer?.menu?.part_2?.list?.item_1, link: '/articles/payment'},
+                {label: locale?.global?.footer?.menu?.part_2?.list?.item_2, link: '/articles/safety'},
             ]
         },
         {
             head: locale?.global?.footer?.menu?.part_3?.title,
             list: [
-                {label: locale?.global?.footer?.menu?.part_3?.list?.item_1, link: '/'},
-                {label: locale?.global?.footer?.menu?.part_3?.list?.item_2, link: '/'},
-                {label: locale?.global?.footer?.menu?.part_3?.list?.item_3, link: '/'},
+                {label: locale?.global?.footer?.menu?.part_3?.list?.item_1, link: '/articles/privacy'},
+                {label: locale?.global?.footer?.menu?.part_3?.list?.item_2, link: '/articles/licencee'},
+                {label: locale?.global?.footer?.menu?.part_3?.list?.item_3, link: '/articles/rules'},
             ]
         }
     ]
