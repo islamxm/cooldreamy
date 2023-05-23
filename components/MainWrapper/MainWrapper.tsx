@@ -29,9 +29,7 @@ const MainWrapper = ({
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
-	useEffect(() => {
-		console.log(token)
-	}, [token])
+
 
 	useEffect(() => {
 		if(locale === 'ru') {
@@ -41,6 +39,17 @@ const MainWrapper = ({
 			dispatch(updateLocale(en))
 		}
 	}, [locale])
+
+
+	useEffect(() => {
+		if(window?.navigator?.language) {
+			if(window?.navigator?.language === 'ru') {
+				dispatch(updateLocale(ru))
+			} else {
+				dispatch(updateLocale(en))
+			}
+		}
+	}, [])
 
 	
 	useEffect(() => {
