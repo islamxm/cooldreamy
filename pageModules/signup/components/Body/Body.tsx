@@ -63,6 +63,12 @@ const Body:FC = () => {
     })
 
 
+    useEffect(() => {
+        if(router?.query?.gender && typeof router?.query?.gender === 'string' && (router?.query?.gender === 'male' || router?.query?.gender === 'female')) {
+            setSex(router?.query?.gender)
+        }
+    }, [router])
+
     
     const [prompt_targets, setPrompt_targets] = useState([])
     const [prompt_interests, setPrompt_interests] = useState([])

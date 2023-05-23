@@ -10,6 +10,7 @@ import phone1 from '@/public/assets/images/phone-1.svg';
 import phone2 from '@/public/assets/images/phone-2.svg';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import Router from 'next/router';
 
 
 const Hero: FC = ({}) => {
@@ -23,9 +24,7 @@ const Hero: FC = ({}) => {
         setSex(value)
     }
 
-    useEffect(() => {
-        console.log(locale)
-    }, [locale])
+    
 
 
     return (
@@ -49,7 +48,15 @@ const Hero: FC = ({}) => {
                             <motion.div variants={item}>
                                 <SelectSex
                                     value={sex}
-                                    onSelect={sexChange}
+                                    onSelect={(e) => {
+                                        sexChange(e)
+                                        if(e === 'male') {
+                                            Router.push('/signup?gender=male')
+                                        }
+                                        if(e === 'female') {
+                                            Router.push('/signup?gender=female')
+                                        }
+                                    }}
                                     />
                             </motion.div>
                         </div>
