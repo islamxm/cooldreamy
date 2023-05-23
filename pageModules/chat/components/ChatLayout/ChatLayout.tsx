@@ -39,6 +39,7 @@ const ChatLayout = () => {
 
     // !! фильтры
     const [chatType, setChatType] = useState<'chat' | 'mail'>()
+    const [filter, setFilter] = useState('all')
 
 
     // !! данные
@@ -80,10 +81,12 @@ const ChatLayout = () => {
             if(dialogsPage === 1) {
                 setLoadSide(true)
             }
+            
             service.getChatList({
+                filter: filter != 'all' ? filter : '',
                 page: dialogsPage,
             }, token).then(res => {
-
+                console.log(res?.data)
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -199,7 +202,7 @@ const ChatLayout = () => {
         if(chatType === 'mail') {
             getMailDialogs && getMailDialogs()
         }
-    }, [dialogsPage, token, chatType])
+    }, [dialogsPage, token, chatType, filter])
 
 
     // ?? обновление списка сообщений в чате
@@ -327,6 +330,8 @@ const ChatLayout = () => {
                             <Col span={24}>
                                 <div className={styles.top}>
                                     <Filter
+                                        activeFilter={filter}
+                                        onFilterChange={setFilter}
                                         activeType={chatType}
                                         onTypeChange={setChatType}
                                         />
@@ -337,6 +342,8 @@ const ChatLayout = () => {
                         <Col span={24}>
                             <div className={styles.top}>
                                 <Filter
+                                    activeFilter={filter}
+                                    onFilterChange={setFilter}
                                     activeType={chatType}
                                     onTypeChange={setChatType}
                                     />

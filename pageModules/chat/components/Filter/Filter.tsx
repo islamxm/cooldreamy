@@ -35,7 +35,10 @@ const tabsList = [
 
 const Filter:FC<IChatFilterType> = ({
     activeType,
-    onTypeChange
+    onTypeChange,
+
+    activeFilter,
+    onFilterChange
 }) => {
     const {locale} = useAppSelector(s => s)
 
@@ -49,6 +52,26 @@ const Filter:FC<IChatFilterType> = ({
             id: '2',
             // badge: 3,
             label: locale?.chatPage.type_tabs.mail ?? ''
+        }
+    ]
+
+
+    const filterTabs = [
+        {
+            id: 'all',
+            label: 'Все переписки'
+        },
+        {
+            id: 'unread',
+            label: 'Непрочитанные'
+        },
+        {
+            id: 'favorite',
+            label: 'Избранные'
+        },
+        {
+            id: 'ignored',
+            label: 'Игнорируемые'
         }
     ]
 
@@ -77,10 +100,10 @@ const Filter:FC<IChatFilterType> = ({
         <div className={styles.wrapper}>
             <div className={styles.body}>
                 <div className={styles.part}>
-                    {/* <Tabs
-                        onChange={() => {}}
-                        activeItem={'1'}
-                        list={tabsList}
+                    <Tabs
+                        onChange={onFilterChange}
+                        activeItem={activeFilter}
+                        list={filterTabs}
                         style={{backgroundColor: 'var(--light_purp_1)'}}
                         defaultColor="var(--light_purp_1)"
                         activeColor='#fff'
@@ -88,7 +111,7 @@ const Filter:FC<IChatFilterType> = ({
                             paddingTop: 10,
                             paddingBottom: 10
                         }}
-                        /> */}
+                        />
                 </div>
                 <div className={styles.part}>
                     <Tabs

@@ -141,7 +141,10 @@ export type chatTabsType = 'chat' | 'mail'
 
 export interface IChatFilterType {
     activeType?: chatTabsType,
-    onTypeChange: (type: chatTabsType) => any
+    onTypeChange: (type: chatTabsType) => any,
+
+    activeFilter?: string,
+    onFilterChange: (value: string) => any
 }
 
 

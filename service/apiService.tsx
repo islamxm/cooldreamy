@@ -224,13 +224,14 @@ class ApiService {
         }
     }
 
-    getChatList = async ({page, per_page = 10}: 
+    getChatList = async ({page, per_page = 10, filter}: 
         {
             page?: number, 
-            per_page?: number
+            per_page?: number,
+            filter?: string
         }, token: IToken) => {
         try {
-            let res = await fetch(endpoints.getChatList + `?page=${page}&per_page=${per_page}`, {
+            let res = await fetch(endpoints.getChatList + `?page=${page}&per_page=${per_page}&filter=${filter}`, {
                 method: 'GET',
                 headers: {
                     ...headers,
