@@ -4,6 +4,7 @@ import {useState, FC} from 'react';
 import { IChatFilterType, chatTabsType } from '../../types';
 import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useWindowSize } from 'usehooks-ts';
 
 
 const tabsList = [
@@ -41,6 +42,7 @@ const Filter:FC<IChatFilterType> = ({
     onFilterChange
 }) => {
     const {locale} = useAppSelector(s => s)
+    const {width} = useWindowSize()
 
     const modeTabs = [
         {
@@ -115,6 +117,7 @@ const Filter:FC<IChatFilterType> = ({
                 </div>
                 <div className={styles.part}>
                     <Tabs
+                        
                         list={modeTabs}
                         onChange={(e) => {
                             if(e == '1') {
@@ -131,7 +134,8 @@ const Filter:FC<IChatFilterType> = ({
                         activeColor='#fff'
                         tabItemStyle={{
                             padding: '8px 50px',
-                            border: '2px solid #ACA7F6'
+                            border: '2px solid #ACA7F6',
+                            width: width <= 1000 ? 'calc((100% / 2) - 8px)' : 'auto'
                         }}
                         />
                 </div>
