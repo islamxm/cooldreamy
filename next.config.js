@@ -5,6 +5,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
+  output: 'export',
+  images: {
+    unoptimized: true
+  },
   i18n: {
     locales: ['en', 'ru'],
     defaultLocale: 'ru'
