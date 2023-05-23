@@ -11,7 +11,14 @@ const UserTitle = ({
 
     return (
         <div className={`${styles.wrapper} ${isOnline ? styles.online : ''}`} style={{fontWeight: textBold ? 500 : 400, ...style}}>
-            <div className={styles.badge}>{`${username} ${age ? ', ' + age : ''}`}</div>
+            <div className={styles.badge}>
+                <span className={styles.name}>{username}</span>
+                {
+                    age && (
+                        <span className={styles.age}>, {age}</span>
+                    )
+                }
+            </div>
         </div>
     )
 }

@@ -34,7 +34,6 @@ const MainWrapper = ({
 	}, [token])
 
 	useEffect(() => {
-		console.log(locale)
 		if(locale === 'ru') {
 			dispatch(updateLocale(ru))
 		}

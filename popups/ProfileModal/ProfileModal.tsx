@@ -16,7 +16,11 @@ import Button from '@/components/Button/Button';
 import Router from 'next/router';
 import placeholder from '@/public/assets/images/avatar-placeholder.png'
 import Avatar from '@/components/Avatar/Avatar';
-
+import { BsCamera } from 'react-icons/bs';
+import { FiHeart } from 'react-icons/fi';
+import { FaRegSmileWink } from 'react-icons/fa';
+import { AiOutlineStar } from 'react-icons/ai';
+import notify from '@/helpers/notify';
 const service = new ApiService()
 
 
@@ -60,6 +64,57 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     }, [currentProfileId, token])
 
 
+    const onLike = () => {
+        if(token) {
+            service.feedItemLike({id: Number(id)}, token).then(res => {
+                console.log(res)
+                if(res?.status === 200) {
+                    notify('Вы поставили лайк', 'SUCCESS')
+                } else {
+                    notify('Вы уже поставили лайк данному пользователю', 'ERROR')
+                }
+            })
+        }
+        
+    }
+
+    const onFavorite = () => {  
+        if(token) {
+            service.addUserToFav({user_id: Number(id)}, token).then(res => {
+                console.log(res)
+                if(res?.status === 200) {
+                    notify('Вы добавили в избранное', 'SUCCESS')
+                } else {
+                    notify('Вы уже добавили данного пользователя в избранные', 'ERROR')
+                }
+            })
+        }
+    }
+
+
+
+
+    const onWink = () => {
+        if(id && token) {
+            service.createChat({user_id: id}, token).then(res => {
+                console.log(res)
+                if(res?.chat_id) {
+                    service.sendWink({user_id: id}, token).then(r => {
+                        if(r?.error) {
+                            notify('Вы уже подмигнули', 'ERROR')
+                        } else {
+                            Router.push(`/chat/${res?.chat_id}?type=chat`)
+                        }
+                        // условие
+                        
+                    })
+                }
+            })
+        }
+    }
+
+
+
     return (
         <Modal
             {...props}
@@ -71,115 +126,144 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
             {
                 !load ? (    
                     <div className={styles.in}>
-                        <div className={styles.main}>
-                            {
-                                thumbsSwiper && (
-                                    <div className={styles.slider}>
-                                        <SwiperWrap
-                                            modules={[Thumbs]}
-                                            thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
-                                            className={styles.slider_body}
-                                            spaceBetween={10}
-                                            >
-                                            {
-                                                (profile_photo && profile_photo?.length > 0) ? profile_photo?.map(i => (
-                                                    <SwiperSlide className={styles.slider_item} key={i.id}>
-                                                        <Image
-                                                            width={300}
-                                                            height={300}
-                                                            src={i.image_url}
-                                                            alt=''
-                                                            loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                            />
-                                                    </SwiperSlide>
-                                                )) : (
-                                                    <SwiperSlide className={styles.slider_item}>
-                                                        <Image
-                                                            width={300}
-                                                            height={300}
-                                                            src={placeholder}
-                                                            alt=''
-                                                            loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                            />
-                                                    </SwiperSlide>
-                                                )
-                                            }
-                                        </SwiperWrap>
-                                    </div>
-                                ) 
-                            }
-                            {
-                                profile_photo && profile_photo?.length > 1 ? (
-                                    <div className={styles.thumbs}>
-                                        <SwiperWrap
-                                            modules={[Thumbs]}
-                                            className={styles.thumbs_body}
-                                            slidesPerView={3}
-                                            watchSlidesProgress
-                                            onSwiper={setThumbsSwiper}
-                                            spaceBetween={10}
-                                            >
-                                            {
-                                                profile_photo?.map(i => (
-                                                    <SwiperSlide className={styles.thumbs_item} key={i.id}>
-                                                        <Image
-                                                            src={i.thumbnail_url}
-                                                            alt=''
-                                                            width={70}
-                                                            height={70}
-                                                            loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                            />
-                                                    </SwiperSlide>
-                                                ))
-                                            }
-                                        </SwiperWrap>
-                                    </div>
-                                ) : null
-                            }
-                            
-                        </div>
-                        <div className={styles.body}>
-                            <Row gutter={[15,15]}>
-                                <Col span={24}>
-                                    <div className={styles.user}>
-                                        <Avatar
-                                            image={avatar_url_thumbnail}
-                                            style={{marginRight: 15}}
-                                            />
-                                        <UserTitle
-                                            isOnline
-                                            username={name}
-                                            age={age ? age.toString() : ''}
-                                            style={{fontSize: 20}}
-                                            />
-                                    </div>
-                                    
-                                </Col>
-                                <Col span={24}>
-                                    <UserLocation
-                                        state={state}
-                                        country={country}
-                                        />
-                                </Col>
-                                {
-                                    about_self ? (
-                                        <Col span={24}>
-                                            <div className={styles.part}>
-                                                <div className={styles.label}>О себе</div>
-                                                <div className={styles.value}>{about_self}</div>
+                        {
+                            (profile_photo && profile_photo?.length > 0) && (
+                                <div className={styles.main}>
+                                    {
+                                        thumbsSwiper && (
+                                            <div className={styles.slider}>
+                                                <div className={styles.photo_count}><BsCamera/>{profile_photo?.length}</div>
+                                                <SwiperWrap
+                                                    modules={[Thumbs]}
+                                                    thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
+                                                    className={styles.slider_body}
+                                                    spaceBetween={10}
+                                                    >
+                                                    {
+                                                        (profile_photo && profile_photo?.length > 0) ? profile_photo?.map(i => (
+                                                            <SwiperSlide className={styles.slider_item} key={i.id}>
+                                                                <Image
+                                                                    width={300}
+                                                                    height={300}
+                                                                    src={i.image_url}
+                                                                    alt=''
+                                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                    />
+                                                            </SwiperSlide>
+                                                        )) : (
+                                                            <SwiperSlide className={styles.slider_item}>
+                                                                <Image
+                                                                    width={300}
+                                                                    height={300}
+                                                                    src={placeholder}
+                                                                    alt=''
+                                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                    />
+                                                            </SwiperSlide>
+                                                        )
+                                                    }
+                                                </SwiperWrap>
                                             </div>
-                                        </Col>
-                                    ) : null
-                                }
-                                <Col span={24}>
-                                    <div className={styles.action}>
-                                        <Button onClick={() => {
-                                            onClose()
-                                            Router.push(`/users/${id}`)
-                                        }} middle text='Открыть профиль'/>
+                                        ) 
+                                    }
+                                    {
+                                        profile_photo && profile_photo?.length > 1 ? (
+                                            <div className={styles.thumbs}>
+                                                <SwiperWrap
+                                                    modules={[Thumbs]}
+                                                    className={styles.thumbs_body}
+                                                    slidesPerView={3}
+                                                    watchSlidesProgress
+                                                    onSwiper={setThumbsSwiper}
+                                                    spaceBetween={10}
+                                                    >
+                                                    {
+                                                        profile_photo?.map(i => (
+                                                            <SwiperSlide className={styles.thumbs_item} key={i.id}>
+                                                                <Image
+                                                                    src={i.thumbnail_url}
+                                                                    alt=''
+                                                                    width={70}
+                                                                    height={70}
+                                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                    />
+                                                            </SwiperSlide>
+                                                        ))
+                                                    }
+                                                </SwiperWrap>
+                                            </div>
+                                        ) : null
+                                    }
+                                    
+                                </div>
+                            )
+                        }
+                        
+                        <div className={styles.body}>
+                            <div className={styles.body_action}>
+                                <button onClick={onLike} className={styles.item}>
+                                    <div className={styles.icon}>
+                                        <FiHeart/>
                                     </div>
-                                </Col>
-                            </Row>
+                                    <div className={styles.text}>НРАВИТСЯ</div>
+                                </button>
+                                <button onClick={onWink} className={styles.item}>
+                                    <div className={styles.icon}>
+                                        <FaRegSmileWink/>
+                                    </div>
+                                    <div className={styles.text}>ПОДМИГНУТЬ</div>
+                                </button>
+                                <button onClick={onFavorite} className={styles.item}>
+                                    <div className={styles.icon}>
+                                        <AiOutlineStar/>
+                                    </div>
+                                    <div className={styles.text}>ИЗБРАННОЕ</div>
+                                </button>
+                            </div>
+                            <div className={styles.body_main}>
+                                <Row gutter={[15,15]}>
+                                    
+                                    <Col span={24}>
+                                        <div className={styles.user}>
+                                            <Avatar
+                                                image={avatar_url_thumbnail}
+                                                style={{marginRight: 15}}
+                                                />
+                                            <UserTitle
+                                                isOnline
+                                                username={name}
+                                                age={age ? age.toString() : ''}
+                                                style={{fontSize: 20}}
+                                                />
+                                        </div>
+                                        
+                                    </Col>
+                                    <Col span={24}>
+                                        <UserLocation
+                                            state={state}
+                                            country={country}
+                                            />
+                                    </Col>
+                                    {
+                                        about_self ? (
+                                            <Col span={24}>
+                                                <div className={styles.part}>
+                                                    <div className={styles.label}>О себе</div>
+                                                    <div className={styles.value}>{about_self}</div>
+                                                </div>
+                                            </Col>
+                                        ) : null
+                                    }
+                                    <Col span={24}>
+                                        <div className={styles.action}>
+                                            <Button onClick={() => {
+                                                onClose()
+                                                Router.push(`/users/${id}`)
+                                            }} middle text='Открыть профиль'/>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </div>
                         </div>
                     </div>
                 ) : <Skeleton/> 

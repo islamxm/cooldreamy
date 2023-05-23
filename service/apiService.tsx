@@ -342,6 +342,12 @@ class ApiService {
         }
     }
 
+    // chatSearch = async (token: IToken) => {
+    //     try {
+    //         let res = await fetch(endpoints)
+    //     }
+    // }
+
     getChat = async ({id, page, per_page = 10}: 
         {
             id: number,

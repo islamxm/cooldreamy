@@ -13,7 +13,7 @@ import img6 from '@/public/assets/icons/interest-6.svg';
 import SelectCard from '@/components/SelectCard/SelectCard';
 import { IPromptSelect } from '../../types';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-
+import {useState, useEffect} from 'react';
 
 const Step3:FC<IPromptSelect> = ({
     list,
@@ -21,6 +21,16 @@ const Step3:FC<IPromptSelect> = ({
     setSelectedList
 }) => {
     const {locale} = useAppSelector(s => s)
+    const [error, setError] = useState(false)
+
+    useEffect(() => {
+        if(selectedList && selectedList?.length >= 5) {
+            setError(true)
+        } else {
+            setError(false)
+        }
+    }, [selectedList])
+
 
     return (
         <motion.div 
@@ -40,6 +50,7 @@ const Step3:FC<IPromptSelect> = ({
             <h3 className={styles.head}>
                 {locale?.signupPage.steps.step_3.title}
             </h3>
+            <div className={`${styles.count} ${error ? styles.error : ''}`}>Выбрано: {selectedList ? selectedList?.length : 0}/5</div>
             <div className={styles.list}>
                 {
                     list?.map((item,index) => (
@@ -55,8 +66,9 @@ const Step3:FC<IPromptSelect> = ({
                                             return [...r]
                                         })
                                     } else {
-                                        console.log(item.id)
-                                        setSelectedList((s: any[]) => [...s, Number(item.id)])
+                                        if(selectedList && selectedList?.length < 5) {
+                                            setSelectedList((s: any[]) => [...s, Number(item.id)])
+                                        }
                                     }
                                 }}
                                 isSelect={selectedList?.find(i => Number(i) === Number(item.id)) ? true : false}

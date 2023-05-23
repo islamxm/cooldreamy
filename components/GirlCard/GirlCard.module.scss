@@ -102,6 +102,9 @@
         .name {
             font-size: 15px;
             line-height: 23px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }   
 
         .loc {

@@ -34,6 +34,7 @@ const endpoints = {
     sendMessage_gift: `${API_PATH}chats/send_chat_gift_message`,
     sendMessage_image: `${API_PATH}chats/send_chat_image_message`,
 
+    // chatSearch: `${API_PATH}`
     getChat: `${API_PATH}chats/get_current_chat`,
     createChat: `${API_PATH}chats/get_chat_with_user`,
     getChatList: `${API_PATH}chats/get_my_chat_list`,

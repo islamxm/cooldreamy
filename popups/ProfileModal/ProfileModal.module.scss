@@ -17,7 +17,32 @@
             flex: 0 0 auto;
 
             .slider {
-                
+                position: relative;
+
+                .photo_count {
+                    padding-right: 5px;
+                    min-width: 45px;
+                    height: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #fff;
+                    margin-right: 4px;
+                    border-radius: 0 8px 8px 0;
+                    color: var(--violet);
+                    font-size: 15px;
+                    line-height: 15px;
+                    position: absolute;
+                    font-weight: 500;
+                    top: 10px;
+                    left: 0;
+                    z-index: 3;
+                    
+                    svg {
+                        margin-right: 5px;
+                    }
+            
+                }
 
                 .slider_item {
                     border-radius: 10px;
@@ -61,15 +86,67 @@
         .body {
             margin: 0 5px;
             width: 100%;
-            border-radius: 10px;
-            background-color: #fff;
-            padding: 15px;
             overflow: hidden;
+
+            .body_action {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 15px;
+
+                .item {
+                    margin: 0 3px;
+                    display: flex;
+                    align-items: center;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 19px;
+                    letter-spacing: 0.05em;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    color: var(--violet);
+                    transition: all .3s ease;
+        
+                    &:hover {
+                        color: var(--purp);
+                    }
+        
+                    &:active {
+                        transform: scale(0.95);
+                    }
+        
+                    &:last-child {
+                        margin-right: 0;
+                    }
+        
+                    .icon {
+                        flex: 0 0 auto;
+                        margin-right: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        line-height: 100%;
+                    }
+        
+                    .text {
+        
+                    }
+                }
+            }  
+            
+
+            .body_main {
+                background-color: #fff;
+                border-radius: 10px;
+                padding: 15px;
+                overflow: hidden;
+            }
 
             .user { 
                 display: flex;
                 align-items: center;
                 overflow: hidden;
+                
             }
 
             .part {

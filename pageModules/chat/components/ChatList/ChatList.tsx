@@ -16,6 +16,9 @@ import ChatPricing from '../ChatPricing/ChatPricing';
 import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import SkeletonChatList from './components/SkeletonChatList/SkeletonChatList';
+
+const service = new ApiService()
+
 const ChatList:FC<IDialogs> = ({
     activeDialogId,
     dialogsList = [],
@@ -27,6 +30,7 @@ const ChatList:FC<IDialogs> = ({
     const {locale} = useAppSelector(s => s)
     const {inView, ref} = useInView()
     const [loadMore, setLoadMore] = useState(false)
+    const [search, setSearch] = useState('')
     const {width} = useWindowSize()
     
     useEffect(() => {
@@ -40,6 +44,13 @@ const ChatList:FC<IDialogs> = ({
         }
     }, [inView, loadMore, updateDialogsPage])
 
+
+    // useEffect(() => {
+    //     if(search) {
+
+    //     }
+    // }, [search])
+
   
     return (
         <div className={`${styles.wrapper} custom-scroll-vertical`}>
@@ -52,7 +63,8 @@ const ChatList:FC<IDialogs> = ({
                     }}
                     placeholder={`...${locale?.chatPage.search}`}
                     afterIcon={<FiSearch color='#888888'/>}
-
+                    value={search}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
                     //beforeIcon={<FiSearch/>}
                     />
             </div>

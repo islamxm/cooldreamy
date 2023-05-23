@@ -5,6 +5,7 @@
     // display: inline-block;
     display: flex;
     align-items: flex-start;
+    overflow: hidden;
 
 
 
@@ -12,12 +13,24 @@
 
     .badge {
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        
+        display: flex;
+        align-items: center;
         color: var(--text);
         padding-right: 13px;
         position: relative;
+
+        .name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+
+        }
+        .age {
+            white-space: nowrap;
+            //overflow: hidden;
+            // text-overflow: ellipsis;
+        }
 
         &:after {
             position: absolute;

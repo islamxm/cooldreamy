@@ -4,8 +4,13 @@
 
     .ant-select-selector {
         background: #FFFFFF !important;
-        border: 2px solid #F0EBFF !important;
+        border: 2px solid #DCD0FF !important;
         border-radius: 12px !important;
+
+
+        .ant-select-selection-placeholder {
+            color: #888888;
+        }
 
         .ant-select-selection-overflow {
             .ant-select-selection-overflow-item {
