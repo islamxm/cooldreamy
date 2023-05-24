@@ -10,6 +10,7 @@ import { container, item } from '@/helpers/variantsOrderAnim';
 import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import parse from 'html-react-parser';
+import Router from 'next/router';
 
 
 
@@ -42,6 +43,7 @@ const Last:FC = () => {
                                 <Col span={24}>
                                     <motion.div className={styles.action} variants={item}>
                                         <Button
+                                            onClick={() => Router.push('/signup')}
                                             middle={width <= 768}
                                             text={locale?.startPage?.start_meet_btn}
                                             />
