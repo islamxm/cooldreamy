@@ -22,9 +22,21 @@ export default function Document() {
                 })(window,document,'script','dataLayer','GTM-59CJTBH')
                 `
               }}
-          >
-
-        </script>
+          />
+          
+        <script
+          type='text/javascript' 
+          async 
+          src="https://www.googletagmanager.com/gtag/js?id=G-PZMJLXVY1B"/> 
+          <script 
+            type='text/javascript' 
+            async 
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PZMJLXVY1B'); 
+              `
+            }}
+           />
 
       </Head>
       <body>
