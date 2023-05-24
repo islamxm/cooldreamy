@@ -8,7 +8,7 @@ const RulesPage = () => {
     return (
         <Container>
             <MainLayout>
-                <Sidebar/>
+                {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
                     <h1 className={styles.title}>Правила сайта</h1>
                     <div className={styles.body}>

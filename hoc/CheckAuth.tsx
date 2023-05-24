@@ -31,7 +31,7 @@ const PrivateRoute = ({
 
                 
 
-                if(router?.pathname !== '/' && router?.pathname !== '/signup') {
+                if(router?.pathname !== '/' && !router?.pathname?.includes('/articles') && router?.pathname !== '/signup') {
                     router.replace('/')
                 } else {
                     return;
@@ -54,7 +54,7 @@ const PrivateRoute = ({
     return auth ? (
         children
     ) : (
-        router?.pathname === '/' || router?.pathname === '/signup'  ? (
+        router?.pathname === '/' || router?.pathname?.includes('/articles') || router?.pathname === '/signup'  ? (
             children    
         ) : (
             null

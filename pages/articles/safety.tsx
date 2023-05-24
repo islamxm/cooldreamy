@@ -8,7 +8,7 @@ const SafetyPage = () => {
     return (
         <Container>
             <MainLayout>
-                <Sidebar/>
+                {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
                     <h1 className={styles.title}>Советы по безопасности</h1>
                     <div className={styles.body}>

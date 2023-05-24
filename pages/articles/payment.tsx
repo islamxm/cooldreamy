@@ -8,7 +8,7 @@ const PaymentPage = () => {
     return (
         <Container>
             <MainLayout>
-                <Sidebar/>
+                {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
                     <h1 className={styles.title}>Правила оплаты</h1>
                     <div className={styles.body}>

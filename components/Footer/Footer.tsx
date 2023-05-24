@@ -34,7 +34,7 @@ const Footer:FC = () => {
             head: locale?.global?.footer?.menu?.part_3?.title,
             list: [
                 {label: locale?.global?.footer?.menu?.part_3?.list?.item_1, link: '/articles/privacy'},
-                {label: locale?.global?.footer?.menu?.part_3?.list?.item_2, link: '/articles/licencee'},
+                {label: locale?.global?.footer?.menu?.part_3?.list?.item_2, link: '/articles/licence'},
                 {label: locale?.global?.footer?.menu?.part_3?.list?.item_3, link: '/articles/rules'},
             ]
         }
