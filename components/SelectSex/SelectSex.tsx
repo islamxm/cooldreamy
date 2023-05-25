@@ -10,7 +10,7 @@ import Ripple from '../Ripple/Ripple';
 import {motion} from 'framer-motion';
 
 const SelectSex: FC<SelectSexPropsTypes>  = ({
-    value = 'male',
+    value,
     onSelect,
     shadow = true
 }) => {

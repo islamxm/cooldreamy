@@ -14,7 +14,7 @@ import Router from 'next/router';
 
 
 const Hero: FC = ({}) => {
-    const [sex, setSex] = useState<'male' | 'female'>('male')
+    const [sex, setSex] = useState<'male' | 'female'>()
     const {scrollYProgress} = useScroll()
     const {locale} = useAppSelector(s => s)
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
