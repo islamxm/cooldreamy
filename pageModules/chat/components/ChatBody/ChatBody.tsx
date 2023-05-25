@@ -27,6 +27,7 @@ import DialogEmpty from '../DialogEmpty/DialogEmpty';
 import SkeletonChat from '../SkeletonChat/SkeletonChat';
 import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
 import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
+import { PulseLoader } from 'react-spinners';
 
 const service = new ApiService()
 
@@ -240,7 +241,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 }}>
                                     {
                                         loadMain ? (
-                                            <SkeletonChat/>
+                                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}><PulseLoader color='var(--violet)'/></div>
+                                            
                                         ) : (
                                             chatList && chatList?.length > 0 ? (
                                                 <Dialog

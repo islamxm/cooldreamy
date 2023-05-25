@@ -93,8 +93,8 @@ const Dialog:FC<I> = ({
                 chatList && chatList?.length > 0 ? (
                     loadMore ? (
                         <div ref={ref} className={styles.load}>
-                            {/* <PulseLoader color='var(--violet)'/> */}
-                            <SkeletonChat/>
+                            <PulseLoader color='var(--violet)'/>
+                            {/* <SkeletonChat/> */}
                         </div>
                     ) : null
                 ) : null
