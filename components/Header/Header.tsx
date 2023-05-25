@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {motion} from 'framer-motion';
 import LoginModal from '../LoginModal/LoginModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { Cookies } from 'typescript-cookie';
 import { updateToken, updateUserId, updateSocket, updateMenu, updateLocale } from '@/store/actions';
@@ -16,6 +16,9 @@ import { useWindowSize } from 'usehooks-ts';
 import SelectDef from '../SelectDef/SelectDef';
 import en from '@/locales/en';
 import ru from '@/locales/ru';
+import TagManager from 'react-gtm-module';
+
+
 const locales = [
     {value: '1', label: 'RU'},
     {value: '2', label: 'EN'}
@@ -30,7 +33,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
     const router = useRouter()
     const [logoutModal, setLogoutModal] = useState(false)
 
-
+    
     const onLogout = () => {
         socketChannel?.unsubscribe()
 
@@ -46,6 +49,14 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
         setLogoutModal(false)
     }
 
+    const testGtag = () => {
+        window.gtag('event', 'conversion', {
+            send_to: 'AW-992358861/FuW7CJr87aMYEM3jmNkD'
+        })
+        Router.push('/signup')
+    }
+
+    
 
     return (
         <motion.header 
@@ -151,7 +162,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                         !token ? (
                                             <div className={styles.auth}>
                                                 <span onClick={() => setLoginModal(true)} className={styles.item}>ВХОД</span>
-                                                <Link className={styles.item} href={'/signup'}>РЕГИСТРАЦИЯ</Link>
+                                                <div className={styles.item} onClick={testGtag}>РЕГИСТРАЦИЯ</div>
                                             </div>
                                         ) : (
                                             width > 768 ? (
