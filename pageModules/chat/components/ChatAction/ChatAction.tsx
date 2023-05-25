@@ -13,6 +13,7 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import moment from 'moment';
 import { sortingDialogList, sortingChatList } from '@/helpers/sorting';
 import { useWindowSize } from 'usehooks-ts';
+import notify from '@/helpers/notify';
 
 
 const service = new ApiService()
@@ -94,15 +95,18 @@ const ChatAction = ({
                         text
                     }, token).then(res => {
                         console.log(res)
-                        updateDialogsList && updateDialogsList((s: any) => {
-                            console.log(s)
-                            const m = s;
-                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-
-                            return sortingDialogList([...m])
+                        if(res?.error) {
+                            notify(res?.error, 'ERROR')
+                        } else {
+                            updateDialogsList && updateDialogsList((s: any) => {
                             
-                        })
-                        updateChat(res?.chat?.last_message)
+                                const m = s;
+                                const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+    
+                                return sortingDialogList([...m])
+                            })
+                            updateChat(res?.chat?.last_message)
+                        }
                     }).finally(() => {
                         setLoad(false)
                         setText('')
@@ -114,14 +118,17 @@ const ChatAction = ({
                         letter_id: Number(query?.id),
                         text
                     }, token).then(res => {
-                        console.log(res)
-                        updateDialogsList && updateDialogsList((s: any) => {
-                            console.log(s)
-                            const m = s;
-                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
-                            return sortingDialogList([...m])
-                        })
-                        updateChat(res?.letter?.last_message)
+                        if(res?.error) {
+                            notify(res?.error, 'ERROR')
+                        } else {
+                            updateDialogsList && updateDialogsList((s: any) => {
+                                console.log(s)
+                                const m = s;
+                                const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
+                                return sortingDialogList([...m])
+                            })
+                            updateChat(res?.letter?.last_message)
+                        }
                     }).finally(() => {
                         setLoad(false)
                         setText('')
@@ -140,21 +147,25 @@ const ChatAction = ({
                 const data = new FormData()
                 data.append('category_id', '3')
                 data.append('image', e.target.files[0])
-
                 setLoad(true)
                 service.addProfileImage(data,token).then(res => {
+                    console.log(res)
                     if(res?.thumbnail_url && res?.image_url) {
                         service.sendMessage_image({
                             chat_id: id,
                             thumbnail_url: res.thumbnail_url,
                             image_url: res.image_url
                         }, token).then(r => {
-                            updateDialogsList && updateDialogsList((s: any) => {
-                                const m = s;
-                                const rm = m.splice(m.findIndex((i: any) => i.id === r?.chat?.id), 1, r?.chat)
-                                return sortingDialogList([...m])
-                            })
-                            updateChat(r?.chat?.last_message)
+                            if(r?.error) {
+                                notify(res?.error, 'ERROR')
+                            } else {
+                                updateDialogsList && updateDialogsList((s: any) => {
+                                    const m = s;
+                                    const rm = m.splice(m.findIndex((i: any) => i.id === r?.chat?.id), 1, r?.chat)
+                                    return sortingDialogList([...m])
+                                })
+                                updateChat(r?.chat?.last_message)
+                            }
                         }).finally(() => {
                             setLoad(false)
                             setText('')
@@ -184,13 +195,17 @@ const ChatAction = ({
                             images: `[${filtered.join(',')}]`
                         }, token).then(r => {
                             // !! нужно включить после того как Даниил поправить модель
-                            updateDialogsList && updateDialogsList((s: any) => {
-                                const m = s;
-                                const rm = m.splice(m.findIndex((i: any) => i.id === r?.letter?.id), 1, r?.letter)
-                                return sortingDialogList([...m])
-                            })
-                            
-                            updateChat(r?.letter?.last_message)
+                            if(r?.error) {
+                                notify(r?.error, 'ERROR')
+                            } else {
+                                updateDialogsList && updateDialogsList((s: any) => {
+                                    const m = s;
+                                    const rm = m.splice(m.findIndex((i: any) => i.id === r?.letter?.id), 1, r?.letter)
+                                    return sortingDialogList([...m])
+                                })
+                                
+                                updateChat(r?.letter?.last_message)
+                            }
                         }).finally(() => {
                             setLoad(false)
                             setText('')
