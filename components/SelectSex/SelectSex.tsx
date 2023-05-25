@@ -8,12 +8,14 @@ import femaleIcon from '@/public/assets/icons/female-icon.svg';
 import { useEffect } from 'react';
 import Ripple from '../Ripple/Ripple';
 import {motion} from 'framer-motion';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const SelectSex: FC<SelectSexPropsTypes>  = ({
     value,
     onSelect,
     shadow = true
 }) => {
+    const {locale} = useAppSelector(s => s)
 
     return (
         <div className={styles.wrapper}>
@@ -32,7 +34,7 @@ const SelectSex: FC<SelectSexPropsTypes>  = ({
                             </div>
                         </Col>
                         <Col span={24}>
-                            <div className={styles.label}>Я - Мужчина</div>
+                            <div className={styles.label}>{locale?.global?.select_gender?.male}</div>
                         </Col>
                     </Row>
                 </Col>
@@ -54,7 +56,7 @@ const SelectSex: FC<SelectSexPropsTypes>  = ({
                             </div>
                         </Col>
                         <Col span={24}>
-                            <div className={styles.label}>Я - Девушка</div>
+                            <div className={styles.label}>{locale?.global?.select_gender?.female}</div>
                         </Col>
                     </Row>
                 </Col>

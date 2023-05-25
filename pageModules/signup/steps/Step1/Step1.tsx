@@ -73,9 +73,14 @@ const Step1:FC<IStep1> = ({
                             <Col span={24}>
                                 <Input
                                     value={name}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        if(e.target.value?.length <= 20) {
+                                            setName(e.target.value)
+                                        }
+                                    }}
                                     placeholder={locale?.signupPage.steps.step_1.name}
                                     error={errors.name?.length === 1 ? errors.name[0] : false}
+                                    type='text'
                                     />
                             </Col>
                             <Col span={24}>

@@ -18,11 +18,13 @@ import PrivateRoute from '@/hoc/CheckAuth';
 import { ToastContainer } from 'react-toastify';
 import { ConfigProvider } from 'antd';
 import ruRu from 'antd/locale/ru_RU';
+import enUs from 'antd/locale/en_US'
 import WcLoader from '@/components/WcLoader/WcLoader';
 import { useRouter } from 'next/router';
 import 'moment/locale/ru'
 import moment from 'moment';
 import { useWindowSize } from 'usehooks-ts';
+
 
 
 
@@ -34,15 +36,16 @@ if(process?.browser) {
 
 function App({ Component, pageProps }: AppProps) {
 	const router = useRouter()
+	const {locale} = router
 	const [wc, setWc] = useState(true)
 	const {width} = useWindowSize()
 	
 
 
 	useEffect(() => {
-		moment.locale('ru')
+		moment.locale(locale === 'ru' ? 'ru' : 'en')
 		setWc(false)
-	}, [])
+	}, [locale])
 
 	const routeChangeStart = (url: any) => {
 		if(url === '/start' || url === '/') {
@@ -71,7 +74,7 @@ function App({ Component, pageProps }: AppProps) {
 
 	return (
 		<Provider store={store}>
-			<ConfigProvider locale={ruRu}>
+			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 				<PrivateRoute>
 					<MainWrapper>
 							<AnimatePresence>

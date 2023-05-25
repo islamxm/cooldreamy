@@ -119,7 +119,6 @@ const SearchFilter:FC<searchFilterType> = ({
                                     range={true}
                                     value={[age_range_start,age_range_end]}    
                                     label={locale?.searchPage.filter.list.filter_age.label}
-                                    // unit={'год'}
                                     />
                             </div>
                             <div className={styles.item}>
@@ -143,7 +142,6 @@ const SearchFilter:FC<searchFilterType> = ({
                                             onChange={(e, v) => {
                                                 setState(v)
                                             }}
-                                            
                                             placeholder={locale?.searchPage.filter.list.filter_state.placeholder ?? ''}
                                             list={states}
                                             />

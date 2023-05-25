@@ -78,13 +78,13 @@ const SymPage = () => {
     const switchDescr = (activeTab: sympGroupTypes) => {
         switch(activeTab) {
             case 'views':
-                return 'Девушка просмотрела Вашу анету - считайте, она уже готова начать общение. Напишите ей!'
+                return locale?.sympathyPage.description.views
             case 'matches':
-                return 'Вы поставили друг другу лайк в “Знакомства”. Начните общение прямо сейчас'
+                return locale?.sympathyPage.description.matches
             case 'likes':
-                return 'В этой вкладке находятся пользователи, которым Вы ставите лайк'
+                return locale?.sympathyPage.description.you_like
             case 'inlikes':
-                return 'В этой вкладке находятся пользователи, которым Вы нравитесь'
+                return locale?.sympathyPage.description.likes_you
             default:
                 return ''
         }

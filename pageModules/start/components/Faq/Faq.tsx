@@ -22,9 +22,9 @@ const Faq:FC = () => {
     const {locale} = useAppSelector(s => s)
 
     const faqItems:FaqItemPropsTypes[] = [
-        {head: locale?.startPage?.start_faq_list?.start_faq_item_1?.title, text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 1, isOpen: false, onChange: () => {}},
-        {head: locale?.startPage?.start_faq_list?.start_faq_item_2?.title, text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 2, isOpen: false, onChange: () => {}},
-        {head: locale?.startPage?.start_faq_list?.start_faq_item_3?.title, text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, pariatur inventore. Cum iusto ut ipsum provident eveniet tempora in voluptate, quis eaque fugit, perspiciatis harum dolore illum pariatur, sapiente voluptatibus.', index: 3, isOpen: false, onChange: () => {}},
+        {head: locale?.startPage?.start_faq_list?.start_faq_item_1?.title, text: locale?.startPage?.start_faq_list?.start_faq_item_1?.text, index: 1, isOpen: false, onChange: () => {}},
+        {head: locale?.startPage?.start_faq_list?.start_faq_item_2?.title, text: locale?.startPage?.start_faq_list?.start_faq_item_2?.text, index: 2, isOpen: false, onChange: () => {}},
+        {head: locale?.startPage?.start_faq_list?.start_faq_item_3?.title, text: locale?.startPage?.start_faq_list?.start_faq_item_3?.text, index: 3, isOpen: false, onChange: () => {}},
     ]
 
 

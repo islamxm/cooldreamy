@@ -118,7 +118,23 @@ export interface ILocale {
                 title: string,
                 text: string,
                 btn: string
-            }
+            },
+            nd: string
+        },
+        select_gender: {
+            male: string,
+            female: string
+        },
+        start_gift: {
+            title: string,
+            btn: string,
+        },
+        back_btn: string,
+        user_action: {
+            like: string,
+            wink: string,
+            fav: string,
+            open_profile_btn: string
         }
     },
     popups: {
@@ -185,15 +201,15 @@ export interface ILocale {
         start_faq_list: {
             start_faq_item_1: {
                 title: string,
-                text: ''
+                text: string
             },
             start_faq_item_2: {
                 title: string,
-                text: ''
+                text: string
             },
             start_faq_item_3: {
                 title: string,
-                text: ''
+                text: string
             }
         }
     },
@@ -239,7 +255,10 @@ export interface ILocale {
             mail: string
         },
         filter_tabs: {
-
+            all: string,
+            notread: string,
+            favs: string,
+            ignored: string
         },
         search: string,
         premium: {

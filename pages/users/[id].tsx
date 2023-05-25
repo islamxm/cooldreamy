@@ -95,7 +95,7 @@ const UserPage:FC = () => {
                                         />
                                 </Col>
                                 <Col span={24}>
-                                    <Button onClick={() => Router.back()} text='Вернутся' middle fill/>
+                                    <Button onClick={() => Router.back()} text={locale?.global?.back_btn} middle fill/>
                                 </Col>
                             </Row>
                         )

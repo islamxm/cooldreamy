@@ -45,6 +45,7 @@ const Menu = () => {
         {
             label: locale?.global.menu.sympathy ?? '',
             link: '/sympathy?type=views',
+            root: '/sympathy',
             icon: <FiHeart/>,
             badge: 0,
             onClick: () => {},

@@ -118,8 +118,24 @@ const en: ILocale = {
         title: "No Chats",
         text: "Select a profile to communicate in the chat",
         btn: "Go to Profiles"
-      }
-    }
+      },
+      nd: 'Not specified'
+    },
+    select_gender: {
+      male: 'I am a Man',
+      female: 'I am a Woman'
+    },
+    start_gift: {
+      title: 'Start the conversation with a gift!',
+      btn: 'Give a gift'
+    },
+    back_btn: 'Back',
+    user_action: {
+      like: 'LIKE',
+      wink: 'WINK',
+      fav: 'FAVORITES',
+      open_profile_btn: 'Go to profile'
+  }
   },
   popups: {
     select_upload_image_type: {
@@ -178,16 +194,16 @@ const en: ILocale = {
     start_faq_title: "Frequently Asked Questions",
     start_faq_list: {
       start_faq_item_1: {
-        title: "How does partner search work?",
-        text: ""
+        title: "What sets our dating site apart from others?",
+        text: "We stand out with our huge community of real users who are seeking serious relationships. Our team actively works on profile verification and ensuring safety, so you can enjoy a comfortable and pleasant dating experience."
       },
       start_faq_item_2: {
-        title: "How to delete a profile?",
-        text: ""
+        title: "What is the success rate of our site's users?",
+        text: "Thanks to our dating site, over 560,000 users have already found their perfect match. We are proud of these success stories and strive to help you find your own happy story."
       },
       start_faq_item_3: {
-        title: "How to sort profiles correctly?",
-        text: ""
+        title: "How can you guarantee that the users are real?",
+        text: "We place great importance on profile verification and combating fake accounts. Our team carefully checks each profile to ensure the authenticity of users and create a trustworthy environment for dating."
       }
     }
   },
@@ -232,7 +248,12 @@ const en: ILocale = {
       chat: "Chat",
       mail: "Mail"
     },
-    filter_tabs: {},
+    filter_tabs: {
+      all: 'All',
+      notread: 'Unread',
+      favs: 'Favourites',
+      ignored: 'Ignored'
+    },
     search: "Search",
     premium: {
       label: "Exchange Contacts!",

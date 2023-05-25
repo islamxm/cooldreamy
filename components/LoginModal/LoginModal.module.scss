@@ -13,6 +13,7 @@
         .item {
             color: var(--violet);
             transition: all .3s ease;
+            cursor: pointer;
 
             &:hover {
                 color: var(--purp);

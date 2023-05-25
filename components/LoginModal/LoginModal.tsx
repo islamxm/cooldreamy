@@ -18,6 +18,7 @@ import { useWindowSize } from 'usehooks-ts';
 const service = new ApiService()
 
 const LoginModal:FC<ModalFuncProps> = (props) => {
+    const {locale} = useAppSelector(s => s)
     const {width} = useWindowSize() 
     const router = useRouter()
 
@@ -90,7 +91,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             width={400}
             onCancel={onClose}
             className={`${styles.wrapper} modal`}
-            title="Войти"
+            title={locale?.popups?.login?.title}
             footer={false}
             >
             <Row gutter={[20,20]}>
@@ -107,9 +108,9 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                     <Input
                         error={errors.password ? true : false}
                         value={password}
-                        type='password'
+                        type={'password'}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                        placeholder='Пароль'
+                        placeholder={locale?.popups?.login?.fields?.password}
                         />
                     {errors?.password && <div className={styles.error}>{errors?.password}</div>}
                     
@@ -119,8 +120,8 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                         <span onClick={() => {
                             onClose()
                             Router.push('/signup')
-                        }} className={styles.item}>Регистрация</span>
-                        <span className={styles.item}>Забыли пароль?</span>
+                        }} className={styles.item}>{locale?.popups?.login?.links.register}</span>
+                        <span className={styles.item}>{locale?.popups?.login?.links?.forgot_password}</span>
                     </div>
                 </Col>
                 <Col span={24}>
@@ -129,7 +130,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                         onClick={onSubmit}
                         load={load}
                         disabled={!(email && password)}
-                        text='Войти'
+                        text={locale?.popups?.login?.login_btn}
                         style={{width: '100%'}}
                         />
                 </Col>

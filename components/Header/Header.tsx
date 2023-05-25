@@ -161,13 +161,13 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                     {
                                         !token ? (
                                             <div className={styles.auth}>
-                                                <span onClick={() => setLoginModal(true)} className={styles.item}>ВХОД</span>
-                                                <div className={styles.item} onClick={testGtag}>РЕГИСТРАЦИЯ</div>
+                                                <span onClick={() => setLoginModal(true)} className={styles.item}>{locale?.global?.header?.join_btn}</span>
+                                                <div className={styles.item} onClick={testGtag}>{locale?.global?.header?.login_btn}</div>
                                             </div>
                                         ) : (
                                             width > 768 ? (
                                                 <div className={styles.auth}>
-                                                    <span onClick={() => setLogoutModal(true)} className={styles.item}>ВЫХОД</span>
+                                                    <span onClick={() => setLogoutModal(true)} className={styles.item}>{locale?.global?.header?.logout_btn}</span>
                                                 </div>
                                             ) : null
                                         )

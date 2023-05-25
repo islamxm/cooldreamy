@@ -61,19 +61,19 @@ const Filter:FC<IChatFilterType> = ({
     const filterTabs = [
         {
             id: 'all',
-            label: 'Все переписки'
+            label: locale?.chatPage?.filter_tabs?.all
         },
         {
             id: 'unread',
-            label: 'Непрочитанные'
+            label: locale?.chatPage?.filter_tabs?.notread
         },
         {
             id: 'favorite',
-            label: 'Избранные'
+            label: locale?.chatPage?.filter_tabs?.favs
         },
         {
             id: 'ignored',
-            label: 'Игнорируемые'
+            label: locale?.chatPage?.filter_tabs?.ignored
         }
     ]
 

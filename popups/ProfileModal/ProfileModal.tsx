@@ -26,7 +26,7 @@ const service = new ApiService()
 
 const ProfileModal:FC<ModalFuncProps> = (props) => {
     
-    const {currentProfileId, token} = useAppSelector(s => s)
+    const {currentProfileId, token, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const {onCancel} = props
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
@@ -205,19 +205,19 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                     <div className={styles.icon}>
                                         <FiHeart/>
                                     </div>
-                                    <div className={styles.text}>НРАВИТСЯ</div>
+                                    <div className={styles.text}>{locale?.global?.user_action?.like}</div>
                                 </button>
                                 <button onClick={onWink} className={styles.item}>
                                     <div className={styles.icon}>
                                         <FaRegSmileWink/>
                                     </div>
-                                    <div className={styles.text}>ПОДМИГНУТЬ</div>
+                                    <div className={styles.text}>{locale?.global?.user_action?.wink}</div>
                                 </button>
                                 <button onClick={onFavorite} className={styles.item}>
                                     <div className={styles.icon}>
                                         <AiOutlineStar/>
                                     </div>
-                                    <div className={styles.text}>ИЗБРАННОЕ</div>
+                                    <div className={styles.text}>{locale?.global?.user_action?.fav}</div>
                                 </button>
                             </div>
                             <div className={styles.body_main}>
@@ -258,7 +258,10 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                         <div className={styles.action}>
                                             <Button onClick={() => {
                                                 onClose()
-                                                Router.push(`/users/${id}`)
+                                                Router.push({
+                                                    pathname: `/users/[id]`,
+                                                    query: {id: id}
+                                                })
                                             }} middle text='Открыть профиль'/>
                                         </div>
                                     </Col>

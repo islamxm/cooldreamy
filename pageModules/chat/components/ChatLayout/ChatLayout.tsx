@@ -21,7 +21,7 @@ const service = new ApiService()
 const ChatLayout = () => {
     // !! глобальные инстанции
     const {width} = useWindowSize()
-    const {query, push} = useRouter()
+    const {query, push, locale} = useRouter()
     const {token, socketChannel, newMessage, newMail} = useAppSelector(s => s)
 
     
@@ -319,6 +319,13 @@ const ChatLayout = () => {
             
         }
     }, [socketChannel, currentChatId, chatType, newMessage, newMail])
+
+    useEffect(() => {
+        if(chatType) {
+            Router.push(`/chat?type=${chatType}`)
+        }
+        
+    }, [locale, chatType])
 
 
     return (
