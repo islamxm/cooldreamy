@@ -12,6 +12,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
 import Button from '@/components/Button/Button';
+import LoginModal from '@/components/LoginModal/LoginModal';
 
 
 const Hero: FC = ({}) => {
@@ -19,7 +20,7 @@ const Hero: FC = ({}) => {
     const {scrollYProgress} = useScroll()
     const {locale} = useAppSelector(s => s)
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
+    const [loginModal, setLoginModal] = useState(false)
 
     const sexChange = (value: 'male' | 'female') => {
         setSex(value)
@@ -30,6 +31,10 @@ const Hero: FC = ({}) => {
 
     return (
         <div className={styles.hero}>
+            <LoginModal
+                open={loginModal}
+                onCancel={() => setLoginModal(false)}
+                />
             <Container>
                 <motion.div
                     initial="hidden"
@@ -117,8 +122,8 @@ const Hero: FC = ({}) => {
                     </div>
                     <div className={styles.action}>
                         <Row gutter={[15,15]}>
-                            <Col span={24}><Button text={locale?.global?.header.join_btn} fill middle/></Col>
-                            <Col span={24}><Button text={locale?.global?.header?.login_btn} fill middle/></Col>
+                            <Col span={24}><Button onClick={() => Router.push('/signup')} text={locale?.global?.header.join_btn} fill middle/></Col>
+                            <Col span={24}><Button onClick={() => setLoginModal(true)} text={locale?.global?.header?.login_btn} fill middle/></Col>
                         </Row>
                     </div>
                 </motion.div>
