@@ -121,7 +121,6 @@ const ChatItem = ({
     }
 
  
-    
 
     if(type === 'chat') {
         return (

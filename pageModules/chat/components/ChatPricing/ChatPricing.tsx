@@ -14,6 +14,7 @@ const ChatPricing = () => {
         if(token) {
             service.getActionPricing(token).then(res => {
                 setList(res)
+                console.log(res)
             })
         }
     }, [token])

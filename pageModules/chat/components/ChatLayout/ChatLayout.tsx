@@ -239,6 +239,14 @@ const ChatLayout = () => {
 
 
 
+    // сброс пагинации диалогов при смене фильтра
+    useEffect(() => {
+        setDialogsList([])
+        setDialogsPage(1)
+    }, [filter])
+
+
+
     // !! подписка на события по сокету
     useEffect(() => {
         if(socketChannel) {
