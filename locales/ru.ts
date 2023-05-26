@@ -137,7 +137,9 @@ const ru: ILocale = {
             wink: 'ПОДМИГНУТЬ',
             fav: 'ИЗБРАННОЕ',
             open_profile_btn: 'Открыть профиль'
-        }
+        },
+        yes: 'Да',
+        no: 'Нет'
     },
     popups: {
         select_upload_image_type: {
@@ -163,6 +165,9 @@ const ru: ILocale = {
                 forgot_password: 'Забыли пароль?'
             },
             login_btn: 'Войти'
+        },
+        logout: {
+            title: 'Вы уверены что хотите выйти?'
         }
     },
     startPage: {

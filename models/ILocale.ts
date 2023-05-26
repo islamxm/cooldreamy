@@ -135,7 +135,9 @@ export interface ILocale {
             wink: string,
             fav: string,
             open_profile_btn: string
-        }
+        },
+        yes: string,
+        no: string
     },
     popups: {
         select_upload_image_type: {
@@ -161,7 +163,11 @@ export interface ILocale {
                 forgot_password: string
             },
             login_btn: string
-        }
+        },
+        logout: {
+            title: string,
+        },
+
     },
     startPage: {
         start_hero_title: string,

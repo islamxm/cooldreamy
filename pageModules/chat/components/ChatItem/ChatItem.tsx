@@ -43,7 +43,7 @@ const ChatItem = ({
     updateDialogsList
 }:I) => {
     const dispatch = useAppDispatch()
-    const {query: {type}} = useRouter()
+    const {query: {type}, asPath} = useRouter()
     const {token} = useAppSelector(s => s)
     const {avatar_url, avatar_url_thumbnail, name, online} = another_user || {};
     
@@ -119,6 +119,8 @@ const ChatItem = ({
             })
         }
     }
+
+ 
     
 
     if(type === 'chat') {
@@ -143,7 +145,9 @@ const ChatItem = ({
                         />
                 </div>
                 <div className={styles.body}>
-                    <Link href={`/chat/${id}?type=${type}`} className={styles.main}>
+                    <Link
+                        href={`/chat/${id}?type=${type}`} 
+                        className={styles.main}>
                         <Row gutter={[2,2]}>
                             <Col span={24}>
                                 <UserTitle 
@@ -212,7 +216,9 @@ const ChatItem = ({
                         />
                 </div>
                 <div className={styles.body}>
-                    <Link href={`/chat/${id}?type=${type}`} className={styles.main}>
+                    <Link 
+                        href={`/chat/${id}?type=${type}`}
+                        className={styles.main}>
                         <Row gutter={[2,2]}>
                             <Col span={24}>
                                 <UserTitle 

@@ -71,7 +71,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                 />
 
             <PromptModal
-                text='Вы уверены что хотите выйти?'
+                text={locale?.popups.logout.title}
                 open={logoutModal}
                 onCancel={() => setLogoutModal(false)}
                 onAccept={onLogout}
@@ -107,12 +107,10 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                         clearIcon={false}
                                         onChange={(e) => {
                                             if(e === '1') {
-                                                // dispatch(updateLocale(ru))
-                                                router.push(router.pathname, router.pathname, {locale: 'ru'})
+                                                router.push(router.asPath, undefined, {locale: 'ru'})
                                             } 
                                             if(e === '2') {
-                                                // dispatch(updateLocale(en))
-                                                router.push(router.pathname, router.pathname, {locale: 'en'})
+                                                router.push(router.asPath, undefined, {locale: 'en'})
                                             }
                                         }}
                                         list={locales}
@@ -146,11 +144,11 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                             onChange={(e) => {
                                                 if(e === '1') {
                                                     // dispatch(updateLocale(ru))
-                                                    router.push(router.pathname, router.pathname, {locale: 'ru'})
+                                                    router.push(router.asPath, undefined, {locale: 'ru'})
                                                 } 
                                                 if(e === '2') {
                                                     // dispatch(updateLocale(en))
-                                                    router.push(router.pathname, router.pathname, {locale: 'en'})
+                                                    router.push(router.asPath, undefined, {locale: 'en'})
                                                 }
                                             }}
                                             list={locales}

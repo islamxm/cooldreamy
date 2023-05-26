@@ -8,6 +8,7 @@ import {AiOutlineGift} from 'react-icons/ai';
 import GiftMainCard from '@/components/GiftMainCard/GiftMainCard';
 import {AnimatePresence} from 'framer-motion';
 import { useWindowSize } from 'usehooks-ts';
+import {FiChevronLeft} from 'react-icons/fi'
 
 
 const service = new ApiService()
@@ -25,7 +26,7 @@ const Gifts = ({
     onClose: (...args: any[]) => any
 }) => {
     const {width} = useWindowSize()
-    const {token} = useAppSelector(s => s);
+    const {token, locale} = useAppSelector(s => s);
     const [list, setList] = useState<any[]>([])
     const [selected, setSelected] = useState<number[]>([])
 
@@ -33,7 +34,6 @@ const Gifts = ({
     useEffect(() => {
         if(token) {
             service.getGifts(token).then(res => {
-                console.log(res)
                 setList(res)
             })
         }
@@ -65,10 +65,20 @@ const Gifts = ({
     return (
         <div className={`${styles.wrapper}`} style={{height: `calc(100% - ${pb}px)`}}>
             <div className={styles.list}>
+                <div className={styles.top}>
+                    <Button
+                        onClick={onClose}
+                        before={<FiChevronLeft/>}
+                        middle
+                        variant={'simple'}
+                        text={locale?.global.back_btn}
+                        />
+                </div>
                 {
                     list?.map((item,index) => (
                         <div className={styles.item} key={index}>
                             <GiftMainCard
+                                price={item?.credits}
                                 onSelect={selectItem}
                                 active={selected?.find(i => i === item.id) ? true : false}
                                 id={item?.id}

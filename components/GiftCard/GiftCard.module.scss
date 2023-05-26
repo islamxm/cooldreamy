@@ -1,5 +1,22 @@
 .card {
-    width: 130px;
+    .info {
+        text-align: center;
+        margin-bottom: 5px;
+        
+        .label {
+            font-size: 18px;
+            line-height: 140%;
+        }
+        .price {
+            font-size: 13px;
+            line-height: 140%;
+            margin-top: 4px;
+            color: var(--violet);
+        }
+    }
+    
+    .main {
+        width: 130px;
     height: 130px;
     position: relative;
     border-radius: 12px;
@@ -21,4 +38,7 @@
             display: flex;
         }
     }
+    }
+
+    
 }

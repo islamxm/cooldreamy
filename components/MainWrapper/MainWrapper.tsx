@@ -22,7 +22,7 @@ const service = new ApiService()
 const MainWrapper = ({
     children
 }: {children?: React.ReactNode}) => {
-	const {locale} = useRouter()
+	const {locale, pathname, push, asPath} = useRouter()
 	const dispatch = useAppDispatch()
     const {token, userId, socketChannel, userData, currentProfileId} = useAppSelector(s => s);
 
@@ -44,9 +44,15 @@ const MainWrapper = ({
 	useEffect(() => {
 		if(window?.navigator?.language) {
 			if(window?.navigator?.language === 'ru') {
-				dispatch(updateLocale(ru))
+				// dispatch(updateLocale(ru))
+				if(asPath) {
+					push(asPath, undefined, {locale: 'ru'})
+				}
 			} else {
-				dispatch(updateLocale(en))
+				if(asPath) {
+					push(asPath, undefined, {locale: 'en'})
+				}
+				// dispatch(updateLocale(en))
 			}
 		}
 	}, [])

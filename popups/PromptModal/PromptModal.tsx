@@ -2,7 +2,7 @@ import {Modal, ModalFuncProps, Row, Col} from 'antd';
 import styles from './PromptModal.module.scss';
 import {FC} from 'react';
 import Button from '@/components/Button/Button';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 interface I extends ModalFuncProps {
     text?: string,
     onReject?: (...args: any[]) => any,
@@ -13,7 +13,7 @@ interface I extends ModalFuncProps {
 
 const PromptModal:FC<I> = (props) => {
     const {text, onReject, onAccept, onCancel} = props;
-
+    const {locale} = useAppSelector(s => s)
     const onClose = () => {
         onCancel && onCancel()
     }
@@ -39,7 +39,7 @@ const PromptModal:FC<I> = (props) => {
                             <Col span={12}>
                                 <Button
                                     style={{width: '100%'}}
-                                    text='Да'
+                                    text={locale?.global.yes}
                                     onClick={() => onAccept && onAccept()}
                                     />
                             </Col>
@@ -47,7 +47,7 @@ const PromptModal:FC<I> = (props) => {
                                 <Button
                                     style={{width: '100%'}}
                                     variant={'danger'}
-                                    text='Нет'
+                                    text={locale?.global.no}
                                     onClick={() => onReject && onReject()}
                                     />
                             </Col>

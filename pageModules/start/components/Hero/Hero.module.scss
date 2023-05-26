@@ -76,6 +76,10 @@
                 }
             }
         }
+
+        .action {
+            display: none;
+        }
     }
 }
 
@@ -84,6 +88,7 @@
     .hero {
 
         .inner {
+            padding-bottom: 100px;
 
             .main {
                 margin-bottom: 30px;
@@ -136,6 +141,14 @@
                         }
                     }
                 }
+            }
+
+            .action {
+                display: block;
+                max-width: 150px;
+                margin: 0 auto;
+                width: 100%;
+
             }
         }
     }

@@ -11,6 +11,7 @@ import phone2 from '@/public/assets/images/phone-2.svg';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
+import Button from '@/components/Button/Button';
 
 
 const Hero: FC = ({}) => {
@@ -113,7 +114,13 @@ const Hero: FC = ({}) => {
                                     
                                 </motion.div>
                             </motion.div>
-                        </div>
+                    </div>
+                    <div className={styles.action}>
+                        <Row gutter={[15,15]}>
+                            <Col span={24}><Button text={locale?.global?.header.join_btn} fill middle/></Col>
+                            <Col span={24}><Button text={locale?.global?.header?.login_btn} fill middle/></Col>
+                        </Row>
+                    </div>
                 </motion.div>
             </Container>
         </div>
