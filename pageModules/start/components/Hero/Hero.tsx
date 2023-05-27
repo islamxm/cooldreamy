@@ -13,7 +13,7 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
 import Button from '@/components/Button/Button';
 import LoginModal from '@/components/LoginModal/LoginModal';
-
+import parse from 'html-react-parser'
 
 const Hero: FC = ({}) => {
     const [sex, setSex] = useState<'male' | 'female'>()
@@ -66,7 +66,9 @@ const Hero: FC = ({}) => {
                                     />
                             </motion.div>
                         </div>
-                        
+                        <div className={styles.adv}>
+                        {parse(locale?.startPage?.start_hero_adv)}
+                        </div>
                     </div>
                     <div className={styles.motion}>
                             <div className={styles.clouds}>

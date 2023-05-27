@@ -139,7 +139,21 @@ const ru: ILocale = {
             open_profile_btn: 'Открыть профиль'
         },
         yes: 'Да',
-        no: 'Нет'
+        no: 'Нет',
+        push: {
+            settings: {
+                success: 'Настройки сохранены',
+                error: 'Не удалось сохранить настройки'
+            },
+            socket: {
+                success: 'Соединение установлено',
+                error: 'Соединение прервано'
+            },
+            profile_photo: {
+                success: 'Фотография добавлена',
+                error: 'Не удалось загрузить фотографию'
+            }
+        }
     },
     popups: {
         select_upload_image_type: {
@@ -171,10 +185,10 @@ const ru: ILocale = {
         }
     },
     startPage: {
-        start_hero_title: 'Более 16 000 пользователей',
-        start_hero_subtitle: 'нашли идеальную пару',
+        start_hero_title: 'Ваша история любви начинается здесь! ',
+        start_hero_subtitle: 'Если вы ищете серьезные отношения, тогда наш сайт  идеально подходит для вас. Проверьте сами!',
         start_hero_steps: 'Всего за 3 простых шага',
-
+        start_hero_adv: '<ul><li>Быстрая и простая регистрация</li><li>Проверенные пользователи</li><li>Большая база данных пользователей</li></ul>',
         start_steps_1: 'Регистрируйся',
         start_steps_2: 'Смотри анкеты',
         start_steps_3: 'Общайся',

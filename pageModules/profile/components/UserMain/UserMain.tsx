@@ -10,6 +10,7 @@ import { updateUserData } from '@/store/actions';
 import EditModalPl from '../../modals/EditModals/EditModalPl/EditModalPl';
 import EditModalText from '../../modals/EditModals/EditModalText/EditModalText';
 import EditModalRegion from '../../modals/EditModals/EditModalRegion/EditModalRegion';
+import { useRouter } from 'next/router';
 const service = new ApiService()
 
 export type editItemT = 'career' | 'finance' | 'rl' | 'target' | 'kids' | 'name' | 'email' | 'about' | 'country'
@@ -30,7 +31,7 @@ const UserMain:FC<IUser> = (props) => {
         prompt_want_kids
     } = props
     
-
+    const router = useRouter()
     const {token, userData, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const [editItemType, setEditItemType] = useState<editItemT | ''>('')
@@ -52,8 +53,9 @@ const UserMain:FC<IUser> = (props) => {
 
 
     useEffect(() => {
-        if(token) {
-            service.getAllPrompts(token).then(res => {
+        if(token && router?.locale) {
+            
+            service.getAllPrompts(token, router.locale).then(res => {
                 setPrompt_targets_list(res?.prompt_targets)
                 setPrompt_careers_list(res?.prompt_careers)
                 setPrompt_finance_states_list(res?.prompt_finance_states)
@@ -63,7 +65,7 @@ const UserMain:FC<IUser> = (props) => {
                 setPrompt_relationships_list(res?.prompt_relationships)
             })
         }
-    }, [token])
+    }, [token, router])
 
 
     const closeEditModal = () => {

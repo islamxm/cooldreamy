@@ -137,7 +137,21 @@ const en: ILocale = {
           open_profile_btn: "Go to profile"
       },
       yes:'Yes',
-      no: 'No'
+      no: 'No',
+      push: {
+        settings: {
+            success: 'Настройки сохранены',
+            error: 'Не удалось сохранить настройки'
+        },
+        socket: {
+            success: 'Соединение установлено',
+            error: 'Соединение прервано'
+        },
+        profile_photo: {
+            success: 'Фотография добавлена',
+            error: 'Не удалось загрузить фотографию'
+        }
+    }
   },
   popups: {
       select_upload_image_type: {
@@ -169,9 +183,10 @@ const en: ILocale = {
       }
   },
   startPage: {
-      start_hero_title: "Over 16,000 users",
-      start_hero_subtitle: "found their perfect match",
+      start_hero_title: "Your love story starts here!",
+      start_hero_subtitle: "If you are looking for serious relationships, then our website is perfect for you. Check it out yourself!",
       start_hero_steps: "Just 3 simple steps",
+      start_hero_adv: '<ul><li>Quick and easy registration</li><li>Verified users</li><li>Large user database</li></ul>',
       start_steps_1: "Register",
       start_steps_2: "Browse Profiles",
       start_steps_3: "Communicate",

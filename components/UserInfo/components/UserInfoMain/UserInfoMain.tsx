@@ -20,7 +20,7 @@ const UserInfoMain:FC<IUser> = (props) => {
         prompt_targets,
         prompt_want_kids
     } = props
-
+    
 
 
 

@@ -137,7 +137,22 @@ export interface ILocale {
             open_profile_btn: string
         },
         yes: string,
-        no: string
+        no: string,
+        push: {
+            settings: {
+                success: string,
+                error: string
+            },
+            socket: {
+                success: string,
+                error: string
+            },
+            profile_photo: {
+                success: string,
+                error: string
+            },
+
+        }
     },
     popups: {
         select_upload_image_type: {
@@ -173,6 +188,8 @@ export interface ILocale {
         start_hero_title: string,
         start_hero_subtitle: string,
         start_hero_steps: string,
+
+        start_hero_adv: string,
 
         start_steps_1: string,
         start_steps_2: string,
