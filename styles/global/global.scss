@@ -63,6 +63,10 @@ body {
 }
 
 
+body.unavailable {
+    background-color: var(--violet);
+}
+
 
 main {
     padding-top: 75px;

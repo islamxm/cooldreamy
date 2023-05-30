@@ -45,8 +45,8 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
         Cookies.remove('cooldate-web-token')
         
         Router.push('/')
-
         setLogoutModal(false)
+        window.location.reload()
     }
 
     const testGtag = () => {

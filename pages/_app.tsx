@@ -69,6 +69,15 @@ function App({ Component, pageProps }: AppProps) {
 			router && router?.events?.off('routeChangeStart', routeChangeEnd)
 		}
 	},[router])
+
+
+	useEffect(() => {
+		if(router?.pathname === '/unavailable') {
+			document.body.classList.add('unavailable')
+		} else {
+			document.body.classList.remove('unavailable')
+		}
+	}, [router])
 	
 	
 
@@ -87,9 +96,7 @@ function App({ Component, pageProps }: AppProps) {
 								width <= 768 && router?.pathname?.includes('/chat') && router?.query?.id ? (
 									null
 								) : (
-									<Header
-										auth={true}
-										/>
+									router?.pathname === '/unavailable' ? null : <Header auth={true}/>
 								)
 							}
 
@@ -99,7 +106,9 @@ function App({ Component, pageProps }: AppProps) {
 							{
 								width <= 768 && router?.pathname?.includes('/chat') ? (
 									null
-								) : <Footer/>
+								) : (
+									router?.pathname === '/unavailable' ? null : <Footer/>
+								)
 							}
 						</MainWrapper>
 				</PrivateRoute>

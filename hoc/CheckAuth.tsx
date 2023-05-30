@@ -4,6 +4,7 @@ import Router, { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { Cookies } from 'typescript-cookie';
 import { updateToken, updateUserId, updateSocket } from '@/store/actions';
+import UnvWrapper from './UnvWrapper';
 
 const PrivateRoute = ({
     children
@@ -29,15 +30,11 @@ const PrivateRoute = ({
                 dispatch(updateUserId(null))
                 dispatch(updateSocket(null))
 
-                
-
                 if(router?.pathname !== '/' && !router?.pathname?.includes('/articles') && router?.pathname !== '/signup') {
                     router.replace('/')
                 } else {
                     return;
                 }
-
-
             } else {
                 setAuth(true)
                 if(router?.pathname === '/') {
@@ -52,7 +49,7 @@ const PrivateRoute = ({
 
 
     return auth ? (
-        children
+        <UnvWrapper>{children}</UnvWrapper>
     ) : (
         router?.pathname === '/' || router?.pathname?.includes('/articles') || router?.pathname === '/signup'  ? (
             children    
