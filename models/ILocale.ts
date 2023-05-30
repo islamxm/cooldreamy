@@ -152,7 +152,8 @@ export interface ILocale {
                 error: string
             },
 
-        }
+        },
+        unavailable: string
     },
     popups: {
         select_upload_image_type: {

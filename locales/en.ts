@@ -151,7 +151,8 @@ const en: ILocale = {
             success: 'Фотография добавлена',
             error: 'Не удалось загрузить фотографию'
         }
-    }
+    },
+    unavailable: 'The website is temporarily unavailable. Technical maintenance is being conducted.'
   },
   popups: {
       select_upload_image_type: {

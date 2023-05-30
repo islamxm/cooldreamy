@@ -153,7 +153,8 @@ const ru: ILocale = {
                 success: 'Фотография добавлена',
                 error: 'Не удалось загрузить фотографию'
             }
-        }
+        },
+        unavailable: 'Проходят технические работы, подождите не много.'
     },
     popups: {
         select_upload_image_type: {
