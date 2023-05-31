@@ -14,6 +14,10 @@ import moment from 'moment';
 import { sortingDialogList, sortingChatList } from '@/helpers/sorting';
 import { useWindowSize } from 'usehooks-ts';
 import notify from '@/helpers/notify';
+import LimitModal from '@/popups/LimitModal/LimitModal'; 
+import getPrice from '@/helpers/getPrice';
+
+
 
 
 const service = new ApiService()
@@ -23,14 +27,17 @@ const ChatAction = ({
     updateChat,
     getGifts,
     updateDialogsList,
+    currentUser
 }: {
+    currentUser: any,
     setHeight: (...args: any[]) => any, 
     updateChat: (...args: any[]) => any,
     getGifts: (type: 'gift') => any,
     updateDialogsList?: (...args: any[]) => any
 }) => {
+
     const {width} = useWindowSize()
-    const {token, locale} = useAppSelector(s => s)
+    const {token, locale, actionsPricing} = useAppSelector(s => s)
     const {query} = useRouter()
     const {type, id} = query
 
@@ -41,6 +48,31 @@ const ChatAction = ({
     const [text, setText] = useState('')
     const [load, setLoad] = useState(false)
 
+    const [limitModal, setLimitModal] = useState(false)
+    const [limitText, setLimitText] = useState('')
+    const [limitHead, setLimitHead] = useState('')
+
+
+
+    const openLimit = ({
+        head,
+        text
+    }: {
+        head: string,
+        text: string
+    }) => {
+        setLimitHead(head)
+        setLimitText(text)
+        setLimitModal(true)
+    }
+
+    const closeLimit = () => {
+        setLimitHead('')
+        setLimitText('')
+        setLimitModal(false)
+    }
+
+
     useEffect(() => {
         if(gifts) setStickers(false)
         if(stickers) setGifts(false)
@@ -48,7 +80,6 @@ const ChatAction = ({
 
 
     const onStickerSelect = (id: number) => {
-        console.log(id)
         if(token && id) {
             if(query?.id && typeof query?.id === 'string') {
                 if(type === 'chat') {
@@ -58,15 +89,24 @@ const ChatAction = ({
                         sticker_id: id
                     }, token).then(res => {
                         console.log(res)
-                        updateDialogsList && updateDialogsList((s: any) => {
-                            console.log(s)
-                            const m = s;
-                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-
-                            return sortingDialogList([...m])
-                            
-                        })
-                        updateChat(res?.chat?.last_message)
+                        if(res?.error) {
+                            openLimit({
+                                head: 'Вам не хватает кредитов...',
+                                text: `К сожалению стикер к ${currentUser?.name} 
+                                не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
+                            })
+                        } else {
+                            updateDialogsList && updateDialogsList((s: any) => {
+                                console.log(s)
+                                const m = s;
+                                const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+    
+                                return sortingDialogList([...m])
+                                
+                            })
+                            updateChat(res?.chat?.last_message)
+                        }
+                       
                     }).finally(() => {
                         setLoad(false)
                     })
@@ -96,7 +136,13 @@ const ChatAction = ({
                     }, token).then(res => {
                         console.log(res)
                         if(res?.error) {
-                            notify(res?.error, 'ERROR')
+                            // notify(res?.error, 'ERROR')
+                            openLimit({
+                                head: 'Вам не хватает кредитов...',
+                                text: `К сожалению сообщение к ${currentUser?.name} 
+                                не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
+                            })
+                            
                         } else {
                             updateDialogsList && updateDialogsList((s: any) => {
                             
@@ -119,7 +165,12 @@ const ChatAction = ({
                         text
                     }, token).then(res => {
                         if(res?.error) {
-                            notify(res?.error, 'ERROR')
+                            // notify(res?.error, 'ERROR')
+                            openLimit({
+                                head: 'Вам не хватает кредитов...',
+                                text: `К сожалению письмо к ${currentUser?.name} 
+                                не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                            })
                         } else {
                             updateDialogsList && updateDialogsList((s: any) => {
                                 console.log(s)
@@ -149,7 +200,6 @@ const ChatAction = ({
                 data.append('image', e.target.files[0])
                 setLoad(true)
                 service.addProfileImage(data,token).then(res => {
-                    console.log(res)
                     if(res?.thumbnail_url && res?.image_url) {
                         service.sendMessage_image({
                             chat_id: id,
@@ -157,7 +207,11 @@ const ChatAction = ({
                             image_url: res.image_url
                         }, token).then(r => {
                             if(r?.error) {
-                                notify(res?.error, 'ERROR')
+                                openLimit({
+                                    head: 'Вам не хватает кредитов...',
+                                    text: `К сожалению картинка к ${currentUser?.name} 
+                                    не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
+                                })
                             } else {
                                 updateDialogsList && updateDialogsList((s: any) => {
                                     const m = s;
@@ -196,7 +250,12 @@ const ChatAction = ({
                         }, token).then(r => {
                             // !! нужно включить после того как Даниил поправить модель
                             if(r?.error) {
-                                notify(r?.error, 'ERROR')
+                                // notify(r?.error, 'ERROR')
+                                openLimit({
+                                    head: 'Вам не хватает кредитов...',
+                                    text: `К сожалению письмо к ${currentUser?.name} 
+                                    не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                                })
                             } else {
                                 updateDialogsList && updateDialogsList((s: any) => {
                                     const m = s;
@@ -238,6 +297,12 @@ const ChatAction = ({
 
     return (
         <div className={styles.lt}>
+            <LimitModal
+                head={limitHead}
+                text={limitText}
+                open={limitModal}
+                onCancel={closeLimit}
+                />
             {
                 load ? (
                     <div className={styles.load}><PulseLoader color='var(--violet)'/></div>

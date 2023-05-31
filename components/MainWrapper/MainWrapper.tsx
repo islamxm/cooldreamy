@@ -10,7 +10,7 @@ import chatMessageTypeVariants from '@/helpers/messageVariants';
 import LinesEllipsis from 'react-lines-ellipsis';
 import ProfileModal from '@/popups/ProfileModal/ProfileModal';
 import { useRouter } from 'next/router';
-import { updateLocale } from '@/store/actions';
+import { updateLocale, updatePricing } from '@/store/actions';
 import ru from '@/locales/ru';
 import en from '@/locales/en';
 
@@ -82,15 +82,16 @@ const MainWrapper = ({
 			service.getMyProfile(token).then(res => {
 				dispatch(updateUserData(res))
 			})
+			service.getActionPricing(token).then(res => {
+				dispatch(updatePricing(res))
+				console.log(res)
+			})
 		}
 	}, [token])
 
 
 	useEffect(() => {
 		if(pusherConfig && userId && !socketChannel) {
-			// if(socketChannel) {
-			// 	socketChannel?.unsubscribe()
-			// }
 			const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {

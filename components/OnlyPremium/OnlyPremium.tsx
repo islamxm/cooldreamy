@@ -14,10 +14,6 @@ const OnlyPremium = ({
     const [modal, setModal] = useState(false)
 
 
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
-
     const onClick = () => {
         console.log('clicked')
         if(userData?.is_premium === 1) {

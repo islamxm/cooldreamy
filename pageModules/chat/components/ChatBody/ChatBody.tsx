@@ -301,6 +301,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         }
                         <div className={styles.action}>
                             <ChatAction 
+                                currentUser={currentUser}
                                 getGifts={() => {
                                     if(mockType !== 'gift') {
                                         setMockType('gift')

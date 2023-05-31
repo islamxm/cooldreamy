@@ -15,3 +15,5 @@ export const updateNewMessage = (data: any) => ({type: 'UPDATE_NEW_MESSAGE', dat
 export const updateNewMail = (data: any) => ({type: 'UPDATE_NEW_MAIL', data})
 
 export const updateLocale = (data: ILocale) => ({type: 'UPDATE_LOCALE', data})
+
+export const updatePricing = (data: any[]) => ({type: 'UPDATE_PRICING', data})

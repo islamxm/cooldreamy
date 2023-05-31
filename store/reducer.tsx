@@ -16,7 +16,9 @@ export interface IGlobalState {
 
     newMessage: any,
     newMail: any,
-    locale: ILocale
+    locale: ILocale,
+
+    actionsPricing: any[]
 }
 
 
@@ -29,7 +31,8 @@ export const globalState: IGlobalState = {
     newMessage: null,
     newMail: null,
     currentProfileId: null,
-    locale: ru
+    locale: ru,
+    actionsPricing:[]
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -82,6 +85,11 @@ const reducer = (state = globalState, action: any) => {
                 
             }
         }
+        case 'UPDATE_PRICING':
+            return {
+                ...state,
+                actionsPricing: action.data
+            }
         default:
             return state;
     }

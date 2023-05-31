@@ -18,7 +18,7 @@ interface I extends ModalFuncProps {
 
 const LimitModal:FC<I> = (props) => {
     const {head, text, action, onCancel} = props;
-
+    
 
     const onClose = () => {
         onCancel && onCancel()
