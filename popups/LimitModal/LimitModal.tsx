@@ -5,20 +5,22 @@ import Image from 'next/image';
 import Router from 'next/router';
 import styles from './LimitModal.module.scss';
 import img from '@/public/assets/images/limit-img.png';
-
+// import { updateLimit } from '@/store/actions';
+// import { useAppDispatch } from '@/hooks/useTypesRedux';
 
 interface I extends ModalFuncProps {
     head?: string,
     text?: string,
     action?: {
-        link: string,
-        label: string
+        link?: string,
+        label?: string
     }
 }
 
 const LimitModal:FC<I> = (props) => {
     const {head, text, action, onCancel} = props;
     
+
 
     const onClose = () => {
         onCancel && onCancel()
@@ -46,13 +48,20 @@ const LimitModal:FC<I> = (props) => {
                     <div className={styles.text}>{text}</div>
                 </Col>
                 {
-                    action ? (
+                    action?.label ? (
                         <Col span={24}>
                             <div className={styles.action}>
                                 <Button
                                     text={action.label}
                                     small
-                                    onClick={() => Router.push(action.link)}
+                                    onClick={() => {
+                                        if(action?.link) {
+                                            Router.push(action.link)
+                                            onClose()
+                                        } else {
+                                            onClose()
+                                        }
+                                    }}
                                     />
                             </div>
                         </Col>

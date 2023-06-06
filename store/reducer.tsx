@@ -18,7 +18,21 @@ export interface IGlobalState {
     newMail: any,
     locale: ILocale,
 
-    actionsPricing: any[]
+    actionsPricing: any[],
+
+
+    limit: {
+        open?: boolean,
+        data?: {
+            head?: string,
+            text?: string,
+            action?: {
+                link?: string,
+                label?: string
+            }
+        } | null
+    },
+    
 }
 
 
@@ -32,7 +46,10 @@ export const globalState: IGlobalState = {
     newMail: null,
     currentProfileId: null,
     locale: ru,
-    actionsPricing:[]
+    actionsPricing:[],
+    limit: {
+        open: false,
+    }
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -89,6 +106,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 actionsPricing: action.data
+            }
+        case 'UPDATE_LIMIT':
+            return {
+                ...state,
+                limit: action.data
             }
         default:
             return state;

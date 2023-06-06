@@ -49,8 +49,8 @@ const PrivateRoute = ({
 
 
     return auth ? (
-        router?.pathname === '/signup' ? children : <UnvWrapper>{children}</UnvWrapper>
-        // children
+        // router?.pathname === '/signup' ? children : <UnvWrapper>{children}</UnvWrapper>
+        children
     ) : (
         router?.pathname === '/' || router?.pathname?.includes('/articles') || router?.pathname === '/signup'  ? (
             children    

@@ -10,9 +10,10 @@ import chatMessageTypeVariants from '@/helpers/messageVariants';
 import LinesEllipsis from 'react-lines-ellipsis';
 import ProfileModal from '@/popups/ProfileModal/ProfileModal';
 import { useRouter } from 'next/router';
-import { updateLocale, updatePricing } from '@/store/actions';
+import { updateLocale, updatePricing, updateLimit } from '@/store/actions';
 import ru from '@/locales/ru';
 import en from '@/locales/en';
+import LimitModal from '@/popups/LimitModal/LimitModal';
 
 
 
@@ -24,8 +25,7 @@ const MainWrapper = ({
 }: {children?: React.ReactNode}) => {
 	const {locale, pathname, push, asPath} = useRouter()
 	const dispatch = useAppDispatch()
-    const {token, userId, socketChannel, userData, currentProfileId} = useAppSelector(s => s);
-
+    const {token, userId, socketChannel, userData, currentProfileId, limit} = useAppSelector(s => s);
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
@@ -44,7 +44,6 @@ const MainWrapper = ({
 	useEffect(() => {
 		if(window?.navigator?.language) {
 			if(window?.navigator?.language === 'ru') {
-				// dispatch(updateLocale(ru))
 				if(asPath) {
 					push(asPath, undefined, {locale: 'ru'})
 				}
@@ -52,7 +51,6 @@ const MainWrapper = ({
 				if(asPath) {
 					push(asPath, undefined, {locale: 'en'})
 				}
-				// dispatch(updateLocale(en))
 			}
 		}
 	}, [])
@@ -84,7 +82,6 @@ const MainWrapper = ({
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))
-				console.log(res)
 			})
 		}
 	}, [token])
@@ -165,6 +162,16 @@ const MainWrapper = ({
 
     return (
         <>
+			<LimitModal
+				open={limit?.open}
+				head={limit?.data?.head}
+				text={limit?.data?.text}
+				action={{
+					label: limit?.data?.action?.label,
+					link: limit?.data?.action?.link
+				}}
+				onCancel={() => dispatch(updateLimit({open: false}))}
+				/>
 			<ProfileModal
 				onCancel={() => dispatch(updateCurrentProfileId(null))}
 				open={currentProfileId ? true : false}
