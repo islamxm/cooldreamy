@@ -13,7 +13,7 @@ const ChatSide:FC<IDialogs> = ({
     activeDialogId,
     updateDialogsPage,
     updateDialogsList,
-    totalDialogItemCount
+    totalDialogItemCount,
 }) => {
 
     return (

@@ -2,7 +2,7 @@ import styles from './ChatBody.module.scss';
 import ChatSide from '../ChatSide/ChatSide';
 import Dialog from '../Dialog/Dialog';
 import ChatAction from '../ChatAction/ChatAction';
-import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import { useCallback, useEffect, useState } from 'react';
 import Button from '@/components/Button/Button';
@@ -28,6 +28,9 @@ import SkeletonChat from '../SkeletonChat/SkeletonChat';
 import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
 import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
 import { PulseLoader } from 'react-spinners';
+import getPrice from '@/helpers/getPrice';
+import { updateLimit } from '@/store/actions';
+
 
 const service = new ApiService()
 
@@ -42,7 +45,8 @@ type ChatBodyComponentType = {
 
     loadedDialogs?: boolean
 
-    currentUser?: any
+    currentUser?: any,
+
 }
 
 
@@ -68,11 +72,13 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
     loadedDialogs,
 
-    currentUser
+    currentUser,
+
 }) => {
+    const dispatch = useAppDispatch()
     const {width} = useWindowSize()
     const {query: {id}} = useRouter()
-    const {token} = useAppSelector(s => s)
+    const {token, actionsPricing} = useAppSelector(s => s)
     const [pb, setPb] = useState<number>(70)
 
     const [mockType, setMockType] = useState<'wink' | 'gift' | 'text' | ''>('')
@@ -97,25 +103,47 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
         if(text && activeDialogId && token && ChatType) {
             if(ChatType === 'chat') {
                 service.sendMessage_text({chat_id: Number(activeDialogId), text}, token).then(res => {
-                    console.log(res)
-                    updateDialogsList && updateDialogsList((s: any) => {
-                        const m = s;
-                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                        return sortingDialogList([...m])
-                    })
-                    updateChat(res?.chat?.last_message)
+                    if(res?.error) {
+                        dispatch(updateLimit({
+                            open: true,
+                            data: {
+                                head: 'Вам не хватает кредитов...',
+                                text: `К сожалению сообщение к ${currentUser?.name} 
+                                не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
+                            }
+                        }))
+                    } else {
+                        updateDialogsList && updateDialogsList((s: any) => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                            return sortingDialogList([...m])
+                        })
+                        updateChat(res?.chat?.last_message)
+                        
+                    }
                     setMockType('')
                 })
             }
             if(ChatType === 'mail') {
                 service.sendMail_text({text: text, letter_id: Number(activeDialogId)}, token).then(res => {
-                    console.log(res)
-                    updateDialogsList && updateDialogsList((s: any) => {
-                        const m = s;
-                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
-                        return sortingDialogList([...m])
-                    })
-                    updateChat(res?.letter?.last_message)
+                    if(res?.error) {
+                        dispatch(updateLimit({
+                            open: true,
+                            data: {
+                                head: 'Вам не хватает кредитов...',
+                                text: `К сожалению письмо к ${currentUser?.name} 
+                                не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                            }
+                        }))
+                    } else {
+                        updateDialogsList && updateDialogsList((s: any) => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
+                            return sortingDialogList([...m])
+                        })
+                        updateChat(res?.letter?.last_message)
+                    }
+                    
                     setMockType('')
                 })
             }
@@ -128,23 +156,44 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
         if(gifts && token && activeDialogId && ChatType) {
             if(ChatType === 'chat') {
                 service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts}, token).then(res => {
-                    updateDialogsList && updateDialogsList((s: any) => {
-                        const m = s;
-                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                        return sortingDialogList([...m])
-                    })
-                    updateChat(res?.chat?.last_message)
+                    if(res?.error) {
+                        dispatch(updateLimit({
+                            open: true,
+                            data: {
+                                head: 'Вам не хватает кредитов...',
+                                text: `К сожалению подарок к ${currentUser?.name} не доставлен. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_GIFT')}`
+                            }
+                        }))
+                    } else {
+                        updateDialogsList && updateDialogsList((s: any) => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
+                            return sortingDialogList([...m])
+                        })
+                        updateChat(res?.chat?.last_message)
+                    }
+                   
                     setMockType('')
                 })
             }
             if(ChatType === 'mail') {
                 service.sendMail_gift({letter_id: activeDialogId.toString(), gifts}, token).then(res => {
-                    updateDialogsList && updateDialogsList((s: any) => {
-                        const m = s;
-                        const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
-                        return sortingDialogList([...m])
-                    })
-                    updateChat(res?.letter?.last_message)
+                    if(res?.error) {
+                        dispatch(updateLimit({
+                            open: true,
+                            data: {
+                                head: 'Вам не хватает кредитов...',
+                                text: `К сожалению подарок к ${currentUser?.name} не доставлен. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_MAIL_GIFT')}`
+                            }
+                        }))
+                    } else {
+                        updateDialogsList && updateDialogsList((s: any) => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
+                            return sortingDialogList([...m])
+                        })
+                        updateChat(res?.letter?.last_message)
+                    }
                     setMockType('')
                 })
             }
@@ -285,11 +334,12 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                     totalChatItemCount={totalChatItemCount}
                                                     />
                                             ) : (
-                                                activeDialogId && !mockType ? (
-                                                    <ChatStart
-                                                        onSelect={setMockType} 
-                                                        avatar={currentUser?.avatar_url_thumbnail}/>
-                                                ) : null
+                                                // activeDialogId && !mockType ? (
+                                                //     <ChatStart
+                                                //         onSelect={setMockType} 
+                                                //         avatar={currentUser?.avatar_url_thumbnail}/>
+                                                // ) : null
+                                                null
                                             )
                                         )
                                     }

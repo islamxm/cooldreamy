@@ -19,13 +19,15 @@ import SkeletonChatList from './components/SkeletonChatList/SkeletonChatList';
 
 const service = new ApiService()
 
+
+
 const ChatList:FC<IDialogs> = ({
     activeDialogId,
     dialogsList = [],
     updateDialogsPage,
     totalDialogItemCount,
 
-    updateDialogsList
+    updateDialogsList,
 }) => {
     const {locale} = useAppSelector(s => s)
     const {inView, ref} = useInView()

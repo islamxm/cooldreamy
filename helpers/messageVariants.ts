@@ -4,6 +4,7 @@ const chatMessageTypeVariants = {
     messageImage: 'App\\Models\\ChatImageMessage',
     messageGift: 'App\\Models\\ChatGiftMessage',
     messageSticker: 'App\\Models\\ChatStickerMessage',
+    messageWink: 'App\\Models\\ChatWinkMessage',
 
     //letter
     letterText: "App\\Models\\LetterTextMessage",

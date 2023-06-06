@@ -79,7 +79,6 @@ const ChatAction = ({
                             }))
                         } else {
                             updateDialogsList && updateDialogsList((s: any) => {
-                                console.log(s)
                                 const m = s;
                                 const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
                                 return sortingDialogList([...m])

@@ -32,6 +32,7 @@ const GirlCard:FC<IUser> = ({
     name,
     state,
     winkable
+    
 }) => {
     const {token, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
@@ -84,6 +85,26 @@ const GirlCard:FC<IUser> = ({
     }
     
 
+    const addToFav = () => {
+        if(id && token) {
+            service.addUserToFav({user_id: id}, token).then(res => {
+                console.log(res?.status)
+                if(res?.status === 200) {
+                    res?.json().then(r => {
+                    })
+                    notify('Пользователь добавлен в избранные', 'SUCCESS')
+                } else {
+                    notify('Не удалось добавить пользователя в избранные', 'ERROR')
+                    res?.json().then(r => {
+                        console.log(r)
+                    })
+                }
+            })
+        }
+        
+    }
+
+
     return (
         <div className={styles.card}>
             <div className={styles.main}>
@@ -119,7 +140,9 @@ const GirlCard:FC<IUser> = ({
                         }
                         
                         <Col span={winkable === 1 ? 8 : 12} md={winkable === 1 ? 7 : 12}>
-                            <button className={styles.button}><AiOutlineStar/></button>
+                            <button 
+                                onClick={addToFav}
+                                className={styles.button}><AiOutlineStar/></button>
                         </Col>
                         <Col span={winkable === 1 ? 8 : 12} md={winkable === 1 ? 10 : 12}>
                             <button 

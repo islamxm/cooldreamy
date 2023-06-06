@@ -18,14 +18,14 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import IconButton from '@/components/IconButton/IconButton';
 import notify from '@/helpers/notify';
 import { updateCurrentProfileId } from '@/store/actions';
-
+import chatMessageTypeVariants from '@/helpers/messageVariants';
 
 
 const service = new ApiService()
 
 
 interface I extends chatItemPropsTypes {
-    updateDialogsList: (...args: any[]) => any
+    updateDialogsList: (...args: any[]) => any,
 }
 
 const ChatItem = ({
@@ -40,7 +40,8 @@ const ChatItem = ({
     text,
     active,
     
-    updateDialogsList
+    updateDialogsList,
+
 }:I) => {
     const dispatch = useAppDispatch()
     const {query: {type}, asPath} = useRouter()
@@ -53,11 +54,11 @@ const ChatItem = ({
 
     const switchChatType = (type?: string) => {
         switch(type) {
-            case 'App\\Models\\ChatImageMessage':
+            case chatMessageTypeVariants.messageImage:
                 return (
                     'Картинка'
                 )
-            case 'App\\Models\\ChatTextMessage':
+            case chatMessageTypeVariants.messageText:
                 
                 return  (
                     typeof last_message?.chat_messageable?.text === 'string' ? (
@@ -68,11 +69,11 @@ const ChatItem = ({
                     ) : null
 
                 )
-            case 'App\\Models\\ChatWinkMessage':
+            case chatMessageTypeVariants.messageWink:
                 return (
                     'Подмигивание'
                 )
-            case 'App\\Models\\ChatGiftMessage':
+            case chatMessageTypeVariants.messageGift:
                 return (
                     'Подарок'
                 )

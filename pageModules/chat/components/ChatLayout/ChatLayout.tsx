@@ -86,7 +86,6 @@ const ChatLayout = () => {
                 filter: filter != 'all' ? filter : '',
                 page: dialogsPage,
             }, token).then(res => {
-                console.log(res?.data)
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)

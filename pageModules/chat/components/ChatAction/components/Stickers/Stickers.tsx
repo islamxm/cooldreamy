@@ -6,6 +6,7 @@ import Sticker from '@/components/Sticker/Sticker';
 import emojiData from '@/helpers/emojiData';
 import Smile from '@/components/Smile/Smile';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useRouter } from 'next/router';
 
 const service = new ApiService()
 
@@ -31,6 +32,8 @@ const Stickers = ({
     onStickerSelect?: (id: number) => any
 }) => {
     const {token} = useAppSelector(s => s)
+    const {query} = useRouter()
+    const {type} = query || null
 
     const [activeTab, setActiveTab] = useState<number>(1)
     const [list, setList] = useState<any[]>()
@@ -98,11 +101,19 @@ const Stickers = ({
             <div className={styles.in}>
                 <div className={styles.tabs}>
                     {
-                        tabs?.map((item ,index) => (
-                            <div 
-                            onClick={() => setActiveTab(item.value)}    
-                            className={`${styles.tab} ${activeTab === item.value ? styles.active : ''}`} key={item.value}>{item.label}</div>
-                        ))
+                        tabs?.map((item ,index) => {
+                            if(index === 1 && type === 'mail') {
+                                return (
+                                    null
+                                ) 
+                            } else {
+                                return (
+                                    <div 
+                                    onClick={() => setActiveTab(item.value)}    
+                                    className={`${styles.tab} ${activeTab === item.value ? styles.active : ''}`} key={item.value}>{item.label}</div>
+                                )
+                            }
+                        })
                     }
                 </div>
                 {switchTabContent()}

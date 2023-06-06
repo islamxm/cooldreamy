@@ -86,7 +86,6 @@ const SearchBody = () => {
     useEffect(() => {
         if(token) {
             service.getAllPrompts(token).then(res => {
-                console.log(res)
                 if(res) {
                     setFinanceList(res?.prompt_finance_states?.map((i: any) => ({...i, value: i.id, label: i.text})))
                     setTargetList(res?.prompt_targets?.map((i: any) => ({...i, value: i.id, label: i.text})))
@@ -138,7 +137,6 @@ const SearchBody = () => {
                 per_page: 25
             }, token
             ).then(res => {
-                console.log(res.data)
                 setTotalFound(res?.total)
                 setList(res?.data)
 
