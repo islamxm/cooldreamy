@@ -16,6 +16,7 @@ import { useWindowSize } from 'usehooks-ts';
 import SelectDef from '../SelectDef/SelectDef';
 import en from '@/locales/en';
 import ru from '@/locales/ru';
+import PremiumBtn from '../Sidebar/components/PremiumBtn/PremiumBtn';
 import TagManager from 'react-gtm-module';
 
 
@@ -27,7 +28,7 @@ const locales = [
 
 const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
     const dispatch = useAppDispatch()
-    const {token, socketChannel, isMenuOpen, locale} = useAppSelector(s => s)
+    const {token, socketChannel, isMenuOpen, locale, userData} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
     const {width} = useWindowSize()
     const router = useRouter()
@@ -138,6 +139,11 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                 null
                             ) : (
                                 <div className={styles.main}>
+                                    {
+                                        userData?.is_premium === 0 && <div className={styles.prem}>
+                                            <PremiumBtn/>
+                                        </div>
+                                    }
                                     <div className={styles.locale}>
                                         <SelectDef
                                             clearIcon={false}

@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import { useWindowSize } from 'usehooks-ts';
 import { updateMenu } from '@/store/actions';
 import {motion} from 'framer-motion';
+import Button from '../Button/Button';
 
 
 const Sidebar:FC = () => {
@@ -39,7 +40,12 @@ const Sidebar:FC = () => {
                                 />
                         </Col>
                         <Col span={24}>
-                            <PremiumBtn/>
+                            <Button
+                                text='Купить кредиты'
+                                middle
+                                fill
+                                variant={'bordered'}
+                                />
                         </Col>
                         <Col span={24}>
                             <Menu/>

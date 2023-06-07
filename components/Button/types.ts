@@ -2,7 +2,7 @@ import { MotionStyle, VariantLabels, TargetAndTransition } from "framer-motion";
 import { HTMLProps } from "react";
 
 
-export type ButtonVariants = 'default' | 'danger' | 'simple' | 'bordered' | 'white'; 
+export type ButtonVariants = 'default' | 'danger' | 'simple' | 'bordered' | 'white' | 'gold'; 
 
 
 export type ButtonPropsTypes = {

@@ -787,6 +787,23 @@ class ApiService {
             console.log(err)
         }
     }
+
+    // TEST
+    setCredits = async (token: IToken, body: {credits: number}) => {
+        try {
+            let res = await fetch(endpoints.setCredits, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

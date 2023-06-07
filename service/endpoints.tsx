@@ -81,6 +81,11 @@ const endpoints = {
     deleteUserFromFav: `${API_PATH}activities/disable_from_favorite`,
 
     getActionPricing: `${API_PATH}profile/get_services_cost`,
+
+
+
+    // ТЕСТ
+    setCredits: `${API_PATH}profile/set_my_credits`,
 }
 
 export default endpoints;

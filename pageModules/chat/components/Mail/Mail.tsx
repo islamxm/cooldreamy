@@ -39,7 +39,9 @@ const Mail:FC<I> = ({
         }
     }, [inView, loadMore, updateChatListPage])
 
-    
+    useEffect(() => {
+        console.log(chatList)
+    }, [chatList])
 
     return (
         <div className={styles.wrapper} style={{maxHeight: height}}>

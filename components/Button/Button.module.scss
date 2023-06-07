@@ -91,6 +91,12 @@
     box-shadow: none !important;
 }
 
+.button.gold {
+    background: linear-gradient(282.57deg, #DE900B 4.74%, #FFCA0E 97.64%);
+    color:#fff;
+    // box-shadow: 0.872px 9.962px 20px rgba(255, 199, 0, 0.15);
+}
+
 .button.sm {
     padding: 3px 8px;
     font-size: 11px;

@@ -30,6 +30,10 @@ const MainWrapper = ({
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
 
+	useEffect(() => {
+		console.log(userData)
+	}, [userData])
+
 
 	useEffect(() => {
 		if(locale === 'ru') {
@@ -110,10 +114,8 @@ const MainWrapper = ({
 		if(socketChannel) {
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
-				console.log(data)
 				dispatch(updateNewMessage(data))
 				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
-	
 				switch(data?.chat_message?.chat_messageable_type) {
 					
 					case chatMessageTypeVariants.messageText:
@@ -128,6 +130,8 @@ const MainWrapper = ({
 					case chatMessageTypeVariants.messageSticker:
 						notify('Вы получили стикер', 'AVATAR', avatar)
 						break;
+					case chatMessageTypeVariants.messageWink:
+						notify('Вам подмигнули', 'AVATAR', avatar)
 					default:
 						return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
 				}
@@ -136,9 +140,9 @@ const MainWrapper = ({
 				
 			// })
 			socketChannel?.listen('.new-letter-message-event', (data: any) => {
-				console.log(data)
 				dispatch(updateNewMail(data))
 				const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;
+				console.log(data)
 				if(data) {
 					notify(
 						<>
@@ -157,6 +161,8 @@ const MainWrapper = ({
         }
 	}, [socketChannel])
 
+
+	
 
 
 
