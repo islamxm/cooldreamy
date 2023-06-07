@@ -54,7 +54,9 @@ const DialogItemComponent:FC<I> = ({
     useEffect(() => {
         if(status === 'unread' && id && inView && !isSelf) {
             if(token) {
-                service.readMessage({chat_message_id: Number(id)}, token)
+                service.readMessage({chat_message_id: Number(id)}, token).then(res => {
+                    console.log(res)
+                })
             }
         }
     }, [status, token, id, inView, isSelf])

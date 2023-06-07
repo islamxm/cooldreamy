@@ -44,7 +44,7 @@ const ChatItem = ({
 
 }:I) => {
     const dispatch = useAppDispatch()
-    const {query: {type}, asPath} = useRouter()
+    const {query: {type}} = useRouter()
     const {token} = useAppSelector(s => s)
     const {avatar_url, avatar_url_thumbnail, name, online} = another_user || {};
     

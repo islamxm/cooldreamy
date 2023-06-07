@@ -270,20 +270,21 @@ const ChatLayout = () => {
                         })
                     }
                 }
-                // socketChannel?.listen('.chat-message-read-event', (data: any) => {
-                //     if(currentChatId && currentChatId == data?.chat_id) {
-                //         setChatList(s => {
-                //             const findItem = s.find(i => i.id == data?.chat_message_id)
-                //             if(findItem) {
-                //                 const m = s;
-                //                 const rm = s.splice(m.findIndex(i => i.id == findItem.id), 1, {...findItem, is_read_by_recepient: 1})
-                //                 return sortingChatList([...m])
-                //             } else {
-                //                 return s;
-                //             }
-                //         })
-                //     }
-                // })
+                socketChannel?.listen('.chat-message-read-event', (data: any) => {
+                    console.log(data)
+                    if(currentChatId && currentChatId == data?.chat_id) {
+                        setChatList(s => {
+                            const findItem = s.find(i => i.id == data?.chat_message_id)
+                            if(findItem) {
+                                const m = s;
+                                const rm = s.splice(m.findIndex(i => i.id == findItem.id), 1, {...findItem, is_read_by_recepient: 1})
+                                return sortingChatList([...m])
+                            } else {
+                                return s;
+                            }
+                        })
+                    }
+                })
             }
             if(chatType === 'mail') {
                 if(newMail) {
