@@ -106,9 +106,7 @@ const Step1:FC<IStep1> = ({
                                     placeholder={locale.signupPage.steps.step_1.birthday}
                                     showToday={false}
                                     onChange={(e,b) => {
-                                        // const date = new Date(b)
-                                        // console.log(date)
-                                        setBirthday(moment(b).format())
+                                        setBirthday(moment(b, 'DD-MM-YYYY').format("YYYY-MM-DD"))
                                     }}
                                     />
                             </Col>
