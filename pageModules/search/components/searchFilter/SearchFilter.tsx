@@ -129,7 +129,11 @@ const SearchFilter:FC<searchFilterType> = ({
                                     onChange={(e,v) => {
                                         setCountry(v)
                                     }}
-                                    onClear={clearStates}
+                                    onClear={() => {
+                                        clearStates()
+                                        setCountry('')
+                                        setState('')
+                                    }}
                                     list={countries}
                                     />
                             </div>
@@ -144,6 +148,9 @@ const SearchFilter:FC<searchFilterType> = ({
                                             }}
                                             placeholder={locale?.searchPage.filter.list.filter_state.placeholder ?? ''}
                                             list={states}
+                                            onClear={() => {
+                                                setState('')
+                                            }}
                                             />
                                     </div>
                                    
