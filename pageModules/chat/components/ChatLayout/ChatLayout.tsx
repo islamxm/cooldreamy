@@ -12,6 +12,7 @@ import notify from '@/helpers/notify';
 import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
 import { useWindowSize } from 'usehooks-ts';
 import { sortingMailChatList } from '@/helpers/sorting';
+import Button from '@/components/Button/Button';
 
 
 const service = new ApiService()
@@ -334,6 +335,14 @@ const ChatLayout = () => {
         
     // }, [chatType])
 
+    const test = () => {
+        if(token && currentChatId) {
+            service.deleteChat(token, currentChatId).then(res=> {
+                console.log(res)
+            })
+        }
+    }
+
 
     return (
         <div className={styles.wrapper}>
@@ -365,7 +374,9 @@ const ChatLayout = () => {
                         </Col>
                     )
                 }
-                
+                <Col span={24}>
+                    <Button text='test' onClick={test}/>
+                </Col>
                 <Col span={24}>
                     <div className={styles.main}>
                         <ChatBody

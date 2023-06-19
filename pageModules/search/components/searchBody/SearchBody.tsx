@@ -15,6 +15,7 @@ import SearchDrawer from '../searchDrawer/SearchDrawer';
 import { useWindowSize } from 'usehooks-ts';
 import SkGirlCardList from '@/components/Skeleton/SkGirlCardList/SkGirlCardList';
 import { IUser } from '@/models/IUser';
+import Button from '@/components/Button/Button';
 
 
 
@@ -195,11 +196,12 @@ const SearchBody = () => {
 
 
 
-
+ 
 
     return (    
         <div className={styles.wrapper}>
             <Row gutter={[10,10]}>
+              
                 <Col span={24}>
 
                     <SearchFilter
