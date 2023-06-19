@@ -335,13 +335,7 @@ const ChatLayout = () => {
         
     // }, [chatType])
 
-    const test = () => {
-        if(token && currentChatId) {
-            service.deleteChat(token, currentChatId).then(res=> {
-                console.log(res)
-            })
-        }
-    }
+    
 
 
     return (
@@ -374,9 +368,6 @@ const ChatLayout = () => {
                         </Col>
                     )
                 }
-                <Col span={24}>
-                    <Button text='test' onClick={test}/>
-                </Col>
                 <Col span={24}>
                     <div className={styles.main}>
                         <ChatBody
