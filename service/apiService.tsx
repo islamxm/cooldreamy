@@ -805,6 +805,52 @@ class ApiService {
             console.log(err)
         }
     }
+
+    subscribe = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.subscribe, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    deleteChat = async (token: IToken, id: number) => {
+        try {
+            let res = await fetch(endpoints.deleteChat + id, {
+                method: 'DELETE',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    signupEnd = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.signupEnd, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

@@ -224,8 +224,10 @@ const Body:FC = () => {
                             } else Router.push(`/search`)
                         })
                     }
-
-                }).finally(() => setLoad(false))
+                    
+                }).then(() => {
+                    service.signupEnd(token).finally(() => setLoad(false))
+                })
             }
         }
     }

@@ -86,6 +86,12 @@ const endpoints = {
 
     // ТЕСТ
     setCredits: `${API_PATH}profile/set_my_credits`,
+
+
+    //EX
+    subscribe: `${API_PATH}subscriptions/subscribe`,
+    deleteChat: `${API_PATH}chats/delete_chat/`,
+    signupEnd: `${API_PATH}set_aces`,
 }
 
 export default endpoints;
