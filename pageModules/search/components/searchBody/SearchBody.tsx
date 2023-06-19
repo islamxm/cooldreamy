@@ -54,6 +54,8 @@ const SearchBody = () => {
     const [isOnline, setIsOnline] = useState<1 | 0>(0)
     const [isNear, setIsNear] = useState<1 | 0>(0)
 
+    const [filter_type, setfilter_type] = useState<'all' | 'nearby' | 'online' | 'new'>()
+
     const [totalFound, setTotalFound] = useState(0);
 
     const [list, setList] = useState<IUser[]>([])
@@ -125,9 +127,7 @@ const SearchBody = () => {
             setLoad(true)
             service.search({
                 page: 1,
-                isNew, 
-                isOnline, 
-                isNear,
+                filter_type: filter_type === 'all' ? undefined : filter_type, 
                 state: state?.label, 
                 country: country?.label, 
                 age_range_start, 
@@ -151,9 +151,7 @@ const SearchBody = () => {
             setLoad(true)
             service.search({
                 page: currentPage,
-                isNew, 
-                isOnline, 
-                isNear, 
+                filter_type: filter_type === 'all' ? undefined : filter_type, 
                 state: state?.label, 
                 country: country?.label, 
                 age_range_start, 
@@ -243,12 +241,8 @@ const SearchBody = () => {
 
                     <SearchInfo
                         total={totalFound}
-                        isNear={isNear}
-                        isNew={isNew}
-                        isOnline={isOnline}
-                        setIsNear={setIsNear}
-                        setIsNew={setIsNew}
-                        setIsOnline={setIsOnline}
+                        filter_type={filter_type}
+                        setfilter_type={setfilter_type}
                         />
 
 

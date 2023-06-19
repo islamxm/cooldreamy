@@ -10,12 +10,8 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const SearchInfo:FC<searchInfoType> = ({
     total,
-    isNear,
-    isNew,
-    isOnline,
-    setIsNear,
-    setIsNew,
-    setIsOnline
+    filter_type,
+    setfilter_type
 }) => {
     const {locale} = useAppSelector(s => s)
     const [activeId, setActiveId] = useState<string>('1');
@@ -29,36 +25,26 @@ const SearchInfo:FC<searchInfoType> = ({
     
     
     useEffect(() => {
-        if(activeId && setIsNear && setIsOnline && setIsNew) {
+        if(activeId && setfilter_type) {
             switch(activeId) {
                 case '1':
-                    setIsNear(0)
-                    setIsOnline(0)
-                    setIsNew(0)
+                    setfilter_type('all')
                     break;
                 case '2':
-                    setIsNear(1)
-                    setIsOnline(0)
-                    setIsNew(0)
+                    setfilter_type('nearby')
                     break;
                 case '3':
-                    setIsNear(0)
-                    setIsOnline(0)
-                    setIsNew(1)
+                    setfilter_type('new')
                     break;
                 case '4':
-                    setIsNear(0)
-                    setIsOnline(1)
-                    setIsNew(0)
+                    setfilter_type('online')
                     break;
                 default:
-                    setIsNear(0)
-                    setIsOnline(0)
-                    setIsNew(0)
+                    setfilter_type('all')
                     break;
             }
         }
-    }, [activeId, setIsNear, setIsNew, setIsOnline])
+    }, [activeId, setfilter_type])
 
 
     return (

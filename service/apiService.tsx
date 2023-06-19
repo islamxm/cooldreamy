@@ -56,9 +56,10 @@ class ApiService {
     search = async (
         body: {
         page: number,
-        isNew: 1 | 0,
-        isOnline: 1 | 0,
-        isNear: 1 | 0,
+        // isNew: 1 | 0,
+        // isOnline: 1 | 0,
+        // isNear: 1 | 0,
+        filter_type?: 'nearby' | 'new' | 'online'
         state?: string,
         country?: string,
         age_range_start?: number,
