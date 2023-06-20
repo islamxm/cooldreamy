@@ -107,6 +107,7 @@ const Step1:FC<IStep1> = ({
                                     showToday={false}
                                     onChange={(e,b) => {
                                         setBirthday(moment(b, 'DD-MM-YYYY').format("YYYY-MM-DD"))
+                                        console.log(moment(b, 'DD-MM-YYYY').format("YYYY-MM-DD"))
                                     }}
                                     />
                             </Col>
