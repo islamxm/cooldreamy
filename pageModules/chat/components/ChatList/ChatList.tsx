@@ -19,15 +19,21 @@ import SkeletonChatList from './components/SkeletonChatList/SkeletonChatList';
 
 const service = new ApiService()
 
+interface I {
+    dialogSearch?: string
+    setDialogSearch?: (...args: any[]) => any
+}
 
-
-const ChatList:FC<IDialogs> = ({
+const ChatList:FC<IDialogs & I> = ({
     activeDialogId,
     dialogsList = [],
     updateDialogsPage,
     totalDialogItemCount,
 
     updateDialogsList,
+
+    dialogSearch,
+    setDialogSearch
 }) => {
     const {locale} = useAppSelector(s => s)
     const {inView, ref} = useInView({
@@ -49,17 +55,14 @@ const ChatList:FC<IDialogs> = ({
     }, [inView, loadMore, updateDialogsPage])
 
 
-    // useEffect(() => {
-    //     if(search) {
-        
-    //     }
-    // }, [search])
+   
 
   
     return (
         <div className={`${styles.wrapper} custom-scroll-vertical`}>
-             <div style={{padding: '5px'}}>
+             {/* <div style={{padding: '5px'}}>
                 <Input
+
                     style={{
                         borderRadius: 8,
                         paddingTop: 5,
@@ -67,11 +70,11 @@ const ChatList:FC<IDialogs> = ({
                     }}
                     placeholder={`...${locale?.chatPage.search}`}
                     afterIcon={<FiSearch color='#888888'/>}
-                    value={search}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+                    value={dialogSearch}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDialogSearch && setDialogSearch(e.target.value)}
                     //beforeIcon={<FiSearch/>}
                     />
-            </div>
+            </div> */}
             <PromoBadge/>
             {
                 dialogsList?.length > 0 ? dialogsList?.map((item, index) => (

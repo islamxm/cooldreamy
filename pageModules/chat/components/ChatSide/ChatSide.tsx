@@ -6,19 +6,27 @@ import ChatList from '../ChatList/ChatList';
 import { IDialogs } from '../../types';
 import {FC} from 'react';
 
+interface I {
+    dialogSearch?: string,
+    setDialogSearch?: (...args: any[]) => any
+}
 
 
-const ChatSide:FC<IDialogs> = ({
+const ChatSide:FC<IDialogs & I> = ({
     dialogsList,
     activeDialogId,
     updateDialogsPage,
     updateDialogsList,
     totalDialogItemCount,
+    dialogSearch,
+    setDialogSearch
 }) => {
 
     return (
         <div className={styles.wrapper}>
             <ChatList
+                dialogSearch={dialogSearch}
+                setDialogSearch={setDialogSearch}
                 totalDialogItemCount={totalDialogItemCount}
                 updateDialogsPage={updateDialogsPage}
                 updateDialogsList={updateDialogsList}

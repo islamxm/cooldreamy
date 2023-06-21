@@ -13,7 +13,7 @@ import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
 import { useWindowSize } from 'usehooks-ts';
 import { sortingMailChatList } from '@/helpers/sorting';
 import Button from '@/components/Button/Button';
-
+import {useDebounce} from 'usehooks-ts';
 
 const service = new ApiService()
 
@@ -53,6 +53,8 @@ const ChatLayout = () => {
     const [totalDialogItemCount, setTotalDialogItemCount] = useState(0)
     const [totalChatItemCount, setTotalChatItemCount] = useState(0)
 
+    const [dialogSearch, setDialogSearch] = useState('')
+    const dialogSearchDebounce = useDebounce<string>(dialogSearch, 500)
 
     // ?? получение ид текущего чата из роута (опционально)
     useEffect(() => {
@@ -77,11 +79,12 @@ const ChatLayout = () => {
             if(dialogsPage === 1) {
                 setLoadSide(true)
             }
-            
             service.getChatList({
                 filter: filter != 'all' ? filter : '',
                 page: dialogsPage,
+                search: dialogSearchDebounce
             }, token).then(res => {
+                console.log(res)
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -203,7 +206,7 @@ const ChatLayout = () => {
         if(chatType === 'mail') {
             getMailDialogs && getMailDialogs()
         }
-    }, [dialogsPage, token, chatType, filter])
+    }, [dialogsPage, token, chatType, filter, dialogSearchDebounce])
 
 
     // ?? обновление списка сообщений в чате
@@ -435,6 +438,9 @@ const ChatLayout = () => {
 
                             loadedDialogs={loadedDialogs}
                             currentUser={currentUser}
+
+                            dialogSearch={dialogSearch}
+                            setDialogSearch={setDialogSearch}
                             />
                     </div>
                 </Col>

@@ -5,26 +5,22 @@ import ChatAction from '../ChatAction/ChatAction';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import { useCallback, useEffect, useState } from 'react';
-import Button from '@/components/Button/Button';
-import testimg from '@/public/assets/images/test.jpg';
-import Image from 'next/image';
 import {FC} from 'react';
 import { IDialogs, IChat } from '../../types';
-
+import Input from '@/components/Input/Input';
+import { FiSearch } from 'react-icons/fi';
 import ChatStart from '../ChatStart/ChatStart';
 import ChatMock from '../ChatMock/ChatMock';
 import Gifts from '../Gifts/Gifts';
 import Mail from '../Mail/Mail';
-import Loader from '@/components/Loader/Loader';
 import Router, { useRouter } from 'next/router';
-import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
+import { sortingDialogList } from '@/helpers/sorting';
 import { useWindowSize } from 'usehooks-ts';
 import IconButton from '@/components/IconButton/IconButton';
 import {BiArrowBack} from 'react-icons/bi';
 import Avatar from '@/components/Avatar/Avatar';
 import DialogEmpty from '../DialogEmpty/DialogEmpty';
 import {VscListSelection} from 'react-icons/vsc';
-import SkeletonChat from '../SkeletonChat/SkeletonChat';
 import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
 import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
 import { PulseLoader } from 'react-spinners';
@@ -50,6 +46,8 @@ type ChatBodyComponentType = {
 
     currentUser?: any,
 
+    dialogSearch?: string,
+    setDialogSearch?: (...args: any[]) => any
 }
 
 
@@ -78,6 +76,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
     currentUser,
 
+    dialogSearch,
+    setDialogSearch
+
 }) => {
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
@@ -87,6 +88,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const [promptModal, setPromptModal] = useState(false)
 
     const [mockType, setMockType] = useState<'wink' | 'gift' | 'text' | ''>('')
+
 
 
 
@@ -118,12 +120,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             }
                         }))
                     } else {
-                        updateDialogsList && updateDialogsList((s: any) => {
-                            const m = s;
-                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                            return sortingDialogList([...m])
-                        })
-                        // updateChat(res?.chat?.last_message)
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                     }
                     setMockType('')
@@ -141,12 +137,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             }
                         }))
                     } else {
-                        updateDialogsList && updateDialogsList((s: any) => {
-                            const m = s;
-                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
-                            return sortingDialogList([...m])
-                        })
-                        // updateChat(res?.letter?.last_message)
+                        onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
                     }
                     
                     setMockType('')
@@ -170,11 +161,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             }
                         }))
                     } else {
-                        updateDialogsList && updateDialogsList((s: any) => {
-                            const m = s;
-                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                            return sortingDialogList([...m])
-                        })
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                     }
                    
@@ -192,12 +178,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             }
                         }))
                     } else {
-                        updateDialogsList && updateDialogsList((s: any) => {
-                            const m = s;
-                            const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
-                            return sortingDialogList([...m])
-                        })
-                        // updateChat(res?.letter?.last_message)
+                        onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
                     }
                     setMockType('')
                 })
@@ -268,6 +249,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                     <SkeletonChatList/>
                                 ) : (
                                     <ChatSide
+                                        dialogSearch={dialogSearch}
+                                        setDialogSearch={setDialogSearch}
                                         updateDialogsPage={updateDialogsPage}
                                         updateDialogsList={updateDialogsList}
                                         dialogsList={dialogsList}
@@ -280,11 +263,26 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     ) : null
                 ) : (
                     <div className={styles.sidebar}>
+                        <div className={styles.search}>
+                        <Input
+                            style={{
+                                borderRadius: 8,
+                                paddingTop: 5,
+                                paddingBottom: 5,
+                            }}
+                            placeholder={`...${locale?.chatPage.search}`}
+                            afterIcon={<FiSearch color='#888888'/>}
+                            value={dialogSearch}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDialogSearch && setDialogSearch(e.target.value)}
+                            />
+                        </div>
                         {
                             loadSide ? (
                                 <SkeletonChatList/>
                             ) : (
                                 <ChatSide
+                                    dialogSearch={dialogSearch}
+                                    setDialogSearch={setDialogSearch}
                                     updateDialogsList={updateDialogsList}
                                     updateDialogsPage={updateDialogsPage}
                                     dialogsList={dialogsList}

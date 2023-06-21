@@ -8,6 +8,10 @@
         width: 300px;
         flex: 0 0 auto;
         position: relative;
+
+        .search {
+            padding: 5px;
+        }
     }
 
     .main {
