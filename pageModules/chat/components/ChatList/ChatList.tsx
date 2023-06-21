@@ -19,21 +19,14 @@ import SkeletonChatList from './components/SkeletonChatList/SkeletonChatList';
 
 const service = new ApiService()
 
-interface I {
-    dialogSearch?: string
-    setDialogSearch?: (...args: any[]) => any
-}
 
-const ChatList:FC<IDialogs & I> = ({
+const ChatList:FC<IDialogs> = ({
     activeDialogId,
     dialogsList = [],
     updateDialogsPage,
     totalDialogItemCount,
 
     updateDialogsList,
-
-    dialogSearch,
-    setDialogSearch
 }) => {
     const {locale} = useAppSelector(s => s)
     const {inView, ref} = useInView({
@@ -60,21 +53,6 @@ const ChatList:FC<IDialogs & I> = ({
   
     return (
         <div className={`${styles.wrapper} custom-scroll-vertical`}>
-             {/* <div style={{padding: '5px'}}>
-                <Input
-
-                    style={{
-                        borderRadius: 8,
-                        paddingTop: 5,
-                        paddingBottom: 5,
-                    }}
-                    placeholder={`...${locale?.chatPage.search}`}
-                    afterIcon={<FiSearch color='#888888'/>}
-                    value={dialogSearch}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDialogSearch && setDialogSearch(e.target.value)}
-                    //beforeIcon={<FiSearch/>}
-                    />
-            </div> */}
             <PromoBadge/>
             {
                 dialogsList?.length > 0 ? dialogsList?.map((item, index) => (

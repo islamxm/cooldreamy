@@ -244,13 +244,24 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                 width <= 768 ? (
                     !id ? (
                         <div className={styles.sidebar}>
+                            <div className={styles.search}>
+                                <Input
+                                    style={{
+                                        borderRadius: 8,
+                                        paddingTop: 5,
+                                        paddingBottom: 5,
+                                    }}
+                                    placeholder={`...${locale?.chatPage.search}`}
+                                    afterIcon={<FiSearch color='#888888'/>}
+                                    value={dialogSearch}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDialogSearch && setDialogSearch(e.target.value)}
+                                    />
+                            </div>
                             {
                                 loadSide ? (
                                     <SkeletonChatList/>
                                 ) : (
                                     <ChatSide
-                                        dialogSearch={dialogSearch}
-                                        setDialogSearch={setDialogSearch}
                                         updateDialogsPage={updateDialogsPage}
                                         updateDialogsList={updateDialogsList}
                                         dialogsList={dialogsList}
@@ -264,25 +275,23 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                 ) : (
                     <div className={styles.sidebar}>
                         <div className={styles.search}>
-                        <Input
-                            style={{
-                                borderRadius: 8,
-                                paddingTop: 5,
-                                paddingBottom: 5,
-                            }}
-                            placeholder={`...${locale?.chatPage.search}`}
-                            afterIcon={<FiSearch color='#888888'/>}
-                            value={dialogSearch}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDialogSearch && setDialogSearch(e.target.value)}
-                            />
+                            <Input
+                                style={{
+                                    borderRadius: 8,
+                                    paddingTop: 5,
+                                    paddingBottom: 5,
+                                }}
+                                placeholder={`...${locale?.chatPage.search}`}
+                                afterIcon={<FiSearch color='#888888'/>}
+                                value={dialogSearch}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDialogSearch && setDialogSearch(e.target.value)}
+                                />
                         </div>
                         {
                             loadSide ? (
                                 <SkeletonChatList/>
                             ) : (
                                 <ChatSide
-                                    dialogSearch={dialogSearch}
-                                    setDialogSearch={setDialogSearch}
                                     updateDialogsList={updateDialogsList}
                                     updateDialogsPage={updateDialogsPage}
                                     dialogsList={dialogsList}
@@ -299,7 +308,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     
                         !id && loadedDialogs && dialogsList?.length === 0 ? (
                             <div className={styles.main}>
-                                <DialogEmpty height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`}/>
+                                <DialogEmpty height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
                             </div>
                         ) : null
                     
@@ -308,13 +317,13 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     <div className={styles.main}>
                         {
                             !id && loadedDialogs && dialogsList?.length === 0 ? (
-                                <DialogEmpty absolute height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`}/>
+                                <DialogEmpty absolute height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
                             ) : null
                         }
                         {
                             ChatType === 'chat' ? (
                                 <div className={styles.body} style={{
-                                    height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`
+                                    height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px + 50px)`
                                 }}>
                                     <div className={styles.body_action}>
                                         <div className={styles.body_action_item}>
@@ -345,7 +354,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                             chatList && chatList?.length > 0 ? (
                                                 <Dialog
                                                     totalChatItemCount={totalChatItemCount}
-                                                    height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`}
+                                                    height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}
                                                     chatList={chatList}
                                                     id={activeDialogId}
                                                     updateChatListPage={updateChatListPage}
@@ -368,7 +377,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         {
                             ChatType === 'mail' ? (
                                 <div className={styles.mail} style={{
-                                    height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`
+                                    height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px + 50px)`
                                 }}>
                                     {
                                         loadMain ? (
@@ -376,7 +385,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                         ) : (
                                             chatList && chatList?.length > 0 ? (
                                                 <Mail
-                                                    height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`}
+                                                    height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px + 50px)`}
                                                     chatList={chatList}
                                                     id={activeDialogId}
                                                     updateChatListPage={updateChatListPage}
