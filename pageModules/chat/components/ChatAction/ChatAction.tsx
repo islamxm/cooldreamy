@@ -24,14 +24,14 @@ const service = new ApiService()
 
 const ChatAction = ({
     setHeight,
-    updateChat,
+    onUpdateChat,
     getGifts,
     updateDialogsList,
     currentUser
 }: {
     currentUser: any,
     setHeight: (...args: any[]) => any, 
-    updateChat: (...args: any[]) => any,
+    onUpdateChat: (...args: any[]) => any,
     getGifts: (type: 'gift') => any,
     updateDialogsList?: (...args: any[]) => any
 }) => {
@@ -78,12 +78,7 @@ const ChatAction = ({
                                 }
                             }))
                         } else {
-                            updateDialogsList && updateDialogsList((s: any) => {
-                                const m = s;
-                                const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                                return sortingDialogList([...m])
-                            })
-                            updateChat(res?.chat?.last_message)
+                            onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         }
                        
                     }).finally(() => {
@@ -98,7 +93,9 @@ const ChatAction = ({
                     }, token).then(res => {
                         console.log(res)
                         if(res?.error) {
-                            
+                            // !! ERROR
+                        } else {
+                            onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
                         }
                     })
                 }
@@ -122,6 +119,7 @@ const ChatAction = ({
                         chat_id: Number(query?.id),
                         text
                     }, token).then(res => {
+                        console.log(res)
                         if(res?.error) {
                             dispatch(updateLimit({
                                 open: true,
@@ -132,12 +130,8 @@ const ChatAction = ({
                                 }
                             }))
                         } else {
-                            updateDialogsList && updateDialogsList((s: any) => {
-                                const m = s;
-                                const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
-                                return sortingDialogList([...m])
-                            })
-                            updateChat(res?.chat?.last_message)
+                            onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+
                         }
                     }).finally(() => {
                         setLoad(false)
@@ -160,12 +154,7 @@ const ChatAction = ({
                                 }
                             }))
                         } else {
-                            updateDialogsList && updateDialogsList((s: any) => {
-                                const m = s;
-                                const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
-                                return sortingDialogList([...m])
-                            })
-                            updateChat(res?.letter?.last_message)
+                            onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
                         }
                     }).finally(() => {
                         setLoad(false)
@@ -203,12 +192,7 @@ const ChatAction = ({
                                     }
                                 }))
                             } else {
-                                updateDialogsList && updateDialogsList((s: any) => {
-                                    const m = s;
-                                    const rm = m.splice(m.findIndex((i: any) => i.id === r?.chat?.id), 1, r?.chat)
-                                    return sortingDialogList([...m])
-                                })
-                                updateChat(r?.chat?.last_message)
+                                onUpdateChat({messageBody: r?.chat?.last_message, dialogBody: r?.chat})
                             }
                         }).finally(() => {
                             setLoad(false)
@@ -249,12 +233,7 @@ const ChatAction = ({
                                     }
                                 }))
                             } else {
-                                updateDialogsList && updateDialogsList((s: any) => {
-                                    const m = s;
-                                    const rm = m.splice(m.findIndex((i: any) => i.id === r?.letter?.id), 1, r?.letter)
-                                    return sortingDialogList([...m])
-                                })
-                                updateChat(r?.letter?.last_message)
+                                onUpdateChat({messageBody: r?.letter?.last_message, dialogBody: r?.letter})
                             }
                         }).finally(() => {
                             setLoad(false)

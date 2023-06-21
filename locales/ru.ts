@@ -111,9 +111,8 @@ const ru: ILocale = {
         notifications: {
             success_image_upload: 'Фотография добавлена!',
             success_edit_profile: 'Настройки сохранены!',
-
-            
-            error_default: 'Произошла ошибка'
+            error_default: 'Произошла ошибка',
+            success_delete_chat: 'Чат удален!'
         },
         placeholders: {
             chat_empty: {

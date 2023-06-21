@@ -111,7 +111,8 @@ const en: ILocale = {
       notifications: {
           success_image_upload: "Photo added!",
           success_edit_profile: "Settings saved!",
-          error_default: "An error occurred"
+          error_default: "An error occurred",
+          success_delete_chat: "Chat deleted!"
       },
       placeholders: {
           chat_empty: {

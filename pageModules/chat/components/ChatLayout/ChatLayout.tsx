@@ -22,7 +22,7 @@ const service = new ApiService()
 const ChatLayout = () => {
     // !! глобальные инстанции
     const {width} = useWindowSize()
-    const {query, push, locale, asPath} = useRouter()
+    const {query} = useRouter()
     const {token, socketChannel, newMessage, newMail} = useAppSelector(s => s)
 
     
@@ -54,9 +54,6 @@ const ChatLayout = () => {
     const [totalChatItemCount, setTotalChatItemCount] = useState(0)
 
 
-    const [listening, setListening] = useState(false)
-
-
     // ?? получение ид текущего чата из роута (опционально)
     useEffect(() => {
         if(query) {
@@ -70,8 +67,6 @@ const ChatLayout = () => {
             setChatType(query?.type)
         }
     }, [query])
-
-
 
 
 
@@ -113,13 +108,19 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
-                    setCurrentUser(res?.another_user)
-                    setTotalChatItemCount(res?.chat_messages?.total)
-                    if(chatListPage === 1) {
-                        setChatList(res?.chat_messages?.data)
+                    if(res?.another_user) {
+                        setCurrentUser(res?.another_user)
+                        setTotalChatItemCount(res?.chat_messages?.total)
+                        if(chatListPage === 1) {
+                            setChatList(res?.chat_messages?.data)
+                        } else {
+                            setChatList(s => [...s, ...res?.chat_messages?.data])
+                        }
                     } else {
-                        setChatList(s => [...s, ...res?.chat_messages?.data])
+                        // !! НАПРАВЛЯЕМ НА СЛЕДУЮЩИЙ ДИАЛОГ ЕСЛИ ЕСТЬ, ЕСЛИ НЕТ ТО ПУСТОЙ ЧАТ
+                        
                     }
+                    
                 }).finally(() => {
                     setLoadMain(false)
                 })
@@ -217,25 +218,7 @@ const ChatLayout = () => {
 
 
 
-    // ?? обновление чата
-    const updateChat = useCallback((item: any) => {
-        if(chatType === 'chat') {
-            setChatList(s => {
-                const sender_user = s.find(i => i.sender_user?.id === item.sender_user_id)?.sender_user
-                if(sender_user) {
-                    return sortingChatList([{...item, sender_user}, ...s])
-                } else return sortingChatList([item, ...s])
-            })
-        } 
-        if(chatType === 'mail') {
-            setChatList(s => {
-                const sender_user = s.find(i => i.sender_user?.id === item.sender_user_id)?.sender_user
-                if(sender_user) {
-                    return sortingMailChatList([{...item, sender_user}, ...s])
-                } else return sortingMailChatList([item, ...s])
-            })
-        }
-    }, [chatList, chatType])
+   
 
 
 
@@ -246,94 +229,155 @@ const ChatLayout = () => {
     }, [filter])
 
 
+    useEffect(() => {
+        if(token && currentChatId) {
+            service.getChatMedia(token, currentChatId).then(res => {
+                console.log(res)
+            })
+        }
+    }, [token, currentChatId])
+
 
     // !! подписка на события по сокету
     useEffect(() => {
         if(socketChannel) {
             if(chatType === 'chat') {
                 if(newMessage) {
-                    console.log(newMessage)
-                    setDialogsList(s => {
-                        const m = s;
-                        const findItem = m.find((i: any) => i.id === newMessage?.chat_list_item?.chat?.id)
-                        if(findItem) {
-                            const rm = m.splice(m.findIndex(i => i.id == findItem.id), 1, newMessage?.chat_list_item?.chat)
-                            
-                            return sortingDialogList([...m])
-                        } else {
-                            return sortingDialogList([newMessage?.chat_list_item?.chat, ...s])
-                        }
+                    onUpdateChat && onUpdateChat({
+                        messageBody: newMessage?.chat_list_item?.chat?.last_message, 
+                        dialogBody: newMessage?.chat_list_item?.chat
                     })
-    
-                    if(currentChatId === newMessage?.chat_list_item?.chat?.id) {
-                        setChatList(s => {
-                            return sortingChatList([{...newMessage?.chat_message, sender_user: newMessage?.chat_list_item?.chat?.last_message?.sender_user}, ...s])
-                        })
-                    }
                 }
-                socketChannel?.listen('.chat-message-read-event', (data: any) => {
-                    console.log(data)
-                    if(currentChatId && currentChatId == data?.chat_id) {
-                        setChatList(s => {
-                            const findItem = s.find(i => i.id == data?.chat_message_id)
-                            if(findItem) {
-                                const m = s;
-                                const rm = s.splice(m.findIndex(i => i.id == findItem.id), 1, {...findItem, is_read_by_recepient: 1})
-                                return sortingChatList([...m])
-                            } else {
-                                return s;
-                            }
-                        })
-                    }
-                })
+                // socketChannel?.listen('.chat-message-read-event', (data: any) => {
+                //     if(currentChatId && currentChatId == data?.chat_id) {
+                //         setChatList(s => {
+                //             const findItem = s.find(i => i.id == data?.chat_message_id)
+                //             if(findItem) {
+                //                 const m = s;
+                //                 const rm = s.splice(m.findIndex(i => i.id == findItem.id), 1, {...findItem, is_read_by_recepient: 1})
+                //                 return sortingChatList([...m])
+                //             } else {
+                //                 return s;
+                //             }
+                //         })
+                //     }
+                // })
             }
             if(chatType === 'mail') {
                 if(newMail) {
-                    console.log(newMail)
-                    // setDialogsList(s => {
-                    //     const m = s;
-                    //     const findItem = m.find((i: any) => i.id === newMail?.letter_message?.letter?.id)
-                    //     console.log('findItem', findItem)
-                    //     if(findItem) {
-                    //         const rm = m.splice(m.findIndex(i => i.id == findItem.id), 1, newMail?.letter_message)
-                    //         return sortingDialogList([...m])
-                    //     } else {
-                    //         return sortingDialogList([newMail?.letter_message, ...s])
-                    //     }
-                    // })
-                    setDialogsList(s => {
-                        const m = s;
-                        const findItem = m.find((i: any) => i.id === newMail?.letter_list_item?.letter?.id)
-                        if(findItem) {
-                            const rm = m.splice(m.findIndex(i => i.id == findItem.id), 1, newMail?.letter_list_item?.letter)
-                            
-                            return sortingDialogList([...m])
-                        } else {
-                            return sortingDialogList([newMail?.letter_list_item?.letter, ...s])
-                        }
-                    })
-                    updateChat(newMail?.letter_message)
-
-
-
-
-                    // updateDialogsList && updateDialogsList((s: any) => {
-                    //     const m = s;
-                    //     const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
-                    //     return sortingDialogList([...m])
-                    // })
-                    // updateChat(res?.letter?.last_message)   
+                    onUpdateChat && onUpdateChat({
+                        messageBody: newMail?.letter_list_item?.letter?.last_message, 
+                        dialogBody: newMail?.letter_list_item?.letter
+                    }) 
                 }
             }
         }
     }, [socketChannel, currentChatId, chatType, newMessage, newMail])
 
-    // useEffect(() => {
-    //     if(chatType) {
-    //         Router.push(`/chat?type=${chatType}`)
-    //     }
-        
-    // }, [chatType])
+
+
+
+
+    const onDeleteDialog = (dialogId: number | string) => {
+        // if(dialogId && token) {
+        //     service.deleteChat(token, Number(dialogId)).then(res => {
+        //         if(res?.message === 'success') {
+        //             const foundDialog = dialogsList?.find(i => i.id == dialogId)
+        //             if(foundDialog) {
+        //                 setDialogsList(s => {
+        //                     const m = s;
+        //                     const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1)
+        //                     return sortingDialogList([...m])
+        //                 })
+        //             }
+        //         } else {
+        //             notify()
+        //         }
+        //     })
+        // }
+        if(dialogId) {
+            const foundDialog = dialogsList?.find(i => i.id == dialogId)
+            if(foundDialog) {
+                setDialogsList(s => {
+                    const m = s;
+                    const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1)
+                    return sortingDialogList([...m])
+                })
+            }
+        }
+    }
+
+
+    const onUpdateChat = (body: {
+        messageBody?: any,
+        dialogBody?:any
+    }) => {
+        // ?? В САМОМ ЧАТЕ
+        if(body?.dialogBody && body?.messageBody) {
+
+            // TODO Если выбран ЧАТ
+            if(chatType === 'chat') {
+                // ?? обновление чата
+                const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
+                if(foundMessage) {
+                    setChatList(s => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex(i => i.id == foundMessage?.id), 1, body?.messageBody)
+                        return sortingChatList([...m])
+                    })   
+                } else {
+                    setChatList(s => {
+                        return sortingChatList([body?.messageBody, ...s])
+                    })
+                }
+                // ?? обновление диалогов
+                const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 
+                if(foundDialog) {
+                    setDialogsList(s => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1, body?.dialogBody)
+                        return sortingDialogList([...m])
+                    })
+                } else {
+                    setDialogsList(s => {
+                        return sortingDialogList([body?.dialogBody, ...s])
+                    })
+                }
+            } 
+
+            // TODO Если выбраны ПИСЬМА
+            if(chatType === 'mail') {
+                const foundLetter = chatList?.find(s => s?.id == body?.messageBody?.id)
+                if(foundLetter) {
+                    setChatList(s => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex(i => i.id == foundLetter?.id), 1, body?.messageBody)
+                        return sortingMailChatList([...m])
+                    })
+                } else {
+                    setChatList(s => {
+                        return sortingMailChatList([body?.messageBody, ...s])
+                    })
+                }
+
+                const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 
+                if(foundDialog) {
+                    setDialogsList(s => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1, body?.dialogBody)
+                        return sortingDialogList([...m])
+                    })
+                } else {
+                    setDialogsList(s => {
+                        return sortingDialogList([body?.dialogBody, ...s])
+                    })
+                }
+            }
+        } else {
+            // !! НЕХВАТАЕТ ВХОДНЫХ ДАННЫХ
+        }
+    }
+    
 
     
 
@@ -382,15 +426,14 @@ const ChatLayout = () => {
                             updateDialogsList={setDialogsList}
                                          
 
-
+                            onUpdateChat={onUpdateChat}
                             // !!тестовый проп
-                            updateChat={updateChat}
+                            
                             ChatType={chatType}
                             loadMain={loadMain}
                             loadSide={loadSide}
 
                             loadedDialogs={loadedDialogs}
-
                             currentUser={currentUser}
                             />
                     </div>

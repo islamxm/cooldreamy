@@ -109,9 +109,8 @@ export interface ILocale {
         notifications: {
             success_image_upload: string,
             success_edit_profile: string,
-
-            
-            error_default: string
+            error_default: string,
+            success_delete_chat: string
         },
         placeholders: {
             chat_empty: {

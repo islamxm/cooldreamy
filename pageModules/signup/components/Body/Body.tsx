@@ -235,9 +235,7 @@ const Body:FC = () => {
 
     useEffect(() => {
         if(currentStep === 1 && token && birthday) {
-            service.updateMyProfile({birthday: birthday}, token).then(res => {
-                //
-            })
+            service.updateMyProfile({birthday: birthday}, token)
         }
     }, [currentStep, token, birthday, about])
 

@@ -851,6 +851,21 @@ class ApiService {
             console.log(err)
         }
     }
+
+    getChatMedia = async (token: IToken, id?: number | string) => {
+        try {
+            let res = await fetch(endpoints.getChatMedia + id, {
+                method: 'GET',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

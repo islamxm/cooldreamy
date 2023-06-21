@@ -23,13 +23,16 @@ import IconButton from '@/components/IconButton/IconButton';
 import {BiArrowBack} from 'react-icons/bi';
 import Avatar from '@/components/Avatar/Avatar';
 import DialogEmpty from '../DialogEmpty/DialogEmpty';
-
+import {VscListSelection} from 'react-icons/vsc';
 import SkeletonChat from '../SkeletonChat/SkeletonChat';
 import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
 import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
 import { PulseLoader } from 'react-spinners';
 import getPrice from '@/helpers/getPrice';
 import { updateLimit } from '@/store/actions';
+import { BsTrash } from 'react-icons/bs';
+import PromptModal from '@/popups/PromptModal/PromptModal';
+import notify from '@/helpers/notify';
 
 
 const service = new ApiService()
@@ -38,7 +41,7 @@ const service = new ApiService()
 
 type ChatBodyComponentType = {
     ChatType?: 'mail' | 'chat'
-    updateChat: (...args: any[]) => any,
+    onUpdateChat: (...args: any[]) => any,
 
     loadSide?: boolean,
     loadMain?: boolean,
@@ -64,8 +67,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     totalChatItemCount,
     totalDialogItemCount,
 
+    onUpdateChat,
+
     // !! тестовый проп
-    updateChat,
     ChatType,
     loadSide,
     loadMain,
@@ -78,8 +82,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
     const {query: {id}} = useRouter()
-    const {token, actionsPricing} = useAppSelector(s => s)
+    const {token, actionsPricing, locale} = useAppSelector(s => s)
     const [pb, setPb] = useState<number>(70)
+    const [promptModal, setPromptModal] = useState(false)
 
     const [mockType, setMockType] = useState<'wink' | 'gift' | 'text' | ''>('')
 
@@ -118,8 +123,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
                             return sortingDialogList([...m])
                         })
-                        updateChat(res?.chat?.last_message)
-                        
+                        // updateChat(res?.chat?.last_message)
+                        onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                     }
                     setMockType('')
                 })
@@ -141,7 +146,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
                             return sortingDialogList([...m])
                         })
-                        updateChat(res?.letter?.last_message)
+                        // updateChat(res?.letter?.last_message)
                     }
                     
                     setMockType('')
@@ -170,7 +175,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.chat?.id), 1, res?.chat)
                             return sortingDialogList([...m])
                         })
-                        updateChat(res?.chat?.last_message)
+                        onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                     }
                    
                     setMockType('')
@@ -192,7 +197,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             const rm = m.splice(m.findIndex((i: any) => i.id === res?.letter?.id), 1, res?.letter)
                             return sortingDialogList([...m])
                         })
-                        updateChat(res?.letter?.last_message)
+                        // updateChat(res?.letter?.last_message)
                     }
                     setMockType('')
                 })
@@ -201,11 +206,36 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     }
     
     
-
+    const onDeleteChat = () => {
+        if((id && typeof id === 'string') && token) {
+            service.deleteChat(token, Number(id)).then(res => {
+                console.log(res)
+                if(res?.message === 'success') {
+                    updateDialogsList && updateDialogsList((s: any) => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex((i: any) => i.id === id), 1)
+                        return sortingDialogList([...m])
+                    })
+                    setPromptModal(true)
+                    notify(locale?.global?.notifications?.success_delete_chat, 'SUCCESS')
+                } else {
+                    notify(locale?.global?.notifications?.error_default, 'ERROR')
+                }
+            })
+        }
+    }
 
 
     return (
         <div className={styles.wrapper}>
+
+            <PromptModal
+                open={promptModal}
+                onCancel={() => setPromptModal(false)}
+                text='Желаете удалить диалог?'
+                onAccept={onDeleteChat}
+                />
+
             {
                 width <= 768 && id ? (
                     <div className={styles.bc}>
@@ -288,6 +318,27 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 <div className={styles.body} style={{
                                     height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px)`
                                 }}>
+                                    <div className={styles.body_action}>
+                                        <div className={styles.body_action_item}>
+                                            <IconButton
+                                                onClick={() => setPromptModal(true)}
+                                                icon={<BsTrash/>}
+                                                size={35}
+                                                variant={'bordered'}
+                                                style={{border: 'none', color: '#888888'}}
+                                                />
+                                        </div>
+                                        <div className={styles.body_action_item}>
+                                            <IconButton
+                                                icon={<VscListSelection/>}
+                                                size={35}
+                                                style={{borderRadius: '11px', borderColor: 'rgba(104, 98, 237, 0.21)'}}
+                                                variant={'bordered'}
+                                                />
+                                        </div>
+                                    </div>
+
+
                                     {
                                         loadMain ? (
                                             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}><PulseLoader color='var(--violet)'/></div>
@@ -359,7 +410,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                         setMockType('')
                                     }
                                 }}
-                                updateChat={updateChat}
+                                onUpdateChat={onUpdateChat}
                                 setHeight={setPb}
                                 updateDialogsList={updateDialogsList}
                                 />

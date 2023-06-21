@@ -40,7 +40,9 @@ const Dialog:FC<I> = ({
 }) => {
     const {userId} = useAppSelector(s => s)
     
-    const {inView, ref} = useInView()
+    const {inView, ref} = useInView({
+        rootMargin: '150px'
+    })
     const [loadMore, setLoadMore] = useState(false)
 
     

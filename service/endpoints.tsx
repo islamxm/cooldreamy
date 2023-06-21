@@ -92,6 +92,10 @@ const endpoints = {
     subscribe: `${API_PATH}subscriptions/subscribe`,
     deleteChat: `${API_PATH}chats/delete_chat/`,
     signupEnd: `${API_PATH}set_aces`,
+
+
+
+    getChatMedia: `${API_PATH}chats/media/`
 }
 
 export default endpoints;

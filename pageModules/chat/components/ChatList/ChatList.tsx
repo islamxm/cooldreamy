@@ -30,7 +30,9 @@ const ChatList:FC<IDialogs> = ({
     updateDialogsList,
 }) => {
     const {locale} = useAppSelector(s => s)
-    const {inView, ref} = useInView()
+    const {inView, ref} = useInView({
+        rootMargin: '150px'
+    })
     const [loadMore, setLoadMore] = useState(false)
     const [search, setSearch] = useState('')
     const {width} = useWindowSize()
