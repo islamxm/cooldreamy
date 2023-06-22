@@ -3,14 +3,8 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Container from "@/components/Container/Container";
 import { Row, Col } from "antd";
 import SearchBody from "@/pageModules/search/components/searchBody/SearchBody";
-import { useAppSelector } from "@/hooks/useTypesRedux";
-import {useEffect} from 'react';
-
 
 const SearchPage = () => {
-    const {token} = useAppSelector(s => s)
-
-    
 
     return (
         <Container>
@@ -19,9 +13,6 @@ const SearchPage = () => {
                 <div style={{width: '100%'}}>
                     <Col span={24}>
                         <Row gutter={[15, 15]}>
-                            {/* <Col span={24}>
-                                <Streams/>
-                            </Col> */}
                             <Col span={24}>
                                 <SearchBody/>
                             </Col>

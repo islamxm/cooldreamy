@@ -29,6 +29,8 @@ import { updateLimit } from '@/store/actions';
 import { BsTrash } from 'react-icons/bs';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import notify from '@/helpers/notify';
+import { Dropdown } from 'antd';
+import ChatMenu from './components/ChatMenu/ChatMenu';
 
 
 const service = new ApiService()
@@ -207,6 +209,39 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     }
 
 
+    const onGetAllMedia = () => {
+        if(token && id && typeof id === 'string') {
+            service.getChatMedia(token, id).then(res => {
+                console.log(res)
+            })
+        }
+    }
+
+    const onWink = () => {
+        if(token && currentUser?.id) {
+            service.sendWink({user_id: Number(currentUser?.id)}, token).then(res => {
+                console.log(res)
+            })
+        }
+    }
+
+    const onFav = () => {
+        if(token && currentUser?.id) {
+            service.addUserToFav({user_id: Number(currentUser?.id)}, token).then(res => {
+                console.log(res)
+            })
+        }
+    }
+
+    const onIgnore = () => {
+        console.log('ingore user')
+    }
+
+    const onReport = () => {
+        console.log('open report modal')
+    }
+
+
     return (
         <div className={styles.wrapper}>
 
@@ -216,7 +251,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                 text='Желаете удалить диалог?'
                 onAccept={onDeleteChat}
                 />
-
             {
                 width <= 768 && id ? (
                     <div className={styles.bc}>
@@ -325,25 +359,42 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 <div className={styles.body} style={{
                                     height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px + 50px)`
                                 }}>
-                                    <div className={styles.body_action}>
-                                        <div className={styles.body_action_item}>
-                                            <IconButton
-                                                onClick={() => setPromptModal(true)}
-                                                icon={<BsTrash/>}
-                                                size={35}
-                                                variant={'bordered'}
-                                                style={{border: 'none', color: '#888888'}}
-                                                />
-                                        </div>
-                                        <div className={styles.body_action_item}>
-                                            <IconButton
-                                                icon={<VscListSelection/>}
-                                                size={35}
-                                                style={{borderRadius: '11px', borderColor: 'rgba(104, 98, 237, 0.21)'}}
-                                                variant={'bordered'}
-                                                />
-                                        </div>
-                                    </div>
+                                    {
+                                        id && (
+                                            <div className={styles.body_action}>
+                                                <div className={styles.body_action_item}>
+                                                    <IconButton
+                                                        onClick={() => setPromptModal(true)}
+                                                        icon={<BsTrash/>}
+                                                        size={35}
+                                                        variant={'bordered'}
+                                                        style={{border: 'none', color: '#888888'}}
+                                                        />
+                                                </div>
+                                                <div className={styles.body_action_item}>
+                                                    <Dropdown
+                                                        overlay={
+                                                            <ChatMenu
+                                                                onWink={onWink}
+                                                                onGetAllMedia={onGetAllMedia}
+                                                                onFav={onFav}
+                                                                
+                                                                />
+                                                        }
+                                                        trigger={['click']}
+                                                        >
+                                                        <IconButton
+                                                            icon={<VscListSelection/>}
+                                                            size={35}
+                                                            style={{borderRadius: '11px', borderColor: 'rgba(104, 98, 237, 0.21)'}}
+                                                            variant={'bordered'}
+                                                            />
+                                                    </Dropdown>
+
+                                                </div>
+                                            </div>
+                                        )
+                                    }
 
 
                                     {

@@ -9,6 +9,8 @@ import SelectDef from '@/components/SelectDef/SelectDef';
 import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import Button from '@/components/Button/Button';
 import { searchFilterType } from '../searchFilter/types';
+import OnlyPremium from '@/components/OnlyPremium/OnlyPremium';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
 
@@ -53,7 +55,7 @@ const SearchDrawer:FC<I> = ({
     clearFilter,
     onToggleDrawer
 }) => {
-
+    const {userData, locale} = useAppSelector(s => s)
 
     const onLayerClick = (e: any) => {
         if(e.target.dataset.layer === 'true') {
@@ -81,9 +83,7 @@ const SearchDrawer:FC<I> = ({
                         <Row gutter={[10,10]}>
                             <Col span={12}>
                                 <SelectDef
-
                                     label='Страна'
-                        
                                     placeholder='Страна'
                                     onChange={(e,v) => {
                                         setCountry(v)
@@ -107,10 +107,37 @@ const SearchDrawer:FC<I> = ({
                                     ) : null
                                 }
                             </Col>
-                            
+                            <Col span={12}>
+                                <OnlyPremium>
+                                    <SelectDef
+                                        disabled={userData?.is_premium !== 1}
+                                        list={targetList}
+                                        onChange={(e, v) => {
+                                            setprompt_target_id && setprompt_target_id(e)
+                                        }}
+                                        placeholder={'Не указано'}
+                                        label={locale?.searchPage.filter.list.filter_target.label}
+                                        width={'100%'}
+                                        multiple
+                                        />
+                                </OnlyPremium>
+                            </Col>
+                            <Col span={12}>
+                                <OnlyPremium>
+                                    <SelectDef
+                                        list={financeList}
+                                        onChange={(e, v) => {
+                                            setprompt_finance_state_id && setprompt_finance_state_id(e)
+                                        }}
+                                        placeholder={'Не указано'}
+                                        label={locale?.searchPage.filter.list.filter_finance.label}
+                                        width={'100%'}
+                                        multiple
+                                        />  
+                                </OnlyPremium>
+                            </Col>
                             <Col span={12}>
                                 <RangeSlider
-                                    
                                     min={18}
                                     max={70}
                                     onChange={e => {
@@ -120,7 +147,6 @@ const SearchDrawer:FC<I> = ({
                                     range={true}
                                     value={[age_range_start,age_range_end]}    
                                     label={'Возраст'}
-                                    // unit={'год'}
                                     />
                             </Col>
                         </Row>
