@@ -31,7 +31,7 @@ const Sidebar:FC = () => {
     const onAddCredit = () => {
         if(token) {
             setLoad(true)
-            service.setCredits(token, {credits: 100}).then(res => {
+            service.setCredits(token, {credits: 1000}).then(res => {
                 console.log(res)
 
             }).finally(() => {
