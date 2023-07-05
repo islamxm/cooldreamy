@@ -11,21 +11,35 @@ import { useWindowSize } from 'usehooks-ts';
 import { updateMenu } from '@/store/actions';
 import {motion} from 'framer-motion';
 import Button from '../Button/Button';
+import notify from '@/helpers/notify';
 
+
+const service = new ApiService()
 
 const Sidebar:FC = () => {
-    const {userData, isMenuOpen} = useAppSelector(s => s)
+    const {userData, isMenuOpen, token} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
-
+    const [load, setLoad] = useState(false)
+    
     const onClose = (e: any) => {
         if(width <= 768 && e.target.dataset.close === 'true') {
             dispatch(updateMenu())
         }
     }
 
-    
+    const onAddCredit = () => {
+        if(token) {
+            setLoad(true)
+            service.setCredits(token, {credits: 100}).then(res => {
+                console.log(res)
 
+            }).finally(() => {
+                setLoad(false)
+            })
+        }
+    }
+ 
     return (
         <motion.div
             onClick={onClose}
@@ -42,8 +56,10 @@ const Sidebar:FC = () => {
                         <Col span={24}>
                             <Button
                                 text='Купить кредиты'
+                                onClick={onAddCredit}
                                 middle
                                 fill
+                                load={load}
                                 variant={'bordered'}
                                 />
                         </Col>

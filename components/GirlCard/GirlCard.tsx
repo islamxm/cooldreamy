@@ -119,13 +119,13 @@ const GirlCard:FC<IUser> = ({
                 
                 
                 <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
-                    <Image
+                    {/* <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
                         src={avatar_url_thumbnail ? avatar_url_thumbnail : placeholder} 
                         width={300}
                         height={300}
                         alt=""/>
-                   
+                    */}
                 </div>
             </div>
             <div className={styles.body}>
