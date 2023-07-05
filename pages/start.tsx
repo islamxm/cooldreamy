@@ -9,6 +9,7 @@ import { useWindowSize } from "usehooks-ts";
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import ru from "@/helpers/localeMock";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const StartPage: React.FC = () => {
     const {width} = useWindowSize()
@@ -17,6 +18,9 @@ const StartPage: React.FC = () => {
 
     return (
         <>
+            <Head>
+                <meta name="verification" content="34dda10c8f41dd109f446ea1555c563c"/>
+            </Head>
             {
                 token && width <= 768 ? (
                     <Sidebar/>
