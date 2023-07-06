@@ -50,6 +50,9 @@ const Hero: FC = ({}) => {
                         <motion.div variants={item} className={styles.subtitle}>
                             {locale?.startPage?.start_hero_steps}
                         </motion.div>
+                        <div className={styles.adv}>
+                        {parse(locale?.startPage?.start_hero_adv)}
+                        </div>
                         <div className={styles.selects}>
                             <motion.div variants={item}>
                                 <SelectSex
@@ -66,9 +69,7 @@ const Hero: FC = ({}) => {
                                     />
                             </motion.div>
                         </div>
-                        <div className={styles.adv}>
-                        {parse(locale?.startPage?.start_hero_adv)}
-                        </div>
+                        
                     </div>
                     <div className={styles.motion}>
                             <div className={styles.clouds}>
@@ -120,6 +121,11 @@ const Hero: FC = ({}) => {
                                     </motion.div>
                                     
                                 </motion.div>
+                                {/* <motion.div
+                                    className={styles.}
+                                    >
+
+                                </motion.div> */}
                             </motion.div>
                     </div>
                     <div className={styles.action}>
