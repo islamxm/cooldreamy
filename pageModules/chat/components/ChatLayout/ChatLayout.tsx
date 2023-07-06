@@ -40,7 +40,7 @@ const ChatLayout = () => {
 
     // !! фильтры
     const [chatType, setChatType] = useState<'chat' | 'mail'>()
-    const [filter, setFilter] = useState('all')
+    const [filter, setFilter] = useState<'all' | 'unread' | 'favorite' | 'ignored' | any>('all')
 
 
     // !! данные
@@ -418,6 +418,7 @@ const ChatLayout = () => {
                 <Col span={24}>
                     <div className={styles.main}>
                         <ChatBody
+                            filter={filter}
                             chatList={chatList}
                             dialogsList={dialogsList}
                             activeDialogId={currentChatId}

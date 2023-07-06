@@ -26,6 +26,7 @@ const service = new ApiService()
 
 interface I extends chatItemPropsTypes {
     updateDialogsList: (...args: any[]) => any,
+    filter?: 'all' | 'unread' | 'ignored' | 'favorite'
 }
 
 const ChatItem = ({
@@ -41,12 +42,13 @@ const ChatItem = ({
     active,
     
     updateDialogsList,
+    filter
 
 }:I) => {
     const dispatch = useAppDispatch()
     const {query: {type}} = useRouter()
     const {token} = useAppSelector(s => s)
-    const {avatar_url, avatar_url_thumbnail, name, online} = another_user || {};
+    const {avatar_url, avatar_url_thumbnail, name, online, user_avatar_url} = another_user || {};
     
 
 
@@ -105,12 +107,17 @@ const ChatItem = ({
     const deleteFromFav = () => {
         if(token && id && another_user?.id) {
             service.deleteUserFromFav({user_id: another_user?.id}, token).then(res => {
+                console.log(res)
                 if(res?.status === 200) {
                     updateDialogsList((s: any | any[]) => {
                         const findItem = s.find((i: any) => i.id === id)
                         if(findItem) {
                             const m = s;
-                            const rm = m.splice(m.findIndex((i:any) => i.id === findItem.id), 1, {...findItem, favorite: false})
+                            if(filter === 'favorite') {
+                                const rm = m.splice(m.findIndex((i:any) => i.id === findItem.id), 1)
+                            } else {
+                                const rm = m.splice(m.findIndex((i:any) => i.id === findItem.id), 1, {...findItem, favorite: false})
+                            }
                             return [...m]
                         } else return s;
                     })
@@ -141,7 +148,7 @@ const ChatItem = ({
                     <Avatar
                         size={63}
                         verified={is_confirmed_user == 1}
-                        image={avatar_url_thumbnail}    
+                        image={user_avatar_url}    
                         />
                 </div>
                 <div className={styles.body}>

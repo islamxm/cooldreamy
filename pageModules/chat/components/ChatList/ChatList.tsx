@@ -27,6 +27,7 @@ const ChatList:FC<IDialogs> = ({
     totalDialogItemCount,
 
     updateDialogsList,
+    filter
 }) => {
     const {locale} = useAppSelector(s => s)
     const {inView, ref} = useInView({
@@ -48,7 +49,7 @@ const ChatList:FC<IDialogs> = ({
     }, [inView, loadMore, updateDialogsPage])
 
 
-   
+
 
   
     return (
@@ -61,6 +62,7 @@ const ChatList:FC<IDialogs> = ({
                         {...item}
                         active={item?.id === activeDialogId}
                         updateDialogsList={updateDialogsList}
+                        
                         />
                 )) : null
                 // <div className={styles.empty}>Нет переписок</div>

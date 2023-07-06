@@ -15,11 +15,13 @@ const ChatSide:FC<IDialogs> = ({
     updateDialogsPage,
     updateDialogsList,
     totalDialogItemCount,
+    filter
 }) => {
 
     return (
         <div className={styles.wrapper}>
             <ChatList
+                filter={filter}
                 totalDialogItemCount={totalDialogItemCount}
                 updateDialogsPage={updateDialogsPage}
                 updateDialogsList={updateDialogsList}

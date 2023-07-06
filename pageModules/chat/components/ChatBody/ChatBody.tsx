@@ -49,7 +49,9 @@ type ChatBodyComponentType = {
     currentUser?: any,
 
     dialogSearch?: string,
-    setDialogSearch?: (...args: any[]) => any
+    setDialogSearch?: (...args: any[]) => any,
+
+    filter: 'all' | 'unread' | 'favorite' | 'ignored'
 }
 
 
@@ -79,7 +81,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     currentUser,
 
     dialogSearch,
-    setDialogSearch
+    setDialogSearch,
+    filter
 
 }) => {
     const dispatch = useAppDispatch()

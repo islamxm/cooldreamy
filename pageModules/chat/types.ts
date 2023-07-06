@@ -112,7 +112,8 @@ type chatUserType = {
     id?: number,
     name?: string,
     age?: number,
-    online?: 1 | 0
+    online?: 1 | 0,
+    user_avatar_url?: string
 }
 
 // диалог (чат лист)
@@ -121,7 +122,8 @@ export interface IDialogs {
     activeDialogId?: number,
     updateDialogsPage?: (...args: any[]) => any,
     updateDialogsList?: (...args: any[]) => any,
-    totalDialogItemCount?: number
+    totalDialogItemCount?: number,
+    filter?: 'all' | 'unread' | 'ignored' | 'favorite'
 }
 
 // сообщения в чате
