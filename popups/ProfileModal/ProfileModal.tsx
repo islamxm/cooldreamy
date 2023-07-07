@@ -4,7 +4,7 @@ import { Modal, ModalFuncProps, Row, Col } from 'antd';
 import {FC, useEffect, useState, useRef} from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { Swiper as SwiperWrap, SwiperSlide } from 'swiper/react';
-import Swiper , {Thumbs} from 'swiper';
+import Swiper , {Thumbs, Navigation} from 'swiper';
 import Skeleton from './components/Skeleton/Skeleton';
 import { updateCurrentProfileId } from '@/store/actions';
 import Image from 'next/image';
@@ -170,8 +170,12 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                         profile_photo && profile_photo?.length > 1 ? (
                                             <div className={styles.thumbs}>
                                                 <SwiperWrap
-                                                    modules={[Thumbs]}
+                                                    modules={[Thumbs, Navigation]}
                                                     className={styles.thumbs_body}
+                                                    navigation={{
+                                                        prevEl: 'profile-modal-nav-prev',
+                                                        nextEl: 'profile-modal-nav-next'
+                                                    }}
                                                     slidesPerView={3}
                                                     watchSlidesProgress
                                                     onSwiper={setThumbsSwiper}
@@ -190,6 +194,8 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                             </SwiperSlide>
                                                         ))
                                                     }
+                                                    <div className={`profile-modal-nav-prev ${styles.nav} ${styles.prev}`}>prev</div>
+                                                    <div className={`profile-modal-nav-next ${styles.nav} ${styles.next}`}>next</div>
                                                 </SwiperWrap>
                                             </div>
                                         ) : null
