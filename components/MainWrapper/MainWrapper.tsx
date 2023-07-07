@@ -115,6 +115,7 @@ const MainWrapper = ({
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
 				dispatch(updateNewMessage(data))
+				console.log(data)
 				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
 				switch(data?.chat_message?.chat_messageable_type) {
 					
