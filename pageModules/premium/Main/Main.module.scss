@@ -18,3 +18,19 @@
         margin: 0 15px;
     }
 }
+
+@media (max-width: 1200px) {
+    .wrapper {
+        padding: 0;
+        background-color: unset;
+        
+        .in {
+            flex-wrap: wrap;
+
+            .item {
+                width: calc(100% - 30px);
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

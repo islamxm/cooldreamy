@@ -54,14 +54,15 @@ const Sidebar:FC = () => {
                                 />
                         </Col>
                         <Col span={24}>
-                            <Button
+                            {/* <Button
                                 text='Купить кредиты'
                                 onClick={onAddCredit}
                                 middle
                                 fill
                                 load={load}
                                 variant={'bordered'}
-                                />
+                                /> */}
+                            <PremiumBtn/>
                         </Col>
                         <Col span={24}>
                             <Menu/>

@@ -17,7 +17,8 @@ const Main = () => {
                     <CardBalance/>
                 </div>
                 <div className={styles.item}>
-                    <CardAdv/>
+                    {/* <CardAdv/> */}
+                    <CardPremium/>
                 </div>
             </div>
         </div>

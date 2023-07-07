@@ -116,7 +116,7 @@ const MainWrapper = ({
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
 				dispatch(updateNewMessage(data))
 				console.log(data)
-				const avatar = data?.chat_list_item?.chat?.another_user?.avatar_url_thumbnail;
+				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
 				switch(data?.chat_message?.chat_messageable_type) {
 					
 					case chatMessageTypeVariants.messageText:

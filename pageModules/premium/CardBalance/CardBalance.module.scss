@@ -95,3 +95,9 @@
         }
     }
 }
+
+@media (max-width: 1200px) {
+    .wrapper {
+        border: 2px solid var(--violet);
+    }
+}
