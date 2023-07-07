@@ -1,3 +1,210 @@
 .wrapper {
-    
+    padding: 15px 55px;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    padding-bottom: 55px;
+
+    .top {
+        margin-bottom: 60px;
+
+        .head {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .balance {
+            text-align: center;
+            margin-bottom: 30px;
+
+            span {
+                color: var(--violet);
+                font-weight: 700;
+            }
+        }
+
+        .list {
+            display: flex;
+            margin-left: -15px;
+            margin-right: -15px;
+
+            .item {
+                width: calc((100% / 3) - 30px);
+                margin: 0 15px;
+                border-radius: 20px;
+                background: #F0EBFF;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-height: 185px;
+                padding: 15px;
+                position: relative;
+
+                .badge {
+                    position: absolute;
+                    top: -15px;
+                    right: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #fff;
+                    border-radius: 12px;
+                    min-height: 30px;
+                    text-transform: uppercase;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 23px;
+                    padding: 2px 12px;
+                }
+
+                .price {
+                    margin-bottom: 10px;
+                    font-size: 18px;
+                    color: var(--violet);
+                    font-weight: 500;
+                }
+
+                .credits {
+                    margin-bottom: 10px;
+                    .value {
+                        font-size: 45px;
+                        font-weight: 700;
+                    }
+                    span {
+                        color: rgba(53, 53, 53, 0.50);
+                        font-size: 15px;
+                    }
+                }
+
+                .ex {
+                    font-size: 15px;
+                }
+
+                &:nth-child(2) {
+                    background-image: url('../../../../public/assets/images/deposit-1-bg.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    color: #fff;
+                    .badge {
+                        background-color: #DA8DF9;
+                    }
+                    
+
+                    .price {
+                        color: #fff;
+                    }
+
+                    .credits {
+                        span {
+                            color: rgba(255, 255, 255, 0.50);
+                        }
+                    }
+                }
+
+                &:nth-child(3) {
+                    background-image: url('../../../../public/assets/images/deposit-2-bg.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+
+                    .badge {
+                        background-color: var(--violet);
+                    }
+                }
+            }
+        }
+    }
+
+    .main {
+        .adv {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            .fr {
+                position: relative;
+                padding-left: 35px;
+
+                &:after {
+                    position: absolute;
+                    width: 25px;
+                    height: 25px;
+                    left: 0;
+                    top: calc(50% - 12.5px);
+                    content: '';
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: contain;
+                    background-image: url('../../../../public/assets/images/secure.svg');
+                }
+                font-size: 18px;
+                line-height: 120%;
+                b {
+                    display: block;
+                }
+            }
+
+            .av {
+                display: flex;
+                align-items: center;
+
+                .item {
+                    height: 70px;
+                    margin: 0 15px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        display: flex;
+                        
+                    }
+                }
+            }
+        }
+
+        .field {
+            height: 350px;
+            background: #D9D9D9;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+        .top {  
+            .list {
+                flex-wrap: wrap;
+
+                .item {
+                    width: calc(100% - 30px);
+                    margin-bottom: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        .top {
+            .list {
+                .item {
+                    min-height: 170px;
+                }
+            }
+        }
+
+        .main {
+            .adv {
+                flex-wrap: wrap;
+                
+                .fr {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
 }

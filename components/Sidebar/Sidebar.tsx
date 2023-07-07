@@ -12,6 +12,7 @@ import { updateMenu } from '@/store/actions';
 import {motion} from 'framer-motion';
 import Button from '../Button/Button';
 import notify from '@/helpers/notify';
+import Router from 'next/router';
 
 
 const service = new ApiService()
@@ -56,10 +57,9 @@ const Sidebar:FC = () => {
                         <Col span={24}>
                             <Button
                                 text='Купить кредиты'
-                                onClick={onAddCredit}
+                                onClick={() => Router.push('/deposit')}
                                 middle
                                 fill
-                                load={load}
                                 variant={'default'}
                                 />
                             {/* <PremiumBtn/> */}
