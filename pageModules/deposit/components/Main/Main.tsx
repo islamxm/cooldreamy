@@ -5,14 +5,17 @@ import Image from 'next/image';
 import mcafee from '@/public/assets/images/mcafee.svg';
 import norton from '@/public/assets/images/norton.svg'
 import ApiService from '@/service/apiService';
-
-
+import PromptModal from '@/popups/PromptModal/PromptModal';
+import * as _ from 'lodash'
 const service = new ApiService()
 
 
 const Main = () => {
     const {userData, token} = useAppSelector(s => s)
     const [list, setList] = useState<any[]>([])
+    const [modal, setModal] = useState(false)
+    const [selectedPlan, setSelectedPlan] = useState<any>(null)
+    const [load, setLoad] = useState(false)
 
     useEffect(() => console.log(userData) , [userData])
 
@@ -33,21 +36,36 @@ const Main = () => {
     }, [token])
 
 
+    const onAccept = () => {
+        if(selectedPlan && token) {
+
+        }
+    }
+
+
     return (
         <div className={styles.wrapper}>
+            {/* <PromptModal
+                open={modal}
+                onCancel={() => setModal(false)}
+                title={`Пополнение баланса`}
+                text='Вы уверены что хот'
+                /> */}
             <div className={styles.top}>
                 <div className={styles.head}>Пополнение баланса</div>
                 <div className={styles.balance}>Ваш баланс: <span>{userData?.credits} кредита</span></div>
                 <div className={styles.list}>
                     {
                         list?.map((i, index) => (
-                            <div className={styles.item} key={index}>
-                                <div className={styles.price}>{i?.price} грн</div>
+                            <div 
+                                onClick={() => setSelectedPlan(i)}
+                                className={styles.item} key={index}>
+                                <div className={styles.price}>{i?.price}$</div>
                                 <div className={styles.credits}>
                                 <div className={styles.value}>{i?.credits}</div>
                                 <span>кредитов</span>
                                 </div>
-                                <div className={styles.ex}>11 грн за 1 кредит</div>
+                                <div className={styles.ex}>{_.round(i?.price / i?.credits, 2)}$ за 1 кредит</div>
                             </div>
                         ))
                     }
