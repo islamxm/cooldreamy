@@ -60,6 +60,8 @@
 
             .thumbs {
                 margin-top: 15px;
+                position: relative;
+
                 .thumbs_item {
                     height: 80px;
                     border-radius: 10px;
@@ -91,16 +93,18 @@
                     align-items: center;
                     justify-content: center;
                     z-index: 3;
+                    cursor: pointer;
+                    color: #fff;
                 }
 
                 .nav.prev {
                     top: calc(50% - 15px);
-                    left: 0;
+                    left: -15px;
                 }
 
                 .nav.next { 
                     top: calc(50% - 15px);
-                    right: 0;
+                    right: -15px;
                 }
 
             }

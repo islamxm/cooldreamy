@@ -20,6 +20,7 @@ import { BsCamera } from 'react-icons/bs';
 import { FiHeart } from 'react-icons/fi';
 import { FaRegSmileWink } from 'react-icons/fa';
 import { AiOutlineStar } from 'react-icons/ai';
+import {FiChevronLeft, FiChevronRight} from 'react-icons/fi'
 import notify from '@/helpers/notify';
 const service = new ApiService()
 
@@ -173,8 +174,8 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                     modules={[Thumbs, Navigation]}
                                                     className={styles.thumbs_body}
                                                     navigation={{
-                                                        prevEl: 'profile-modal-nav-prev',
-                                                        nextEl: 'profile-modal-nav-next'
+                                                        prevEl: '.profile-modal-nav-prev',
+                                                        nextEl: '.profile-modal-nav-next'
                                                     }}
                                                     slidesPerView={3}
                                                     watchSlidesProgress
@@ -194,9 +195,14 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                             </SwiperSlide>
                                                         ))
                                                     }
-                                                    <div className={`profile-modal-nav-prev ${styles.nav} ${styles.prev}`}>prev</div>
-                                                    <div className={`profile-modal-nav-next ${styles.nav} ${styles.next}`}>next</div>
+                                                    
                                                 </SwiperWrap>
+                                                <div className={`profile-modal-nav-prev ${styles.nav} ${styles.prev}`}>
+                                                    <FiChevronLeft/>
+                                                </div>
+                                                <div className={`profile-modal-nav-next ${styles.nav} ${styles.next}`}>
+                                                    <FiChevronRight/>
+                                                </div>
                                             </div>
                                         ) : null
                                     }
