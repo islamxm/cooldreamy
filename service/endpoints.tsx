@@ -95,7 +95,17 @@ const endpoints = {
 
 
 
-    getChatMedia: `${API_PATH}chats/media/`
+    getChatMedia: `${API_PATH}chats/media/`,
+
+
+
+    //credits
+    pay: `${API_PATH}payments/pay`,
+    getPayPlans: `${API_PATH}payments/credits/list`,
+    getPaySubs: `${API_PATH}payments/subscription/list`,
+    getPayPrems: `${API_PATH}payments/premium/list`,
+    getSub: `${API_PATH}payments/subscription`,
+    getPrem: `${API_PATH}payments/premium`,
 }
 
 export default endpoints;

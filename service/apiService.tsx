@@ -868,6 +868,41 @@ class ApiService {
             console.log(err)
         }
     }
+
+
+    //pay
+
+    pay = async (token: IToken, body: {}) => {
+        try {
+            let res = await fetch(endpoints.pay, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
+    getPayPlans = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getPayPlans, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 
