@@ -17,13 +17,13 @@ const Main = () => {
     const [selectedPlan, setSelectedPlan] = useState<any>(null)
     const [load, setLoad] = useState(false)
 
-    useEffect(() => console.log(userData) , [userData])
+
 
 
     const getPlans = () => {
         if(token) {
             service.getPayPlans(token).then(res => {
-                console.log(res)
+                console.log(res?.map((i: any) => i?.status))
                 setList(res)
             })
         }
@@ -36,9 +36,19 @@ const Main = () => {
     }, [token])
 
 
-    const onAccept = () => {
-        if(selectedPlan && token) {
-
+    const onAccept = (plan: any) => {
+        console.log(plan)
+        console.log(token)
+        if(token) {
+            service.pay(token, {
+                list_type: 'credit',
+                list_id: plan?.id
+            }).then(res => {
+                console.log(res)
+                if(res?.link) {
+                    window.open(res?.link)
+                }
+            })
         }
     }
 
@@ -56,24 +66,57 @@ const Main = () => {
                 <div className={styles.balance}>Ваш баланс: <span>{userData?.credits} кредита</span></div>
                 <div className={styles.list}>
                     {
-                        list?.map((i, index) => (
-                            <div 
-                                onClick={() => setSelectedPlan(i)}
-                                className={styles.item} key={index}>
-                                <div className={styles.price}>{i?.price}$</div>
-                                <div className={styles.credits}>
-                                <div className={styles.value}>{i?.credits}</div>
-                                <span>кредитов</span>
-                                </div>
-                                <div className={styles.ex}>{_.round(i?.price / i?.credits, 2)}$ за 1 кредит</div>
-                            </div>
-                        ))
+                        list?.map((i, index) => {
+                            if(i?.status === 0) {
+                                return (
+                                    <div 
+                                        onClick={() => onAccept(i)}
+                                        className={styles.item} key={index}>
+                                        <div className={styles.price}>{i?.price}$</div>
+                                        <div className={styles.credits}>
+                                        <div className={styles.value}>{i?.credits}</div>
+                                        <span>кредитов</span>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            if(i?.status === 1) {
+                                return (
+                                    <div 
+                                        onClick={() => onAccept(i)}
+                                        className={`${styles.item} ${styles.pop}`} key={index}>
+                                        <div className={styles.badge}>
+                                        ПОПУЛЯРНЫЙ
+                                        </div>
+                                        <div className={styles.price}>{i?.price}$</div>
+                                        <div className={styles.credits}>
+                                        <div className={styles.value}>{i?.credits}</div>
+                                        <span>кредитов</span>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            if(i?.status === 2) {
+                                return (
+                                    <div 
+                                        onClick={() => onAccept(i)}
+                                        className={`${styles.item} ${styles.dsc}`} key={index}>
+                                        <div className={styles.badge}>
+                                            ВЫГОДНЫЙ
+                                        </div>
+                                        <div className={styles.price}>{i?.price}$</div>
+                                        <div className={styles.credits}>
+                                        <div className={styles.value}>{i?.credits}</div>
+                                        <span>кредитов</span>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        })
                     }
                     
                     {/* <div className={styles.item}>
-                        <div className={styles.badge}>
-                        ПОПУЛЯРНЫЙ
-                        </div>
+                        
                     <div className={styles.price}>559 грн</div>
                         <div className={styles.credits}>
                         <div className={styles.value}>50</div>
@@ -82,9 +125,7 @@ const Main = () => {
                         <div className={styles.ex}>11 грн за 1 кредит</div>
                     </div>
                     <div className={styles.item}>
-                    <div className={styles.badge}>
-                    ВЫГОДНЫЙ
-                        </div>
+                        
                     <div className={styles.credits}>
                         <div className={styles.value}>50</div>
                         <span>кредитов</span>

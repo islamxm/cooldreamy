@@ -85,37 +85,39 @@
                     font-size: 15px;
                 }
 
-                &:nth-child(2) {
-                    background-image: url('../../../../public/assets/images/deposit-1-bg.png');
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: cover;
+                
+            }
+
+            .item.pop {
+                background-image: url('../../../../public/assets/images/deposit-1-bg.png');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                color: #fff;
+                .badge {
+                    background-color: #DA8DF9;
+                }
+                
+
+                .price {
                     color: #fff;
-                    .badge {
-                        background-color: #DA8DF9;
-                    }
-                    
-
-                    .price {
-                        color: #fff;
-                    }
-
-                    .credits {
-                        span {
-                            color: rgba(255, 255, 255, 0.50);
-                        }
-                    }
                 }
 
-                &:nth-child(3) {
-                    background-image: url('../../../../public/assets/images/deposit-2-bg.png');
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: cover;
-
-                    .badge {
-                        background-color: var(--violet);
+                .credits {
+                    span {
+                        color: rgba(255, 255, 255, 0.50);
                     }
+                }
+            }
+
+            .item.dsc {
+                background-image: url('../../../../public/assets/images/deposit-2-bg.png');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+
+                .badge {
+                    background-color: var(--violet);
                 }
             }
         }

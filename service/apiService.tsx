@@ -872,7 +872,10 @@ class ApiService {
 
     //pay
 
-    pay = async (token: IToken, body: {}) => {
+    pay = async (token: IToken, body: {
+        list_type?: string,
+        list_id?: string
+    }) => {
         try {
             let res = await fetch(endpoints.pay, {
                 method: 'POST',
