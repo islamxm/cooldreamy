@@ -53,6 +53,21 @@ class ApiService {
         }
     }
 
+    logout = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.logout, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     search = async (
         body: {
         page: number,

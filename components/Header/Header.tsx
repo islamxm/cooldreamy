@@ -18,7 +18,9 @@ import en from '@/locales/en';
 import ru from '@/locales/ru';
 import PremiumBtn from '../Sidebar/components/PremiumBtn/PremiumBtn';
 import TagManager from 'react-gtm-module';
-
+import ApiService from '@/service/apiService';
+import notify from '@/helpers/notify';
+const service = new ApiService()
 
 const locales = [
     {value: '1', label: 'RU'},
@@ -36,18 +38,29 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
 
     
     const onLogout = () => {
-        socketChannel?.unsubscribe()
+        if(token) {
+            service.logout(token).then(res => {
+                console.log(res)
+                if(res?.message === 'success') {
+                    socketChannel?.unsubscribe()
 
-        dispatch(updateToken(''))
-        dispatch(updateUserId(null))
-        dispatch(updateSocket(null))
+                    dispatch(updateToken(''))
+                    dispatch(updateUserId(null))
+                    dispatch(updateSocket(null))
 
-        Cookies.remove('cooldate-web-user-id')
-        Cookies.remove('cooldate-web-token')
+                    Cookies.remove('cooldate-web-user-id')
+                    Cookies.remove('cooldate-web-token')
+                    
+                    Router.push('/')
+                    setLogoutModal(false)
+                    window.location.reload()
+                } else {
+                    notify(locale?.global?.notifications?.error_default, 'ERROR')
+                }
+            })
+        }
         
-        Router.push('/')
-        setLogoutModal(false)
-        window.location.reload()
+        
     }
 
     const testGtag = () => {

@@ -42,7 +42,7 @@ const MailItem:FC<IMail> = ({
     const [openLoad, setOpenLoad] = useState(false)
     const {width} = useWindowSize()
 
-
+    
 
     const dispatch = useAppDispatch()
     const {inView, ref} = useInView({
