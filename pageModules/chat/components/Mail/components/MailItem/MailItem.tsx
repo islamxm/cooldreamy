@@ -12,6 +12,8 @@ import { IMail } from '@/pageModules/chat/types';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import Image from 'next/image';
 import { useWindowSize } from 'usehooks-ts';
+import { useAppDispatch } from '@/hooks/useTypesRedux';
+import { useInView } from 'react-intersection-observer';
 const service = new ApiService()
 
 
@@ -30,7 +32,7 @@ const MailItem:FC<IMail> = ({
     sticker,
     text,
     isSelf,
-    
+    status,
 
 
     updateChat,
@@ -39,6 +41,26 @@ const MailItem:FC<IMail> = ({
     const {token} = useAppSelector(s => s)
     const [openLoad, setOpenLoad] = useState(false)
     const {width} = useWindowSize()
+
+
+
+    const dispatch = useAppDispatch()
+    const {inView, ref} = useInView({
+        triggerOnce: true,
+    })
+
+    
+
+    useEffect(() => {
+        if(status === 'unread' && id && inView && !isSelf) {
+            console.log('READ')
+            if(token) {
+                service.readMail({letter_message_id: Number(id)}, token).then(res => {
+                    console.log(res)
+                })
+            }
+        }
+    }, [status, token, id, inView, isSelf])
 
 
     
@@ -155,7 +177,7 @@ const MailItem:FC<IMail> = ({
 
 
     return (
-        <div className={styles.wrapper}>
+        <div ref={ref} className={styles.wrapper}>
             <div className={styles.avatar}>
                 <Avatar 
                     image={avatar}

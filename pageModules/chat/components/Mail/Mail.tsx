@@ -75,6 +75,7 @@ const Mail:FC<I> = ({
                             updatedAt={item.updated_at}
                             createdAt={item.created_at}
                             isSelf={item.sender_user_id === Number(userId)}
+                            status={item?.is_read_by_recepient === 1 ? 'read' : 'unread'}
                             />
                     ))
                 }

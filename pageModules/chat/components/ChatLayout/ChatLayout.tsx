@@ -274,6 +274,14 @@ const ChatLayout = () => {
                     }) 
                 }
             }
+
+
+            socketChannel?.listen('.chat-message-read-event', (data: any) => {
+                console.log(data)
+            })
+            socketChannel?.listen('.letter-message-read-event', (data: any) => (
+                console.log(data)
+            ))
         }
     }, [socketChannel, currentChatId, chatType, newMessage, newMail])
 

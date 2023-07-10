@@ -240,7 +240,7 @@ export interface IMail {
     sticker?: messageStickerType | null,
     text?: string | null,
     isSelf?: boolean,
-
+    status?: messageStatusTypes
     updateChat?: (...args: any[]) => any,
     updateDialog?: (...args: any[]) => any
 }
