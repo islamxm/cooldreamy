@@ -72,7 +72,7 @@ const SearchBody = () => {
 
     const getCountries = () => {
         if(token) {
-            service.getCountries(token).then(res => {
+            service.getCountries().then(res => {
                 setCountriesList(res?.map((i: any) => ({value: i?.id, id: i.id, label: i?.title})))
             })
         }
@@ -80,7 +80,7 @@ const SearchBody = () => {
 
     const getStates = (id: number) => {
         if(token) {
-            service.getStates(id, token).then(res => {
+            service.getStates(id).then(res => {
                 setStatesList(res?.map((i: any) => ({value: i?.id, id: i?.id, label: i?.title})))
             })
         }
