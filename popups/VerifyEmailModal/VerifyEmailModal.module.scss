@@ -1,0 +1,44 @@
+.wrapper {
+    
+    .head {
+        text-align: center;
+        
+        .title {
+            font-size: 20px;
+            line-height: 30px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #aaa;
+        }
+    }
+
+    .body {
+        .label {
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        .email {
+            margin-bottom: 5px;
+        }
+
+        .edit {
+            a {
+                color: var(--violet);
+            }
+        }
+
+        
+    }
+
+    .action {
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+    }
+}

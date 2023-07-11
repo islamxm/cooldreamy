@@ -3,11 +3,19 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Container from "@/components/Container/Container";
 import { Row, Col } from "antd";
 import SearchBody from "@/pageModules/search/components/searchBody/SearchBody";
-
+import { useAppSelector } from "@/hooks/useTypesRedux";
+import LimitModal from "@/popups/LimitModal/LimitModal";
+import Router from "next/router";
+import VerifyEmailModal from "@/popups/VerifyEmailModal/VerifyEmailModal";
 const SearchPage = () => {
+    const {userData} = useAppSelector(s => s)
+
 
     return (
         <Container>
+            <VerifyEmailModal
+                open
+                />
             <MainLayout>
                 <Sidebar/>
                 <div style={{width: '100%'}}>

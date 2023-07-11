@@ -33,7 +33,8 @@ export interface IUser {
     profile_photos?: any[],
     age?: number,
     winkable?: 1 | 0,
-    online?: 1 | 0
+    online?: 1 | 0,
+    is_email_verified?: boolean,
 
 
     profile_photo?: any[]
