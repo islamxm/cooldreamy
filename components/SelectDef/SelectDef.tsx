@@ -15,7 +15,8 @@ const SelectDef:FC<selectDefType> = ({
     onClear,
     multiple,
     disabled,
-    clearIcon
+    clearIcon,
+    isRound
 }) => {
 
     const ref = useRef<any>()
@@ -44,6 +45,7 @@ const SelectDef:FC<selectDefType> = ({
                         options={list}
                         value={value}
                         disabled={disabled}
+                        className={isRound ? 'round' : ''}
                         />
                 ) : (
                     <Select
@@ -58,6 +60,7 @@ const SelectDef:FC<selectDefType> = ({
                         options={list}
                         value={value}
                         disabled={disabled}
+                        className={isRound ? 'round' : ''}
                         />
                 )
             }

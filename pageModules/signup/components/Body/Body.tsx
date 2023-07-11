@@ -24,6 +24,7 @@ import Step7 from '../../steps/Step7/Step7';
 import Step8 from '../../steps/Step8/Step8';
 import Step9 from '../../steps/Step9/Step9';
 import Step10 from '../../steps/Step10/Step10';
+import StepEx from '../../steps/StepEx/StepEx';
 import { IUser } from '@/models/IUser';
 import notify from '@/helpers/notify';
 
@@ -48,12 +49,19 @@ const Body:FC = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [city, setCity] = useState('')
+    
     const [dob, setDob] = useState('')
+
     const [sex, setSex] = useState<'male' | 'female'>('male')
     const [avatar, setAvatar] = useState<File | null | undefined>(null)
     const [about, setAbout] = useState('')
     const [birthday, setBirthday] = useState<any>('')
+
+    const [countryDef, setCountryDef] = useState<any>(null)
+    const [stateDef, setStateDef] = useState<any>(null)
+    const [country, setCountry] = useState<any>()
+    const [state, setState] = useState<any>()
+    const [language, setLanguage] = useState<string>('')
 
 
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
@@ -61,6 +69,14 @@ const Body:FC = () => {
         email: [],
         password: []
     })
+
+
+    useEffect(() => {
+        service.getLocation().then(res => {
+            setCountryDef(res?.country)
+            setStateDef(res?.state)
+        })
+    }, [])
 
 
     useEffect(() => {
@@ -129,22 +145,24 @@ const Body:FC = () => {
                         />
                 )
             case 1:
-                return <Step2 list={prompt_targets} selectedList={selectedTargets} setSelectedList={setSelectedTargets}/>
+                return <StepEx language={language} setLanguage={setLanguage} country={country} setCountry={setCountry} state={state} setState={setState}/>
             case 2:
-                return <Step3 list={prompt_interests} selectedList={selectedInterests} setSelectedList={setSelectedIntersets}/>
+                return <Step2 list={prompt_targets} selectedList={selectedTargets} setSelectedList={setSelectedTargets}/>
             case 3:
-                return <Step4 list={prompt_finance_states} selectedList={selectedFinance} setSelectedList={setSelectedFinance}/>
+                return <Step3 list={prompt_interests} selectedList={selectedInterests} setSelectedList={setSelectedIntersets}/>
             case 4:
-                return <Step5 list={prompt_sources} selectedList={selectedSources} setSelectedList={setSelectedSources}/>
+                return <Step4 list={prompt_finance_states} selectedList={selectedFinance} setSelectedList={setSelectedFinance}/>
             case 5:
-                return <Step6 list={prompt_want_kids} selectedList={selectedKids} setSelectedList={setSelectedKids}/>
+                return <Step5 list={prompt_sources} selectedList={selectedSources} setSelectedList={setSelectedSources}/>
             case 6:
-                return <Step7 list={prompt_relationships} selectedList={selectedRl} setSelectedList={setSelectedRl}/>
+                return <Step6 list={prompt_want_kids} selectedList={selectedKids} setSelectedList={setSelectedKids}/>
             case 7:
-                return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
+                return <Step7 list={prompt_relationships} selectedList={selectedRl} setSelectedList={setSelectedRl}/>
             case 8:
-                return <Step9 nextStep={() => setCurrentStep(s => s + 1)}/>
+                return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
             case 9:
+                return <Step9 nextStep={() => setCurrentStep(s => s + 1)}/>
+            case 10:
                 return <Step10 about={about} setAbout={setAbout}/>
             default:
                 return null; 
@@ -191,16 +209,12 @@ const Body:FC = () => {
                 }
             }).finally(() => setLoad(false))
         }
-        // if(currentStep > 0 && currentStep < 9 && currentStep !== 8) {
-        //     setCurrentStep(s => s + 1)
-        // }
-        if(currentStep > 0 && currentStep < 9) {
+     
+        if(currentStep > 0 && currentStep < 10) {
             setCurrentStep(s => s + 1)
         }
-        // if(currentStep === 8) {
-            
-        // }
-        if(currentStep === 9) {
+      
+        if(currentStep === 10) {
             setLoad(true)
             const updateBody: IUser = {
                 prompt_careers: `[${selectedCareers?.join(',')}]`,
@@ -238,6 +252,18 @@ const Body:FC = () => {
             service.updateMyProfile({birthday: birthday}, token)
         }
     }, [currentStep, token, birthday, about])
+
+    useEffect(() => {
+        if(currentStep === 2 && token) {
+            service.setExUserData(token, {
+                language: language ? language : 'en',
+                country: country?.label ? country?.label : countryDef,
+                state: (country?.label && state?.label) ? state?.label : (state?.label ? state?.label : stateDef)
+            }).then(res => {
+                console.log(res)
+            })
+        }
+    }, [currentStep, token, countryDef, country, stateDef, state])
 
 
     return (

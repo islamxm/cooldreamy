@@ -107,6 +107,12 @@ const endpoints = {
     getPayPrems: `${API_PATH}payments/premium/list`,
     getSub: `${API_PATH}payments/subscription`,
     getPrem: `${API_PATH}payments/premium`,
+
+    getLocation: `${API_PATH}location`,
+
+
+    setExUserData: `${API_PATH}user/set/info`
+    
 }
 
 export default endpoints;

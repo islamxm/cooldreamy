@@ -133,13 +133,13 @@ class ApiService {
         }
     }
 
-    getCountries = async (token: IToken) => {
+    getCountries = async () => {
         try {
             let res = await fetch(endpoints.getCountries, {
                 method: 'GET',
                 headers: {
                     ...headers,
-                    'Authorization': `Bearer ${token}`
+                    // 'Authorization': `Bearer ${token}`
                 },
             })
 
@@ -149,7 +149,7 @@ class ApiService {
         }
     }
 
-    getStates = async (country_id: number, token: IToken) => {
+    getStates = async (country_id: number) => {
         try {
             let res = await fetch(endpoints.getStates + `?country_id=${country_id}`, {
                 method: 'GET',
@@ -254,6 +254,18 @@ class ApiService {
                     ...headers,
                     'Authorization': `Bearer ${token}`
                 }
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getLocation = async () => {
+        try {
+            let res = await fetch(endpoints.getLocation, {
+                method: "GET",
+                headers,
             })
             return await res?.json()
         } catch(err) {
@@ -915,6 +927,27 @@ class ApiService {
                     ...headers,
                     'Authorization': `Bearer ${token}`
                 },
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
+    setExUserData = async (token: IToken, body: {
+        language?: string,
+        country?: string,
+        state?: string
+    }) => {
+        try {
+            let res = await fetch(endpoints.setExUserData, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
             })
             return await res?.json()
         } catch(err) {

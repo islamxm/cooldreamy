@@ -10,6 +10,7 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import BthPicker from '@/components/BthPicker/BthPicker';
 import moment from 'moment';
+import SelectDef from '@/components/SelectDef/SelectDef';
 
 
 const service = new ApiService()
@@ -49,7 +50,7 @@ const Step1:FC<IStep1> = ({
 }) => {
     const {locale} = useAppSelector(s => s)
 
-
+   
 
 
     return (

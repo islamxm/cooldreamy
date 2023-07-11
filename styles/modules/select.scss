@@ -26,6 +26,19 @@
 
     
 }
+.ant-select.round {
+    // font-size: 18px !important;
+    // line-height: 150% !important;
+
+    .ant-select-selector {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border-radius: 30px !important;
+        font-size: 18px;
+        line-height: 150%;
+    }
+}
 
 .ant-select-dropdown {
     
