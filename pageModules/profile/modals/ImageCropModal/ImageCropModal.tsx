@@ -136,26 +136,31 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                 data.append('category_id', category.toString())
                 data.append('image', res)
 
-                const url = URL.createObjectURL(res).replace('blob:', '')
+                const checkData = new FormData()
+                checkData.append('file', res)
 
-                service.checkPhotoAi(token, {url}).then(r => {
+                service.checkPhotoAi(token, checkData).then(r => {
                     console.log(r)
+                    if(r === 200) {
+                        service.addProfileImage(data, token).then(d => {
+                            if(d?.id) {
+                                service.getMyProfile(token).then(userData => {
+                                    if(userData) {
+                                        dispatch(updateUserData(userData))
+                                    }
+                                })
+                                notify('Фотография добавлена', 'SUCCESS')
+                                onCancel()
+                                onAfterUpload && onAfterUpload()
+                            }
+                        }).finally(() => {
+                            setLoad(false)
+                        })
+                    } else {
+                        notify('Фотография не подходит', 'ERROR')
+                    }
                 })
-
-                // service.addProfileImage(data, token).then(res => {
-                //     if(res?.id) {
-                //         service.getMyProfile(token).then(userData => {
-                //             if(userData) {
-                //                 dispatch(updateUserData(userData))
-                //             }
-                //         })
-                //         notify('Фотография добавлена', 'SUCCESS')
-                //         onCancel()
-                //         onAfterUpload && onAfterUpload()
-                //     }
-                // }).finally(() => {
-                //     setLoad(false)
-                // })
+                
             })
         }
     }

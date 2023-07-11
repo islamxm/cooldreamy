@@ -956,18 +956,16 @@ class ApiService {
     }
 
 
-    checkPhotoAi = async (token: IToken, body: {
-        url?: string
-    }) => {
+    checkPhotoAi = async (token: IToken, body: FormData) => {
         try {
             let res = await fetch(endpoints.checkPhotoAi, {
                 method: "POST",
                 headers: {
-                    ...headers
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(body)
+                body
             })
-            return await res?.json()
+            return await res?.status
         } catch(err) {
             console.log(err)
         }

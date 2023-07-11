@@ -38,6 +38,7 @@ const VerifyEmailModal:FC<ModalFuncProps> = (props) => {
                         <div className={styles.item}>
                             <Button
                                 middle
+                                onClick={() => window.open(`https://${userData?.email?.split('@')[1]}`)}
                                 text='Перейти в почту'
                                 />
                         </div>
