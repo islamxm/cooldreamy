@@ -954,6 +954,24 @@ class ApiService {
             console.log(err)
         }
     }
+
+
+    checkPhotoAi = async (token: IToken, body: {
+        url?: string
+    }) => {
+        try {
+            let res = await fetch(endpoints.checkPhotoAi, {
+                method: "POST",
+                headers: {
+                    ...headers
+                },
+                body: JSON.stringify(body)
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

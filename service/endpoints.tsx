@@ -111,8 +111,9 @@ const endpoints = {
     getLocation: `${API_PATH}location`,
 
 
-    setExUserData: `${API_PATH}user/set/info`
+    setExUserData: `${API_PATH}user/set/info`,
     
+    checkPhotoAi: `${API_PATH}check-image`,
 }
 
 export default endpoints;

@@ -265,7 +265,7 @@ const Body:FC = () => {
         }
     }, [currentStep, token, countryDef, country, stateDef, state])
 
-
+    
     return (
         <div className={styles.body}>
             <Container>
@@ -281,7 +281,7 @@ const Body:FC = () => {
                                 <div className={styles.panel}>
                                     <div className={styles.head}>
                                         <StepLine
-                                            total={10}
+                                            total={11}
                                             currentIndex={currentStep}
                                             />
                                     </div>

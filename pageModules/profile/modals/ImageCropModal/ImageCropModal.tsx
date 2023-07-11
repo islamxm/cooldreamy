@@ -136,20 +136,26 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                 data.append('category_id', category.toString())
                 data.append('image', res)
 
-                service.addProfileImage(data, token).then(res => {
-                    if(res?.id) {
-                        service.getMyProfile(token).then(userData => {
-                            if(userData) {
-                                dispatch(updateUserData(userData))
-                            }
-                        })
-                        notify('Фотография добавлена', 'SUCCESS')
-                        onCancel()
-                        onAfterUpload && onAfterUpload()
-                    }
-                }).finally(() => {
-                    setLoad(false)
+                const url = URL.createObjectURL(res).replace('blob:', '')
+
+                service.checkPhotoAi(token, {url}).then(r => {
+                    console.log(r)
                 })
+
+                // service.addProfileImage(data, token).then(res => {
+                //     if(res?.id) {
+                //         service.getMyProfile(token).then(userData => {
+                //             if(userData) {
+                //                 dispatch(updateUserData(userData))
+                //             }
+                //         })
+                //         notify('Фотография добавлена', 'SUCCESS')
+                //         onCancel()
+                //         onAfterUpload && onAfterUpload()
+                //     }
+                // }).finally(() => {
+                //     setLoad(false)
+                // })
             })
         }
     }
