@@ -37,7 +37,7 @@ const EditModalRegion:FC<I> = (props) => {
 
     useEffect(() => {
         if(token) {
-            service.getCountries(token).then(res => {
+            service.getCountries().then(res => {
                 setCountryList(res?.map((i:any) => ({id: i.id, value: i.id.toString(), label: i.title})))
             })
         }
@@ -73,7 +73,7 @@ const EditModalRegion:FC<I> = (props) => {
     // ** получить список регионов после выбора страны
     useEffect(() => {
         if(country?.id && token) {
-            service.getStates(country?.id, token).then(res => {
+            service.getStates(country?.id).then(res => {
                 setStateList(res?.map((i: any) => ({id: i.id, value: i.id.toString(), label: i.title})))
             })
         }
