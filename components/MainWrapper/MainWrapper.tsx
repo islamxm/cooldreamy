@@ -36,6 +36,9 @@ const MainWrapper = ({
 				// console.log(res)
 				if(res === 200) {
 					notify('Почта подтверждена!', 'SUCCESS')
+					service.getMyProfile(token).then(userData => {
+						dispatch(updateUserData(userData))
+					})
 				} else {
 					notify('Почта не подтверждена!', 'ERROR')
 				}

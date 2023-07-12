@@ -14,7 +14,7 @@ const SearchPage = () => {
     return (
         <Container>
             <VerifyEmailModal
-                open={!userData?.is_email_verified}
+                open={userData?.hasOwnProperty('is_email_verified') && userData?.is_email_verified === false}
                 onCancel={() => Router.push('/feed')}
                 />
             <MainLayout>
