@@ -61,7 +61,7 @@ const Body:FC = () => {
     const [stateDef, setStateDef] = useState<any>(null)
     const [country, setCountry] = useState<any>()
     const [state, setState] = useState<any>()
-    const [language, setLanguage] = useState<string>('')
+    const [language, setLanguage] = useState<any>(null)
 
 
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({

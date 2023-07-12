@@ -101,6 +101,21 @@ class ApiService {
         }
     }
 
+    verifyEmail = async (token: IToken, verify_token: string) => {
+        try {
+            let res = await fetch(endpoints.verifyEmail + `?token=${verify_token}`, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
 
     getPromptTargets = async (token: IToken) => {
         try {

@@ -6,6 +6,7 @@ const endpoints = {
     register: `${API_PATH}register`,
     login: `${API_PATH}token`,
     logout: `${API_PATH}logout`,
+    verifyEmail: `${API_PATH}verify`,
 
     //users
     search: `${API_PATH}users/search`,

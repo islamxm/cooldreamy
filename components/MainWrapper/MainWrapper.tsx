@@ -23,7 +23,7 @@ const service = new ApiService()
 const MainWrapper = ({
     children
 }: {children?: React.ReactNode}) => {
-	const {locale, pathname, push, asPath} = useRouter()
+	const {locale, pathname, push, asPath, query} = useRouter()
 	const dispatch = useAppDispatch()
     const {token, userId, socketChannel, userData, currentProfileId, limit} = useAppSelector(s => s);
 
@@ -31,8 +31,17 @@ const MainWrapper = ({
 
 
 	useEffect(() => {
-		console.log(userData)
-	}, [userData])
+		if(token && query && typeof query?.token === 'string') {
+			service.verifyEmail(token, query?.token).then(res => {
+				// console.log(res)
+				if(res === 200) {
+					notify('Почта подтверждена!', 'SUCCESS')
+				} else {
+					notify('Почта не подтверждена!', 'ERROR')
+				}
+			})
+		}
+	}, [token, query])
 
 
 	useEffect(() => {
