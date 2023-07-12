@@ -1,7 +1,7 @@
 import endpoints from "./endpoints";
 import { IToken } from "@/models/IToken";
 import checkAuth from "./checkAuth";
-
+import { API_PATH } from "./endpoints";
 
 
 
@@ -970,6 +970,41 @@ class ApiService {
             console.log(err)
         }
     }
+
+    chatIgnore = async (token: IToken, {id}: {id: string | number}) => {
+        try {
+            let res = await fetch(`${API_PATH}chats/${id}/ignore`, {
+                method: "PATCH",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    chatReport = async (token: IToken, id: string | number, body: {
+        text: string
+    }) => {
+        try {
+            let res = await fetch(`${API_PATH}chats/${id}/report`, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    
 }
 
 

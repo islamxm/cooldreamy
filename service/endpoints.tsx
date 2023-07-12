@@ -1,5 +1,5 @@
 const BASE_DOMAIN = `https://api.cooldreamy.com/`;
-const API_PATH = `${BASE_DOMAIN}api/`;
+export const API_PATH = `${BASE_DOMAIN}api/`;
 
 const endpoints = {
     //auth
@@ -114,6 +114,8 @@ const endpoints = {
     setExUserData: `${API_PATH}user/set/info`,
     
     checkPhotoAi: `${API_PATH}check-image`,
+
+
 }
 
 export default endpoints;

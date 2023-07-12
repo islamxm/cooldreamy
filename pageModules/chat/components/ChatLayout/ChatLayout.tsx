@@ -276,16 +276,32 @@ const ChatLayout = () => {
             }
 
 
-            socketChannel?.listen('.chat-message-read-event', (data: any) => {
-                console.log(data)
-            })
-            socketChannel?.listen('.letter-message-read-event', (data: any) => (
-                console.log(data)
-            ))
         }
     }, [socketChannel, currentChatId, chatType, newMessage, newMail])
 
 
+    useEffect(() => {
+        if(socketChannel) {
+            socketChannel?.listen('.chat-message-read-event', (data: any) => {
+                console.log(data)
+                if(chatType === 'chat') {
+                    onUpdateChat && onUpdateChat({
+                        messageBody: data?.chat_list_item?.chat?.last_message, 
+                        dialogBody: data?.chat_list_item?.chat
+                    })
+                }
+
+            })
+            socketChannel?.listen('.letter-message-read-event', (data: any) => {
+                if(chatType === 'mail') {
+                    onUpdateChat && onUpdateChat({
+                        messageBody: data?.letter_list_item?.letter?.last_message, 
+                        dialogBody: data?.letter_list_item?.letter
+                    }) 
+                }
+            })
+        }
+    }, [chatType, socketChannel])
 
 
 
