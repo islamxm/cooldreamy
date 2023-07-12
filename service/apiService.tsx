@@ -638,9 +638,9 @@ class ApiService {
     }
 
 
-    getProfile = async ({user_id}: {user_id:number}, token: IToken) => {
+    getProfile = async ({user_id, uuid}: {user_id:number, uuid?: string}, token: IToken) => {
         try {
-            let res = await fetch(endpoints.getProfile + `?user_id=${user_id}`, {
+            let res = await fetch(endpoints.getProfile + `?user_id=${user_id}&uuid=${uuid}`, {
                 method: 'GET',
                 headers: {
                     ...headers,

@@ -17,7 +17,7 @@ import ApiService from '@/service/apiService';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import IconButton from '@/components/IconButton/IconButton';
 import notify from '@/helpers/notify';
-import { updateCurrentProfileId } from '@/store/actions';
+import { updateCurrentProfileId, updateCurrentProfileUiid } from '@/store/actions';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
 
 
@@ -26,7 +26,8 @@ const service = new ApiService()
 
 interface I extends chatItemPropsTypes {
     updateDialogsList: (...args: any[]) => any,
-    filter?: 'all' | 'unread' | 'ignored' | 'favorite'
+    filter?: 'all' | 'unread' | 'ignored' | 'favorite',
+    uuid?: any
 }
 
 const ChatItem = ({
@@ -42,15 +43,20 @@ const ChatItem = ({
     active,
     
     updateDialogsList,
-    filter
+    filter,
+    uuid
 
 }:I) => {
     const dispatch = useAppDispatch()
-    const {query: {type}} = useRouter()
+    const {query} = useRouter()
+    const {type} = query || null
     const {token} = useAppSelector(s => s)
     const {avatar_url, avatar_url_thumbnail, name, online, user_avatar_url} = another_user || {};
     
 
+    useEffect(() => {
+        console.log(uuid)
+    }, [uuid])
 
 
 
@@ -143,6 +149,8 @@ const ChatItem = ({
                 <div onClick={() => {
                     if(another_user?.id) {
                         dispatch(updateCurrentProfileId(another_user?.id))
+                        dispatch(updateCurrentProfileUiid(uuid))
+                        
                     }
                 }} className={styles.avatar}>
                     <Avatar
@@ -214,6 +222,7 @@ const ChatItem = ({
                 <div onClick={() => {
                     if(another_user?.id) {
                         dispatch(updateCurrentProfileId(another_user?.id))
+                        dispatch(updateCurrentProfileUiid(uuid))
                     }
                 }} className={styles.avatar}>
                     <Avatar

@@ -9,6 +9,7 @@ export const updateUserId = (id: string | { [property: string]: string; } | numb
 export const updateUserData = (data: IUser | null) => ({type: 'UPDATE_USER_DATA', data})
 export const updateMenu = () => ({type: 'UPDATE_MENU'})
 export const updateCurrentProfileId = (data:number | null) => ({type: 'UPDATE_CURRENT_PROFILE_ID', data}) 
+export const updateCurrentProfileUiid = (data:string | null) => ({type: 'UPDATE_CURRENT_PROFILE_UIID', data}) 
 
 
 export const updateNewMessage = (data: any) => ({type: 'UPDATE_NEW_MESSAGE', data})

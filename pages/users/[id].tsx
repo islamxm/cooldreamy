@@ -19,6 +19,8 @@ import { useWindowSize } from 'usehooks-ts';
 import UserCardMob from '@/pageModules/profile/components/UserCardMob/UserCardMob';
 import UserMobAction from '@/pageModules/user/components/UserMobAction/UserMobAction';
 import giftImg from '@/public/assets/images/gift-1.png'
+
+
 const service = new ApiService()
 
 const UserPage:FC = () => {
@@ -29,9 +31,16 @@ const UserPage:FC = () => {
     const [data, setData] = useState<IUser | null>(null)
 
 
+
     useEffect(() => {
-        if(query && query?.id && typeof query?.id === 'string' && token) {
+        console.log(query)
+        if(query && query?.id && typeof query?.id === 'string' && token && !query?.currentProfileUuid) {
             service.getProfile({user_id: Number(query?.id)}, token).then(res => {
+                setData(res)
+            })
+        }
+        if(query && typeof query?.id === 'string' && typeof query?.currentProfileUuid === 'string' && token) {
+            service.getProfile({user_id: Number(query?.id), uuid: query?.currentProfileUuid}, token).then(res => {
                 setData(res)
             })
         }

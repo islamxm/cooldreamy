@@ -6,14 +6,14 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { Swiper as SwiperWrap, SwiperSlide } from 'swiper/react';
 import Swiper , {Thumbs, Navigation} from 'swiper';
 import Skeleton from './components/Skeleton/Skeleton';
-import { updateCurrentProfileId } from '@/store/actions';
+import { updateCurrentProfileId, updateCurrentProfileUiid } from '@/store/actions';
 import Image from 'next/image';
 import ApiService from '@/service/apiService';
 import UserTitle from '@/components/UserTitle/UserTitle';
 import UserLocation from '@/components/UserLocation/UserLocation';
 import Textarea from '@/components/Textarea/Textarea';
 import Button from '@/components/Button/Button';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import placeholder from '@/public/assets/images/avatar-placeholder.png'
 import Avatar from '@/components/Avatar/Avatar';
 import { BsCamera } from 'react-icons/bs';
@@ -26,8 +26,8 @@ const service = new ApiService()
 
 
 const ProfileModal:FC<ModalFuncProps> = (props) => {
-    
-    const {currentProfileId, token, locale} = useAppSelector(s => s)
+    const {query} = useRouter()
+    const {currentProfileId, token, locale, currentProfileUuid} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const {onCancel} = props
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
@@ -47,7 +47,11 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
 
     const onClose = () => {
         onCancel && onCancel()
+        dispatch(updateCurrentProfileUiid(null))
     }
+
+
+    
 
 
     useEffect(() => {
@@ -272,7 +276,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                 onClose()
                                                 Router.push({
                                                     pathname: `/users/[id]`,
-                                                    query: {id: id}
+                                                    query: {id: id, currentProfileUuid: currentProfileUuid}
                                                 })
                                             }} middle text='Открыть профиль'/>
                                         </div>
