@@ -110,7 +110,7 @@ class ApiService {
                     'Authorization': `Bearer ${token}`
                 },
             })
-            return await res?.json()
+            return await res?.status
         } catch(err) {
             console.log(err)
         }
