@@ -39,7 +39,7 @@
                 }
             }
             .item_wr {
-                width: calc((100% / 3) - 30px);
+                width: calc((100% / 4) - 30px);
                 margin: 0 15px;
                 margin-bottom: 30px;
                 position: relative;
@@ -61,7 +61,7 @@
                 border-radius: 20px;
                 background: #F0EBFF;
                 display: flex;
-                flex-direction: column;
+                justify-content: center;
                 align-items: center;
                 min-height: 185px;
                 padding: 15px;
@@ -71,12 +71,47 @@
                 transition: all .3s ease;
                 z-index: 3;
 
-                
-
-                .badge {
+                .adds {
                     position: absolute;
                     top: -15px;
                     right: 10px;
+                    display: flex;
+                    align-items: center;
+                    margin-left: -2px;
+                    margin-right: -2px;
+
+
+                }
+
+                .discount {
+                    border-radius: 100%;
+                    width: 32px;
+                    height: 32px;
+                    background: linear-gradient(109.07deg, #FFD89D 2.71%, #FEC979 48.42%, #FFC163 102.45%);
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    text-align: center;
+                    color: #CF7827;
+                    font-weight: 800;
+                    font-size: 8px;
+                    line-height: 8px;
+                    margin: 0 2px;
+
+
+                    span {
+                        display: block;
+                        font-size: 7px;
+                        line-height: 7px;
+                        font-weight: 700;
+                    }
+                }
+                
+
+                .badge {
+                    margin: 0 2px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -98,32 +133,68 @@
                     font-weight: 500;
                 }
 
+
                 .credits {
-                    margin-bottom: 10px;
                     text-align: center;
+
                     .value {
                         font-size: 45px;
                         font-weight: 700;
+                        line-height: 45px;
+                        margin-bottom: -10px;
                     }
+
                     span {
                         color: rgba(53, 53, 53, 0.50);
                         font-size: 15px;
+                        line-height: 15px;
                     }
+
                 }
 
                 .ex {
                     font-size: 15px;
                 }
 
+
+                .item_body {
+                    padding-left: 12px;
+                    .part {
+                        font-weight: 500;
+
+                        .label {
+                            color: rgba(#646368, .65);
+                            font-size: 11px;
+                            line-height: 15px;
+                            
+                        }
+                        .value {
+                            
+                            font-weight: 600;
+                            font-size: 18px;
+                            line-height: 25px;
+                            color: var(--violet);
+                        }
+
+                        .value.old {
+                            text-decoration: line-through;
+                            text-decoration-color: #DA8DF9;
+                            color: #646368;
+                            font-size: 11px;
+                        }
+                    }
+                }
+
                 
             }
 
             .item.pop {
-                background-image: url('../../../../public/assets/images/deposit-1-bg.png');
+                background-image: url('../../../../public/assets/images/deposit-2-bg.svg');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
                 color: #fff;
+
                 .badge {
                     background-color: #DA8DF9;
                 }
@@ -138,10 +209,25 @@
                         color: rgba(255, 255, 255, 0.50);
                     }
                 }
+
+                .item_body {
+                    .part {
+                        .label {
+                            color: #BAAEF5;
+                        }
+                        .value {
+                            color: #fff;
+                        }
+
+                        .value.old {
+                            color: #F0EBFF;
+                        }
+                    }
+                }
             }
 
             .item.dsc {
-                background-image: url('../../../../public/assets/images/deposit-2-bg.png');
+                background-image: url('../../../../public/assets/images/deposit-1-bg.svg');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;

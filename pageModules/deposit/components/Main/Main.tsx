@@ -106,11 +106,41 @@ const Main = () => {
                                                 setSelectedPlan(i)
                                             }}
                                             className={`${styles.item}`} key={index}>
-                                            <div className={styles.price}>{i?.price}$</div>
-                                            <div className={styles.credits}>
-                                            <div className={styles.value}>{i?.credits}</div>
-                                            <span>кредитов</span>
+                                            <div className={styles.adds}>
+                                            {
+                                                i?.discount !== 0 && (
+                                                    <div className={styles.discount}>
+                                                        -{i?.discount}%
+                                                        <span>скидка</span>
+                                                    </div>
+                                                )
+                                            }
                                             </div>
+                                            <div className={styles.credits}>
+                                                <div className={styles.value}>{i?.credits}</div>
+                                                <span>кредитов</span>
+                                            </div>
+                                            <div className={styles.item_body}>
+                                            {
+                                                    i?.discount !== 0 && (
+                                                        <div className={styles.part}>
+                                                            <div className={styles.label}>цена</div>
+                                                            <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
+                                                        </div>
+                                                    )
+                                                }
+                                                <div className={styles.part}>
+                                                    <div className={styles.label}>
+                                                        {
+                                                            i?.discount !== 0 ? (
+                                                                'со скидкой'
+                                                            ) : 'цена'
+                                                        }
+                                                    </div>
+                                                    <div className={styles.value}>{i?.price}$</div>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 )
@@ -124,14 +154,38 @@ const Main = () => {
                                                 setSelectedPlan(i)
                                             }}
                                             className={`${styles.item} ${styles.pop}`}>
-                                            <div className={styles.badge}>
-                                            ПОПУЛЯРНЫЙ
+                                            <div className={styles.adds}>
+                                                {
+                                                    i?.discount !== 0 && (
+                                                        <div className={styles.discount}>
+                                                            -{i?.discount}%
+                                                            <span>скидка</span>
+                                                        </div>
+                                                    )
+                                                }
+                                                <div className={styles.badge}>
+                                                ПОПУЛЯРНЫЙ
+                                                </div>
                                             </div>
-                                            <div className={styles.price}>{i?.price}$</div>
                                             <div className={styles.credits}>
-                                            <div className={styles.value}>{i?.credits}</div>
-                                            <span>кредитов</span>
+                                                <div className={styles.value}>{i?.credits}</div>
+                                                <span>кредитов</span>
                                             </div>
+                                            <div className={styles.item_body}>
+                                            {
+                                                    i?.discount !== 0 && (
+                                                        <div className={styles.part}>
+                                                            <div className={styles.label}>цена</div>
+                                                            <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
+                                                        </div>
+                                                    )
+                                                }
+                                                <div className={styles.part}>
+                                                    <div className={styles.label}>со скидкой</div>
+                                                    <div className={styles.value}>{i?.price}$</div>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     
@@ -146,13 +200,39 @@ const Main = () => {
                                                 setSelectedPlan(i)
                                             }}
                                             className={`${styles.item} ${styles.dsc}`} key={index}>
+                                            
+                                            <div className={styles.adds}>
+                                            {
+                                                i?.discount !== 0 && (
+                                                    <div className={styles.discount}>
+                                                        -{i?.discount}%
+                                                        <span>скидка</span>
+                                                    </div>
+                                                )
+                                            }
                                             <div className={styles.badge}>
                                                 ВЫГОДНЫЙ
                                             </div>
-                                            <div className={styles.price}>{i?.price}$</div>
+                                            </div>
+                                            
                                             <div className={styles.credits}>
-                                            <div className={styles.value}>{i?.credits}</div>
-                                            <span>кредитов</span>
+                                                <div className={styles.value}>{i?.credits}</div>
+                                                <span>кредитов</span>
+                                            </div>
+                                            <div className={styles.item_body}>
+                                                {
+                                                    i?.discount !== 0 && (
+                                                        <div className={styles.part}>
+                                                            <div className={styles.label}>цена</div>
+                                                            <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
+                                                        </div>
+                                                    )
+                                                }
+                                                
+                                                <div className={styles.part}>
+                                                    <div className={styles.label}>со скидкой</div>
+                                                    <div className={styles.value}>{i?.price}$</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
