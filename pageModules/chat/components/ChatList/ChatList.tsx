@@ -29,7 +29,7 @@ const ChatList:FC<IDialogs> = ({
     updateDialogsList,
     filter
 }) => {
-    const {locale} = useAppSelector(s => s)
+   
     const {inView, ref} = useInView({
         rootMargin: '150px'
     })
@@ -37,9 +37,11 @@ const ChatList:FC<IDialogs> = ({
     const [search, setSearch] = useState('')
     const {width} = useWindowSize()
     
+
     useEffect(() => {
         dialogsList?.length === totalDialogItemCount ? setLoadMore(false) : setLoadMore(true)
     }, [dialogsList, totalDialogItemCount])
+
 
 
     useEffect(() => {
@@ -49,6 +51,9 @@ const ChatList:FC<IDialogs> = ({
     }, [inView, loadMore, updateDialogsPage])
 
 
+    useEffect(() => {
+        console.log(dialogsList)
+    }, [dialogsList])
 
 
   

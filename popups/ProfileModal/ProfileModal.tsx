@@ -190,7 +190,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                         profile_photo?.map(i => (
                                                             <SwiperSlide className={styles.thumbs_item} key={i.id}>
                                                                 <Image
-                                                                    src={i.thumbnail_url}
+                                                                    src={i.image_url}
                                                                     alt=''
                                                                     width={70}
                                                                     height={70}

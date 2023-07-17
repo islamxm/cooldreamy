@@ -75,7 +75,7 @@ const UserImages:FC<IUser> = ({
                     profile_photo?.map((item, index) => (
                         <a data-fancybox="gallery" href={item.image_url} className={styles.item} key={index}>
                             <UserImageItem
-                                image={item?.thumbnail_url}
+                                image={item?.image_url}
                             />
                         </a>
                     ))

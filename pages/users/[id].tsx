@@ -33,10 +33,11 @@ const UserPage:FC = () => {
 
 
     useEffect(() => {
-        console.log(query)
+
         if(query && query?.id && typeof query?.id === 'string' && token && !query?.currentProfileUuid) {
             service.getProfile({user_id: Number(query?.id)}, token).then(res => {
                 setData(res)
+                console.log(res)
             })
         }
         if(query && typeof query?.id === 'string' && typeof query?.currentProfileUuid === 'string' && token) {
