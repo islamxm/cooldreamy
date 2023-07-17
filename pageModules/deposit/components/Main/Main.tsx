@@ -50,6 +50,15 @@ const Main = () => {
         }
     }
 
+    useEffect(() => {
+        setSecretKey('')
+    }, [selectedPlan])
+
+    // useEffect(() => {
+    //     console.log(secretKey)
+    //     console.log(stripePromise)
+    // }, [secretKey, stripePromise])
+
     
 
     useEffect(() => {
@@ -93,7 +102,7 @@ const Main = () => {
                                     <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
                                         <div 
                                             onClick={() => {
-                                                onAccept(i)
+                                                
                                                 setSelectedPlan(i)
                                             }}
                                             className={`${styles.item}`} key={index}>
@@ -111,7 +120,7 @@ const Main = () => {
                                     <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
                                         <div 
                                             onClick={() => {
-                                                onAccept(i)
+                                                
                                                 setSelectedPlan(i)
                                             }}
                                             className={`${styles.item} ${styles.pop}`}>
@@ -133,7 +142,7 @@ const Main = () => {
                                     <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
                                         <div 
                                             onClick={() => {
-                                                onAccept(i)
+                                                
                                                 setSelectedPlan(i)
                                             }}
                                             className={`${styles.item} ${styles.dsc}`} key={index}>
@@ -152,24 +161,18 @@ const Main = () => {
                         })
                     }
                     
-                    {/* <div className={styles.item}>
-                        
-                    <div className={styles.price}>559 грн</div>
-                        <div className={styles.credits}>
-                        <div className={styles.value}>50</div>
-                        <span>кредитов</span>
-                        </div>
-                        <div className={styles.ex}>11 грн за 1 кредит</div>
-                    </div>
-                    <div className={styles.item}>
-                        
-                    <div className={styles.credits}>
-                        <div className={styles.value}>50</div>
-                        <span>кредитов</span>
-                        </div>
-                        <div className={styles.ex}>11 грн за 1 кредит</div>
-                    </div> */}
                 </div>
+                {
+                    selectedPlan && !secretKey && (
+                        <div className={styles.buy}>
+                            <Button
+                                text={`Купить тариф за ${selectedPlan?.price}$`}
+                                onClick={() => onAccept(selectedPlan)}
+                                />
+                        </div>
+                    )
+                }
+                
             </div>
             <div className={styles.main}>
                 <div className={styles.adv}>
