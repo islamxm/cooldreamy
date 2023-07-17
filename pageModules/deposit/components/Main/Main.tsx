@@ -16,7 +16,7 @@ import Loader from '@/components/Loader/Loader';
 import { PulseLoader } from 'react-spinners';
 
 const service = new ApiService()
-const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
+const PUBLIC_KEY = 'pk_live_51NUnhYCjAbe3POAZuvvjbnFUlTWumdkTvv7xLFuchzqpI8O8Y617SEGHyij0teeG0pO3988SsyRN1JrP0S0NU5H400zLwmQg3p';
 
 
 const Main = () => {
