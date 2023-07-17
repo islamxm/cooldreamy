@@ -7,7 +7,16 @@ import norton from '@/public/assets/images/norton.svg'
 import ApiService from '@/service/apiService';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import * as _ from 'lodash'
+import {loadStripe} from '@stripe/stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
+import {Row, Col} from 'antd';
+import Button from '@/components/Button/Button';
+import PayForm from '../PayForm/PayForm';
+import Loader from '@/components/Loader/Loader';
+import { PulseLoader } from 'react-spinners';
+
 const service = new ApiService()
+const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
 
 
 const Main = () => {
@@ -16,6 +25,18 @@ const Main = () => {
     const [modal, setModal] = useState(false)
     const [selectedPlan, setSelectedPlan] = useState<any>(null)
     const [load, setLoad] = useState(false)
+
+    const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
+
+    
+    const [secretKey, setSecretKey] = useState<string>('')
+    const [payLoad, setPayLoad] = useState<boolean>(false)
+
+
+
+
+    
+
 
 
 
@@ -37,20 +58,20 @@ const Main = () => {
 
 
     const onAccept = (plan: any) => {
-        console.log(plan)
-        console.log(token)
         if(token) {
+            setLoad(true)
             service.pay(token, {
                 list_type: 'credit',
                 list_id: plan?.id
             }).then(res => {
                 console.log(res)
-                if(res?.link) {
-                    window.open(res?.link)
-                }
-            })
+                const clientSecret = res?.clientSecret;
+                setSecretKey(clientSecret)
+            }).finally(() => setLoad(false))
         }
     }
+
+
 
 
     return (
@@ -69,45 +90,61 @@ const Main = () => {
                         list?.map((i, index) => {
                             if(i?.status === 0) {
                                 return (
-                                    <div 
-                                        onClick={() => onAccept(i)}
-                                        className={styles.item} key={index}>
-                                        <div className={styles.price}>{i?.price}$</div>
-                                        <div className={styles.credits}>
-                                        <div className={styles.value}>{i?.credits}</div>
-                                        <span>кредитов</span>
+                                    <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
+                                        <div 
+                                            onClick={() => {
+                                                onAccept(i)
+                                                setSelectedPlan(i)
+                                            }}
+                                            className={`${styles.item}`} key={index}>
+                                            <div className={styles.price}>{i?.price}$</div>
+                                            <div className={styles.credits}>
+                                            <div className={styles.value}>{i?.credits}</div>
+                                            <span>кредитов</span>
+                                            </div>
                                         </div>
                                     </div>
                                 )
                             }
                             if(i?.status === 1) {
                                 return (
-                                    <div 
-                                        onClick={() => onAccept(i)}
-                                        className={`${styles.item} ${styles.pop}`} key={index}>
-                                        <div className={styles.badge}>
-                                        ПОПУЛЯРНЫЙ
-                                        </div>
-                                        <div className={styles.price}>{i?.price}$</div>
-                                        <div className={styles.credits}>
-                                        <div className={styles.value}>{i?.credits}</div>
-                                        <span>кредитов</span>
+                                    <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
+                                        <div 
+                                            onClick={() => {
+                                                onAccept(i)
+                                                setSelectedPlan(i)
+                                            }}
+                                            className={`${styles.item} ${styles.pop}`}>
+                                            <div className={styles.badge}>
+                                            ПОПУЛЯРНЫЙ
+                                            </div>
+                                            <div className={styles.price}>{i?.price}$</div>
+                                            <div className={styles.credits}>
+                                            <div className={styles.value}>{i?.credits}</div>
+                                            <span>кредитов</span>
+                                            </div>
                                         </div>
                                     </div>
+                                    
                                 )
                             }
                             if(i?.status === 2) {
                                 return (
-                                    <div 
-                                        onClick={() => onAccept(i)}
-                                        className={`${styles.item} ${styles.dsc}`} key={index}>
-                                        <div className={styles.badge}>
-                                            ВЫГОДНЫЙ
-                                        </div>
-                                        <div className={styles.price}>{i?.price}$</div>
-                                        <div className={styles.credits}>
-                                        <div className={styles.value}>{i?.credits}</div>
-                                        <span>кредитов</span>
+                                    <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
+                                        <div 
+                                            onClick={() => {
+                                                onAccept(i)
+                                                setSelectedPlan(i)
+                                            }}
+                                            className={`${styles.item} ${styles.dsc}`} key={index}>
+                                            <div className={styles.badge}>
+                                                ВЫГОДНЫЙ
+                                            </div>
+                                            <div className={styles.price}>{i?.price}$</div>
+                                            <div className={styles.credits}>
+                                            <div className={styles.value}>{i?.credits}</div>
+                                            <span>кредитов</span>
+                                            </div>
                                         </div>
                                     </div>
                                 )
@@ -159,7 +196,24 @@ const Main = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.field}></div>
+                <div className={styles.field}>
+                    {
+                        load ? (
+                            <div className={styles.load}>
+                                <PulseLoader color='var(--violet)'/>
+                            </div>
+                        ) : (
+                            (secretKey && stripePromise) && (
+                                <Elements
+                                    stripe={stripePromise}
+                                    options={{clientSecret: secretKey}}
+                                    >
+                                    <PayForm/>
+                                </Elements>
+                            ) 
+                        )
+                    }
+                </div>
             </div>
         </div>
     )

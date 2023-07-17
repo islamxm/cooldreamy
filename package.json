@@ -12,6 +12,8 @@
     "@fancyapps/ui": "^5.0.17",
     "@next/font": "^13.1.6",
     "@redux-devtools/extension": "^3.2.5",
+    "@stripe/react-stripe-js": "^1.10.0",
+    "@stripe/stripe-js": "^1.35.0",
     "@types/google.analytics": "^0.0.42",
     "@types/node": "18.13.0",
     "@types/react": "18.0.27",
