@@ -35,7 +35,7 @@ export interface IUser {
     winkable?: 1 | 0,
     online?: 1 | 0,
     is_email_verified?: boolean,
-
+    user_avatar_url?: string
 
     profile_photo?: any[]
 }

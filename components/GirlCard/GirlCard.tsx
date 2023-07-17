@@ -26,6 +26,7 @@ const GirlCard:FC<IUser> = ({
     avatar_url,
     avatar_url_thumbnail,
     birthday,
+    user_avatar_url,
     country,
     created_at,
     id,
@@ -121,11 +122,10 @@ const GirlCard:FC<IUser> = ({
                 <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        src={avatar_url_thumbnail ? avatar_url_thumbnail : placeholder} 
+                        src={user_avatar_url ? user_avatar_url : placeholder} 
                         width={300}
                         height={300}
                         alt=""/>
-                   
                 </div>
             </div>
             <div className={styles.body}>

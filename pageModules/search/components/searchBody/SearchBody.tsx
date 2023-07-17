@@ -91,7 +91,11 @@ const SearchBody = () => {
         if(country?.id && token) {
             getStates && getStates(Number(country?.id))
         }
-    }, [token, country])
+    }, [token, country])    
+
+    useEffect(() => {
+        console.log(list)
+    }, [list])
 
 
 

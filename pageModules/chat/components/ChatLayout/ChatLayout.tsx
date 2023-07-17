@@ -306,22 +306,23 @@ const ChatLayout = () => {
 
 
     const onDeleteDialog = (dialogId: number | string) => {
-        // if(dialogId && token) {
-        //     service.deleteChat(token, Number(dialogId)).then(res => {
-        //         if(res?.message === 'success') {
-        //             const foundDialog = dialogsList?.find(i => i.id == dialogId)
-        //             if(foundDialog) {
-        //                 setDialogsList(s => {
-        //                     const m = s;
-        //                     const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1)
-        //                     return sortingDialogList([...m])
-        //                 })
-        //             }
-        //         } else {
-        //             notify()
-        //         }
-        //     })
-        // }
+        if(dialogId && token) {
+            service.deleteChat(token, Number(dialogId)).then(res => {
+                if(res?.message === 'success') {
+                    const foundDialog = dialogsList?.find(i => i.id == dialogId)
+                    if(foundDialog) {
+                        setDialogsList(s => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1)
+                            return sortingDialogList([...m])
+                        })
+                    }
+                } else {
+                    notify('', 'ERROR')
+                }
+            })
+        }
+
         if(dialogId) {
             const foundDialog = dialogsList?.find(i => i.id == dialogId)
             if(foundDialog) {
@@ -356,6 +357,7 @@ const ChatLayout = () => {
                     setChatList(s => {
                         return sortingChatList([body?.messageBody, ...s])
                     })
+                    
                 }
                 // ?? обновление диалогов
                 const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 

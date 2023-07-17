@@ -15,12 +15,14 @@ import { RootState } from '@/store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import notify from '@/helpers/notify';
 import { useWindowSize } from 'usehooks-ts';
+import LimitModal from '@/popups/LimitModal/LimitModal';
 const service = new ApiService()
 
 const LoginModal:FC<ModalFuncProps> = (props) => {
     const {locale} = useAppSelector(s => s)
     const {width} = useWindowSize() 
     const router = useRouter()
+    const [blocked, setBlocked] = useState(false)
 
     const dispatch = useDispatch()
     const {onCancel} = props
@@ -66,6 +68,9 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 })
                 
             } else {
+                if(res?.error === 'BLOCKED') {
+                    setBlocked(true)
+                } 
                 notify('Произошла ошибка', 'ERROR')
             }
             if(res?.error) {
@@ -86,7 +91,13 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
 
 
     return (
-        <Modal
+        <>
+            <LimitModal
+                text='Пользователь заблокирован!'
+                open={blocked}
+                onCancel={() => setBlocked(false)}
+                />
+            <Modal
             {...props}
             width={400}
             onCancel={onClose}
@@ -94,6 +105,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             title={locale?.popups?.login?.title}
             footer={false}
             >
+            
             <Row gutter={[20,20]}>
                 <Col span={24}>
                     <Input
@@ -113,7 +125,6 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                         placeholder={locale?.popups?.login?.fields?.password}
                         />
                     {errors?.password && <div className={styles.error}>{errors?.password}</div>}
-                    
                 </Col>
                 <Col span={24}>
                     <div className={styles.ex}>
@@ -136,6 +147,8 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 </Col>
             </Row>
         </Modal>
+        </>
+        
     )
 }
 

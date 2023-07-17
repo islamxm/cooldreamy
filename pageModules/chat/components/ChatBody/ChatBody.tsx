@@ -31,6 +31,8 @@ import PromptModal from '@/popups/PromptModal/PromptModal';
 import notify from '@/helpers/notify';
 import { Dropdown } from 'antd';
 import ChatMenu from './components/ChatMenu/ChatMenu';
+import ReportModal from '@/popups/ReportModal/ReportModal';
+
 
 
 const service = new ApiService()
@@ -91,6 +93,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const {token, actionsPricing, locale} = useAppSelector(s => s)
     const [pb, setPb] = useState<number>(70)
     const [promptModal, setPromptModal] = useState(false)
+    const [reportModal, setReportModal] = useState(false)
 
     const [mockType, setMockType] = useState<'wink' | 'gift' | 'text' | ''>('')
 
@@ -237,17 +240,26 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     }
 
     const onIgnore = () => {
-        console.log('ingore user')
+        if(token && currentUser?.id) {
+            service.chatIgnore(token, {id: Number(currentUser?.id)}).then(res => {
+                console.log(res)
+            })
+        }
     }
 
+
     const onReport = () => {
-        console.log('open report modal')
+        setReportModal(true)
     }
 
 
     return (
         <div className={styles.wrapper}>
-
+            <ReportModal
+                open={reportModal}
+                chatId={Number(id)}
+                onCancel={() => setReportModal(false)}
+                />
             <PromptModal
                 open={promptModal}
                 onCancel={() => setPromptModal(false)}
@@ -381,7 +393,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                                 onWink={onWink}
                                                                 onGetAllMedia={onGetAllMedia}
                                                                 onFav={onFav}
-                                                                
+                                                                onIgnore={onIgnore}
+                                                                onReport={onReport}
                                                                 />
                                                         }
                                                         trigger={['click']}

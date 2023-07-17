@@ -116,6 +116,8 @@ const endpoints = {
     
     checkPhotoAi: `${API_PATH}check-image`,
 
+    
+
 
 }
 
