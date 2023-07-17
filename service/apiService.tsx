@@ -476,9 +476,9 @@ class ApiService {
         }
     }
 
-    getMailList = async ({per_page, page}:{page?: number, per_page?: number}, token: IToken) => {
+    getMailList = async ({per_page, page, filter}:{page?: number, per_page?: number, filter?: string}, token: IToken) => {
         try {
-            let res = await fetch(endpoints.getMailList + `?per_page=${per_page}&page=${page}`, {
+            let res = await fetch(endpoints.getMailList + `?per_page=${per_page}&page=${page}&filter=${filter}`, {
                 method: 'GET',
                 headers: {
                     ...headers,

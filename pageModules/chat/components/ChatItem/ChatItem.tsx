@@ -113,7 +113,6 @@ const ChatItem = ({
     const deleteFromFav = () => {
         if(token && id && another_user?.id) {
             service.deleteUserFromFav({user_id: another_user?.id}, token).then(res => {
-                console.log(res)
                 if(res?.status === 200) {
                     updateDialogsList((s: any | any[]) => {
                         const findItem = s.find((i: any) => i.id === id)
@@ -121,10 +120,11 @@ const ChatItem = ({
                             const m = s;
                             if(filter === 'favorite') {
                                 const rm = m.splice(m.findIndex((i:any) => i.id === findItem.id), 1)
+                                return [...m]
                             } else {
                                 const rm = m.splice(m.findIndex((i:any) => i.id === findItem.id), 1, {...findItem, favorite: false})
+                                return [...m]
                             }
-                            return [...m]
                         } else return s;
                     })
                 } else {

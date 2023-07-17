@@ -241,8 +241,22 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
     const onIgnore = () => {
         if(token && currentUser?.id) {
-            service.chatIgnore(token, {id: Number(currentUser?.id)}).then(res => {
-                console.log(res)
+            service.chatIgnore(token, {id: Number(id)}).then(res => {
+                if(res) {
+                    notify('Жалоба отправлена', 'SUCCESS')
+                }
+                updateDialogsList && updateDialogsList((s: any | any[]) => {
+                    const findItem = s.find((i: any) => i.id === id)
+                    if(findItem) {
+                        const m = s;
+                        if(filter === 'ignored') {
+                            const rm = m.splice(m.findIndex((i:any) => i.id === findItem.id), 1)
+                            return [...m]   
+                        } else {
+                            return [...m]
+                        }
+                    } else return s;
+                })
             })
         }
     }
@@ -311,6 +325,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                     <SkeletonChatList/>
                                 ) : (
                                     <ChatSide
+                                        filter={filter}
                                         updateDialogsPage={updateDialogsPage}
                                         updateDialogsList={updateDialogsList}
                                         dialogsList={dialogsList}
@@ -341,6 +356,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 <SkeletonChatList/>
                             ) : (
                                 <ChatSide
+                                    filter={filter}
                                     updateDialogsList={updateDialogsList}
                                     updateDialogsPage={updateDialogsPage}
                                     dialogsList={dialogsList}

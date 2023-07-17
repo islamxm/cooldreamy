@@ -59,7 +59,7 @@ const Mail:FC<I> = ({
                             id={item.id}
                             index={index}
                             type={item?.letter_messageable_type}
-                            avatar={item?.sender_user?.avatar_url_thumbnail}
+                            avatar={item?.sender_user?.user_avatar_url}
                             name={item?.sender_user?.name}
                             age={item?.sender_user?.age}
                             isPayed={item?.letter_messageable?.is_payed === 1 ? true : false}

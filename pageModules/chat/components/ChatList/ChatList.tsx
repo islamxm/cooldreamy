@@ -67,7 +67,7 @@ const ChatList:FC<IDialogs> = ({
                         {...item}
                         active={item?.id === activeDialogId}
                         updateDialogsList={updateDialogsList}
-                        
+                        filter={filter}
                         />
                 )) : null
                 // <div className={styles.empty}>Нет переписок</div>

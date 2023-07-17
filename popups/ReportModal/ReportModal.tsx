@@ -20,7 +20,7 @@ const ReportModal:FC<I & ModalFuncProps> = (props) => {
     const [load, setLoad] = useState(false)
 
     const onReport = () => {
-        if(token && chatId) {
+        if(token && chatId && text) {
             setLoad(true)
             service.chatReport(token, chatId, {text}).then(res => {
                 console.log(res)
@@ -39,6 +39,7 @@ const ReportModal:FC<I & ModalFuncProps> = (props) => {
     return (
         <Modal
             {...props}
+            footer={null}
             className={`${styles.wrapper} modal`}
             >
             <Row gutter={[15,15]}>
@@ -66,6 +67,7 @@ const ReportModal:FC<I & ModalFuncProps> = (props) => {
                             <Button
                                 text='Отправить'
                                 fill
+                                disabled={!text}
                                 load={load}
                                 onClick={onReport}
                                 />
