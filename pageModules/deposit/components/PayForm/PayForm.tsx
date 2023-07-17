@@ -5,7 +5,7 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 import {Row, Col} from 'antd';
 import Button from '@/components/Button/Button';
 
-const PayForm = () => {
+const PayForm = ({plan}: {plan?: any}) => {
     const [payLoad, setPayLoad] = useState<boolean>(false)
     const [message, setMessage] = useState<any>(null)
     const stripe = useStripe()
@@ -58,7 +58,7 @@ const PayForm = () => {
                     </Col>
                     <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
                         <Button
-                            text={'Оплатить'}
+                            text={`Оплатить ${plan?.price}$`}
                             load={payLoad}
 
                             />

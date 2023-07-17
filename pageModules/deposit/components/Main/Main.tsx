@@ -44,7 +44,7 @@ const Main = () => {
     const getPlans = () => {
         if(token) {
             service.getPayPlans(token).then(res => {
-                console.log(res?.map((i: any) => i?.status))
+                console.log(res)
                 setList(res)
             })
         }
@@ -208,7 +208,7 @@ const Main = () => {
                                     stripe={stripePromise}
                                     options={{clientSecret: secretKey}}
                                     >
-                                    <PayForm/>
+                                    <PayForm plan={selectedPlan}/>
                                 </Elements>
                             ) 
                         )
