@@ -430,7 +430,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                 activeDialogId && !mockType ? (
                                                     <ChatStart
                                                         onSelect={setMockType} 
-                                                        avatar={currentUser?.avatar_url_thumbnail}/>
+                                                        avatar={currentUser?.user_avatar_url}/>
                                                 ) : null
                                             )
                                         )
