@@ -140,7 +140,8 @@ const ChatLayout = () => {
             service.getMailList({
                 page: dialogsPage,
                 per_page: 10,
-                filter
+                filter: filter != 'all' ? filter : '',
+                
             }, token).then(res => {
                 console.log(res)
                 setTotalDialogItemCount(res?.total)
