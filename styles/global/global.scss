@@ -6,6 +6,7 @@
     box-sizing: border-box;
     outline: none;
     font-family: 'Jost', sans-serif !important;
+    scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
         width: 6px;
