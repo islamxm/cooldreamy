@@ -312,7 +312,7 @@ const Body:FC = () => {
             } else setBtnDisable(false)
         }
 
-    }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl])
+    }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl, email, name, password, birthday])
 
     useEffect(() => {
         console.log(currentStep)
