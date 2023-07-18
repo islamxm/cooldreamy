@@ -17,11 +17,7 @@ const UserImages:FC<IUser> = ({
     const ref = useRef<HTMLInputElement>(null)
     const [uploadedFile, setUploadedFile] = useState<File | null>(null)
 
-
     const closeCropModal = () => {
-        // if(ref) {
-        //     ref?.current?.r
-        // }
         setUploadedFile(null)
         setImageCropModal(false)
     }
@@ -41,7 +37,6 @@ const UserImages:FC<IUser> = ({
     
 
     const onUpload = (image: any) => {
-
         if(image) {
             const data = new FormData()
             createFile(image).then(res => {
@@ -55,7 +50,6 @@ const UserImages:FC<IUser> = ({
 
     return (
         <FancyboxWrapper>
-            
             <div className={`${styles.wrapper} horizontal-scroll`}>
                 <ImageCropModal
                     uploadedFile={uploadedFile}
@@ -82,7 +76,6 @@ const UserImages:FC<IUser> = ({
                 }
             </div>
         </FancyboxWrapper>
-        
     )
 }
 

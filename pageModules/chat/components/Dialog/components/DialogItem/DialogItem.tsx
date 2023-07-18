@@ -17,6 +17,7 @@ import ApiService from '@/service/apiService';
 import Router from 'next/router';
 import { updateCurrentProfileId } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
+import winkImg from '@/public/assets/images/wink-sticker.png';
 const service = new ApiService()
 
 
@@ -112,7 +113,12 @@ const DialogItemComponent:FC<I> = ({
                                 animate={{opacity: 1, scale: 1}}
                                 transition={{type: 'spring', damping: 17, stiffness: 400}}
                                 >
-                                <FaSmileWink size={50} color='var(--violet)'/>
+                                <Image
+                                    src={winkImg}
+                                    width={50}
+                                    height={50}
+                                    alt=''
+                                    />
                             </motion.div>
                         </div>
                     </div>

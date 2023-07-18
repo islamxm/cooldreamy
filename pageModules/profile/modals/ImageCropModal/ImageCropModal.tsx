@@ -52,6 +52,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
     const [croppedImage, setCroppedImage] = useState<any>(null)
     const [load, setLoad] = useState(false)
 
+
     const onCancel = () => {
         setSrcImg(null)
         setCrop({x: 0, y: 0})
@@ -59,8 +60,10 @@ const ImageCropModal:FC<cropModalPropsType> = ({
         setZoom(1)
         setCroppedAreaPixels(null)
         setCroppedImage(null)
+        setCategory(0)
         onClose()
     }
+
 
     useEffect(() => {
         if(initCategory) setCategory(initCategory)
@@ -73,6 +76,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
         }
     }, [uploadedFile])
 
+
     const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }, [])
@@ -80,53 +84,18 @@ const ImageCropModal:FC<cropModalPropsType> = ({
 
     const showCroppedImage = useCallback(async () => {
         if(srcImg) {
-
             try {
                 const croppedImage = await getCroppedImg(
                     srcImg,
                     croppedAreaPixels,
                     rotation
                 )
-
                 setCroppedImage(croppedImage)
-
             } catch(err) {
                 console.log(err)
             }
         }
-        
     }, [croppedAreaPixels, rotation, srcImg])
-
-
-    // !! upload test
-
-    // const onSave = () => {
-
-    //     if(token && croppedImage) {
-    //         setLoad(true)
-    //         const data = new FormData()
-    //         createFile(croppedImage).then(res => {
-    //             data.append('category_id', '5')
-    //             data.append('image', res)
-
-    //             service.addProfileImage(data, token).then(res => {
-    //                 // console.log(res)
-    //                 if(res?.id) {
-    //                     service.getMyProfile(token).then(userData => {
-    //                         if(userData) {
-    //                             dispatch(updateUserData(userData))
-    //                         }
-    //                     })
-    //                     notify('Фотография добавлена', 'SUCCESS')
-    //                     onCancel()
-    //                 }
-    //             }).finally(() => {
-    //                 setLoad(false)
-                    
-    //             })
-    //         })
-    //     }
-    // }
     
     const onSave = () => {
         if(token && croppedImage) {
@@ -158,9 +127,9 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                         })
                     } else {
                         notify('Фотография не подходит', 'ERROR')
+                        setLoad(false)
                     }
                 })
-                
             })
         }
     }

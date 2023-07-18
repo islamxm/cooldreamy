@@ -235,7 +235,7 @@ const Main = () => {
                                     onAccept(selectedPlan)
                                     goToPayment()
                                 }}
-                                variant={width <= 1200 ? 'gold' : 'default'}
+                                variant={width <= 1200 ? 'green' : 'default'}
                                 />
                         </div>
                     )

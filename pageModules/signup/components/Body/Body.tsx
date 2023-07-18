@@ -42,7 +42,7 @@ const Body:FC = () => {
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(2)
+    const [currentStep, setCurrentStep] = useState(0)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -50,7 +50,6 @@ const Body:FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
-    const [dob, setDob] = useState('')
 
     const [sex, setSex] = useState<'male' | 'female'>('male')
     const [avatar, setAvatar] = useState<File | null | undefined>(null)
