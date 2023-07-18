@@ -42,7 +42,7 @@ const Body:FC = () => {
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(2)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -62,6 +62,7 @@ const Body:FC = () => {
     const [country, setCountry] = useState<any>()
     const [state, setState] = useState<any>()
     const [language, setLanguage] = useState<any>(null)
+    const [btnDisable, setBtnDisable] = useState(false)
 
 
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
@@ -108,6 +109,7 @@ const Body:FC = () => {
 
 
     useEffect(() => {
+        // '693|5PBGOZGldlXrOAXhwQcQeDV0uuuLSUiKxyPGPsFJ'
         if(token && router?.locale) {
             service.getAllPrompts(token, router.locale).then(res => {
                 setPrompt_targets(res?.prompt_targets)
@@ -266,6 +268,57 @@ const Body:FC = () => {
     }, [currentStep, token, countryDef, country, stateDef, state])
 
     
+
+    useEffect(() => {
+        if(currentStep === 0) {
+            if(!(email && name && password && sex && birthday)) {
+                setBtnDisable(true)
+            } else {
+                setBtnDisable(false)
+            }
+        }
+        if(currentStep === 2) {
+            if(selectedTargets?.length < 1 || selectedTargets?.length > 3) {
+                setBtnDisable(true)
+            } else setBtnDisable(false)
+        }
+        if(currentStep === 3) {
+            if(selectedInterests?.length < 5 || selectedCareers?.length > 5) {
+                setBtnDisable(true)
+            } else setBtnDisable(false)
+        }
+        if(currentStep === 4) {
+            if(selectedFinance?.length !== 1) {
+                setBtnDisable(true)
+            } else setBtnDisable(false)
+        }
+        if(currentStep === 5) {
+            if(selectedSources?.length !== 1) {
+                setBtnDisable(true)
+            } else setBtnDisable(false)
+        }
+        if(currentStep === 6) {
+            if(selectedKids?.length !== 1) {
+                setBtnDisable(true)
+            } else setBtnDisable(false)
+        }
+        if(currentStep === 7) {
+            if(selectedRl?.length !== 1) {
+                setBtnDisable(true)
+            } else setBtnDisable(false)
+        }
+        if(currentStep === 8) {
+            if(selectedCareers?.length !== 1) {
+                setBtnDisable(true)
+            } else setBtnDisable(false)
+        }
+
+    }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl])
+
+    useEffect(() => {
+        console.log(currentStep)
+    }, [currentStep])
+
     return (
         <div className={styles.body}>
             <Container>
@@ -296,10 +349,9 @@ const Body:FC = () => {
                                                 <div className={styles.action}>
                                                     <Button
                                                         load={load}
-                                                        //disabled={nextBtn}
                                                         middle={width <= 768}
                                                         onClick={stepChange}
-                                                        disabled={!(email && name && password && sex && birthday)}
+                                                        disabled={btnDisable}
                                                         text={currentStep === 9 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
                                                         />
                                                 </div>

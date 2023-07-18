@@ -29,6 +29,9 @@ const MainWrapper = ({
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
+	useEffect(() => console.log(token), [token])
+
+
 	useEffect(() => {
 		if(token && query && typeof query?.token === 'string') {
 			service.verifyEmail(token, query?.token).then(res => {
