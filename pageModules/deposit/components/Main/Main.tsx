@@ -81,6 +81,9 @@ const Main = () => {
                 <div className={styles.list}>
                     {
                         list?.map((i, index) => {
+                            if(i?.id === 1) {
+                                return null
+                            }
                             if(i?.status === 0) {
                                 return (
                                     <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
@@ -171,7 +174,6 @@ const Main = () => {
                                             
                                         </div>
                                     </div>
-                                    
                                 )
                             }
                             if(i?.status === 2) {
@@ -197,7 +199,6 @@ const Main = () => {
                                                 ВЫГОДНЫЙ
                                             </div>
                                             </div>
-                                            
                                             <div className={styles.credits}>
                                                 <div className={styles.value}>{i?.credits}</div>
                                                 <span>кредитов</span>
