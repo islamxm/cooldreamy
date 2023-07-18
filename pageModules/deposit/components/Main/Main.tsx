@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Main.module.scss';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Image from 'next/image';
 import mcafee from '@/public/assets/images/mcafee.svg';
 import norton from '@/public/assets/images/norton.svg'
 import ApiService from '@/service/apiService';
-import PromptModal from '@/popups/PromptModal/PromptModal';
 import * as _ from 'lodash'
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
-import {Row, Col} from 'antd';
 import Button from '@/components/Button/Button';
 import PayForm from '../PayForm/PayForm';
-import Loader from '@/components/Loader/Loader';
+import { useWindowSize } from 'usehooks-ts';
 import { PulseLoader } from 'react-spinners';
 
 const service = new ApiService()
@@ -20,9 +18,10 @@ const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5Gsju
 
 
 const Main = () => {
+    const {width} = useWindowSize()
+    const payRef = useRef<HTMLDivElement>(null)
     const {userData, token} = useAppSelector(s => s)
     const [list, setList] = useState<any[]>([])
-    const [modal, setModal] = useState(false)
     const [selectedPlan, setSelectedPlan] = useState<any>(null)
     const [load, setLoad] = useState(false)
 
@@ -30,21 +29,11 @@ const Main = () => {
 
     
     const [secretKey, setSecretKey] = useState<string>('')
-    const [payLoad, setPayLoad] = useState<boolean>(false)
-
-
-
-
-    
-
-
-
 
 
     const getPlans = () => {
         if(token) {
             service.getPayPlans(token).then(res => {
-                console.log(res)
                 setList(res)
             })
         }
@@ -54,11 +43,15 @@ const Main = () => {
         setSecretKey('')
     }, [selectedPlan])
 
-    // useEffect(() => {
-    //     console.log(secretKey)
-    //     console.log(stripePromise)
-    // }, [secretKey, stripePromise])
 
+    const goToPayment = () => {
+        if(width <= 768) {
+            const top = payRef?.current?.getBoundingClientRect()?.top;
+            if(typeof top === 'number') {
+                document.documentElement.scrollTo(0, top)
+            }
+        }
+    }
     
 
     useEffect(() => {
@@ -73,7 +66,6 @@ const Main = () => {
                 list_type: 'credit',
                 list_id: plan?.id
             }).then(res => {
-                console.log(res)
                 const clientSecret = res?.clientSecret;
                 setSecretKey(clientSecret)
             }).finally(() => setLoad(false))
@@ -81,16 +73,8 @@ const Main = () => {
     }
 
 
-
-
     return (
         <div className={styles.wrapper}>
-            {/* <PromptModal
-                open={modal}
-                onCancel={() => setModal(false)}
-                title={`Пополнение баланса`}
-                text='Вы уверены что хот'
-                /> */}
             <div className={styles.top}>
                 <div className={styles.head}>Пополнение баланса</div>
                 <div className={styles.balance}>Ваш баланс: <span>{userData?.credits} кредита</span></div>
@@ -102,7 +86,6 @@ const Main = () => {
                                     <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
                                         <div 
                                             onClick={() => {
-                                                
                                                 setSelectedPlan(i)
                                             }}
                                             className={`${styles.item}`} key={index}>
@@ -121,7 +104,7 @@ const Main = () => {
                                                 <span>кредитов</span>
                                             </div>
                                             <div className={styles.item_body}>
-                                            {
+                                                {
                                                     i?.discount !== 0 && (
                                                         <div className={styles.part}>
                                                             <div className={styles.label}>цена</div>
@@ -172,7 +155,7 @@ const Main = () => {
                                                 <span>кредитов</span>
                                             </div>
                                             <div className={styles.item_body}>
-                                            {
+                                                {
                                                     i?.discount !== 0 && (
                                                         <div className={styles.part}>
                                                             <div className={styles.label}>цена</div>
@@ -247,7 +230,11 @@ const Main = () => {
                         <div className={styles.buy}>
                             <Button
                                 text={`Купить тариф за ${selectedPlan?.price}$`}
-                                onClick={() => onAccept(selectedPlan)}
+                                onClick={() => {
+                                    onAccept(selectedPlan)
+                                    goToPayment()
+                                }}
+                                variant={width <= 1200 ? 'gold' : 'default'}
                                 />
                         </div>
                     )
@@ -279,7 +266,7 @@ const Main = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.field}>
+                <div ref={payRef} className={styles.field}>
                     {
                         load ? (
                             <div className={styles.load}>

@@ -311,11 +311,13 @@
             .list {
                 flex-wrap: wrap;
 
-                .item {
+                .item_wr {
                     width: calc(100% - 30px);
                     margin-bottom: 30px;
                 }
             }
+
+            
         }
     }
 }
@@ -327,6 +329,13 @@
                 .item {
                     min-height: 170px;
                 }
+            }
+            .buy {
+                position: fixed;
+                bottom: 20px;
+                left: 0;
+                width: 100%;
+                z-index: 100;
             }
         }
 

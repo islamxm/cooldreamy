@@ -5,6 +5,7 @@ import Textarea from '@/components/Textarea/Textarea';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import Button from '@/components/Button/Button';
+import notify from '@/helpers/notify';
 
 const service = new ApiService()
 
@@ -23,9 +24,15 @@ const ReportModal:FC<I & ModalFuncProps> = (props) => {
         if(token && chatId && text) {
             setLoad(true)
             service.chatReport(token, chatId, {text}).then(res => {
-                console.log(res)
+                if(res?.message === 'success') {
+                    notify('Жалоба отправлена', 'SUCCESS')
+                } 
+                if(res?.error === 'Already exists') {
+                    notify('Вы уже отправили жалобу на данного пользователя', 'ERROR')
+                }
             }).finally(() => {
                 setLoad(false)
+                onClose()
             })
         }
     }
