@@ -435,13 +435,15 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                             
                                         ) : (
                                             chatList && chatList?.length > 0 ? (
-                                                <Dialog
+                                                <div className={styles.body_wr}>
+                                                    <Dialog
                                                     totalChatItemCount={totalChatItemCount}
                                                     height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}
                                                     chatList={chatList}
                                                     id={activeDialogId}
                                                     updateChatListPage={updateChatListPage}
                                                     />
+                                                </div>
                                             ) : (
                                                 activeDialogId && !mockType ? (
                                                     <ChatStart

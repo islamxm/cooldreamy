@@ -22,10 +22,13 @@
             padding-top: 40px;
             position: relative;
             overflow-y: auto;
-            display: flex;
-            align-items: flex-end;
             
-
+            .body_wr {
+                display: flex;
+                justify-content: flex-end;
+                height: 100%;
+                overflow: visible;
+            }
 
             .body_action {
                 padding: 0 5px;
