@@ -51,7 +51,7 @@ const ChatItem = ({
     const {query} = useRouter()
     const {type} = query || null
     const {token} = useAppSelector(s => s)
-    const {avatar_url, avatar_url_thumbnail, name, online, user_avatar_url} = another_user || {};
+    const {avatar_url, avatar_url_thumbnail, name, online, user_avatar_url, user_thumbnail_url} = another_user || {};
     
 
     useEffect(() => {
@@ -156,7 +156,7 @@ const ChatItem = ({
                     <Avatar
                         size={63}
                         verified={is_confirmed_user == 1}
-                        image={user_avatar_url}    
+                        image={user_thumbnail_url || user_avatar_url}    
                         />
                 </div>
                 <div className={styles.body}>
@@ -228,7 +228,7 @@ const ChatItem = ({
                     <Avatar
                         size={63}
                         verified={is_confirmed_user == 1}
-                        image={avatar_url_thumbnail}    
+                        image={user_thumbnail_url || avatar_url_thumbnail}    
                         />
                 </div>
                 <div className={styles.body}>

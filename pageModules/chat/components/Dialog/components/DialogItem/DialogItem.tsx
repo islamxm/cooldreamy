@@ -48,7 +48,7 @@ const DialogItemComponent:FC<I> = ({
     const dispatch = useAppDispatch()
     const {token, unreadChatCount} = useAppSelector(s => s)
     const {inView, ref} = useInView({
-        triggerOnce: true,
+        // triggerOnce: true,
     })
 
     

@@ -113,7 +113,8 @@ type chatUserType = {
     name?: string,
     age?: number,
     online?: 1 | 0,
-    user_avatar_url?: string
+    user_avatar_url?: string,
+    user_thumbnail_url?: string
 }
 
 // диалог (чат лист)
