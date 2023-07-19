@@ -359,17 +359,18 @@ const ChatLayout = () => {
             if(chatType === 'chat') {
                 // ?? обновление чата
                 const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
-                if(foundMessage) {
-                    setChatList(s => {
-                        const m = s;
-                        const rm = m.splice(m.findIndex(i => i.id == foundMessage?.id), 1, body?.messageBody)
-                        return sortingChatList([...m])
-                    })   
-                } else {
-                    console.log('NEW MESSAGE', body?.messageBody)
-                    setChatList(s => {
-                        return sortingChatList([body?.messageBody, ...s])
-                    })
+                if(currentChatId == body?.dialogBody?.id) {
+                    if(foundMessage) {
+                        setChatList(s => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex(i => i.id == foundMessage?.id), 1, body?.messageBody)
+                            return sortingChatList([...m])
+                        })   
+                    } else {
+                        setChatList(s => {
+                            return sortingChatList([body?.messageBody, ...s])
+                        })
+                    }
                 }
                 // ?? обновление диалогов
                 const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 
@@ -389,16 +390,18 @@ const ChatLayout = () => {
             // TODO Если выбраны ПИСЬМА
             if(chatType === 'mail') {
                 const foundLetter = chatList?.find(s => s?.id == body?.messageBody?.id)
-                if(foundLetter) {
-                    setChatList(s => {
-                        const m = s;
-                        const rm = m.splice(m.findIndex(i => i.id == foundLetter?.id), 1, body?.messageBody)
-                        return sortingMailChatList([...m])
-                    })
-                } else {
-                    setChatList(s => {
-                        return sortingMailChatList([body?.messageBody, ...s])
-                    })
+                if(currentChatId == body?.dialogBody?.id) {
+                    if(foundLetter) {
+                        setChatList(s => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex(i => i.id == foundLetter?.id), 1, body?.messageBody)
+                            return sortingMailChatList([...m])
+                        })
+                    } else {
+                        setChatList(s => {
+                            return sortingMailChatList([body?.messageBody, ...s])
+                        })
+                    }
                 }
 
                 const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 
