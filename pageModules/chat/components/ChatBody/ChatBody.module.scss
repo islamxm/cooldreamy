@@ -17,15 +17,13 @@
     .main {
         width: 100%;
         position: relative;
-        display: flex;
-        flex-direction: column;
-        
         
         .body {   
-            display: flex;
-            align-items: flex-end;
             padding-top: 40px;
             position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: flex-end;
             
 
 
