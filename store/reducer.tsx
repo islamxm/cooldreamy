@@ -33,6 +33,8 @@ export interface IGlobalState {
             }
         } | null
     },
+
+    unreadChatCount: number
     
 }
 
@@ -51,7 +53,8 @@ export const globalState: IGlobalState = {
     actionsPricing:[],
     limit: {
         open: false,
-    }
+    },
+    unreadChatCount: 0
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -118,6 +121,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 limit: action.data
+            }
+        case 'UPDATE_UNREAD_CHAT_COUNT':
+            return {
+                ...state,
+                unreadChatCount: action.data
             }
         default:
             return state;

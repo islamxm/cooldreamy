@@ -19,6 +19,7 @@ export const updateLocale = (data: ILocale) => ({type: 'UPDATE_LOCALE', data})
 
 export const updatePricing = (data: any[]) => ({type: 'UPDATE_PRICING', data})
 
+
 export const updateLimit = (data: {
     open?: boolean, 
     data?: {
@@ -30,3 +31,6 @@ export const updateLimit = (data: {
         }
     }
 }) => ({type: "UPDATE_LIMIT", data})
+
+
+export const updateUnreadChatCount = (data: number) => ({type: 'UPDATE_UNREAD_CHAT_COUNT', data})

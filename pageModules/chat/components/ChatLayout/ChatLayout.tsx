@@ -247,13 +247,12 @@ const ChatLayout = () => {
     useEffect(() => {
         if(socketChannel) {
             if(chatType === 'chat') {
-                if(newMessage) {
-                    console.log(newMessage)
+                if(newMessage) { 
                     onUpdateChat && onUpdateChat({ 
                         // messageBody: newMessage?.chat_list_item?.chat?.last_message, 
                         // dialogBody: newMessage?.chat_list_item?.chat
                         messageBody: newMessage?.chat_message, 
-                        dialogBody: {...newMessage?.chat_list_item, other_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user}
+                        dialogBody: {...newMessage?.chat_list_item, another_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user, last_message: newMessage?.chat_message}
                     })
                 }
                 // socketChannel?.listen('.chat-message-read-event', (data: any) => {
@@ -277,7 +276,7 @@ const ChatLayout = () => {
                         // messageBody: newMail?.letter_list_item?.letter?.last_message, 
                         // dialogBody: newMail?.letter_list_item?.letter
                         messageBody: newMail?.letter_message, 
-                        dialogBody: {...newMail?.letter_list_item, other_user: newMail?.chat_message?.sender_user, self_user: newMail?.chat_message?.recepient_user}
+                        dialogBody: {...newMail?.letter_list_item, another_user: newMail?.chat_message?.sender_user, self_user: newMail?.chat_message?.recepient_user, last_message: newMail?.letter_message}
                     }) 
                 }
             }
@@ -293,8 +292,10 @@ const ChatLayout = () => {
                 console.log(data)
                 if(chatType === 'chat') {
                     onUpdateChat && onUpdateChat({
-                        messageBody: data?.chat_list_item?.chat?.last_message, 
-                        dialogBody: data?.chat_list_item?.chat
+                        // messageBody: data?.chat_list_item?.chat?.last_message, 
+                        // dialogBody: data?.chat_list_item?.chat
+                        messageBody: newMessage?.chat_message, 
+                        dialogBody: {...newMessage?.chat_list_item, another_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user, last_message: newMessage?.chat_message}
                     })
                 }
 
@@ -302,8 +303,10 @@ const ChatLayout = () => {
             socketChannel?.listen('.letter-message-read-event', (data: any) => {
                 if(chatType === 'mail') {
                     onUpdateChat && onUpdateChat({
-                        messageBody: data?.letter_list_item?.letter?.last_message, 
-                        dialogBody: data?.letter_list_item?.letter
+                        // messageBody: data?.letter_list_item?.letter?.last_message, 
+                        // dialogBody: data?.letter_list_item?.letter
+                        messageBody: newMail?.letter_message, 
+                        dialogBody: {...newMail?.letter_list_item, another_user: newMail?.letter_message?.sender_user, self_user: newMail?.letter_meesage?.recepient_user, last_message: newMessage?.letter_message}
                     }) 
                 }
             })
@@ -350,11 +353,12 @@ const ChatLayout = () => {
         // ?? В САМОМ ЧАТЕ
         if(body?.dialogBody && body?.messageBody) {
 
+
+
             // TODO Если выбран ЧАТ
             if(chatType === 'chat') {
                 // ?? обновление чата
                 const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
-                console.log(foundMessage)
                 if(foundMessage) {
                     setChatList(s => {
                         const m = s;

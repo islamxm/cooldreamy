@@ -34,7 +34,6 @@ const Sidebar:FC = () => {
             setLoad(true)
             service.setCredits(token, {credits: 1000}).then(res => {
                 console.log(res)
-
             }).finally(() => {
                 setLoad(false)
             })

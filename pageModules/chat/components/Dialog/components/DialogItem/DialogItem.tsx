@@ -15,9 +15,10 @@ import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import Router from 'next/router';
-import { updateCurrentProfileId } from '@/store/actions';
+import { updateCurrentProfileId, updateUnreadChatCount } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import winkImg from '@/public/assets/images/wink-sticker.png';
+
 const service = new ApiService()
 
 
@@ -45,7 +46,7 @@ const DialogItemComponent:FC<I> = ({
     
 }) => {
     const dispatch = useAppDispatch()
-    const {token} = useAppSelector(s => s)
+    const {token, unreadChatCount} = useAppSelector(s => s)
     const {inView, ref} = useInView({
         triggerOnce: true,
     })
@@ -56,7 +57,9 @@ const DialogItemComponent:FC<I> = ({
         if(status === 'unread' && id && inView && !isSelf) {
             if(token) {
                 service.readMessage({chat_message_id: Number(id)}, token).then(res => {
-                    console.log(res)
+                    if(res?.message === 'success') {
+                        unreadChatCount === 0 ? dispatch(updateUnreadChatCount(0)) : dispatch(updateUnreadChatCount(unreadChatCount - 1)) 
+                    }
                 })
             }
         }

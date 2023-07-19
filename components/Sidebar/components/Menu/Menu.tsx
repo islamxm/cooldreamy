@@ -14,8 +14,9 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
 const Menu = () => {
-    const {locale} = useAppSelector(s => s)
+    const {locale, unreadChatCount} = useAppSelector(s => s)
     const {pathname} = useRouter()
+
 
     const menuList:menuItemType[] = [
         {
@@ -31,7 +32,7 @@ const Menu = () => {
             link: '/chat?type=chat',
             root: '/chat',
             icon: <IoChatbubblesOutline/>,
-            badge: 0,
+            badge: unreadChatCount,
             onClick: () => {},
         },
         {

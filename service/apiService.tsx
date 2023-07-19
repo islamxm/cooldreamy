@@ -1019,6 +1019,21 @@ class ApiService {
         }
     }
 
+    getUnreadChatCount = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getUnreadChatCount, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            return await res?.json() 
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     
 }
 

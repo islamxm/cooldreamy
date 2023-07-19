@@ -116,7 +116,7 @@ const endpoints = {
     
     checkPhotoAi: `${API_PATH}check-image`,
 
-    
+    getUnreadChatCount: `${API_PATH}chats/unread`,
 
 
 }

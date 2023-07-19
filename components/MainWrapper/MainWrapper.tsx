@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
-import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData } from '@/store/actions';
+import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData, updateUnreadChatCount } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
@@ -25,7 +25,7 @@ const MainWrapper = ({
 }: {children?: React.ReactNode}) => {
 	const {locale, pathname, push, asPath, query} = useRouter()
 	const dispatch = useAppDispatch()
-    const {token, userId, socketChannel, userData, currentProfileId, limit} = useAppSelector(s => s);
+    const {token, userId, socketChannel, userData, currentProfileId, limit, unreadChatCount, newMessage, newMail} = useAppSelector(s => s);
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
@@ -114,6 +114,14 @@ const MainWrapper = ({
 		}
 	}, [pusherConfig, userId, socketChannel])
 
+	useEffect(() => {
+		if(token) {
+			service.getUnreadChatCount(token).then(res => {
+				dispatch(updateUnreadChatCount(res?.count))
+			})
+		}
+	}, [token])
+
 
 
 	
@@ -121,6 +129,12 @@ const MainWrapper = ({
 	//chat-message-read-event
 	//new-letter-message-event
 	//letter-message-read-event
+
+	useEffect(() => {
+		if(newMessage) {
+			dispatch(updateUnreadChatCount(unreadChatCount + 1))
+		}
+	}, [newMessage])
 	
 
 	useEffect(() => {
@@ -128,7 +142,7 @@ const MainWrapper = ({
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
 				dispatch(updateNewMessage(data))
-				console.log(data)
+				// dispatch(updateUnreadChatCount(unreadChatCount + 1))
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
 				switch(data?.chat_message?.chat_messageable_type) {
 					
@@ -156,7 +170,6 @@ const MainWrapper = ({
 			socketChannel?.listen('.new-letter-message-event', (data: any) => {
 				dispatch(updateNewMail(data))
 				const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;
-				console.log(data)
 				if(data) {
 					notify(
 						<>
