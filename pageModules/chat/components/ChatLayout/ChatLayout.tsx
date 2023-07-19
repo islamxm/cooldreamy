@@ -248,9 +248,12 @@ const ChatLayout = () => {
         if(socketChannel) {
             if(chatType === 'chat') {
                 if(newMessage) {
-                    onUpdateChat && onUpdateChat({
-                        messageBody: newMessage?.chat_list_item?.chat?.last_message, 
-                        dialogBody: newMessage?.chat_list_item?.chat
+                    console.log(newMessage)
+                    onUpdateChat && onUpdateChat({ 
+                        // messageBody: newMessage?.chat_list_item?.chat?.last_message, 
+                        // dialogBody: newMessage?.chat_list_item?.chat
+                        messageBody: newMessage?.chat_message, 
+                        dialogBody: {...newMessage?.chat_list_item, other_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user}
                     })
                 }
                 // socketChannel?.listen('.chat-message-read-event', (data: any) => {
@@ -271,8 +274,10 @@ const ChatLayout = () => {
             if(chatType === 'mail') {
                 if(newMail) {
                     onUpdateChat && onUpdateChat({
-                        messageBody: newMail?.letter_list_item?.letter?.last_message, 
-                        dialogBody: newMail?.letter_list_item?.letter
+                        // messageBody: newMail?.letter_list_item?.letter?.last_message, 
+                        // dialogBody: newMail?.letter_list_item?.letter
+                        messageBody: newMail?.letter_message, 
+                        dialogBody: {...newMail?.letter_list_item, other_user: newMail?.chat_message?.sender_user, self_user: newMail?.chat_message?.recepient_user}
                     }) 
                 }
             }
@@ -349,6 +354,7 @@ const ChatLayout = () => {
             if(chatType === 'chat') {
                 // ?? обновление чата
                 const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
+                console.log(foundMessage)
                 if(foundMessage) {
                     setChatList(s => {
                         const m = s;
@@ -356,10 +362,10 @@ const ChatLayout = () => {
                         return sortingChatList([...m])
                     })   
                 } else {
+                    console.log('NEW MESSAGE', body?.messageBody)
                     setChatList(s => {
                         return sortingChatList([body?.messageBody, ...s])
                     })
-                    
                 }
                 // ?? обновление диалогов
                 const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 
