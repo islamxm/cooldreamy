@@ -23,7 +23,7 @@ const PayForm = ({plan}: {plan?: any}) => {
         const {error} = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                // return_url: `${window.location.origin}/`,
+                return_url: `${window.location.origin}/pay_success`,
             },
             redirect: "if_required" 
         })
