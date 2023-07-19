@@ -7,15 +7,26 @@ import { useAppSelector } from "@/hooks/useTypesRedux";
 import LimitModal from "@/popups/LimitModal/LimitModal";
 import Router from "next/router";
 import VerifyEmailModal from "@/popups/VerifyEmailModal/VerifyEmailModal";
+import { useEffect, useState } from "react";
 const SearchPage = () => {
     const {userData} = useAppSelector(s => s)
 
+    const [modal, setModal] = useState(false)
+
+    useEffect(() => {
+        if(userData?.hasOwnProperty('is_email_verified') && userData?.is_email_verified === false) {
+            setModal(true)
+        } else {
+            setModal(false)
+        }
+    }, [userData])
 
     return (
         <Container>
             <VerifyEmailModal
-                open={userData?.hasOwnProperty('is_email_verified') && userData?.is_email_verified === false}
-                onCancel={() => Router.push('/feed')}
+                open={modal}
+                // onCancel={() => Router.push('/feed')}
+                onCancel={() => setModal(false)}
                 />
             <MainLayout>
                 <Sidebar/>

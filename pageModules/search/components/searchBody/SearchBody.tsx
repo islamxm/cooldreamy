@@ -93,9 +93,7 @@ const SearchBody = () => {
         }
     }, [token, country])    
 
-    useEffect(() => {
-        console.log(list)
-    }, [list])
+  
 
 
 
