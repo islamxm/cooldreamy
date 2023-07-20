@@ -42,7 +42,7 @@ const Body:FC = () => {
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(10)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -108,9 +108,9 @@ const Body:FC = () => {
 
 
     useEffect(() => {
-        // '693|5PBGOZGldlXrOAXhwQcQeDV0uuuLSUiKxyPGPsFJ'
-        if(token && router?.locale) {
-            service.getAllPrompts(token, router.locale).then(res => {
+ 
+        if('738|abgZ1qn50aw7aV1Ebu0CniaWwoKNe2ldnukOCVZM' && router?.locale) {
+            service.getAllPrompts('738|abgZ1qn50aw7aV1Ebu0CniaWwoKNe2ldnukOCVZM', router.locale).then(res => {
                 setPrompt_targets(res?.prompt_targets)
                 setPrompt_careers(res?.prompt_careers)
                 setPrompt_finance_states(res?.prompt_finance_states)
@@ -311,8 +311,13 @@ const Body:FC = () => {
                 setBtnDisable(true)
             } else setBtnDisable(false)
         }
+        if(currentStep === 10) {
+            if(about?.length < 20 || about?.length > 200) {
+                setBtnDisable(true)
+            } else setBtnDisable(false)
+        }
 
-    }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl, email, name, password, birthday])
+    }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl, email, name, password, birthday, about])
 
     useEffect(() => {
         console.log(currentStep)

@@ -5,6 +5,24 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 import {Row, Col} from 'antd';
 import Button from '@/components/Button/Button';
 
+const switchRedirect = (planId: number | string) => {
+    if(planId == '1') {
+        return `${window.location.origin}/pay_success_credit1`
+    }
+    if(planId == '2') {
+        return `${window.location.origin}/pay_success_credit2`
+    }
+    if(planId == '3') { 
+        return `${window.location.origin}/pay_success_credit3`
+    }
+    if(planId == '4') {
+        return `${window.location.origin}/pay_success_credit4`
+    }
+    if(planId == '5') {
+        return `${window.location.origin}/pay_success_credit5`
+    }
+}
+
 const PayForm = ({plan}: {plan?: any}) => {
     const [payLoad, setPayLoad] = useState<boolean>(false)
     const [message, setMessage] = useState<any>(null)
@@ -23,7 +41,7 @@ const PayForm = ({plan}: {plan?: any}) => {
         const {error} = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: `${window.location.origin}/pay_success`,
+                return_url: switchRedirect(plan?.id),
             },
             redirect: "if_required" 
         })
