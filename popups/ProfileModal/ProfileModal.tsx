@@ -42,7 +42,8 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         state,
         about_self,
         id,
-        avatar_url_thumbnail
+        avatar_url_thumbnail,
+        user_avatar_url,
     } = data || {}
 
     const onClose = () => {
@@ -242,7 +243,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                     <Col span={24}>
                                         <div className={styles.user}>
                                             <Avatar
-                                                image={avatar_url_thumbnail}
+                                                image={avatar_url_thumbnail || user_avatar_url}
                                                 style={{marginRight: 15}}
                                                 />
                                             <UserTitle
