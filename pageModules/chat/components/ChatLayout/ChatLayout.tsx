@@ -294,7 +294,7 @@ const ChatLayout = () => {
                     onUpdateChat && onUpdateChat({
                         // messageBody: data?.chat_list_item?.chat?.last_message, 
                         // dialogBody: data?.chat_list_item?.chat
-                        messageBody: {...newMessage?.chat_message, is_read_by_recepient: 1}, 
+                        messageBody: newMessage?.chat_message, 
                         dialogBody: {...newMessage?.chat_list_item, another_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user, last_message: newMessage?.chat_message}
                     })
                 }

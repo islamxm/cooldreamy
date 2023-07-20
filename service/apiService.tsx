@@ -1019,9 +1019,9 @@ class ApiService {
         }
     }
 
-    getUnreadChatCount = async (token: IToken) => {
+    getUnreadCount = async (token: IToken) => {
         try {
-            let res = await fetch(endpoints.getUnreadChatCount, {
+            let res = await fetch(endpoints.getUnreadCount, {
                 method: "GET",
                 headers: {
                     ...headers,

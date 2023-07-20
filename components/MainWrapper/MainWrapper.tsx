@@ -116,8 +116,10 @@ const MainWrapper = ({
 
 	useEffect(() => {
 		if(token) {
-			service.getUnreadChatCount(token).then(res => {
+			service.getUnreadCount(token).then(res => {
 				dispatch(updateUnreadChatCount(res?.count_chat_messages))
+				
+				
 				//count_letter_messages
 			})
 		}
