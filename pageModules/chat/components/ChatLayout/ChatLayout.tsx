@@ -294,7 +294,7 @@ const ChatLayout = () => {
                     onUpdateChat && onUpdateChat({
                         // messageBody: data?.chat_list_item?.chat?.last_message, 
                         // dialogBody: data?.chat_list_item?.chat
-                        messageBody: newMessage?.chat_message, 
+                        messageBody: {...newMessage?.chat_message, is_read_by_recepient: 1}, 
                         dialogBody: {...newMessage?.chat_list_item, another_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user, last_message: newMessage?.chat_message}
                     })
                 }
@@ -359,7 +359,9 @@ const ChatLayout = () => {
             if(chatType === 'chat') {
                 // ?? обновление чата
                 const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
+                console.log('FOUND MESSAGE', foundMessage)
                 if(currentChatId == body?.dialogBody?.id) {
+                    console.log('CURRENT CHAT')
                     if(foundMessage) {
                         setChatList(s => {
                             const m = s;
