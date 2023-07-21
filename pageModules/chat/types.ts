@@ -9,7 +9,8 @@ export type chatItemPropsTypes = {
     another_user: chatUserType,
     is_confirmed_user?: 1 | 0
     text?: string,
-    active: boolean
+    active: boolean,
+    unread_messages_count?: number
 }
 
 

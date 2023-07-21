@@ -1034,7 +1034,20 @@ class ApiService {
         }
     }
 
-    
+    getCredits = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getCredits, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

@@ -32,6 +32,7 @@ import notify from '@/helpers/notify';
 import { Dropdown } from 'antd';
 import ChatMenu from './components/ChatMenu/ChatMenu';
 import ReportModal from '@/popups/ReportModal/ReportModal';
+import { updateUserData } from '@/store/actions';
 
 
 
@@ -90,7 +91,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
     const {query: {id}} = useRouter()
-    const {token, actionsPricing, locale} = useAppSelector(s => s)
+    const {token, actionsPricing, locale, userData} = useAppSelector(s => s)
     const [pb, setPb] = useState<number>(70)
     const [promptModal, setPromptModal] = useState(false)
     const [reportModal, setReportModal] = useState(false)
@@ -129,6 +130,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         }))
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                        service.getCredits(token).then(credits => {
+                            dispatch(updateUserData({...userData, credits}))
+                        })
                     }
                     setMockType('')
                 })
@@ -146,6 +150,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         }))
                     } else {
                         onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
+                        service.getCredits(token).then(credits => {
+                            dispatch(updateUserData({...userData, credits}))
+                        })
                     }
                     
                     setMockType('')
@@ -170,6 +177,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         }))
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                        service.getCredits(token).then(credits => {
+                            dispatch(updateUserData({...userData, credits}))
+                        })
                     }
                    
                     setMockType('')
@@ -187,6 +197,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         }))
                     } else {
                         onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
+                        service.getCredits(token).then(credits => {
+                            dispatch(updateUserData({...userData, credits}))
+                        })
                     }
                     setMockType('')
                 })
@@ -218,7 +231,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const onGetAllMedia = () => {
         if(token && id && typeof id === 'string') {
             service.getChatMedia(token, id).then(res => {
-                console.log(res)
+                // console.log(res)
             })
         }
     }
@@ -226,7 +239,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const onWink = () => {
         if(token && currentUser?.id) {
             service.sendWink({user_id: Number(currentUser?.id)}, token).then(res => {
-                console.log(res)
+                // console.log(res)
             })
         }
     }
@@ -234,7 +247,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const onFav = () => {
         if(token && currentUser?.id) {
             service.addUserToFav({user_id: Number(currentUser?.id)}, token).then(res => {
-                console.log(res)
+                // console.log(res)
             })
         }
     }

@@ -16,7 +16,7 @@ import { useWindowSize } from 'usehooks-ts';
 import notify from '@/helpers/notify';
 import LimitModal from '@/popups/LimitModal/LimitModal'; 
 import getPrice from '@/helpers/getPrice';
-import { updateLimit } from '@/store/actions';
+import { updateLimit, updateUserData } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 
 
@@ -39,7 +39,7 @@ const ChatAction = ({
 
 
     const {width} = useWindowSize()
-    const {token, locale, actionsPricing} = useAppSelector(s => s)
+    const {token, locale, actionsPricing, userData} = useAppSelector(s => s)
     const {query} = useRouter()
     const {type, id} = query
 
@@ -79,6 +79,9 @@ const ChatAction = ({
                             }))
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                            service.getCredits(token).then(credits => {
+                                dispatch(updateUserData({...userData, credits}))
+                            })
                         }
                        
                     }).finally(() => {
@@ -96,6 +99,9 @@ const ChatAction = ({
                             // !! ERROR
                         } else {
                             onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
+                            service.getCredits(token).then(credits => {
+                                dispatch(updateUserData({...userData, credits}))
+                            })
                         }
                     })
                 }
@@ -131,6 +137,9 @@ const ChatAction = ({
                             }))
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                            service.getCredits(token).then(credits => {
+                                dispatch(updateUserData({...userData, credits}))
+                            })
 
                         }
                     }).finally(() => {
@@ -155,6 +164,9 @@ const ChatAction = ({
                             }))
                         } else {
                             onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
+                            service.getCredits(token).then(credits => {
+                                dispatch(updateUserData({...userData, credits}))
+                            })
                         }
                     }).finally(() => {
                         setLoad(false)
@@ -193,6 +205,9 @@ const ChatAction = ({
                                 }))
                             } else {
                                 onUpdateChat({messageBody: r?.chat?.last_message, dialogBody: r?.chat})
+                                service.getCredits(token).then(credits => {
+                                    dispatch(updateUserData({...userData, credits}))
+                                })
                             }
                         }).finally(() => {
                             setLoad(false)
@@ -234,6 +249,9 @@ const ChatAction = ({
                                 }))
                             } else {
                                 onUpdateChat({messageBody: r?.letter?.last_message, dialogBody: r?.letter})
+                                service.getCredits(token).then(credits => {
+                                    dispatch(updateUserData({...userData, credits}))
+                                })
                             }
                         }).finally(() => {
                             setLoad(false)

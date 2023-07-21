@@ -14,7 +14,7 @@ const SearchPage = () => {
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        if(userData?.hasOwnProperty('is_email_verified') && userData?.is_email_verified === false) {
+        if(userData?.hasOwnProperty('is_email_verified') && userData?.is_email_verified === 0) {
             setModal(true)
         } else {
             setModal(false)

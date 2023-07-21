@@ -25,6 +25,7 @@ import Step8 from '../../steps/Step8/Step8';
 import Step9 from '../../steps/Step9/Step9';
 import Step10 from '../../steps/Step10/Step10';
 import StepEx from '../../steps/StepEx/StepEx';
+import StepMail from '../../steps/StepMail/StepMail';
 import { IUser } from '@/models/IUser';
 import notify from '@/helpers/notify';
 
@@ -42,7 +43,7 @@ const Body:FC = () => {
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(10)
+    const [currentStep, setCurrentStep] = useState(0)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -108,9 +109,9 @@ const Body:FC = () => {
 
 
     useEffect(() => {
- 
-        if('738|abgZ1qn50aw7aV1Ebu0CniaWwoKNe2ldnukOCVZM' && router?.locale) {
-            service.getAllPrompts('738|abgZ1qn50aw7aV1Ebu0CniaWwoKNe2ldnukOCVZM', router.locale).then(res => {
+        //'738|abgZ1qn50aw7aV1Ebu0CniaWwoKNe2ldnukOCVZM'
+        if(token && router?.locale) {
+            service.getAllPrompts(token, router.locale).then(res => {
                 setPrompt_targets(res?.prompt_targets)
                 setPrompt_careers(res?.prompt_careers)
                 setPrompt_finance_states(res?.prompt_finance_states)
@@ -165,6 +166,8 @@ const Body:FC = () => {
                 return <Step9 nextStep={() => setCurrentStep(s => s + 1)}/>
             case 10:
                 return <Step10 about={about} setAbout={setAbout}/>
+            // case 11:
+            //     return <StepMail/>
             default:
                 return null; 
                 
@@ -319,9 +322,7 @@ const Body:FC = () => {
 
     }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl, email, name, password, birthday, about])
 
-    useEffect(() => {
-        console.log(currentStep)
-    }, [currentStep])
+   
 
     return (
         <div className={styles.body}>
@@ -356,7 +357,7 @@ const Body:FC = () => {
                                                         middle={width <= 768}
                                                         onClick={stepChange}
                                                         disabled={btnDisable}
-                                                        text={currentStep === 9 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
+                                                        text={currentStep === 10 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
                                                         />
                                                 </div>
                                             </Col>

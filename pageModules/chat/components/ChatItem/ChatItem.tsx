@@ -44,7 +44,8 @@ const ChatItem = ({
     
     updateDialogsList,
     filter,
-    uuid
+    uuid,
+    unread_messages_count
 
 }:I) => {
     const dispatch = useAppDispatch()
@@ -54,9 +55,6 @@ const ChatItem = ({
     const {avatar_url, avatar_url_thumbnail, name, online, user_avatar_url, user_thumbnail_url} = another_user || {};
     
 
-    useEffect(() => {
-        console.log(uuid)
-    }, [uuid])
 
 
 
@@ -199,17 +197,19 @@ const ChatItem = ({
                                 )
                             }
                         </div>
-                        {/* <div className={styles.item}>
-                            {
-                                status === 'unread' ? (
+                        {
+                            (unread_messages_count && unread_messages_count > 0) ? (
+                                <div className={styles.item}>
                                     <Badge
-                                         value={unreadMesssageCount}
+                                        value={unread_messages_count}
                                         />
-                                ) : (
+                                </div>
+                            ) : (
+                                <div className={styles.item}>
                                     <BiCheckDouble/>
-                                )
-                            }
-                        </div> */}
+                                </div>
+                            )
+                        }
                     </div>
                 </div> 
             </div>

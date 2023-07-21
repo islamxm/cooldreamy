@@ -118,6 +118,8 @@ const endpoints = {
 
     getUnreadCount: `${API_PATH}chats/unread`,
 
+    getCredits: `${API_PATH}profile/get_my_credits`,
+
     
 
 

@@ -123,7 +123,12 @@ const SearchBody = () => {
         }
     }
 
-    useEffect(() => setCurrentPage(1), [filter_type])
+    useEffect(() => {
+        setCurrentPage(1)
+        if(currentPage === 1) {
+            onSearch()
+        }
+    }, [filter_type])
 
     const updateList = () => {
         if(token) {
