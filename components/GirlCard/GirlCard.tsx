@@ -122,7 +122,7 @@ const GirlCard:FC<IUser> = ({
                 <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        src={user_avatar_url ? user_avatar_url : placeholder} 
+                        src={user_avatar_url ? user_avatar_url?.replace(/ /g, '') : placeholder} 
                         width={300}
                         height={300}
                         alt=""/>

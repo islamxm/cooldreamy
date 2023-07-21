@@ -15,7 +15,8 @@ import SkeletonChat from '../SkeletonChat/SkeletonChat';
 // import InfiniteLoader from 'react-window-infinite-loader'
 
 interface I extends IChat {
-    height?: string
+    height?: string,
+    updateDialogsList?: (...args: any[]) => any
 }
 
 const Item = ({data, index, style}: {data: any, index: number, style: any}) => (
@@ -36,7 +37,9 @@ const Dialog:FC<I> = ({
     updateChatListPage,
     id,
     height,
-    totalChatItemCount
+    totalChatItemCount,
+
+    updateDialogsList
 }) => {
     const {userId} = useAppSelector(s => s)
     
@@ -84,6 +87,8 @@ const Dialog:FC<I> = ({
                             index={index}
                             showAvatar={item.sender_user_id !== chatList[index - 1]?.sender_user_id}
                             senderUser={item?.sender_user}
+
+                            updateDialogsList={updateDialogsList}
                             />
                     ))
                 }

@@ -459,6 +459,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                     chatList={chatList}
                                                     id={activeDialogId}
                                                     updateChatListPage={updateChatListPage}
+
+                                                    updateDialogsList={updateDialogsList}
                                                     />
                                                 </div>
                                             ) : (

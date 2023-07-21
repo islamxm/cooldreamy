@@ -287,7 +287,7 @@ const ChatLayout = () => {
             //     }
             // })
         }
-    }, [chatType, socketChannel, chatList, dialogsList])
+    }, [chatType, socketChannel, chatList, dialogsList, currentChatId])
 
 
     const onDeleteDialog = (dialogId: number | string) => {
