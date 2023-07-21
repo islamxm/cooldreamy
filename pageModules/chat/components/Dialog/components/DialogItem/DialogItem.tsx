@@ -14,10 +14,11 @@ import { IMessage } from '@/pageModules/chat/types';
 import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { updateCurrentProfileId, updateUnreadChatCount } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import winkImg from '@/public/assets/images/wink-sticker.png';
+import { sortingDialogList } from '@/helpers/sorting';
 
 const service = new ApiService()
 
@@ -45,15 +46,17 @@ const DialogItemComponent:FC<I> = ({
     showAvatar,
     senderUser,
 
-
     updateDialogsList
-    
 }) => {
     const dispatch = useAppDispatch()
     const {token, unreadChatCount} = useAppSelector(s => s)
     const {inView, ref} = useInView({
         // triggerOnce: true,
     })
+
+    const {query} = useRouter()
+
+
 
     
 
@@ -65,11 +68,18 @@ const DialogItemComponent:FC<I> = ({
                     if(res?.message === 'success') {
                         unreadChatCount === 0 ? dispatch(updateUnreadChatCount(0)) : dispatch(updateUnreadChatCount(unreadChatCount - 1)) 
 
-                        updateDialogsList && updateDialogsList((s: any) => {
-                            const m = s;
-                            const rm = m.splice()
-                        })
+                        if(query && query?.id && typeof query?.id === 'string') {
+                            updateDialogsList && updateDialogsList((s: any) => {
+                                const m = s;
+                                const findItem = m.find((i:any) => i.id == query?.id)
+                                if(findItem) {
+                                    const rm = m.splice(m.findIndex((i:any) => i?.id == findItem?.id), 1, {...findItem, unread_messages_count: findItem?.unread_messages_count > 0 ? findItem?.unread_messages_count - 1 : findItem?.unread_messages_count})
 
+                                    return sortingDialogList([...m])
+                                }
+                                return sortingDialogList([...m])
+                            })
+                        }
                     }
                 })
             }
