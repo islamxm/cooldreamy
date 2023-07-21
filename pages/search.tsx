@@ -23,11 +23,11 @@ const SearchPage = () => {
 
     return (
         <Container>
-            <VerifyEmailModal
+            {/* <VerifyEmailModal
                 open={modal}
                 // onCancel={() => Router.push('/feed')}
                 onCancel={() => setModal(false)}
-                />
+                /> */}
             <MainLayout>
                 <Sidebar/>
                 <div style={{width: '100%'}}>

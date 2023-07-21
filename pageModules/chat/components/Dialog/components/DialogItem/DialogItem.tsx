@@ -43,7 +43,10 @@ const DialogItemComponent:FC<I> = ({
     gifts,
     index,
     showAvatar,
-    senderUser
+    senderUser,
+
+
+    updateDialogsList
     
 }) => {
     const dispatch = useAppDispatch()
@@ -61,6 +64,11 @@ const DialogItemComponent:FC<I> = ({
                     console.log(res)
                     if(res?.message === 'success') {
                         unreadChatCount === 0 ? dispatch(updateUnreadChatCount(0)) : dispatch(updateUnreadChatCount(unreadChatCount - 1)) 
+
+                        updateDialogsList && updateDialogsList((s: any) => {
+                            const m = s;
+                            const rm = m.splice()
+                        })
 
                     }
                 })

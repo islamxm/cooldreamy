@@ -17,6 +17,7 @@ import placeholder from '@/public/assets/images/avatar-placeholder.png';
 import notify from '@/helpers/notify';
 import { IUser } from '@/models/IUser';
 import { updateCurrentProfileId } from '@/store/actions';
+import replaceSpace from '@/helpers/replaceSpace';
 
 
 const service = new ApiService();
@@ -122,7 +123,7 @@ const GirlCard:FC<IUser> = ({
                 <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        src={user_avatar_url ? user_avatar_url?.replace(/ /g, '') : placeholder} 
+                        src={user_avatar_url ? replaceSpace(user_avatar_url) : placeholder} 
                         width={300}
                         height={300}
                         alt=""/>
