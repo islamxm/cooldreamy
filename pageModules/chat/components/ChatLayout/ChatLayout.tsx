@@ -143,7 +143,7 @@ const ChatLayout = () => {
                 filter: filter != 'all' ? filter : '',
                 
             }, token).then(res => {
-                console.log(res)
+       
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -172,7 +172,7 @@ const ChatLayout = () => {
                     page: chatListPage,
                     per_page: 10
                 }, token).then(res => {
-                    console.log(res)
+                    
                     setCurrentUser(res?.another_user)
                     setTotalChatItemCount(res?.letter_messages?.total)
                     if(chatListPage === 1) {
@@ -237,7 +237,7 @@ const ChatLayout = () => {
     useEffect(() => {
         if(token && currentChatId) {
             service.getChatMedia(token, currentChatId).then(res => {
-                console.log(res)
+              
             })
         }
     }, [token, currentChatId])
@@ -338,7 +338,7 @@ const ChatLayout = () => {
                         if(currentChatId == body?.dialogBody?.id) {   
                             const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
                             if(currentChatId == body?.dialogBody?.id) {
-                                console.log('FOUND MESSAGE', foundMessage)
+            
                                 if(foundMessage) {
                                     setChatList(s => {
                                         const m = s;
@@ -371,7 +371,7 @@ const ChatLayout = () => {
                                         
                         const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
                         if(currentChatId == body?.dialogBody?.id) {
-                            console.log('FOUND MESSAGE', foundMessage)
+                     
                             if(foundMessage) {
                                 setChatList(s => {
                                     const m = s;
@@ -499,6 +499,7 @@ const ChatLayout = () => {
 
                             dialogSearch={dialogSearch}
                             setDialogSearch={setDialogSearch}
+                            
                             />
                     </div>
                 </Col>

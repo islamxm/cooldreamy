@@ -25,12 +25,12 @@ const ChatMenu:FC<I> = ({
 
     return (
         <div className={styles.wrapper}>
-            <div 
+            {/* <div 
                 onClick={onGetAllMedia}
                 className={styles.item}>
                 <div className={styles.icon}><IoImagesOutline/></div>
                 <div className={styles.label}>Все медиа файлы</div>
-            </div>
+            </div> */}
             <div 
                 onClick={onWink}
                 className={styles.item}>

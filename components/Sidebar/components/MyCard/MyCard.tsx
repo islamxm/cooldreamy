@@ -21,7 +21,6 @@ const MyCard:FC<IUser> = ({
 }) => {
     const {userData, locale} = useAppSelector(s => s)
 
-    useEffect(() => console.log(userData),[userData])
     return (
         <Link href={'/profile'} className={styles.card} >
             <div className={styles.main}>

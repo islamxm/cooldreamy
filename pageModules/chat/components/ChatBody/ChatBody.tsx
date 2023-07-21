@@ -209,22 +209,25 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     
     
     const onDeleteChat = () => {
-        // if((id && typeof id === 'string') && token) {
-        //     service.deleteChat(token, Number(id)).then(res => {
-        //         console.log(res)
-        //         if(res?.message === 'success') {
-        //             updateDialogsList && updateDialogsList((s: any) => {
-        //                 const m = s;
-        //                 const rm = m.splice(m.findIndex((i: any) => i.id === id), 1)
-        //                 return sortingDialogList([...m])
-        //             })
-        //             setPromptModal(true)
-        //             notify(locale?.global?.notifications?.success_delete_chat, 'SUCCESS')
-        //         } else {
-        //             notify(locale?.global?.notifications?.error_default, 'ERROR')
-        //         }
-        //     })
-        // }
+        if((id && typeof id === 'string') && token) {
+            service.deleteChat(token, Number(id)).then(res => {
+                console.log(res)
+                if(res?.message === 'success') {
+                    updateDialogsList && updateDialogsList((s: any) => {
+                        const m = s;
+                        const rm = m.splice(m.findIndex((i: any) => i.id == id), 1)
+                        if([...m]?.length > 0) Router.push(`/chat/${sortingDialogList([...m])[0]?.id}?type=chat`)
+                        return sortingDialogList([...m])
+                    })
+                    
+                    notify(locale?.global?.notifications?.success_delete_chat, 'SUCCESS')
+                } else {
+                    notify(locale?.global?.notifications?.error_default, 'ERROR')
+                }
+            }).finally(() => {
+                setPromptModal(false)
+            })
+        }
     }
 
 
@@ -292,6 +295,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                 onCancel={() => setPromptModal(false)}
                 text='Желаете удалить диалог?'
                 onAccept={onDeleteChat}
+                onReject={() => setPromptModal(false)}
                 />
             {
                 width <= 768 && id ? (
