@@ -20,6 +20,7 @@ import PremiumBtn from '../Sidebar/components/PremiumBtn/PremiumBtn';
 import TagManager from 'react-gtm-module';
 import ApiService from '@/service/apiService';
 import notify from '@/helpers/notify';
+import { updateSoonModal } from '@/store/actions';
 const service = new ApiService()
 
 const locales = [

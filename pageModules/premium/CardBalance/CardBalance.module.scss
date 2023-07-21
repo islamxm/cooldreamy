@@ -73,6 +73,7 @@
 
                 .item {
                     width: calc(100% / 3);
+                    
 
                     input {
                         position: absolute;
@@ -95,6 +96,7 @@
                         text-align: center;
                         padding: 10px;
                         cursor: pointer;
+                        min-height: 130px;
 
                         .value {
                             margin-bottom: 15px;

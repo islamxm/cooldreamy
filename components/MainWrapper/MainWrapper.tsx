@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
-import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData, updateUnreadChatCount } from '@/store/actions';
+import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData, updateUnreadChatCount, updateSoonModal } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
@@ -14,6 +14,7 @@ import { updateLocale, updatePricing, updateLimit } from '@/store/actions';
 import ru from '@/locales/ru';
 import en from '@/locales/en';
 import LimitModal from '@/popups/LimitModal/LimitModal';
+import SoonModal from '@/popups/SoonModal/SoonModal';
 
 
 
@@ -25,12 +26,10 @@ const MainWrapper = ({
 }: {children?: React.ReactNode}) => {
 	const {locale, pathname, push, asPath, query} = useRouter()
 	const dispatch = useAppDispatch()
-    const {token, userId, socketChannel, userData, currentProfileId, limit, unreadChatCount, newMessage, newMail} = useAppSelector(s => s);
+    const {token, userId, socketChannel, userData, currentProfileId, limit, unreadChatCount, newMessage, newMail, soonModal} = useAppSelector(s => s);
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
-
-	useEffect(() => console.log(token), [token])
-
+	
 
 	useEffect(() => {
 		if(token && query && typeof query?.token === 'string') {
@@ -211,6 +210,10 @@ const MainWrapper = ({
 			<ProfileModal
 				onCancel={() => dispatch(updateCurrentProfileId(null))}
 				open={currentProfileId ? true : false}
+				/>
+			<SoonModal
+				open={soonModal}
+				onCancel={() => dispatch(updateSoonModal(false))}
 				/>
             {children}
         </>

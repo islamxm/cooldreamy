@@ -34,3 +34,4 @@ export const updateLimit = (data: {
 
 
 export const updateUnreadChatCount = (data: number) => ({type: 'UPDATE_UNREAD_CHAT_COUNT', data})
+export const updateSoonModal = (data: boolean) => ({type:'UPDATE_SOON_MODAL', data})

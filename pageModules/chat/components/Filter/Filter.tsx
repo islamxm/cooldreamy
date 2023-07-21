@@ -118,7 +118,7 @@ const Filter:FC<IChatFilterType> = ({
                         }}
                         />
                 </div>
-                <div className={styles.part}>
+                {/* <div className={styles.part}>
                     <Tabs
                         
                         list={modeTabs}
@@ -141,7 +141,7 @@ const Filter:FC<IChatFilterType> = ({
                             width: width <= 1000 ? 'calc((100% / 2) - 8px)' : 'auto'
                         }}
                         />
-                </div>
+                </div> */}
             </div>
             
         </div>

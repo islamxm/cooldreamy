@@ -1,10 +1,19 @@
 import Button from '@/components/Button/Button';
 import styles from './CardPremium.module.scss';
+import { useEffect } from 'react';
 
 
+interface I {
+    list?: any[]
+}
 
-const CardPremium = () => {
 
+const CardPremium = ({
+    list
+}: I) => {
+
+
+    useEffect(() => console.log(list), [list])
 
     return (
         <div className={styles.wrapper}>

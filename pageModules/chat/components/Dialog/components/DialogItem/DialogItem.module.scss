@@ -2,6 +2,24 @@
     display: flex;
     // border: 1px solid red;
     padding: 5px 20px;
+    position: relative;
+
+    .id {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        border: 1px solid red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: red;
+        font-size: 20px;
+        line-height: 20px;
+        display: none;
+    }
 
     .body {
        display: flex;

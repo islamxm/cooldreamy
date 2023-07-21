@@ -34,7 +34,8 @@ export interface IGlobalState {
         } | null
     },
 
-    unreadChatCount: number
+    unreadChatCount: number,
+    soonModal: boolean
     
 }
 
@@ -54,7 +55,8 @@ export const globalState: IGlobalState = {
     limit: {
         open: false,
     },
-    unreadChatCount: 0
+    unreadChatCount: 0,
+    soonModal: false
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -126,6 +128,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 unreadChatCount: action.data
+            }
+        case 'UPDATE_SOON_MODAL':
+            return {
+                ...state,
+                soonModal: action.data
             }
         default:
             return state;

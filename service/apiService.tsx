@@ -950,6 +950,40 @@ class ApiService {
     }
 
 
+    getPaySubs = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getPaySubs, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    
+
+
+    getPayPrems = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getPayPrems, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
     setExUserData = async (token: IToken, body: {
         language?: string,
         country?: string,

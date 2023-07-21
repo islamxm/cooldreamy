@@ -248,41 +248,22 @@ const ChatLayout = () => {
         if(socketChannel) {
             if(chatType === 'chat') {
                 if(newMessage) { 
-                    console.log('MESSAGE EVENT', newMessage)
                     onUpdateChat && onUpdateChat({ 
-                        // messageBody: newMessage?.chat_list_item?.chat?.last_message, 
-                        // dialogBody: newMessage?.chat_list_item?.chat
                         messageBody: newMessage?.chat_message, 
                         dialogBody: {...newMessage?.chat_list_item, another_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user, last_message: newMessage?.chat_message}
                     })
                 }
-                // socketChannel?.listen('.chat-message-read-event', (data: any) => {
-                //     if(currentChatId && currentChatId == data?.chat_id) {
-                //         setChatList(s => {
-                //             const findItem = s.find(i => i.id == data?.chat_message_id)
-                //             if(findItem) {
-                //                 const m = s;
-                //                 const rm = s.splice(m.findIndex(i => i.id == findItem.id), 1, {...findItem, is_read_by_recepient: 1})
-                //                 return sortingChatList([...m])
-                //             } else {
-                //                 return s;
-                //             }
-                //         })
-                //     }
-                // })
             }
-            if(chatType === 'mail') {
-                if(newMail) {
-                    onUpdateChat && onUpdateChat({
-                        // messageBody: newMail?.letter_list_item?.letter?.last_message, 
-                        // dialogBody: newMail?.letter_list_item?.letter
-                        messageBody: newMail?.letter_message, 
-                        dialogBody: {...newMail?.letter_list_item, another_user: newMail?.chat_message?.sender_user, self_user: newMail?.chat_message?.recepient_user, last_message: newMail?.letter_message}
-                    }) 
-                }
-            }
-
-
+            // if(chatType === 'mail') {
+            //     if(newMail) {
+            //         onUpdateChat && onUpdateChat({
+            //             // messageBody: newMail?.letter_list_item?.letter?.last_message, 
+            //             // dialogBody: newMail?.letter_list_item?.letter
+            //             messageBody: newMail?.letter_message, 
+            //             dialogBody: {...newMail?.letter_list_item, another_user: newMail?.chat_message?.sender_user, self_user: newMail?.chat_message?.recepient_user, last_message: newMail?.letter_message}
+            //         }) 
+            //     }
+            // }
         }
     }, [socketChannel, currentChatId, chatType, newMessage, newMail])
 
@@ -290,30 +271,23 @@ const ChatLayout = () => {
     useEffect(() => {
         if(socketChannel) {
             socketChannel?.listen('.chat-message-read-event', (data: any) => {
-                console.log('READ EVENT', data)
                 if(chatType === 'chat') {
-                    // onUpdateChat && onUpdateChat({
-                    //     // messageBody: data?.chat_list_item?.chat?.last_message, 
-                    //     // dialogBody: data?.chat_list_item?.chat
-                    //     messageBody: data?.chat_message, 
-                    //     dialogBody: {...data?.chat_list_item, another_user: data?.chat_message?.sender_user, self_user: data?.chat_message?.recepient_user, last_message: data?.chat_message}
-                    // })
-                }
-
-            })
-            socketChannel?.listen('.letter-message-read-event', (data: any) => {
-                if(chatType === 'mail') {
                     onUpdateChat && onUpdateChat({
-                        // messageBody: data?.letter_list_item?.letter?.last_message, 
-                        // dialogBody: data?.letter_list_item?.letter
-                        messageBody: data?.letter_message, 
-                        dialogBody: {...data?.letter_list_item, another_user: data?.letter_message?.sender_user, self_user: data?.letter_meesage?.recepient_user, last_message: data?.letter_message}
-                    }) 
+                        messageBody: data?.chat_message, 
+                        dialogBody: {...data?.chat_list_item, another_user: data?.chat_message?.recepient_user, self_user: data?.chat_message?.sender_user, last_message: data?.chat_message}
+                    }, 'read')
                 }
             })
+            // socketChannel?.listen('.letter-message-read-event', (data: any) => {
+            //     if(chatType === 'mail') {
+            //         onUpdateChat && onUpdateChat({
+            //             messageBody: data?.letter_message, 
+            //             dialogBody: {...data?.letter_list_item, another_user: data?.letter_message?.sender_user, self_user: data?.letter_meesage?.recepient_user, last_message: data?.letter_message}
+            //         }) 
+            //     }
+            // })
         }
-    }, [chatType, socketChannel])
-
+    }, [chatType, socketChannel, chatList, dialogsList])
 
 
     const onDeleteDialog = (dialogId: number | string) => {
@@ -350,42 +324,83 @@ const ChatLayout = () => {
     const onUpdateChat = (body: {
         messageBody?: any,
         dialogBody?:any
-    }) => {
+    }, type: 'read' | 'new' = 'new') => {
         // ?? В САМОМ ЧАТЕ
         if(body?.dialogBody && body?.messageBody) {
+
+
+
             // TODO Если выбран ЧАТ
             if(chatType === 'chat') {
-                // ?? обновление чата
-                if(currentChatId == body?.dialogBody?.id) {
-                    const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
-                    if(currentChatId == body?.dialogBody?.id) {
-                        if(foundMessage) {
-                            setChatList(s => {
-                                const m = [...s];
-                                const rm = m.splice(m.findIndex(i => i.id == foundMessage?.id), 1, body?.messageBody)
-                                return sortingChatList([...m])
-                            })   
+                if(type === 'read') {
+                    if(chatList?.length > 0 && dialogsList?.length > 0) {
+                        // ?? обновление чата
+                        if(currentChatId == body?.dialogBody?.id) {   
+                            const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
+                            if(currentChatId == body?.dialogBody?.id) {
+                                console.log('FOUND MESSAGE', foundMessage)
+                                if(foundMessage) {
+                                    setChatList(s => {
+                                        const m = s;
+                                        const rm = m.splice(m.findIndex(i => i.id == foundMessage?.id), 1, body?.messageBody)
+                                        return sortingChatList([...m])
+                                    })   
+                                } 
+                            }
+                        }
+
+                        // ?? обновление диалогов
+                        const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 
+                        if(foundDialog) {
+                            setDialogsList(s => {
+                                const m = s;
+                                const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1, body?.dialogBody)
+                                return sortingDialogList([...m])
+                            })
                         } else {
-                            setChatList(s => {
-                                return sortingChatList([body?.messageBody, ...s])
+                            setDialogsList(s => {
+                                return sortingDialogList([body?.dialogBody, ...s])
                             })
                         }
                     }
+                    
+                } else {
+                    // ?? обновление чата
+                    if(currentChatId == body?.dialogBody?.id) {
+                                        
+                                        
+                        const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
+                        if(currentChatId == body?.dialogBody?.id) {
+                            console.log('FOUND MESSAGE', foundMessage)
+                            if(foundMessage) {
+                                setChatList(s => {
+                                    const m = s;
+                                    const rm = m.splice(m.findIndex(i => i.id == foundMessage?.id), 1, body?.messageBody)
+                                    return sortingChatList([...m])
+                                })   
+                            } else {
+                                setChatList(s => {
+                                    return sortingChatList([body?.messageBody, ...s])
+                                })
+                            }
+                        }
+                    }
+
+                    // ?? обновление диалогов
+                    const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 
+                    if(foundDialog) {
+                        setDialogsList(s => {
+                            const m = s;
+                            const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1, body?.dialogBody)
+                            return sortingDialogList([...m])
+                        })
+                    } else {
+                        setDialogsList(s => {
+                            return sortingDialogList([body?.dialogBody, ...s])
+                        })
+                    }
                 }
                 
-                // ?? обновление диалогов
-                const foundDialog = dialogsList?.find(s => s?.id == body?.dialogBody?.id) 
-                if(foundDialog) {
-                    setDialogsList(s => {
-                        const m = [...s];
-                        const rm = m.splice(m.findIndex(i => i.id == foundDialog?.id), 1, body?.dialogBody)
-                        return sortingDialogList([...m])
-                    })
-                } else {
-                    setDialogsList(s => {
-                        return sortingDialogList([body?.dialogBody, ...s])
-                    })
-                }
             } 
 
             // TODO Если выбраны ПИСЬМА
