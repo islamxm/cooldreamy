@@ -64,26 +64,54 @@
                 margin-bottom: 40px;
             }
 
-            .value {
+            .list {
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                background: #FFFFFF;
-                border: 2px solid #7D6AF0;
-                border-radius: 10px;
-                width: 98px;
-                height: 92px;
-                justify-content: center;
-                margin: 0 auto;
+                width: calc(100% + 40px);
+                background-color: #fff;
+                margin-left: -20px;
+                padding: 0 20px;
 
-                span {
-                    color: var(--violet);
-                    font-weight: 700;
-                    font-size: 15px;
-                    line-height: 22px;
-                    text-align: center;
-                    display: block;
+                .item {
+                    width: calc(100% / 3);
+
+                    input {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: -1;
+                        pointer-events: none;
+                        touch-action: none;
+                    }
+
+                    input:checked ~ .label {
+                        border-radius: 10px;
+                        border: 1px solid var(--violet);
+                    }
+
+                    .label {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        padding: 10px;
+                        cursor: pointer;
+
+                        .value {
+                            margin-bottom: 15px;
+                            font-weight: 700;
+                            font-size: 15px;
+                            line-height: 15px;
+                        }
+
+                        .price {
+                            font-size: 25px;
+                            font-weight: 700;
+                        }
+                    }
                 }
+
+
+
             }
         }
 

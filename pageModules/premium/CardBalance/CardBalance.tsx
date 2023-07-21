@@ -16,9 +16,28 @@ const CardBalance = () => {
                     <div className={styles.text}>
                     За кредиты Вы можете дарить подарки, присылать стикеры и многое другое...
                     </div>
-                    <div className={styles.value}>
-                        <span>5</span>
-                        <span>кредитов</span>
+                    <div className={styles.list}>
+                        <div className={styles.item}>
+                            <input type="radio" />
+                            <label className={styles.label}>
+                                <div className={styles.value}><span>5</span> кредитов</div>
+                                <div className={styles.price}>$19</div>
+                            </label>
+                        </div>
+                        <div className={styles.item}>
+                            <input checked type="radio" />
+                            <label className={styles.label}>
+                                <div className={styles.value}><span>5</span> кредитов</div>
+                                <div className={styles.price}>$19</div>
+                            </label>
+                        </div>
+                        <div className={styles.item}>
+                            <input type="radio" />
+                            <label className={styles.label}>
+                                <div className={styles.value}><span>5</span> кредитов</div>
+                                <div className={styles.price}>$19</div>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.action}>
