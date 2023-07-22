@@ -166,7 +166,7 @@ const GirlCard:FC<IUser> = ({
                             {
                                 !(!state && !country) && (
                                     <Col span={24}>
-                                        <div className={styles.loc}>{`${country} ${state ? ',' + state : ''}`}</div>
+                                        <div className={styles.loc}>{`${country}${state ? ', ' + state : ''}`}</div>
                                     </Col>
                                 )
                             }
