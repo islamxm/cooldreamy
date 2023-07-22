@@ -111,7 +111,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                             whileHover={{scale: 1.2}}
                             transition={{ type: "spring", stiffness: 400, damping: 17 }}    
                             >
-                            <Image onClick={() => Router.push('/')} src={logoImage} alt="Cool Date" />
+                            <Image style={{'cursor': 'pointer'}} onClick={() => Router.push('/')} src={logoImage} alt="Cool Date" />
                         </motion.div>
                     </div>
                     {
