@@ -121,9 +121,7 @@ const endpoints = {
     getCredits: `${API_PATH}profile/get_my_credits`,
 
 
-    getArticle: `${API_PATH}pages`
-
-    
+    getArticle: `${API_PATH}/pages`,
 
 
 }
