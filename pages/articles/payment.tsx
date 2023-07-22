@@ -10,7 +10,7 @@ const service = new ApiService()
 
 const PaymentPage = () => {
     const {token, unreadChatCount, userData} = useAppSelector(s => s)
-    const [data, setData] = useState({});
+    const [data, setData] = useState('');
 
     service.getArticle(token , 'terms_of_pay').then(res => {
         if (res) {
