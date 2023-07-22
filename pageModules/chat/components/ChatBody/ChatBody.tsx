@@ -173,8 +173,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         dispatch(updateLimit({
                             open: true,
                             data: {
-                                head: 'Вам не хватает кредитов...',
-                                text: `К сожалению подарок к ${currentUser?.name} не доставлен. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_GIFT')}`
+                                head: locale?.popups?.nocredit_gift?.title,
+                                text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_GIFT')}`
                             }
                         }))
                     } else {
@@ -183,7 +183,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             dispatch(updateUserData({...userData, credits}))
                         })
                     }
-                   
                     setMockType('')
                 })
             }
@@ -193,8 +192,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         dispatch(updateLimit({
                             open: true,
                             data: {
-                                head: 'Вам не хватает кредитов...',
-                                text: `К сожалению подарок к ${currentUser?.name} не доставлен. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_MAIL_GIFT')}`
+                                head: locale?.popups?.nocredit_gift?.title,
+                                text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_GIFT')}`
                             }
                         }))
                     } else {
@@ -244,7 +243,11 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const onWink = () => {
         if(token && currentUser?.id) {
             service.sendWink({user_id: Number(currentUser?.id)}, token).then(res => {
-                // console.log(res)
+                if(res?.id) {
+                    // notify('')
+                } else {
+                    notify(locale?.global?.notifications?.error_wink, 'ERROR')
+                }
             })
         }
     }
@@ -252,7 +255,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const onFav = () => {
         if(token && currentUser?.id) {
             service.addUserToFav({user_id: Number(currentUser?.id)}, token).then(res => {
-                // console.log(res)
+                if(res?.status === 200) {
+                    notify(locale?.global?.notifications?.success_add_chat_to_fav, 'SUCCESS')
+                }
             })
         }
     }
@@ -261,7 +266,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
         if(token && currentUser?.id) {
             service.chatIgnore(token, {id: Number(id)}).then(res => {
                 if(res) {
-                    notify('Жалоба отправлена', 'SUCCESS')
+                    notify(locale?.global?.notifications?.success_report, 'SUCCESS')
                 }
                 updateDialogsList && updateDialogsList((s: any | any[]) => {
                     const findItem = s.find((i: any) => i.id === id)

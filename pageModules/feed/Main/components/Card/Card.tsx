@@ -31,7 +31,8 @@ const Card:FC<cardPropsType> = ({
         setCanceling,
         setLiking,
         liking,
-        canceling
+        canceling,
+        user_thumbnail_url
     } = card
 
     const [rotate, setRotate] = useState(1)
@@ -147,8 +148,8 @@ const Card:FC<cardPropsType> = ({
                             avatar_url ? (
                                 index === 0 || index === 1 ? (
                                     <Image 
-                                        loader={() => avatar_url ? avatar_url : ''} 
-                                        src={avatar_url ? avatar_url : logo} 
+                                        loader={() => user_thumbnail_url ? user_thumbnail_url : ''} 
+                                        src={user_thumbnail_url ? user_thumbnail_url : logo} 
                                         alt='' 
                                         unoptimized
                                         width={560} 

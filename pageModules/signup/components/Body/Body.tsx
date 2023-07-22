@@ -179,6 +179,9 @@ const Body:FC = () => {
     }, [currentStep])
 
 
+    useEffect(() => {
+        console.log(selectedCareers)
+    }, [selectedCareers])
 
 
     const stepChange = () => {
@@ -231,6 +234,8 @@ const Body:FC = () => {
             }
             if(token) {
                 service.updateMyProfile(updateBody, token).then(res => {
+                    console.log(res)
+                    console.log(updateBody)
                     if(res?.id) {
                         notify('Настройки сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))

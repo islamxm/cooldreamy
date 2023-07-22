@@ -18,7 +18,7 @@ import Router from 'next/router';
 const service = new ApiService()
 
 const Sidebar:FC = () => {
-    const {userData, isMenuOpen, token} = useAppSelector(s => s)
+    const {userData, isMenuOpen, token, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
     const [load, setLoad] = useState(false)
@@ -55,7 +55,7 @@ const Sidebar:FC = () => {
                         </Col>
                         <Col span={24}>
                             <Button
-                                text='Купить кредиты'
+                                text={locale?.global?.menu?.buy_credits}
                                 onClick={() => Router.push('/deposit')}
                                 middle
                                 fill

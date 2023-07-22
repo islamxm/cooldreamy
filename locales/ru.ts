@@ -100,7 +100,8 @@ const ru: ILocale = {
             chats: 'мои переписки',
             feed: 'знакомства',
             sympathy: 'симпатии',
-            logout: 'выход'
+            logout: 'выход',
+            buy_credits: 'Купить кредиты'
         },
         my_card: {
             balance: {
@@ -112,7 +113,10 @@ const ru: ILocale = {
             success_image_upload: 'Фотография добавлена!',
             success_edit_profile: 'Настройки сохранены!',
             error_default: 'Произошла ошибка',
-            success_delete_chat: 'Чат удален!'
+            success_delete_chat: 'Чат удален!',
+            success_report: 'Жалоба отправлена!',
+            error_wink: 'Вы уже подмигнули данному пользователю',
+            success_add_chat_to_fav: 'Чат добавлен в избранные'
         },
         placeholders: {
             chat_empty: {
@@ -183,6 +187,31 @@ const ru: ILocale = {
         logout: {
             title: 'Вы уверены что хотите выйти?'
         },
+        nocredit_chat_message: {
+            title: 'Вам не хватает кредитов...',
+            text_part_1: 'К сожалению сообщение к ',
+            text_part_2: ' не доставлено. Пополните баланс. Стоимость действия:'
+        },
+        nocredit_chat_picture: {
+            title: 'Вам не хватает кредитов...',
+            text_part_1: 'К сожалению картинка к ',
+            text_part_2: ' не доставлено. Пополните баланс. Стоимость действия:'
+        },
+        nocredit_mail_message: {
+            title: 'Вам не хватает кредитов...',
+            text_part_1: 'К сожалению письмо к ',
+            text_part_2: ' не доставлено. Пополните баланс. Стоимость действия:'
+        },
+        nocredit_sticker_message: {
+            title: 'Вам не хватает кредитов...',
+            text_part_1: "К сожалению стикер к ",
+            text_part_2: " не доставлено. Пополните баланс. Стоимость действия:"
+        },
+        nocredit_gift: {
+            title: 'Вам не хватает кредитов...',
+            text_part_1: "К сожалению подарок к ",
+            text_part_2: ' не доставлено. Пополните баланс. Стоимость действия:'
+        }
     },
     startPage: {
         start_hero_title: 'Ваша история любви начинается здесь! ',
@@ -404,6 +433,25 @@ const ru: ILocale = {
                 placeholder: 'Не менее 20 символов...',
                 ex: 'Согласно правилам сайта запрещено указывать контактные данные'
             }
+        }
+    },
+    depositPage: {
+        main: {
+            title: 'Пополнение баланса',
+            my_balance: 'Ваш баланс:',
+        },
+        card: {
+            price: 'цена',
+            credits: 'кредитов',
+            discount: 'со скидкой',
+            popular: 'популярный',
+            spec_offer: 'выгодный'
+        },
+        select_btn: 'Купить тариф за ',
+        form: {
+            title: 'Оплата',
+            subtitle: 'Введите данные карты',
+            btn: 'Оплатить'
         }
     }
 

@@ -4,6 +4,7 @@ import { useStripe, useElements } from '@stripe/react-stripe-js';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import {Row, Col} from 'antd';
 import Button from '@/components/Button/Button';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const switchRedirect = (planId: number | string) => {
     if(planId == '1') {
@@ -26,6 +27,7 @@ const switchRedirect = (planId: number | string) => {
 const PayForm = ({plan}: {plan?: any}) => {
     const [payLoad, setPayLoad] = useState<boolean>(false)
     const [message, setMessage] = useState<any>(null)
+    const {locale} = useAppSelector(s => s)
     const stripe = useStripe()
     const elements = useElements()
 
@@ -63,10 +65,10 @@ const PayForm = ({plan}: {plan?: any}) => {
         <div className={styles.wrapper}>
             <div className={styles.head}>
                 <div className={styles.title}>
-                Оплата
+                {locale?.depositPage?.form?.title}
                 </div>
                 <div className={styles.subtitle}>
-                Введите данные карты
+                {locale?.depositPage?.form?.subtitle}
                 </div>
             </div>
             <form id='payment-form' onSubmit={onPay}>
@@ -76,9 +78,8 @@ const PayForm = ({plan}: {plan?: any}) => {
                     </Col>
                     <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
                         <Button
-                            text={`Оплатить ${plan?.price}$`}
+                            text={`${locale?.depositPage?.form?.btn} ${plan?.price}$`}
                             load={payLoad}
-
                             />
                     </Col>
                 </Row>

@@ -72,9 +72,8 @@ const ChatAction = ({
                             dispatch(updateLimit({
                                 open: true,
                                 data: {
-                                    head: 'Вам не хватает кредитов...',
-                                    text: `К сожалению стикер к ${currentUser?.name} 
-                                    не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
+                                    head: locale?.popups?.nocredit_sticker_message?.title,
+                                    text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
                                 }
                             }))
                         } else {
@@ -130,9 +129,9 @@ const ChatAction = ({
                             dispatch(updateLimit({
                                 open: true,
                                 data: {
-                                    head: 'Вам не хватает кредитов...',
-                                    text: `К сожалению сообщение к ${currentUser?.name} 
-                                    не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
+                                    head: locale?.popups?.nocredit_chat_message?.title,
+                                    text: `${locale?.popups?.nocredit_chat_message?.text_part_1}${currentUser?.name} 
+                                    ${locale?.popups?.nocredit_chat_message?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
                                 }
                             }))
                         } else {
@@ -157,9 +156,9 @@ const ChatAction = ({
                             dispatch(updateLimit({
                                 open: true,
                                 data: {
-                                    head: 'Вам не хватает кредитов...',
-                                    text: `К сожалению письмо к ${currentUser?.name} 
-                                    не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                                    head: locale?.popups?.nocredit_mail_message?.title,
+                                    text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
+                                    ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
                                 }
                             }))
                         } else {
@@ -198,9 +197,9 @@ const ChatAction = ({
                                 dispatch(updateLimit({
                                     open: true,
                                     data: {
-                                        head: 'Вам не хватает кредитов...',
-                                        text: `К сожалению картинка к ${currentUser?.name} 
-                                        не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
+                                        head: locale?.popups?.nocredit_chat_picture?.title,
+                                        text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
+                                        ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
                                     }
                                 }))
                             } else {
@@ -242,9 +241,9 @@ const ChatAction = ({
                                 dispatch(updateLimit({
                                     open: true,
                                     data: {
-                                        head: 'Вам не хватает кредитов...',
-                                        text: `К сожалению письмо к ${currentUser?.name} 
-                                        не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                                        head: locale?.popups?.nocredit_mail_message?.title,
+                                        text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
+                                        ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
                                     }
                                 }))
                             } else {

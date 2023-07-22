@@ -49,7 +49,8 @@ const UserMain:FC<IUser> = (props) => {
     const [prompt_relationships_list, setPrompt_relationships_list] = useState<any[]>([])
     const [prompt_careers_list, setPrompt_careers_list] = useState<any[]>([])   
 
-    
+
+
 
 
     useEffect(() => {

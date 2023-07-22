@@ -20,7 +20,7 @@ const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5Gsju
 const Main = () => {
     const {width} = useWindowSize()
     const payRef = useRef<HTMLDivElement>(null)
-    const {userData, token} = useAppSelector(s => s)
+    const {userData, token, locale} = useAppSelector(s => s)
     const [list, setList] = useState<any[]>([])
     const [selectedPlan, setSelectedPlan] = useState<any>(null)
     const [load, setLoad] = useState(false)
@@ -76,8 +76,8 @@ const Main = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.top}>
-                <div className={styles.head}>Пополнение баланса</div>
-                <div className={styles.balance}>Ваш баланс: <span>{userData?.credits} кредита</span></div>
+                <div className={styles.head}>{locale?.depositPage?.main?.title}</div>
+                <div className={styles.balance}>{locale?.depositPage?.main?.my_balance} <span>{userData?.credits} {locale?.depositPage?.card?.credits}</span></div>
                 <div className={styles.list}>
                     {
                         list?.map((i, index) => {
@@ -97,20 +97,20 @@ const Main = () => {
                                                 i?.discount !== 0 && (
                                                     <div className={styles.discount}>
                                                         -{i?.discount}%
-                                                        <span>скидка</span>
+                                                        <span>{locale?.depositPage?.card?.discount}</span>
                                                     </div>
                                                 )
                                             }
                                             </div>
                                             <div className={styles.credits}>
                                                 <div className={styles.value}>{i?.credits}</div>
-                                                <span>кредитов</span>
+                                                <span>{locale?.depositPage?.card?.credits}</span>
                                             </div>
                                             <div className={styles.item_body}>
                                                 {
                                                     i?.discount !== 0 && (
                                                         <div className={styles.part}>
-                                                            <div className={styles.label}>цена</div>
+                                                            <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
                                                             <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
                                                         </div>
                                                     )
@@ -119,8 +119,8 @@ const Main = () => {
                                                     <div className={styles.label}>
                                                         {
                                                             i?.discount !== 0 ? (
-                                                                'со скидкой'
-                                                            ) : 'цена'
+                                                                locale?.depositPage?.card?.discount
+                                                            ) : locale?.depositPage?.card?.price
                                                         }
                                                     </div>
                                                     <div className={styles.value}>{i?.price}$</div>
@@ -145,29 +145,29 @@ const Main = () => {
                                                     i?.discount !== 0 && (
                                                         <div className={styles.discount}>
                                                             -{i?.discount}%
-                                                            <span>скидка</span>
+                                                            <span>{locale?.depositPage?.card?.discount}</span>
                                                         </div>
                                                     )
                                                 }
                                                 <div className={styles.badge}>
-                                                ПОПУЛЯРНЫЙ
+                                                {locale?.depositPage?.card?.popular}
                                                 </div>
                                             </div>
                                             <div className={styles.credits}>
                                                 <div className={styles.value}>{i?.credits}</div>
-                                                <span>кредитов</span>
+                                                <span>{locale?.depositPage?.card?.credits}</span>
                                             </div>
                                             <div className={styles.item_body}>
                                                 {
                                                     i?.discount !== 0 && (
                                                         <div className={styles.part}>
-                                                            <div className={styles.label}>цена</div>
+                                                            <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
                                                             <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
                                                         </div>
                                                     )
                                                 }
                                                 <div className={styles.part}>
-                                                    <div className={styles.label}>со скидкой</div>
+                                                    <div className={styles.label}>{locale?.depositPage?.card?.discount}</div>
                                                     <div className={styles.value}>{i?.price}$</div>
                                                 </div>
                                             </div>
@@ -191,30 +191,30 @@ const Main = () => {
                                                 i?.discount !== 0 && (
                                                     <div className={styles.discount}>
                                                         -{i?.discount}%
-                                                        <span>скидка</span>
+                                                        <span>{locale?.depositPage?.card?.discount}</span>
                                                     </div>
                                                 )
                                             }
                                             <div className={styles.badge}>
-                                                ВЫГОДНЫЙ
+                                                {locale?.depositPage?.card?.spec_offer}
                                             </div>
                                             </div>
                                             <div className={styles.credits}>
                                                 <div className={styles.value}>{i?.credits}</div>
-                                                <span>кредитов</span>
+                                                <span>{locale?.depositPage?.card?.credits}</span>
                                             </div>
                                             <div className={styles.item_body}>
                                                 {
                                                     i?.discount !== 0 && (
                                                         <div className={styles.part}>
-                                                            <div className={styles.label}>цена</div>
+                                                            <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
                                                             <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
                                                         </div>
                                                     )
                                                 }
                                                 
                                                 <div className={styles.part}>
-                                                    <div className={styles.label}>со скидкой</div>
+                                                    <div className={styles.label}>{locale?.depositPage?.card?.discount}</div>
                                                     <div className={styles.value}>{i?.price}$</div>
                                                 </div>
                                             </div>
@@ -230,7 +230,7 @@ const Main = () => {
                     selectedPlan && !secretKey && (
                         <div className={styles.buy}>
                             <Button
-                                text={`Купить тариф за ${selectedPlan?.price}$`}
+                                text={`${locale?.depositPage?.select_btn} ${selectedPlan?.price}$`}
                                 onClick={() => {
                                     onAccept(selectedPlan)
                                     goToPayment()

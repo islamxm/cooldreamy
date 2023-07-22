@@ -100,7 +100,8 @@ const en: ILocale = {
           chats: "My Chats",
           feed: "Dating",
           sympathy: "Sympathy",
-          logout: "Log out"
+          logout: "Log out",
+          buy_credits: 'Buy credits'
       },
       my_card: {
           balance: {
@@ -112,8 +113,11 @@ const en: ILocale = {
           success_image_upload: "Photo added!",
           success_edit_profile: "Settings saved!",
           error_default: "An error occurred",
-          success_delete_chat: "Chat deleted!"
-      },
+          success_delete_chat: "Chat deleted!",
+          success_report: 'Complaint sent!',
+          error_wink: 'You have already winked at this user',
+          success_add_chat_to_fav: 'Chat has been added to favorites'
+      },    
       placeholders: {
           chat_empty: {
               title: "No Chats",
@@ -182,6 +186,31 @@ const en: ILocale = {
       },
       logout: {
         title: 'Are you sure you want to leave?'
+      },
+      nocredit_chat_message: {
+        title: "You don't have enough credits...",
+        text_part_1: 'Unfortunately, the message to ',
+        text_part_2: ' was not delivered. Please recharge your balance. Cost of the action:'
+      },
+      nocredit_chat_picture: {
+        title: "You don't have enough credits...",
+        text_part_1: 'Unfortunately, the picture to ',
+        text_part_2: ' was not delivered. Please recharge your balance. Cost of the action:'
+      },
+      nocredit_mail_message: {
+        title: "You don't have enough credits...",
+        text_part_1: 'Unfortunately, the letter to ',
+        text_part_2: ' was not delivered. Please recharge your balance. Cost of the action:'
+      },
+      nocredit_sticker_message: {
+        title: "You don't have enough credits...",
+        text_part_1: 'Unfortunately, the sticker to ',
+        text_part_2: ' was not delivered. Please recharge your balance. Cost of the action:'
+      },
+      nocredit_gift: {
+        title: "You don't have enough credits...",
+        text_part_1: "Unfortunately, the gift to ",
+        text_part_2: " was not delivered. Please recharge your balance. Cost of the action:"
       }
   },
   startPage: {
@@ -397,6 +426,25 @@ const en: ILocale = {
               ex: "According to the site rules, it is prohibited to provide contact information"
           }
       }
+  },
+  depositPage: {
+    main: {
+        title: 'Balance Recharge',
+        my_balance: 'Your Balance:',
+    },
+    card: {
+        price: 'price',
+        credits: 'credits',
+        discount: 'discount',
+        popular: 'popular',
+        spec_offer: 'SPECIAL OFFER'
+    },
+    select_btn: 'Purchase tariff for ',
+    form: {
+        title: 'Payment',
+        subtitle: 'Enter card details',
+        btn: 'Pay'
+    }
   }
 }
 

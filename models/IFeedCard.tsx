@@ -8,7 +8,9 @@ interface IFeedCard {
     country?: string,
     id: number,
     name?: string,
-    state?: string
+    state?: string,
+    user_thumbnail_url?: string,
+    
 }
 
 export default IFeedCard;

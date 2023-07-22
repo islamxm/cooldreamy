@@ -98,7 +98,8 @@ export interface ILocale {
             chats: string,
             feed: string,
             sympathy: string,
-            logout: string
+            logout: string,
+            buy_credits: string
         },
         my_card: {
             balance: {
@@ -110,7 +111,10 @@ export interface ILocale {
             success_image_upload: string,
             success_edit_profile: string,
             error_default: string,
-            success_delete_chat: string
+            success_delete_chat: string,
+            success_report: string,
+            error_wink: string,
+            success_add_chat_to_fav: string
         },
         placeholders: {
             chat_empty: {
@@ -182,9 +186,31 @@ export interface ILocale {
         logout: {
             title: string,
         },
-        // limit: {
-        //     title: ''
-        // }
+        nocredit_chat_message: {
+            title: string,
+            text_part_1: string,
+            text_part_2: string
+        },
+        nocredit_chat_picture: {
+            title: string,
+            text_part_1: string,
+            text_part_2: string
+        },
+        nocredit_mail_message: {
+            title: string,
+            text_part_1: string,
+            text_part_2: string
+        }
+        nocredit_sticker_message: {
+            title: string,
+            text_part_1: string,
+            text_part_2: string
+        },
+        nocredit_gift: {
+            title: string,
+            text_part_1:string,
+            text_part_2:string
+        }
 
     },
     startPage: {
@@ -406,6 +432,25 @@ export interface ILocale {
                 placeholder: string,
                 ex: string
             }
+        }
+    },
+    depositPage: {
+        main: {
+            title: string,
+            my_balance: string,
+        },
+        card: {
+            price: string,
+            credits: string,
+            discount: string,
+            popular: string,
+            spec_offer: string
+        },
+        select_btn: string,
+        form: {
+            title: string,
+            subtitle: string,
+            btn: string
         }
     }
 }
