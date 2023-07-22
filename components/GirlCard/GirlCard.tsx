@@ -18,6 +18,7 @@ import notify from '@/helpers/notify';
 import { IUser } from '@/models/IUser';
 import { updateCurrentProfileId } from '@/store/actions';
 import replaceSpace from '@/helpers/replaceSpace';
+import brokenUrl from '@/helpers/borkenUrl';
 
 
 const service = new ApiService();
@@ -124,7 +125,7 @@ const GirlCard:FC<IUser> = ({
                 <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        src={user_thumbnail_url ? replaceSpace(user_thumbnail_url) : placeholder} 
+                        src={user_thumbnail_url ? brokenUrl(replaceSpace(user_thumbnail_url))  : placeholder} 
                         width={300}
                         height={300}
                         alt=""/>
