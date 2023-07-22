@@ -3,9 +3,8 @@ import MainLayout from "@/components/MainLayout/MainLayout";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import styles from '@/pageModules/footer/FooterPage.module.scss';
 import {useAppSelector} from "@/hooks/useTypesRedux";
-import {useEffect, useState} from "react";
+import {useEffect, useRef} from "react";
 import ApiService from "@/service/apiService";
-import {useRef} from "react/index";
 const service = new ApiService()
 
 const RulesPage = () => {
