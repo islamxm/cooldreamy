@@ -6,18 +6,21 @@ import {useAppSelector} from "@/hooks/useTypesRedux";
 import ApiService from "@/service/apiService";
 const service = new ApiService()
 import {useEffect, useState} from "react";
+import {useRef} from "react/index";
 
 const PrivatePage = () => {
     const {token, unreadChatCount, userData} = useAppSelector(s => s)
-    const [data, setData] = useState('');
+    const spanRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         service.getArticle(token , 'privacy_policy').then(res => {
             if (res) {
-                setData(res.text_ru);
+                if (spanRef.current) {
+                    spanRef.current.innerHTML = res.text_en;
+                }
             }
         })
-    }, [token]);
+    }, [spanRef.current]);
 
     return (
         <Container>
@@ -25,8 +28,7 @@ const PrivatePage = () => {
                 {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
                     <h1 className={styles.title}>Политика в отношении обработки персональных данных</h1>
-                    <div className={styles.body}>
-                        {data}
+                    <div className={styles.body} ref={spanRef}>
                     </div>
                 </div>
             </MainLayout>
