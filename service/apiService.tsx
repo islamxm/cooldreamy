@@ -1099,7 +1099,7 @@ class ApiService {
     }
 
 
-    getArticle = async (token: IToken, url: string) => {
+    getArticle = async (token: any, url: string) => {
         try {
             let res = await fetch(endpoints.getArticle + `?url=${url}`, {
                 method: "GET",

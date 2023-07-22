@@ -9,7 +9,7 @@ import {useState} from "react";
 const service = new ApiService()
 
 const PaymentPage = () => {
-    const {token} = useAppSelector(s => s)
+    const {token, unreadChatCount, userData} = useAppSelector(s => s)
     const [data, setData] = useState({});
 
     service.getArticle(token , 'terms_of_pay').then(res => {
