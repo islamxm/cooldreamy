@@ -11,13 +11,8 @@ import { searchFilterType } from './types';
 import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import OnlyPremium from '@/components/OnlyPremium/OnlyPremium';
+import defCountryList from '@/helpers/defCountryList';
 
-const countryList = [
-    {
-        value: '1',
-        label: 'Россия'
-    }
-]
 
 const ageList = [
     {
@@ -134,10 +129,11 @@ const SearchFilter:FC<searchFilterType> = ({
                                         setCountry('')
                                         setState('')
                                     }}
-                                    list={countries}
+                                    // list={countries}
+                                    list={defCountryList}
                                     />
                             </div>
-                            {
+                            {/* {
                                 states?.length > 0 ? (
                                     <div className={styles.item}>
                                         <SelectDef
@@ -155,7 +151,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                     </div>
                                    
                                 ) : null
-                            }
+                            } */}
                             <div className={styles.item}>
                                 <OnlyPremium>
                                     <SelectDef

@@ -11,7 +11,7 @@ import Button from '@/components/Button/Button';
 import { searchFilterType } from '../searchFilter/types';
 import OnlyPremium from '@/components/OnlyPremium/OnlyPremium';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-
+import defCountryList from '@/helpers/defCountryList';
 
 
 interface I extends searchFilterType {
@@ -89,10 +89,11 @@ const SearchDrawer:FC<I> = ({
                                         setCountry(v)
                                     }}
                                     onClear={clearStates}
-                                    list={countries}
+                                    // list={countries}
+                                    list={defCountryList}
                                     />
                             </Col>
-                            <Col span={12}>
+                            {/* <Col span={12}>
                                 {
                                     states?.length > 0 ? (
                                         <SelectDef
@@ -106,7 +107,7 @@ const SearchDrawer:FC<I> = ({
                                                 />
                                     ) : null
                                 }
-                            </Col>
+                            </Col> */}
                             <Col span={12}>
                                 <OnlyPremium>
                                     <SelectDef

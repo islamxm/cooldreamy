@@ -6,6 +6,8 @@ import { Row, Col } from 'antd';
 import SelectDef from '@/components/SelectDef/SelectDef';
 import ApiService from '@/service/apiService';
 import Button from '@/components/Button/Button';
+import defCountryList from '@/helpers/defCountryList';
+
 
 
 const service = new ApiService()
@@ -87,12 +89,13 @@ const StepEx:FC<IStepEx> = ({
                             onClear={() => setCountry && setCountry(null)}
                             isRound
                             value={country?.id}
-                            list={countryList}
+                            // list={countryList}
+                            list={defCountryList}
                             placeholder='Страна'
                             onChange={(e, v) => setCountry && setCountry(v)}
                             />    
                     </Col>    
-                    {
+                    {/* {
                         regionList?.length > 0 && (
                             <Col span={24}>
                                 <SelectDef
@@ -105,7 +108,7 @@ const StepEx:FC<IStepEx> = ({
                                     />
                             </Col>
                         )
-                    }    
+                    }     */}
                 </Row>    
             </Col>    
         </motion.div>

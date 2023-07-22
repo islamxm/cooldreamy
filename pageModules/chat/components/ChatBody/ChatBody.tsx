@@ -54,7 +54,8 @@ type ChatBodyComponentType = {
     dialogSearch?: string,
     setDialogSearch?: (...args: any[]) => any,
 
-    filter: 'all' | 'unread' | 'favorite' | 'ignored'
+    filter: 'all' | 'unread' | 'favorite' | 'ignored',
+    updateChatList?: (...args: any) => any
 }
 
 
@@ -85,6 +86,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
     dialogSearch,
     setDialogSearch,
+    updateChatList,
     filter
 
 }) => {
@@ -454,13 +456,14 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                             chatList && chatList?.length > 0 ? (
                                                 <div className={styles.body_wr}>
                                                     <Dialog
-                                                    totalChatItemCount={totalChatItemCount}
-                                                    height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}
-                                                    chatList={chatList}
-                                                    id={activeDialogId}
-                                                    updateChatListPage={updateChatListPage}
+                                                        totalChatItemCount={totalChatItemCount}
+                                                        height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}
+                                                        chatList={chatList}
+                                                        id={activeDialogId}
+                                                        updateChatListPage={updateChatListPage}
 
-                                                    updateDialogsList={updateDialogsList}
+                                                        updateDialogsList={updateDialogsList}
+                                                        updateChatList={updateChatList}
                                                     />
                                                 </div>
                                             ) : (

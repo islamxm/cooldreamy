@@ -1082,6 +1082,21 @@ class ApiService {
             console.log(err)
         }
     }
+
+    chatImagePay = async (token: IToken, message_id?: number | string) => {
+        try {
+            let res = await fetch(`${API_PATH}images/${message_id}/pay`, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

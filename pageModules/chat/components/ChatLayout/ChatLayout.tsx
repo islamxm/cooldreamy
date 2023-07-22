@@ -15,6 +15,7 @@ import { sortingMailChatList } from '@/helpers/sorting';
 import Button from '@/components/Button/Button';
 import {useDebounce} from 'usehooks-ts';
 
+
 const service = new ApiService()
 
 
@@ -321,6 +322,10 @@ const ChatLayout = () => {
     }
 
 
+    useEffect(() => {
+        if(chatList?.length > 0) console.log(chatList[0])
+    }, [chatList])
+
     const onUpdateChat = (body: {
         messageBody?: any,
         dialogBody?:any
@@ -499,6 +504,7 @@ const ChatLayout = () => {
 
                             dialogSearch={dialogSearch}
                             setDialogSearch={setDialogSearch}
+                            updateChatList={setChatList}
                             
                             />
                     </div>

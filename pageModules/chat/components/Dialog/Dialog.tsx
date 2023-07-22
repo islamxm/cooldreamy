@@ -16,7 +16,8 @@ import SkeletonChat from '../SkeletonChat/SkeletonChat';
 
 interface I extends IChat {
     height?: string,
-    updateDialogsList?: (...args: any[]) => any
+    updateDialogsList?: (...args: any[]) => any,
+    updateChatList?: (...args: any[]) => any
 }
 
 const Item = ({data, index, style}: {data: any, index: number, style: any}) => (
@@ -39,7 +40,8 @@ const Dialog:FC<I> = ({
     height,
     totalChatItemCount,
 
-    updateDialogsList
+    updateDialogsList,
+    updateChatList
 }) => {
     const {userId} = useAppSelector(s => s)
     
@@ -87,8 +89,9 @@ const Dialog:FC<I> = ({
                             index={index}
                             showAvatar={item.sender_user_id !== chatList[index - 1]?.sender_user_id}
                             senderUser={item?.sender_user}
-
+                            is_payed={item?.is_payed}
                             updateDialogsList={updateDialogsList}
+                            updateChatList={updateChatList}
                             />
                     ))
                 }

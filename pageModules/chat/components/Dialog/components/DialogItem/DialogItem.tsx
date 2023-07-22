@@ -15,17 +15,21 @@ import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import Router, { useRouter } from 'next/router';
-import { updateCurrentProfileId, updateUnreadChatCount } from '@/store/actions';
+import { updateCurrentProfileId, updateUnreadChatCount, updateUserData } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import winkImg from '@/public/assets/images/wink-sticker.png';
-import { sortingDialogList } from '@/helpers/sorting';
+import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
+import blur2 from '@/public/assets/images/censor-blur-effect-texture-isolated-blurry-pixel-color-censorship-element-naked-pixel-blur-nude-skin-censor-pattern-vector.jpg'
+import notify from '@/helpers/notify';
 
 const service = new ApiService()
 
 
 interface I extends IMessage {
     showAvatar?: boolean,
-    updateDialogsList?: (...args: any[]) => any
+    updateDialogsList?: (...args: any[]) => any,
+    updateChatList?: (...args: any[]) => any
+    is_payed?: 1 | 0
 }
 
 
@@ -46,10 +50,12 @@ const DialogItemComponent:FC<I> = ({
     showAvatar,
     senderUser,
 
-    updateDialogsList
+    is_payed,
+    updateDialogsList,
+    updateChatList
 }) => {
     const dispatch = useAppDispatch()
-    const {token, unreadChatCount} = useAppSelector(s => s)
+    const {token, unreadChatCount, userData} = useAppSelector(s => s)
     const {inView, ref} = useInView({
         // triggerOnce: true,
     })
@@ -87,7 +93,26 @@ const DialogItemComponent:FC<I> = ({
     }, [status, token, id, inView, isSelf])
 
 
-
+    const chatImagePay = () => {
+        if(id && token) {
+            service.chatImagePay(token, id).then(res => {
+                console.log(res)
+                if(res?.message === 'success') {
+                    updateChatList && updateChatList((s: any) => {
+                        const m = s;
+                        const findItem = m.find((i:any) => i?.id == id)
+                        const rm = m.splice(m.findIndex((i:any) => i?.id == id), 1, {...findItem, is_payed: 1})
+                        return sortingChatList([...m])
+                    })
+                    service.getCredits(token).then(credits => {
+                        dispatch(updateUserData({...userData, credits}))
+                    })
+                } else {
+                    notify('Error', "ERROR")
+                }
+            })
+        }
+    }
 
 
     const switchMessageType = (type?: chatMessageTypes) => {
@@ -95,23 +120,50 @@ const DialogItemComponent:FC<I> = ({
             case 'App\\Models\\ChatImageMessage':
                 return (
                     <div className={styles.media}>
-                        <FancyboxWrapper>
-                            <div className={styles.body}>
-                                <a data-fancybox="gallery" href={images[0].image} className={styles.item}>
-                                    <Image
-                                        src={images[0].thumbnail ? images[0].thumbnail : ''}
-                                        loader={(p) => {
-                                            return p?.src && typeof p?.src === 'string' ? p?.src : ''
-                                        }}
-                                        alt=''
-                                        width={100}
-                                        height={100}
-                                        />
-                                </a>
-                            </div>
-                        </FancyboxWrapper>
+                        {
+                            is_payed === 1 || isSelf ? (
+                                <>
+                                    <FancyboxWrapper>
+                                        <div className={styles.body}>
+                                            <a data-fancybox="gallery" href={images[0].image} className={styles.item}>
+                                                <Image
+                                                    src={images[0].thumbnail ? images[0].thumbnail : ''}
+                                                    loader={(p) => {
+                                                        return p?.src && typeof p?.src === 'string' ? p?.src : ''
+                                                    }}
+                                                    alt=''
+                                                    width={100}
+                                                    height={100}
+                                                    />
+                                            </a>
+                                        </div>
+                                    </FancyboxWrapper>
+                                    
+                                    <div className={styles.time}>{moment(updatedAt).format('hh:mm')}</div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className={styles.body}>
+                                        <a className={styles.item}
+                                            onClick={chatImagePay}
+                                            >
+                                            <Image
+                                                src={blur2}
+                                                loader={(p) => {
+                                                    return p?.src && typeof p?.src === 'string' ? p?.src : ''
+                                                }}
+                                                alt=''
+                                                width={100}
+                                                height={100}
+                                                />
+                                        </a>
+                                    </div>
+                                    
+                                    <div className={styles.time}>{moment(updatedAt).format('hh:mm')}</div>
+                                </>
+                            )
+                        }
                         
-                        <div className={styles.time}>{moment(updatedAt).format('hh:mm')}</div>
                     </div>
                 ) 
             case "App\\Models\\ChatTextMessage":
