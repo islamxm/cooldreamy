@@ -4,7 +4,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import styles from '@/pageModules/footer/FooterPage.module.scss';
 import {useAppSelector} from "@/hooks/useTypesRedux";
 import ApiService from "@/service/apiService";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const service = new ApiService()
 
@@ -12,11 +12,13 @@ const PaymentPage = () => {
     const {token, unreadChatCount, userData} = useAppSelector(s => s)
     const [data, setData] = useState('');
 
-    service.getArticle(token , 'terms_of_pay').then(res => {
-        if (res) {
-            setData(res.text_ru);
-        }
-    })
+    useEffect(() => {
+        service.getArticle(token , 'terms_of_pay').then(res => {
+            if (res) {
+                setData(res.text_ru);
+            }
+        })
+    }, [token]);
 
     return (
         <Container>
