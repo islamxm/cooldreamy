@@ -5,8 +5,7 @@ import styles from '@/pageModules/footer/FooterPage.module.scss';
 import {useAppSelector} from "@/hooks/useTypesRedux";
 import ApiService from "@/service/apiService";
 const service = new ApiService()
-import {useEffect, useState} from "react";
-import {useRef} from "react/index";
+import {useEffect, useRef, useState} from "react";
 
 const PrivatePage = () => {
     const {token, unreadChatCount, userData} = useAppSelector(s => s)
