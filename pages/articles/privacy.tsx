@@ -9,7 +9,7 @@ import {useEffect, useRef, useState} from "react";
 
 const PrivatePage = () => {
     const {token, unreadChatCount, userData} = useAppSelector(s => s)
-    const spanRef = useRef<HTMLSpanElement>(null);
+    const spanRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         service.getArticle(token , 'privacy_policy').then(res => {
