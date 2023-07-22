@@ -1,6 +1,5 @@
 const replaceSpace = (str: string) => {
-    const newStr = str;
-    str.replaceAll(' ', '')
+    const newStr = str.replaceAll(' ', '');
     return newStr;
 }
 

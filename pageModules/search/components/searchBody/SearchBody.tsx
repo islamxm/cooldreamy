@@ -116,7 +116,7 @@ const SearchBody = () => {
             ).then(res => {
                 setTotalFound(res?.total)
                 setList(res?.data)
-
+                console.log(res?.data)
             }).finally(() => {
                 setLoad(false)
             })

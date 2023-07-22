@@ -37,5 +37,6 @@ export interface IUser {
     is_email_verified?: 1 | 0,
     user_avatar_url?: string
 
-    profile_photo?: any[]
+    profile_photo?: any[],
+    user_thumbnail_url?: string
 }

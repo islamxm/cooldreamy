@@ -17,7 +17,6 @@ import LimitModal from '@/popups/LimitModal/LimitModal';
 import SoonModal from '@/popups/SoonModal/SoonModal';
 
 
-
 const service = new ApiService()
 
 
