@@ -35,7 +35,7 @@ const UserCardMob:FC<I> = ({
                 <Image
                     width={120}
                     height={120}
-                    src={user_avatar_url || avatar_url_thumbnail}
+                    src={user_avatar_url ? user_avatar_url : ''}
                     loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
                     alt=''
                     />  
