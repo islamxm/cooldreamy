@@ -12,7 +12,7 @@ const LicencePage = () => {
     const [data, setData] = useState('');
 
     useEffect(() => {
-        service.getArticle(token , 'terms_of_pay').then(res => {
+        service.getArticle(token , 'licence').then(res => {
             if (res) {
                 setData(res.text_ru);
             }
