@@ -20,8 +20,8 @@ const Card:FC<cardPropsType> = ({
     removeCard
 }) => {
     const {age,
-        avatar_url,
-        avatar_url_thumbnail,
+        user_avatar_url,
+        user_avatar_url_thumbnail,
         id,
         birthday,
         country,
@@ -145,7 +145,7 @@ const Card:FC<cardPropsType> = ({
                     
                     <div className={styles.img}>
                         {
-                            avatar_url ? (
+                            user_avatar_url ? (
                                 index === 0 || index === 1 ? (
                                     <Image 
                                         loader={() => user_thumbnail_url ? user_thumbnail_url : ''} 
@@ -176,11 +176,11 @@ const Card:FC<cardPropsType> = ({
                 >
                 <div className={styles.img}>
                     {
-                        avatar_url ? (
+                        user_avatar_url ? (
                             index === 0 || index === 1 ? (
                                 <Image 
-                                    loader={() => avatar_url ? avatar_url : ''} 
-                                    src={avatar_url ? avatar_url : logo} 
+                                    loader={() => user_avatar_url ? user_avatar_url : ''}
+                                    src={user_avatar_url ? user_avatar_url : logo}
                                     alt='' 
                                     unoptimized
                                     width={560} 
