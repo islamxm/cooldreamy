@@ -12,7 +12,7 @@ const SafetyPage = () => {
     const spanRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        service.getArticle(token , 'secret_guide').then(res => {
+        service.getArticle(token , 'security_guides').then(res => {
             if (res) {
                 if (spanRef.current) {
                     spanRef.current.innerHTML = res.text_en;
