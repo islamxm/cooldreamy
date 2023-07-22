@@ -15,6 +15,7 @@ interface I extends IUser {
 
 
 const UserCardMob:FC<I> = ({
+    user_avatar_url,
     avatar_url_thumbnail,
     name,
     age,
@@ -34,7 +35,7 @@ const UserCardMob:FC<I> = ({
                 <Image
                     width={120}
                     height={120}
-                    src={avatar_url_thumbnail ? avatar_url_thumbnail : ''}
+                    src={user_avatar_url || avatar_url_thumbnail}
                     loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
                     alt=''
                     />  
