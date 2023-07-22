@@ -35,7 +35,8 @@ const GirlCard:FC<IUser> = ({
     id,
     name,
     state,
-    winkable
+    winkable,
+    gender
     
 }) => {
     const {token, locale} = useAppSelector(s => s)
@@ -125,7 +126,7 @@ const GirlCard:FC<IUser> = ({
                 <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        src={user_thumbnail_url ? brokenUrl(replaceSpace(user_thumbnail_url))  : placeholder} 
+                        src={user_thumbnail_url ? brokenUrl(replaceSpace(user_thumbnail_url), gender)  : placeholder} 
                         width={300}
                         height={300}
                         alt=""/>
