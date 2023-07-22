@@ -182,7 +182,7 @@ const ru: ILocale = {
         },
         logout: {
             title: 'Вы уверены что хотите выйти?'
-        }
+        },
     },
     startPage: {
         start_hero_title: 'Ваша история любви начинается здесь! ',

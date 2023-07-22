@@ -108,7 +108,7 @@ const SearchDrawer:FC<I> = ({
                                     ) : null
                                 }
                             </Col> */}
-                            <Col span={12}>
+                            {/* <Col span={12}>
                                 <OnlyPremium>
                                     <SelectDef
                                         disabled={userData?.is_premium !== 1}
@@ -136,7 +136,7 @@ const SearchDrawer:FC<I> = ({
                                         multiple
                                         />  
                                 </OnlyPremium>
-                            </Col>
+                            </Col> */}
                             <Col span={12}>
                                 <RangeSlider
                                     min={18}

@@ -152,7 +152,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                    
                                 ) : null
                             } */}
-                            <div className={styles.item}>
+                            {/* <div className={styles.item}>
                                 <OnlyPremium>
                                     <SelectDef
                                         disabled={userData?.is_premium !== 1}
@@ -181,7 +181,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                         multiple
                                         />  
                                 </OnlyPremium>
-                            </div>
+                            </div> */}
                             
                         </div>
                         <div className={styles.action}>

@@ -182,6 +182,9 @@ export interface ILocale {
         logout: {
             title: string,
         },
+        // limit: {
+        //     title: ''
+        // }
 
     },
     startPage: {
