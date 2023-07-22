@@ -21,7 +21,7 @@ const Card:FC<cardPropsType> = ({
 }) => {
     const {age,
         user_avatar_url,
-        user_avatar_url_thumbnail,
+        avatar_url_thumbnail,
         id,
         birthday,
         country,
