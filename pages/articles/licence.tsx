@@ -3,21 +3,23 @@ import MainLayout from "@/components/MainLayout/MainLayout";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import styles from '@/pageModules/footer/FooterPage.module.scss';
 import {useAppSelector} from "@/hooks/useTypesRedux";
-import {useEffect, useState} from "react";
+import {useEffect, useRef} from "react";
 import ApiService from "@/service/apiService";
 const service = new ApiService()
 
 const LicencePage = () => {
     const {token, unreadChatCount, userData} = useAppSelector(s => s)
-    const [data, setData] = useState('');
+    const spanRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         service.getArticle(token , 'licence').then(res => {
             if (res) {
-                setData(res.text_ru);
+                if (spanRef.current) {
+                    spanRef.current.innerHTML = res.text_en;
+                }
             }
         })
-    }, [token]);
+    }, [spanRef.current]);
 
     return (
         <Container>
@@ -25,8 +27,7 @@ const LicencePage = () => {
                 {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
                     <h1 className={styles.title}>ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ</h1>
-                    <div className={styles.body}>
-                        {data}
+                    <div className={styles.body} ref={spanRef}>
                     </div>
                 </div>
             </MainLayout>

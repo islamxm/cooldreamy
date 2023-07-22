@@ -5,20 +5,23 @@ import styles from '@/pageModules/footer/FooterPage.module.scss';
 import {useAppSelector} from "@/hooks/useTypesRedux";
 import ApiService from "@/service/apiService";
 import {useEffect, useState} from "react";
+import {useRef} from "react/index";
 
 const service = new ApiService()
 
 const PaymentPage = () => {
     const {token, unreadChatCount, userData} = useAppSelector(s => s)
-    const [data, setData] = useState('');
+    const spanRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         service.getArticle(token , 'terms_of_pay').then(res => {
             if (res) {
-                setData(res.text_ru);
+                if (spanRef.current) {
+                    spanRef.current.innerHTML = res.text_en;
+                }
             }
         })
-    }, [token]);
+    }, [spanRef.current]);
 
     return (
         <Container>
@@ -26,8 +29,7 @@ const PaymentPage = () => {
                 {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
                     <h1 className={styles.title}>Правила оплаты</h1>
-                    <div className={styles.body}>
-                        {data}
+                    <div className={styles.body} ref={spanRef}>
                     </div>
                 </div>
             </MainLayout>
