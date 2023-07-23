@@ -8,23 +8,22 @@ const service = new ApiService()
 
 const ChatPricing = () => {
     const {token, locale, actionsPricing} = useAppSelector(s => s)
-    // const [list, setList] = useState<any[]>([])
-    console.log('sc');
-    // useEffect(() => {
-    //     if(token) {
-    //         service.getActionPricing(token).then(res => {
-    //             setList(res)
-    //             console.log(res)
-    //         })
-    //     }
-    // }, [token])
+    const [list, setList] = useState<any[]>([])
+    useEffect(() => {
+        if(token) {
+            service.getActionPricing(token).then(res => {
+                setList(res)
+                console.log(res)
+            })
+        }
+    }, [token])
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.head}>{locale?.chatPage.pricing.title}</div>
             <div className={styles.body}>
                 {
-                    actionsPricing?.map(i => (
+                    list?.map(i => (
                         <div key={i.id} className={styles.item}>{i.name}:: {i.price}</div>
                     ))
                 }
