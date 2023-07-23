@@ -21,7 +21,7 @@ const Step8:FC<IPromptSelect> = ({
     setSelectedList
 }) => {
     const {locale} = useAppSelector(s => s)
-
+    console.log('wwwww');
     return (
         <motion.div 
             initial={{
@@ -37,7 +37,7 @@ const Step8:FC<IPromptSelect> = ({
             transition={{type: 'spring', stiffness: 400, damping: 17 }}
             className={styles.wrapper}>
             <h3 className={styles.head}>
-            {locale?.signupPage.steps.step_8.title}test
+            {locale?.signupPage.steps.step_8.title}
             </h3>
             <div className={styles.list}>
                 {
