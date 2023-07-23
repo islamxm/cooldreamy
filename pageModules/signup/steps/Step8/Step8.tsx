@@ -47,18 +47,9 @@ const Step8:FC<IPromptSelect> = ({
                                 label={item.text}
                                 value={item.id.toString()}
                                 onSelect={() => {
-                                    if(selectedList?.find(i => Number(i) === Number(item.id))) {
-                                        setSelectedList((s:any[]) => {
-                                            const r = s;
-                                            const rm = s.splice(r.findIndex(r => Number(r) === Number(item.id)), 1)
-                                            return [...r]
-                                        })
-                                    } else {
-                                        console.log(item.id)
-                                        setSelectedList((s: any[]) => [...s, Number(item.id)])
-                                    }
+                                    setSelectedList([item.id])
                                 }}
-                                isSelect={selectedList?.find(i => Number(i) === Number(item.id)) ? true : false}
+                                isSelect={selectedList && Number(selectedList[0]) === Number(item.id) ? true : false}
                             />
                         </div>
                     ))
