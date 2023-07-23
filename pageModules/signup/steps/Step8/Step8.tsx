@@ -37,7 +37,7 @@ const Step8:FC<IPromptSelect> = ({
             transition={{type: 'spring', stiffness: 400, damping: 17 }}
             className={styles.wrapper}>
             <h3 className={styles.head}>
-            {locale?.signupPage.steps.step_8.title}
+            {locale?.signupPage.steps.step_8.title}test
             </h3>
             <div className={styles.list}>
                 {
