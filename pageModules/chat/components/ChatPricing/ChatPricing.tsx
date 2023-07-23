@@ -21,11 +21,11 @@ const ChatPricing = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.head}>{locale?.chatPage.pricing.title}asdaads</div>
+            <div className={styles.head}>{locale?.chatPage.pricing.title}</div>
             <div className={styles.body}>
                 {
                     actionsPricing?.map(i => (
-                        <div key={i.id} className={styles.item}>{i.name}: {i.price}</div>
+                        <div key={i.id} className={styles.item}>{i.name}:: {i.price}</div>
                     ))
                 }
             </div>
