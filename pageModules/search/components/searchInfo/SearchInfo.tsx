@@ -50,7 +50,6 @@ const SearchInfo:FC<searchInfoType> = ({
     return (
         <div className={styles.wrapper}>
             <div className={styles.value}>
-                {/*{locale?.searchPage.filter.found}: {total}*/}
             </div>
             <div className={styles.tabs}>
                 {
