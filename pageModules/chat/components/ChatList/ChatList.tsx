@@ -62,13 +62,15 @@ const ChatList:FC<IDialogs> = ({
             <PromoBadge/>
             {
                 dialogsList?.length > 0 ? dialogsList?.map((item, index) => (
-                    <ChatItem
-                        key={index}
-                        {...item}
-                        active={item?.id === activeDialogId}
-                        updateDialogsList={updateDialogsList}
-                        filter={filter}
+                    item?.id ? (
+                        <ChatItem
+                            key={index}
+                            {...item}
+                            active={item?.id === activeDialogId}
+                            updateDialogsList={updateDialogsList}
+                            filter={filter}
                         />
+                    ) : ''
                 )) : null
                 // <div className={styles.empty}>Нет переписок</div>
             }
