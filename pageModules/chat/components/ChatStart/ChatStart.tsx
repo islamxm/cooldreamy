@@ -37,7 +37,7 @@ const ChatStart = ({avatar, onSelect}: {avatar?: string, onSelect: (type: 'wink'
                             />
                     </div>
                 </div>
-                <h3 className={styles.title}>Начните общаться прямо сейчас!</h3>
+                <h3 className={styles.title}>Start chatting right now !</h3>
                 <div className={styles.action}>
                     {/* <div className={styles.item}>
                         <button className={styles.button}>
@@ -56,7 +56,7 @@ const ChatStart = ({avatar, onSelect}: {avatar?: string, onSelect: (type: 'wink'
                                 size={60}
                                 icon={<HiOutlineGift size={30}/>}
                                 />
-                            <div className={styles.label}>ПОДАРОК</div>
+                            <div className={styles.label}>Gift</div>
                         </button>
                     </div>
                     <div className={styles.item}>
@@ -66,7 +66,7 @@ const ChatStart = ({avatar, onSelect}: {avatar?: string, onSelect: (type: 'wink'
                                 size={60}
                                 icon={<HiOutlineChatBubbleOvalLeftEllipsis size={30}/>}
                                 />
-                            <div className={styles.label}>ПРИВЕТСТВИЕ</div>
+                            <div className={styles.label}>GREETINGS</div>
                         </button>
                     </div>
                 </div>

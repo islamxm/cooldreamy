@@ -75,7 +75,7 @@ const StepEx:FC<IStepEx> = ({
                 <Row gutter={[25,25]}>
                     <Col span={24}>
                         <SelectDef
-                            placeholder='Язык'
+                            placeholder='Language'
                             list={languagesList}
                             value={language}
                             onChange={setLanguage}
@@ -88,7 +88,7 @@ const StepEx:FC<IStepEx> = ({
                             isRound
                             value={country?.id}
                             list={countryList}
-                            placeholder='Страна'
+                            placeholder='Country'
                             onChange={(e, v) => setCountry && setCountry(v)}
                             />    
                     </Col>    
@@ -99,7 +99,7 @@ const StepEx:FC<IStepEx> = ({
                                     onClear={() => setState && setState(null)}
                                     value={state?.id}
                                     isRound
-                                    placeholder='Регион'
+                                    placeholder='Region'
                                     list={regionList}
                                     onChange={(e,v) => setState && setState(v)}
                                     />
