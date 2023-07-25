@@ -10,27 +10,27 @@ const mockList = [
     {
         id: 'mock1',
         value: '1',
-        text: 'Привет, познакомимся?'
+        text: "Hello, let's meet?"
     },
     {
         id: 'mock2',
         value: '2',
-        text: 'Каких отношений ты ищешь на этом сайте?'
+        text: 'What relationship are you looking for on this site?'
     },
     {
         id: 'mock3',
         value: '3',
-        text: 'Привет, тебе говорили, что ты просто сногшибательная?'
+        text: 'Hey, have you been told that you are simply stunning?'
     },
     {
         id: 'mock4',
         value: '4',
-        text: 'Здравствуй! Отличные фотографии!'
+        text: 'Hello! Great photos!'
     },
     {
         id: 'mock5',
         value: '5',
-        text: 'У тебя великолепная внешность. Я поражен...'
+        text: 'You have great looks. I am amazed...'
     },
 ]
 
@@ -50,7 +50,7 @@ const ChatMock = ({
     return (
         <div className={styles.wrapper}>
             <div className={styles.body}>
-                <h3 className={styles.title}>Отправить сообщение</h3>
+                <h3 className={styles.title}>Send Message</h3>
                 <div className={styles.main}>
                     {
                         mockList?.map((item,index) => (
@@ -76,14 +76,14 @@ const ChatMock = ({
                         <Col span={12}>
                             <Button
                                 disabled={!selectValue}
-                                text='Отправить'
+                                text='Send'
                                 onClick={() => onSend(selectValue)}
                                 />
                         </Col>
                         <Col span={12}>
                             <Button
                                 variant={'bordered'}
-                                text='Назад'
+                                text='Back'
                                 onClick={onClose}
                                 />
                         </Col>
