@@ -118,7 +118,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                                         dispatch(updateUserData(userData))
                                     }
                                 })
-                                notify('Фотография добавлена', 'SUCCESS')
+                                notify('Image Added', 'SUCCESS')
                                 onCancel()
                                 onAfterUpload && onAfterUpload()
                             }
@@ -126,7 +126,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                             setLoad(false)
                         })
                     } else {
-                        notify('Фотография не подходит', 'ERROR')
+                        notify('Wrong Image', 'ERROR')
                         setLoad(false)
                     }
                 })
@@ -145,8 +145,8 @@ const ImageCropModal:FC<cropModalPropsType> = ({
             >
             {
                 !category ? (
-                    <div className={styles.head}>Выберите категорию загружаемой картинки</div>
-                ) : <div className={styles.head}>Выбранная область будет показана на Вашей странице</div>
+                    <div className={styles.head}>Select the category of the uploaded image</div>
+                ) : <div className={styles.head}>The selected area will be found on your page.</div>
             }
             {
                 !category ? (
@@ -214,7 +214,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                                             load={load}
                                             onClick={onSave}
                                             fill
-                                            text={croppedImage ? 'Загрузить' : 'Сохранить'}
+                                            text={croppedImage ? 'Download' : 'Save'}
                                             style={{padding: '8px 10px', fontSize: 18}}
                                             />
                                     ) : (
@@ -223,7 +223,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                                             load={load}
                                             onClick={showCroppedImage}
                                             fill
-                                            text={croppedImage ? 'Загрузить' : 'Сохранить'}
+                                            text={croppedImage ? 'Download' : 'Save'}
                                             style={{padding: '8px 10px', fontSize: 18}}
                                             />
                                     )
@@ -235,7 +235,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                                     middle={width <= 768}
                                     fill
                                     style={{padding: '8px 10px', fontSize: 18}}
-                                    text='Отменить'
+                                    text='Cancel'
                                     onClick={onCancel}
                                     variant={'bordered'}
                                     />
