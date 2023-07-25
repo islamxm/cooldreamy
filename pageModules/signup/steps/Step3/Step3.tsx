@@ -50,7 +50,7 @@ const Step3:FC<IPromptSelect> = ({
             <h3 className={styles.head}>
                 {locale?.signupPage.steps.step_3.title}
             </h3>
-            <div className={`${styles.count} ${error ? styles.error : ''}`}>Выбрано: {selectedList ? selectedList?.length : 0}/5</div>
+            <div className={`${styles.count} ${error ? styles.error : ''}`}>Selected: {selectedList ? selectedList?.length : 0}/5</div>
             <div className={styles.list}>
                 {
                     list?.map((item,index) => (

@@ -38,7 +38,7 @@ const Step2:FC<IPromptSelect> = ({
             transition={{type: 'spring', stiffness: 400, damping: 17 }}
             className={styles.wrapper}>
             <h3 className={styles.head}>{locale.signupPage.steps.step_2.title}</h3>
-            <div className={`${styles.count} ${error ? styles.error : ''}`}>Выбрано: {selectedList ? selectedList?.length : 0}/3</div>
+            <div className={`${styles.count} ${error ? styles.error : ''}`}>Selected: {selectedList ? selectedList?.length : 0}/3</div>
             <div className={styles.list}>
                 {
                     list?.map((item, index) => (
