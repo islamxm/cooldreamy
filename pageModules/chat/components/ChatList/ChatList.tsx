@@ -36,19 +36,21 @@ const ChatList:FC<IDialogs> = ({
     const [loadMore, setLoadMore] = useState(false)
     const [search, setSearch] = useState('')
     const {width} = useWindowSize()
-    
+    const [updated, setUpdated] = useState(0);
 
     useEffect(() => {
         dialogsList?.length === totalDialogItemCount ? setLoadMore(false) : setLoadMore(true)
     }, [dialogsList, totalDialogItemCount])
 
-
+    setTimeout(() => {
+        setUpdated(updated + 1);
+    }, 1000)
 
     useEffect(() => {
         if(loadMore && inView) {
             updateDialogsPage && updateDialogsPage((s: number) => s + 1)
         }
-    }, [inView, loadMore, updateDialogsPage])
+    }, [inView, loadMore, updateDialogsPage, updated])
 
 
 
