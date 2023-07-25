@@ -24,8 +24,8 @@ import { updateSoonModal } from '@/store/actions';
 const service = new ApiService()
 
 const locales = [
-    {value: '1', label: 'RU'},
-    {value: '2', label: 'EN'}
+    // {value: '1', label: 'RU'},
+    // {value: '2', label: 'EN'}
 ]
 
 
@@ -118,20 +118,20 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                         !token ? (
                             <div className={styles.main}>
                                 <div className={styles.locale}>
-                                    <SelectDef
-                                        clearIcon={false}
-                                        onChange={(e) => {
-                                            if(e === '1') {
-                                                router.push(router.asPath, undefined, {locale: 'ru'})
-                                            } 
-                                            if(e === '2') {
-                                                router.push(router.asPath, undefined, {locale: 'en'})
-                                            }
-                                        }}
-                                        list={locales}
-                                        placeholder='Выбор языка'
-                                        value={router?.locale === 'ru' ? '1' : '2'}
-                                        />
+                                    {/*<SelectDef*/}
+                                    {/*    clearIcon={false}*/}
+                                    {/*    onChange={(e) => {*/}
+                                    {/*        if(e === '1') {*/}
+                                    {/*            router.push(router.asPath, undefined, {locale: 'ru'})*/}
+                                    {/*        } */}
+                                    {/*        if(e === '2') {*/}
+                                    {/*            router.push(router.asPath, undefined, {locale: 'en'})*/}
+                                    {/*        }*/}
+                                    {/*    }}*/}
+                                    {/*    list={locales}*/}
+                                    {/*    placeholder='Выбор языка'*/}
+                                    {/*    value={router?.locale === 'ru' ? '1' : '2'}*/}
+                                    {/*    />*/}
                                 </div>
                                 {
                                     !token ? (
@@ -159,22 +159,22 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                                         </div>
                                     }
                                     <div className={styles.locale}>
-                                        <SelectDef
-                                            clearIcon={false}
-                                            onChange={(e) => {
-                                                if(e === '1') {
-                                                    // dispatch(updateLocale(ru))
-                                                    router.push(router.asPath, undefined, {locale: 'ru'})
-                                                } 
-                                                if(e === '2') {
-                                                    // dispatch(updateLocale(en))
-                                                    router.push(router.asPath, undefined, {locale: 'en'})
-                                                }
-                                            }}
-                                            list={locales}
-                                            placeholder='Выбор языка'
-                                            value={router?.locale === 'ru' ? '1' : '2'}
-                                            />
+                                        {/*<SelectDef*/}
+                                        {/*    clearIcon={false}*/}
+                                        {/*    onChange={(e) => {*/}
+                                        {/*        if(e === '1') {*/}
+                                        {/*            // dispatch(updateLocale(ru))*/}
+                                        {/*            router.push(router.asPath, undefined, {locale: 'ru'})*/}
+                                        {/*        } */}
+                                        {/*        if(e === '2') {*/}
+                                        {/*            // dispatch(updateLocale(en))*/}
+                                        {/*            router.push(router.asPath, undefined, {locale: 'en'})*/}
+                                        {/*        }*/}
+                                        {/*    }}*/}
+                                        {/*    list={locales}*/}
+                                        {/*    placeholder='Выбор языка'*/}
+                                        {/*    value={router?.locale === 'ru' ? '1' : '2'}*/}
+                                        {/*    />*/}
                                     </div>
                                     {
                                         !token ? (
