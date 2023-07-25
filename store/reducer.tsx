@@ -3,6 +3,8 @@ import { PusherPrivateChannel } from "laravel-echo/dist/channel";
 import { Cookies } from "typescript-cookie";
 import { IUser } from "@/models/IUser";
 import ru from "@/locales/ru";
+import en from "@/locales/en";
+
 import { ILocale } from "@/models/ILocale";
 
 
@@ -50,7 +52,7 @@ export const globalState: IGlobalState = {
     newMail: null,
     currentProfileId: null,
     currentProfileUuid: null,
-    locale: ru,
+    locale: en,
     actionsPricing:[],
     limit: {
         open: false,
