@@ -52,7 +52,7 @@ const ChatItem = ({
     const {query} = useRouter()
     const {type} = query || null
     const {token} = useAppSelector(s => s)
-    const {avatar_url, avatar_url_thumbnail, name, online, user_avatar_url, user_thumbnail_url} = another_user || {};
+    const {avatar_url, avatar_url_thumbnail, name, age, online, user_avatar_url, user_thumbnail_url} = another_user || {};
     
 
 
@@ -165,7 +165,7 @@ const ChatItem = ({
                             <Col span={24}>
                                 <UserTitle 
                                     username={name}
-                                    age='26'
+                                    age={age ? age.toString() : ''}
                                     textBold
                                     isOnline={online === 1}/>
                             </Col>
@@ -239,7 +239,7 @@ const ChatItem = ({
                             <Col span={24}>
                                 <UserTitle 
                                     username={name}
-                                    age='26'
+                                    age={age ? age.toString() : ''}
                                     textBold
                                     isOnline={online === 1}/>
                             </Col>
