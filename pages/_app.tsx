@@ -99,7 +99,7 @@ function App({ Component, pageProps }: AppProps) {
 									router?.pathname === '/unavailable' ? null : <Header auth={true}/>
 								)
 							}
-							<!-- Start of LiveChat (www.livechat.com) code -->
+
 							<main>
 								<Component {...pageProps} />
 							</main>
