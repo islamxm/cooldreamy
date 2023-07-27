@@ -15,6 +15,7 @@ import ru from '@/locales/ru';
 import en from '@/locales/en';
 import LimitModal from '@/popups/LimitModal/LimitModal';
 import SoonModal from '@/popups/SoonModal/SoonModal';
+import { TEST_DOMAIN } from '@/service/endpoints';
 
 
 const service = new ApiService()
@@ -77,8 +78,9 @@ const MainWrapper = ({
 			setPusherConfig(
 				{
 					key: 's3cr3t',
-					wsHost: 'api.cooldreamy.com',
-					authEndpoint: 'https://api.cooldreamy.com/broadcasting/auth',
+					// api.cooldreamy.com
+					wsHost: 'newapi.soultri.site',
+					authEndpoint: TEST_DOMAIN + 'broadcasting/auth',
 					cluster: 'mt1',
 					encrypted: true,
 					forceTLS: false,
@@ -109,6 +111,9 @@ const MainWrapper = ({
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {
 				notify('Соединение установлено', 'SUCCESS')
+			})
+			channels?.error(() => {
+				notify('SOCKET ERROR', 'ERROR')
 			})
 		}
 	}, [pusherConfig, userId, socketChannel])
@@ -143,11 +148,11 @@ const MainWrapper = ({
 		if(socketChannel) {
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
+				console.log(data)
 				dispatch(updateNewMessage(data))
 				// dispatch(updateUnreadChatCount(unreadChatCount + 1))
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
 				switch(data?.chat_message?.chat_messageable_type) {
-					
 					case chatMessageTypeVariants.messageText:
 						notify(<LinesEllipsis text={data?.chat_message?.chat_messageable?.text} maxLine={2}/>, 'AVATAR', avatar)
 						break;

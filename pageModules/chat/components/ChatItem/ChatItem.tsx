@@ -134,7 +134,7 @@ const ChatItem = ({
 
  
 
-    if(type === 'chat' && last_message) {
+    if(type === 'chat') {
         return (
             <div  className={`${styles.wrapper} ${active ? styles.active : ''}`}>
                 {/* <Link href={`/users/${another_user?.id}`} className={styles.avatar}>
@@ -216,7 +216,7 @@ const ChatItem = ({
         )
     }
 
-    if(type === 'mail' && last_message) {
+    if(type === 'mail') {
         return (
             <div className={`${styles.wrapper} ${active ? styles.active : ''}`}>
                 <div onClick={() => {
