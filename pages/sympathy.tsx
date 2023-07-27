@@ -63,21 +63,19 @@ const SymPage = () => {
         }
     }
 
-    useEffect(() => {
+    const getData = () => {
         if(activeTab) {
             Router.push(`/sympathy?type=${activeTab}`)
             setLoad(true)
             if(token) {
                 if(activeTab === 'views') {
                     service.getActivityViews(token).then(res => {
-                        console.log(res)
                         setList(res)
                     }).finally(() => setLoad(false))
                 }
                 if(activeTab )
                 if(activeTab === 'likes') {
                     service.getActivityLikes(token).then(res => {
-                        console.log(res)
                         setList(res)
                     }).finally(() => setLoad(false))
                 }
@@ -88,14 +86,26 @@ const SymPage = () => {
                 }
                 if(activeTab === 'inlikes') {
                     service.getActivityInLikes(token).then(res => {
-                        console.log(res)
                         setList(res)
                     }).finally(() => setLoad(false))
                 }
             }
 
         }
+    }
+
+    useEffect(() => {
+        getData()
     }, [activeTab, token])
+
+
+
+    useEffect(() => {
+        const tm = setInterval(getData, 5000)
+        return () => {
+            tm && clearInterval(tm)
+        }
+    }, [])
 
 
 
