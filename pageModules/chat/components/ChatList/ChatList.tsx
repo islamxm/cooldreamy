@@ -74,7 +74,9 @@ const ChatList:FC<IDialogs> = ({
             {
                 dialogsList && dialogsList?.length > 0 ? (
                     loadMore ? (
-                        <div ref={ref} className={styles.loader}><SkeletonChatList/></div>
+                        <div ref={ref} className={styles.loader}>
+                            {/* <SkeletonChatList/> */}
+                        </div>
                     ) : null
                 ) : null
             }

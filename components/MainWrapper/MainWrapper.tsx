@@ -163,7 +163,8 @@ const MainWrapper = ({
 					case chatMessageTypeVariants.messageWink:
 						notify('Вам подмигнули', 'AVATAR', avatar)
 					default:
-						return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
+						// return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
+						return null
 				}
             })
 			// socketChannel?.listen('.chat-message-read-event', (data: any) => {
