@@ -60,7 +60,8 @@ const MainWrapper = ({
 		if(window?.navigator?.language) {
 			if(window?.navigator?.language === 'ru') {
 				if(asPath) {
-					push(asPath, undefined, {locale: 'ru'})
+					// push(asPath, undefined, {locale: 'ru'})
+					push(asPath, undefined, {locale: 'en'})
 				}
 			} else {
 				if(asPath) {
