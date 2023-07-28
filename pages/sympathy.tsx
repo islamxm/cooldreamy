@@ -70,23 +70,23 @@ const SymPage = () => {
             if(token) {
                 if(activeTab === 'views') {
                     service.getActivityViews(token).then(res => {
-                        setList(res)
+                        res?.data && setList(res?.data)
                     }).finally(() => setLoad(false))
                 }
                 if(activeTab )
                 if(activeTab === 'likes') {
                     service.getActivityLikes(token).then(res => {
-                        setList(res)
+                        res?.data && setList(res?.data)
                     }).finally(() => setLoad(false))
                 }
                 if(activeTab === 'matches') {
                     service.getActivityMutualLikes(token).then(res => {
-                        setList(res)
+                        res?.data && setList(res?.data)
                     }).finally(() => setLoad(false))
                 }
                 if(activeTab === 'inlikes') {
                     service.getActivityInLikes(token).then(res => {
-                        setList(res)
+                        res?.data && setList(res?.data)
                     }).finally(() => setLoad(false))
                 }
             }

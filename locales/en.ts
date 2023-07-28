@@ -116,7 +116,16 @@ const en: ILocale = {
           success_delete_chat: "Chat deleted!",
           success_report: 'Complaint sent!',
           error_wink: 'You have already winked at this user',
-          success_add_chat_to_fav: 'Chat has been added to favorites'
+          success_add_chat_to_fav: 'Chat has been added to favorites',
+          success_socket: 'Connected!',
+          error_socket: 'Disconnected!',
+          error_email_verify: 'E-mail not verified',
+          success_email_verify: 'E-mail verified',
+
+          get_gift: 'You received a gift!',
+          get_pic: 'Photo',
+          get_sticker: 'You received a sticker!',
+          get_wink: 'You got a wink!'
       },    
       placeholders: {
           chat_empty: {

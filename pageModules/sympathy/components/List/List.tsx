@@ -9,7 +9,7 @@ const List = ({list}: {list: any[]}) => {
         <div className={styles.wrapper}>
             <Row gutter={[12,12]}>
                 {
-                    list?.map((item,index) => (
+                    list && list?.map((item,index) => (
                         <Col sm={8} md={6} span={12} key={index}>
                             <GirlCard
                                 {...item}

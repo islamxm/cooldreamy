@@ -114,7 +114,16 @@ export interface ILocale {
             success_delete_chat: string,
             success_report: string,
             error_wink: string,
-            success_add_chat_to_fav: string
+            success_add_chat_to_fav: string,
+            success_socket: string,
+            error_socket: string,
+            success_email_verify: string,
+            error_email_verify: string,
+
+            get_gift: string,
+            get_pic: string,
+            get_sticker: string,
+            get_wink: string
         },
         placeholders: {
             chat_empty: {

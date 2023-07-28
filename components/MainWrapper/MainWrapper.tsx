@@ -27,6 +27,7 @@ const MainWrapper = ({
 	const {locale, pathname, push, asPath, query} = useRouter()
 	const dispatch = useAppDispatch()
     const {token, userId, socketChannel, userData, currentProfileId, limit, unreadChatCount, newMessage, newMail, soonModal} = useAppSelector(s => s);
+	const lc = useAppSelector(s => s.locale)
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 	
@@ -35,12 +36,12 @@ const MainWrapper = ({
 		if(token && query && typeof query?.token === 'string') {
 			service.verifyEmail(token, query?.token).then(res => {
 				if(res === 200) {
-					notify('Почта подтверждена!', 'SUCCESS')
+					notify(lc?.global?.notifications?.success_email_verify, 'SUCCESS')
 					service.getMyProfile(token).then(userData => {
 						dispatch(updateUserData(userData))
 					})
 				} else {
-					notify('Почта не подтверждена!', 'ERROR')
+					notify(lc?.global?.notifications?.error_email_verify, 'ERROR')
 				}
 			})
 		}
@@ -79,8 +80,8 @@ const MainWrapper = ({
 				{
 					key: 's3cr3t',
 					// api.cooldreamy.com
-					wsHost: TEST_WS_HOST,
-					authEndpoint: TEST_DOMAIN + 'broadcasting/auth',
+					wsHost: BASE_WS_HOST,
+					authEndpoint: BASE_DOMAIN + 'broadcasting/auth',
 					cluster: 'mt1',
 					encrypted: true,
 					forceTLS: false,
@@ -119,10 +120,10 @@ const MainWrapper = ({
 			const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {
-				notify('Соединение установлено', 'SUCCESS')
+				notify(lc?.global?.notifications?.success_socket, 'SUCCESS')
 			})
 			channels?.error(() => {
-				notify('SOCKET ERROR', 'ERROR')
+				notify(lc?.global?.notifications?.error_socket, 'ERROR')
 			})
 		}
 	}, [pusherConfig, userId, socketChannel])
@@ -166,16 +167,16 @@ const MainWrapper = ({
 						notify(<LinesEllipsis text={data?.chat_message?.chat_messageable?.text} maxLine={2}/>, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageGift:
-						notify(`Вы получили подарок(${data?.chat_message?.chat_messageable?.gifts?.length})`, 'AVATAR', avatar)
+						notify(`${lc?.global?.notifications?.get_gift}(${data?.chat_message?.chat_messageable?.gifts?.length})`, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageImage:
-						notify('Фотография', 'AVATAR', avatar)
+						notify(lc?.global?.notifications?.get_pic, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageSticker:
-						notify('Вы получили стикер', 'AVATAR', avatar)
+						notify(lc?.global?.notifications?.get_sticker, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageWink:
-						notify('Вам подмигнули', 'AVATAR', avatar)
+						notify(lc?.global?.notifications?.get_wink, 'AVATAR', avatar)
 					default:
 						// return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
 						return null

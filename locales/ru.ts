@@ -116,7 +116,16 @@ const ru: ILocale = {
             success_delete_chat: 'Чат удален!',
             success_report: 'Жалоба отправлена!',
             error_wink: 'Вы уже подмигнули данному пользователю',
-            success_add_chat_to_fav: 'Чат добавлен в избранные'
+            success_add_chat_to_fav: 'Чат добавлен в избранные',
+            success_socket: 'Соединение установлено!',
+            error_socket: 'Соединение прервано!',
+            success_email_verify: 'Почта подтверждена!',
+            error_email_verify: 'Почта не подтверждена!',
+
+            get_gift: 'Вы получили подарок',
+            get_pic: 'Фотография',
+            get_sticker: 'Вы получили стикер',
+            get_wink: 'Вам подмигнули'
         },
         placeholders: {
             chat_empty: {
