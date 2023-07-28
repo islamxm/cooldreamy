@@ -4,12 +4,17 @@
     justify-content: center;
 
     .ant-pagination-prev, .ant-pagination-next {
-        width: 23px;
-        height: 23px;
+        width: 40px;
+        height: 40px;
+        
         min-width: unset;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        span {
+            font-size: 25px;
+        }
 
         &:hover {
             background-color: var(--light_purp_1) !important;

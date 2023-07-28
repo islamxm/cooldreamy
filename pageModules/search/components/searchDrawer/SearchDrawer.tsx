@@ -17,7 +17,9 @@ import defCountryList from '@/helpers/defCountryList';
 interface I extends searchFilterType {
     isOpen: boolean,
     onClose: (...args: any[]) => any
-    onOpen: (...args: any[]) => any
+    onOpen: (...args: any[]) => any,
+
+    setCurrentPage?: (...args: any[]) => any
 }
 
 
@@ -53,7 +55,9 @@ const SearchDrawer:FC<I> = ({
     clearStates,
 
     clearFilter,
-    onToggleDrawer
+    onToggleDrawer,
+
+    setCurrentPage
 }) => {
     const {userData, locale} = useAppSelector(s => s)
 
@@ -159,7 +163,10 @@ const SearchDrawer:FC<I> = ({
                                     <Button
                                         text='Найти'
                                         middle
-                                        onClick={() => onSearch && onSearch()}
+                                        onClick={() => {
+                                            // onSearch && onSearch()
+                                            setCurrentPage && setCurrentPage(0)
+                                        }}
                                         load={load}
                                         />
                                 </div>

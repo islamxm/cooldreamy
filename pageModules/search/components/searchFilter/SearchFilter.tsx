@@ -76,7 +76,9 @@ const SearchFilter:FC<searchFilterType> = ({
     clearStates,
 
     clearFilter,
-    onToggleDrawer
+    onToggleDrawer,
+
+    setCurrentPage
 }) => {
 
     const [showAll, setShowAll] = useState<boolean>(false);
@@ -203,7 +205,11 @@ const SearchFilter:FC<searchFilterType> = ({
                             <div className={styles.action_item}>
                                 <Button
                                     load={load}
-                                    onClick={() => onSearch && onSearch()} 
+                                    onClick={() => {
+                                        // onSearch && onSearch()
+                                        // console.log(onSearch)
+                                        setCurrentPage && setCurrentPage(0)
+                                    }} 
                                     style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px'}} 
                                     text={locale?.searchPage.filter.action.search_btn ?? ''}/>
                             </div>

@@ -3,5 +3,5 @@ export type searchInfoType = {
     filter_type?: 'nearby' | 'online' | 'new' | 'all'
     setfilter_type?: (...args: any[]) => any,
 
-    setIsFilterChanged?: (...args: any[]) => any
+    setCurrentPage?: (...args: any[]) => any
 } 

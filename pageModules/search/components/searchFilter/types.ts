@@ -27,5 +27,7 @@ export type searchFilterType = {
     clearFilter: (...args: any[]) => any,
 
 
-    onToggleDrawer: (...args: any[]) => any
+    onToggleDrawer: (...args: any[]) => any,
+
+    setCurrentPage?: (...args: any[]) => any
 }

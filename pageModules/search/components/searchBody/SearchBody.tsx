@@ -30,7 +30,7 @@ const SearchBody = () => {
     const [load, setLoad] = useState(false)
    
     const [searched, setSearched] = useState(false)
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
 
     
     const [targetList, setTargetList] = useState([])
@@ -101,8 +101,10 @@ const SearchBody = () => {
 
 
     const onSearch = () => {
-        if(token) {
-            setCurrentPage(1)
+        
+        if(token && currentPage > 0 && country && age_range_end && age_range_start && filter_type) {
+            console.log('SEARCH [onSearch]')
+            // setCurrentPage(1)
             setLoad(true)
             service.search({
                 page: 1,
@@ -118,46 +120,66 @@ const SearchBody = () => {
             ).then(res => {
                 setTotalFound(res?.total)
                 setList(res?.data)
-                console.log(res?.data)
             }).finally(() => {
                 setLoad(false)
+
+                setIsFilterChanged(true)
             })
         }
     }
 
     useEffect(() => {
-        setCurrentPage(1)
-        if(currentPage === 1 && isFilterChanged) {
-            onSearch()
-        }
-    }, [filter_type, isFilterChanged])
-
-    const updateList = () => {
-        if(token && currentPage && filter_type && country && age_range_end && age_range_start) {
-            setLoad(true)
-            service.search({
-                page: currentPage,
-                filter_type: filter_type === 'all' ? undefined : filter_type, 
-                state: state?.label, 
-                country: country?.label == 'All' ? '' : country?.label,
-                age_range_start, 
-                age_range_end,
-                prompt_targets: `[${prompt_targets?.join(',')}]`, 
-                prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
-                per_page: 25
-            }, token).then(res => {
-                setTotalFound(res?.total)
-                setList(res?.data)
-                console.log(res?.data)
-            }).finally(() => {
-                setLoad(false)
-            })
-        }
-    }
+        onSearch()
+    }, [currentPage])
 
     useEffect(() => {
-        updateList()
-    }, [currentPage, token, filter_type, country, age_range_end, age_range_start])
+        if(currentPage === 0) {
+            setCurrentPage(1)
+        }
+        // if(currentPage === 1) {
+        //     onSearch()
+        // }
+        // setCurrentPage(1)
+    }, [token, country, age_range_end, age_range_start, filter_type, currentPage])
+
+
+    
+
+    // useEffect(() => {
+    //     setCurrentPage(1)
+    //     if(currentPage === 1 && isFilterChanged) {
+    //         onSearch()
+    //         setIsFilterChanged(false)
+    //     }
+    // }, [filter_type, ])
+
+    // const updateList = () => {
+    //     if(token && currentPage && filter_type && country && age_range_end && age_range_start && !isFilterChanged) {
+    //         console.log('SEARCH [updateList]')
+    //         setLoad(true)
+    //         service.search({
+    //             page: currentPage,
+    //             filter_type: filter_type === 'all' ? undefined : filter_type, 
+    //             state: state?.label, 
+    //             country: country?.label == 'All' ? '' : country?.label,
+    //             age_range_start, 
+    //             age_range_end,
+    //             prompt_targets: `[${prompt_targets?.join(',')}]`, 
+    //             prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
+    //             per_page: 25
+    //         }, token).then(res => {
+    //             setTotalFound(res?.total)
+    //             setList(res?.data)
+    //             console.log(res?.data)
+    //         }).finally(() => {
+    //             setLoad(false)
+    //         })
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     updateList()
+    // }, [currentPage, token, filter_type, country, age_range_end, age_range_start])
 
     useEffect(() => {
         getCountries()
@@ -172,6 +194,9 @@ const SearchBody = () => {
         setprompt_targets([])
         setprompt_finance_states([])
     }
+
+
+    
 
 
     return (    
@@ -199,6 +224,7 @@ const SearchBody = () => {
                         setState={setState}
                         clearFilter={clearFilter}
                         onToggleDrawer={() => setIsDrawerOpen(s => !s)}
+                        setCurrentPage={setCurrentPage}
                         />
                 </Col>
                 <Col span={24}>
@@ -206,7 +232,7 @@ const SearchBody = () => {
                         total={totalFound}
                         filter_type={filter_type}
                         setfilter_type={setfilter_type}
-                        setIsFilterChanged={setIsFilterChanged}
+                        setCurrentPage={setCurrentPage}
                         />
                 </Col>
                 <Col span={24}>

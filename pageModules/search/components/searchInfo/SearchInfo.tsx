@@ -12,7 +12,7 @@ const SearchInfo:FC<searchInfoType> = ({
     total,
     filter_type,
     setfilter_type,
-    setIsFilterChanged
+    setCurrentPage
 }) => {
     const {locale} = useAppSelector(s => s)
     const [activeId, setActiveId] = useState<string>('1');
@@ -21,7 +21,7 @@ const SearchInfo:FC<searchInfoType> = ({
         {label: locale?.searchPage.filter.tabs.all, id: '1'},
         {label: locale?.searchPage.filter.tabs.near, id: '2'},
         {label: locale?.searchPage.filter.tabs.new, id: '3'},
-        {label: locale?.searchPage.filter.tabs.online, id: '4'},
+        // {label: locale?.searchPage.filter.tabs.online, id: '4'},
     ]
     
     
@@ -51,6 +51,7 @@ const SearchInfo:FC<searchInfoType> = ({
     return (
         <div className={styles.wrapper}>
             <div className={styles.value}>
+                
             </div>
             <div className={styles.tabs}>
                 {
@@ -58,8 +59,11 @@ const SearchInfo:FC<searchInfoType> = ({
                         <button 
                             key={index} 
                             onClick={() => {
+                                if(setCurrentPage) {
+                                    setCurrentPage(0)
+                                    // setCurrentPage(1)
+                                }  
                                 setActiveId(item.id)
-                                setIsFilterChanged && setIsFilterChanged(true)
                             }}
                             className={`${styles.item} ${activeId === item.id ? styles.active : ''}`}>
                                 {item.label}
