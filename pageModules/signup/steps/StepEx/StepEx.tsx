@@ -10,11 +10,34 @@ import Button from '@/components/Button/Button';
 
 const service = new ApiService()
 
-const languagesList = [
-    {value: 'en', label: 'English'},
-    {value: 'ru', label: 'Russian'},
+// const languagesList = [
+//     {label: 'Ukraine', value:''},
+//     {label: 'USA', value:''},
+//     {label: 'Belgium', value:''},
+//     {label: 'Bulgaria', value:''},
+//     {label: 'France', value:''},
+//     {label: 'Germany', value:''},
+//     {label: 'Ireland', value:''},
+//     {label: 'Italy', value:''},
+//     {label: 'Poland', value:''},
+//     {label: 'Portugal', value:''},
+//     {label: 'Romania', value:''},
+//     {label: 'Spain', value:''},
+//     {label: 'England', value:''},
+//     {label: 'Czech', value:''},
+//     {label: 'Hungary', value:''},
+// ]
 
+const languagesList = [
+    {label: 'English', value: 'en'},
+    {label: 'Spanish', value: 'es'},
+    {label: 'French', value: 'fr'},
+    {label: 'Portuguese', value: 'pt'},
+    {label: 'German', value: 'de'},
+    {label: 'Russian', value: 'ru'},
+    {label: 'Italian', value: 'it'},
 ]
+
 
 interface IStepEx {
     language?: string,
