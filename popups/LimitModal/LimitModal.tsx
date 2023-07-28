@@ -5,9 +5,10 @@ import Image from 'next/image';
 import Router from 'next/router';
 import styles from './LimitModal.module.scss';
 import img from '@/public/assets/images/limit-img.png';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 // import { updateLimit } from '@/store/actions';
 // import { useAppDispatch } from '@/hooks/useTypesRedux';
-
+import ApiService from '@/service/apiService';
 interface I extends ModalFuncProps {
     head?: string,
     text?: string,
@@ -17,14 +18,24 @@ interface I extends ModalFuncProps {
     }
 }
 
+const service = new ApiService()
+
 const LimitModal:FC<I> = (props) => {
-    const {head, text, action, onCancel} = props;
-    
+    const {head, text, action, onCancel, open} = props;
+    const {token} = useAppSelector(s => s)
 
 
     const onClose = () => {
         onCancel && onCancel()
     }
+
+    useEffect(() => {
+        if(token) {
+            service.getPromo(token).then(res => {
+                console.log(res)
+            })
+        }
+    }, [token])
 
 
     return (
