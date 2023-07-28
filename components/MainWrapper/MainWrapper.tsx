@@ -105,6 +105,14 @@ const MainWrapper = ({
 		}
 	}, [token])
 
+	useEffect(() => {
+		if(token) {
+			service.getAllPrompts(token).then(res => {
+				console.log(res)
+			})
+		}
+	}, [token])
+
 
 	useEffect(() => {
 		if(pusherConfig && userId && !socketChannel) {

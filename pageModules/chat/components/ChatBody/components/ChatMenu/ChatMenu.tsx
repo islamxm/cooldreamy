@@ -4,6 +4,7 @@ import {IoImagesOutline, IoCloseCircleOutline} from 'react-icons/io5'
 import {FaRegSmileWink} from 'react-icons/fa'
 import {AiOutlineStar} from 'react-icons/ai';
 import {HiOutlineMinusCircle} from 'react-icons/hi';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 interface I {
     onGetAllMedia?: (...args: any) => any,
@@ -21,7 +22,7 @@ const ChatMenu:FC<I> = ({
     onIgnore,
     onReport
 }) => {
-
+    const {locale} = useAppSelector(s => s)
 
     return (
         <div className={styles.wrapper}>
@@ -35,25 +36,25 @@ const ChatMenu:FC<I> = ({
                 onClick={onWink}
                 className={styles.item}>
                 <div className={styles.icon}><FaRegSmileWink/></div>
-                <div className={styles.label}>Подмигнуть</div>
+                <div className={styles.label}>{locale?.chatPage?.menu?.wink}</div>
             </div>
             <div 
                 onClick={onFav}
                 className={styles.item}>
                 <div className={styles.icon}><AiOutlineStar/></div>
-                <div className={styles.label}>В избранное</div>
+                <div className={styles.label}>{locale?.chatPage?.menu?.fav}</div>
             </div>
             <div 
                 onClick={onIgnore}
                 className={styles.item}>
                 <div className={styles.icon}><HiOutlineMinusCircle/></div>
-                <div className={styles.label}>Игнорировать</div>
+                <div className={styles.label}>{locale?.chatPage?.menu?.ignore}</div>
             </div>
             <div 
                 onClick={onReport}
                 className={styles.item}>
                 <div className={styles.icon}><IoCloseCircleOutline/></div>
-                <div className={styles.label}>Пожаловаться</div>
+                <div className={styles.label}>{locale?.chatPage?.menu?.report}</div>
             </div>
         </div>
     )

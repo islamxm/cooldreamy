@@ -72,7 +72,7 @@ const SearchDrawer:FC<I> = ({
         <div data-layer onClick={onLayerClick} className={`${styles.wrapper} ${isOpen ? styles.active : ''}`}>
             <div className={styles.in}>
                 <div className={styles.head}>
-                    <div className={styles.title}>Фильтр</div>
+                    <div className={styles.title}>{locale?.searchPage?.filter?.title}</div>
                     <div className={styles.close}>
                         <IconButton
                             onClick={onClose}
@@ -87,8 +87,8 @@ const SearchDrawer:FC<I> = ({
                         <Row gutter={[10,10]}>
                             <Col span={12}>
                                 <SelectDef
-                                    label='Страна'
-                                    placeholder='Страна'
+                                    label={locale?.searchPage.filter.list.filter_country.label}
+                                    placeholder={locale?.searchPage.filter.list.filter_country.placeholder ?? ''}
                                     onChange={(e,v) => {
                                         setCountry(v)
                                     }}
@@ -151,7 +151,7 @@ const SearchDrawer:FC<I> = ({
                                     }}
                                     range={true}
                                     value={[age_range_start,age_range_end]}    
-                                    label={'Возраст'}
+                                    label={locale?.searchPage.filter.list.filter_age.label}
                                     />
                             </Col>
                         </Row>
@@ -161,7 +161,7 @@ const SearchDrawer:FC<I> = ({
                             <Col span={24}>
                                 <div className={styles.item}>
                                     <Button
-                                        text='Найти'
+                                        text={locale?.searchPage.filter.action.search_btn ?? ''}
                                         middle
                                         onClick={() => {
                                             // onSearch && onSearch()
@@ -175,7 +175,7 @@ const SearchDrawer:FC<I> = ({
                                 <div className={styles.item}>
                                     <Button
                                         onClick={clearFilter}
-                                        text='Очистить фильтр'
+                                        text={locale?.searchPage.filter.action.clear ?? ''}
                                         middle
                                         variant={'bordered'}
                                         />

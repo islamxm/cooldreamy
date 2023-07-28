@@ -99,7 +99,7 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
                     className={styles.inner}>
                     {
                         token ? (
-                            <button className={`${styles.burger} ${isMenuOpen ? styles.active : ''}`} onClick={() => dispatch(updateMenu())}>
+                            <button className={`${styles.burger} ${isMenuOpen ? styles.active : ''}`} onClick={() => dispatch(updateMenu(!isMenuOpen))}>
                                 <span></span>
                                 <span></span>
                                 <span></span>

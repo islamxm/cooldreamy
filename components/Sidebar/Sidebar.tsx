@@ -12,7 +12,7 @@ import { updateMenu } from '@/store/actions';
 import {motion} from 'framer-motion';
 import Button from '../Button/Button';
 import notify from '@/helpers/notify';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 
 const service = new ApiService()
@@ -22,10 +22,11 @@ const Sidebar:FC = () => {
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
     const [load, setLoad] = useState(false)
+    const router = useRouter()
     
     const onClose = (e: any) => {
         if(width <= 768 && e.target.dataset.close === 'true') {
-            dispatch(updateMenu())
+            dispatch(updateMenu(false))
         }
     }
 
@@ -39,6 +40,10 @@ const Sidebar:FC = () => {
             })
         }
     }
+
+    useEffect(() => {
+        dispatch(updateMenu(false))
+    }, [router])
  
     return (
         <motion.div

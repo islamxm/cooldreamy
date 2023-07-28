@@ -302,14 +302,16 @@ export interface ILocale {
                 show: string,
                 hide: string,
                 search_btn: string,
-                mobile_filter_btn: string
+                mobile_filter_btn: string,
+                clear: string
             },
             tabs: {
                 all: string,
                 near: string,
                 new: string,
                 online: string,
-            }
+            },
+            title: string
         }
     },
     chatPage: {
@@ -354,6 +356,12 @@ export interface ILocale {
                 select_btn: string,
                 remove_btn: string
             }
+        },
+        menu: {
+            wink: string,
+            fav: string,
+            ignore: string,
+            report: string
         }
     },
     sympathyPage: {

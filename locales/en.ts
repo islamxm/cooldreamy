@@ -295,14 +295,16 @@ const en: ILocale = {
               show: "Show All Filters",
               hide: "Hide",
               search_btn: "Search",
-              mobile_filter_btn: "Filter"
+              mobile_filter_btn: "Filter",
+              clear: 'Clear filter'
           },
           tabs: {
               all: "All",
               near: "Nearby",
               new: "New",
               online: "Online"
-          }
+          },
+          title: 'Filter'
       }
   },
   chatPage: {
@@ -347,6 +349,12 @@ const en: ILocale = {
               select_btn: "Add",
               remove_btn: "Added"
           }
+      },
+      menu: {
+        wink: 'Wink',
+        fav: 'Favorite',
+        ignore: 'Ignore',
+        report: 'Report'
       }
   },
   sympathyPage: {

@@ -86,7 +86,7 @@ const reducer = (state = globalState, action: any) => {
         case 'UPDATE_MENU':
             return {
                 ...state,
-                isMenuOpen: !state?.isMenuOpen
+                isMenuOpen: action.value
             }
 
         case 'UPDATE_NEW_MESSAGE':

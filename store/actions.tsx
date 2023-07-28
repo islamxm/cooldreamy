@@ -7,7 +7,7 @@ export const updateToken = (token: string | { [property: string]: string; } | nu
 export const updateSocket = (socket: PusherPrivateChannel | Channel |  null) => ({type: 'UPDATE_SOCKET', socket: socket})
 export const updateUserId = (id: string | { [property: string]: string; } | number | null | undefined) => ({type: 'UPDATE_USER_ID', id: id})
 export const updateUserData = (data: IUser | null) => ({type: 'UPDATE_USER_DATA', data})
-export const updateMenu = () => ({type: 'UPDATE_MENU'})
+export const updateMenu = (value: boolean) => ({type: 'UPDATE_MENU', value})
 export const updateCurrentProfileId = (data:number | null) => ({type: 'UPDATE_CURRENT_PROFILE_ID', data}) 
 export const updateCurrentProfileUiid = (data:string | null) => ({type: 'UPDATE_CURRENT_PROFILE_UIID', data}) 
 

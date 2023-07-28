@@ -303,14 +303,16 @@ const ru: ILocale = {
                 show: 'Все фильтры',
                 hide: 'Скрыть',
                 search_btn: 'Найти',
-                mobile_filter_btn: 'Фильтр'
+                mobile_filter_btn: 'Фильтр',
+                clear: 'Очистить фильтр'
             },
             tabs: {
                 all: 'Все',
                 near: 'Рядом',
                 new: 'Новые',
                 online: 'Онлайн',
-            }
+            },
+            title: 'Фильтр'
         }
     },
     chatPage: {
@@ -355,6 +357,12 @@ const ru: ILocale = {
                 select_btn: 'Добавить',
                 remove_btn: 'Добавлен'
             }
+        },
+        menu: {
+            wink: 'Подмигнуть',
+            fav: 'В избранное',
+            ignore: 'Игнорировать',
+            report: 'Пожаловаться'
         }
     },
     sympathyPage: {
