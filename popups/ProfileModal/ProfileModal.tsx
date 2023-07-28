@@ -74,7 +74,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         if(token) {
             service.feedItemLike({id: Number(id)}, token).then(res => {
                 console.log(res)
-                if(res?.status === 200) {
+                if(res?.message === 'success') {
                     notify('Вы поставили лайк', 'SUCCESS')
                 } else {
                     notify('Вы уже поставили лайк данному пользователю', 'ERROR')
