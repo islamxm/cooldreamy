@@ -15,7 +15,7 @@ import ru from '@/locales/ru';
 import en from '@/locales/en';
 import LimitModal from '@/popups/LimitModal/LimitModal';
 import SoonModal from '@/popups/SoonModal/SoonModal';
-import { TEST_DOMAIN } from '@/service/endpoints';
+import { BASE_DOMAIN, BASE_WS_HOST, TEST_DOMAIN } from '@/service/endpoints';
 
 
 const service = new ApiService()
@@ -79,8 +79,8 @@ const MainWrapper = ({
 				{
 					key: 's3cr3t',
 					// api.cooldreamy.com
-					wsHost: 'newapi.soultri.site',
-					authEndpoint: TEST_DOMAIN + 'broadcasting/auth',
+					wsHost: BASE_WS_HOST,
+					authEndpoint: BASE_DOMAIN + 'broadcasting/auth',
 					cluster: 'mt1',
 					encrypted: true,
 					forceTLS: false,

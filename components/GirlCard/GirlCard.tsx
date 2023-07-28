@@ -36,7 +36,8 @@ const GirlCard:FC<IUser> = ({
     name,
     state,
     winkable,
-    gender
+    gender,
+    online
     
 }) => {
     const {token, locale} = useAppSelector(s => s)
@@ -161,7 +162,7 @@ const GirlCard:FC<IUser> = ({
                     <Col span={24}>
                         <Row gutter={[2,2]}>
                             <Col span={24}>
-                                <div className={`${styles.name} ${styles.online}`}>{name}, {age}</div>
+                                <div className={`${styles.name}`}>{name}, {age} {online === 1 && <span></span>}</div>
                             </Col>
                             {
                                 !(!state && !country) && (

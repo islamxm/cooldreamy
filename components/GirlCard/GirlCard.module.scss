@@ -105,7 +105,19 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            position: relative;
+
+            span {
+                width: 10px;
+                height: 10px;
+                border-radius: 100%;
+                background-color: var(--green);
+                display: inline-block;
+            }
+
         }   
+
+        
 
         .loc {
             font-size: 15px;
