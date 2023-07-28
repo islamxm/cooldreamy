@@ -212,8 +212,16 @@ const en: ILocale = {
         text_part_1: "Unfortunately, the gift to ",
         text_part_2: " was not delivered. Please recharge your balance. Cost of the action:"
       },
+      nocredit_global_chat: 'Your credits are depleted, my friend! To continue chatting, you need to recharge them.',
       profile_modal: {
         open_btn: 'Open profile'
+      },
+      promo: {
+        credits: 'credits',
+        benefit: 'Benefit',
+        buy: 'Buy',
+        title: 'Special offer for you!',
+        open_market: 'Store'
       }
   },
   startPage: {
@@ -445,7 +453,7 @@ const en: ILocale = {
         popular: 'popular',
         spec_offer: 'SPECIAL OFFER'
     },
-    select_btn: 'Purchase tariff for ',
+    select_btn: 'Buy tariff for ',
     form: {
         title: 'Payment',
         subtitle: 'Enter card details',

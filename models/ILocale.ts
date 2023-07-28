@@ -211,9 +211,17 @@ export interface ILocale {
             text_part_1:string,
             text_part_2:string
         },
+        nocredit_global_chat: string,
         profile_modal: {
             open_btn: string
-        }
+        },
+        promo: {
+            credits: string,
+            benefit: string,
+            buy: string,
+            title: string,
+            open_market: string
+        },
 
     },
     startPage: {

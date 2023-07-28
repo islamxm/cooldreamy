@@ -12,6 +12,7 @@ import ApiService from '@/service/apiService';
 import PromoCard from './components/PromoCard/PromoCard';
 
 
+
 interface I extends ModalFuncProps {
     head?: string,
     text?: string,
@@ -25,7 +26,7 @@ const service = new ApiService()
 
 const LimitModal:FC<I> = (props) => {
     const {head, text, action, onCancel, open} = props;
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const [promoData, setPromoData] = useState<any>(null)
 
     const onClose = () => {
@@ -94,7 +95,7 @@ const LimitModal:FC<I> = (props) => {
                             <Col span={24}>
                                 <div className={styles.market}>
                                     <Button
-                                        text='Открыть магазин'
+                                        text={locale?.popups?.promo?.open_market}
                                         middle
                                         onClick={() => {
                                             Router.push('/deposit')

@@ -212,8 +212,16 @@ const ru: ILocale = {
             text_part_1: "К сожалению подарок к ",
             text_part_2: ' не доставлено. Пополните баланс. Стоимость действия:'
         },
+        nocredit_global_chat: 'Your credits are depleted, my friend! To continue chatting, you need to recharge them.',
         profile_modal: {
             open_btn: 'Открыть профиль'
+        },
+        promo: {
+            credits: 'кредитов',
+            benefit: 'Выгода',
+            buy: 'Купить',
+            title: 'Специальное предложение для Вас!',
+            open_market: 'Открыть магазин'
         }
     },
     startPage: {

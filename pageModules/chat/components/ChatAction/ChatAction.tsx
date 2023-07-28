@@ -73,7 +73,8 @@ const ChatAction = ({
                                 open: true,
                                 data: {
                                     head: locale?.popups?.nocredit_sticker_message?.title,
-                                    text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
+                                    // text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
+                                    text: locale?.popups?.nocredit_global_chat
                                 }
                             }))
                         } else {
@@ -130,8 +131,9 @@ const ChatAction = ({
                                 open: true,
                                 data: {
                                     head: locale?.popups?.nocredit_chat_message?.title,
-                                    text: `${locale?.popups?.nocredit_chat_message?.text_part_1}${currentUser?.name} 
-                                    ${locale?.popups?.nocredit_chat_message?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
+                                    // text: `${locale?.popups?.nocredit_chat_message?.text_part_1}${currentUser?.name} 
+                                    // ${locale?.popups?.nocredit_chat_message?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
+                                    text: locale?.popups?.nocredit_global_chat
                                 }
                             }))
                         } else {
@@ -157,8 +159,9 @@ const ChatAction = ({
                                 open: true,
                                 data: {
                                     head: locale?.popups?.nocredit_mail_message?.title,
-                                    text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
-                                    ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                                    // text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
+                                    // ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                                    text: locale?.popups?.nocredit_global_chat
                                 }
                             }))
                         } else {
@@ -198,8 +201,9 @@ const ChatAction = ({
                                     open: true,
                                     data: {
                                         head: locale?.popups?.nocredit_chat_picture?.title,
-                                        text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
-                                        ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
+                                        // text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
+                                        // ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
+                                        text: locale?.popups?.nocredit_global_chat
                                     }
                                 }))
                             } else {
@@ -242,8 +246,9 @@ const ChatAction = ({
                                     open: true,
                                     data: {
                                         head: locale?.popups?.nocredit_mail_message?.title,
-                                        text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
-                                        ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                                        // text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
+                                        // ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                                        text: locale?.popups?.nocredit_global_chat
                                     }
                                 }))
                             } else {

@@ -5,6 +5,7 @@ import img from '@/public/assets/images/promo-img.svg';
 import Image from 'next/image';
 import Button from '@/components/Button/Button';
 import Router from 'next/router';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 
 
@@ -24,24 +25,24 @@ const PromoCard:FC<any> = (props) => {
         updated_at,
         onClose
     } = props || {}
-
+    const {locale} = useAppSelector(s => s)
 
 
     return (
         <div className={styles.wrapper}>
             <Row gutter={[20,20]}>
                 <Col span={24}>
-                    <div className={styles.title}>Специальное предложение для Вас!</div>
+                    <div className={styles.title}>{locale?.popups?.promo?.title}</div>
                 </Col>
                 <Col span={24}>
                     <div className={styles.card}>
                         <div className={styles.main}>
                             <div className={styles.credits}>
-                                {credits}
+                                {credits} {locale?.popups?.promo?.credits}
                             </div>
                             {
                                 benefit && (
-                                    <div className={styles.benefit}>Выгода {benefit}%</div>
+                                    <div className={styles.benefit}>{locale?.popups?.promo?.benefit} {benefit}%</div>
                                 )
                             }
                             <div className={styles.price}>
@@ -50,7 +51,7 @@ const PromoCard:FC<any> = (props) => {
                             </div>
                             <div className={styles.action}>
                                 <Button
-                                    text='Купить'
+                                    text={locale?.popups?.promo?.buy}
                                     middle
                                     onClick={() => {
                                         Router.push('/deposit')
