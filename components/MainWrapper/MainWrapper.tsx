@@ -97,6 +97,7 @@ const MainWrapper = ({
 			)
 			service.getMyProfile(token).then(res => {
 				dispatch(updateUserData(res))
+				// console.log(res)
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))

@@ -9,6 +9,9 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 // import { updateLimit } from '@/store/actions';
 // import { useAppDispatch } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
+import PromoCard from './components/PromoCard/PromoCard';
+
+
 interface I extends ModalFuncProps {
     head?: string,
     text?: string,
@@ -23,19 +26,23 @@ const service = new ApiService()
 const LimitModal:FC<I> = (props) => {
     const {head, text, action, onCancel, open} = props;
     const {token} = useAppSelector(s => s)
-
+    const [promoData, setPromoData] = useState<any>(null)
 
     const onClose = () => {
+        setPromoData(null)
         onCancel && onCancel()
     }
 
     useEffect(() => {
-        if(token) {
+        if(token && open) {
             service.getPromo(token).then(res => {
                 console.log(res)
+                setPromoData(res)
             })
+        } else {
+            setPromoData(null)
         }
-    }, [token])
+    }, [token, open])
 
 
     return (
@@ -78,6 +85,28 @@ const LimitModal:FC<I> = (props) => {
                         </Col>
                     ) : null
                 }
+                {
+                    promoData && (
+                        <>
+                            <Col span={24}>
+                                <PromoCard {...promoData} onClose={onClose}/>
+                            </Col>
+                            <Col span={24}>
+                                <div className={styles.market}>
+                                    <Button
+                                        text='Открыть магазин'
+                                        middle
+                                        onClick={() => {
+                                            Router.push('/deposit')
+                                            onClose()
+                                        }}
+                                        />
+                                </div>
+                            </Col>
+                        </>
+                    )
+                }
+                
             </Row>
         </Modal>
     )
