@@ -279,7 +279,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                     pathname: `/users/[id]`,
                                                     query: {id: id, currentProfileUuid: currentProfileUuid}
                                                 })
-                                            }} middle text='Открыть профиль'/>
+                                            }} middle text={locale?.popups?.profile_modal?.open_btn}/>
                                         </div>
                                     </Col>
                                 </Row>

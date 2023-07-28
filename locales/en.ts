@@ -211,6 +211,9 @@ const en: ILocale = {
         title: "You don't have enough credits...",
         text_part_1: "Unfortunately, the gift to ",
         text_part_2: " was not delivered. Please recharge your balance. Cost of the action:"
+      },
+      profile_modal: {
+        open_btn: 'Open profile'
       }
   },
   startPage: {
@@ -366,6 +369,9 @@ const en: ILocale = {
       images: {
           add_btn: "Add Photo",
           verify_btn: "Verify Photo"
+      },
+      action: {
+        message_btn: 'Message'
       }
   },
   signupPage: {

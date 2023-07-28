@@ -76,6 +76,7 @@ const UserPage:FC = () => {
                                 {...data}
                                 >
                                 <UserMobAction
+                                    createChat={createChat}
                                     id={data?.id}
                                     />        
                             </UserCardMob>

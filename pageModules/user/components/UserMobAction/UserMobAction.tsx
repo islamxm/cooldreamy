@@ -4,11 +4,14 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
 import Button from '@/components/Button/Button';
 import { useWindowSize } from 'usehooks-ts';
+
+
 const service = new ApiService()
 
 
 
-const UserMobAction = ({id}: {id?: number}) => {
+const UserMobAction = ({id, createChat}: {id?: number, createChat?: (...args: any[]) => any}) => {
+    const {locale} = useAppSelector(s => s)
     const {width} = useWindowSize()
 
 
@@ -21,7 +24,7 @@ const UserMobAction = ({id}: {id?: number}) => {
                 <div className={styles.item}></div>
             </div>
             <div className={styles.ex}>
-                <Button small={width <= 500} middle={width > 500} text='Сообщение'/>
+                <Button onClick={createChat} small={width <= 500} middle={width > 500} text={locale?.profilePage?.action?.message_btn}/>
             </div>
         </div>
     )

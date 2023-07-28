@@ -211,6 +211,9 @@ const ru: ILocale = {
             title: 'Вам не хватает кредитов...',
             text_part_1: "К сожалению подарок к ",
             text_part_2: ' не доставлено. Пополните баланс. Стоимость действия:'
+        },
+        profile_modal: {
+            open_btn: 'Открыть профиль'
         }
     },
     startPage: {
@@ -374,6 +377,9 @@ const ru: ILocale = {
         images: {
             add_btn: 'Добавить фото',
             verify_btn: 'Подтвердить фото'
+        },
+        action: {
+            message_btn: 'Сообщение'
         }
     },
     signupPage: {

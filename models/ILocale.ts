@@ -210,6 +210,9 @@ export interface ILocale {
             title: string,
             text_part_1:string,
             text_part_2:string
+        },
+        profile_modal: {
+            open_btn: string
         }
 
     },
@@ -373,6 +376,9 @@ export interface ILocale {
         images: {
             add_btn: string,
             verify_btn: string
+        },
+        action: {
+            message_btn: string
         }
     },
     signupPage: {
