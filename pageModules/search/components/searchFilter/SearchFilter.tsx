@@ -129,6 +129,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                         setCountry('')
                                         setState('')
                                     }}
+                                    value={country?.value}
                                     // list={countries}
                                     list={defCountryList}
                                     />

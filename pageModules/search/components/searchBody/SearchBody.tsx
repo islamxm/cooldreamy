@@ -41,7 +41,7 @@ const SearchBody = () => {
     const [kidsList, setKidsList] = useState([])
 
     const [state, setState] = useState<{value: string, id: string, label: string} | null>(null)
-    const [country, setCountry] = useState<{value: string, id: string, label: string} | null>(null)
+    const [country, setCountry] = useState<{value: string, id: string, label: string} | null>({value: 'All', id: 'All', label: 'All'})
     const [age_range_start, setage_range_start] = useState(18)
     const [age_range_end, setage_range_end] = useState(70)
 
@@ -58,6 +58,8 @@ const SearchBody = () => {
     const [statesList, setStatesList] = useState<selectOptionType[]>([])
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+    const [isFilterChanged, setIsFilterChanged] = useState(false)
 
     useEffect(() => {
         if(token) {
@@ -88,7 +90,7 @@ const SearchBody = () => {
     }
 
     useEffect(() => {
-        if(country?.id && token) {
+        if(country?.id && country?.id !== 'All' && token) {
             getStates && getStates(Number(country?.id))
         }
     }, [token, country])    
@@ -125,13 +127,13 @@ const SearchBody = () => {
 
     useEffect(() => {
         setCurrentPage(1)
-        if(currentPage === 1) {
+        if(currentPage === 1 && isFilterChanged) {
             onSearch()
         }
-    }, [filter_type])
+    }, [filter_type, isFilterChanged])
 
     const updateList = () => {
-        if(token) {
+        if(token && currentPage && filter_type && country && age_range_end && age_range_start) {
             setLoad(true)
             service.search({
                 page: currentPage,
@@ -155,7 +157,7 @@ const SearchBody = () => {
 
     useEffect(() => {
         updateList()
-    }, [currentPage, token])
+    }, [currentPage, token, filter_type, country, age_range_end, age_range_start])
 
     useEffect(() => {
         getCountries()
@@ -204,6 +206,7 @@ const SearchBody = () => {
                         total={totalFound}
                         filter_type={filter_type}
                         setfilter_type={setfilter_type}
+                        setIsFilterChanged={setIsFilterChanged}
                         />
                 </Col>
                 <Col span={24}>

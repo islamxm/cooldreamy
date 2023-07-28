@@ -31,6 +31,7 @@
         align-items: center;
         justify-content: center;
         flex: 0 0 auto;
+        display: none;
         a {
             padding: 0;
         }
@@ -38,6 +39,13 @@
         &:hover {
             background-color: var(--light_purp_1) !important;
         }
+    }
+
+    .ant-pagination-jump-next {
+        display: none;
+    }
+    .ant-pagination-options {
+        display: none;
     }
 
     .ant-pagination-item.ant-pagination-item-active {

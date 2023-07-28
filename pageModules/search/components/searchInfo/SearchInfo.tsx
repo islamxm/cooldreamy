@@ -11,7 +11,8 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 const SearchInfo:FC<searchInfoType> = ({
     total,
     filter_type,
-    setfilter_type
+    setfilter_type,
+    setIsFilterChanged
 }) => {
     const {locale} = useAppSelector(s => s)
     const [activeId, setActiveId] = useState<string>('1');
@@ -56,7 +57,10 @@ const SearchInfo:FC<searchInfoType> = ({
                     tabs?.map((item, index) => (
                         <button 
                             key={index} 
-                            onClick={() => setActiveId(item.id)}
+                            onClick={() => {
+                                setActiveId(item.id)
+                                setIsFilterChanged && setIsFilterChanged(true)
+                            }}
                             className={`${styles.item} ${activeId === item.id ? styles.active : ''}`}>
                                 {item.label}
                             </button>
