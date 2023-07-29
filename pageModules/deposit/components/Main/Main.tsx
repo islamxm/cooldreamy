@@ -141,8 +141,7 @@ const Main = () => {
                                                         setSelectedPlan(i)
                                                     }}
                                                     className={`${styles.item}`} key={index}>
-                                                    <div className={styles.adds}>
-                                                    {
+                                                        {
                                                         i?.discount !== 0 && (
                                                             <div className={styles.discount}>
                                                                 -{i?.discount}%
@@ -150,6 +149,8 @@ const Main = () => {
                                                             </div>
                                                         )
                                                     }
+                                                    <div className={styles.adds}>
+                                                    
                                                     </div>
                                                     <div className={styles.credits}>
                                                         <div className={styles.value}>{i?.credits}</div>
@@ -189,7 +190,6 @@ const Main = () => {
                                                         setSelectedPlan(i)
                                                     }}
                                                     className={`${styles.item} ${styles.pop}`}>
-                                                    <div className={styles.adds}>
                                                         {
                                                             i?.discount !== 0 && (
                                                                 <div className={styles.discount}>
@@ -198,6 +198,8 @@ const Main = () => {
                                                                 </div>
                                                             )
                                                         }
+                                                    <div className={styles.adds}>
+                                                        
                                                         <div className={styles.badge}>
                                                         {locale?.depositPage?.card?.popular}
                                                         </div>
@@ -234,8 +236,6 @@ const Main = () => {
                                                         setSelectedPlan(i)
                                                     }}
                                                     className={`${styles.item} ${styles.dsc}`} key={index}>
-                                                    
-                                                    <div className={styles.adds}>
                                                     {
                                                         i?.discount !== 0 && (
                                                             <div className={styles.discount}>
@@ -244,6 +244,8 @@ const Main = () => {
                                                             </div>
                                                         )
                                                     }
+                                                    <div className={styles.adds}>
+                                                    
                                                     <div className={styles.badge}>
                                                         {locale?.depositPage?.card?.spec_offer}
                                                     </div>

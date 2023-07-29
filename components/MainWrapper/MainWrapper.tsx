@@ -16,6 +16,7 @@ import en from '@/locales/en';
 import LimitModal from '@/popups/LimitModal/LimitModal';
 import SoonModal from '@/popups/SoonModal/SoonModal';
 import { BASE_DOMAIN, BASE_WS_HOST, TEST_DOMAIN, TEST_WS_HOST } from '@/service/endpoints';
+import Button from '../Button/Button';
 
 
 const service = new ApiService()
@@ -98,6 +99,7 @@ const MainWrapper = ({
 			)
 			service.getMyProfile(token).then(res => {
 				dispatch(updateUserData(res))
+				console.log(res)
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))
@@ -199,7 +201,13 @@ const MainWrapper = ({
 
 
 	
-
+	const test = () => {
+		if(token) {
+			service.createChat({user_id: 50324}, token).then(res => {
+				console.log(res)
+			})
+		}
+	}
 
 
     return (
@@ -222,6 +230,10 @@ const MainWrapper = ({
 				open={soonModal}
 				onCancel={() => dispatch(updateSoonModal(false))}
 				/>
+			{/* <div style={{marginTop: 100}}><Button
+				text='adsadasdas'
+				onClick={test}
+				/></div> */}
             {children}
         </>
     )
