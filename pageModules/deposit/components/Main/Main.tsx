@@ -106,6 +106,9 @@ const Main = () => {
                             <div className={`${styles.item_wr} ${selectedPlan?.id == promo?.id ? styles?.active : ''}`}>
                                 <div onClick={() => setSelectedPlan(promo)} className={styles.item}>
                                     <div className={styles.badge}>{locale?.depositPage?.card?.spec_offer}!</div>
+                                    <div className={styles.discount}>
+                                        {promo?.discount}%
+                                    </div>
                                     <div className={styles.credits}>
                                         <div className={styles.value}>{promo?.credits}</div>
                                         <div className={styles.label}>{locale?.depositPage?.card?.credits}</div>
