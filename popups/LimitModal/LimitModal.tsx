@@ -90,7 +90,7 @@ const LimitModal:FC<I> = (props) => {
                         </Col>
                     ) : null
                 }
-                {/* {
+                {
                     promoData && (
                         <>
                             <Col span={24}>
@@ -110,7 +110,7 @@ const LimitModal:FC<I> = (props) => {
                             </Col>
                         </>
                     )
-                } */}
+                }
                 
             </Row>
         </Modal>

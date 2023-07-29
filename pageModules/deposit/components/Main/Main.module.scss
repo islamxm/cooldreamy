@@ -21,6 +21,86 @@
                 font-weight: 700;
             }
         }
+        .list.one {
+            margin-bottom: 30px;
+            
+            .item_wr {
+                max-width: 500px;
+                width: 100%;
+                margin: 0 auto;
+                .item {
+                    
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-image: url('../../../../public/assets/images/promo-bg.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                min-height: 140px;
+                // position: relative;
+
+                .badge {
+                    width: 230px;
+                    padding: 4px 12px;
+                    background: #DA8DF9;
+                    border-radius: 12px;
+                    position: absolute;
+                    top: -15px;
+                    left: calc(50% - (230px / 2));
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #fff;
+                    text-transform: uppercase;
+                }
+
+                .credits {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .value {
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 40px;
+                        text-align: center;
+                    }
+                    .label {
+                        text-align: center;
+                        color: #BAAEF5;
+                        font-size: 15px;
+                        font-weight: 500;
+                    }
+                }
+
+                .ex {
+                    color: #fff;
+                    font-size: 15px;
+                    margin: 0 10px;
+                }   
+
+                .price {
+                    display: flex;
+                    align-items: center;
+
+                    .old {
+                        text-decoration: line-through;
+                        color: #BAAEF5;
+                        font-size: 15px;
+
+                    }
+
+                    .actual {
+                        color: #fff;
+                        font-size: 24px;
+                        font-weight: 700;
+
+                    }
+                }
+                }
+            }
+        }
 
         .list {
             display: flex;

@@ -43,9 +43,11 @@ const Main = () => {
     const getPromo = () => {
         if(token) {
             service.getPromo(token).then(res => {
+                console.log(res)
                 if(res?.data?.length > 0) {
-                    console.log(res?.data[0]?.promotion)
                     setPromo(res?.data[0]?.promotion)
+                } else {
+                    getPlans()
                 }
             })
         }
@@ -68,15 +70,13 @@ const Main = () => {
     
 
     useEffect(() => {
-        // if(userData && userData?.is_donate === 1) {
-        //     getPlans()
-        // } 
-        // if(userData && userData?.is_donate === 0) {
-        //     getPromo()
-        // }
-        getPlans()
-        
-        
+        console.log(userData)
+        if(userData && userData?.is_donate === 1) {
+            getPlans()
+        } 
+        if(userData && userData?.is_donate === 0) {
+            getPromo()
+        }
     }, [token, userData])
 
 
@@ -84,7 +84,7 @@ const Main = () => {
         if(token) {
             setLoad(true)
             service.pay(token, {
-                list_type: 'credit',
+                list_type: promo ? 'promotion' : 'credit',
                 list_id: plan?.id
             }).then(res => {
                 const clientSecret = res?.clientSecret;
@@ -102,7 +102,19 @@ const Main = () => {
                 {
                     promo && (
                         <div className={`${styles.list} ${styles.one}`}>
-
+                            <div className={`${styles.item_wr} ${selectedPlan?.id == promo?.id ? styles?.active : ''}`}>
+                                <div onClick={() => setSelectedPlan(promo)} className={styles.item}>
+                                    <div className={styles.badge}>{locale?.depositPage?.card?.spec_offer}!</div>
+                                    <div className={styles.credits}>
+                                        <div className={styles.value}>{promo?.credits}</div>
+                                        <div className={styles.label}>{locale?.depositPage?.card?.credits}</div>
+                                    </div>
+                                    <div className={styles.ex}>for</div>
+                                    <div className={styles.price}>
+                                        <div className={styles.actual}>${promo?.price}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     )
                 }
