@@ -68,12 +68,13 @@ const Main = () => {
     
 
     useEffect(() => {
-        if(userData && userData?.is_donate === 1) {
-            getPlans()
-        } 
-        if(userData && userData?.is_donate === 0) {
-            getPromo()
-        }
+        // if(userData && userData?.is_donate === 1) {
+        //     getPlans()
+        // } 
+        // if(userData && userData?.is_donate === 0) {
+        //     getPromo()
+        // }
+        getPlans()
         
         
     }, [token, userData])
