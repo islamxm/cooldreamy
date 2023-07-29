@@ -34,7 +34,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                             {locale?.profilePage.info.about}
                         </div>
                         <div className={styles.text} style={{color: about_self ? 'var(--text)' : 'var(--red)'}}>
-                        {about_self ? about_self : 'Not set'}
+                        {about_self ? about_self : 'Unspecified'}
                         </div>
                     </div>
                 </Col>
