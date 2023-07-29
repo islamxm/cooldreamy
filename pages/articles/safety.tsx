@@ -25,7 +25,6 @@ const SafetyPage = () => {
             <MainLayout>
                 {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
-                    <h1 className={styles.title}>Советы по безопасности</h1>
                     <div className={styles.body} ref={spanRef}>
                     </div>
                 </div>
