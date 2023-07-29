@@ -7,30 +7,34 @@ import Button from '@/components/Button/Button';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import notify from '@/helpers/notify';
 
-const switchRedirect = (planId: number | string) => {
-    if(planId == '1') {
+const switchRedirect = (planId: number | string, type: string) => {
+    if(planId == '1' && type === 'promotion') {
+        return `${window.location.origin}/pay_success_promo1?user_promotion_id=${planId}`
+    }
+    if(planId == '1' && type === 'credit') {
         return `${window.location.origin}/pay_success_credit1`
     }
-    if(planId == '2') {
+    if(planId == '2' && type === 'credit') {
         return `${window.location.origin}/pay_success_credit2`
     }
-    if(planId == '3') { 
+    if(planId == '3' && type === 'credit') { 
         return `${window.location.origin}/pay_success_credit3`
     }
-    if(planId == '4') {
+    if(planId == '4' && type === 'credit') {
         return `${window.location.origin}/pay_success_credit4`
     }
-    if(planId == '5') {
+    if(planId == '5' && type === 'credit') {
         return `${window.location.origin}/pay_success_credit5`
     }
 }
 
-const PayForm = ({plan}: {plan?: any}) => {
+const PayForm = ({plan, type}: {plan?: any, type: string}) => {
     const [payLoad, setPayLoad] = useState<boolean>(false)
     const [message, setMessage] = useState<any>(null)
     const {locale} = useAppSelector(s => s)
     const stripe = useStripe()
     const elements = useElements()
+    
 
 
     const onPay = async (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -44,7 +48,7 @@ const PayForm = ({plan}: {plan?: any}) => {
         const {error} = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: switchRedirect(plan?.id),
+                return_url: switchRedirect(plan?.id, type),
                 
             },
             redirect: "if_required" 

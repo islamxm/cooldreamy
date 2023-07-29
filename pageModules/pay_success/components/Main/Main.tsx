@@ -16,7 +16,7 @@ const Main = () => {
                     />
             </div>
             <div className={styles.body}>
-                <div className={styles.title}>Оплата прошла успешно!</div>
+                <div className={styles.title}>Payment successful!</div>
                 {/* <div className={styles.subtitle}>Вам начислено 166 кредитов.</div> */}
                 <div className={styles.action}>
                     <Button

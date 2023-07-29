@@ -127,7 +127,9 @@ const endpoints = {
     getArticle: `${API_PATH}pages`,
 
 
-    getPromo: `${API_PATH}payments/promotions/list`
+    getPromo: `${API_PATH}payments/promotions/list`,
+
+    activatePay: `${API_PATH}payments/promotions/activate`
 
 
 }

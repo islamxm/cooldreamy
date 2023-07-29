@@ -25,6 +25,7 @@ const Main = () => {
     const [selectedPlan, setSelectedPlan] = useState<any>(null)
     const [promo, setPromo] = useState<any>(null)
     const [load, setLoad] = useState(false)
+    const [type, setType] = useState<string>('')
 
     const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
 
@@ -37,6 +38,7 @@ const Main = () => {
             service.getPayPlans(token).then(res => {
                 setList(res)
                 console.log(res)
+                setType('credit')
             })
         }
     }
@@ -47,8 +49,10 @@ const Main = () => {
                 console.log(res)
                 if(res?.data?.length > 0) {
                     setPromo(res?.data[0]?.promotion)
+                    setType('credit')
                 } else {
                     getPlans()
+                    setType('promotion')
                 }
             })
         }
@@ -85,7 +89,7 @@ const Main = () => {
         if(token) {
             setLoad(true)
             service.pay(token, {
-                list_type: promo ? 'promotion' : 'credit',
+                list_type: type,
                 list_id: plan?.id
             }).then(res => {
                 const clientSecret = res?.clientSecret;
@@ -336,7 +340,7 @@ const Main = () => {
                                     stripe={stripePromise}
                                     options={{clientSecret: secretKey}}
                                     >
-                                    <PayForm plan={selectedPlan}/>
+                                    <PayForm type={type} plan={selectedPlan}/>
                                 </Elements>
                             ) 
                         )
