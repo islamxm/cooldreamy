@@ -123,7 +123,8 @@ export interface ILocale {
             get_gift: string,
             get_pic: string,
             get_sticker: string,
-            get_wink: string
+            get_wink: string,
+
         },
         placeholders: {
             chat_empty: {

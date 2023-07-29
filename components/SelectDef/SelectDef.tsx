@@ -72,7 +72,7 @@ const SelectDef:FC<selectDefType & test> = ({
                         disabled={disabled}
                         className={isRound ? 'round' : ''}
 
-                        open={open}
+                        virtual={false}
                         
                         />
                 )

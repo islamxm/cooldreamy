@@ -237,7 +237,7 @@ const Body:FC = () => {
                     console.log(res)
                     console.log(updateBody)
                     if(res?.id) {
-                        notify('Настройки сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         // 
                         service.getMyProfile(token).then(profile => {
