@@ -36,6 +36,7 @@ const Main = () => {
         if(token) {
             service.getPayPlans(token).then(res => {
                 setList(res)
+                console.log(res)
             })
         }
     }
@@ -145,7 +146,7 @@ const Main = () => {
                                                         i?.discount !== 0 && (
                                                             <div className={styles.discount}>
                                                                 -{i?.discount}%
-                                                                <span>{locale?.depositPage?.card?.discount}</span>
+                                                                {/* <span>{locale?.depositPage?.card?.discount}</span> */}
                                                             </div>
                                                         )
                                                     }
@@ -193,7 +194,7 @@ const Main = () => {
                                                             i?.discount !== 0 && (
                                                                 <div className={styles.discount}>
                                                                     -{i?.discount}%
-                                                                    <span>{locale?.depositPage?.card?.discount}</span>
+                                                                    {/* <span>{locale?.depositPage?.card?.discount}</span> */}
                                                                 </div>
                                                             )
                                                         }
@@ -239,7 +240,7 @@ const Main = () => {
                                                         i?.discount !== 0 && (
                                                             <div className={styles.discount}>
                                                                 -{i?.discount}%
-                                                                <span>{locale?.depositPage?.card?.discount}</span>
+                                                                {/* <span>{locale?.depositPage?.card?.discount}</span> */}
                                                             </div>
                                                         )
                                                     }

@@ -80,8 +80,8 @@ const MainWrapper = ({
 				{
 					key: 's3cr3t',
 					// api.cooldreamy.com
-					wsHost: BASE_WS_HOST,
-					authEndpoint: BASE_DOMAIN + 'broadcasting/auth',
+					wsHost: TEST_WS_HOST,
+					authEndpoint: TEST_DOMAIN + 'broadcasting/auth',
 					cluster: 'mt1',
 					encrypted: true,
 					forceTLS: false,

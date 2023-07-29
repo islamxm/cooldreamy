@@ -5,7 +5,11 @@ import {FC, useRef, useEffect} from 'react';
 import { selectDefType } from './types';
 
 
-const SelectDef:FC<selectDefType> = ({
+interface test {
+    open?: boolean
+}
+
+const SelectDef:FC<selectDefType & test> = ({
     placeholder,
     list,
     value,
@@ -16,7 +20,9 @@ const SelectDef:FC<selectDefType> = ({
     multiple,
     disabled,
     clearIcon,
-    isRound
+    isRound,
+
+    open
 }) => {
 
     const ref = useRef<any>()
@@ -46,6 +52,10 @@ const SelectDef:FC<selectDefType> = ({
                         value={value}
                         disabled={disabled}
                         className={isRound ? 'round' : ''}
+                        
+                        virtual={false}
+                        
+                        
                         />
                 ) : (
                     <Select
@@ -61,6 +71,9 @@ const SelectDef:FC<selectDefType> = ({
                         value={value}
                         disabled={disabled}
                         className={isRound ? 'round' : ''}
+
+                        open={open}
+                        
                         />
                 )
             }

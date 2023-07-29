@@ -66,6 +66,7 @@ const StepEx:FC<IStepEx> = ({
 
     useEffect(() => {
         service.getCountries().then(res => {
+            console.log(res)
             setCountryList(res?.map((i: any) => ({value: i?.id, label: i?.title})))
         })
     }, [])
@@ -105,16 +106,23 @@ const StepEx:FC<IStepEx> = ({
                             isRound
                             />    
                     </Col>    
-                    <Col span={24}>
-                        <SelectDef
-                            onClear={() => setCountry && setCountry(null)}
-                            isRound
-                            value={country?.id}
-                            list={countryList}
-                            placeholder='Country'
-                            onChange={(e, v) => setCountry && setCountry(v)}
-                            />    
-                    </Col>    
+                    {
+                        (countryList && countryList?.length) > 0 && (
+                            <Col span={24}>
+                                <SelectDef
+                                    onClear={() => setCountry && setCountry(null)}
+                                    isRound
+                                    value={country?.id}
+                                    list={countryList}
+                                    
+                                    placeholder='Country'
+                                    onChange={(e, v) => setCountry && setCountry(v)}
+
+                                    open
+                                    />    
+                            </Col>    
+                        )
+                    }
                     {
                         regionList?.length > 0 && (
                             <Col span={24}>
