@@ -15,7 +15,7 @@ import { PulseLoader } from 'react-spinners';
 
 const service = new ApiService()
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
-
+const PUBLIC_KEY_TEST = 'pk_test_51MzlPfFjkPZRdnX1dn6HeooarP7ShRYGfBoSNMCAfPRZPl4tCPcAljK4pn3p7W2VRm6t7VG2lB0oP6HyY7WRYDOp00ZOqNBbUJ'
 
 const Main = () => {
     const {width} = useWindowSize()
@@ -27,7 +27,7 @@ const Main = () => {
     const [load, setLoad] = useState(false)
     const [type, setType] = useState<string>('')
 
-    const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
+    const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY_TEST))
 
     
     const [secretKey, setSecretKey] = useState<string>('')
