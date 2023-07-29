@@ -470,7 +470,7 @@ const en: ILocale = {
         popular: 'popular',
         spec_offer: 'SPECIAL OFFER'
     },
-    select_btn: 'Buy tariff for ',
+    select_btn: 'Buy ',
     form: {
         title: 'Payment',
         subtitle: 'Enter card details',
