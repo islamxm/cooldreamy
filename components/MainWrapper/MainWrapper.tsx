@@ -236,7 +236,7 @@ const MainWrapper = ({
 				onClick={test}
 				/></div> */}
             {children}
-			<Navbar/>
+			{/* <Navbar/> */}
         </>
     )
 }

@@ -11,6 +11,7 @@ import { sympGroupTypes } from "@/pageModules/sympathy/components/List/types";
 import ApiService from "@/service/apiService";
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import Loader from "@/components/Loader/Loader";
+import Navbar from "@/components/Navbar/Navbar";
 
 const service = new ApiService()
 
@@ -113,6 +114,7 @@ const SymPage = () => {
     return (
         <Container>
             <MainLayout>
+                <Navbar/>
                 <Sidebar/>
                 <div style={{width: '100%'}}>
                     <Row gutter={[15,15]}>

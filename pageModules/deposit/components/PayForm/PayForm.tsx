@@ -45,6 +45,7 @@ const PayForm = ({plan}: {plan?: any}) => {
             elements,
             confirmParams: {
                 return_url: switchRedirect(plan?.id),
+                
             },
             redirect: "if_required" 
         })

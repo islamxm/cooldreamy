@@ -8,6 +8,7 @@ import LimitModal from "@/popups/LimitModal/LimitModal";
 import Router from "next/router";
 import VerifyEmailModal from "@/popups/VerifyEmailModal/VerifyEmailModal";
 import { useEffect, useState } from "react";
+import Navbar from "@/components/Navbar/Navbar";
 const SearchPage = () => {
     const {userData} = useAppSelector(s => s)
 
@@ -30,6 +31,7 @@ const SearchPage = () => {
                 /> */}
             <MainLayout>
                 <Sidebar/>
+                <Navbar/>
                 <div style={{width: '100%'}}>
                     <Col span={24}>
                         <Row gutter={[15, 15]}>
