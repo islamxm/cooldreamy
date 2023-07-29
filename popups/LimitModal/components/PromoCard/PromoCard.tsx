@@ -49,7 +49,7 @@ const PromoCard:FC<any> = (props) => {
                             <div className={styles.price}>
                                 <span className={styles.actual}>${price}</span>
                                 {
-                                    old_price > 0 && (
+                                    Number(old_price) > 0 && (
                                         <span className={styles.old}>${old_price}</span>
                                     )
                                 }
