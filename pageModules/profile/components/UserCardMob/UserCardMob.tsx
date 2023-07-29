@@ -8,7 +8,7 @@ import {Row, Col} from 'antd';
 import UserLocation from '@/components/UserLocation/UserLocation';
 import Button from '@/components/Button/Button';
 import {motion} from 'framer-motion';
-
+import { useAppSelector } from '@/hooks/useTypesRedux';
 interface I extends IUser {
     children?: React.ReactNode
 }
@@ -27,7 +27,7 @@ const UserCardMob:FC<I> = ({
     children
 
 }) => {
-
+    const {locale} = useAppSelector(s => s)
     return (
         <div className={styles.wrapper}>
             <div className={styles.main}>
@@ -63,7 +63,7 @@ const UserCardMob:FC<I> = ({
                                 <Col span={24}>
                                     <div className={styles.action}>
                                         <Button
-                                            text='Подтвердить фото'
+                                            text={locale?.profilePage?.images?.verify_btn}
                                             variant={'simple'}
                                             small
                                             />
@@ -82,7 +82,7 @@ const UserCardMob:FC<I> = ({
                                 whileTap={{scale: 0.9}} 
                                 transition={{type: 'spring', damping: 17, stiffness: 400}}
                                 className={styles.btn}>
-                                Баланс: {credits} кредитов
+                                {locale?.global?.my_card?.balance?.title}: {credits} {locale?.global?.my_card?.balance?.label}
                             </motion.button>
                         </div>
                         {
@@ -92,7 +92,7 @@ const UserCardMob:FC<I> = ({
                                         whileTap={{scale: 0.9}} 
                                         transition={{type: 'spring', damping: 17, stiffness: 400}}
                                         className={styles.btn}>
-                                        Премиум статус
+                                        Premium
                                     </motion.button>
                                 </div>
                             ) : null
