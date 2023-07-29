@@ -27,7 +27,7 @@ const Main = () => {
     const [load, setLoad] = useState(false)
     const [type, setType] = useState<string>('')
 
-    const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY_TEST))
+    const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
 
     
     const [secretKey, setSecretKey] = useState<string>('')
