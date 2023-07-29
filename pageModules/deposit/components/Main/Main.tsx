@@ -49,10 +49,10 @@ const Main = () => {
                 console.log(res)
                 if(res?.data?.length > 0) {
                     setPromo(res?.data[0]?.promotion)
-                    setType('credit')
+                    setType('promotion')
                 } else {
                     getPlans()
-                    setType('promotion')
+                    setType('credit')
                 }
             })
         }
