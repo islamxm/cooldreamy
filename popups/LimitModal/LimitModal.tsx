@@ -28,6 +28,7 @@ const LimitModal:FC<I> = (props) => {
     const {head, text, action, onCancel, open} = props;
     const {token, locale} = useAppSelector(s => s)
     const [promoData, setPromoData] = useState<any>(null)
+    const [timerStart, setTimerStart] = useState<any>(null)
 
     const onClose = () => {
         setPromoData(null)
@@ -37,8 +38,11 @@ const LimitModal:FC<I> = (props) => {
     useEffect(() => {
         if(token && open) {
             service.getPromo(token).then(res => {
-                console.log(res)
-                setPromoData(res)
+                
+                if(res?.data?.length > 0) {
+                    setPromoData(res?.data[0]?.promotion)
+                    setTimerStart(res?.data[0])
+                } else setPromoData(null)
             })
         } else {
             setPromoData(null)

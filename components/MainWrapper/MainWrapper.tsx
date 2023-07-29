@@ -98,7 +98,6 @@ const MainWrapper = ({
 			)
 			service.getMyProfile(token).then(res => {
 				dispatch(updateUserData(res))
-				// console.log(res)
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))
@@ -106,13 +105,6 @@ const MainWrapper = ({
 		}
 	}, [token])
 
-	useEffect(() => {
-		if(token) {
-			service.getAllPrompts(token).then(res => {
-				console.log(res)
-			})
-		}
-	}, [token])
 
 
 	useEffect(() => {
@@ -158,7 +150,6 @@ const MainWrapper = ({
 		if(socketChannel) {
 			//?? получение сообщений
             socketChannel?.listen('.new-chat-message-event', (data: any) => {
-				console.log(data)
 				dispatch(updateNewMessage(data))
 				// dispatch(updateUnreadChatCount(unreadChatCount + 1))
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;

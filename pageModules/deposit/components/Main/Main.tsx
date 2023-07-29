@@ -23,6 +23,7 @@ const Main = () => {
     const {userData, token, locale} = useAppSelector(s => s)
     const [list, setList] = useState<any[]>([])
     const [selectedPlan, setSelectedPlan] = useState<any>(null)
+    const [promo, setPromo] = useState<any>(null)
     const [load, setLoad] = useState(false)
 
     const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
@@ -38,6 +39,18 @@ const Main = () => {
             })
         }
     }
+
+    const getPromo = () => {
+        if(token) {
+            service.getPromo(token).then(res => {
+                if(res?.data?.length > 0) {
+                    console.log(res?.data[0]?.promotion)
+                    setPromo(res?.data[0]?.promotion)
+                }
+            })
+        }
+    }
+
 
     useEffect(() => {
         setSecretKey('')
@@ -55,8 +68,15 @@ const Main = () => {
     
 
     useEffect(() => {
-        getPlans()
-    }, [token])
+        if(userData && userData?.is_donate === 1) {
+            getPlans()
+        } 
+        if(userData && userData?.is_donate === 0) {
+            getPromo()
+        }
+        
+        
+    }, [token, userData])
 
 
     const onAccept = (plan: any) => {
@@ -78,154 +98,167 @@ const Main = () => {
             <div className={styles.top}>
                 <div className={styles.head}>{locale?.depositPage?.main?.title}</div>
                 <div className={styles.balance}>{locale?.depositPage?.main?.my_balance} <span>{userData?.credits} {locale?.depositPage?.card?.credits}</span></div>
-                <div className={styles.list}>
-                    {
-                        list?.map((i, index) => {
-                            if(i?.id === 1) {
-                                return null
-                            }
-                            if(i?.status === 0) {
-                                return (
-                                    <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
-                                        <div 
-                                            onClick={() => {
-                                                setSelectedPlan(i)
-                                            }}
-                                            className={`${styles.item}`} key={index}>
-                                            <div className={styles.adds}>
-                                            {
-                                                i?.discount !== 0 && (
-                                                    <div className={styles.discount}>
-                                                        -{i?.discount}%
-                                                        <span>{locale?.depositPage?.card?.discount}</span>
+                {
+                    promo && (
+                        <div className={`${styles.list} ${styles.one}`}>
+
+                        </div>
+                    )
+                }
+                {
+                    list?.length > 0 && (
+                        <div className={styles.list}>
+
+                            {
+                                list?.map((i, index) => {
+                                    if(i?.id === 1) {
+                                        return null
+                                    }
+                                    if(i?.status === 0) {
+                                        return (
+                                            <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
+                                                <div 
+                                                    onClick={() => {
+                                                        setSelectedPlan(i)
+                                                    }}
+                                                    className={`${styles.item}`} key={index}>
+                                                    <div className={styles.adds}>
+                                                    {
+                                                        i?.discount !== 0 && (
+                                                            <div className={styles.discount}>
+                                                                -{i?.discount}%
+                                                                <span>{locale?.depositPage?.card?.discount}</span>
+                                                            </div>
+                                                        )
+                                                    }
                                                     </div>
-                                                )
-                                            }
-                                            </div>
-                                            <div className={styles.credits}>
-                                                <div className={styles.value}>{i?.credits}</div>
-                                                <span>{locale?.depositPage?.card?.credits}</span>
-                                            </div>
-                                            <div className={styles.item_body}>
-                                                {
-                                                    i?.discount !== 0 && (
-                                                        <div className={styles.part}>
-                                                            <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
-                                                            <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
-                                                        </div>
-                                                    )
-                                                }
-                                                <div className={styles.part}>
-                                                    <div className={styles.label}>
+                                                    <div className={styles.credits}>
+                                                        <div className={styles.value}>{i?.credits}</div>
+                                                        <span>{locale?.depositPage?.card?.credits}</span>
+                                                    </div>
+                                                    <div className={styles.item_body}>
                                                         {
-                                                            i?.discount !== 0 ? (
-                                                                locale?.depositPage?.card?.discount
-                                                            ) : locale?.depositPage?.card?.price
+                                                            i?.discount !== 0 && (
+                                                                <div className={styles.part}>
+                                                                    <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
+                                                                    <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
+                                                                </div>
+                                                            )
                                                         }
-                                                    </div>
-                                                    <div className={styles.value}>{i?.price}$</div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            if(i?.status === 1) {
-                                return (
-                                    <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
-                                        <div 
-                                            onClick={() => {
-                                                
-                                                setSelectedPlan(i)
-                                            }}
-                                            className={`${styles.item} ${styles.pop}`}>
-                                            <div className={styles.adds}>
-                                                {
-                                                    i?.discount !== 0 && (
-                                                        <div className={styles.discount}>
-                                                            -{i?.discount}%
-                                                            <span>{locale?.depositPage?.card?.discount}</span>
-                                                        </div>
-                                                    )
-                                                }
-                                                <div className={styles.badge}>
-                                                {locale?.depositPage?.card?.popular}
-                                                </div>
-                                            </div>
-                                            <div className={styles.credits}>
-                                                <div className={styles.value}>{i?.credits}</div>
-                                                <span>{locale?.depositPage?.card?.credits}</span>
-                                            </div>
-                                            <div className={styles.item_body}>
-                                                {
-                                                    i?.discount !== 0 && (
                                                         <div className={styles.part}>
-                                                            <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
-                                                            <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
+                                                            <div className={styles.label}>
+                                                                {
+                                                                    i?.discount !== 0 ? (
+                                                                        locale?.depositPage?.card?.discount
+                                                                    ) : locale?.depositPage?.card?.price
+                                                                }
+                                                            </div>
+                                                            <div className={styles.value}>{i?.price}$</div>
                                                         </div>
-                                                    )
-                                                }
-                                                <div className={styles.part}>
-                                                    <div className={styles.label}>{locale?.depositPage?.card?.discount}</div>
-                                                    <div className={styles.value}>{i?.price}$</div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            if(i?.status === 2) {
-                                return (
-                                    <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
-                                        <div 
-                                            onClick={() => {
-                                                
-                                                setSelectedPlan(i)
-                                            }}
-                                            className={`${styles.item} ${styles.dsc}`} key={index}>
-                                            
-                                            <div className={styles.adds}>
-                                            {
-                                                i?.discount !== 0 && (
-                                                    <div className={styles.discount}>
-                                                        -{i?.discount}%
-                                                        <span>{locale?.depositPage?.card?.discount}</span>
                                                     </div>
-                                                )
-                                            }
-                                            <div className={styles.badge}>
-                                                {locale?.depositPage?.card?.spec_offer}
-                                            </div>
-                                            </div>
-                                            <div className={styles.credits}>
-                                                <div className={styles.value}>{i?.credits}</div>
-                                                <span>{locale?.depositPage?.card?.credits}</span>
-                                            </div>
-                                            <div className={styles.item_body}>
-                                                {
-                                                    i?.discount !== 0 && (
-                                                        <div className={styles.part}>
-                                                            <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
-                                                            <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
-                                                        </div>
-                                                    )
-                                                }
-                                                
-                                                <div className={styles.part}>
-                                                    <div className={styles.label}>{locale?.depositPage?.card?.discount}</div>
-                                                    <div className={styles.value}>{i?.price}$</div>
+                                                    
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                )
+                                        )
+                                    }
+                                    if(i?.status === 1) {
+                                        return (
+                                            <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
+                                                <div 
+                                                    onClick={() => {
+                                                        
+                                                        setSelectedPlan(i)
+                                                    }}
+                                                    className={`${styles.item} ${styles.pop}`}>
+                                                    <div className={styles.adds}>
+                                                        {
+                                                            i?.discount !== 0 && (
+                                                                <div className={styles.discount}>
+                                                                    -{i?.discount}%
+                                                                    <span>{locale?.depositPage?.card?.discount}</span>
+                                                                </div>
+                                                            )
+                                                        }
+                                                        <div className={styles.badge}>
+                                                        {locale?.depositPage?.card?.popular}
+                                                        </div>
+                                                    </div>
+                                                    <div className={styles.credits}>
+                                                        <div className={styles.value}>{i?.credits}</div>
+                                                        <span>{locale?.depositPage?.card?.credits}</span>
+                                                    </div>
+                                                    <div className={styles.item_body}>
+                                                        {
+                                                            i?.discount !== 0 && (
+                                                                <div className={styles.part}>
+                                                                    <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
+                                                                    <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
+                                                                </div>
+                                                            )
+                                                        }
+                                                        <div className={styles.part}>
+                                                            <div className={styles.label}>{locale?.depositPage?.card?.discount}</div>
+                                                            <div className={styles.value}>{i?.price}$</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                    if(i?.status === 2) {
+                                        return (
+                                            <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
+                                                <div 
+                                                    onClick={() => {
+                                                        
+                                                        setSelectedPlan(i)
+                                                    }}
+                                                    className={`${styles.item} ${styles.dsc}`} key={index}>
+                                                    
+                                                    <div className={styles.adds}>
+                                                    {
+                                                        i?.discount !== 0 && (
+                                                            <div className={styles.discount}>
+                                                                -{i?.discount}%
+                                                                <span>{locale?.depositPage?.card?.discount}</span>
+                                                            </div>
+                                                        )
+                                                    }
+                                                    <div className={styles.badge}>
+                                                        {locale?.depositPage?.card?.spec_offer}
+                                                    </div>
+                                                    </div>
+                                                    <div className={styles.credits}>
+                                                        <div className={styles.value}>{i?.credits}</div>
+                                                        <span>{locale?.depositPage?.card?.credits}</span>
+                                                    </div>
+                                                    <div className={styles.item_body}>
+                                                        {
+                                                            i?.discount !== 0 && (
+                                                                <div className={styles.part}>
+                                                                    <div className={styles.label}>{locale?.depositPage?.card?.price}</div>
+                                                                    <div className={`${styles.value} ${styles.old}`}>{_.round(i?.price + (i?.price / 100 * i?.discount), 2)}$</div>
+                                                                </div>
+                                                            )
+                                                        }
+                                                        
+                                                        <div className={styles.part}>
+                                                            <div className={styles.label}>{locale?.depositPage?.card?.discount}</div>
+                                                            <div className={styles.value}>{i?.price}$</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                })
                             }
-                        })
-                    }
-                    
-                </div>
+                            
+                        </div>
+                    )
+                }
+                
                 {
                     selectedPlan && !secretKey && (
                         <div className={styles.buy}>
