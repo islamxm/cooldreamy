@@ -26,7 +26,6 @@ const PrivatePage = () => {
             <MainLayout>
                 {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
-                    <h1 className={styles.title}>Политика в отношении обработки персональных данных</h1>
                     <div className={styles.body} ref={spanRef}>
                     </div>
                 </div>

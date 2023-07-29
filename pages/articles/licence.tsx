@@ -26,7 +26,6 @@ const LicencePage = () => {
             <MainLayout>
                 {/* <Sidebar/> */}
                 <div className={styles.wrapper}>
-                    <h1 className={styles.title}>ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ</h1>
                     <div className={styles.body} ref={spanRef}>
                     </div>
                 </div>
