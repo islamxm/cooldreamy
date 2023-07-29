@@ -29,9 +29,9 @@ const UserInfoAction:FC<IUser> = ({
             service.feedItemLike({id: Number(id)}, token).then(res => {
                 console.log(res)
                 if(res?.status === 200) {
-                    notify('Вы поставили лайк', 'SUCCESS')
+                    notify('User Liked', 'SUCCESS')
                 } else {
-                    notify('Вы уже поставили лайк данному пользователю', 'ERROR')
+                    notify('User Already Liked', 'ERROR')
                 }
             })
         }
