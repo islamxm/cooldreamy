@@ -23,6 +23,8 @@
         }
         .list.one {
             margin-bottom: 30px;
+            margin-left: 0;
+            margin-right: 0;
 
             .item_wr {
                 max-width: 500px;
@@ -43,7 +45,7 @@
 
                 .discount {
                     position: absolute;
-                    
+
                 }
 
                 .badge {
@@ -426,7 +428,7 @@
             }
             .buy {
                 position: fixed;
-                bottom: 20px;
+                bottom: 80px;
                 left: 0;
                 width: 100%;
                 z-index: 100;
@@ -434,6 +436,8 @@
         }
 
         .main {
+
+        
             .adv {
                 flex-wrap: wrap;
                 

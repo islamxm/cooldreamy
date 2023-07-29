@@ -71,7 +71,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 if(res?.error === 'BLOCKED') {
                     setBlocked(true)
                 } 
-                notify('Произошла ошибка', 'ERROR')
+                notify(locale?.global?.notifications?.error_default, 'ERROR')
             }
             if(res?.error) {
                 setErrors(s => {
@@ -93,7 +93,8 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
     return (
         <>
             <LimitModal
-                text='Пользователь заблокирован!'
+                // text='Пользователь заблокирован!'
+                text='User blocked!'
                 open={blocked}
                 onCancel={() => setBlocked(false)}
                 />

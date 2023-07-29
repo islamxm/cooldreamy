@@ -17,6 +17,7 @@ import LimitModal from '@/popups/LimitModal/LimitModal';
 import SoonModal from '@/popups/SoonModal/SoonModal';
 import { BASE_DOMAIN, BASE_WS_HOST, TEST_DOMAIN, TEST_WS_HOST } from '@/service/endpoints';
 import Button from '../Button/Button';
+import Navbar from '../Navbar/Navbar';
 
 
 const service = new ApiService()
@@ -235,6 +236,7 @@ const MainWrapper = ({
 				onClick={test}
 				/></div> */}
             {children}
+			<Navbar/>
         </>
     )
 }

@@ -397,7 +397,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     
                         !id && loadedDialogs && dialogsList?.length === 0 ? (
                             <div className={styles.main}>
-                                <DialogEmpty height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
+                                <DialogEmpty height={width <= 768 ? `calc(100vh - 42px - ${pb}px - 20px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
                             </div>
                         ) : null
                     
@@ -406,13 +406,13 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     <div className={styles.main}>
                         {
                             !id && loadedDialogs && dialogsList?.length === 0 ? (
-                                <DialogEmpty absolute height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
+                                <DialogEmpty absolute height={width <= 768 ? `calc(100vh - 42px - ${pb}px - 20px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
                             ) : null
                         }
                         {
                             ChatType === 'chat' ? (
                                 <div className={styles.body} style={{
-                                    height: width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px + 50px)`
+                                    height: width <= 768 ? `calc(100vh - 42px - ${pb}px - 20px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px + 50px)`
                                 }}>
                                     {
                                         id && (
@@ -462,7 +462,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                 <div className={styles.body_wr}>
                                                     <Dialog
                                                         totalChatItemCount={totalChatItemCount}
-                                                        height={width <= 768 ? `calc(100vh - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}
+                                                        height={width <= 768 ? `calc(100vh - 42px - ${pb}px - 20px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}
                                                         chatList={chatList}
                                                         id={activeDialogId}
                                                         updateChatListPage={updateChatListPage}

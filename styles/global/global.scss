@@ -67,6 +67,7 @@ body {
 }
 
 
+
 body.unavailable {
     background-color: var(--violet);
 }
@@ -75,11 +76,15 @@ body.unavailable {
 main {
     padding-top: 75px;
     overflow: hidden;
+    
 }
 
 @media (max-width: 768px) {
     main {
-        padding-top: 40px;
+        // padding-top: 40px;
+        padding-top: 0;
+
+        // padding-bottom: 56px;
     }
 }
 
