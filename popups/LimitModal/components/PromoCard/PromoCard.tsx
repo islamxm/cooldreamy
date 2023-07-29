@@ -23,7 +23,8 @@ const PromoCard:FC<any> = (props) => {
         subscription_id,
         type,
         updated_at,
-        onClose
+        onClose,
+        old_price
     } = props || {}
     const {locale} = useAppSelector(s => s)
 
@@ -47,7 +48,11 @@ const PromoCard:FC<any> = (props) => {
                             }
                             <div className={styles.price}>
                                 <span className={styles.actual}>${price}</span>
-                                <span className={styles.old}></span>
+                                {
+                                    old_price > 0 && (
+                                        <span className={styles.old}>${old_price}</span>
+                                    )
+                                }
                             </div>
                             <div className={styles.action}>
                                 <Button

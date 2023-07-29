@@ -111,6 +111,11 @@ const Main = () => {
                                     </div>
                                     <div className={styles.ex}>for</div>
                                     <div className={styles.price}>
+                                        {
+                                            Number(promo?.old_price) > 0 && (
+                                                <div className={styles.old}>${promo?.old_price}</div>
+                                            )
+                                        }
                                         <div className={styles.actual}>${promo?.price}</div>
                                     </div>
                                 </div>
