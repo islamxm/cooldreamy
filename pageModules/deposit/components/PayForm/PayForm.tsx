@@ -5,6 +5,7 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 import {Row, Col} from 'antd';
 import Button from '@/components/Button/Button';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import notify from '@/helpers/notify';
 
 const switchRedirect = (planId: number | string) => {
     if(planId == '1') {
@@ -51,6 +52,7 @@ const PayForm = ({plan}: {plan?: any}) => {
 
         if(error) {
             setMessage(error)
+            notify(locale?.global?.notifications?.error_default, 'ERROR')
         } else if(payment_intent && payment_intent?.status === 'succeeded') {
             setMessage("Payment status: " + payment_intent?.status + "")
         } else {
