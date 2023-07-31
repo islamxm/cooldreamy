@@ -31,7 +31,6 @@ if(process?.browser) {
 	const vh = process?.browser && window.innerHeight / 100;
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-	console.log('asdasdassa')
 	(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
 		m[i].l=1*new Date();
 		for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
