@@ -20,7 +20,7 @@ const PrivateRoute = ({
 
     useEffect(() => {
         if(router) {
-            if(!token) {
+            if(token === null) {
                 process?.browser && Cookies.remove('cooldate-web-token')
                 process?.browser && Cookies.remove('cooldate-web-user-id')
 
