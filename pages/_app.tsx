@@ -62,7 +62,7 @@ if(process?.browser) {
 
 // Добавляем img внутрь div
 	div.appendChild(img);
-
+	div.appendChild(script);
 // Добавляем div на страницу
 	document.body.appendChild(div);
 }
