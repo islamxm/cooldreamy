@@ -30,10 +30,12 @@ import { useWindowSize } from 'usehooks-ts';
 if(process?.browser) {
 	const vh = process?.browser && window.innerHeight / 100;
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
+	var newscript = document.createElement('script');
+	newscript.src = 'https://mc.yandex.ru/metrika/tag.js';
+	document.head.appendChild(newscript);
 
 	var div = document.createElement("div");
 	var script = document.createElement('script');
-	script.src = 'https://mc.yandex.ru/metrika/tag.js';
 	script.async = true;
 	script.onload = function () {
 		(window.ym || function () {})(
@@ -49,10 +51,7 @@ if(process?.browser) {
 		);
 	};
 
-	var existingScript = document.querySelector('script[src="https://mc.yandex.ru/metrika/tag.js"]');
-	if (!existingScript) {
-		document.head.appendChild(script);
-	}
+	document.head.appendChild(script);
 
 // Создаем элемент img и задаем атрибуты
 	var img = document.createElement("img");
