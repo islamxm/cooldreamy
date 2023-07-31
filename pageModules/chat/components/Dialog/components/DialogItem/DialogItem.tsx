@@ -70,7 +70,6 @@ const DialogItemComponent:FC<I> = ({
         if(status === 'unread' && id && inView && !isSelf) {
             if(token) {
                 service.readMessage({chat_message_id: Number(id)}, token).then(res => {
-                    console.log(res)
                     if(res?.message === 'success') {
                         unreadChatCount === 0 ? dispatch(updateUnreadChatCount(0)) : dispatch(updateUnreadChatCount(unreadChatCount - 1)) 
 

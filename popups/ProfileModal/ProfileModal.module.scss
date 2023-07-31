@@ -7,6 +7,7 @@
         align-items: flex-start;
         margin-left: -5px;
         margin-right: -5px;
+        // border: 1px solid red;
 
         .main {
             width: 300px;
@@ -191,11 +192,21 @@
                 }
             }
 
-            .action {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+            // .action {
+            //     display: flex;
+            //     align-items: center;
+            //     justify-content: center;
+            // }
+        }
+    }
+
+    .action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        .action_item {
+            margin: 0 10px;
         }
     }
 }
@@ -218,5 +229,19 @@
                 margin: 0;
             }
         }
+
+        .action {
+            margin-top: 20px;
+            flex-wrap: wrap;
+            .action_item {
+                width: 100%;
+                margin-bottom: 10px;
+                    
+                button {
+                    width: 100%;
+                }
+            }
+        }
+
     }
 }

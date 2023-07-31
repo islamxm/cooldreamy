@@ -22,6 +22,7 @@ import { FaRegSmileWink } from 'react-icons/fa';
 import { AiOutlineStar } from 'react-icons/ai';
 import {FiChevronLeft, FiChevronRight} from 'react-icons/fi'
 import notify from '@/helpers/notify';
+import {GoMail} from 'react-icons/go'
 const service = new ApiService()
 
 
@@ -32,6 +33,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     const {onCancel} = props
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
     const [load, setLoad] = useState(true)
+    const [createChatLoad, setCreateChatLoad] = useState(false)
     const [data, setData] = useState<IUser | null>(null)
 
     const {
@@ -95,13 +97,32 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                 }
             })
         }
+    }   
+
+
+    
+    const createChat = () => {
+        if(id && token) {
+            setCreateChatLoad(true)
+            service.createChat({user_id: id}, token).then(res => {
+                if(res?.chat_id) {
+                    Router.push(`/chat/${res?.chat_id}?type=chat`)
+                }
+            }).finally(() => setCreateChatLoad(false))
+
+            // !! параллельное создание чата писем
+            service.createMail({user_id: id}, token).then(res => {
+                console.log(res)
+            }).finally(() => setCreateChatLoad(false))
+        }
     }
 
 
 
-
     const onWink = () => {
+
         if(id && token) {
+
             service.createChat({user_id: id}, token).then(res => {
                 console.log(res)
                 if(res?.chat_id) {
@@ -131,161 +152,188 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
             >
             {
                 !load ? (    
-                    <div className={styles.in}>
-                        {
-                            (profile_photo && profile_photo?.length > 0) && (
-                                <div className={styles.main}>
-                                    {
-                                        thumbsSwiper && (
-                                            <div className={styles.slider}>
-                                                <div className={styles.photo_count}><BsCamera/>{profile_photo?.length}</div>
-                                                <SwiperWrap
-                                                    modules={[Thumbs]}
-                                                    thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
-                                                    className={styles.slider_body}
-                                                    spaceBetween={10}
-                                                    >
-                                                    {
-                                                        (profile_photo && profile_photo?.length > 0) ? profile_photo?.map(i => (
-                                                            <SwiperSlide className={styles.slider_item} key={i.id}>
-                                                                <Image
-                                                                    width={300}
-                                                                    height={300}
-                                                                    src={i.image_url}
-                                                                    alt=''
-                                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                                    />
-                                                            </SwiperSlide>
-                                                        )) : (
-                                                            <SwiperSlide className={styles.slider_item}>
-                                                                <Image
-                                                                    width={300}
-                                                                    height={300}
-                                                                    src={placeholder}
-                                                                    alt=''
-                                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                                    />
-                                                            </SwiperSlide>
-                                                        )
-                                                    }
-                                                </SwiperWrap>
-                                            </div>
-                                        ) 
-                                    }
-                                    {
-                                        profile_photo && profile_photo?.length > 1 ? (
-                                            <div className={styles.thumbs}>
-                                                <SwiperWrap
-                                                    modules={[Thumbs, Navigation]}
-                                                    className={styles.thumbs_body}
-                                                    navigation={{
-                                                        prevEl: '.profile-modal-nav-prev',
-                                                        nextEl: '.profile-modal-nav-next'
-                                                    }}
-                                                    slidesPerView={3}
-                                                    watchSlidesProgress
-                                                    onSwiper={setThumbsSwiper}
-                                                    spaceBetween={10}
-                                                    >
-                                                    {
-                                                        profile_photo?.map(i => (
-                                                            <SwiperSlide className={styles.thumbs_item} key={i.id}>
-                                                                <Image
-                                                                    src={i.image_url}
-                                                                    alt=''
-                                                                    width={70}
-                                                                    height={70}
-                                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                                    />
-                                                            </SwiperSlide>
-                                                        ))
-                                                    }
-                                                    
-                                                </SwiperWrap>
-                                                <div className={`profile-modal-nav-prev ${styles.nav} ${styles.prev}`}>
-                                                    <FiChevronLeft/>
+                    <>
+                        <div className={styles.in}>
+                            {
+                                (profile_photo && profile_photo?.length > 0) && (
+                                    <div className={styles.main}>
+                                        {
+                                            thumbsSwiper && (
+                                                <div className={styles.slider}>
+                                                    <div className={styles.photo_count}><BsCamera/>{profile_photo?.length}</div>
+                                                    <SwiperWrap
+                                                        modules={[Thumbs]}
+                                                        thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
+                                                        className={styles.slider_body}
+                                                        spaceBetween={10}
+                                                        >
+                                                        {
+                                                            (profile_photo && profile_photo?.length > 0) ? profile_photo?.map(i => (
+                                                                <SwiperSlide className={styles.slider_item} key={i.id}>
+                                                                    <Image
+                                                                        width={300}
+                                                                        height={300}
+                                                                        src={i.image_url}
+                                                                        alt=''
+                                                                        loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                        />
+                                                                </SwiperSlide>
+                                                            )) : (
+                                                                <SwiperSlide className={styles.slider_item}>
+                                                                    <Image
+                                                                        width={300}
+                                                                        height={300}
+                                                                        src={placeholder}
+                                                                        alt=''
+                                                                        loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                        />
+                                                                </SwiperSlide>
+                                                            )
+                                                        }
+                                                    </SwiperWrap>
                                                 </div>
-                                                <div className={`profile-modal-nav-next ${styles.nav} ${styles.next}`}>
-                                                    <FiChevronRight/>
+                                            ) 
+                                        }
+                                        {
+                                            profile_photo && profile_photo?.length > 1 ? (
+                                                <div className={styles.thumbs}>
+                                                    <SwiperWrap
+                                                        modules={[Thumbs, Navigation]}
+                                                        className={styles.thumbs_body}
+                                                        navigation={{
+                                                            prevEl: '.profile-modal-nav-prev',
+                                                            nextEl: '.profile-modal-nav-next'
+                                                        }}
+                                                        slidesPerView={3}
+                                                        watchSlidesProgress
+                                                        onSwiper={setThumbsSwiper}
+                                                        spaceBetween={10}
+                                                        >
+                                                        {
+                                                            profile_photo?.map(i => (
+                                                                <SwiperSlide className={styles.thumbs_item} key={i.id}>
+                                                                    <Image
+                                                                        src={i.image_url}
+                                                                        alt=''
+                                                                        width={70}
+                                                                        height={70}
+                                                                        loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                        />
+                                                                </SwiperSlide>
+                                                            ))
+                                                        }
+                                                        
+                                                    </SwiperWrap>
+                                                    <div className={`profile-modal-nav-prev ${styles.nav} ${styles.prev}`}>
+                                                        <FiChevronLeft/>
+                                                    </div>
+                                                    <div className={`profile-modal-nav-next ${styles.nav} ${styles.next}`}>
+                                                        <FiChevronRight/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ) : null
-                                    }
-                                    
-                                </div>
-                            )
-                        }
-                        
-                        <div className={styles.body}>
-                            <div className={styles.body_action}>
-                                <button onClick={onLike} className={styles.item}>
-                                    <div className={styles.icon}>
-                                        <FiHeart/>
-                                    </div>
-                                    <div className={styles.text}>{locale?.global?.user_action?.like}</div>
-                                </button>
-                                <button onClick={onWink} className={styles.item}>
-                                    <div className={styles.icon}>
-                                        <FaRegSmileWink/>
-                                    </div>
-                                    <div className={styles.text}>{locale?.global?.user_action?.wink}</div>
-                                </button>
-                                <button onClick={onFavorite} className={styles.item}>
-                                    <div className={styles.icon}>
-                                        <AiOutlineStar/>
-                                    </div>
-                                    <div className={styles.text}>{locale?.global?.user_action?.fav}</div>
-                                </button>
-                            </div>
-                            <div className={styles.body_main}>
-                                <Row gutter={[15,15]}>
-                                    
-                                    <Col span={24}>
-                                        <div className={styles.user}>
-                                            <Avatar
-                                                image={avatar_url_thumbnail || user_avatar_url}
-                                                style={{marginRight: 15}}
-                                                />
-                                            <UserTitle
-                                                isOnline
-                                                username={name}
-                                                age={age ? age.toString() : ''}
-                                                style={{fontSize: 20}}
-                                                />
-                                        </div>
+                                            ) : null
+                                        }
                                         
-                                    </Col>
-                                    <Col span={24}>
-                                        <UserLocation
-                                            state={state}
-                                            country={country}
-                                            />
-                                    </Col>
-                                    {
-                                        about_self ? (
-                                            <Col span={24}>
-                                                <div className={styles.part}>
-                                                    <div className={styles.label}>О себе</div>
-                                                    <div className={styles.value}>{about_self}</div>
-                                                </div>
-                                            </Col>
-                                        ) : null
-                                    }
-                                    <Col span={24}>
-                                        <div className={styles.action}>
-                                            <Button onClick={() => {
-                                                onClose()
-                                                Router.push({
-                                                    pathname: `/users/[id]`,
-                                                    query: {id: id, currentProfileUuid: currentProfileUuid}
-                                                })
-                                            }} middle text={locale?.popups?.profile_modal?.open_btn}/>
+                                    </div>
+                                )
+                            }
+                            
+                            <div className={styles.body}>
+                                <div className={styles.body_action}>
+                                    <button onClick={onLike} className={styles.item}>
+                                        <div className={styles.icon}>
+                                            <FiHeart/>
                                         </div>
-                                    </Col>
-                                </Row>
+                                        <div className={styles.text}>{locale?.global?.user_action?.like}</div>
+                                    </button>
+                                    <button onClick={onWink} className={styles.item}>
+                                        <div className={styles.icon}>
+                                            <FaRegSmileWink/>
+                                        </div>
+                                        <div className={styles.text}>{locale?.global?.user_action?.wink}</div>
+                                    </button>
+                                    <button onClick={onFavorite} className={styles.item}>
+                                        <div className={styles.icon}>
+                                            <AiOutlineStar/>
+                                        </div>
+                                        <div className={styles.text}>{locale?.global?.user_action?.fav}</div>
+                                    </button>
+                                </div>
+                                <div className={styles.body_main}>
+                                    <Row gutter={[15,15]}>
+                                        
+                                        <Col span={24}>
+                                            <div className={styles.user}>
+                                                <Avatar
+                                                    image={avatar_url_thumbnail || user_avatar_url}
+                                                    style={{marginRight: 15}}
+                                                    />
+                                                <UserTitle
+                                                    isOnline
+                                                    username={name}
+                                                    age={age ? age.toString() : ''}
+                                                    style={{fontSize: 20}}
+                                                    />
+                                            </div>
+                                            
+                                        </Col>
+                                        <Col span={24}>
+                                            <UserLocation
+                                                state={state}
+                                                country={country}
+                                                />
+                                        </Col>
+                                        {
+                                            about_self ? (
+                                                <Col span={24}>
+                                                    <div className={styles.part}>
+                                                        <div className={styles.label}>О себе</div>
+                                                        <div className={styles.value}>{about_self}</div>
+                                                    </div>
+                                                </Col>
+                                            ) : null
+                                        }
+                                        {/* <Col span={24}>
+                                            <div className={styles.action}>
+                                                <Button onClick={() => {
+                                                    onClose()
+                                                    Router.push({
+                                                        pathname: `/users/[id]`,
+                                                        query: {id: id, currentProfileUuid: currentProfileUuid}
+                                                    })
+                                                }} middle text={locale?.popups?.profile_modal?.open_btn}/>
+                                            </div>
+                                        </Col> */}
+                                    </Row>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div className={styles.action}>
+                            <div className={styles.action_item}>
+                                <Button
+                                    after={<GoMail/>}
+                                    onClick={createChat}
+                                    load={createChatLoad}
+                                    middle
+                                    text={locale?.global?.user_card?.send_message}
+                                    />
+                            </div>
+                            <div className={styles.action_item}>
+                                <Button
+                                    onClick={() => {
+                                        onClose()
+                                        Router.push({
+                                            pathname: `/users/[id]`,
+                                            query: {id: id, currentProfileUuid: currentProfileUuid}
+                                        })
+                                    }}
+                                    middle
+                                    text={locale?.popups?.profile_modal?.open_btn}
+                                    />
+                            </div>
+                        </div>
+                    </>
+                    
                 ) : <Skeleton/> 
             }
             
