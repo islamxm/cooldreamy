@@ -137,7 +137,6 @@ const DialogItemComponent:FC<I> = ({
                                             </a>
                                         </div>
                                     </FancyboxWrapper>
-                                    
                                     <div className={styles.time}>{moment(updatedAt).format('hh:mm')}</div>
                                 </>
                             ) : (

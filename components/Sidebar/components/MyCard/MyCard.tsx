@@ -45,7 +45,10 @@ const MyCard:FC<IUser> = ({
                 </div>
             </div>
             <div className={styles.balance}>
+                <Link href={'/deposit'}>
                 {locale?.global.my_card.balance.title}: {credits ? credits : 0} {locale?.global.my_card.balance.label}
+                </Link>
+                
             </div>
         </Link>
     )

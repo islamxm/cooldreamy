@@ -56,7 +56,7 @@ const Sidebar:FC = () => {
                         <Col span={24}>
                             <MyCard
                                 {...userData}
-                                />
+                                /> 
                         </Col>
                         <Col span={24}>
                             <Button

@@ -21,6 +21,7 @@ import { FiHeart } from 'react-icons/fi';
 import { FaRegSmileWink } from 'react-icons/fa';
 import { AiOutlineStar } from 'react-icons/ai';
 import {FiChevronLeft, FiChevronRight} from 'react-icons/fi'
+import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import notify from '@/helpers/notify';
 import {GoMail} from 'react-icons/go'
 const service = new ApiService()
@@ -107,12 +108,13 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
             service.createChat({user_id: id}, token).then(res => {
                 if(res?.chat_id) {
                     Router.push(`/chat/${res?.chat_id}?type=chat`)
+                    onClose()
                 }
             }).finally(() => setCreateChatLoad(false))
 
             // !! параллельное создание чата писем
             service.createMail({user_id: id}, token).then(res => {
-                console.log(res)
+                
             }).finally(() => setCreateChatLoad(false))
         }
     }
@@ -124,7 +126,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         if(id && token) {
 
             service.createChat({user_id: id}, token).then(res => {
-                console.log(res)
                 if(res?.chat_id) {
                     service.sendWink({user_id: id}, token).then(r => {
                         if(r?.error) {
@@ -170,13 +171,18 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                         {
                                                             (profile_photo && profile_photo?.length > 0) ? profile_photo?.map(i => (
                                                                 <SwiperSlide className={styles.slider_item} key={i.id}>
-                                                                    <Image
-                                                                        width={300}
-                                                                        height={300}
-                                                                        src={i.image_url}
-                                                                        alt=''
-                                                                        loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                                        />
+                                                                    <FancyboxWrapper>
+                                                                        <a data-fancybox="gallery" href={i.image_url} className={styles.item}>
+                                                                                <Image
+                                                                                    width={300}
+                                                                                    height={300}
+                                                                                    src={i.image_url}
+                                                                                    alt=''
+                                                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                                    />
+                                                                            </a>
+                                                                    </FancyboxWrapper>
+                                                                    
                                                                 </SwiperSlide>
                                                             )) : (
                                                                 <SwiperSlide className={styles.slider_item}>
@@ -190,6 +196,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                                 </SwiperSlide>
                                                             )
                                                         }
+                                                        
                                                     </SwiperWrap>
                                                 </div>
                                             ) 
