@@ -30,41 +30,6 @@ import { useWindowSize } from 'usehooks-ts';
 if(process?.browser) {
 	const vh = process?.browser && window.innerHeight / 100;
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
-	var newscript = document.createElement('script');
-	newscript.src = 'https://mc.yandex.ru/metrika/tag.js';
-	document.head.appendChild(newscript);
-
-	var div = document.createElement("div");
-	var script = document.createElement('script');
-	script.async = true;
-	script.onload = function () {
-		(window.ym || function () {})(
-			94454907,
-			'init',
-			{
-				clickmap: true,
-				trackLinks: true,
-				accurateTrackBounce: true,
-				webvisor: true,
-				ecommerce: 'dataLayer'
-			}
-		);
-	};
-
-	document.head.appendChild(script);
-
-// Создаем элемент img и задаем атрибуты
-	var img = document.createElement("img");
-	img.src = "https://mc.yandex.ru/watch/94454907";
-	img.style.position = "absolute";
-	img.style.left = "-9999px";
-	img.alt = "";
-
-// Добавляем img внутрь div
-	div.appendChild(img);
-	div.appendChild(script);
-// Добавляем div на страницу
-	document.body.appendChild(div);
 }
 
 
@@ -112,7 +77,6 @@ function App({ Component, pageProps }: AppProps) {
 			document.body.classList.remove('unavailable')
 		}
 	}, [router])
-
 	return (
 		<Provider store={store}>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
