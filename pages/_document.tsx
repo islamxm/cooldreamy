@@ -57,7 +57,11 @@ export default function Document() {
           }}  
           />
 
-
+          <script
+              dangerouslySetInnerHTML={{
+                  __html: `console.log('asdasd')`
+              }}
+          />
       </Head>
       <body>
         <Main />
