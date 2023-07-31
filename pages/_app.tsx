@@ -24,7 +24,6 @@ import { useRouter } from 'next/router';
 import 'moment/locale/ru'
 import moment from 'moment';
 import { useWindowSize } from 'usehooks-ts';
-import YandexMetrica from "@/components/YandexMetrica/YandexMetrica";
 
 
 
