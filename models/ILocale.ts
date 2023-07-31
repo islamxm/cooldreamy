@@ -143,6 +143,7 @@ export interface ILocale {
             btn: string,
         },
         back_btn: string,
+        back_to_site_btn: string
         user_action: {
             like: string,
             wink: string,

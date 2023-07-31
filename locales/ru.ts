@@ -144,6 +144,7 @@ const ru: ILocale = {
             btn: 'Подарить'
         },
         back_btn: 'Вернуться',
+        back_to_site_btn: 'Вернуться на сайт',
         user_action: {
             like: 'НРАВИТСЯ',
             wink: 'ПОДМИГНУТЬ',

@@ -144,6 +144,7 @@ const en: ILocale = {
           btn: "Give a gift"
       },
       back_btn: "Back",
+      back_to_site_btn: 'Back to site',
       user_action: {
           like: "LIKE",
           wink: "WINK",

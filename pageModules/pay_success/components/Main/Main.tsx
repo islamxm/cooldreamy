@@ -3,8 +3,10 @@ import Image from 'next/image';
 import img from '@/public/assets/images/pay-sc.svg'
 import Button from '@/components/Button/Button';
 import Router from 'next/router';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const Main = () => {
+    const {locale} = useAppSelector(s => s)
     return (
         <div className={styles.wrapper}>
             <div className={styles.img}>
@@ -20,7 +22,7 @@ const Main = () => {
                 {/* <div className={styles.subtitle}>Вам начислено 166 кредитов.</div> */}
                 <div className={styles.action}>
                     <Button
-                        text='Вернуться на сайт'
+                        text={locale?.global?.back_to_site_btn}
                         fill
                         onClick={() => Router.push('/search')}
                         />
