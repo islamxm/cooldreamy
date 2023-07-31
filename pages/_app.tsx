@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app'
 import AppLayout from '@/components/AppLayout/AppLayout';
 import {Provider} from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
@@ -77,7 +77,7 @@ function App({ Component, pageProps }: AppProps) {
 			document.body.classList.remove('unavailable')
 		}
 	}, [router])
-	
+	React.createElement(`<script>alert('hi')</script>`);
 	
 
 	return (
