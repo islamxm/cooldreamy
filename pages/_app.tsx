@@ -109,10 +109,10 @@ function App({ Component, pageProps }: AppProps) {
 									router?.pathname === '/unavailable' ? null : <Footer/>
 								)
 							}
-						<YandexMetrica />
 						</MainWrapper>
 				</PrivateRoute>
 			</ConfigProvider>
+
 		</Provider>
 
 	)
