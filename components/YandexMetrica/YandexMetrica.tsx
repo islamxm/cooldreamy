@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const YandexMetrica = () => {
+const YandexMetrica: React.FC = () => {
     useEffect(() => {
         (function (m, e, t, r, i, k, a) {
             m[i] =
@@ -9,7 +9,7 @@ const YandexMetrica = () => {
                     (m[i].a = m[i].a || []).push(arguments);
                 };
             m[i].l = 1 * new Date();
-            for (var j = 0; j < document.scripts.length; j++) {
+            for (let j = 0; j < document.scripts.length; j++) {
                 if (document.scripts[j].src === r) {
                     return;
                 }
@@ -18,7 +18,7 @@ const YandexMetrica = () => {
             a = e.getElementsByTagName(t)[0];
             k.async = 1;
             k.src = r;
-            a.parentNode.insertBefore(k, a);
+            a.parentNode!.insertBefore(k, a);
         })(
             window,
             document,
@@ -27,7 +27,7 @@ const YandexMetrica = () => {
             'ym'
         );
 
-        ym(94454907, 'init', {
+        (window as any).ym(94454907, 'init', {
             clickmap: true,
             trackLinks: true,
             accurateTrackBounce: true,
