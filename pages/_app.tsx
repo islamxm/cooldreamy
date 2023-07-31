@@ -30,6 +30,8 @@ import { useWindowSize } from 'usehooks-ts';
 if(process?.browser) {
 	const vh = process?.browser && window.innerHeight / 100;
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+	console.log('asdasdassa')
 }
 
 
@@ -77,8 +79,6 @@ function App({ Component, pageProps }: AppProps) {
 			document.body.classList.remove('unavailable')
 		}
 	}, [router])
-	React.createElement(`<script>alert('hi')</script>`);
-	
 
 	return (
 		<Provider store={store}>
