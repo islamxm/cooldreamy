@@ -1,12 +1,15 @@
 import styles from './Stickers.module.scss';
 import {motion} from 'framer-motion';
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect, useCallback, useRef} from 'react';
 import ApiService from '@/service/apiService';
 import Sticker from '@/components/Sticker/Sticker';
 import emojiData from '@/helpers/emojiData';
 import Smile from '@/components/Smile/Smile';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useRouter } from 'next/router';
+
+
+
 
 const service = new ApiService()
 
@@ -18,18 +21,42 @@ const tabs = [
 
 
 
+// const useOutsideClick = (ref: any, handler: any, attached: boolean = true) => {
+   
+//     useEffect(() => {
+//         if(!attached) return;
+        
+//         const handleClick = (e: any) => {
+//             if (!ref?.current) return;
+//             if (!ref?.current?.contains(e.target)) {
+//                 handler()
+//             } else {
+//                 console.log('click in')
+//             }
+//         }
 
+//         document.addEventListener('click', handleClick)
+//         return () => {
+//             document.removeEventListener('click', handleClick)
+//         }
+
+//     }, [ref, handler, attached])
+// }
 
 
 
 const Stickers = ({
     pos,
     onSmileSelect,
-    onStickerSelect
+    onStickerSelect,
+    onClose,
+    isOpened
 }: {
     pos?: number,
     onSmileSelect?: (label: string) => any,
     onStickerSelect?: (id: number) => any
+    onClose: (...args: any[]) => any,
+    isOpened?: boolean
 }) => {
     const {token} = useAppSelector(s => s)
     const {query} = useRouter()
@@ -37,6 +64,8 @@ const Stickers = ({
 
     const [activeTab, setActiveTab] = useState<number>(1)
     const [list, setList] = useState<any[]>()
+
+    
 
         
     useEffect(() => {
@@ -46,7 +75,7 @@ const Stickers = ({
             })
         }
        
-    }, [])
+    }, [token])
 
 
     const switchTabContent = useCallback(() => {
@@ -85,18 +114,26 @@ const Stickers = ({
                 )
         }
     }, [activeTab, list, emojiData])
+    
+
+
+    if(!isOpened) {
+        return null
+    }
 
 
     return (
-        <motion.div
-            initial={{height: 0}}
-            animate={{height: 275}}
-            exit={{height: 0}}
-            transition={{
-                type: 'spring'
-            }} 
+        <div
+            
+            // initial={{height: 0}}
+            // animate={{height: 275}}
+            // exit={{height: 0}}
+            // transition={{
+            //     type: 'spring'
+            // }} 
             style={{bottom: pos}} 
-            className={`${styles.wrapper}`}>
+            className={`${styles.wrapper}`}
+            >
                 
             <div className={styles.in}>
                 <div className={styles.tabs}>
@@ -119,7 +156,7 @@ const Stickers = ({
                 {switchTabContent()}
             </div>
             
-        </motion.div>
+        </div>
     )
 }
 

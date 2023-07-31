@@ -18,6 +18,7 @@ import LimitModal from '@/popups/LimitModal/LimitModal';
 import getPrice from '@/helpers/getPrice';
 import { updateLimit, updateUserData } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 
 const service = new ApiService()
@@ -294,21 +295,29 @@ const ChatAction = ({
                 ) : null
             }
             <div className={`${styles.wrapper} ${load ? styles.disabled : ''}`}>
-                <AnimatePresence>
+                {/* <AnimatePresence>
                     {
                         stickers ? (
                             <Stickers 
+                                onClose={() => setStickers(false)}
                                 onStickerSelect={onStickerSelect}
                                 onSmileSelect={onSmileSelect}
+                                isOpened={stickers}
                                 pos={drawerPos}/>
                         ) : null
-                    }
-                    {
-                        gifts ? (
-                            null
-                        ) : null
-                    }
-                </AnimatePresence>
+                    }   
+                </AnimatePresence> */}
+                <OutsideClickHandler
+                    onOutsideClick={() => setStickers(false)}
+                    >
+                <Stickers
+                    onClose={() => setStickers(false)}
+                    onStickerSelect={onStickerSelect}
+                    onSmileSelect={onSmileSelect}
+                    isOpened={stickers}
+                    pos={drawerPos}/>
+                </OutsideClickHandler>
+                
                 <div className={styles.main}>
                     <div className={styles.input}>
                         <TextareaAutosize 
