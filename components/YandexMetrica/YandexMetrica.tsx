@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const YandexMetrica: React.FC = () => {
     useEffect(() => {
-    (function (m, e, t, r, i, k, a) {
+    (function (m:any, e:any, t:any, r:any, i:any, k, a) {
         m[i] =
             m[i] ||
             function () {
