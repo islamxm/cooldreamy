@@ -11,6 +11,7 @@ import ApiService from '@/service/apiService';
 import BthPicker from '@/components/BthPicker/BthPicker';
 import moment from 'moment';
 import SelectDef from '@/components/SelectDef/SelectDef';
+import BirthdaySelect from '../../components/BirthdaySelect/BirthdaySelect';
 
 
 const service = new ApiService()
@@ -103,12 +104,18 @@ const Step1:FC<IStep1> = ({
                                     />
                             </Col>
                             <Col span={24}>
-                                <BthPicker
+                                {/* <BthPicker
                                     placeholder={locale.signupPage.steps.step_1.birthday}
                                     showToday={false}
                                     onChange={(e,b) => {
                                         setBirthday(moment(b, 'DD-MM-YYYY').format("YYYY-MM-DD"))
+                                        console.log(moment(b, 'DD-MM-YYYY').format("YYYY-MM-DD"))
                                     }}
+                                    /> */}
+                                <BirthdaySelect
+                                    minAge={18}
+                                    maxAge={70}
+                                    setValue={setBirthday}
                                     />
                             </Col>
                         </Row>
