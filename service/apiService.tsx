@@ -1127,14 +1127,15 @@ class ApiService {
         }
     }
 
-    activatePay = async (token: IToken, {user_promotion_id}: {user_promotion_id?: string | number}) => {
+    activatePay = async (token: IToken, body: {user_promotion_id?: string | number}) => {
         try {
             let res = await fetch(endpoints.activatePay, {
                 method: "POST",
                 headers: {
                     ...headers,
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                body: JSON.stringify(body)
             })
             return await res?.json()
         } catch(err) {

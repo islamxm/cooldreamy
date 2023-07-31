@@ -26,6 +26,7 @@ const switchRedirect = (planId: number | string, type: string) => {
     if(planId == '5' && type === 'credit') {
         return `${window.location.origin}/pay_success_credit5`
     }
+    return `${window.location.origin}/deposit`
 }
 
 const PayForm = ({plan, type}: {plan?: any, type: string}) => {
@@ -51,7 +52,7 @@ const PayForm = ({plan, type}: {plan?: any, type: string}) => {
                 return_url: switchRedirect(plan?.id, type),
                 
             },
-            redirect: "if_required" 
+            // redirect: "if_required" 
         })
         const {payment_intent} = error || {}
 
