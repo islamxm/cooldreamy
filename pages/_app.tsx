@@ -24,7 +24,7 @@ import { useRouter } from 'next/router';
 import 'moment/locale/ru'
 import moment from 'moment';
 import { useWindowSize } from 'usehooks-ts';
-import YandexMetrikaCounter from "@/components/YandexMetrica";
+import YandexMetrica from "@/components/YandexMetrica/YandexMetrica";
 
 
 
@@ -110,7 +110,7 @@ function App({ Component, pageProps }: AppProps) {
 									router?.pathname === '/unavailable' ? null : <Footer/>
 								)
 							}
-							<YandexMetrikaCounter />
+						<YandexMetrica />
 						</MainWrapper>
 				</PrivateRoute>
 			</ConfigProvider>
