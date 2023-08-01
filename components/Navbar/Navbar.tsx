@@ -7,16 +7,27 @@ import {BiStore} from 'react-icons/bi';
 import Link from 'next/link';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useRouter } from 'next/router';
+import Avatar from '../Avatar/Avatar';
 
 
 
 const Navbar = () => {
-    const {unreadChatCount} = useAppSelector(s => s)
+    const {unreadChatCount, userData} = useAppSelector(s => s)
     const {pathname} = useRouter()
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.in}>
+                <div className={styles.item}>
+                    <Link className={`${styles.btn}`} href={'/profile'}>
+                        <Avatar
+                            size={30}
+                            style={{border: pathname?.includes('/profile') ? '1px solid var(--violet)' : '1px solid transparent'}}
+                            round
+                            image={userData?.user_thumbnail_url}
+                            />
+                    </Link>
+                </div>
                 <div className={styles.item}>
                     <Link className={`${styles.btn} ${pathname?.includes('/search') ? styles.active : ''}`} href={'/search'}>
                         <FiSearch/>
@@ -43,10 +54,11 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className={styles.item}>
-                    <Link className={`${styles.btn} ${pathname?.includes('/deposit')}`} href={'/deposit'}>
+                    <Link className={`${styles.btn} ${styles.market} ${pathname?.includes('/deposit') ? styles.active : ''}`} href={'/deposit'}>
                         <BiStore/>
                     </Link>
                 </div>
+                
             </div>
         </div>
     )

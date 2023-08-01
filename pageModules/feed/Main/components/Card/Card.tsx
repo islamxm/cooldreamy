@@ -5,7 +5,7 @@ import {FC} from 'react';
 import { cardPropsType } from './type';
 import {useState, useEffect, useCallback} from 'react';
 import IconButton from '@/components/IconButton/IconButton';
-import {motion, useMotionValue, PanInfo, useMotionValueEvent, AnimatePresence} from 'framer-motion';
+import {motion, PanInfo, AnimatePresence} from 'framer-motion';
 import {CgClose} from 'react-icons/cg';
 import {HiHeart} from 'react-icons/hi';
 import logo from '@/public/assets/images/logo-big.svg';
@@ -156,7 +156,6 @@ const Card:FC<cardPropsType> = ({
                                         unoptimized
                                         width={560} 
                                         height={560}
-                                        // placeholder='blur'
                                         />
                                 ) : null
                             ) : null
@@ -164,12 +163,6 @@ const Card:FC<cardPropsType> = ({
                         
                     </div>
                     <div className={styles.label}>
-                        {/* <span className={styles.name}>
-                            {name}
-                        </span>,
-                        <span className={styles.age}>
-                            {` ${age}`}
-                        </span> */}
                         <UserTitle
                             username={name}
                             age={age ? age.toString() : ''}
@@ -197,7 +190,6 @@ const Card:FC<cardPropsType> = ({
                                     unoptimized
                                     width={560} 
                                     height={560}
-                                    // placeholder='blur'
                                     />
                             ) : null
                         ) : null
@@ -205,12 +197,6 @@ const Card:FC<cardPropsType> = ({
                     
                 </div>
                 <div className={styles.label}>
-                    {/* <span className={styles.name}>
-                        {name}
-                    </span>,
-                    <span className={styles.age}>
-                        {` ${age}`}
-                    </span> */}
                     <UserTitle
                             username={name}
                             age={age ? age.toString() : ''}
