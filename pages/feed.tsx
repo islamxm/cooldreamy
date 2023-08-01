@@ -3,9 +3,23 @@ import MainLayout from "@/components/MainLayout/MainLayout";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Main from "@/pageModules/feed/Main/Main";
 import Navbar from "@/components/Navbar/Navbar";
-
+import { useWindowSize } from "usehooks-ts";
 
 const FeedPage = () => {
+    const {width} = useWindowSize()
+
+
+    if(width <= 768) {
+        return (
+            <Container style={{padding: 0}}>
+                <MainLayout style={{padding: 0}}>
+                    <Sidebar/>
+                    <Navbar/>
+                    <Main/>
+                </MainLayout>
+            </Container>
+        )
+    }
 
     return (
         <Container>

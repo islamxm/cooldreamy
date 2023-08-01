@@ -12,6 +12,7 @@ interface IFeedCard {
     state?: string,
     user_thumbnail_url?: string,
     
+    
 }
 
 export default IFeedCard;

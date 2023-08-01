@@ -1,13 +1,15 @@
 import styles from './Container.module.scss';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 const Container = ({
-    children
+    children,
+    style
 }: {
-    children: React.ReactNode
+    children: React.ReactNode,
+    style?: CSSProperties
 }) => {
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={style}>
             {children}
         </div>
     )

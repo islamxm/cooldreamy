@@ -9,6 +9,7 @@ import {motion, useMotionValue, PanInfo, useMotionValueEvent, AnimatePresence} f
 import {CgClose} from 'react-icons/cg';
 import {HiHeart} from 'react-icons/hi';
 import logo from '@/public/assets/images/logo-big.svg';
+import UserTitle from '@/components/UserTitle/UserTitle';
 
 
 const Card:FC<cardPropsType> = ({
@@ -32,7 +33,8 @@ const Card:FC<cardPropsType> = ({
         setLiking,
         liking,
         canceling,
-        user_thumbnail_url
+        user_thumbnail_url,
+        
     } = card
 
     const [rotate, setRotate] = useState(1)
@@ -162,12 +164,22 @@ const Card:FC<cardPropsType> = ({
                         
                     </div>
                     <div className={styles.label}>
-                        <span className={styles.name}>
+                        {/* <span className={styles.name}>
                             {name}
                         </span>,
                         <span className={styles.age}>
                             {` ${age}`}
-                        </span>
+                        </span> */}
+                        <UserTitle
+                            username={name}
+                            age={age ? age.toString() : ''}
+                            textBold
+                            style={{color: '#fff', fontSize: 30, lineHeight: '40px'}}
+                            // isOnline={}
+                            />
+                        <div className={styles.loc}>
+                            {country}{state ? ', ' + state : ''}
+                        </div>
                     </div>
                 </motion.div>
             )   : (
@@ -193,12 +205,22 @@ const Card:FC<cardPropsType> = ({
                     
                 </div>
                 <div className={styles.label}>
-                    <span className={styles.name}>
+                    {/* <span className={styles.name}>
                         {name}
                     </span>,
                     <span className={styles.age}>
                         {` ${age}`}
-                    </span>
+                    </span> */}
+                    <UserTitle
+                            username={name}
+                            age={age ? age.toString() : ''}
+                            textBold
+                            style={{color: '#fff', fontSize: 30, lineHeight: '40px'}}
+                            // isOnline={}
+                            />
+                        <div className={styles.loc}>
+                            {country}{state ? ', ' + state : ''}
+                        </div>
                 </div>
             </div>
             )

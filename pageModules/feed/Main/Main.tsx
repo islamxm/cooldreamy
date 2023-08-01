@@ -20,47 +20,6 @@ export type ResultType = { [k in SwipeType]: number };
 
 
 
-// const mock: IFeedCard[] = [
-//     {
-//         name: 'Name 1',
-//         age: 23,
-//         avatar_url_thumbnail: img,
-//         id: 1
-//     },
-//     {
-//         name: 'Name 2',
-//         age: 20,
-//         avatar_url_thumbnail: img,
-//         id: 2
-//     },
-//     {
-//         name: 'Name 3',
-//         age: 20,
-//         avatar_url_thumbnail: img,
-//         id: 3
-//     },
-//     {
-//         name: 'Name 4',
-//         age: 20,
-//         avatar_url_thumbnail: img,
-//         id: 4
-//     },
-//     {
-//         name: 'Name 5',
-//         age: 20,
-//         avatar_url_thumbnail: img,
-//         id: 5
-//     },
-//     {
-//         name: 'Name 6',
-//         age: 20,
-//         avatar_url_thumbnail: img,
-//         id: 6
-//     }
-// ]
-
-
-
 const Main = () => {
     const {token} = useAppSelector(s => s);
 
@@ -161,7 +120,9 @@ const Main = () => {
     }, [list])
 
 
-
+    useEffect(() => {
+        console.log(list)
+    }, [list])
 
     
 
