@@ -1142,6 +1142,21 @@ class ApiService {
             console.log(err)
         }
     }
+
+    getChatFilterCount = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getChatFilterCount, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

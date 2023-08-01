@@ -1,48 +1,52 @@
 import styles from './Filter.module.scss';
 import Tabs from '@/components/Tabs/Tabs';
-import {useState, FC} from 'react';
+import {useState, FC, useEffect} from 'react';
 import { IChatFilterType, chatTabsType } from '../../types';
 import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useWindowSize } from 'usehooks-ts';
+import ApiService from '@/service/apiService';
 
 
-const tabsList = [
-    {
-        id: '1',
-        // badge: 3,
-        label: 'Все переписки'
-    },
-    {
-        id: '3',
-        // badge: 0,
-        label: 'Избранные'
-    },
-    // {
-    //     id: '2',
-    //     // badge: 3,
-    //     label: 'Непрочитанные'
-    // },
-    // {
-    //     id: '4',
-    //     // badge: 0,
-    //     label: 'Игнорируемые'
-    // }
-]
+interface I {
+    tabsBadgeCount?: any
+}
+
+const service = new ApiService()
 
 
-
-
-
-const Filter:FC<IChatFilterType> = ({
+const Filter:FC<IChatFilterType & I> = ({
     activeType,
     onTypeChange,
 
     activeFilter,
     onFilterChange
 }) => {
-    const {locale, unreadChatCount} = useAppSelector(s => s)
+    const {locale, unreadChatCount, token} = useAppSelector(s => s)
     const {width} = useWindowSize()
+    const [countData, setCountData] = useState<any>()
+    const [filterTabs, setFilterTabs] = useState<any[]>([
+        {
+            id: 'all',
+            label: locale?.chatPage?.filter_tabs?.all,
+            badge: unreadChatCount
+            
+        },
+        {
+            id: 'unread',
+            label: locale?.chatPage?.filter_tabs?.notread,
+            badge: unreadChatCount
+        },
+        {
+            id: 'favorite',
+            label: locale?.chatPage?.filter_tabs?.favs,
+            
+        },
+        {
+            id: 'ignored',
+            label: locale?.chatPage?.filter_tabs?.ignored
+        }
+    ])
 
     const modeTabs = [
         {
@@ -58,27 +62,17 @@ const Filter:FC<IChatFilterType> = ({
     ]
 
 
-    const filterTabs = [
-        {
-            id: 'all',
-            label: locale?.chatPage?.filter_tabs?.all,
-            badge: unreadChatCount
-            
-        },
-        {
-            id: 'unread',
-            label: locale?.chatPage?.filter_tabs?.notread,
-            badge: unreadChatCount
-        },
-        {
-            id: 'favorite',
-            label: locale?.chatPage?.filter_tabs?.favs
-        },
-        {
-            id: 'ignored',
-            label: locale?.chatPage?.filter_tabs?.ignored
-        }
-    ]
+
+
+    // useEffect(() => {
+    //     if(countData) {
+    //         setFilterTabs(s => {
+    //             const m = [...s]
+    //             const rm = m.splice(2,1,{...s[2], badge: countData?.favorites})
+    //             return [...m]
+    //         })
+    //     }
+    // }, [countData])
 
     const switchActiveType = (type?: chatTabsType) => {
         switch(type) {
@@ -99,6 +93,12 @@ const Filter:FC<IChatFilterType> = ({
                 }
         }
     }
+
+    useEffect(() => {
+        token && service.getChatFilterCount(token).then(res => {
+            setCountData(res)
+        })
+    }, [token])
 
 
     return (

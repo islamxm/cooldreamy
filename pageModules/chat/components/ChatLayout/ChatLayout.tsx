@@ -85,7 +85,7 @@ const ChatLayout = () => {
                 page: dialogsPage,
                 search: dialogSearchDebounce
             }, token).then(res => {
-   
+                
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -460,6 +460,8 @@ const ChatLayout = () => {
                                         onFilterChange={setFilter}
                                         activeType={chatType}
                                         onTypeChange={setChatType}
+
+                                        // tabsBadgeCount={}
                                         />
                                 </div>
                             </Col>

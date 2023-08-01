@@ -13,7 +13,8 @@ import {motion} from 'framer-motion';
 import Button from '../Button/Button';
 import notify from '@/helpers/notify';
 import Router, { useRouter } from 'next/router';
-
+import PromoModal from '@/popups/PromoModal/PromoModal';
+import Link from 'next/link';
 
 const service = new ApiService()
 
@@ -51,30 +52,45 @@ const Sidebar:FC = () => {
             data-close
             className={`${styles.wrapper} ${isMenuOpen ? styles.active : ''}`}>
             <div data-close className={styles.in}>
-                <Col span={24}>
-                    <Row gutter={[15, 15]}>
-                        <Col span={24}>
-                            <MyCard
-                                {...userData}
-                                /> 
-                        </Col>
-                        <Col span={24}>
-                            <Button
-                                text={locale?.global?.menu?.buy_credits}
-                                onClick={() => Router.push('/deposit')}
-                                middle
-                                fill
-                                variant={'default'}
-                                />
-                            {/* <PremiumBtn/> */}
-                        </Col>
-                        <Col span={24}>
-                            <Menu/>
-                        </Col>
-                    </Row>
-                </Col>
+                <Row gutter={[15, 15]}>
+                    <Col span={24}>
+                        <MyCard
+                            {...userData}
+                            /> 
+                    </Col>
+                    <Col span={24}>
+                        <Button
+                            text={locale?.global?.menu?.buy_credits}
+                            onClick={() => Router.push('/deposit')}
+                            middle
+                            fill
+                            variant={'default'}
+                            />
+                        {/* <PremiumBtn/> */}
+                    </Col>
+                    <Col span={24}>
+                        <Menu/>
+                    </Col>
+                    
+                </Row>
             </div>
-            
+            <motion.button 
+                whileTap={{
+                    scale: 0.9,
+                    transition: {type: "spring", stiffness: 400, damping: 17}
+                }} 
+                transition={{type: 'spring', stiffness: 400, damping: 17}}
+                initial={{scale: 0, opacity: 0}}
+                animate={{scale: 1, opacity: 1}}
+                exit={{scale: 0, opacity: 0}}
+                whileHover={{boxShadow: '0.872px 9.962px 20px rgba(251, 179, 69, .5)'}}
+                className={styles.promo}>
+                Promo
+            </motion.button>
+
+            <PromoModal
+                // open
+                />
         </motion.div>
     )
 }

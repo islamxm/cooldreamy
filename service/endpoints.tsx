@@ -129,7 +129,9 @@ const endpoints = {
 
     getPromo: `${API_PATH}payments/promotions/list`,
 
-    activatePay: `${API_PATH}payments/promotions/activate`
+    activatePay: `${API_PATH}payments/promotions/activate`,
+
+    getChatFilterCount: `${API_PATH}chats/statistics`
 
 
 }
