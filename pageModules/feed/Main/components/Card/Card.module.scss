@@ -29,6 +29,7 @@
         user-select: none;
         pointer-events: none;
         position: relative;
+        background-color: var(--light_purp_2);
 
         &:after {
             position: absolute;
