@@ -53,16 +53,13 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         onCancel && onCancel()
         dispatch(updateCurrentProfileUiid(null))
     }
-
-
-    
+  
 
 
     useEffect(() => {
         if(currentProfileId && token) {
             setLoad(true)
             service.getProfile({user_id: currentProfileId}, token).then(res => {
-                console.log(res)
                 if(res) {
                     setData(res)
                 }
@@ -73,14 +70,15 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     }, [currentProfileId, token])
 
 
+
     const onLike = () => {
         if(token) {
             service.feedItemLike({id: Number(id)}, token).then(res => {
-                console.log(res)
                 if(res?.message === 'success') {
-                    notify('User Liked', 'SUCCESS')
+                    onClose()
+                    notify(locale?.global?.notifications?.liked, 'SUCCESS')
                 } else {
-                    notify('User Already Liked', 'ERROR')
+                    notify(locale?.global?.notifications?.already_liked, 'ERROR')
                 }
             })
         }
@@ -90,17 +88,15 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     const onFavorite = () => {  
         if(token) {
             service.addUserToFav({user_id: Number(id)}, token).then(res => {
-                console.log(res)
                 if(res?.status === 200) {
-                    notify('Вы добавили в избранное', 'SUCCESS')
+                    notify(locale?.global?.notifications?.add_to_fav, 'SUCCESS')
+                    onClose()
                 } else {
-                    notify('Вы уже добавили данного пользователя в избранные', 'ERROR')
+                    notify(locale?.global?.notifications?.already_added_to_fav, 'ERROR')
                 }
             })
         }
     }   
-
-
     
     const createChat = () => {
         if(id && token) {
@@ -111,15 +107,12 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                     onClose()
                 }
             }).finally(() => setCreateChatLoad(false))
-
             // !! параллельное создание чата писем
-            service.createMail({user_id: id}, token).then(res => {
+            // service.createMail({user_id: id}, token).then(res => {
                 
-            }).finally(() => setCreateChatLoad(false))
+            // }).finally(() => setCreateChatLoad(false))
         }
     }
-
-
 
     const onWink = () => {
         if(id && token) {
@@ -127,8 +120,9 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                 if(res?.chat_id) {
                     service.sendWink({user_id: id}, token).then(r => {
                         if(r?.error) {
-                            notify('Вы уже подмигнули', 'ERROR')
+                            notify(locale?.global?.notifications?.already_wink, 'ERROR')
                         } else {
+                            onClose()
                             Router.push(`/chat/${res?.chat_id}?type=chat`)
                         }
                     })
@@ -136,7 +130,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
             })
         }
     }
-
 
 
     return (
@@ -289,7 +282,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                             about_self ? (
                                                 <Col span={24}>
                                                     <div className={styles.part}>
-                                                        <div className={styles.label}>О себе</div>
+                                                        <div className={styles.label}>{locale?.profilePage?.info?.about}</div>
                                                         <div className={styles.value}>{about_self}</div>
                                                     </div>
                                                 </Col>

@@ -3,7 +3,7 @@ import {FC, useState, useEffect, useCallback, memo} from 'react';
 import { chatMessageTypes, dialogItemType } from '@/pageModules/chat/types';
 import Avatar from '@/components/Avatar/Avatar';
 import img from '@/public/assets/images/avatar-placeholder.png';
-import {BsCheckAll} from 'react-icons/bs';
+import {BsCheckAll, BsCheck} from 'react-icons/bs';
 import Moment from 'react-moment';
 import Image from 'next/image';
 import {motion} from 'framer-motion';
@@ -266,7 +266,7 @@ const DialogItemComponent:FC<I> = ({
                             {
                                 status === 'unread' && (
                                     <div className={`${styles.ex} ${styles.unread}`}>
-                                        <div className={styles.icon}><BsCheckAll/></div>
+                                        <div className={styles.icon}><BsCheck/></div>
                                     </div>
                                 )
                             }

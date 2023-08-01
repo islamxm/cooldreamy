@@ -122,6 +122,13 @@ const en: ILocale = {
           error_email_verify: 'E-mail not verified',
           success_email_verify: 'E-mail verified',
 
+          add_to_fav: "You've added to favorites",
+        already_added_to_fav: "You've already added this user to your favorites.",
+
+        liked: "You've given a like.",
+        already_liked: "You've already liked this user before.",
+        already_wink: "You've already winked at this user before.",
+
           get_gift: 'You received a gift!',
           get_pic: 'Photo',
           get_sticker: 'You received a sticker!',

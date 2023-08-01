@@ -61,6 +61,10 @@ const SearchBody = () => {
     const [isFilterChanged, setIsFilterChanged] = useState(false)
 
     useEffect(() => {
+        console.log(list)
+    }, [list])
+
+    useEffect(() => {
         if(token) {
             service.getAllPrompts(token).then(res => {
                 if(res) {

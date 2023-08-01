@@ -8,7 +8,7 @@ import {Row, Col} from 'antd';
 import LinesEllipsis from 'react-lines-ellipsis'
 
 import Badge from '@/components/Badge/Badge';
-import {BiCheckDouble} from 'react-icons/bi';
+import {BiCheckDouble, BiCheck} from 'react-icons/bi';
 import {AiOutlineStar, AiFillStar} from 'react-icons/ai';
 import Avatar from '@/components/Avatar/Avatar';
 import Router, { useRouter } from 'next/router';
@@ -46,15 +46,12 @@ const ChatItem = ({
     filter,
     uuid,
     unread_messages_count
-
 }:I) => {
     const dispatch = useAppDispatch()
     const {query} = useRouter()
     const {type} = query || null
     const {token} = useAppSelector(s => s)
     const {avatar_url, avatar_url_thumbnail, name, age, online, user_avatar_url, user_thumbnail_url} = another_user || {};
-    
-
 
 
 
@@ -62,10 +59,9 @@ const ChatItem = ({
         switch(type) {
             case chatMessageTypeVariants.messageImage:
                 return (
-                    'Картинка'
+                    'Picture'
                 )
             case chatMessageTypeVariants.messageText:
-                
                 return  (
                     typeof last_message?.chat_messageable?.text === 'string' ? (
                                             <LinesEllipsis
@@ -73,15 +69,18 @@ const ChatItem = ({
                         maxLine={2}
                         />
                     ) : null
-
                 )
             case chatMessageTypeVariants.messageWink:
                 return (
-                    'Подмигивание'
+                    'Wink'
                 )
             case chatMessageTypeVariants.messageGift:
                 return (
-                    'Подарок'
+                    'Gift'
+                )
+            case chatMessageTypeVariants.messageSticker:
+                return (
+                    'Sticker'
                 )
             default:
                 return null
@@ -132,6 +131,7 @@ const ChatItem = ({
         }
     }
 
+
  
 
     if(type === 'chat') {
@@ -148,7 +148,6 @@ const ChatItem = ({
                     if(another_user?.id) {
                         dispatch(updateCurrentProfileId(another_user?.id))
                         dispatch(updateCurrentProfileUiid(uuid))
-                        
                     }
                 }} className={styles.avatar}>
                     <Avatar
@@ -205,9 +204,19 @@ const ChatItem = ({
                                         />
                                 </div>
                             ) : (
-                                <div className={styles.item}>
-                                    <BiCheckDouble/>
-                                </div>
+                                last_message && (
+                                    last_message?.is_read_by_recepient === 1 ? (
+                                        <div className={styles.item}>
+                                            <BiCheckDouble/>
+                                        </div>
+                                    ) : (
+                                        <div className={styles.item} style={{color: 'var(--gray)'}}>
+                                            <BiCheck/>
+                                        </div>
+                                    )
+                                )
+                                
+                                
                             )
                         }
                     </div>

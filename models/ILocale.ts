@@ -120,6 +120,14 @@ export interface ILocale {
             success_email_verify: string,
             error_email_verify: string,
 
+            add_to_fav: string,
+            already_added_to_fav: string,
+
+            liked: string,
+            already_liked: string
+
+            already_wink: string
+
             get_gift: string,
             get_pic: string,
             get_sticker: string,

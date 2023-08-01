@@ -8,6 +8,7 @@ import Avatar from '@/components/Avatar/Avatar';
 import { IUser } from '@/models/IUser';
 import UserLocation from '@/components/UserLocation/UserLocation';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import {AiFillDollarCircle} from 'react-icons/ai';
 import {useEffect} from 'react';
 
 const MyCard:FC<IUser> = ({
@@ -46,7 +47,7 @@ const MyCard:FC<IUser> = ({
             </div>
             <div className={styles.balance}>
                 <Link href={'/deposit'}>
-                {locale?.global.my_card.balance.title}: {credits ? credits : 0} {locale?.global.my_card.balance.label}
+                {locale?.global.my_card.balance.title}: {credits ? credits : 0} <span><AiFillDollarCircle/></span>
                 </Link>
                 
             </div>

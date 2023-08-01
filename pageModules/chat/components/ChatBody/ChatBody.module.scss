@@ -96,6 +96,12 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+
+                .body {
+                    .body_wr {
+                        padding-bottom: 100px;
+                    }
+                }
             }
 
             .avatar {
