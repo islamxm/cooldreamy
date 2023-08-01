@@ -122,9 +122,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
 
 
     const onWink = () => {
-
         if(id && token) {
-
             service.createChat({user_id: id}, token).then(res => {
                 if(res?.chat_id) {
                     service.sendWink({user_id: id}, token).then(r => {
@@ -133,8 +131,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                         } else {
                             Router.push(`/chat/${res?.chat_id}?type=chat`)
                         }
-                        // условие
-                        
                     })
                 }
             })
@@ -244,7 +240,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                     </div>
                                 )
                             }
-                            
                             <div className={styles.body}>
                                 <div className={styles.body_action}>
                                     <button onClick={onLike} className={styles.item}>

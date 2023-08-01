@@ -257,12 +257,18 @@ const DialogItemComponent:FC<I> = ({
                             className={styles.message}>
                             {switchMessageType(type)}
                             {
-                                status === 'read' ? (
+                                status === 'read' && (
                                     <div className={styles.ex}>
-                                        <div className={styles.label}>Просмотрено</div>
                                         <div className={styles.icon}><BsCheckAll/></div>
                                     </div>
-                                ) : null
+                                )
+                            }
+                            {
+                                status === 'unread' && (
+                                    <div className={`${styles.ex} ${styles.unread}`}>
+                                        <div className={styles.icon}><BsCheckAll/></div>
+                                    </div>
+                                )
                             }
                         </div>
                         

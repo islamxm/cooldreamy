@@ -102,6 +102,7 @@
                 bottom: -10px;
                 right: 0;
 
+
                 .icon {
                     color: var(--violet);
                     line-height: 100%;
@@ -111,6 +112,15 @@
                     font-size: 18px;
                 }
             }
+
+
+
+            .ex.unread {
+                .icon {
+                    color: var(--gray);
+                }
+            }
+            
 
             
         }    
