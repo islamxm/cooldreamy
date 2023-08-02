@@ -28,6 +28,7 @@ import StepEx from '../../steps/StepEx/StepEx';
 import StepMail from '../../steps/StepMail/StepMail';
 import { IUser } from '@/models/IUser';
 import notify from '@/helpers/notify';
+import LOCAL_STORAGE from '@/helpers/localStorage';
 
 
 
@@ -209,8 +210,11 @@ const Body:FC = () => {
                     })
                     dispatch(updateToken(res?.token))
                     dispatch(updateUserId(res?.id))
-                    Cookies.set('cooldate-web-user-id', res?.id)
-                    Cookies.set('cooldate-web-token', res?.token)
+                    
+                    LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
+                    LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
+                    // Cookies.set('cooldate-web-user-id', res?.id)
+                    // Cookies.set('cooldate-web-token', res?.token)
 
                     setCurrentStep(s => s + 1)
                 }

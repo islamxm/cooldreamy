@@ -21,6 +21,7 @@ import TagManager from 'react-gtm-module';
 import ApiService from '@/service/apiService';
 import notify from '@/helpers/notify';
 import { updateSoonModal } from '@/store/actions';
+import LOCAL_STORAGE from '@/helpers/localStorage';
 const service = new ApiService()
 
 const locales = [
@@ -41,16 +42,16 @@ const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
     const onLogout = () => {
         if(token) {
             service.logout(token).then(res => {
-                console.log(res)
                 if(res?.message === 'success') {
                     socketChannel?.unsubscribe()
 
                     dispatch(updateToken(''))
                     dispatch(updateUserId(null))
                     dispatch(updateSocket(null))
-
-                    Cookies.remove('cooldate-web-user-id')
-                    Cookies.remove('cooldate-web-token')
+                    LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
+                    LOCAL_STORAGE?.removeItem('cooldate-web-token')
+                    // Cookies.remove('cooldate-web-user-id')
+                    // Cookies.remove('cooldate-web-token')
                     
                     Router.push('/')
                     setLogoutModal(false)

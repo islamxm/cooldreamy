@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import notify from '@/helpers/notify';
 import { useWindowSize } from 'usehooks-ts';
 import LimitModal from '@/popups/LimitModal/LimitModal';
+import LOCAL_STORAGE from '@/helpers/localStorage';
 const service = new ApiService()
 
 const LoginModal:FC<ModalFuncProps> = (props) => {
@@ -54,8 +55,8 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             password
         }).then(res => {
             if(res?.token) {
-                Cookies.set('cooldate-web-token', res?.token)
-                Cookies.set('cooldate-web-user-id', res?.id)
+                LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
+                LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
                 dispatch(updateToken(res?.token))
                 dispatch(updateUserId(res?.id))
                 

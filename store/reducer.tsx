@@ -6,6 +6,7 @@ import ru from "@/locales/ru";
 import en from "@/locales/en";
 
 import { ILocale } from "@/models/ILocale";
+import LOCAL_STORAGE from "@/helpers/localStorage";
 
 
 export interface IGlobalState {
@@ -43,8 +44,8 @@ export interface IGlobalState {
 
 
 export const globalState: IGlobalState = {
-    userId: process?.browser && Cookies.get('cooldate-web-user-id') ? Cookies.get('cooldate-web-user-id') : null,
-    token: process?.browser && Cookies.get('cooldate-web-token') ? Cookies.get('cooldate-web-token') : null,
+    userId: process?.browser && LOCAL_STORAGE?.getItem('cooldate-web-user-id') ? LOCAL_STORAGE.getItem('cooldate-web-user-id') : null,
+    token: process?.browser && LOCAL_STORAGE?.getItem('cooldate-web-token') ? LOCAL_STORAGE.getItem('cooldate-web-token') : null,
     socketChannel: null,
     userData: null,
     isMenuOpen: false,

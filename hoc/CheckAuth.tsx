@@ -5,6 +5,7 @@ import { NextPage } from 'next';
 import { Cookies } from 'typescript-cookie';
 import { updateToken, updateUserId, updateSocket } from '@/store/actions';
 import UnvWrapper from './UnvWrapper';
+import LOCAL_STORAGE from '@/helpers/localStorage';
 
 const PrivateRoute = ({
     children
@@ -21,8 +22,8 @@ const PrivateRoute = ({
     useEffect(() => {
         if(router) {
             if(token === null) {
-                process?.browser && Cookies.remove('cooldate-web-token')
-                process?.browser && Cookies.remove('cooldate-web-user-id')
+                process?.browser && LOCAL_STORAGE?.removeItem('cooldate-web-token')
+                process?.browser && LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
 
                 socketChannel && socketChannel?.unsubscribe()
 
