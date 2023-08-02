@@ -48,6 +48,32 @@ const Filter:FC<IChatFilterType & I> = ({
         }
     ])
 
+
+    useEffect(() => {
+        setFilterTabs([
+            {
+                id: 'all',
+                label: locale?.chatPage?.filter_tabs?.all,
+                badge: unreadChatCount
+                
+            },
+            {
+                id: 'unread',
+                label: locale?.chatPage?.filter_tabs?.notread,
+                badge: unreadChatCount
+            },
+            {
+                id: 'favorite',
+                label: locale?.chatPage?.filter_tabs?.favs,
+                
+            },
+            {
+                id: 'ignored',
+                label: locale?.chatPage?.filter_tabs?.ignored
+            }
+        ])
+    }, [unreadChatCount])
+
     const modeTabs = [
         {
             id: '1',
