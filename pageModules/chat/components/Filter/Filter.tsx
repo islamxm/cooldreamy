@@ -129,7 +129,6 @@ const Filter:FC<IChatFilterType & I> = ({
                             if(e == '2') {
                                 Router.push('/chat?type=mail')
                             }
-                            
                         }}
                         activeItem={switchActiveType(activeType).value}
                         style={{backgroundColor: 'var(--light_purp_1)'}}

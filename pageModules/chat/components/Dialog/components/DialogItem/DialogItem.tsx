@@ -272,13 +272,13 @@ const DialogItemComponent:FC<I> = ({
                             }
                         </div>
                         
-                        {/* <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
+                        <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
                                 image={avatar}
                                 size={40}
                                 />
-                        </div> */}
+                        </div>
                     </div>
                 ) : (
                     <div className={`${styles.body} ${styles.you}`}>
