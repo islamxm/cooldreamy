@@ -24,6 +24,7 @@ import { useRouter } from 'next/router';
 import 'moment/locale/ru'
 import moment from 'moment';
 import { useWindowSize } from 'usehooks-ts';
+import Div100vh from 'react-div-100vh'
 
 
 
@@ -81,6 +82,7 @@ function App({ Component, pageProps }: AppProps) {
 		<Provider store={store}>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 				<PrivateRoute>
+					<Div100vh>
 					<MainWrapper>
 							<AnimatePresence>
 								{wc ? <WcLoader/> : null}
@@ -106,7 +108,10 @@ function App({ Component, pageProps }: AppProps) {
 									router?.pathname === '/unavailable' ? null : <Footer/>
 								)
 							}
-						</MainWrapper>
+						</MainWrapper>	
+					</Div100vh>
+				
+					
 				</PrivateRoute>
 			</ConfigProvider>
 

@@ -11,7 +11,9 @@ import {Elements} from '@stripe/react-stripe-js';
 import Button from '@/components/Button/Button';
 import PayForm from '../PayForm/PayForm';
 import { useWindowSize } from 'usehooks-ts';
+import { StripeElementLocale } from '@stripe/stripe-js';
 import { PulseLoader } from 'react-spinners';
+import { useRouter } from 'next/router';
 
 const service = new ApiService()
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
@@ -26,6 +28,7 @@ const Main = () => {
     const [promo, setPromo] = useState<any>(null)
     const [load, setLoad] = useState(false)
     const [type, setType] = useState<string>('')
+    const router = useRouter()
 
     const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
 
@@ -37,7 +40,6 @@ const Main = () => {
         if(token) {
             service.getPayPlans(token).then(res => {
                 setList(res)
-                console.log(res)
                 setType('credit')
             })
         }
@@ -46,7 +48,6 @@ const Main = () => {
     const getPromo = () => {
         if(token) {
             service.getPromo(token).then(res => {
-                console.log(res)
                 if(res?.data?.length > 0) {
                     setPromo(res?.data[0]?.promotion)
                     setType('promotion')
@@ -98,6 +99,7 @@ const Main = () => {
         }
     }
 
+    // const stripeLocale: StripeElementLocale = router?.locale || 'auto'
 
     return (
         <div className={styles.wrapper}>
@@ -338,7 +340,7 @@ const Main = () => {
                             (secretKey && stripePromise) && (
                                 <Elements
                                     stripe={stripePromise}
-                                    options={{clientSecret: secretKey}}
+                                    options={{clientSecret: secretKey, locale: 'en'}}
                                     >
                                     <PayForm type={type} plan={selectedPlan}/>
                                 </Elements>
