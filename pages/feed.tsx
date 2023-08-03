@@ -16,7 +16,7 @@ const FeedPage = () => {
                 <MainLayout style={{padding: 0}}>
                     {/* <Sidebar/> */}
                     <Main/>
-                    <Navbar/>
+                    {/* <Navbar/> */}
                     {/* <div
                         style={{display: 'flex', flexDirection: 'column', width: '100%', height: '100%'}}
                         >

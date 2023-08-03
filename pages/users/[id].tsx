@@ -68,7 +68,7 @@ const UserPage:FC = () => {
     return (
         <Container>
             <MainLayout>
-                <Sidebar/>
+                {/* <Sidebar/> */}
                 <UserLayout
                     side={
                         width <= 1000 ? (

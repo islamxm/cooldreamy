@@ -10,8 +10,8 @@ const PremiumPage = () => {
     return (
         <Container>
             <MainLayout>
-                <Sidebar/>
-                <Navbar/>
+                {/* <Sidebar/>
+                <Navbar/> */}
                 <Main/>
             </MainLayout>
         </Container>

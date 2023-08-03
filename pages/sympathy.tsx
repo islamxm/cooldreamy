@@ -114,8 +114,8 @@ const SymPage = () => {
     return (
         <Container>
             <MainLayout>
-                <Navbar/>
-                <Sidebar/>
+                {/* <Navbar/>
+                <Sidebar/> */}
                 <div style={{width: '100%'}}>
                     <Row gutter={[15,15]}>
                         <Col span={24}>

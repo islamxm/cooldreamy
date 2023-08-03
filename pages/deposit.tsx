@@ -9,8 +9,8 @@ const DepositPage = () => {
     return (
         <Container>
             <MainLayout>
-                <Sidebar/>
-                <Navbar/>
+                {/* <Sidebar/>
+                <Navbar/> */}
                 <Main/>
             </MainLayout>
         </Container>
