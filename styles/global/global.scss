@@ -62,9 +62,8 @@ body {
     overflow-x: hidden;
 
     min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: calc((var(--vh, 1vh) * 100) - 60px);
 }
-
 
 
 body.unavailable {
@@ -82,7 +81,7 @@ main {
     main {
         // padding-top: 40px;
         padding-top: 0;
-        height: calc(100% - 120px);
+        // height: calc(100% - 120px);
         border: 1px solid green;
 
         // padding-bottom: 56px;
