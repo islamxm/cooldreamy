@@ -96,8 +96,11 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                
+                
 
                 .body {
+
                     .body_wr {
                         padding-bottom: 100px;
                     }
@@ -111,11 +114,22 @@
             }
         }
 
+        .main {
+            display: flex;
+            flex-direction: column;
+            
+            .body {
+                border: 1px solid green;
+
+                .body_action {
+                    top: 40px;            
+                }
+            }
+        }
+
         .sidebar {
             width: 100%;
             padding-bottom: 60px;
-            
-
         }
     }
 }
