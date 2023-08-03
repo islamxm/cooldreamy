@@ -60,9 +60,9 @@ const Body:FC = () => {
 
     const [countryDef, setCountryDef] = useState<any>(null)
     const [stateDef, setStateDef] = useState<any>(null)
-    const [country, setCountry] = useState<any>()
+    const [country, setCountry] = useState<any>({value: 2, label: 'USA'})
     const [state, setState] = useState<any>()
-    const [language, setLanguage] = useState<any>(null)
+    const [language, setLanguage] = useState<any>('en')
     const [btnDisable, setBtnDisable] = useState(false)
 
 

@@ -112,7 +112,7 @@ const StepEx:FC<IStepEx> = ({
                                 <SelectDef
                                     onClear={() => setCountry && setCountry(null)}
                                     isRound
-                                    value={country?.id}
+                                    value={country?.value}
                                     list={countryList}
                                     
                                     placeholder='Country'
