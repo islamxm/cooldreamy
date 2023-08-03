@@ -82,8 +82,10 @@ function App({ Component, pageProps }: AppProps) {
 		<Provider store={store}>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 				<PrivateRoute>
-					<Div100vh>
-					<MainWrapper>
+					{/* <Div100vh>
+					
+					</Div100vh> */}
+				<MainWrapper>
 							<AnimatePresence>
 								{wc ? <WcLoader/> : null}
 							</AnimatePresence>
@@ -109,8 +111,6 @@ function App({ Component, pageProps }: AppProps) {
 								)
 							}
 						</MainWrapper>	
-					</Div100vh>
-				
 					
 				</PrivateRoute>
 			</ConfigProvider>
