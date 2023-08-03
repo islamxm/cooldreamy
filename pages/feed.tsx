@@ -4,6 +4,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Main from "@/pageModules/feed/Main/Main";
 import Navbar from "@/components/Navbar/Navbar";
 import { useWindowSize } from "usehooks-ts";
+import Div100vh from 'react-div-100vh'
 
 const FeedPage = () => {
     const {width} = useWindowSize()
@@ -13,9 +14,11 @@ const FeedPage = () => {
         return (
             <Container style={{padding: 0}}>
                 <MainLayout style={{padding: 0}}>
-                    <Sidebar/>
+                    {/* <Sidebar/> */}
                     <Navbar/>
-                    <Main/>
+                    <Div100vh style={{width: '100%'}}>
+                        <Main/>
+                    </Div100vh>
                 </MainLayout>
             </Container>
         )
@@ -24,7 +27,7 @@ const FeedPage = () => {
     return (
         <Container>
             <MainLayout>
-                <Sidebar/>
+                {/* <Sidebar/> */}
                 <Navbar/>
                 <Main/>
             </MainLayout>

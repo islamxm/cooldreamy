@@ -49,10 +49,16 @@
         // padding: 10px 0;
         padding: 0;
         position: relative;
+        border: 1px solid red;
+        height: 100%;
+        width: 100%;
+        justify-content: flex-start;
+    
 
         .slider {
             width: 100%;
-            height: calc(100vh - 60px);
+            // height: calc(100vh - 60px);
+            height: calc(100% - 60px);
             
             // .item {
             //     height: 100%;
@@ -61,7 +67,7 @@
 
         .action {
             position: absolute;
-            bottom: 0;
+            bottom: 60px;
             left: 0;
             width: 100%;
         }

@@ -120,9 +120,7 @@ const Main = () => {
     }, [list])
 
 
-    useEffect(() => {
-        console.log(list)
-    }, [list])
+
 
     
 
