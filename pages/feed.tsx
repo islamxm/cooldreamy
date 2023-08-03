@@ -15,17 +15,16 @@ const FeedPage = () => {
             <Container style={{padding: 0}}>
                 <MainLayout style={{padding: 0}}>
                     {/* <Sidebar/> */}
-                    <Div100vh style={{width: '100%'}}>
-                    <div
+                    <Main/>
+                    <Navbar/>
+                    {/* <div
                         style={{display: 'flex', flexDirection: 'column', width: '100%', height: '100%'}}
                         >
-                        <Main/>
+                        
                         <Navbar
                         style={{position: 'static', flex: '0 0 auto'}}
                         />
-                    </div>
-                    </Div100vh>
-                    
+                    </div> */}
 
                 </MainLayout>
             </Container>
