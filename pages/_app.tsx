@@ -25,6 +25,7 @@ import 'moment/locale/ru'
 import moment from 'moment';
 import { useWindowSize } from 'usehooks-ts';
 import Div100vh from 'react-div-100vh'
+import Navbar from '@/components/Navbar/Navbar';
 
 
 
@@ -103,6 +104,9 @@ function App({ Component, pageProps }: AppProps) {
 							<main>
 								<Component {...pageProps} />
 							</main>
+
+							<Navbar/>
+							
 							{
 								width <= 768 && router?.pathname?.includes('/chat') ? (
 									null
