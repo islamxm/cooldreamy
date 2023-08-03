@@ -9,8 +9,8 @@ const ChatPage = () => {
     return (
         <Container>
             <MainLayout>
-                <Sidebar/>
-                <Navbar/>
+                {/* <Sidebar/>
+                <Navbar/> */}
                 <ChatLayout/>
             </MainLayout>
         </Container>
