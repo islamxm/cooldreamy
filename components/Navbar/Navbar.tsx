@@ -8,15 +8,22 @@ import Link from 'next/link';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useRouter } from 'next/router';
 import Avatar from '../Avatar/Avatar';
+import { CSSProperties } from 'react';
 
 
 
-const Navbar = () => {
+const Navbar = ({
+    fixed = true,
+    style
+}: {
+    fixed?: boolean,
+    style?: CSSProperties
+}) => {
     const {unreadChatCount, userData} = useAppSelector(s => s)
     const {pathname} = useRouter()
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={style}>
             <div className={styles.in}>
                 <div className={styles.item}>
                     <Link className={`${styles.btn}`} href={'/profile'}>
