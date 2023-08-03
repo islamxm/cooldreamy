@@ -74,7 +74,7 @@ const Sidebar:FC = () => {
                     
                 </Row>
             </div>
-            <motion.button 
+            {/* <motion.button 
                 whileTap={{
                     scale: 0.9,
                     transition: {type: "spring", stiffness: 400, damping: 17}
@@ -86,7 +86,7 @@ const Sidebar:FC = () => {
                 whileHover={{boxShadow: '0.872px 9.962px 20px rgba(251, 179, 69, .5)'}}
                 className={styles.promo}>
                 Promo
-            </motion.button>
+            </motion.button> */}
 
             <PromoModal
                 // open
