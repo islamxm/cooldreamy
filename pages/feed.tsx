@@ -16,7 +16,7 @@ const FeedPage = () => {
                 <MainLayout style={{padding: 0}}>
                     {/* <Sidebar/> */}
                     <Main/>
-                    {/* <Navbar/> */}
+                 
                     {/* <div
                         style={{display: 'flex', flexDirection: 'column', width: '100%', height: '100%'}}
                         >
@@ -34,7 +34,7 @@ const FeedPage = () => {
     return (
         <Container>
             <MainLayout>
-                {/* <Sidebar/> */}
+                <Sidebar/>
                 <Navbar/>
                 <Main/>
             </MainLayout>

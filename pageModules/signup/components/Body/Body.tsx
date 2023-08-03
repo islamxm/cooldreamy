@@ -238,20 +238,18 @@ const Body:FC = () => {
             }
             if(token) {
                 service.updateMyProfile(updateBody, token).then(res => {
-                    console.log(res)
-                    console.log(updateBody)
+                  
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
-                        // 
+
                         service.getMyProfile(token).then(profile => {
                             console.log(profile)
                             if(!profile?.avatar_url) {
-                                Router.push(`/profile`)
+                                Router.push(`/search`)
                             } else Router.push(`/search`)
                         })
                     }
-                    
                 }).then(() => {
                     service.signupEnd(token).finally(() => setLoad(false))
                 })

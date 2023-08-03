@@ -8,8 +8,7 @@ const Notfound = () => {
     return (
         <Container>
             <MainLayout>
-                {/* <Navbar/>
-                <Sidebar/> */}
+                <Sidebar/>
                 <div style={{width: '100%'}}>
                     <h1>404 not found</h1>
                 </div>

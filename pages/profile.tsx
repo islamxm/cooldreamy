@@ -18,8 +18,7 @@ const Profile = () => {
     return (
         <Container>
             <MainLayout>
-                {/* <Sidebar/>
-                <Navbar/> */}
+                <Sidebar/>
                 <UserLayout
                     side={
                         width <= 1000 ? (

@@ -135,163 +135,172 @@ const ChatItem = ({
  
 
     if(type === 'chat') {
-        return (
-            <div  className={`${styles.wrapper} ${active ? styles.active : ''}`}>
-                {/* <Link href={`/users/${another_user?.id}`} className={styles.avatar}>
-                    <Avatar
-                        size={63}
-                        verified={is_confirmed_user == 1}
-                        image={avatar_url_thumbnail}    
-                        />
-                </Link> */}
-                <div onClick={() => {
-                    if(another_user?.id) {
-                        dispatch(updateCurrentProfileId(another_user?.id))
-                        dispatch(updateCurrentProfileUiid(uuid))
-                    }
-                }} className={styles.avatar}>
-                    <Avatar
-                        size={63}
-                        verified={is_confirmed_user == 1}
-                        image={user_thumbnail_url || user_avatar_url}    
-                        />
-                </div>
-                <div className={styles.body}>
-                    <Link
-                        href={`/chat/${id}?type=${type}`} 
-                        className={styles.main}>
-                        <Row gutter={[2,2]}>
-                            <Col span={24}>
-                                <UserTitle 
-                                    username={name}
-                                    age={age ? age.toString() : ''}
-                                    textBold
-                                    isOnline={online === 1}/>
-                            </Col>
-                            <Col span={24}>
-                                <div className={styles.dialog}>
-                                    {switchChatType(last_message?.chat_messageable_type)}
-                                </div>
-                            </Col>
-                        </Row>
-                    </Link>    
-                    <div className={styles.ex}>
-                        <div className={styles.item}>
+        if(!last_message) {
+            return <></>
+        } else {
+            return (
+                <div  className={`${styles.wrapper} ${active ? styles.active : ''}`}>
+                    {/* <Link href={`/users/${another_user?.id}`} className={styles.avatar}>
+                        <Avatar
+                            size={63}
+                            verified={is_confirmed_user == 1}
+                            image={avatar_url_thumbnail}    
+                            />
+                    </Link> */}
+                    <div onClick={() => {
+                        if(another_user?.id) {
+                            dispatch(updateCurrentProfileId(another_user?.id))
+                            dispatch(updateCurrentProfileUiid(uuid))
+                        }
+                    }} className={styles.avatar}>
+                        <Avatar
+                            size={63}
+                            verified={is_confirmed_user == 1}
+                            image={user_thumbnail_url || user_avatar_url}    
+                            />
+                    </div>
+                    <div className={styles.body}>
+                        <Link
+                            href={`/chat/${id}?type=${type}`} 
+                            className={styles.main}>
+                            <Row gutter={[2,2]}>
+                                <Col span={24}>
+                                    <UserTitle 
+                                        username={name}
+                                        age={age ? age.toString() : ''}
+                                        textBold
+                                        isOnline={online === 1}/>
+                                </Col>
+                                <Col span={24}>
+                                    <div className={styles.dialog}>
+                                        {switchChatType(last_message?.chat_messageable_type)}
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Link>    
+                        <div className={styles.ex}>
+                            <div className={styles.item}>
+                                {
+                                    favorite ? (
+                                        <IconButton
+                                            onClick={deleteFromFav}
+                                            size={20}
+                                            variant={'transparent'}
+                                            icon={<AiFillStar color='var(--violet)'/>}
+                                            />
+                                        
+                                    ) : (
+                                        <IconButton
+                                            onClick={addToFav}
+                                            size={20}
+                                            variant={'transparent'}
+                                            icon={<AiOutlineStar color='var(--violet)'/>}
+                                            />
+                                    )
+                                }
+                            </div>
                             {
-                                favorite ? (
-                                    <IconButton
-                                        onClick={deleteFromFav}
-                                        size={20}
-                                        variant={'transparent'}
-                                        icon={<AiFillStar color='var(--violet)'/>}
-                                        />
-                                    
+                                (unread_messages_count && unread_messages_count > 0) ? (
+                                    <div className={styles.item}>
+                                        <Badge
+                                            value={unread_messages_count}
+                                            />
+                                    </div>
                                 ) : (
-                                    <IconButton
-                                        onClick={addToFav}
-                                        size={20}
-                                        variant={'transparent'}
-                                        icon={<AiOutlineStar color='var(--violet)'/>}
-                                        />
+                                    last_message && (
+                                        last_message?.is_read_by_recepient === 1 ? (
+                                            <div className={styles.item}>
+                                                <BiCheckDouble/>
+                                            </div>
+                                        ) : (
+                                            <div className={styles.item} style={{color: 'var(--gray)'}}>
+                                                <BiCheck/>
+                                            </div>
+                                        )
+                                    )
+                                    
+                                    
                                 )
                             }
                         </div>
-                        {
-                            (unread_messages_count && unread_messages_count > 0) ? (
-                                <div className={styles.item}>
-                                    <Badge
-                                        value={unread_messages_count}
-                                        />
-                                </div>
-                            ) : (
-                                last_message && (
-                                    last_message?.is_read_by_recepient === 1 ? (
-                                        <div className={styles.item}>
-                                            <BiCheckDouble/>
-                                        </div>
-                                    ) : (
-                                        <div className={styles.item} style={{color: 'var(--gray)'}}>
-                                            <BiCheck/>
-                                        </div>
-                                    )
-                                )
-                                
-                                
-                            )
-                        }
-                    </div>
-                </div> 
-            </div>
-        )
+                    </div> 
+                </div>
+            )
+        }
     }
 
     if(type === 'mail') {
-        return (
-            <div className={`${styles.wrapper} ${active ? styles.active : ''}`}>
-                <div onClick={() => {
-                    if(another_user?.id) {
-                        dispatch(updateCurrentProfileId(another_user?.id))
-                        dispatch(updateCurrentProfileUiid(uuid))
-                    }
-                }} className={styles.avatar}>
-                    <Avatar
-                        size={63}
-                        verified={is_confirmed_user == 1}
-                        image={user_thumbnail_url || avatar_url_thumbnail}    
-                        />
-                </div>
-                <div className={styles.body}>
-                    <Link 
-                        href={`/chat/${id}?type=${type}`}
-                        className={styles.main}>
-                        <Row gutter={[2,2]}>
-                            <Col span={24}>
-                                <UserTitle 
-                                    username={name}
-                                    age={age ? age.toString() : ''}
-                                    textBold
-                                    isOnline={online === 1}/>
-                            </Col>
-                            <Col span={24}>
-                                <div className={styles.dialog}>
-                                    {
-                                        typeof last_message?.letter_messageable?.text === 'string' ? (
-                                            <LinesEllipsis
-                                                text={last_message?.letter_messageable?.text}
-                                                maxLine={2}
-                                        />
-                                        ) : null
-                                    }
-                                    
-                                </div>
-                            </Col>
-                        </Row>
-                    </Link>    
-                    <div className={styles.ex}>
-                        {/* <div className={styles.item}>
-                            {
-                                isFavourite ? (
-                                    <AiFillStar/>
-                                ) : (
-                                    <AiOutlineStar/>
-                                )
-                            }
-                        </div> */}
-                        {/* <div className={styles.item}>
-                            {
-                                status === 'unread' ? (
-                                    <Badge
-                                        value={unreadMesssageCount}
-                                        />
-                                ) : (
-                                    <BiCheckDouble/>
-                                )
-                            }
-                        </div> */}
+        if(!last_message) {
+            return <></>
+        } else {
+            return (
+                <div className={`${styles.wrapper} ${active ? styles.active : ''}`}>
+                    <div onClick={() => {
+                        if(another_user?.id) {
+                            dispatch(updateCurrentProfileId(another_user?.id))
+                            dispatch(updateCurrentProfileUiid(uuid))
+                        }
+                    }} className={styles.avatar}>
+                        <Avatar
+                            size={63}
+                            verified={is_confirmed_user == 1}
+                            image={user_thumbnail_url || avatar_url_thumbnail}    
+                            />
                     </div>
-                </div> 
-            </div>
-        )
+                    <div className={styles.body}>
+                        <Link 
+                            href={`/chat/${id}?type=${type}`}
+                            className={styles.main}>
+                            <Row gutter={[2,2]}>
+                                <Col span={24}>
+                                    <UserTitle 
+                                        username={name}
+                                        age={age ? age.toString() : ''}
+                                        textBold
+                                        isOnline={online === 1}/>
+                                </Col>
+                                <Col span={24}>
+                                    <div className={styles.dialog}>
+                                        {
+                                            typeof last_message?.letter_messageable?.text === 'string' ? (
+                                                <LinesEllipsis
+                                                    text={last_message?.letter_messageable?.text}
+                                                    maxLine={2}
+                                            />
+                                            ) : null
+                                        }
+                                        
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Link>    
+                        <div className={styles.ex}>
+                            {/* <div className={styles.item}>
+                                {
+                                    isFavourite ? (
+                                        <AiFillStar/>
+                                    ) : (
+                                        <AiOutlineStar/>
+                                    )
+                                }
+                            </div> */}
+                            {/* <div className={styles.item}>
+                                {
+                                    status === 'unread' ? (
+                                        <Badge
+                                            value={unreadMesssageCount}
+                                            />
+                                    ) : (
+                                        <BiCheckDouble/>
+                                    )
+                                }
+                            </div> */}
+                        </div>
+                    </div> 
+                </div>
+            )
+        }
+        
     }
     return null
 

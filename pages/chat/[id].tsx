@@ -16,8 +16,7 @@ const ChatPage = () => {
     return (
         <Container>
             <MainLayout>
-                {/* <Sidebar/>
-                <Navbar/> */}
+                <Sidebar/>
                 <ChatLayout/>
             </MainLayout>
         </Container>

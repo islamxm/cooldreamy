@@ -30,8 +30,7 @@ const SearchPage = () => {
                 onCancel={() => setModal(false)}
                 /> */}
             <MainLayout>
-                {/* <Sidebar/>
-                <Navbar/> */}
+                <Sidebar/>
                 <div style={{width: '100%'}}>
                     <Col span={24}>
                         <Row gutter={[15, 15]}>
