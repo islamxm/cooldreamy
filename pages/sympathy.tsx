@@ -19,7 +19,7 @@ const service = new ApiService()
 const SymPage = () => {
     const {token, locale} = useAppSelector(s => s)
     const {query} = useRouter()
-    const [activeTab, setActiveTab] = useState<sympGroupTypes | any>('');
+    const [activeTab, setActiveTab] = useState<sympGroupTypes | any>('views');
     const [load, setLoad] = useState(false)
     const [list, setList] = useState([])
 
@@ -107,8 +107,6 @@ const SymPage = () => {
             tm && clearInterval(tm)
         }
     }, [])
-
-
 
 
     return (
