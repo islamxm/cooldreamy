@@ -23,7 +23,7 @@ const Navbar = ({
     const {unreadChatCount, userData, token} = useAppSelector(s => s)
     const {pathname} = useRouter()
     const {width} = useWindowSize()
-    if(token && pathname !== '/' && pathname !== '/start' && width <= 768) {
+    if(token && pathname !== '/' && pathname !== '/start' && pathname !== '/signup' && width <= 768) {
         return (
             <div className={styles.wrapper} style={style}>
                 <div className={styles.in}>
