@@ -398,14 +398,14 @@ const ru: ILocale = {
     },
     profilePage: {
         info: {
-            name: 'имя',
-            about: 'о себе',
+            name: 'Имя',
+            about: 'О себе',
             country: 'Страна/Регион',
-            target: 'цели знакомства',
-            finance: 'финансовые предпочтения',
+            target: 'Цели знакомства',
+            finance: 'Финансовые предпочтения',
             career: 'Карьера',
             relationship: 'Семейное положение',
-            kids: 'дети'
+            kids: 'Дети'
         },
         images: {
             add_btn: 'Добавить фото',
@@ -418,17 +418,17 @@ const ru: ILocale = {
     signupPage: {
         main: {
             title: 'Регистрация',
-            next_btn: 'дальше',
-            end_btn: 'завершить'
+            next_btn: 'Дальше',
+            end_btn: 'Завершить'
         },
         steps: {
             step_1: {
-                name: 'имя',
-                password: 'пароль',
-                birthday: 'день рождения',
+                name: 'Имя',
+                password: 'Пароль',
+                birthday: 'День рождения',
                 privacy: {
                     label: 'Продолжив, Вы принимаете',
-                    link: 'условия пользовательского соглашения и конфидициальности'
+                    link: 'Условия пользовательского соглашения и конфидициальности'
                 }
             },
             step_2: {

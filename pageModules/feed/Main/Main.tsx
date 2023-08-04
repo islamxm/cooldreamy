@@ -119,16 +119,12 @@ const Main = () => {
         }
     }, [list])
 
-
-
-
     
 
     const removeCard = (card: any, type: SwipeType) => {
         setList(s => {
             return s.filter(i => i.id !== card.id)
         })
-
         if(type === 'like') {
             onLike()
         }
@@ -150,11 +146,11 @@ const Main = () => {
                 })
 
                 // !! параллельное создание чата писем
-                service.createMail({
-                    user_id: currentCard
-                }, token).then(res => {
-                    console.log(res)
-                })
+                // service.createMail({
+                //     user_id: currentCard
+                // }, token).then(res => {
+                //     console.log(res)
+                // })
             }
         }
        
