@@ -15,7 +15,7 @@ import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import Router, { useRouter } from 'next/router';
-import { updateCurrentProfileId, updateUnreadChatCount, updateUserData } from '@/store/actions';
+import { decreaseUnreadChatCount, updateCurrentProfileId, updateUnreadChatCount, updateUserData } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import winkImg from '@/public/assets/images/wink-sticker.png';
 import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
@@ -62,17 +62,14 @@ const DialogItemComponent:FC<I> = ({
 
     const {query} = useRouter()
 
-
-
-    
+   
 
     useEffect(() => {
         if(status === 'unread' && id && inView && !isSelf) {
             if(token) {
                 service.readMessage({chat_message_id: Number(id)}, token).then(res => {
                     if(res?.message === 'success') {
-                        unreadChatCount === 0 ? dispatch(updateUnreadChatCount(0)) : dispatch(updateUnreadChatCount(unreadChatCount - 1)) 
-
+                        dispatch(decreaseUnreadChatCount())
                         if(query && query?.id && typeof query?.id === 'string') {
                             updateDialogsList && updateDialogsList((s: any) => {
                                 const m = s;

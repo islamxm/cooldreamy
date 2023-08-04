@@ -132,6 +132,16 @@ const reducer = (state = globalState, action: any) => {
                 ...state,
                 unreadChatCount: action.data
             }
+        case 'DECREASE_UNREAD_CHAT_COUNT':
+            return {
+                ...state,
+                unreadChatCount: state.unreadChatCount > 0 ? state.unreadChatCount - 1 : 0
+            }
+        case 'INCREASE_UNREAD_CHAT_COUNT':
+            return {
+                ...state,
+                unreadChatCount: state.unreadChatCount + 1
+            }
         case 'UPDATE_SOON_MODAL':
             return {
                 ...state,

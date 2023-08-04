@@ -250,6 +250,7 @@ const ChatLayout = () => {
         if(socketChannel) {
             if(chatType === 'chat') {
                 if(newMessage) { 
+                    console.log(newMessage)
                     onUpdateChat && onUpdateChat({ 
                         messageBody: newMessage?.chat_message, 
                         dialogBody: {...newMessage?.chat_list_item, another_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user, last_message: newMessage?.chat_message}
@@ -441,6 +442,9 @@ const ChatLayout = () => {
     }
     
 
+    useEffect(() => {
+        if(dialogsList?.length) console.log(dialogsList[0])
+    }, [dialogsList])
     
 
 

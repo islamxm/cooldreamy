@@ -77,6 +77,7 @@ const ChatMock = ({
                             <Button
                                 disabled={!selectValue}
                                 text='Send'
+                                middle={width <= 768}
                                 onClick={() => onSend(selectValue)}
                                 />
                         </Col>
@@ -84,6 +85,7 @@ const ChatMock = ({
                             <Button
                                 variant={'bordered'}
                                 text='Back'
+                                middle={width <= 768}
                                 onClick={onClose}
                                 />
                         </Col>
