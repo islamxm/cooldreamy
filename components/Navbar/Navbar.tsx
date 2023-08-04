@@ -46,7 +46,7 @@ const Navbar = ({
                         <Link className={`${styles.btn} ${pathname?.includes('/chat') ? styles.active : ''}`} href={'/chat?type=chat'}>
                             <IoChatbubblesOutline/>
                             {
-                                unreadChatCount === 0 && (
+                                unreadChatCount > 0 && (
                                     <div className={styles.badge}>{unreadChatCount > 99 ? '+99' : unreadChatCount}</div>
                                 )
                             }

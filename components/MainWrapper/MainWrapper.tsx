@@ -19,6 +19,7 @@ import { BASE_DOMAIN, BASE_WS_HOST, TEST_DOMAIN, TEST_WS_HOST } from '@/service/
 import Button from '../Button/Button';
 import Navbar from '../Navbar/Navbar';
 import styles from './MainWrapper.module.scss';
+import socketEvents from '@/helpers/socketEvents';
 
 
 const service = new ApiService()
@@ -82,7 +83,6 @@ const MainWrapper = ({
 			setPusherConfig(
 				{
 					key: 's3cr3t',
-					// api.cooldreamy.com
 					wsHost: BASE_WS_HOST,
 					authEndpoint: BASE_DOMAIN + 'broadcasting/auth',
 					cluster: 'mt1',
@@ -116,10 +116,12 @@ const MainWrapper = ({
 			const channels = getChannels(pusherConfig).private(`App.User.${userId}`);
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {
-				notify(lc?.global?.notifications?.success_socket, 'SUCCESS')
+				// notify(lc?.global?.notifications?.success_socket, 'SUCCESS')
+				console.log('SOCKET CONNECTED')
 			})
 			channels?.error(() => {
-				notify(lc?.global?.notifications?.error_socket, 'ERROR')
+				// notify(lc?.global?.notifications?.error_socket, 'ERROR')
+				console.log('SOCKET DISCONNECTED')
 			})
 		}
 	}, [pusherConfig, userId, socketChannel])
@@ -128,8 +130,6 @@ const MainWrapper = ({
 		if(token) {
 			service.getUnreadCount(token).then(res => {
 				dispatch(updateUnreadChatCount(res?.count_chat_messages))
-				
-				
 				//count_letter_messages
 			})
 		}
@@ -153,7 +153,7 @@ const MainWrapper = ({
 	useEffect(() => {
 		if(socketChannel) {
 			//?? получение сообщений
-            socketChannel?.listen('.new-chat-message-event', (data: any) => {
+            socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
 				dispatch(updateNewMessage(data))
 				// dispatch(updateUnreadChatCount(unreadChatCount + 1))
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
@@ -177,39 +177,27 @@ const MainWrapper = ({
 						return null
 				}
             })
-			// socketChannel?.listen('.chat-message-read-event', (data: any) => {
-				
-			// })
-			socketChannel?.listen('.new-letter-message-event', (data: any) => {
-				dispatch(updateNewMail(data))
-				const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;
-				if(data) {
-					notify(
-						<>
-							Вы получили письмо
-							{
-								data?.letter_message?.letter_messageable?.text ? (
-									<div style={{color: '#aaa', fontSize: 12, lineHeight: '16px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '100%'}}>{data?.letter_message?.letter_messageable?.text}</div>
-								) : null
-							}
+			// socketChannel?.listen('.new-letter-message-event', (data: any) => {
+			// 	dispatch(updateNewMail(data))
+			// 	const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;
+			// 	if(data) {
+			// 		notify(
+			// 			<>
+			// 				Вы получили письмо
+			// 				{
+			// 					data?.letter_message?.letter_messageable?.text ? (
+			// 						<div style={{color: '#aaa', fontSize: 12, lineHeight: '16px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '100%'}}>{data?.letter_message?.letter_messageable?.text}</div>
+			// 					) : null
+			// 				}
 							
-						</>, 
-						'AVATAR', 
-						avatar)
-				}
-			})
+			// 			</>, 
+			// 			'AVATAR', 
+			// 			avatar)
+			// 	}
+			// })
         }
 	}, [socketChannel])
 
-
-	
-	const test = () => {
-		if(token) {
-			service.createChat({user_id: 50324}, token).then(res => {
-				console.log(res)
-			})
-		}
-	}
 
 
     return (

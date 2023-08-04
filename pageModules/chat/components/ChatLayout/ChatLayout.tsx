@@ -14,6 +14,7 @@ import { useWindowSize } from 'usehooks-ts';
 import { sortingMailChatList } from '@/helpers/sorting';
 import Button from '@/components/Button/Button';
 import {useDebounce} from 'usehooks-ts';
+import socketEvents from '@/helpers/socketEvents';
 
 
 const service = new ApiService()
@@ -271,7 +272,7 @@ const ChatLayout = () => {
 
     useEffect(() => {
         if(socketChannel) {
-            socketChannel?.listen('.chat-message-read-event', (data: any) => {
+            socketChannel?.listen(socketEvents?.eventChatReadMessage, (data: any) => {
                 if(chatType === 'chat') {
                     onUpdateChat && onUpdateChat({
                         messageBody: data?.chat_message, 
@@ -321,10 +322,6 @@ const ChatLayout = () => {
         }
     }
 
-
-    useEffect(() => {
-        if(chatList?.length > 0) console.log(chatList[0])
-    }, [chatList])
 
     const onUpdateChat = (body: {
         messageBody?: any,
