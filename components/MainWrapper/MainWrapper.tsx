@@ -177,6 +177,15 @@ const MainWrapper = ({
 						return null
 				}
             })
+			socketChannel?.listen(socketEvents?.eventSympathy, (data: any) => {
+				const avatar = data?.userData?.user_thumbnail_url || data?.userData?.user_avatar_url
+				if(data?.type === 'Watch') {
+					notify('New profile view', 'AVATAR', avatar)
+				}
+				if(data?.type === 'Like') {
+					notify('Someone liked you', 'AVATAR', avatar)
+				}
+			})
 			// socketChannel?.listen('.new-letter-message-event', (data: any) => {
 			// 	dispatch(updateNewMail(data))
 			// 	const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;

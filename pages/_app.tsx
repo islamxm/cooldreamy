@@ -92,7 +92,7 @@ function App({ Component, pageProps }: AppProps) {
 							</AnimatePresence>
 							
 
-							<ToastContainer/>
+							<ToastContainer limit={width <= 768 ? 1 : 5}/>
 							{
 								width <= 768 && router?.pathname?.includes('/chat') && router?.query?.id ? (
 									null
