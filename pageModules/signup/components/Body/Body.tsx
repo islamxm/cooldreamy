@@ -106,6 +106,13 @@ const Body:FC = () => {
     const [selectedCareers, setSelectedCareers] = useState<any[]>([])
 
 
+    useEffect(() => {
+        LOCAL_STORAGE?.removeItem('cooldate-web-token')
+        LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
+        dispatch(updateToken(null))
+        dispatch(updateUserData(null))
+        dispatch(updateUserId(null))
+    }, [])
 
 
 
