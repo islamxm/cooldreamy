@@ -263,7 +263,7 @@ const UserMain:FC<IUser> = (props) => {
                                 <RiPencilLine/>
                             </button>
                         </div>
-                        <div className={styles.text}>
+                        <div className={styles.text} style={{color: about_self ? 'var(--text)' : 'var(--red)'}}>
                             {state ? `${state}/${country}` : locale?.global?.placeholders?.nd}
                         </div>
                     </div>

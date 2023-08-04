@@ -47,12 +47,12 @@ const Card:FC<cardPropsType> = ({
         //   removeCard(card, "superlike");
         //   return;
         // }
-        if (info.offset.x > 300) {
+        if (info.offset.x > 100) {
           setLeaveX('100%');
           setLeaveY(info.offset.y)
           removeCard(card, "like");
         }
-        if (info.offset.x < -300) {
+        if (info.offset.x < -100) {
           setLeaveX('-100%');
           setLeaveY(info.offset.y)
           removeCard(card, "nope");
@@ -65,12 +65,12 @@ const Card:FC<cardPropsType> = ({
     
     const onDrag = (e: any, info: PanInfo) => {
         setRotate(Math.round(info.offset.x / 40))
-        if (info.offset.x > 300) {  
+        if (info.offset.x > 100) {  
             setLiking(true)
         } else {
             setLiking(false)
         }
-        if (info.offset.x < -300) {
+        if (info.offset.x < -100) {
             setCanceling(true)
         } else {
             setCanceling(false)

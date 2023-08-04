@@ -54,7 +54,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                     ))
                                 ) : (
                                     <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
-                                        {'Не указано'}
+                                        {locale?.global?.placeholders?.nd}
                                     </div>
                                 )
                             }
@@ -77,7 +77,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                     ))
                                 ) : (
                                     <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
-                                        {'Не указано'}
+                                        {locale?.global?.placeholders?.nd}
                                     </div>
                                 )
                             }
@@ -100,7 +100,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                     ))
                                 ) : (
                                     <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
-                                        {'Не указано'}
+                                        {locale?.global?.placeholders?.nd}
                                     </div>
                                 )
                             }
@@ -123,7 +123,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                     ))
                                 ) : (
                                     <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
-                                        {'Не указано'}
+                                        {locale?.global?.placeholders?.nd}
                                     </div>
                                 )
                             }
@@ -146,7 +146,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                     ))
                                 ) : (
                                     <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
-                                        {'Не указано'}
+                                        {locale?.global?.placeholders?.nd}
                                     </div>
                                 )
                             }
