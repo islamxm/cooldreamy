@@ -440,11 +440,7 @@ const ChatLayout = () => {
             // !! НЕХВАТАЕТ ВХОДНЫХ ДАННЫХ
         }
     }
-    
 
-    useEffect(() => {
-        if(dialogsList?.length) console.log(dialogsList[0])
-    }, [dialogsList])
     
 
 
