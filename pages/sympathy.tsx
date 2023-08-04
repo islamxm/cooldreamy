@@ -19,7 +19,7 @@ const service = new ApiService()
 const SymPage = () => {
     const {token, locale} = useAppSelector(s => s)
     const {query} = useRouter()
-    const [activeTab, setActiveTab] = useState<sympGroupTypes | any>('views');
+    const [activeTab, setActiveTab] = useState<sympGroupTypes | any>('');
     const [load, setLoad] = useState(false)
     const [list, setList] = useState([])
 
@@ -27,6 +27,8 @@ const SymPage = () => {
     useEffect(() => {
         if(query?.type && typeof query?.type === 'string') {
             setActiveTab(query.type)
+        } else {
+            Router.push(`/sympathy?type=views`)
         }
     }, [query])
 

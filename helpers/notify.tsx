@@ -44,7 +44,7 @@ const switchType:switchFuncType = (type, avatar) => {
 const notify = (text: string | React.ReactNode | number, type: notificationType = 'SUCCESS', avatar?: string) => {
     toast(text, {
         icon: switchType(type, avatar).icon,
-        position: "bottom-right",
+        position: window?.innerWidth <= 768 ? 'top-right' : 'bottom-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
