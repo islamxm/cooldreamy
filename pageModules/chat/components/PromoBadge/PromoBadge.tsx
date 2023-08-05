@@ -4,6 +4,7 @@ import Button from '@/components/Button/Button';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { updateSoonModal } from '@/store/actions';
+import Router from 'next/router';
 
 
 const PromoBadge = () => {
@@ -22,7 +23,8 @@ const PromoBadge = () => {
                 <Col span={24}>
                     <div className={styles.action}>
                         <Button
-                            onClick={() => dispatch(updateSoonModal(true))}
+                            // onClick={() => dispatch(updateSoonModal(true))}
+                            onClick={() => Router.push('/premium')}
                             text={locale?.chatPage.premium.btn}
                             variant={'white'}
                             small
