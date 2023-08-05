@@ -9,6 +9,7 @@ import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import { PulseLoader } from 'react-spinners';
 import PayForm from '@/pageModules/deposit/components/PayForm/PayForm';
+import Router from 'next/router';
 
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
 const PUBLIC_KEY_TEST = 'pk_test_51MzlPfFjkPZRdnX1dn6HeooarP7ShRYGfBoSNMCAfPRZPl4tCPcAljK4pn3p7W2VRm6t7VG2lB0oP6HyY7WRYDOp00ZOqNBbUJ'
@@ -85,7 +86,11 @@ const Main = () => {
                     list_id: selected?.value
                 }).then(res => {
                     if(res?.message === 'success') {
-
+                        if(selected?.value == 1) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem1')
+                        
+                        if(selected?.value == 2) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem2')
+                        
+                        if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem3')
                     }
                 }).finally(() => setLoad(false))
             }
@@ -94,8 +99,10 @@ const Main = () => {
                     list_type: selected?.type,
                     list_id: selected?.value
                 }).then(res => {
-                    const clientSecret = res?.clientSecret;
-                    setSecretKey(clientSecret)
+                    console.log(res)
+                    // if(selected?.value == 2) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub2')
+                    // if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
+                    // if(selected?.value == 4) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
                 }).finally(() => setLoad(false))
             }
            

@@ -1,6 +1,6 @@
 import Button from '@/components/Button/Button';
 import styles from './CardAdv.module.scss';
-
+import {AiFillDollarCircle} from 'react-icons/ai'
 
 
 
@@ -43,7 +43,7 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
                                                 <span>Видео: {i?.count_watch_or_send_video}</span>
                                             </div>
                                             <div className={styles.price}>
-                                            ${i?.price}
+                                            {i?.price} <span><AiFillDollarCircle/></span>
                                             </div>
                                             {/* <div className={styles.dsc}>
                                             Экономия 36%

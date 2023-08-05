@@ -1,6 +1,7 @@
 import Button from '@/components/Button/Button';
 import styles from './CardPremium.module.scss';
 import { useEffect } from 'react';
+import {AiFillDollarCircle} from 'react-icons/ai'
 
 
 interface I {
@@ -54,7 +55,9 @@ const CardPremium = ({
                                                 {(i?.duration < 4 && i?.duration > 1) && 'недели'}
                                                 {(i?.duration === 1) && 'неделя'}
                                             </div>
-                                            <div className={styles.price}>${i?.price}</div>
+                                            <div className={styles.price}>{i?.price}
+                                                <span><AiFillDollarCircle/></span>
+                                            </div>
                                         </label>
                                     </div>
                                 ))
