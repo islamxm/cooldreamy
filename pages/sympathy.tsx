@@ -12,27 +12,21 @@ import ApiService from "@/service/apiService";
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import Loader from "@/components/Loader/Loader";
 import Navbar from "@/components/Navbar/Navbar";
-
+import { useAppDispatch } from "@/hooks/useTypesRedux";
+import { decSympLikes, decSympWathces } from "@/store/actions";
 const service = new ApiService()
 
 
 const SymPage = () => {
-    const {token, locale} = useAppSelector(s => s)
+    const dispatch = useAppDispatch()
+    const {token, locale, sympCountData} = useAppSelector(s => s)
     const {query} = useRouter()
     const [activeTab, setActiveTab] = useState<sympGroupTypes | any>('');
     const [load, setLoad] = useState(false)
-    const [list, setList] = useState([])
-
-
-    useEffect(() => {
-        if(query?.type && typeof query?.type === 'string') {
-            setActiveTab(query.type)
-        } else {
-            Router.push(`/sympathy?type=views`)
-        }
-    }, [query])
-
-    const tabs: tabItemType[] = [
+    const [list, setList] = useState<any[]>([])
+    const [page, setPage] = useState<number>(0)
+    const [total, setTotal] = useState(0)
+    const [tabs, setTabs] = useState<tabItemType[] | any[]>([
         {
             id: 'views',
             label: locale?.sympathyPage.tabs.views ?? ''
@@ -49,7 +43,48 @@ const SymPage = () => {
             id: 'inlikes',
             label: locale?.sympathyPage.tabs.likes_you ?? ''
         }
-    ]
+    ])
+
+
+    useEffect(() => {
+        if(query?.type && typeof query?.type === 'string') {
+            setActiveTab(query.type)
+        } else {
+            Router.push(`/sympathy?type=views`)
+        }
+    }, [query])
+
+
+
+
+    
+
+
+    useEffect(() => {
+        sympCountData && setTabs([
+            {
+                id: 'views',
+                label: locale?.sympathyPage.tabs.views ?? '',
+                badge: sympCountData.count_watches
+            },
+            {
+                id: 'matches',
+                label: locale?.sympathyPage.tabs.matches ?? '',
+                badge: sympCountData.count_mutual
+            },
+            {
+                id: 'likes',
+                label: locale?.sympathyPage.tabs.you_like ?? '',
+                badge: sympCountData.count_my_likes
+            },
+            {
+                id: 'inlikes',
+                label: locale?.sympathyPage.tabs.likes_you ?? '',
+                badge: sympCountData.count_likes
+            }
+        ])
+    }, [sympCountData])
+    
     
     const switchDescr = (activeTab: sympGroupTypes) => {
         switch(activeTab) {
@@ -66,20 +101,34 @@ const SymPage = () => {
         }
     }
 
+
     const getData = () => {
         if(activeTab) {
             Router.push(`/sympathy?type=${activeTab}`)
             setLoad(true)
-            if(token) {
+            if(token && page) {
                 if(activeTab === 'views') {
-                    service.getActivityViews(token).then(res => {
-                        res?.data && setList(res?.data)
+                    service.getActivityViews(token,{page}).then(res => {
+                        setTotal(res?.data?.total)
+                        if(res?.data?.data) {
+                            if(page === 1) {
+                                setList(res?.data?.data)
+                            } else {
+                                setList(s => [...s, ...res?.data?.data])
+                            }
+                        } 
                     }).finally(() => setLoad(false))
                 }
-                if(activeTab )
                 if(activeTab === 'likes') {
-                    service.getActivityLikes(token).then(res => {
-                        res?.data && setList(res?.data)
+                    service.getActivityLikes(token, {page}).then(res => {
+                        setTotal(res?.data?.total)
+                        if(res?.data?.data) {
+                            if(page === 1) {
+                                setList(res?.data?.data)
+                            } else {
+                                setList(s => [...s, ...res?.data?.data])
+                            }
+                        } 
                     }).finally(() => setLoad(false))
                 }
                 if(activeTab === 'matches') {
@@ -88,29 +137,49 @@ const SymPage = () => {
                     }).finally(() => setLoad(false))
                 }
                 if(activeTab === 'inlikes') {
-                    service.getActivityInLikes(token).then(res => {
-                        res?.data && setList(res?.data)
+                    service.getActivityInLikes(token, {page}).then(res => {
+                        setTotal(res?.data?.total)
+                        if(res?.data?.data) {
+                            if(page === 1) {
+                                setList(res?.data?.data)
+                            } else {
+                                setList(s => [...s, ...res?.data?.data])
+                            }
+                        } 
                     }).finally(() => setLoad(false))
                 }
             }
-
         }
     }
 
     useEffect(() => {
-        getData()
+        setPage(1)
+        if(page === 1) {
+            getData()
+        }
     }, [activeTab, token])
 
 
+    useEffect(() => {
+        getData()
+    }, [page])
+
 
     useEffect(() => {
-        const tm = setInterval(getData, 5000)
-        return () => {
-            tm && clearInterval(tm)
+        if(token) {
+            if(activeTab === 'views') {
+                service.readProfile(token, 'WATCH').then(res => res?.message === 'success' && dispatch(decSympWathces()))
+            }
+            if(activeTab === 'inlikes') {
+                service.readProfile(token, 'LIKE').then(res => res?.message === 'success' && dispatch(decSympLikes()))
+            }
+            // if(activeTab === 'matches') {
+            //     service.readProfile(token, '').then(res => dispatch())
+            // }
         }
-    }, [])
+    }, [activeTab])
 
-
+    useEffect(() => console.log(token), [token])
     return (
         <Container>
             <MainLayout>
@@ -129,7 +198,7 @@ const SymPage = () => {
                         </Col>
                         <Col span={24}>
                             {
-                                load ? <Loader/> : <List list={list}/>
+                                load ? <Loader/> : <List total={total} setPage={setPage} type={activeTab} list={list}/>
                             }
                             
                         </Col>

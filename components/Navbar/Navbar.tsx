@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useRouter } from 'next/router';
 import Avatar from '../Avatar/Avatar';
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
 
@@ -20,9 +20,18 @@ const Navbar = ({
     fixed?: boolean,
     style?: CSSProperties
 }) => {
-    const {unreadChatCount, userData, token} = useAppSelector(s => s)
+    const {unreadChatCount, userData, token, sympCountData} = useAppSelector(s => s)
     const {pathname} = useRouter()
     const {width} = useWindowSize()
+    const [sympCount, setSympCount] = useState(0)
+
+    useEffect(() => {
+        setSympCount(sympCountData?.count_likes + sympCountData?.count_mutual + sympCountData?.count_my_likes + sympCountData?.count_watches)
+        console.log(sympCountData)
+    }, [sympCountData])
+
+
+
     if(token && pathname !== '/' && pathname !== '/start' && pathname !== '/signup' && width <= 768) {
         return (
             <div className={styles.wrapper} style={style}>
@@ -59,6 +68,11 @@ const Navbar = ({
                     </div>
                     <div className={styles.item}>
                         <Link className={`${styles.btn} ${pathname?.includes('/sympathy') ? styles.active : ''}`} href={'/sympathy'}>
+                            {
+                                sympCount > 0 && (
+                                    <div className={styles.badge}>{sympCount > 99 ? '+99' : sympCount}</div>
+                                )
+                            }
                             <AiOutlineHeart/>
                         </Link>
                     </div>

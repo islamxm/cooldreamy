@@ -131,9 +131,12 @@ const endpoints = {
 
     activatePay: `${API_PATH}payments/promotions/activate`,
 
-    getChatFilterCount: `${API_PATH}chats/statistics`
+    getChatFilterCount: `${API_PATH}chats/statistics`,
 
 
+    getFeedFilterCount: `${API_PATH}feeds/statistic`,
+
+    readProfile: `${API_PATH}feeds/read`,
 }
 
 export default endpoints;

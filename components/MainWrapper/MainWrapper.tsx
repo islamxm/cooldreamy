@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
-import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData, updateUnreadChatCount, updateSoonModal, increaseUnreadChatCount } from '@/store/actions';
+import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData, updateUnreadChatCount, updateSoonModal, increaseUnreadChatCount, updateSympCountData, decSympWathces, incSympWathces, incSympLikes } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
@@ -132,6 +132,9 @@ const MainWrapper = ({
 				dispatch(updateUnreadChatCount(res?.count_chat_messages))
 				//count_letter_messages
 			})
+			service.getFeedFilterCount(token).then(res => {
+				dispatch(updateSympCountData(res))
+			})
 		}
 	}, [token])
 
@@ -178,12 +181,15 @@ const MainWrapper = ({
 				}
             })
 			socketChannel?.listen(socketEvents?.eventSympathy, (data: any) => {
+				console.log(data)
 				const avatar = data?.userData?.user_thumbnail_url || data?.userData?.user_avatar_url
-				if(data?.type === 'Watch') {
+				if(data?.type === 'WATCH') {
 					notify('New profile view', 'AVATAR', avatar)
+					dispatch(incSympWathces())
 				}
-				if(data?.type === 'Like') {
+				if(data?.type === 'LIKE') {
 					notify('Someone liked you', 'AVATAR', avatar)
+					dispatch(incSympLikes())
 				}
 			})
 			// socketChannel?.listen('.new-letter-message-event', (data: any) => {

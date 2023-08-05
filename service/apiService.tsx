@@ -727,9 +727,9 @@ class ApiService {
 
 
     //activity
-    getActivityViews = async (token: IToken) => {
+    getActivityViews = async (token: IToken, {page, per_page = 10}: {page: number, per_page?: number}) => {
         try {
-            let res = await fetch(endpoints.getActivityViews, {
+            let res = await fetch(endpoints.getActivityViews + `?page=${page}&per_page=${per_page}`, {
                 headers: {
                     ...headers,
                     'Authorization': `Bearer ${token}`
@@ -741,9 +741,9 @@ class ApiService {
         }
     }
 
-    getActivityLikes = async (token: IToken) => {
+    getActivityLikes = async (token: IToken, {page, per_page = 10}: {page: number, per_page?: number}) => {
         try {
-            let res = await fetch(endpoints.getActivityLikes, {
+            let res = await fetch(endpoints.getActivityLikes + `?page=${page}&per_page=${per_page}`, {
                 headers: {
                     ...headers,
                     'Authorization': `Bearer ${token}`
@@ -755,9 +755,9 @@ class ApiService {
         }
     }
 
-    getActivityInLikes = async (token: IToken) => {
+    getActivityInLikes = async (token: IToken, {page, per_page = 10}: {page: number, per_page?: number}) => {
         try {
-            let res = await fetch(endpoints.getActivityInLikes, {
+            let res = await fetch(endpoints.getActivityInLikes + `?page=${page}&per_page=${per_page}`, {
                 headers: {
                     ...headers,
                     'Authorization': `Bearer ${token}`
@@ -1159,7 +1159,37 @@ class ApiService {
     }
 
 
-    
+    getFeedFilterCount = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getFeedFilterCount, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+
+    readProfile = async (token: IToken, type: 'WATCH' | 'LIKE') => {
+        try {
+            let res = await fetch(endpoints.readProfile, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({type})
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 }
 
 

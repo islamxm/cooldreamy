@@ -38,8 +38,14 @@ export interface IGlobalState {
     },
 
     unreadChatCount: number,
-    soonModal: boolean
-    
+    soonModal: boolean,
+
+    sympCountData: {
+        count_likes: number,
+        count_mutual: number,
+        count_my_likes: number,
+        count_watches: number
+    }
 }
 
 
@@ -59,7 +65,13 @@ export const globalState: IGlobalState = {
         open: false,
     },
     unreadChatCount: 0,
-    soonModal: false
+    soonModal: false,
+    sympCountData: {
+        count_likes: 0,
+        count_mutual: 0,
+        count_my_likes: 0,
+        count_watches: 0
+    }
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -146,6 +158,44 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 soonModal: action.data
+            }
+
+        case 'UPDATE_SYMP_COUNT_DATA':
+            return {
+                ...state,
+                sympCountData: action.data
+            }
+        case 'DEC_SYMP_LIKES':
+            return {
+                ...state,
+                sympCountData: {
+                    ...state.sympCountData,
+                    count_likes: 0
+                }
+            }
+        case 'INC_SYMP_LIKES':
+            return {
+                ...state,
+                sympCountData: {
+                    ...state.sympCountData,
+                    count_likes: state.sympCountData.count_likes + 1
+                }
+            }
+        case 'DEC_SYMP_WATCHES':
+            return {
+                ...state,
+                sympCountData: {
+                    ...state.sympCountData,
+                    count_watches: 0
+                }
+            }
+        case 'INC_SYMP_WATCHES':
+            return {
+                ...state,
+                sympCountData: {
+                    ...state.sympCountData,
+                    count_watches: state.sympCountData.count_watches + 1
+                }
             }
         default:
             return state;

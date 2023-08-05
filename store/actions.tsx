@@ -38,4 +38,13 @@ export const decreaseUnreadChatCount = () => ({type: 'DECREASE_UNREAD_CHAT_COUNT
 export const increaseUnreadChatCount = () => ({type: 'INCREASE_UNREAD_CHAT_COUNT'})
 
 
+export const updateSympCountData = (data: any) => ({type: "UPDATE_SYMP_COUNT_DATA", data})
+
+export const decSympLikes = () => ({type: 'DEC_SYMP_LIKES'})
+export const incSympLikes = () => ({type: 'INC_SYMP_LIKES'})
+export const decSympWathces = () => ({type: "DEC_SYMP_WATCHES"})
+export const incSympWathces = () => ({type: 'INC_SYMP_WATCHES'})
+
+
+
 export const updateSoonModal = (data: boolean) => ({type:'UPDATE_SOON_MODAL', data})

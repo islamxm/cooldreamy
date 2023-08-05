@@ -24,7 +24,6 @@ const Filter:FC<IChatFilterType & I> = ({
 }) => {
     const {locale, unreadChatCount, token} = useAppSelector(s => s)
     const {width} = useWindowSize()
-    const [countData, setCountData] = useState<any>()
     const [filterTabs, setFilterTabs] = useState<any[]>([
         {
             id: 'all',
@@ -87,44 +86,26 @@ const Filter:FC<IChatFilterType & I> = ({
         }
     ]
 
-
-
-
-    // useEffect(() => {
-    //     if(countData) {
-    //         setFilterTabs(s => {
-    //             const m = [...s]
-    //             const rm = m.splice(2,1,{...s[2], badge: countData?.favorites})
-    //             return [...m]
-    //         })
+    // const switchActiveType = (type?: chatTabsType) => {
+    //     switch(type) {
+    //         case 'chat':
+    //             return {
+    //                 value: '1',
+    //                 type: 'chat'
+    //             }
+    //         case 'mail':
+    //             return {
+    //                 value: '2',
+    //                 type: 'mail'
+    //             }
+    //         default:
+    //             return {
+    //                 value: '',
+    //                 type: ''
+    //             }
     //     }
-    // }, [countData])
+    // }
 
-    const switchActiveType = (type?: chatTabsType) => {
-        switch(type) {
-            case 'chat':
-                return {
-                    value: '1',
-                    type: 'chat'
-                }
-            case 'mail':
-                return {
-                    value: '2',
-                    type: 'mail'
-                }
-            default:
-                return {
-                    value: '',
-                    type: ''
-                }
-        }
-    }
-
-    useEffect(() => {
-        token && service.getChatFilterCount(token).then(res => {
-            setCountData(res)
-        })
-    }, [token])
 
 
     return (
