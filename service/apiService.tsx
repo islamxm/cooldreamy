@@ -727,7 +727,7 @@ class ApiService {
 
 
     //activity
-    getActivityViews = async (token: IToken, {page, per_page = 10}: {page: number, per_page?: number}) => {
+    getActivityViews = async (token: IToken, {page, per_page = 3}: {page: number, per_page?: number}) => {
         try {
             let res = await fetch(endpoints.getActivityViews + `?page=${page}&per_page=${per_page}`, {
                 headers: {
@@ -741,7 +741,7 @@ class ApiService {
         }
     }
 
-    getActivityLikes = async (token: IToken, {page, per_page = 10}: {page: number, per_page?: number}) => {
+    getActivityLikes = async (token: IToken, {page, per_page = 3}: {page: number, per_page?: number}) => {
         try {
             let res = await fetch(endpoints.getActivityLikes + `?page=${page}&per_page=${per_page}`, {
                 headers: {
@@ -755,7 +755,7 @@ class ApiService {
         }
     }
 
-    getActivityInLikes = async (token: IToken, {page, per_page = 10}: {page: number, per_page?: number}) => {
+    getActivityInLikes = async (token: IToken, {page, per_page = 3}: {page: number, per_page?: number}) => {
         try {
             let res = await fetch(endpoints.getActivityInLikes + `?page=${page}&per_page=${per_page}`, {
                 headers: {
@@ -769,9 +769,9 @@ class ApiService {
         }
     }
 
-    getActivityMutualLikes = async (token: IToken) => {
+    getActivityMutualLikes = async (token: IToken, {page, per_page = 3}: {page: number, per_page?: number}) => {
         try {
-            let res = await fetch(endpoints.getActivityMutualLikes, {
+            let res = await fetch(endpoints.getActivityMutualLikes + `?page=${page}&per_page=${per_page}`, {
                 headers: {
                     ...headers,
                     'Authorization': `Bearer ${token}`

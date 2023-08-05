@@ -132,8 +132,15 @@ const SymPage = () => {
                     }).finally(() => setLoad(false))
                 }
                 if(activeTab === 'matches') {
-                    service.getActivityMutualLikes(token).then(res => {
-                        res?.data && setList(res?.data)
+                    service.getActivityMutualLikes(token, {page}).then(res => {
+                        setTotal(res?.data?.total)
+                        if(res?.data?.data) {
+                            if(page === 1) {
+                                setList(res?.data?.data)
+                            } else {
+                                setList(s => [...s, ...res?.data?.data])
+                            }
+                        } 
                     }).finally(() => setLoad(false))
                 }
                 if(activeTab === 'inlikes') {
@@ -197,9 +204,7 @@ const SymPage = () => {
                             {switchDescr(activeTab)}
                         </Col>
                         <Col span={24}>
-                            {
-                                load ? <Loader/> : <List total={total} setPage={setPage} type={activeTab} list={list}/>
-                            }
+                            <List total={total} setPage={setPage} type={activeTab} list={list}/>
                             
                         </Col>
                     </Row>

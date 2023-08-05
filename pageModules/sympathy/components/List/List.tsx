@@ -41,13 +41,11 @@ const List = ({list, type, setPage, total}: {list: any[], type: sympGroupTypes, 
                 }
             </Row>
             {
-                type !== 'matches' && (
-                    list && list?.length > 0 ? (
-                        loadMore ? (
-                            <div ref={ref} className={styles.loader}></div>
-                        ) : null
+                list && list?.length > 0 ? (
+                    loadMore ? (
+                        <div ref={ref} className={styles.loader}></div>
                     ) : null
-                )
+                ) : null
             }
         </div>
     )
