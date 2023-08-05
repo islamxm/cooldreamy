@@ -914,7 +914,7 @@ class ApiService {
 
     pay = async (token: IToken, body: {
         list_type?: string,
-        list_id?: string
+        list_id?: string | number
     }) => {
         try {
             let res = await fetch(endpoints.pay, {
@@ -926,6 +926,25 @@ class ApiService {
                 body: JSON.stringify(body)
             })
             return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    payS = async (token: IToken, body: {
+        list_type: string,
+        list_id: string | number
+    }) => {
+        try {
+            let res = await fetch(endpoints.payS, {
+                method: 'POST',
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            return await checkAuth(res)
         } catch(err) {
             console.log(err)
         }

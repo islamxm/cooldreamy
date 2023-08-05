@@ -6,14 +6,19 @@ import { useEffect } from 'react';
 interface I {
     list?: any[],
     selected: any,
-    onSelect: any
+    onSelect: any,
+    onAccept: (...args: any[]) => any,
+    load: boolean
 }
 
 
 const CardPremium = ({
     list,
     selected,
-    onSelect
+    onSelect,
+
+    load,
+    onAccept
 }: I) => {  
 
 
@@ -63,6 +68,9 @@ const CardPremium = ({
                         // hover={null}
                         variant={'gold'}
                         text='Стать Премиум'
+                        load={load && selected?.type === 'premium'}
+                        onClick={onAccept}
+                        disabled={selected?.type !== 'premium'}
                         fill
                         />
                 </div>

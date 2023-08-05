@@ -2,7 +2,7 @@ import styles from './CardBalance.module.scss';
 import Button from '@/components/Button/Button';
 
 
-const CardBalance = ({list, selected, onSelect}: {list?: any[], selected: any, onSelect: any}) => {
+const CardBalance = ({list, selected, onSelect, onAccept, load}: {list?: any[], selected: any, onSelect: any, onAccept: (...args: any[]) => any, load: boolean}) => {
 
 
     return (
@@ -37,6 +37,9 @@ const CardBalance = ({list, selected, onSelect}: {list?: any[], selected: any, o
                     <Button
                         text='Пополнить'
                         fill
+                        load={load && selected?.type === 'credit'}
+                        disabled={selected?.type !== 'credit'}
+                        onClick={onAccept}
                         />    
                 </div> 
             </div>

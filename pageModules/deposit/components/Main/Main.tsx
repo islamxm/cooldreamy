@@ -45,6 +45,7 @@ const Main = () => {
         }
     }
 
+
     const getPromo = () => {
         if(token) {
             service.getPromo(token).then(res => {
@@ -76,7 +77,6 @@ const Main = () => {
     
 
     useEffect(() => {
-        console.log(userData)
         if(userData && userData?.is_donate === 1) {
             getPlans()
         } 

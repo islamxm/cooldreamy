@@ -7,7 +7,7 @@ import Button from '@/components/Button/Button';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import notify from '@/helpers/notify';
 
-const switchRedirect = (planId: number | string, type: string) => {
+const switchRedirect = (planId: number | string, type?: string) => {
     if(planId == '1' && type === 'promotion') {
         return `${window.location.origin}/pay_success_promo1?user_promotion_id=${planId}`
     }
@@ -29,7 +29,7 @@ const switchRedirect = (planId: number | string, type: string) => {
     return `${window.location.origin}/deposit`
 }
 
-const PayForm = ({plan, type}: {plan?: any, type: string}) => {
+const PayForm = ({plan, type}: {plan?: any, type?: string, price?: number | string}) => {
     const [payLoad, setPayLoad] = useState<boolean>(false)
     const [message, setMessage] = useState<any>(null)
     const {locale} = useAppSelector(s => s)
@@ -85,10 +85,20 @@ const PayForm = ({plan, type}: {plan?: any, type: string}) => {
                         <PaymentElement/>
                     </Col>
                     <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
-                        <Button
-                            text={`${locale?.depositPage?.form?.btn} ${plan?.price}$`}
-                            load={payLoad}
+                        {
+                            plan?.price ? (
+                                <Button
+                                    text={`${locale?.depositPage?.form?.btn} ${plan?.price}$`}
+                                    load={payLoad}
+                                    />
+                            ) : (
+                                <Button
+                                    text={`${locale?.depositPage?.form?.btn}`}
+                                    load={payLoad}
                             />
+                            )
+                        }
+                        
                     </Col>
                 </Row>
             </form>

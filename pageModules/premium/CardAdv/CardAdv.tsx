@@ -4,7 +4,7 @@ import styles from './CardAdv.module.scss';
 
 
 
-const CardAdv = ({list, selected, onSelect}: {list?: any[], selected: any, onSelect: any}) => {
+const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], selected: any, onSelect: any, onAccept: (...args: any[]) => any, load: boolean}) => {
 
     
 
@@ -57,9 +57,11 @@ const CardAdv = ({list, selected, onSelect}: {list?: any[], selected: any, onSel
                 </div>
                 <div className={styles.action}>
                     <Button
-
+                        load={load && selected?.type === 'subscription'}
                         variant={'default'}
+                        onClick={onAccept}
                         fill
+                        disabled={selected?.type !== 'subscription'}
                         text='Подписаться'
                         />
                 </div>

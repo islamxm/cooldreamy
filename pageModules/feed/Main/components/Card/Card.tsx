@@ -101,9 +101,8 @@ const Card:FC<cardPropsType> = ({
                     // rotate,
                     opacity: 0,
                     scale: 0.5,
-                    transition: { duration: 1.5 },
+                    transition: { duration: .1},
                     }}
-                    
                     transition={{ease: [0,0,1,1], duration: .1}}
                     className={styles.wrapper}
                     >
