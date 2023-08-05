@@ -295,6 +295,7 @@ const SearchBody = () => {
                 setState={setState}
                 clearFilter={clearFilter}
                 onToggleDrawer={() => setIsDrawerOpen(s => !s)}
+                setCurrentPage={setCurrentPage}
                 />
         </div>  
     )

@@ -166,6 +166,7 @@ const SearchDrawer:FC<I> = ({
                                         onClick={() => {
                                             // onSearch && onSearch()
                                             setCurrentPage && setCurrentPage(0)
+                                            onClose()
                                         }}
                                         load={load}
                                         />
