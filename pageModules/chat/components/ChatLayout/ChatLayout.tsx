@@ -58,6 +58,18 @@ const ChatLayout = () => {
     const [dialogSearch, setDialogSearch] = useState('')
     const dialogSearchDebounce = useDebounce<string>(dialogSearch, 500)
 
+
+
+
+    // !! новая механика обновления чата
+    const [newRead, setNewRead] = useState<any>(null)
+    const [newMsg, setNewMsg] = useState<any>(null)
+
+
+
+
+
+
     // ?? получение ид текущего чата из роута (опционально)
     useEffect(() => {
         if(query) {
@@ -159,8 +171,6 @@ const ChatLayout = () => {
         }
     }
 
-
-
     // ** получение чата писем (конкрентного)
     const getMailChat = () => {
         if(token) {
@@ -250,7 +260,6 @@ const ChatLayout = () => {
         if(socketChannel) {
             if(chatType === 'chat') {
                 if(newMessage) { 
-                    console.log(newMessage)
                     onUpdateChat && onUpdateChat({ 
                         messageBody: newMessage?.chat_message, 
                         dialogBody: {...newMessage?.chat_list_item, another_user: newMessage?.chat_message?.sender_user, self_user: newMessage?.chat_message?.recepient_user, last_message: newMessage?.chat_message}
@@ -293,6 +302,36 @@ const ChatLayout = () => {
     }, [chatType, socketChannel, chatList, dialogsList, currentChatId])
 
 
+
+    // useEffect(() => {
+    //     socketChannel && socketChannel?.listen(socketEvents?.eventChatReadMessage, (data: any) => {
+    //         setNewRead(data)  
+    //     })
+    //     socketChannel && socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
+    //         setNewMsg(data)
+    //     })
+    // }, [socketChannel])
+
+    // useEffect(() => {
+    //     if(newRead) {
+    //         onUpdateChat && onUpdateChat({
+    //             messageBody: newRead?.chat_message, 
+    //             dialogBody: {...newRead?.chat_list_item, another_user: newRead?.chat_message?.recepient_user, self_user: newRead?.chat_message?.sender_user, last_message: newRead?.chat_message}
+    //         }, 'read')
+    //     }
+    // }, [newRead])
+
+    // useEffect(() => {
+    //     if(newMsg) {
+    //         onUpdateChat && onUpdateChat({
+    //             messageBody: newMsg?.chat_message, 
+    //             dialogBody: {...newMsg?.chat_list_item, another_user: newMsg?.chat_message?.recepient_user, self_user: newMsg?.chat_message?.sender_user, last_message: newMsg?.chat_message}
+    //         }, 'read')
+    //     }
+    // }, [newMsg])
+
+    
+
     const onDeleteDialog = (dialogId: number | string) => {
         if(dialogId && token) {
             service.deleteChat(token, Number(dialogId)).then(res => {
@@ -323,6 +362,7 @@ const ChatLayout = () => {
         }
     }
 
+    useEffect(() => console.log(dialogsList[0]),[dialogsList])
 
     const onUpdateChat = (body: {
         messageBody?: any,
@@ -371,7 +411,6 @@ const ChatLayout = () => {
                     // ?? обновление чата
                     if(currentChatId == body?.dialogBody?.id) {
                                         
-                                        
                         const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
                         if(currentChatId == body?.dialogBody?.id) {
                      
@@ -403,7 +442,6 @@ const ChatLayout = () => {
                         })
                     }
                 }
-                
             } 
 
             // TODO Если выбраны ПИСЬМА

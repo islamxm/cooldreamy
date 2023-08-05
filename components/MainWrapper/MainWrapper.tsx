@@ -101,7 +101,6 @@ const MainWrapper = ({
 			)
 			service.getMyProfile(token).then(res => {
 				dispatch(updateUserData(res))
-				console.log(res)
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))
@@ -156,8 +155,11 @@ const MainWrapper = ({
 	useEffect(() => {
 		if(socketChannel) {
 			//?? получение сообщений
+			console.log('LISTEN SOCKET')
             socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
+				console.log('NEW MESSAGE')
 				dispatch(updateNewMessage(data))
+				console.log(data)
 				// dispatch(updateUnreadChatCount(unreadChatCount + 1))
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
 				switch(data?.chat_message?.chat_messageable_type) {
@@ -180,8 +182,8 @@ const MainWrapper = ({
 						return null
 				}
             })
+			
 			socketChannel?.listen(socketEvents?.eventSympathy, (data: any) => {
-				console.log(data)
 				const avatar = data?.userData?.user_thumbnail_url || data?.userData?.user_avatar_url
 				if(data?.type === 'WATCH') {
 					notify('New profile view', 'AVATAR', avatar)

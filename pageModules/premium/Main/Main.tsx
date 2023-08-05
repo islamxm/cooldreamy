@@ -16,6 +16,8 @@ const Main = () => {
     const [listPrem, setListPrem] = useState<any[]>([])
     const [listSub, setListSub] = useState<any[]>([])
     const [listCred, setListCred] = useState<any[]>([])
+
+    const [selected, setSelected] = useState<{value: string | number, type: string} | null>(null)
     
 
     const getPrem = () => {
@@ -28,14 +30,18 @@ const Main = () => {
     const getSub = () => {
         if(token) {
             service.getPaySubs(token).then(res => {
-                setListSub(res)
+                const m = res;
+                const rm = m.splice(0,1)
+                setListSub([...m])
             })
         }
     }
     const getCred = () => {
         if(token) {
             service.getPayPlans(token).then(res => {
-                setListCred(res)
+                const m = res;
+                const rm = m.splice(0, 2)
+                setListCred([...m])
             })
         }
     }
@@ -49,19 +55,26 @@ const Main = () => {
         }
     }, [token])
 
-
     return (
         <div className={`${styles.wrapper}`}>
             <div className={styles.in}>
                 <div className={styles.item}>
-                    <CardPremium list={listPrem}/>
+                    <CardPremium 
+                        onSelect={setSelected}
+                        selected={selected}
+                        list={listPrem}/>
                 </div>
                 <div className={styles.item}>
-                    <CardBalance/>
+                    <CardAdv 
+                        onSelect={setSelected}
+                        selected={selected}
+                        list={listSub}/>
                 </div>
                 <div className={styles.item}>
-                    {/* <CardAdv/> */}
-                    <CardPremium/>
+                    <CardBalance 
+                        onSelect={setSelected}
+                        selected={selected}
+                        list={listCred}/>
                 </div>
             </div>
         </div>

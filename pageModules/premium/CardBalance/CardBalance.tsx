@@ -2,7 +2,8 @@ import styles from './CardBalance.module.scss';
 import Button from '@/components/Button/Button';
 
 
-const CardBalance = () => {
+const CardBalance = ({list, selected, onSelect}: {list?: any[], selected: any, onSelect: any}) => {
+
 
     return (
         <div className={styles.wrapper}>
@@ -17,27 +18,19 @@ const CardBalance = () => {
                     За кредиты Вы можете дарить подарки, присылать стикеры и многое другое...
                     </div>
                     <div className={styles.list}>
-                        <div className={styles.item}>
-                            <input type="radio" />
-                            <label className={styles.label}>
-                                <div className={styles.value}><span>5</span> кредитов</div>
-                                <div className={styles.price}>$19</div>
-                            </label>
-                        </div>
-                        <div className={styles.item}>
-                            <input checked type="radio" />
-                            <label className={styles.label}>
-                                <div className={styles.value}><span>5</span> кредитов</div>
-                                <div className={styles.price}>$19</div>
-                            </label>
-                        </div>
-                        <div className={styles.item}>
-                            <input type="radio" />
-                            <label className={styles.label}>
-                                <div className={styles.value}><span>5</span> кредитов</div>
-                                <div className={styles.price}>$19</div>
-                            </label>
-                        </div>
+                        {
+                            (list && list?.length > 0) && list?.map(i => (
+                                <div
+                                    onClick={() => onSelect({value: i?.id, type: 'credit'})}
+                                    className={styles.item} key={i?.id}>
+                                    <input type="radio" checked={i?.id == selected?.value && selected?.type == 'credit'}/>
+                                    <label className={styles.label}>
+                                        <div className={styles.value}><span>{i?.credits}</span> кредитов</div>
+                                        <div className={styles.price}>${i?.price}</div>
+                                    </label>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className={styles.action}>

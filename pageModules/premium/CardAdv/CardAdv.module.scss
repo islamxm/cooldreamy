@@ -3,6 +3,7 @@
     border: 2px solid #FB9E13;
     border-radius: 10px;
     height: 100%;
+    border: 2px solid #E9E9E9;
     
     .in {
         padding: 35px 20px;
@@ -13,7 +14,7 @@
 
         .title {
             text-align: center;
-            color: #DE890B;
+            color: #AD6DEC;
             margin-bottom: 22px;
         }
 
@@ -28,7 +29,7 @@
                 width: 100%;
                 height: 100%;
                 border-radius: 100%;
-                background-image: url('../../../public/assets/icons/premium-1-icon.svg');
+                background-image: url('../../../public/assets/icons/premium-adv-icon.svg');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: 30px;
@@ -43,7 +44,7 @@
                 width: 100%;
                 height: 100%;
                 content: '';
-                background: radial-gradient(53.23% 53.23% at 50% 46.77%, #F4972A 0%, #F3BD0D 100%);
+                background: linear-gradient(180deg, #AC6DEC 0%, #EC82FF 100%);
                 border-radius: 100%;
                 z-index: 1;
             }
@@ -66,13 +67,16 @@
                 margin-bottom: 20px;
             }
 
-            .pricing {
+            .list {
                 display: flex;
-                width: 100%;
-                
+                width: calc(100% + 40px);
+                background-color: #F0EBFF;
+                margin-left: -20px;
+                padding: 0 20px;
 
                 .item {
                     width: calc(100% / 3);
+                    
 
                     input {
                         position: absolute;
@@ -81,6 +85,14 @@
                         z-index: -1;
                         pointer-events: none;
                         touch-action: none;
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+
+                    input:checked ~ .label {
+                        border-radius: 10px;
+                        border-color: var(--violet);
+                        background-color: #fff;
                     }
 
                     .label {
@@ -88,43 +100,47 @@
                         flex-direction: column;
                         align-items: center;
                         text-align: center;
-                        height: 130px;
-                        padding: 15px 10px;
-                        font-weight: 700;
+                        padding: 10px;
                         cursor: pointer;
+                        min-height: 130px;
+                        border: 1px solid transparent;
+                        transition: all .3s ease;
 
-                        .date {
-                            margin-bottom: 8px;
+                        .value {
+                            color: #DE7DFB;
+                            font-weight: 700;
                             font-size: 15px;
-                                line-height: 22px;
+                            text-align: center;
+                            line-height: 16px;
+                        }
+
+                        .info {
+                            color: #9B9B9B;
+                            font-size: 12px;
+                            line-height: 17px;
                             span {
-                                font-size: 25px;
-                                // line-height: 36px;
                                 display: block;
-                                
+                                text-align: center;
                             }
                         }
 
                         .price {
-                            font-size: 15px;
-                            line-height: 22px;
-                            margin-bottom: 10px;
+                            font-weight: 700;
+                            font-size: 25px;
+                            line-height: 35px;
                         }
 
-                        .ex {
+                        .dsc {
                             font-size: 11px;
-                            line-height: 16px;
+                            line-height: 15px;
+                            color: #db9e43;
+                            font-weight: 700;
                         }
-                    }
-
-                    .label.top {
-                        color: #DE890B;
-                        border: 1px solid #EEAF51;
-                        border-radius: 10px;
                     }
                 }
 
-                
+
+
             }
         }
         .action {

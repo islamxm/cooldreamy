@@ -85,7 +85,6 @@ const Card:FC<cardPropsType> = ({
             active ? (
                 <motion.div
                     drag
-                    dragTransition={{power: 1}}
                     dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                     onDragEnd={onDragEnd}
                     onDrag={onDrag}
@@ -102,7 +101,7 @@ const Card:FC<cardPropsType> = ({
                     // rotate,
                     opacity: 0,
                     scale: 0.5,
-                    transition: { duration: 0.2 },
+                    transition: { duration: 1.5 },
                     }}
                     
                     transition={{ease: [0,0,1,1], duration: .1}}

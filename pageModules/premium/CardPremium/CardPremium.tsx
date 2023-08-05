@@ -4,16 +4,18 @@ import { useEffect } from 'react';
 
 
 interface I {
-    list?: any[]
+    list?: any[],
+    selected: any,
+    onSelect: any
 }
 
 
 const CardPremium = ({
-    list
-}: I) => {
+    list,
+    selected,
+    onSelect
+}: I) => {  
 
-
-    useEffect(() => console.log(list), [list])
 
     return (
         <div className={styles.wrapper}>
@@ -27,37 +29,32 @@ const CardPremium = ({
                     а также все преимущества Премиум статуса.
                     </div>
                     <div className={styles.pricing}>
-                        <div className={styles.item}>
-                            <input type="checkbox" />
-                            <label className={styles.label}>
-                                <div className={styles.date}>
-                                    <span>12</span>
-                                    месяцев
-                                </div>
-                                <div className={styles.price}>$7</div>
-                            </label>
-                        </div>
-                        <div className={`${styles.item}`}>
-                            <input type="checkbox" />
-                            <label className={`${styles.label} ${styles.top}`}>
-                                <div className={styles.date}>
-                                    <span>6</span>
-                                    месяцев
-                                </div>
-                                <div className={styles.price}>$10</div>
-                                <div className={styles.ex}>Экономия 36%</div>
-                            </label>
-                        </div>
-                        <div className={styles.item}>
-                            <input type="checkbox" />
-                            <label className={styles.label}>
-                                <div className={styles.date}>
-                                    <span>1</span>
-                                    месяц
-                                </div>
-                                <div className={styles.price}>$19</div>
-                            </label>
-                        </div>
+
+                        {
+                            (list && list?.length > 0) && (
+                                list?.map(i => (
+                                    <div 
+                                        onClick={() => onSelect({value: i?.id, type: 'premium'})}
+                                        className={styles.item} key={i?.id}>
+                                        <input type="radio" checked={selected?.value == i?.id && selected?.type == 'premium'}/>
+                                        <label className={styles.label}>
+                                            <div className={styles.date}>
+                                                <span>
+                                                    {i?.duration === 4 && i?.duration / 4}
+                                                    {i?.duration < 4 && i?.duration}
+                                                    {i?.duration > 4 && i?.duration / 4}
+                                                </span>
+                                                {i?.duration === 4 && 'месяц'}
+                                                {i?.duration > 4 && 'месяцев'}
+                                                {(i?.duration < 4 && i?.duration > 1) && 'недели'}
+                                                {(i?.duration === 1) && 'неделя'}
+                                            </div>
+                                            <div className={styles.price}>${i?.price}</div>
+                                        </label>
+                                    </div>
+                                ))
+                            )
+                        }
                     </div>
                 </div>
                 <div className={styles.action}>

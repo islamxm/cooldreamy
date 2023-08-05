@@ -68,9 +68,12 @@
 
             .pricing {
                 display: flex;
-                width: 100%;
+                background-color: rgba(#E4E4E7, .15);
+                margin-left: -20px;
+                margin-right: -20px;
+                width: calc(100% + 40px);
+                padding: 0 20px;
                 
-
                 .item {
                     width: calc(100% / 3);
 
@@ -81,6 +84,14 @@
                         z-index: -1;
                         pointer-events: none;
                         touch-action: none;
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+
+                    input:checked ~ .label {
+                        border-color: #DE890B;
+                        color: #DE890B;
+                        
                     }
 
                     .label {
@@ -91,6 +102,9 @@
                         min-height: 130px;
                         padding: 15px 10px;
                         font-weight: 700;
+                        border: 1px solid transparent;
+                        transition: all .3s ease;
+                        border-radius: 10px;
                         cursor: pointer;
 
                         .date {
