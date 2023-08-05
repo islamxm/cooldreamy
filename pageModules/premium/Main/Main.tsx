@@ -94,7 +94,7 @@ const Main = () => {
                         
                         if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem3')
                     } else {
-                        notify(locale?.global?.notifications?.error_default)
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => setLoad(false))
             }
@@ -109,7 +109,7 @@ const Main = () => {
                         if(selected?.value == 5) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
                         if(selected?.value == 6) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
                     } else {
-                        notify(locale?.global?.notifications?.error_default)
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                     
                 }).finally(() => setLoad(false))

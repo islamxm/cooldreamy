@@ -106,7 +106,6 @@ const MainWrapper = ({
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))
 			})
-			console.log(token)
 		}
 	}, [token])
 
