@@ -30,7 +30,7 @@ const locales = [
 ]
 
 
-const Header: React.FC<HeaderPropsTypes> = ({auth}) => {
+const Header: React.FC<any> = () => {
     const dispatch = useAppDispatch()
     const {token, socketChannel, isMenuOpen, locale, userData} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
