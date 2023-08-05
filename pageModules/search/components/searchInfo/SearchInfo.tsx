@@ -21,7 +21,7 @@ const SearchInfo:FC<searchInfoType> = ({
         {label: locale?.searchPage.filter.tabs.all, id: '1'},
         {label: locale?.searchPage.filter.tabs.near, id: '2'},
         {label: locale?.searchPage.filter.tabs.new, id: '3'},
-        // {label: locale?.searchPage.filter.tabs.online, id: '4'},
+        {label: locale?.searchPage.filter.tabs.online, id: '4'},
     ]
     
     
