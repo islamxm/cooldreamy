@@ -26,13 +26,17 @@ const CardPremium = ({
     return (
         <div className={styles.wrapper}>
             <div className={styles.in}>
-                <div className={styles.title}>Премиум статус</div>
+                <div className={styles.title}>Premium status</div>
                 <div className={styles.icon}><div className={styles.icon_img}></div></div>
                 <div className={styles.body}>
-                    <div className={styles.head}>Получите все возможности сайта</div>
+                    <div className={styles.head}>Unlock all site features:</div>
                     <div className={styles.text}>
-                    Эксклюзивное предложение. Ваш профиль может быть все время в ТОП или стать Инкогнито, персональный менеджер службы поддержки, 
-                    а также все преимущества Премиум статуса.
+                    <ul>
+                        <li>Exclusive avatar badge</li>
+                        <li>Female search filters</li>
+                        <li>View profiles that added you to favorites</li>
+                        <li>View profiles that liked you back</li>
+                    </ul>
                     </div>
                     <div className={styles.pricing}>
 
@@ -50,10 +54,10 @@ const CardPremium = ({
                                                     {i?.duration < 4 && i?.duration}
                                                     {i?.duration > 4 && i?.duration / 4}
                                                 </span>
-                                                {i?.duration === 4 && 'месяц'}
-                                                {i?.duration > 4 && 'месяцев'}
-                                                {(i?.duration < 4 && i?.duration > 1) && 'недели'}
-                                                {(i?.duration === 1) && 'неделя'}
+                                                {i?.duration === 4 && 'month'}
+                                                {i?.duration > 4 && 'months'}
+                                                {(i?.duration < 4 && i?.duration > 1) && 'weeks'}
+                                                {(i?.duration === 1) && 'week'}
                                             </div>
                                             <div className={styles.price}>{i?.price}
                                                 <span><AiFillDollarCircle/></span>
@@ -70,7 +74,7 @@ const CardPremium = ({
                         // hover={{boxShadow: '0.872px 9.962px 20px rgba(255, 199, 0, 0.15)'}}
                         // hover={null}
                         variant={'gold'}
-                        text='Стать Премиум'
+                        text='Become Premium'
                         load={load && selected?.type === 'premium'}
                         onClick={onAccept}
                         disabled={selected?.type !== 'premium'}

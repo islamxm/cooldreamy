@@ -101,10 +101,12 @@ const MainWrapper = ({
 			)
 			service.getMyProfile(token).then(res => {
 				dispatch(updateUserData(res))
+				console.log(res)
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))
 			})
+			console.log(token)
 		}
 	}, [token])
 
@@ -155,12 +157,8 @@ const MainWrapper = ({
 	useEffect(() => {
 		if(socketChannel) {
 			//?? получение сообщений
-			console.log('LISTEN SOCKET')
             socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
-				console.log('NEW MESSAGE')
 				dispatch(updateNewMessage(data))
-				console.log(data)
-				// dispatch(updateUnreadChatCount(unreadChatCount + 1))
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
 				switch(data?.chat_message?.chat_messageable_type) {
 					case chatMessageTypeVariants.messageText:

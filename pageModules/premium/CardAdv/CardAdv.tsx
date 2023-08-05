@@ -12,18 +12,18 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
         <div className={styles.wrapper}>
             <div className={styles.in}>
                 <div className={styles.title}>
-                    Подписка на безлимитное общение
+                Unlimited chat subscription
                 </div>
                 <div className={styles.icon}>
                     <div className={styles.icon_img}></div>
                 </div>
                 <div className={styles.body}>
-                    <div className={styles.head}>
+                    {/* <div className={styles.head}>
                         Купите подписку и общайтесь 
                         на сайте без ограничений!
-                    </div>
+                    </div> */}
                     <div className={styles.text}>
-                        Покупая подписку вы получаете возможность общаться в чате без ограничений, а также имеете бесплатные лимиты на отправку фото и видео контента.
+                        With a subscription, you get unlimited chat access and free limits on sending photos and videos
                     </div>
                     <div className={styles.list}>
                         {
@@ -36,11 +36,11 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
                                         <label className={styles.label} htmlFor="">
                                             <div className={styles.value}>
                                             {i?.duration} <br/>
-                                            часов
+                                            hours
                                             </div>
                                             <div className={styles.info}>
-                                                <span>Фото: {i?.count_watch_or_send_photos}</span>
-                                                <span>Видео: {i?.count_watch_or_send_video}</span>
+                                                <span>Photos: {i?.count_watch_or_send_photos}</span>
+                                                <span>Videos: {i?.count_watch_or_send_video}</span>
                                             </div>
                                             <div className={styles.price}>
                                             {i?.price} <span><AiFillDollarCircle/></span>
@@ -62,7 +62,7 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
                         onClick={onAccept}
                         fill
                         disabled={selected?.type !== 'subscription'}
-                        text='Подписаться'
+                        text={'Subscribe'}
                         />
                 </div>
             </div>

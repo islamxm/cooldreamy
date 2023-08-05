@@ -86,7 +86,7 @@ const Main = () => {
                     list_type: selected?.type,
                     list_id: selected?.value
                 }).then(res => {
-
+                    console.log(selected?.value)
                     if(res?.message === 'success') {
                         if(selected?.value == 1) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem1')
                         
@@ -103,10 +103,11 @@ const Main = () => {
                     list_type: selected?.type,
                     list_id: selected?.value
                 }).then(res => {
+                    console.log(selected?.value)
                     if(res?.message === 'success') {
-                        if(selected?.value == 2) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub2')
-                        if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
-                        if(selected?.value == 4) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
+                        if(selected?.value == 4) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub2')
+                        if(selected?.value == 5) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
+                        if(selected?.value == 6) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
                     } else {
                         notify(locale?.global?.notifications?.error_default)
                     }

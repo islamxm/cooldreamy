@@ -8,14 +8,14 @@ const CardBalance = ({list, selected, onSelect, onAccept, load}: {list?: any[], 
     return (
         <div className={styles.wrapper}>
             <div className={styles.in}>
-                <div className={styles.title}>Баланс кредитов</div>
+                <div className={styles.title}>Credit balance.</div>
                 <div className={styles.icon}>
                     <div className={styles.icon_img}></div>
                 </div>
                 <div className={styles.body}>
-                    <div className={styles.head}>Покупки на сервисе</div>
+                    <div className={styles.head}>Purchases on the site</div>
                     <div className={styles.text}>
-                    За кредиты Вы можете дарить подарки, присылать стикеры и многое другое...
+                    You can use credits to gift presents, stickers, and much more.
                     </div>
                     <div className={styles.list}>
                         {
@@ -25,7 +25,7 @@ const CardBalance = ({list, selected, onSelect, onAccept, load}: {list?: any[], 
                                     className={styles.item} key={i?.id}>
                                     <input type="radio" checked={i?.id == selected?.value && selected?.type == 'credit'}/>
                                     <label className={styles.label}>
-                                        <div className={styles.value}><span>{i?.credits}</span> кредитов</div>
+                                        <div className={styles.value}><span>{i?.credits}</span> credits</div>
                                         <div className={styles.price}>${i?.price}</div>
                                     </label>
                                 </div>
@@ -35,7 +35,7 @@ const CardBalance = ({list, selected, onSelect, onAccept, load}: {list?: any[], 
                 </div>
                 <div className={styles.action}>
                     <Button
-                        text='Пополнить'
+                        text={'Buy credits'}
                         fill
                         load={load && selected?.type === 'credit'}
                         disabled={selected?.type !== 'credit'}
