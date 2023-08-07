@@ -130,9 +130,11 @@ const BirthdaySelectMob:FC<I> = ({
         <div className={styles.wrapper}>
             <div className={styles.title}>When is your birthday?</div>
             <div className={styles.body}>
+                
                 <div className={styles.part}>
+                    <div className={styles.active}></div>
                     <Swiper
-                        
+                        initialSlide={1}
                         direction={'vertical'}
                         slidesPerView={3}
                         className={`${styles.slider} bth-slider`}
