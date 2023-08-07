@@ -2,6 +2,7 @@ import styles from './BirthdaySelectMob.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {useState, useEffect, FC} from 'react';
 import moment from 'moment';
+import Item from './components/Item/Item';
 
 interface I {
     minAge?: number,
@@ -91,6 +92,8 @@ const BirthdaySelectMob:FC<I> = ({
     const [months, setMonths] = useState<any[]>(sequence(1,12)?.map(i => ({label: getMonthName(i), value: i})) || [])
     const [days, setDays] = useState<any[]>([])
 
+    const [total, setTotal] = useState<number>()
+
     useEffect(() => {
         if(minYear && maxYear) {
             setYears(sequence(minYear, maxYear)?.map(i => ({value: i, label: i?.toString()}))?.reverse())
@@ -125,22 +128,34 @@ const BirthdaySelectMob:FC<I> = ({
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.title}>Когда у Вас день рождения?</div>
+            <div className={styles.title}>When is your birthday?</div>
             <div className={styles.body}>
                 <div className={styles.part}>
                     <Swiper
+                        
                         direction={'vertical'}
                         slidesPerView={3}
-                        className={styles.slider}
-                        slideActiveClass={styles.active}
+                        className={`${styles.slider} bth-slider`}
                         centeredSlides
+                        // slideActiveClass={'bth-slide-active'}
+                        // centeredSlides
                         slideToClickedSlide
-                        freeMode
+                        // freeMode={{
+                        //     enabled: true,
+                        //     sticky: true,
+                        //     momentum: true,
+                        //     momentumRatio: 5
+                        // }}
+                        freeMode={true}
                         >
                         {
                             years?.map((i:any, index: number) => (
                                 <SwiperSlide className={styles.slide} key={i?.value}>
-                                    {i?.label}
+                                    <Item
+                                        index={index}
+                                        value={i?.value}
+                                        label={i?.label}
+                                        />
                                 </SwiperSlide>
                             ))
                         }
@@ -161,8 +176,13 @@ const BirthdaySelectMob:FC<I> = ({
                         />
                 </div> */}
             </div>
-            <div className={styles.ex}>Прокрутите, чтобы выбрать</div>
-            <div className={styles.total}></div>
+            <div className={styles.ex}>Scroll to select</div>
+            {
+                total && (
+                    <div className={styles.total}>Your age: {total} years.</div>        
+                )
+            }
+            
         </div>
     )
 }

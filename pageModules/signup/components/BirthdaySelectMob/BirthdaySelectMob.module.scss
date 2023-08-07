@@ -14,7 +14,7 @@
 
             .slider {
                 height: 130px;
-                border: 1px solid red;
+                // border: 1px solid red;
 
                 .slide {
                     display: flex;
@@ -26,10 +26,7 @@
                     
                 }
 
-                .slide.active {
-                    background-color: #F0EBFF;
-                    color: var(--violet);
-                }
+                
             }
         }
     }
