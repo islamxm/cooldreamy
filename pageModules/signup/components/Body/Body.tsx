@@ -57,7 +57,7 @@ const Body:FC = () => {
     const [sex, setSex] = useState<'male' | 'female'>('male')
     const [avatar, setAvatar] = useState<File | null | undefined>(null)
     const [about, setAbout] = useState('')
-    const [birthday, setBirthday] = useState<any>('')
+    const [birthday, setBirthday] = useState<any>()
 
     const [countryDef, setCountryDef] = useState<any>(null)
     const [stateDef, setStateDef] = useState<any>(null)
@@ -117,6 +117,7 @@ const Body:FC = () => {
         dispatch(updateUserId(null))
     }, [])
 
+    useEffect(() => console.log(birthday), [birthday])
 
 
     useEffect(() => {
@@ -194,7 +195,6 @@ const Body:FC = () => {
 
     const stepChange = () => {
         if(currentStep === 0) {
-         
             if(registered) {
                 setLoad(true)
                 const body = {
@@ -204,7 +204,6 @@ const Body:FC = () => {
                     gender: sex
                 }
                 if(token) {
-                    console.log(token)
                     setLoad(true)
                     service.updateMyProfile(body, token).then(res => {
                         if(res?.id) {
@@ -309,6 +308,10 @@ const Body:FC = () => {
         }
     }, [currentStep, token, countryDef, country, stateDef, state])
 
+    useEffect(() => {
+        console.log(birthday)
+    }, [birthday])
+
 
     useEffect(() => {
         if(currentStep === 0) {
@@ -376,7 +379,7 @@ const Body:FC = () => {
                                             currentStep > 0 && (
                                                 <Button
                                                     text='BACK'
-                                                    small
+                                                    middle
                                                     fill
                                                     variant={'white'}
                                                     onClick={() => setCurrentStep(s => s - 1)}
@@ -390,7 +393,7 @@ const Body:FC = () => {
                                     <div className={styles.top_btn}>
                                         <Button
                                             style={{textTransform: 'uppercase'}}
-                                            small
+                                            middle
                                             fill
                                             onClick={stepChange}
                                             disabled={btnDisable}

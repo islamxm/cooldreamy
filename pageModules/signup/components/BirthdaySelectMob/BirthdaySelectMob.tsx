@@ -73,6 +73,8 @@ const getMonthName = (index: number) => {
     }
 }
 
+const currentYear = (new Date()).getFullYear()
+
 const BirthdaySelectMob:FC<I> = ({
     minAge,
     maxAge,
@@ -87,9 +89,8 @@ const BirthdaySelectMob:FC<I> = ({
 }) => {
     const [dayValue, setDayValue] = useState<any>()
     const [monthValue, setMonthValue] = useState<any>(1)
-    const [yearValue, setYearValue] = useState<any>()
+    const [yearValue, setYearValue] = useState<any>(1)
 
-    const [currentYear, setCurrentYear] = useState<any>((new Date()).getFullYear())
     const [minYear, setMinYear] = useState<any>()
     const [maxYear, setMaxYear] = useState<any>()
 
@@ -97,17 +98,24 @@ const BirthdaySelectMob:FC<I> = ({
     const [months, setMonths] = useState<any[]>(sequence(1,12)?.map(i => ({label: getMonthName(i), value: i})) || [])
     const [days, setDays] = useState<any[]>([])
 
-    const [total, setTotal] = useState<number>()
+    const [total, setTotal] = useState<number>(0)
 
     const refSliderYear = useRef<any>(null)
     const refSliderMonth = useRef<any>(null)
     const refSliderDay = useRef<SwiperRef>(null)
+
+    
+    useEffect(() => {
+        if(years?.length > 0) setYearValue(years[1]?.value)
+    }, [years])
+
 
     useEffect(() => {
         if(minYear && maxYear) {
             setYears(sequence(minYear, maxYear)?.map(i => ({value: i, label: i?.toString()}))?.reverse())
         }
     }, [minYear, maxYear])
+
 
 
     useEffect(() => {
@@ -117,28 +125,30 @@ const BirthdaySelectMob:FC<I> = ({
     }, [yearValue, monthValue])
 
     useEffect(() => {
-        maxYear && setYearValue(maxYear)
-    }, [maxYear])
-
-    useEffect(() => {
-        if(minAge && maxAge && currentYear) {
+        if(minAge && maxAge) {
             setMinYear(currentYear - maxAge)
             setMaxYear(currentYear - minAge)
         }
-    }, [minAge, maxAge, currentYear])
+    }, [minAge, maxAge])
 
     useEffect(() => {
         if (dayValue && monthValue && yearValue) {
-            setValue && moment(`${dayValue}-${monthValue}-${yearValue}`, 'DD-MM-YYYY').format("YYYY-MM-DD") !== 'Invalid date' && setValue(moment(`${dayValue}-${monthValue}-${yearValue}`, 'DD-MM-YYYY').format("YYYY-MM-DD"))
+            if(setValue && moment(`${dayValue}-${monthValue}-${yearValue}`, 'DD-MM-YYYY').format("YYYY-MM-DD") !== 'Invalid date') {
+                setValue(moment(`${dayValue}-${monthValue}-${yearValue}`, 'DD-MM-YYYY').format("YYYY-MM-DD"))
+            }
         } else {
             setValue && setValue(null)
         }
-    }, [dayValue, monthValue, yearValue])
+    }, [dayValue, monthValue, yearValue, setValue])
+
+
+ 
 
 
     useEffect(() => {
         if(refSliderDay && refSliderDay?.current) {
             refSliderDay?.current?.swiper?.update()
+            refSliderDay?.current?.swiper?.slideTo(1)
         }
     }, [yearValue, monthValue, refSliderDay])
 
@@ -158,11 +168,11 @@ const BirthdaySelectMob:FC<I> = ({
                 
                 <div className={styles.part}>
                     {
-                        years?.findIndex(i => i?.value == yearValue) !== -1 && (
+                        years?.length > 0 && yearValue && years?.findIndex(i => i?.value == yearValue) !== -1 && (
                             <>
                                 <div className={styles.active}></div>
                                 <Swiper
-                                    initialSlide={years?.findIndex(i => i?.value == yearValue) + 1}
+                                    initialSlide={1}
                                     direction={'vertical'}
                                     slidesPerView={3}
                                     className={`${styles.slider} bth-slider`}
@@ -193,68 +203,81 @@ const BirthdaySelectMob:FC<I> = ({
                     
                 </div>
                 <div className={styles.part}>
-                    <div className={styles.active}></div>
-                    <Swiper
-                        direction={'vertical'}
-                        slidesPerView={3}
-                        initialSlide={1}
-                        className={`${styles.slider} bth-slider`}
-                        centeredSlides
-                        slideToClickedSlide
-                        freeMode={true}
-                        onActiveIndexChange={(e) => {
-                            setMonthValue(e.activeIndex + 1)
-                        }}
-                        ref={refSliderMonth}
-                        >
-                        {
-                            months?.map((i:any, index: number) => (
-                                <SwiperSlide className={styles.slide} key={i?.value}>
-                                    <Item
-                                        index={index}
-                                        value={i?.value}
-                                        label={i?.label}
-                                        setValue={setMonthValue}
-                                        />
-                                </SwiperSlide>
-                            ))
-                        }
-                    </Swiper>
+                    {
+                        monthValue && (
+                            <>
+                                <div className={styles.active}></div>
+                                <Swiper
+                                    direction={'vertical'}
+                                    slidesPerView={3}
+                                    initialSlide={1}
+                                    className={`${styles.slider} bth-slider`}
+                                    centeredSlides
+                                    slideToClickedSlide
+                                    freeMode={true}
+                                    onActiveIndexChange={(e) => {
+                                        setMonthValue(e.activeIndex + 1)
+                                    }}
+                                    ref={refSliderMonth}
+                                    >
+                                    {
+                                        months?.map((i:any, index: number) => (
+                                            <SwiperSlide className={styles.slide} key={i?.value}>
+                                                <Item
+                                                    index={index}
+                                                    value={i?.value}
+                                                    label={i?.label}
+                                                    setValue={setMonthValue}
+                                                    />
+                                            </SwiperSlide>
+                                        ))
+                                    }
+                                </Swiper>
+                            </>
+                        )
+                    }
                 </div>
                 <div className={styles.part}>
-                    <div className={styles.active}></div>
+                    {
+                        days?.length > 0 && (
+                            <>
+                                <div className={styles.active}></div>
                         
-                    <Swiper
-                        initialSlide={1}
-                        direction={'vertical'}
-                        slidesPerView={3}
-                        className={`${styles.slider} bth-slider`}
-                        centeredSlides
-                        slideToClickedSlide
-                        freeMode={true}
-                        onActiveIndexChange={(e) => {
-                            setDayValue(e.activeIndex + 1)
-                        }}
-                        ref={refSliderDay}
-                        >
-                        {
-                            days?.map((i:any, index: number) => (
-                                <SwiperSlide className={styles.slide} key={i?.value}>
-                                    <Item
-                                        setValue={setDayValue}
-                                        index={index}
-                                        value={i?.value}
-                                        label={i?.label}
-                                        />
-                                </SwiperSlide>
-                            ))
-                        }
-                    </Swiper>
+                                <Swiper
+                                    initialSlide={1}
+                                    direction={'vertical'}
+                                    slidesPerView={3}
+                                    className={`${styles.slider} bth-slider`}
+                                    centeredSlides
+                                    slideToClickedSlide
+                                    freeMode={true}
+                                    onActiveIndexChange={(e) => {
+                                        setDayValue(e.activeIndex + 1)
+                                    }}
+                                    ref={refSliderDay}
+                                    >
+                                    {
+                                        days?.map((i:any, index: number) => (
+                                            <SwiperSlide className={styles.slide} key={i?.value}>
+                                                <Item
+                                                    setValue={setDayValue}
+                                                    index={index}
+                                                    value={i?.value}
+                                                    label={i?.label}
+                                                    />
+                                            </SwiperSlide>
+                                        ))
+                                    }
+                                </Swiper>
+                            </>
+                        )
+                    }
+                    
                 </div>
             </div>
             <div className={styles.ex}>Scroll to select</div>
             {
-                total && (
+                total > 0 && (
                     <div className={styles.total}>Your age: {total} years.</div>        
                 )
             }
