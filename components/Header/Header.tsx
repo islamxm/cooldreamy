@@ -32,7 +32,8 @@ const locales = [
 
 const Header: React.FC<any> = () => {
     const dispatch = useAppDispatch()
-    const {token, socketChannel, isMenuOpen, locale, userData} = useAppSelector(s => s)
+    const {token, socketChannel, isMenuOpen, locale, userData, premiumData} = useAppSelector(s => s)
+    const {is_premium} = premiumData
     const [loginModal, setLoginModal] = useState(false)
     const {width} = useWindowSize()
     const router = useRouter()
@@ -155,7 +156,7 @@ const Header: React.FC<any> = () => {
                             ) : (
                                 <div className={styles.main}>
                                     {
-                                        userData?.is_premium === 0 && <div className={styles.prem}>
+                                        !is_premium && <div className={styles.prem}>
                                             <PremiumBtn/>
                                         </div>
                                     }

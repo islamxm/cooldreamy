@@ -32,9 +32,10 @@ import Navbar from '@/components/Navbar/Navbar';
 if(process?.browser) {
 	const vh = process?.browser && window.innerHeight / 100;
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
+	// screen.orientation.lock('portrait')
 }
 
-screen.orientation.lock('portrait')
+
 
 
 
