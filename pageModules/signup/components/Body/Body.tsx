@@ -29,6 +29,7 @@ import StepMail from '../../steps/StepMail/StepMail';
 import { IUser } from '@/models/IUser';
 import notify from '@/helpers/notify';
 import LOCAL_STORAGE from '@/helpers/localStorage';
+import moment from 'moment';
 
 
 
@@ -64,6 +65,8 @@ const Body:FC = () => {
     const [state, setState] = useState<any>()
     const [language, setLanguage] = useState<any>('en')
     const [btnDisable, setBtnDisable] = useState(false)
+
+    const [registered, setRegistered] = useState(false)
 
 
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
@@ -187,45 +190,69 @@ const Body:FC = () => {
     }, [currentStep])
 
 
-    useEffect(() => {
-        console.log(selectedCareers)
-    }, [selectedCareers])
 
 
     const stepChange = () => {
         if(currentStep === 0) {
-            
-            setLoad(true)
-            const body = {
-                email,
-                name,
-                password,
-                gender: sex
-            }
-            service.register(body).then(res => {
-                if(res?.error) {
-                    setErrors(s => ({
-                        ...s,
-                        ...res?.error
-                    }))
+         
+            if(registered) {
+                setLoad(true)
+                const body = {
+                    email,
+                    name,
+                    password, 
+                    gender: sex
                 }
-                if(res?.token && res?.id) {
-                    setErrors({
-                        email: [],
-                        name: [],
-                        password: []
+                if(token) {
+                    console.log(token)
+                    setLoad(true)
+                    service.updateMyProfile(body, token).then(res => {
+                        if(res?.id) {
+                            dispatch(updateUserData(res))
+                            setCurrentStep(s => s + 1)
+                        } else {
+                            notify(locale?.global?.notifications?.error_default, 'ERROR')
+                        }
+                    }).finally(() => {
+                        setLoad(false)
                     })
-                    dispatch(updateToken(res?.token))
-                    dispatch(updateUserId(res?.id))
-                    
-                    LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
-                    LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
-                    // Cookies.set('cooldate-web-user-id', res?.id)
-                    // Cookies.set('cooldate-web-token', res?.token)
-
-                    setCurrentStep(s => s + 1)
+                } 
+                
+            } else {
+                setLoad(true)
+                const body = {
+                    email,
+                    name,
+                    password,
+                    gender: sex
                 }
-            }).finally(() => setLoad(false))
+                service.register(body).then(res => {
+                    if(res?.error) {
+                        setErrors(s => ({
+                            ...s,
+                            ...res?.error
+                        }))
+                    }
+                    if(res?.token && res?.id) {
+                        setErrors({
+                            email: [],
+                            name: [],
+                            password: []
+                        })
+                        dispatch(updateToken(res?.token))
+                        dispatch(updateUserId(res?.id))
+                        
+                        LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
+                        LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
+                        // Cookies.set('cooldate-web-user-id', res?.id)
+                        // Cookies.set('cooldate-web-token', res?.token)
+    
+                        setCurrentStep(s => s + 1)
+                    }
+                }).finally(() => setLoad(false))
+            }
+            
+            setRegistered(true)
         }
      
         if(currentStep > 0 && currentStep < 10) {
@@ -249,9 +276,7 @@ const Body:FC = () => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
-
                         service.getMyProfile(token).then(profile => {
-                            console.log(profile)
                             if(!profile?.avatar_url) {
                                 Router.push(`/search`)
                             } else Router.push(`/search`)
@@ -270,6 +295,7 @@ const Body:FC = () => {
             service.updateMyProfile({birthday: birthday}, token)
         }
     }, [currentStep, token, birthday, about])
+    
 
     useEffect(() => {
         if(currentStep === 2 && token) {
@@ -278,12 +304,11 @@ const Body:FC = () => {
                 country: country?.label ? country?.label : countryDef,
                 state: (country?.label && state?.label) ? state?.label : (state?.label ? state?.label : stateDef)
             }).then(res => {
-                console.log(res)
+                
             })
         }
     }, [currentStep, token, countryDef, country, stateDef, state])
 
-    
 
     useEffect(() => {
         if(currentStep === 0) {
@@ -345,9 +370,35 @@ const Body:FC = () => {
                     <Col span={24}>
                         <Row gutter={[24,24]}>
                             <Col span={24}>
-                                <h2 className="block-title center">
-                                    {locale?.signupPage.main.title}
-                                </h2>
+                                <div className={styles.top}>
+                                    <div className={styles.top_btn}>
+                                        {
+                                            currentStep > 0 && (
+                                                <Button
+                                                    text='BACK'
+                                                    small
+                                                    fill
+                                                    variant={'white'}
+                                                    onClick={() => setCurrentStep(s => s - 1)}
+                                                    />
+                                            )
+                                        }
+                                    </div>
+                                    <h2 className="block-title center">
+                                        {locale?.signupPage.main.title}
+                                    </h2>
+                                    <div className={styles.top_btn}>
+                                        <Button
+                                            style={{textTransform: 'uppercase'}}
+                                            small
+                                            fill
+                                            onClick={stepChange}
+                                            disabled={btnDisable}
+                                            text={currentStep === 10 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
+                                            load={load}
+                                            />
+                                    </div>
+                                </div>
                             </Col>
                             <Col span={24}>
                                 <div className={styles.panel}>

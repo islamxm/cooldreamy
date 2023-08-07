@@ -9,7 +9,12 @@ interface I {
     maxAge?: number
 
     value?: any,
-    setValue?: (...args: any[]) => any
+    setValue?: (...args: any[]) => any,
+
+
+    initYear?: any,
+    initMonth?: any,
+    initDay?: any
 }
 
 
@@ -70,8 +75,12 @@ const BirthdaySelect:FC<I> = ({
     minAge,
     maxAge,
 
-    value,
-    setValue
+    
+    setValue,
+
+    initYear,
+    initMonth,
+    initDay
 }) => {
     const [dayValue, setDayValue] = useState<any>()
     const [monthValue, setMonthValue] = useState<any>()
@@ -84,6 +93,17 @@ const BirthdaySelect:FC<I> = ({
     const [years, setYears] = useState<any>()
     const [months, setMonths] = useState<any[]>(sequence(1,12)?.map(i => ({label: getMonthName(i), value: i})) || [])
     const [days, setDays] = useState<any[]>([])
+
+
+    useEffect(() => {
+        console.log('YEAR', initYear)
+        console.log('MONTH', initMonth)
+        console.log('DAY', initDay)
+        
+        initDay && setDayValue(initDay)
+        initMonth && setMonthValue(initMonth)
+        initYear && setYearValue(initYear)
+    }, [initDay, initMonth, initYear])
 
 
     useEffect(() => {

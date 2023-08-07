@@ -8,6 +8,13 @@
     .inner {
         padding: 24px 0;
 
+        .top {
+
+            .top_btn {
+                display: none;
+            }
+        }
+
         .panel {
             max-width: 945px;
             width: 100%;
@@ -59,6 +66,16 @@
         .inner {
             padding: 15px 0;
 
+            .top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .top_btn {
+                    width: 80px;
+                    display: block;
+                }
+            }
+
             .panel {
                 padding: 20px;
                 border-radius: 20px;
@@ -68,6 +85,7 @@
                     // bottom: 60px;
                     // left: 0;
                     // width: 100%;
+                    display: none;
                 }
             }
         }
