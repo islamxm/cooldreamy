@@ -138,6 +138,8 @@ const endpoints = {
     getFeedFilterCount: `${API_PATH}feeds/statistic`,
 
     readProfile: `${API_PATH}feeds/read`,
+
+    getPremiumStatus: `${API_PATH}payments/premium`,
 }
 
 export default endpoints;

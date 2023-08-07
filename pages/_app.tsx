@@ -34,6 +34,9 @@ if(process?.browser) {
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
+screen.orientation.lock('portrait')
+
+
 
 function App({ Component, pageProps }: AppProps) {
 	const router = useRouter()

@@ -45,6 +45,10 @@ export interface IGlobalState {
         count_mutual: number,
         count_my_likes: number,
         count_watches: number
+    },
+
+    premiumData: {
+        is_premium: boolean,
     }
 }
 
@@ -71,6 +75,9 @@ export const globalState: IGlobalState = {
         count_mutual: 0,
         count_my_likes: 0,
         count_watches: 0
+    },
+    premiumData: {
+        is_premium: false
     }
 }
 
@@ -196,6 +203,11 @@ const reducer = (state = globalState, action: any) => {
                     ...state.sympCountData,
                     count_watches: state.sympCountData.count_watches + 1
                 }
+            }
+        case 'UPDATE_PREMIUM_DATA':
+            return {
+                ...state,
+                premiumData: action.data
             }
         default:
             return state;

@@ -75,3 +75,28 @@
     }
     
 }
+
+.card.premium {
+    border-radius: 8px;
+    background: var(--33, linear-gradient(143deg, rgba(255, 199, 0, 0.19) 0%, rgba(255, 224, 133, 0.19) 49.62%, rgba(255, 184, 0, 0.19) 100%));
+    border: 1px solid #ffc368;
+
+    .balance {
+        padding-right: 25px;
+        position: relative;
+
+        &:after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            content: '';
+            background-image: url('../../../../public/assets/icons/premium-sm.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+    }
+}

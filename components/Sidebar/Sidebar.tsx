@@ -16,14 +16,19 @@ import Router, { useRouter } from 'next/router';
 import PromoModal from '@/popups/PromoModal/PromoModal';
 import Link from 'next/link';
 
+
 const service = new ApiService()
 
 const Sidebar:FC = () => {
-    const {userData, isMenuOpen, token, locale} = useAppSelector(s => s)
+    const {userData, isMenuOpen, token, locale, premiumData} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
     const [load, setLoad] = useState(false)
     const router = useRouter()
+
+    const {is_premium} = premiumData
+
+ 
     
     const onClose = (e: any) => {
         if(width <= 768 && e.target.dataset.close === 'true') {
@@ -31,16 +36,6 @@ const Sidebar:FC = () => {
         }
     }
 
-    const onAddCredit = () => {
-        if(token) {
-            setLoad(true)
-            service.setCredits(token, {credits: 1000}).then(res => {
-                console.log(res)
-            }).finally(() => {
-                setLoad(false)
-            })
-        }
-    }
 
     useEffect(() => {
         dispatch(updateMenu(false))

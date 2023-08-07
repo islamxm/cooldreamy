@@ -1210,6 +1210,20 @@ class ApiService {
         }
     }
 
+    getPremiumStatus = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getPremiumStatus, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            console.log(err)
+        }
+    }
    
 }
 

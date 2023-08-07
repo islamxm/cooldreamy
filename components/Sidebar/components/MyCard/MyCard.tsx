@@ -11,6 +11,8 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import {AiFillDollarCircle} from 'react-icons/ai';
 import {useEffect} from 'react';
 
+
+
 const MyCard:FC<IUser> = ({
     name,
     state,
@@ -20,10 +22,12 @@ const MyCard:FC<IUser> = ({
     age,
     online
 }) => {
-    const {userData, locale} = useAppSelector(s => s)
+    const {userData, locale, premiumData} = useAppSelector(s => s)
+    const {is_premium} = premiumData
+
 
     return (
-        <Link href={'/profile'} className={styles.card} >
+        <Link href={'/profile'} className={`${styles.card} ${is_premium ? styles.premium : ''}`} >
             <div className={styles.main}>
                 <div className={styles.avatar}>
                     <Avatar

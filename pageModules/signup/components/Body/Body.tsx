@@ -245,13 +245,13 @@ const Body:FC = () => {
                         LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
                         // Cookies.set('cooldate-web-user-id', res?.id)
                         // Cookies.set('cooldate-web-token', res?.token)
-    
+                        setRegistered(true)
                         setCurrentStep(s => s + 1)
                     }
                 }).finally(() => setLoad(false))
             }
             
-            setRegistered(true)
+          
         }
      
         if(currentStep > 0 && currentStep < 10) {

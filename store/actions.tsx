@@ -48,3 +48,4 @@ export const incSympWathces = () => ({type: 'INC_SYMP_WATCHES'})
 
 
 export const updateSoonModal = (data: boolean) => ({type:'UPDATE_SOON_MODAL', data})
+export const updatePremiumData = (data: any) => ({type: 'UPDATE_PREMIUM_DATA', data})
