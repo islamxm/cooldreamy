@@ -96,10 +96,6 @@ const BirthdaySelect:FC<I> = ({
 
 
     useEffect(() => {
-        console.log('YEAR', initYear)
-        console.log('MONTH', initMonth)
-        console.log('DAY', initDay)
-        
         initDay && setDayValue(initDay)
         initMonth && setMonthValue(initMonth)
         initYear && setYearValue(initYear)

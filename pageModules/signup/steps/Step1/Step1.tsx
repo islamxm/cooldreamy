@@ -12,6 +12,7 @@ import BthPicker from '@/components/BthPicker/BthPicker';
 import moment from 'moment';
 import SelectDef from '@/components/SelectDef/SelectDef';
 import BirthdaySelect from '../../components/BirthdaySelect/BirthdaySelect';
+import BirthdaySelectMob from '../../components/BirthdaySelectMob/BirthdaySelectMob';
 
 
 const service = new ApiService()
@@ -102,15 +103,7 @@ const Step1:FC<IStep1> = ({
                                     />
                             </Col>
                             <Col span={24}>
-                                {/* <BthPicker
-                                    placeholder={locale.signupPage.steps.step_1.birthday}
-                                    showToday={false}
-                                    onChange={(e,b) => {
-                                        setBirthday(moment(b, 'DD-MM-YYYY').format("YYYY-MM-DD"))
-                                        console.log(moment(b, 'DD-MM-YYYY').format("YYYY-MM-DD"))
-                                    }}
-                                    /> */}
-                                <BirthdaySelect
+                                {/* <BirthdaySelect
                                     minAge={18}
                                     maxAge={70}
                                     setValue={setBirthday}
@@ -118,6 +111,11 @@ const Step1:FC<IStep1> = ({
                                     initYear={birthday && !Number.isNaN(moment(birthday).get('year')) ? moment(birthday).get('year') : undefined}
                                     initMonth={birthday && !Number.isNaN(moment(birthday).get('month')) ? moment(birthday).get('month') + 1 : undefined}
                                     initDay={birthday && !Number.isNaN(moment(birthday).get('D')) ? moment(birthday).get('D') : undefined}
+                                    /> */}
+
+                                <BirthdaySelectMob
+                                    minAge={18}
+                                    maxAge={70}
                                     />
                             </Col>
                         </Row>
