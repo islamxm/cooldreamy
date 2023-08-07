@@ -137,7 +137,8 @@ main {
 .bth-slider {
 
     .swiper-slide.swiper-slide-active {
-        // background-color: #F0EBFF;
-        color: var(--violet);
+        div {
+            color: var(--violet) !important;
+        }
     }
 }

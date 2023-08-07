@@ -116,6 +116,12 @@ const Step1:FC<IStep1> = ({
                                 <BirthdaySelectMob
                                     minAge={18}
                                     maxAge={70}
+
+                                    initYear={birthday && !Number.isNaN(moment(birthday).get('year')) ? moment(birthday).get('year') : undefined}
+                                    initMonth={birthday && !Number.isNaN(moment(birthday).get('month')) ? moment(birthday).get('month') + 1 : undefined}
+                                    initDay={birthday && !Number.isNaN(moment(birthday).get('D')) ? moment(birthday).get('D') : undefined}
+                                    setValue={setBirthday}
+                                    value={birthday}
                                     />
                             </Col>
                         </Row>

@@ -9,8 +9,11 @@
     .body {
         display: flex;
         margin-bottom: 8px;
+        justify-content: center;
+        
         .part {
             width: 95px;
+            margin: 0 4px;
             position: relative;
 
             .active {
