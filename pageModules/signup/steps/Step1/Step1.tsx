@@ -13,7 +13,7 @@ import moment from 'moment';
 import SelectDef from '@/components/SelectDef/SelectDef';
 import BirthdaySelect from '../../components/BirthdaySelect/BirthdaySelect';
 import BirthdaySelectMob from '../../components/BirthdaySelectMob/BirthdaySelectMob';
-
+import { useWindowSize } from 'usehooks-ts';
 
 const service = new ApiService()
 
@@ -51,7 +51,7 @@ const Step1:FC<IStep1> = ({
     errors
 }) => {
     const {locale} = useAppSelector(s => s)
-
+    const {width} = useWindowSize()
 
     return (
         <motion.div 
@@ -103,26 +103,33 @@ const Step1:FC<IStep1> = ({
                                     />
                             </Col>
                             <Col span={24}>
-                                {/* <BirthdaySelect
-                                    minAge={18}
-                                    maxAge={70}
-                                    setValue={setBirthday}
-
-                                    initYear={birthday && !Number.isNaN(moment(birthday).get('year')) ? moment(birthday).get('year') : undefined}
-                                    initMonth={birthday && !Number.isNaN(moment(birthday).get('month')) ? moment(birthday).get('month') + 1 : undefined}
-                                    initDay={birthday && !Number.isNaN(moment(birthday).get('D')) ? moment(birthday).get('D') : undefined}
-                                    /> */}
-
-                                <BirthdaySelectMob
-                                    minAge={18}
-                                    maxAge={70}
-
-                                    initYear={birthday && !Number.isNaN(moment(birthday).get('year')) ? moment(birthday).get('year') : undefined}
-                                    initMonth={birthday && !Number.isNaN(moment(birthday).get('month')) ? moment(birthday).get('month') + 1 : undefined}
-                                    initDay={birthday && !Number.isNaN(moment(birthday).get('D')) ? moment(birthday).get('D') : undefined}
-                                    setValue={setBirthday}
-                                    value={birthday}
-                                    />
+                                
+                               
+                                {
+                                    width <= 768 ? (
+                                        <BirthdaySelectMob
+                                            minAge={18}
+                                            maxAge={70}
+        
+                                            initYear={birthday && !Number.isNaN(moment(birthday).get('year')) ? moment(birthday).get('year') : undefined}
+                                            initMonth={birthday && !Number.isNaN(moment(birthday).get('month')) ? moment(birthday).get('month') + 1 : undefined}
+                                            initDay={birthday && !Number.isNaN(moment(birthday).get('D')) ? moment(birthday).get('D') : undefined}
+                                            setValue={setBirthday}
+                                            value={birthday}
+                                            />
+                                    ) : (
+                                        <BirthdaySelect
+                                            minAge={18}
+                                            maxAge={70}
+                                            setValue={setBirthday}
+        
+                                            initYear={birthday && !Number.isNaN(moment(birthday).get('year')) ? moment(birthday).get('year') : undefined}
+                                            initMonth={birthday && !Number.isNaN(moment(birthday).get('month')) ? moment(birthday).get('month') + 1 : undefined}
+                                            initDay={birthday && !Number.isNaN(moment(birthday).get('D')) ? moment(birthday).get('D') : undefined}
+                                            />
+                                    )
+                                }
+                               
                             </Col>
                         </Row>
                     </Col>
