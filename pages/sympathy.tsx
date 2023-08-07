@@ -109,6 +109,7 @@ const SymPage = () => {
             if(token && page) {
                 if(activeTab === 'views') {
                     service.getActivityViews(token,{page}).then(res => {
+                        console.log(res)
                         setTotal(res?.data?.total)
                         if(res?.data?.data) {
                             if(page === 1) {
@@ -186,7 +187,7 @@ const SymPage = () => {
         }
     }, [activeTab])
 
-    useEffect(() => console.log(token), [token])
+
     return (
         <Container>
             <MainLayout>
@@ -204,8 +205,11 @@ const SymPage = () => {
                             {switchDescr(activeTab)}
                         </Col>
                         <Col span={24}>
-                            <List total={total} setPage={setPage} type={activeTab} list={list}/>
-                            
+                            <List 
+                                total={total} 
+                                setPage={setPage} 
+                                type={activeTab} 
+                                list={list}/>
                         </Col>
                     </Row>
                 </div>

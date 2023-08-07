@@ -14,11 +14,16 @@ const List = ({list, type, setPage, total}: {list: any[], type: sympGroupTypes, 
         list?.length === total ? setLoadMore(false) : setLoadMore(true)
     }, [list, total])
 
+    useEffect(() => {
+        setLoadMore(false)
+    }, [type])
+
 
 
     useEffect(() => {
         if(loadMore && inView) {
             setPage && setPage((s: number) => s + 1)
+            setLoadMore(false)
         }
     }, [inView, loadMore, setPage])
 
