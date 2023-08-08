@@ -2,6 +2,7 @@
 
     .Toastify__toast {
         overflow: hidden;
+        
 
         .Toastify__toast-body {
             width: 100%;
@@ -17,6 +18,15 @@
         .Toastify__toast-icon ~ div {
             width: 100%;
             overflow: hidden;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .Toastify {
+        .Toastify__toast {
+            padding: 10px !important;
+            border-radius: 0 !important;
         }
     }
 }

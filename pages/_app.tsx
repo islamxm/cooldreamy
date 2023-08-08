@@ -87,15 +87,11 @@ function App({ Component, pageProps }: AppProps) {
 		<Provider store={store}>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 				<PrivateRoute>
-					{/* <Div100vh>
-					
-					</Div100vh> */}
-				<MainWrapper>
+					<MainWrapper>
 							<AnimatePresence>
 								{wc ? <WcLoader/> : null}
 							</AnimatePresence>
 							
-
 							<ToastContainer limit={width <= 768 ? 1 : 5}/>
 							{
 								width <= 768 && router?.pathname?.includes('/chat') && router?.query?.id ? (

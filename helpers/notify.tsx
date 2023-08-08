@@ -45,7 +45,8 @@ const notify = (text: string | React.ReactNode | number, type: notificationType 
     toast(text, {
         icon: switchType(type, avatar).icon,
         position: window?.innerWidth <= 768 ? 'top-right' : 'bottom-right',
-        autoClose: 2500,
+        // autoClose: 2500,
+        autoClose: false,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

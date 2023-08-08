@@ -339,7 +339,7 @@ const ChatAction = ({
                             placeholder={`${locale?.chatPage.action.placeholder}...`}
                             />
                     </div>
-                    {
+                    {/* {
                         width <= 768 ? (
                             null
                         ) : (
@@ -379,7 +379,42 @@ const ChatAction = ({
                                 </div>
                             </div>
                         )
-                    }
+                    } */}
+                     <div className={styles.action}>
+                                {/* <div className={styles.item}>
+                                    <IconButton
+                                        onClick={() => setStickers(s => !s)}
+                                        variant={'bordered'}
+                                        size={30}
+                                        icon={<AiOutlineSmile size={20}/>}
+                                        />
+                                </div> */}
+                                <div className={styles.item}>
+                                    <IconButton
+                                        onClick={getGifts}
+                                        variant={'bordered'}
+                                        size={30}
+                                        icon={<AiOutlineGift size={20}/>}
+                                        />
+                                </div>
+                                <div className={`${styles.item} ${styles.upload}`}>
+                                    <input 
+                                        id='chat_media_upload'
+                                        type="file" 
+                                        multiple={type === 'mail'}
+                                        onChange={uploadMedia}
+                                        accept='.png, .jpg, .jpeg'
+                                        value=''
+                                        />
+                                    <IconButton 
+                                        fileId='chat_media_upload' 
+                                        variant={'bordered'}
+                                        size={30}
+                                        icon={<AiOutlineCamera size={20}/>}
+                                        /> 
+                                    
+                                </div>
+                            </div>
                 </div>
                 <div className={styles.send}>
                     <IconButton
