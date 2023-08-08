@@ -292,6 +292,14 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     }
 
 
+    // const goToDown = (ref: React.MutableRefObject<HTMLDivElement>) => {
+    //     ref?.current?.scrollTo({top: ref?.current?.scrollHeight})
+    // }
+
+
+
+
+
     return (
         <div className={styles.wrapper}>
             <ReportModal

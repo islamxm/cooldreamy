@@ -142,7 +142,6 @@ const ChatAction = ({
                             service.getCredits(token).then(credits => {
                                 dispatch(updateUserData({...userData, credits}))
                             })
-
                         }
                     }).finally(() => {
                         setLoad(false)
