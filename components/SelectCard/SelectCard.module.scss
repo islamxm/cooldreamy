@@ -66,6 +66,10 @@
         height: 105px;
         border-radius: 16px;
 
+        &:hover {
+            border-color: transparent;
+        }
+
         // .img {
         //     width: 45px;
         //     height: 45px;

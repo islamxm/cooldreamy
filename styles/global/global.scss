@@ -144,3 +144,30 @@ main {
         }
     }
 }
+
+.pricing_tooltip_content {
+    background-color: #6495ED;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.ant-popover {
+    background-color: unset !important;
+    box-shadow: unset !important;
+    border: none !important;
+    .ant-popover-content {
+        border: none !important;
+        background-color: unset !important;
+        box-shadow: unset !important;
+        .ant-popover-arrow {
+            display: none;
+        }
+        .ant-popover-inner {
+            padding: 0;
+            border: none !important;
+            background-color: unset !important;
+    box-shadow: unset !important;
+        }
+    }
+}

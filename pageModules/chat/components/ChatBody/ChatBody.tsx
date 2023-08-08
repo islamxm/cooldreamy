@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import {FC} from 'react';
 import { IDialogs, IChat } from '../../types';
 import Input from '@/components/Input/Input';
-import { FiSearch } from 'react-icons/fi';
+import { FiInfo, FiSearch } from 'react-icons/fi';
 import ChatStart from '../ChatStart/ChatStart';
 import ChatMock from '../ChatMock/ChatMock';
 import Gifts from '../Gifts/Gifts';
@@ -29,7 +29,7 @@ import { updateLimit } from '@/store/actions';
 import { BsTrash } from 'react-icons/bs';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import notify from '@/helpers/notify';
-import { Dropdown } from 'antd';
+import { Dropdown, Popover } from 'antd';
 import ChatMenu from './components/ChatMenu/ChatMenu';
 import ReportModal from '@/popups/ReportModal/ReportModal';
 import { updateUserData } from '@/store/actions';
@@ -430,6 +430,31 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                     {
                                         id && (
                                             <div className={styles.body_action}>
+                                                {
+                                                    width <= 768 && (
+                                                        <div className={styles.info}>
+                                                            <Popover
+                                                                trigger={'click'}
+                                                                content={
+                                                                    <div className={'pricing_tooltip_content'}>
+                                                                        {
+                                                                            actionsPricing?.map((i,index) => (
+                                                                                <div key={index}>{i?.name}: {i?.price}</div>
+                                                                            ))
+                                                                        }
+                                                                    </div>
+                                                                }
+                                                                >
+                                                                <IconButton
+                                                                    icon={<FiInfo/>}
+                                                                    size={35}
+                                                                    variant={'bordered'}
+                                                                    style={{border: 'none', color: '#888888'}}
+                                                                    />
+                                                            </Popover>
+                                                        </div>
+                                                    )
+                                                }
                                                 <div className={styles.body_action_item}>
                                                     <IconButton
                                                         onClick={() => setPromptModal(true)}
