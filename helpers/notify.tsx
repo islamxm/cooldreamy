@@ -51,7 +51,7 @@ const notify = (text: string | React.ReactNode | number, type: notificationType 
         hideProgressBar: false,
         // closeOnClick: true,
         closeOnClick: false,
-        pauseOnHover: true,
+        // pauseOnHover: true,
         draggable: true,
         theme: "dark",
         className: 'notify',
