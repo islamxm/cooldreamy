@@ -21,6 +21,7 @@ import Navbar from '../Navbar/Navbar';
 import styles from './MainWrapper.module.scss';
 import socketEvents from '@/helpers/socketEvents';
 import UserTitle from '../UserTitle/UserTitle';
+import Link from 'next/link';
 
 
 const service = new ApiService()
@@ -164,28 +165,44 @@ const MainWrapper = ({
 			//?? получение сообщений
             socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
 				dispatch(updateNewMessage(data))
+				console.log(data)
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
 				const name = data?.chat_message?.sender_user?.name;
 				const age = data?.chat_message?.sender_user?.age;
+				const chatId = data?.chat_message?.chat_id
 
 				switch(data?.chat_message?.chat_messageable_type) {
 					case chatMessageTypeVariants.messageText:
-						notify(<>
+						notify(<Link href={`/chat/${chatId}?type=chat`}>
 							<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
 							<LinesEllipsis text={data?.chat_message?.chat_messageable?.text} maxLine={2}/>
-						</>, 'AVATAR', avatar)
+						</Link>, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageGift:
-						notify(`${lc?.global?.notifications?.get_gift}(${data?.chat_message?.chat_messageable?.gifts?.length})`, 'AVATAR', avatar)
+						// notify(`${lc?.global?.notifications?.get_gift}(${data?.chat_message?.chat_messageable?.gifts?.length})`, 'AVATAR', avatar)
+						notify(<Link href={`/chat/${chatId}?type=chat`}>
+							<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
+							{lc?.global?.notifications?.get_gift}
+							{/* ({data?.chat_message?.chat_messageable?.gifts?.length}) */}
+						</Link>, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageImage:
-						notify(lc?.global?.notifications?.get_pic, 'AVATAR', avatar)
+						notify(<Link href={`/chat/${chatId}?type=chat`}>
+							<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
+							{lc?.global?.notifications?.get_pic}
+						</Link>, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageSticker:
-						notify(lc?.global?.notifications?.get_sticker, 'AVATAR', avatar)
+						notify(<Link href={`/chat/${chatId}?type=chat`}>
+							<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
+							{lc?.global?.notifications?.get_sticker}
+						</Link>, 'AVATAR', avatar)
 						break;
 					case chatMessageTypeVariants.messageWink:
-						notify(lc?.global?.notifications?.get_wink, 'AVATAR', avatar)
+						notify(<Link href={`/chat/${chatId}?type=chat`}>
+							<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
+							{lc?.global?.notifications?.get_wink}
+						</Link>, 'AVATAR', avatar)
 					default:
 						// return notify(data?.chat_message?.chat_messageable_type, 'AVATAR', avatar)
 						return null

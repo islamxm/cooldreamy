@@ -19,14 +19,20 @@
             width: 100%;
             overflow: hidden;
         }
+
+        .Toastify__close-button {
+            color: var(--red);
+        }
     }
 }
 
 @media (max-width: 768px) {
     .Toastify {
+
         .Toastify__toast {
             padding: 10px !important;
             border-radius: 0 !important;
         }
+
     }
 }

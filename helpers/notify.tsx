@@ -2,6 +2,7 @@ import {toast} from 'react-toastify';
 import {VscError} from 'react-icons/vsc';
 import {AiOutlineCheckCircle,  AiOutlineInfoCircle} from 'react-icons/ai';
 import Avatar from '@/components/Avatar/Avatar';
+import {GrFormClose} from 'react-icons/gr';
 
 
 
@@ -45,14 +46,14 @@ const notify = (text: string | React.ReactNode | number, type: notificationType 
     toast(text, {
         icon: switchType(type, avatar).icon,
         position: window?.innerWidth <= 768 ? 'top-right' : 'bottom-right',
-        // autoClose: 2500,
-        autoClose: false,
+        autoClose: 2500,
+        // autoClose: false,
         hideProgressBar: false,
-        closeOnClick: true,
+        // closeOnClick: true,
+        closeOnClick: false,
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        closeButton: false,
         className: 'notify',
         progressStyle: {
             backgroundColor: switchType(type).themeColor
