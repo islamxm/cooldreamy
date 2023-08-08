@@ -380,14 +380,18 @@ const ChatAction = ({
                         )
                     } */}
                      <div className={styles.action}>
-                                {/* <div className={styles.item}>
-                                    <IconButton
-                                        onClick={() => setStickers(s => !s)}
-                                        variant={'bordered'}
-                                        size={30}
-                                        icon={<AiOutlineSmile size={20}/>}
-                                        />
-                                </div> */}
+                                {
+                                    width > 768 && (
+                                        <div className={styles.item}>
+                                            <IconButton
+                                                onClick={() => setStickers(s => !s)}
+                                                variant={'bordered'}
+                                                size={30}
+                                                icon={<AiOutlineSmile size={20}/>}
+                                                />
+                                        </div>
+                                    )
+                                }
                                 <div className={styles.item}>
                                     <IconButton
                                         onClick={getGifts}
