@@ -311,7 +311,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     <div className={styles.bc}>
                         <div className={styles.back}>
                             <IconButton
-                                onClick={() => Router.back()}
+                                onClick={() => Router.push('/chat?type=chat')}
                                 variant={'transparent'}
                                 size={30}
                                 icon={<BiArrowBack color={'#000'} size={20}/>}
