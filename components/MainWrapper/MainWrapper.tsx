@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import Pusher from 'pusher-js';
-import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData, updateUnreadChatCount, updateSoonModal, increaseUnreadChatCount, updateSympCountData, decSympWathces, incSympWathces, incSympLikes, updatePremiumData } from '@/store/actions';
+import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData, updateUnreadChatCount, updateSoonModal, increaseUnreadChatCount, updateSympCountData, decSympWathces, incSympWathces, incSympLikes, updatePremiumData, inccreaseUnreadMailCount, updateUnreadMailCount } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
@@ -142,7 +142,7 @@ const MainWrapper = ({
 		if(token) {
 			service.getUnreadCount(token).then(res => {
 				dispatch(updateUnreadChatCount(res?.count_chat_messages))
-				//count_letter_messages
+				dispatch(updateUnreadMailCount(res?.count_letter_messages))
 			})
 			service.getFeedFilterCount(token).then(res => {
 				dispatch(updateSympCountData(res))
@@ -163,6 +163,12 @@ const MainWrapper = ({
 			dispatch(increaseUnreadChatCount())
 		}
 	}, [newMessage])
+
+	useEffect(() => {
+		if(newMail) {
+			dispatch(inccreaseUnreadMailCount())
+		}
+	}, [newMail])
 	
 
 	useEffect(() => {
@@ -170,7 +176,6 @@ const MainWrapper = ({
 			//?? получение сообщений
             socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
 				dispatch(updateNewMessage(data))
-				console.log(data)
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
 				const name = data?.chat_message?.sender_user?.name;
 				const age = data?.chat_message?.sender_user?.age;
@@ -225,24 +230,27 @@ const MainWrapper = ({
 					dispatch(incSympLikes())
 				}
 			})
-			// socketChannel?.listen('.new-letter-message-event', (data: any) => {
-			// 	dispatch(updateNewMail(data))
-			// 	const avatar = data?.letter_message?.sender_user?.avatar_url_thumbnail;
-			// 	if(data) {
-			// 		notify(
-			// 			<>
-			// 				Вы получили письмо
-			// 				{
-			// 					data?.letter_message?.letter_messageable?.text ? (
-			// 						<div style={{color: '#aaa', fontSize: 12, lineHeight: '16px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '100%'}}>{data?.letter_message?.letter_messageable?.text}</div>
-			// 					) : null
-			// 				}
-							
-			// 			</>, 
-			// 			'AVATAR', 
-			// 			avatar)
-			// 	}
-			// })
+			socketChannel?.listen(socketEvents?.eventNewMailMessage, (data: any) => {
+				
+				dispatch(updateNewMail(data))
+
+				// const avatar = data?.letter_message?.sender_user?.user_thumbnail_url;
+				// const name = data?.letter_message?.sender_user?.name;
+				// const age = data?.letter_message?.sender_user?.age;
+				// const chatId = data?.letter_message?.chat_id
+				
+				// if(data) {
+				// 	notify(<Link href={`/chat/${chatId}?type=mail`}>
+				// 	<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
+				// 	Вы получили письмо
+				// 	{
+				// 		data?.letter_message?.letter_messageable?.text ? (
+				// 			<div style={{color: '#aaa', fontSize: 12, lineHeight: '16px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '100%'}}>{data?.letter_message?.letter_messageable?.text}</div>
+				// 		) : null
+				// 	}
+				// 	</Link>, 'AVATAR', avatar)
+				// }
+			})
         }
 	}, [socketChannel])
 

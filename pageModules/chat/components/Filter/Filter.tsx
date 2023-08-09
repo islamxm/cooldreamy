@@ -22,7 +22,7 @@ const Filter:FC<IChatFilterType & I> = ({
     activeFilter,
     onFilterChange
 }) => {
-    const {locale, unreadChatCount, token} = useAppSelector(s => s)
+    const {locale, unreadChatCount, token, unreadMailCount} = useAppSelector(s => s)
     const {width} = useWindowSize()
     const [filterTabs, setFilterTabs] = useState<any[]>([
         {
@@ -76,12 +76,12 @@ const Filter:FC<IChatFilterType & I> = ({
     const modeTabs = [
         {
             id: '1',
-            // badge: 3,
+            badge: unreadChatCount,
             label: locale?.chatPage.type_tabs.chat ?? ''
         },
         {
             id: '2',
-            // badge: 3,
+            badge: unreadMailCount,
             label: locale?.chatPage.type_tabs.mail ?? ''
         }
     ]

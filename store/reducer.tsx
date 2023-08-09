@@ -38,6 +38,8 @@ export interface IGlobalState {
     },
 
     unreadChatCount: number,
+    unreadMailCount: number
+
     soonModal: boolean,
 
     sympCountData: {
@@ -69,6 +71,7 @@ export const globalState: IGlobalState = {
         open: false,
     },
     unreadChatCount: 0,
+    unreadMailCount: 0,
     soonModal: false,
     sympCountData: {
         count_likes: 0,
@@ -160,6 +163,21 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 unreadChatCount: state.unreadChatCount + 1
+            }
+        case 'DECREASE_UNREAD_MAIL_COUNT':
+            return {
+                ...state,
+                unreadMailCount: state.unreadMailCount > 0 ? state.unreadMailCount - 1 : 0
+            }
+        case 'INCREASE_UNREAD_MAIL_COUNT':
+            return {
+                ...state,
+                unreadMailCount: state.unreadMailCount + 1
+            }
+        case 'UPDATE_UNREAD_MAIL_COUNT':
+            return {
+                ...state,
+                unreadMailCount: action.data
             }
         case 'UPDATE_SOON_MODAL':
             return {

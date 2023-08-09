@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 
 
 const Menu = () => {
-    const {locale, unreadChatCount} = useAppSelector(s => s)
+    const {locale, unreadChatCount, unreadMailCount} = useAppSelector(s => s)
     const router  = useRouter()
 
     const {pathname} = router
@@ -44,7 +44,7 @@ const Menu = () => {
             root: '/chat',
             icon: <IoMailOutline/>,
             onClick: () => {},
-            badge: 0
+            badge: unreadMailCount
         },
         {
             label: locale?.global.menu.feed ?? '',

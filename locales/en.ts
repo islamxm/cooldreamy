@@ -452,7 +452,7 @@ const en: ILocale = {
               title: "Tell us about yourself",
               text: "A few sentences about yourself will attract the attention of users",
               ex: "According to the website rules, it is prohibited to provide contact information",
-              placeholder: "Not less than 20 characters..."
+              placeholder: "Not less than 6 characters..."
           },
           upload_avatar: {
               title: "Add Photo",

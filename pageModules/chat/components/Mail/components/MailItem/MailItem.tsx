@@ -14,6 +14,8 @@ import Image from 'next/image';
 import { useWindowSize } from 'usehooks-ts';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { useInView } from 'react-intersection-observer';
+import { decreaseUnreadMailCount } from '@/store/actions';
+import { useRouter } from 'next/router';
 const service = new ApiService()
 
 
@@ -41,10 +43,9 @@ const MailItem:FC<IMail> = ({
     const {token} = useAppSelector(s => s)
     const [openLoad, setOpenLoad] = useState(false)
     const {width} = useWindowSize()
-
-    
-
+    const {query} = useRouter()
     const dispatch = useAppDispatch()
+
     const {inView, ref} = useInView({
         triggerOnce: true,
     })
@@ -56,7 +57,21 @@ const MailItem:FC<IMail> = ({
             console.log('READ')
             if(token) {
                 service.readMail({letter_message_id: Number(id)}, token).then(res => {
-                    console.log(res)
+                    if(res?.message === 'success') {
+                        dispatch(decreaseUnreadMailCount())
+                        if(query && query?.id && typeof query?.id === 'string') {
+                            // updateDialogsList && updateDialogsList((s: any) => {
+                            //     const m = s;
+                            //     const findItem = m.find((i:any) => i.id == query?.id)
+                            //     if(findItem) {
+                            //         const rm = m.splice(m.findIndex((i:any) => i?.id == findItem?.id), 1, {...findItem, unread_messages_count: findItem?.unread_messages_count > 0 ? findItem?.unread_messages_count - 1 : findItem?.unread_messages_count})
+
+                            //         return sortingDialogList([...m])
+                            //     }
+                            //     return sortingDialogList([...m])
+                            // })
+                        }
+                    }
                 })
             }
         }
@@ -94,7 +109,6 @@ const MailItem:FC<IMail> = ({
                                             ))}
                                         </div>
                                     </FancyboxWrapper>
-                                    
                                 ) : null
                             ) : (
                                 isPayed ? (
@@ -211,7 +225,7 @@ const MailItem:FC<IMail> = ({
                     ) : (
                         <div className={styles.action}>
                             <div className={styles.item}>
-                                <button onClick={openMail} className={styles.open}>Открыть письмо</button>
+                                <button onClick={openMail} className={styles.open}>Open mail</button>
                             </div>
                         </div>
                     )

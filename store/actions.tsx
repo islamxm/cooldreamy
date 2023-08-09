@@ -37,6 +37,10 @@ export const updateUnreadChatCount = (data: number) => ({type: 'UPDATE_UNREAD_CH
 export const decreaseUnreadChatCount = () => ({type: 'DECREASE_UNREAD_CHAT_COUNT'})
 export const increaseUnreadChatCount = () => ({type: 'INCREASE_UNREAD_CHAT_COUNT'})
 
+export const updateUnreadMailCount = (data: number) => ({type: 'UPDATE_UNREAD_MAIL_COUNT', data})
+export const decreaseUnreadMailCount = () => ({type: 'DECREASE_UNREAD_MAIL_COUNT'})
+export const inccreaseUnreadMailCount = () => ({type: 'INCREASE_UNREAD_MAIL_COUNT'})
+
 
 export const updateSympCountData = (data: any) => ({type: "UPDATE_SYMP_COUNT_DATA", data})
 

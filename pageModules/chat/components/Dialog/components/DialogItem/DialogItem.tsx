@@ -92,7 +92,7 @@ const DialogItemComponent:FC<I> = ({
     const chatImagePay = () => {
         if(id && token) {
             service.chatImagePay(token, id).then(res => {
-                console.log(res)
+                
                 if(res?.message === 'success') {
                     updateChatList && updateChatList((s: any) => {
                         const m = s;
