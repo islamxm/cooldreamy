@@ -3,19 +3,22 @@ import { menuItemType } from './types';
 import MenuItem from './components/MenuItem/MenuItem';
 
 import {FiSearch} from 'react-icons/fi';
-import {IoChatbubblesOutline} from 'react-icons/io5';
+import {IoChatbubblesOutline, IoMailOutline} from 'react-icons/io5';
 import {FiUsers, FiHeart, FiSettings} from 'react-icons/fi';
 import {RxExit} from 'react-icons/rx';
 import { useRouter } from 'next/router';
 import { Cookies } from 'typescript-cookie';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useEffect } from 'react';
 
 
 
 
 const Menu = () => {
     const {locale, unreadChatCount} = useAppSelector(s => s)
-    const {pathname} = useRouter()
+    const router  = useRouter()
+
+    const {pathname} = router
 
 
     const menuList:menuItemType[] = [
@@ -34,6 +37,14 @@ const Menu = () => {
             icon: <IoChatbubblesOutline/>,
             badge: unreadChatCount,
             onClick: () => {},
+        },
+        {
+            label: 'My Mails',
+            link: '/chat?type=mail',
+            root: '/chat',
+            icon: <IoMailOutline/>,
+            onClick: () => {},
+            badge: 0
         },
         {
             label: locale?.global.menu.feed ?? '',
@@ -71,16 +82,40 @@ const Menu = () => {
         // },
     ]
 
+    // useEffect(() => {
+    //     console.log(router)
+    // }, [router])
+
 
     return (
         <div className={styles.menu}>
             {
                 menuList?.map((item, index) => (
                     <div className={styles.item} key={index}>
-                        <MenuItem
-                            {...item}
-                            isActive={item?.root && pathname?.includes(item.root) ? true : false}
-                            />
+                        {
+                            index === 2 && (
+                                <MenuItem
+                                    {...item}
+                                    isActive={router?.query?.type === 'mail' ? true : false}
+                                    />
+                            )
+                        }
+                        {
+                            index === 1 && (
+                                <MenuItem
+                                    {...item}
+                                    isActive={router?.query?.type === 'chat' ? true : false}
+                                    />
+                            )
+                        }
+                        {
+                            (index !== 1 && index !== 2) && (
+                                <MenuItem
+                                    {...item}
+                                    isActive={item?.root && pathname?.includes(item.root) ? true : false}
+                                    />
+                            )
+                        }
                     </div>
                 ))
             }
