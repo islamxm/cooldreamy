@@ -44,6 +44,7 @@ const Step2:FC<IPromptSelect> = ({
                     list?.map((item, index) => (
                         <div className={styles.item} key={index}>
                             <SelectCard
+                                disabled={!selectedList?.find(i => Number(i) === Number(item.id)) && selectedList?.length === 3}
                                 image={item?.icon}
                                 label={item.text}
                                 value={item.id.toString()}
