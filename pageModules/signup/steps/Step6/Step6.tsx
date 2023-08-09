@@ -43,6 +43,7 @@ const Step6:FC<IPromptSelect> = ({
                     list?.map((item,index) => (
                         <div className={styles.item} key={index}>
                             <SelectCard
+                                image={item?.icon}
                                 label={item.text}
                                 value={item.id.toString()}
                                 onSelect={() => {
