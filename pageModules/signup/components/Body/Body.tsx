@@ -5,13 +5,12 @@ import { Row, Col } from 'antd';
 import StepLine from '../StepLine/StepLine';
 import Button from '@/components/Button/Button';
 import { useEffect, useState } from 'react';
-import { interestTypes, targetTypes } from '../../types';
 import ApiService from '@/service/apiService';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import { updateToken, updateUserId, updateUserData } from '@/store/actions';
 import Router, { useRouter } from 'next/router';
-import { Cookies } from 'typescript-cookie';
 import { useWindowSize } from 'usehooks-ts';
+import setIconsSg from '@/helpers/setIconsSg';
 
 //steps
 import Step1 from '../../steps/Step1/Step1';
@@ -29,7 +28,6 @@ import StepMail from '../../steps/StepMail/StepMail';
 import { IUser } from '@/models/IUser';
 import notify from '@/helpers/notify';
 import LOCAL_STORAGE from '@/helpers/localStorage';
-import moment from 'moment';
 
 
 
@@ -117,20 +115,19 @@ const Body:FC = () => {
         dispatch(updateUserId(null))
     }, [])
 
-    useEffect(() => console.log(birthday), [birthday])
 
 
     useEffect(() => {
-        //'738|abgZ1qn50aw7aV1Ebu0CniaWwoKNe2ldnukOCVZM'
-        if(token && router?.locale) {
+        if(router?.locale && token) {
             service.getAllPrompts(token, router.locale).then(res => {
-                setPrompt_targets(res?.prompt_targets)
-                setPrompt_careers(res?.prompt_careers)
-                setPrompt_finance_states(res?.prompt_finance_states)
-                setPrompt_sources(res?.prompt_sources)
-                setPrompt_interests(res?.prompt_interests)
-                setPrompt_want_kids(res?.prompt_want_kids)
-                setPrompt_relationships(res?.prompt_relationships)
+                console.log(setIconsSg('careers', 1))
+                // setPrompt_targets(res?.prompt_targets?.map((i: any) => ({...i, icon: setIconsSg('targets', i?.id)})))
+                // setPrompt_careers(res?.prompt_careers?.map((i: any) => ({...i, icon: setIconsSg('careers', i?.id)})))
+                // setPrompt_finance_states(res?.prompt_finance_states?.map((i:any) => ({...i, icon: setIconsSg('finance_states', i?.id)})))
+                // setPrompt_sources(res?.prompt_sources?.map((i: any) => ({...i, icon: setIconsSg('sources', i?.id)})))
+                // setPrompt_interests(res?.prompt_interests?.map((i:any) => ({...i, icon: setIconsSg('intersets', i?.id)})))
+                // setPrompt_want_kids(res?.prompt_want_kids?.map((i:any) => ({...i, icon: setIconsSg('want_kids', i?.id)})))
+                // setPrompt_relationships(res?.prompt_relationships?.map((i:any) => ({...i, icon: setIconsSg('rl', i?.id)})))
             })
         }
         

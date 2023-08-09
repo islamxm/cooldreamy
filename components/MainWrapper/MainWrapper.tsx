@@ -82,6 +82,11 @@ const MainWrapper = ({
 	
 	useEffect(() => {
 		if(token) {
+			service.getAllPrompts(token).then(res => {
+				console.log(res)
+			})
+
+
 			setPusherConfig(
 				{
 					key: 's3cr3t',
