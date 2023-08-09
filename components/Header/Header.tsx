@@ -80,7 +80,7 @@ const Header: React.FC<any> = () => {
             initial={{y: '-100%'}}
             animate={{y: '0%'}}
             transition={{type: 'spring'}}
-            className={styles.header}>
+            className={`${styles.header} ${width <= 768 && (router?.pathname === '/' || router?.pathname === '/start') ? styles.show : ''}`}>
 
             <LoginModal
                 open={loginModal}

@@ -87,11 +87,14 @@
 
 
 @media (max-width: 768px) {
+    .header.show {
+        display: block;
+    }
     .header {
         height: 42px;
         padding: 5px 0;
-        
-        display: none;
+        display: none;        
+        // display: none;
 
         .inner {
             .burger {
