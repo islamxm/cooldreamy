@@ -86,25 +86,25 @@ const Filter:FC<IChatFilterType & I> = ({
         }
     ]
 
-    // const switchActiveType = (type?: chatTabsType) => {
-    //     switch(type) {
-    //         case 'chat':
-    //             return {
-    //                 value: '1',
-    //                 type: 'chat'
-    //             }
-    //         case 'mail':
-    //             return {
-    //                 value: '2',
-    //                 type: 'mail'
-    //             }
-    //         default:
-    //             return {
-    //                 value: '',
-    //                 type: ''
-    //             }
-    //     }
-    // }
+    const switchActiveType = (type?: chatTabsType) => {
+        switch(type) {
+            case 'chat':
+                return {
+                    value: '1',
+                    type: 'chat'
+                }
+            case 'mail':
+                return {
+                    value: '2',
+                    type: 'mail'
+                }
+            default:
+                return {
+                    value: '',
+                    type: ''
+                }
+        }
+    }
 
 
 
@@ -125,7 +125,7 @@ const Filter:FC<IChatFilterType & I> = ({
                         }}
                         />
                 </div>
-                {/* <div className={styles.part}>
+                <div className={styles.part}>
                     <Tabs
                         
                         list={modeTabs}
@@ -147,7 +147,7 @@ const Filter:FC<IChatFilterType & I> = ({
                             width: width <= 1000 ? 'calc((100% / 2) - 8px)' : 'auto'
                         }}
                         />
-                </div> */}
+                </div>
             </div>
             
         </div>

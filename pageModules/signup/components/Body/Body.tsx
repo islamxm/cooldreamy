@@ -305,10 +305,6 @@ const Body:FC = () => {
         }
     }, [currentStep, token, countryDef, country, stateDef, state])
 
-    useEffect(() => {
-        console.log(birthday)
-    }, [birthday])
-
 
     useEffect(() => {
         if(currentStep === 0) {
@@ -317,6 +313,9 @@ const Body:FC = () => {
             } else {
                 setBtnDisable(false)
             }
+        }
+        if(currentStep === 1) {
+            setBtnDisable(false)
         }
         if(currentStep === 2) {
             if(selectedTargets?.length < 1 || selectedTargets?.length > 3) {
@@ -354,7 +353,7 @@ const Body:FC = () => {
             } else setBtnDisable(false)
         }
         if(currentStep === 10) {
-            if(about?.length < 20 || about?.length > 200) {
+            if(about?.length < 6 || about?.length > 200) {
                 setBtnDisable(true)
             } else setBtnDisable(false)
         }

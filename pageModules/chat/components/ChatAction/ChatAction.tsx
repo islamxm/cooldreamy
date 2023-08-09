@@ -110,10 +110,10 @@ const ChatAction = ({
         }
     }
 
+
     const onSmileSelect = (label: string) => {
         setText(s => `${s}${label}`)
     }
-
 
 
     // !!отправка сообщения временно будет локализовано в этом компоненте
@@ -266,9 +266,7 @@ const ChatAction = ({
                 }
             }
         }
-
-        
-        
+   
     }
 
 
@@ -392,39 +390,66 @@ const ChatAction = ({
                                         </div>
                                     )
                                 } */}
-                                        <div className={styles.item}>
-                                            <IconButton
-                                                onClick={() => setStickers(s => !s)}
+                                {
+                                    type === 'mail' && (
+                                        <div className={`${styles.item} ${styles.upload}`}>
+                                            <input 
+                                                id='chat_media_upload'
+                                                type="file" 
+                                                multiple={type === 'mail'}
+                                                onChange={uploadMedia}
+                                                accept='.png, .jpg, .jpeg'
+                                                value=''
+                                                />
+                                            <IconButton 
+                                                fileId='chat_media_upload' 
                                                 variant={'bordered'}
                                                 size={30}
-                                                icon={<AiOutlineSmile size={20}/>}
-                                                />
+                                                icon={<AiOutlineCamera size={20}/>}
+                                                /> 
+                                            
                                         </div>
-                                <div className={styles.item}>
-                                    <IconButton
-                                        onClick={getGifts}
-                                        variant={'bordered'}
-                                        size={30}
-                                        icon={<AiOutlineGift size={20}/>}
-                                        />
-                                </div>
-                                <div className={`${styles.item} ${styles.upload}`}>
-                                    <input 
-                                        id='chat_media_upload'
-                                        type="file" 
-                                        multiple={type === 'mail'}
-                                        onChange={uploadMedia}
-                                        accept='.png, .jpg, .jpeg'
-                                        value=''
-                                        />
-                                    <IconButton 
-                                        fileId='chat_media_upload' 
-                                        variant={'bordered'}
-                                        size={30}
-                                        icon={<AiOutlineCamera size={20}/>}
-                                        /> 
-                                    
-                                </div>
+                                    ) 
+                                }
+                                {
+                                    type === 'chat' && (
+                                        <>
+                                              <div className={styles.item}>
+                                                        <IconButton
+                                                            onClick={() => setStickers(s => !s)}
+                                                            variant={'bordered'}
+                                                            size={30}
+                                                            icon={<AiOutlineSmile size={20}/>}
+                                                            />
+                                                    </div>
+                                            <div className={styles.item}>
+                                                <IconButton
+                                                    onClick={getGifts}
+                                                    variant={'bordered'}
+                                                    size={30}
+                                                    icon={<AiOutlineGift size={20}/>}
+                                                    />
+                                            </div>
+                                            <div className={`${styles.item} ${styles.upload}`}>
+                                                <input 
+                                                    id='chat_media_upload'
+                                                    type="file" 
+                                                    onChange={uploadMedia}
+                                                    accept='.png, .jpg, .jpeg'
+                                                    value=''
+                                                    />
+                                                <IconButton 
+                                                    fileId='chat_media_upload' 
+                                                    variant={'bordered'}
+                                                    size={30}
+                                                    icon={<AiOutlineCamera size={20}/>}
+                                                    /> 
+                                                
+                                            </div>
+                                        </>
+                                    )
+                                }
+                                      
                             </div>
                 </div>
                 <div className={styles.send}>

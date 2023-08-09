@@ -244,9 +244,9 @@ const DialogItemComponent:FC<I> = ({
 
     return (
         <div ref={ref} className={`${styles.wrapper} ${isSelf ? styles.right : styles.left}`}>
-            {
+            {/* {
                 <div className={styles.id}>{id}</div>
-            }
+            } */}
             {
                 isSelf ? (
                     <div className={`${styles.body} ${styles.me}`}>

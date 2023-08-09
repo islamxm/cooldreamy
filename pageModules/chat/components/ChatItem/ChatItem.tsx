@@ -229,79 +229,72 @@ const ChatItem = ({
         }
     }
 
-    if(type === 'mail') {
-        if(!last_message) {
-            return <></>
-        } else {
-            return (
-                <div className={`${styles.wrapper} ${active ? styles.active : ''}`}>
-                    <div onClick={() => {
-                        if(another_user?.id) {
-                            dispatch(updateCurrentProfileId(another_user?.id))
-                            dispatch(updateCurrentProfileUiid(uuid))
+    return (
+        <div className={`${styles.wrapper} ${active ? styles.active : ''}`}>
+            <div onClick={() => {
+                if(another_user?.id) {
+                    dispatch(updateCurrentProfileId(another_user?.id))
+                    dispatch(updateCurrentProfileUiid(uuid))
+                }
+            }} className={styles.avatar}>
+                <Avatar
+                    size={63}
+                    verified={is_confirmed_user == 1}
+                    image={user_thumbnail_url || avatar_url_thumbnail}    
+                    />
+            </div>
+            <div className={styles.body}>
+                <Link 
+                    href={`/chat/${id}?type=${type}`}
+                    className={styles.main}>
+                    <Row gutter={[2,2]}>
+                        <Col span={24}>
+                            <UserTitle 
+                                username={name}
+                                age={age ? age.toString() : ''}
+                                textBold
+                                isOnline={online === 1}/>
+                        </Col>
+                        <Col span={24}>
+                            <div className={styles.dialog}>
+                                {
+                                    typeof last_message?.letter_messageable?.text === 'string' ? (
+                                        <LinesEllipsis
+                                            text={last_message?.letter_messageable?.text}
+                                            maxLine={2}
+                                    />
+                                    ) : null
+                                }
+                                
+                            </div>
+                        </Col>
+                    </Row>
+                </Link>    
+                <div className={styles.ex}>
+                    {/* <div className={styles.item}>
+                        {
+                            isFavourite ? (
+                                <AiFillStar/>
+                            ) : (
+                                <AiOutlineStar/>
+                            )
                         }
-                    }} className={styles.avatar}>
-                        <Avatar
-                            size={63}
-                            verified={is_confirmed_user == 1}
-                            image={user_thumbnail_url || avatar_url_thumbnail}    
-                            />
-                    </div>
-                    <div className={styles.body}>
-                        <Link 
-                            href={`/chat/${id}?type=${type}`}
-                            className={styles.main}>
-                            <Row gutter={[2,2]}>
-                                <Col span={24}>
-                                    <UserTitle 
-                                        username={name}
-                                        age={age ? age.toString() : ''}
-                                        textBold
-                                        isOnline={online === 1}/>
-                                </Col>
-                                <Col span={24}>
-                                    <div className={styles.dialog}>
-                                        {
-                                            typeof last_message?.letter_messageable?.text === 'string' ? (
-                                                <LinesEllipsis
-                                                    text={last_message?.letter_messageable?.text}
-                                                    maxLine={2}
-                                            />
-                                            ) : null
-                                        }
-                                        
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Link>    
-                        <div className={styles.ex}>
-                            {/* <div className={styles.item}>
-                                {
-                                    isFavourite ? (
-                                        <AiFillStar/>
-                                    ) : (
-                                        <AiOutlineStar/>
-                                    )
-                                }
-                            </div> */}
-                            {/* <div className={styles.item}>
-                                {
-                                    status === 'unread' ? (
-                                        <Badge
-                                            value={unreadMesssageCount}
-                                            />
-                                    ) : (
-                                        <BiCheckDouble/>
-                                    )
-                                }
-                            </div> */}
-                        </div>
-                    </div> 
+                    </div> */}
+                    {/* <div className={styles.item}>
+                        {
+                            status === 'unread' ? (
+                                <Badge
+                                    value={unreadMesssageCount}
+                                    />
+                            ) : (
+                                <BiCheckDouble/>
+                            )
+                        }
+                    </div> */}
                 </div>
-            )
-        }
-        
-    }
+            </div> 
+        </div>
+    )
     return null
 
     

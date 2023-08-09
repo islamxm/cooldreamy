@@ -84,7 +84,6 @@ const GirlCard:FC<IUser> = ({
                     })
                 }
             })
-
             // !! параллельное создание чата писем
             service.createMail({user_id: id}, token).then(res => {
                 console.log(res)
@@ -109,7 +108,6 @@ const GirlCard:FC<IUser> = ({
                 }
             })
         }
-        
     }
 
 

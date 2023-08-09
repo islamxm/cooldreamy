@@ -62,7 +62,6 @@ const UserPage:FC = () => {
         }
     }
 
-
  
 
     return (
@@ -110,7 +109,6 @@ const UserPage:FC = () => {
                                 </Col>
                             </Row>
                         )
-                        
                     }
                     main={
                         <UserInfo {...data}/>

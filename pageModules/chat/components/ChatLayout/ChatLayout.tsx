@@ -135,9 +135,7 @@ const ChatLayout = () => {
                         }
                     } else {
                         // !! НАПРАВЛЯЕМ НА СЛЕДУЮЩИЙ ДИАЛОГ ЕСЛИ ЕСТЬ, ЕСЛИ НЕТ ТО ПУСТОЙ ЧАТ
-                        
                     }
-                    
                 }).finally(() => {
                     setLoadMain(false)
                 })
@@ -155,9 +153,7 @@ const ChatLayout = () => {
                 page: dialogsPage,
                 per_page: 10,
                 filter: filter != 'all' ? filter : '',
-                
             }, token).then(res => {
-       
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -174,7 +170,6 @@ const ChatLayout = () => {
     // ** получение чата писем (конкрентного)
     const getMailChat = () => {
         if(token) {
-            // service.getChatListFavorite().then(res => {})
             if(currentChatId && chatListPage) {
                 if(chatListPage === 1) {
                     setLoadMain(true)
@@ -218,6 +213,7 @@ const ChatLayout = () => {
             getDialogs && getDialogs()
         }
         if(chatType === 'mail') {
+            console.log('mail')
             getMailDialogs && getMailDialogs()
         }
     }, [dialogsPage, token, chatType, filter, dialogSearchDebounce])

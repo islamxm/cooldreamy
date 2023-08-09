@@ -42,7 +42,7 @@ const Step10:FC<I> = ({
             <div className={styles.body}>
                 <div className={styles.field}>
                     <Textarea
-                        minLength={20}
+                        minLength={6}
                         height={100}
                         value={about}
                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAbout(e.target.value)}
