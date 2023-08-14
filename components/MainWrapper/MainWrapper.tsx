@@ -222,34 +222,33 @@ const MainWrapper = ({
 			socketChannel?.listen(socketEvents?.eventSympathy, (data: any) => {
 				const avatar = data?.userData?.user_thumbnail_url || data?.userData?.user_avatar_url
 				if(data?.type === 'WATCH') {
-					notify('New profile view', 'AVATAR', avatar)
+					// notify('New profile view', 'AVATAR', avatar)
 					dispatch(incSympWathces())
 				}
 				if(data?.type === 'LIKE') {
-					notify('Someone liked you', 'AVATAR', avatar)
+					// notify('Someone liked you', 'AVATAR', avatar)
 					dispatch(incSympLikes())
 				}
 			})
 			socketChannel?.listen(socketEvents?.eventNewMailMessage, (data: any) => {
 				
 				dispatch(updateNewMail(data))
-
-				// const avatar = data?.letter_message?.sender_user?.user_thumbnail_url;
-				// const name = data?.letter_message?.sender_user?.name;
-				// const age = data?.letter_message?.sender_user?.age;
-				// const chatId = data?.letter_message?.chat_id
+				const avatar = data?.letter_message?.sender_user?.user_thumbnail_url;
+				const name = data?.letter_message?.sender_user?.name;
+				const age = data?.letter_message?.sender_user?.age;
+				const chatId = data?.letter_message?.chat_id
 				
-				// if(data) {
-				// 	notify(<Link href={`/chat/${chatId}?type=mail`}>
-				// 	<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
-				// 	Вы получили письмо
-				// 	{
-				// 		data?.letter_message?.letter_messageable?.text ? (
-				// 			<div style={{color: '#aaa', fontSize: 12, lineHeight: '16px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '100%'}}>{data?.letter_message?.letter_messageable?.text}</div>
-				// 		) : null
-				// 	}
-				// 	</Link>, 'AVATAR', avatar)
-				// }
+				if(data) {
+					notify(<Link href={`/chat/${chatId}?type=mail`}>
+					<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
+					Вы получили письмо
+					{
+						data?.letter_message?.letter_messageable?.text ? (
+							<div style={{color: '#aaa', fontSize: 12, lineHeight: '16px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '100%'}}>{data?.letter_message?.letter_messageable?.text}</div>
+						) : null
+					}
+					</Link>, 'AVATAR', avatar)
+				}
 			})
         }
 	}, [socketChannel])

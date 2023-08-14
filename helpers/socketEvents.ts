@@ -3,7 +3,6 @@ const socketEvents = {
     eventChatReadMessage: '.chat-message-read-event',
 
     eventNewMailMessage: '.new-letter-message-event',
-
     eventSympathy: '.sympathy-event',
 }   
 
