@@ -14,6 +14,7 @@ import Loader from "@/components/Loader/Loader";
 import Navbar from "@/components/Navbar/Navbar";
 import { useAppDispatch } from "@/hooks/useTypesRedux";
 import { decSympLikes, decSympWathces } from "@/store/actions";
+import styles from '../pageModules/sympathy/sympathy.module.scss';
 const service = new ApiService()
 
 
@@ -89,13 +90,21 @@ const SymPage = () => {
     const switchDescr = (activeTab: sympGroupTypes) => {
         switch(activeTab) {
             case 'views':
-                return locale?.sympathyPage.description.views
+                return (
+                    <div className={styles.pl}>{locale?.sympathyPage.description.views}</div>
+                )
             case 'matches':
-                return locale?.sympathyPage.description.matches
+                return (
+                    <div className={styles.pl}>{locale?.sympathyPage.description.matches}</div>
+                )
             case 'likes':
-                return locale?.sympathyPage.description.you_like
+                return (
+                    <div className={styles.pl}>{locale?.sympathyPage.description.you_like}</div>
+                )
             case 'inlikes':
-                return locale?.sympathyPage.description.likes_you
+                return (
+                    <div className={styles.pl}>{locale?.sympathyPage.description.likes_you}</div>
+                )
             default:
                 return ''
         }
@@ -192,7 +201,7 @@ const SymPage = () => {
         <Container>
             <MainLayout>
                 <Sidebar/>
-                <div style={{width: '100%'}}>
+                <div className={styles.wrapper}>
                     <Row gutter={[15,15]}>
                         <Col span={24}>
                             <Tabs
@@ -201,9 +210,13 @@ const SymPage = () => {
                                 onChange={setActiveTab}
                                 />
                         </Col>  
-                        <Col span={24}>
-                            {switchDescr(activeTab)}
-                        </Col>
+                        {
+                            list?.length === 0 && (
+                                <Col span={24}>
+                                    {switchDescr(activeTab)}
+                                </Col>
+                            )
+                        }
                         <Col span={24}>
                             <List 
                                 total={total} 
