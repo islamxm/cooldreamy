@@ -382,10 +382,10 @@ const en: ILocale = {
           likes_you: "Likes You"
       },
       description: {
-          views: "A girl has viewed your profile - consider her ready to start communication. Write to her!",
-          matches: "You and another person have liked each other in 'Dating'. Start communicating now",
-          you_like: "This tab contains users you like",
-          likes_you: "This tab contains users who like you"
+          views: "Still awaiting your first profile admirer!",
+          matches: "Matchmaker's on break – no mutual likes yet.",
+          you_like: "The ladies are yet to discover your charm – no likes so far.",
+          likes_you: "Dive in! You haven't yet shown interest in any female profiles."
       }
   },
   profilePage: {
