@@ -10,16 +10,15 @@ const OnlyPremium = ({
 }: {
     children?: React.ReactNode
 }) => {
-    const {userData} = useAppSelector(s => s)
+    const {premiumData} = useAppSelector(s => s)
     const [modal, setModal] = useState(false)
 
 
     const onClick = () => {
-        console.log('clicked')
-        if(userData?.is_premium === 1) {
-            return;
-        } else {
+        if(premiumData?.is_premium === false) {
             setModal(true)
+        } else {
+            return;
         }
     }
 
@@ -34,7 +33,7 @@ const OnlyPremium = ({
             <div className={styles.wrapper} onClick={onClick}>
             
             {
-                userData?.is_premium !== 1 ? (
+                premiumData?.is_premium === false ? (
                     <div className={styles.blocked}></div>
                 ) : null
             }

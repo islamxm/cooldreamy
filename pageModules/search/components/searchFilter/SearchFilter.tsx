@@ -95,6 +95,8 @@ const SearchFilter:FC<searchFilterType> = ({
         }
     }, [width])
 
+
+    useEffect(() => console.log(countries), [countries])
     
 
 
@@ -133,10 +135,10 @@ const SearchFilter:FC<searchFilterType> = ({
                                     }}
                                     value={country?.value}
                                     // list={countries}
-                                    list={defCountryList}
+                                    list={countries}
                                     />
                             </div>
-                            {/* {
+                            {
                                 states?.length > 0 ? (
                                     <div className={styles.item}>
                                         <SelectDef
@@ -154,8 +156,8 @@ const SearchFilter:FC<searchFilterType> = ({
                                     </div>
                                    
                                 ) : null
-                            } */}
-                            {/* <div className={styles.item}>
+                            }
+                            <div className={styles.item}>
                                 <OnlyPremium>
                                     <SelectDef
                                         disabled={userData?.is_premium !== 1}
@@ -167,7 +169,6 @@ const SearchFilter:FC<searchFilterType> = ({
                                         label={locale?.searchPage.filter.list.filter_target.label}
                                         width={230}
                                         multiple
-                                        
                                         />
                                 </OnlyPremium>
                             </div>
@@ -184,7 +185,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                         multiple
                                         />  
                                 </OnlyPremium>
-                            </div> */}
+                            </div>
                             
                         </div>
                         <div className={styles.action}>
