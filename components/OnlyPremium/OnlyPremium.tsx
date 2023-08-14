@@ -27,11 +27,10 @@ const OnlyPremium = ({
             <LimitModal
                 open={modal}
                 onCancel={() => setModal(false)}
-                head="Ограничение"
-                text="Функционал доступен только в 'Премиум подписке'"
+                head="Limitation"
+                text="Functionality available only in 'Premium subscription'"
                 />
             <div className={styles.wrapper} onClick={onClick}>
-            
             {
                 premiumData?.is_premium === false ? (
                     <div className={styles.blocked}></div>
