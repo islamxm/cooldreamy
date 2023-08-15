@@ -60,9 +60,6 @@ const SearchBody = () => {
 
     const [isFilterChanged, setIsFilterChanged] = useState(false)
 
-    useEffect(() => {
-        console.log(list)
-    }, [list])
 
     useEffect(() => {
         if(token) {
@@ -124,7 +121,6 @@ const SearchBody = () => {
                 setList(res?.data)
             }).finally(() => {
                 setLoad(false)
-
                 setIsFilterChanged(true)
             })
         }

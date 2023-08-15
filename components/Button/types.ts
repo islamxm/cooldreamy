@@ -17,6 +17,7 @@ export type ButtonPropsTypes = {
     fill?: boolean,
     small?: boolean,
     middle?: boolean,
-    load?: boolean
+    load?: boolean,
+    className?: string
 }
 
