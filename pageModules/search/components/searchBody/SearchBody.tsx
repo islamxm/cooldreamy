@@ -144,46 +144,9 @@ const SearchBody = () => {
         if(currentPage > 1) {
             setCurrentPage(1)
         }
-    }, [token, country, age_range_end, age_range_start, filter_type, currentPage])
+    }, [token, country, age_range_end, age_range_start, filter_type, currentPage, state])
 
 
-    
-
-    // useEffect(() => {
-    //     setCurrentPage(1)
-    //     if(currentPage === 1 && isFilterChanged) {
-    //         onSearch()
-    //         setIsFilterChanged(false)
-    //     }
-    // }, [filter_type, ])
-
-    // const updateList = () => {
-    //     if(token && currentPage && filter_type && country && age_range_end && age_range_start && !isFilterChanged) {
-    //         console.log('SEARCH [updateList]')
-    //         setLoad(true)
-    //         service.search({
-    //             page: currentPage,
-    //             filter_type: filter_type === 'all' ? undefined : filter_type, 
-    //             state: state?.label, 
-    //             country: country?.label == 'All' ? '' : country?.label,
-    //             age_range_start, 
-    //             age_range_end,
-    //             prompt_targets: `[${prompt_targets?.join(',')}]`, 
-    //             prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
-    //             per_page: 25
-    //         }, token).then(res => {
-    //             setTotalFound(res?.total)
-    //             setList(res?.data)
-    //             console.log(res?.data)
-    //         }).finally(() => {
-    //             setLoad(false)
-    //         })
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     updateList()
-    // }, [currentPage, token, filter_type, country, age_range_end, age_range_start])
 
     useEffect(() => {
         getCountries()
