@@ -45,7 +45,6 @@ const Hero: FC = ({}) => {
 
     useEffect(() => {
         process?.browser && window.addEventListener('beforeinstallprompt', (e: any) => {
-            console.log('before install')
             // if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             //     //alert('Android');
             //     //Запуск установки по кнопке:
@@ -54,7 +53,7 @@ const Hero: FC = ({}) => {
             setEnableInstall(false)
             let buttonAnd: any = document.querySelector('.get-pwa-btn');
             buttonAnd.addEventListener('click', () => {
-              console.log('clicked')
+              alert('clicked')
               e.prompt();
             });
           })
@@ -288,7 +287,7 @@ const Hero: FC = ({}) => {
                         <Row gutter={[15,15]}>
                             <Col span={24}><Button onClick={() => Router.push('/signup')} text={locale?.global?.header.join_btn} fill middle/></Col>
                             <Col span={24}><Button onClick={() => setLoginModal(true)} text={locale?.global?.header?.login_btn} fill middle/></Col>
-                            <Col span={24}><Button load={!enableInstall} className='get-pwa-btn' text={'Get App'} fill middle/></Col>
+                            <Col span={24}><Button load={enableInstall ? true : false} className='get-pwa-btn' text={'Get App'} fill middle/></Col>
                         </Row>
                     </div>
                 </motion.div>
