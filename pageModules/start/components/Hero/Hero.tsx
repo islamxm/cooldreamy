@@ -37,27 +37,27 @@ const Hero: FC = ({}) => {
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const [loginModal, setLoginModal] = useState(false)
     const [enableInstall, setEnableInstall] = useState(true)
+    const [installEvent, setInstallEvent] = useState<any>(null)
 
     const sexChange = (value: 'male' | 'female') => {
         setSex(value)
     }
 
 
+    const openInstall = (e: any) => {
+        console.log(e)
+        setEnableInstall(false)
+        setInstallEvent(e)
+    }
+
+
     useEffect(() => {
-        process?.browser && window.addEventListener('beforeinstallprompt', (e: any) => {
-            // if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            //     //alert('Android');
-            //     //Запуск установки по кнопке:
-               
-            //   }
-            setEnableInstall(false)
-            let buttonAnd: any = document.querySelector('.get-pwa-btn');
-            buttonAnd.addEventListener('click', () => {
-              alert('clicked')
-              e.prompt();
-            });
-          })
-    })
+        process?.browser && window.addEventListener('beforeinstallprompt', openInstall)
+
+        return () => {
+            window.removeEventListener('beforeinstallprompt', openInstall)
+        }
+    }, [])
 
     
 
@@ -287,7 +287,7 @@ const Hero: FC = ({}) => {
                         <Row gutter={[15,15]}>
                             <Col span={24}><Button onClick={() => Router.push('/signup')} text={locale?.global?.header.join_btn} fill middle/></Col>
                             <Col span={24}><Button onClick={() => setLoginModal(true)} text={locale?.global?.header?.login_btn} fill middle/></Col>
-                            <Col span={24}><Button load={enableInstall ? true : false} className='get-pwa-btn' text={'Get App'} fill middle/></Col>
+                            <Col span={24}><Button load={enableInstall ? true : false} onClick={() => installEvent?.prompt && installEvent?.prompt()} className='get-pwa-btn' text={'Get App'} fill middle/></Col>
                         </Row>
                     </div>
                 </motion.div>
