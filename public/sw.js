@@ -99,15 +99,3 @@ define(['./workbox-8f0e986c'], (function (workbox) { 'use strict';
 
 }));
 //# sourceMappingURL=sw.js.map
-process?.browser && window.addEventListener('beforeinstallprompt', (e) => {
-  console.log('before install')
-  // if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-  //     //alert('Android');
-  //     //Запуск установки по кнопке:
-     
-  //   }
-  let buttonAnd = document.querySelector('.get-pwa-btn');
-  buttonAnd.addEventListener('click', () => {
-    e.prompt();
-  });
-})
