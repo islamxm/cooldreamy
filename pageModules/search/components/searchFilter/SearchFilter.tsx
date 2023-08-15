@@ -142,6 +142,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                     label={locale?.searchPage.filter.list.filter_target.label}
                                     width={230}
                                     multiple
+                                    customIcon={true}
                                     />
                             </div>
                             <div className={styles.item}>
@@ -157,9 +158,9 @@ const SearchFilter:FC<searchFilterType> = ({
                                     label={locale?.searchPage.filter.list.filter_finance.label}
                                     width={230}
                                     multiple
+                                    customIcon={true}
                                     />  
                             </div>
-                            
                         </div>
                         <div className={styles.action}>
                             {

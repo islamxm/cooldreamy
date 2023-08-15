@@ -16,5 +16,7 @@ export type selectDefType = {
     onClear?: (...args: any[]) => any,
     disabled?: boolean,
     clearIcon?: boolean,
-    isRound?: boolean
+    isRound?: boolean,
+
+    customIcon?: React.ReactNode
 }

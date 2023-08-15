@@ -3,7 +3,7 @@ import {Select} from 'antd';
 
 import {FC, useRef, useEffect} from 'react';
 import { selectDefType } from './types';
-
+import {DownOutlined} from '@ant-design/icons';
 
 interface test {
     open?: boolean
@@ -22,7 +22,9 @@ const SelectDef:FC<selectDefType & test> = ({
     clearIcon,
     isRound,
 
-    open
+    open,
+
+    customIcon
 }) => {
 
     const ref = useRef<any>()
@@ -48,14 +50,10 @@ const SelectDef:FC<selectDefType & test> = ({
                         defaultValue={value}
                         onChange={onChange}
                         onClear={onClear}
-                        onSelect={(e,v) => {
-                            console.log(e)
-                            console.log(v)
-                        }}
                         options={list}
                         value={value}
                         disabled={disabled}
-                        className={isRound ? 'round' : ''}
+                        className={`${isRound ? 'round' : ''} ${customIcon ? 'custom-icon' : ''}`}
                         virtual={false}
                         />
                 ) : (
