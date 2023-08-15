@@ -3,50 +3,15 @@ import SelectDef from '@/components/SelectDef/SelectDef';
 import Button from '@/components/Button/Button';
 import {GoSettings} from 'react-icons/go';
 import { useState } from 'react';
-import {motion} from 'framer-motion';
 import { Row, Col } from 'antd';
 import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import {FC, useEffect} from 'react';
 import { searchFilterType } from './types';
 import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-import OnlyPremium from '@/components/OnlyPremium/OnlyPremium';
-import defCountryList from '@/helpers/defCountryList';
+import LimitModal from '@/popups/LimitModal/LimitModal';
 
 
-const ageList = [
-    {
-        value: '1',
-        label: '18'
-    },
-    {
-        value: '2',
-        label: '19'
-    },
-    {
-        value: '3',
-        label: '20'
-    },
-    {
-        value: '4',
-        label: '21'
-    },
-    {
-        value: '5',
-        label: '22'
-    },
-    {
-        value: '6',
-        label: '23'
-    }
-]
-
-
-// const citiesList = [
-//     {
-
-//     }
-// ]
 
 
 const SearchFilter:FC<searchFilterType> = ({
@@ -83,7 +48,8 @@ const SearchFilter:FC<searchFilterType> = ({
 
     const [showAll, setShowAll] = useState<boolean>(false);
     const {width} = useWindowSize()
-    const {locale, userData} = useAppSelector(s => s)
+    const {locale, userData, premiumData} = useAppSelector(s => s)
+    const [limitModal, setLimitModal] = useState(false)
     
     const toggleFilter = () => {
         setShowAll(s => !s)
@@ -102,6 +68,12 @@ const SearchFilter:FC<searchFilterType> = ({
 
     return (
         <div className={styles.wrapper}>
+             <LimitModal
+                open={limitModal}
+                onCancel={() => setLimitModal(false)}
+                head="Limitation"
+                text="Functionality available only in 'Premium subscription'"
+                />
             <Row gutter={[10,10]}>
                 <Col span={24}>
                     <div className={styles.main}>
@@ -158,33 +130,34 @@ const SearchFilter:FC<searchFilterType> = ({
                                 ) : null
                             }
                             <div className={styles.item}>
-                                <OnlyPremium>
-                                    <SelectDef
-                                        disabled={userData?.is_premium !== 1}
-                                        list={targetList}
-                                        onChange={(e, v) => {
-                                            setprompt_target_id && setprompt_target_id(e)
-                                        }}
-                                        placeholder={'Не указано'}
-                                        label={locale?.searchPage.filter.list.filter_target.label}
-                                        width={230}
-                                        multiple
-                                        />
-                                </OnlyPremium>
+                                <SelectDef
+                                    // disabled={premiumData?.is_premium === 1}
+                                    list={targetList}
+                                    onChange={(e, v) => {
+                                        premiumData?.is_premium === true ? 
+                                        setprompt_target_id && setprompt_target_id(e) :
+                                        setLimitModal(true)
+                                    }}
+                                    placeholder={'Не указано'}
+                                    label={locale?.searchPage.filter.list.filter_target.label}
+                                    width={230}
+                                    multiple
+                                    />
                             </div>
                             <div className={styles.item}>
-                                <OnlyPremium>
-                                    <SelectDef
-                                        list={financeList}
-                                        onChange={(e, v) => {
-                                            setprompt_finance_state_id && setprompt_finance_state_id(e)
-                                        }}
-                                        placeholder={'Не указано'}
-                                        label={locale?.searchPage.filter.list.filter_finance.label}
-                                        width={230}
-                                        multiple
-                                        />  
-                                </OnlyPremium>
+                                <SelectDef
+                                    list={financeList}
+                                    onChange={(e, v) => {
+                                        premiumData?.is_premium === true ? 
+                                        setprompt_finance_state_id && setprompt_finance_state_id(e) :
+                                        setLimitModal(true)
+                                    }}
+                                    
+                                    placeholder={'Не указано'}
+                                    label={locale?.searchPage.filter.list.filter_finance.label}
+                                    width={230}
+                                    multiple
+                                    />  
                             </div>
                             
                         </div>

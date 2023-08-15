@@ -48,14 +48,15 @@ const SelectDef:FC<selectDefType & test> = ({
                         defaultValue={value}
                         onChange={onChange}
                         onClear={onClear}
+                        onSelect={(e,v) => {
+                            console.log(e)
+                            console.log(v)
+                        }}
                         options={list}
                         value={value}
                         disabled={disabled}
                         className={isRound ? 'round' : ''}
-                        
                         virtual={false}
-                        
-                        
                         />
                 ) : (
                     <Select
