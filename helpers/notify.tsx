@@ -52,6 +52,8 @@ const notify = (text: string | React.ReactNode | number, type: notificationType 
         // closeOnClick: true,
         closeOnClick: false,
         // pauseOnHover: true,
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
         draggable: true,
         theme: "dark",
         className: 'notify',
