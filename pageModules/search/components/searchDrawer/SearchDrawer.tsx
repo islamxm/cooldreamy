@@ -11,6 +11,7 @@ import Button from '@/components/Button/Button';
 import { searchFilterType } from '../searchFilter/types';
 import OnlyPremium from '@/components/OnlyPremium/OnlyPremium';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import LimitModal from '@/popups/LimitModal/LimitModal';
 import defCountryList from '@/helpers/defCountryList';
 
 
@@ -21,8 +22,6 @@ interface I extends searchFilterType {
 
     setCurrentPage?: (...args: any[]) => any
 }
-
-
 
 const SearchDrawer:FC<I> = ({
     isOpen,
@@ -59,7 +58,8 @@ const SearchDrawer:FC<I> = ({
 
     setCurrentPage
 }) => {
-    const {userData, locale} = useAppSelector(s => s)
+    const {locale, premiumData} = useAppSelector(s => s)
+    const [limitModal, setLimitModal] = useState(false)
 
     const onLayerClick = (e: any) => {
         if(e.target.dataset.layer === 'true') {
@@ -67,9 +67,14 @@ const SearchDrawer:FC<I> = ({
         }
     }
 
-
     return (
         <div data-layer onClick={onLayerClick} className={`${styles.wrapper} ${isOpen ? styles.active : ''}`}>
+             <LimitModal
+                open={limitModal}
+                onCancel={() => setLimitModal(false)}
+                head="Limitation"
+                text="Functionality available only in 'Premium subscription'"
+                />
             <div className={styles.in}>
                 <div className={styles.head}>
                     <div className={styles.title}>{locale?.searchPage?.filter?.title}</div>
@@ -97,8 +102,8 @@ const SearchDrawer:FC<I> = ({
                                     list={defCountryList}
                                     />
                             </Col>
-                            {/* <Col span={12}>
-                                {
+                            <Col span={12}>
+                                {/* {
                                     states?.length > 0 ? (
                                         <SelectDef
                                                 label='Город'
@@ -110,37 +115,59 @@ const SearchDrawer:FC<I> = ({
                                                 list={states}
                                                 />
                                     ) : null
+                                } */}
+                                {
+                                    states?.length > 0 ? (
+                                        <div className={styles.item}>
+                                            <SelectDef
+                                                label={locale?.searchPage.filter.list.filter_state.label}
+                                                // width={230}
+                                                onChange={(e, v) => {
+                                                    setState(v)
+                                                }}
+                                                placeholder={locale?.searchPage.filter.list.filter_state.placeholder ?? ''}
+                                                list={states}
+                                                onClear={() => {
+                                                    setState('')
+                                                }}
+                                                />
+                                        </div>
+                                    
+                                    ) : null
                                 }
-                            </Col> */}
-                            {/* <Col span={12}>
-                                <OnlyPremium>
-                                    <SelectDef
-                                        disabled={userData?.is_premium !== 1}
-                                        list={targetList}
-                                        onChange={(e, v) => {
-                                            setprompt_target_id && setprompt_target_id(e)
-                                        }}
-                                        placeholder={'Не указано'}
-                                        label={locale?.searchPage.filter.list.filter_target.label}
-                                        width={'100%'}
-                                        multiple
-                                        />
-                                </OnlyPremium>
                             </Col>
                             <Col span={12}>
-                                <OnlyPremium>
-                                    <SelectDef
-                                        list={financeList}
-                                        onChange={(e, v) => {
-                                            setprompt_finance_state_id && setprompt_finance_state_id(e)
-                                        }}
-                                        placeholder={'Не указано'}
-                                        label={locale?.searchPage.filter.list.filter_finance.label}
-                                        width={'100%'}
-                                        multiple
-                                        />  
-                                </OnlyPremium>
-                            </Col> */}
+                                <SelectDef
+                                    // disabled={premiumData?.is_premium === 1}
+                                    list={targetList}
+                                    onChange={(e, v) => {
+                                        premiumData?.is_premium === true ? 
+                                        setprompt_target_id && setprompt_target_id(e) :
+                                        setLimitModal(true)
+                                    }}
+                                    placeholder={'Не указано'}
+                                    label={locale?.searchPage.filter.list.filter_target.label}
+                                    // width={230}
+                                    multiple
+                                    customIcon={true}
+                                    />
+                            </Col>
+                            <Col span={12}>
+                                <SelectDef
+                                    list={financeList}
+                                    onChange={(e, v) => {
+                                        premiumData?.is_premium === true ? 
+                                        setprompt_finance_state_id && setprompt_finance_state_id(e) :
+                                        setLimitModal(true)
+                                    }}
+                                    
+                                    placeholder={'Не указано'}
+                                    label={locale?.searchPage.filter.list.filter_finance.label}
+                                    // width={230}
+                                    multiple
+                                    customIcon={true}
+                                    /> 
+                            </Col>
                             <Col span={12}>
                                 <RangeSlider
                                     min={18}
