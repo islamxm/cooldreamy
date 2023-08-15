@@ -177,7 +177,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                 ) : null
                             }
                             
-                            <div className={styles.action_item}>
+                            {/* <div className={styles.action_item}>
                                 <Button
                                     load={load}
                                     onClick={() => {
@@ -187,7 +187,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                     }} 
                                     style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px'}} 
                                     text={locale?.searchPage.filter.action.search_btn ?? ''}/>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </Col>

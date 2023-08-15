@@ -106,7 +106,6 @@ const SearchBody = () => {
     const onSearch = () => {
         
         if(token && currentPage > 0 && country && age_range_end && age_range_start && filter_type) {
-            console.log('SEARCH [onSearch]')
             // setCurrentPage(1)
             setLoad(true)
             service.search({
@@ -136,13 +135,15 @@ const SearchBody = () => {
     }, [currentPage])
 
     useEffect(() => {
-        if(currentPage === 0) {
+        if(currentPage === 0 || currentPage > 1) {
+            setCurrentPage(1)
+        } 
+        if(currentPage === 1) {
+            onSearch()
+        } 
+        if(currentPage > 1) {
             setCurrentPage(1)
         }
-        // if(currentPage === 1) {
-        //     onSearch()
-        // }
-        // setCurrentPage(1)
     }, [token, country, age_range_end, age_range_start, filter_type, currentPage])
 
 
