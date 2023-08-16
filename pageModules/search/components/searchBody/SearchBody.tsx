@@ -25,7 +25,7 @@ const service = new ApiService();
 
 
 const SearchBody = () => {
-    const {token} = useAppSelector(s => s)
+    const {token, userData} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
    
     const [searched, setSearched] = useState(false)
@@ -73,16 +73,21 @@ const SearchBody = () => {
     }, [token])
 
     const getCountries = () => {
-        if(token) {
-            service.getCountries().then(res => {
+        if(token && userData?.gender) {
+            service.getCountriesMod({
+                gender: userData?.gender === 'female' ? 'male' : 'female'
+            }).then(res => {
                 setCountriesList(res?.map((i: any) => ({value: i?.id, id: i.id, label: i?.title})))
             })
         }
     }
 
     const getStates = (id: number) => {
-        if(token) {
-            service.getStates(id).then(res => {
+        if(token && userData?.gender) {
+            service.getStatesMod({
+                country_id: id,
+                gender: userData?.gender === 'female' ? 'male' : 'female'
+            }).then(res => {
                 setStatesList(res?.map((i: any) => ({value: i?.id, id: i?.id, label: i?.title})))
             })
         }

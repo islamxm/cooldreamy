@@ -176,6 +176,28 @@ class ApiService {
         }
     }
 
+    getCountriesMod = async ({gender}: {gender: 'male' | 'female'}) => {
+        try {
+            let res = await fetch(endpoints.getCountriesMod + `?gender=${gender}`, {
+                headers
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    getStatesMod = async ({country_id, gender}: {country_id: number, gender: 'male' | 'female'}) => {
+        try {
+            let res = await fetch(endpoints.getStatesMod + `?country_id=${country_id}&gender=${gender}`, {
+                headers
+            })
+            return await res?.json()
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     getFeed = async ({
         page
     }: {

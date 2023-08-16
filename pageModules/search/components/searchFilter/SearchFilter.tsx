@@ -60,9 +60,6 @@ const SearchFilter:FC<searchFilterType> = ({
             setShowAll(false)
         }
     }, [width])
-
-
-    useEffect(() => console.log(countries), [countries])
     
 
 
