@@ -18,7 +18,11 @@ const Card:FC<cardPropsType> = ({
     card,
     // !! test
     active,
-    removeCard
+    removeCard,
+
+    leaveX,
+    setLeaveX
+    
 }) => {
     const {age,
         user_avatar_url,
@@ -38,7 +42,7 @@ const Card:FC<cardPropsType> = ({
     } = card
 
     const [rotate, setRotate] = useState(1)
-    const [leaveX, setLeaveX] = useState<number | string>(0);
+    // const [leaveX, setLeaveX] = useState<number | string>(0);
     const [leaveY, setLeaveY] = useState(0);
 
     const onDragEnd = (_e: any, info: PanInfo) => {
@@ -48,19 +52,18 @@ const Card:FC<cardPropsType> = ({
         //   return;
         // }
         if (info.offset.x > 100) {
-          setLeaveX('100%');
+        //   setLeaveX('100%');
           setLeaveY(info.offset.y)
           removeCard(card, "like");
         }
         if (info.offset.x < -100) {
-          setLeaveX('-100%');
+        //   setLeaveX('-100%');
           setLeaveY(info.offset.y)
           removeCard(card, "nope");
         }
         setLiking(false)
         setCanceling(false)
     }
-
 
     
     const onDrag = (e: any, info: PanInfo) => {
@@ -96,12 +99,12 @@ const Card:FC<cardPropsType> = ({
                     // scale: 1.05,
                     // }}
                     exit={{
-                    x: leaveX,
+                    x: leaveX?.x,
                     y: leaveY,
                     // rotate,
                     opacity: 0,
                     scale: 0.5,
-                    transition: { duration: .1},
+                    transition: { duration: .5},
                     }}
                     transition={{ease: [0,0,1,1], duration: .1}}
                     className={styles.wrapper}

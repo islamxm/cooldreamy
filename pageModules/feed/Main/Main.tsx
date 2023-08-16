@@ -40,6 +40,8 @@ const Main = () => {
     const activeIndex = 0;
     const [liking, setLiking] = useState(false)
     const [canceling, setCanceling] = useState(false)
+
+    const [leaveX, setLeaveX] = useState<any>(null)
         
 
     
@@ -122,16 +124,25 @@ const Main = () => {
     
 
     const removeCard = (card: any, type: SwipeType) => {
-        setList(s => {
-            return s.filter(i => i.id !== card.id)
-        })
         if(type === 'like') {
             onLike()
+
+            setLeaveX({id: card?.id, x: '100%'})
         }
         if(type === 'nope') {
             onCancel()
+
+            setLeaveX({id: card?.id, x: '-100%'})
         }
     }
+
+    useEffect(() => {
+        if(leaveX) {
+            setList(s => {
+                return s.filter(i => i.id !== leaveX?.id)
+            })
+        }
+    }, [leaveX])
 
 
     const createChat = () => {
@@ -169,9 +180,12 @@ const Main = () => {
                         {
                             list?.map((item, index) => (
                                 <Card 
+                                    leaveX={leaveX}
+                                    setLeaveX={setLeaveX}
                                     removeCard={removeCard}
                                     active={activeIndex === index}
                                     key={item.id}
+                                    
                                     card={{
                                         ...item,
                                         // onLike: onLike,

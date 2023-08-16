@@ -91,7 +91,6 @@ const SearchBody = () => {
                 setStatesList(res?.map((i: any) => ({value: i?.id, id: i?.id, label: i?.title})))
             })
         }
-       
     }
 
     useEffect(() => {

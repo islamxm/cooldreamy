@@ -8,13 +8,15 @@ interface ICard extends IFeedCard {
     setCanceling: (...args: any) => any
     setLiking: (...args: any) => any,
     liking: boolean,
-    canceling: boolean
+    canceling: boolean,
 }
 
 
 export interface cardPropsType {
     //setLiked: (...args: any[]) => any,
-    card: ICard
+    card: ICard,
+    leaveX: {id: any, x: any} | null,
+    setLeaveX: (...args: any[]) => any
 
     // !! test
     active?: boolean,
