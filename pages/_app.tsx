@@ -27,6 +27,7 @@ import { useWindowSize } from 'usehooks-ts';
 import Div100vh from 'react-div-100vh'
 import Navbar from '@/components/Navbar/Navbar';
 import Head from 'next/head';
+import notify from '@/helpers/notify';
 
 
 
@@ -45,6 +46,8 @@ function App({ Component, pageProps }: AppProps) {
 	const {locale} = router
 	const [wc, setWc] = useState(true)
 	const {width} = useWindowSize()
+	const [sw, setSw] = useState<ServiceWorkerRegistration | null>(null)
+	const [permis, setPermis] = useState(false)
 	
 
 
@@ -65,13 +68,30 @@ function App({ Component, pageProps }: AppProps) {
 	useEffect(() => {
 		if('serviceWorker' in navigator) {
 			window.addEventListener('load', () => {
-				navigator.serviceWorker.register('/sw.js').then(res => {
-					alert('SW REGISTERED')
+				navigator.serviceWorker.register('/sw.js').then(res => {	
+				 setSw(res)		
+				 notify('[SW]: Registered', 'INFO')
 				})
 			})
 		}
 	}, [])
 
+	useEffect(() => {
+		Notification.requestPermission(res => {
+			if(res === 'granted') {
+				setPermis(true)
+			} else setPermis(false)
+		})
+	}, [])
+
+	useEffect(() => {
+		if(sw && permis) {
+			alert('show push')
+			sw.showNotification('Title', {
+				body: 'body of push',
+			})
+		}
+	}, [sw, permis])
 
 
 	useEffect(() => {

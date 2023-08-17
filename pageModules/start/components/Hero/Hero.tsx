@@ -60,6 +60,8 @@ const Hero: FC = ({}) => {
         }
     }, [])
 
+
+
     
 
 
@@ -288,7 +290,7 @@ const Hero: FC = ({}) => {
                         <Row gutter={[15,15]}>
                             <Col span={24}><Button onClick={() => Router.push('/signup')} text={locale?.global?.header.join_btn} fill middle/></Col>
                             <Col span={24}><Button onClick={() => setLoginModal(true)} text={locale?.global?.header?.login_btn} fill middle/></Col>
-                            <Col span={24}><Button load={enableInstall ? true : false} onClick={() => installEvent?.prompt && installEvent?.prompt()} className='get-pwa-btn' text={'Get App'} fill middle/></Col>
+                            {/* <Col span={24}><Button load={enableInstall ? true : false} onClick={() => installEvent?.prompt && installEvent?.prompt()} className='get-pwa-btn' text={'Get App'} fill middle/></Col> */}
                         </Row>
                     </div>
                 </motion.div>
