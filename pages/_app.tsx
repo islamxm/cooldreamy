@@ -28,6 +28,7 @@ import Div100vh from 'react-div-100vh'
 import Navbar from '@/components/Navbar/Navbar';
 import Head from 'next/head';
 import notify from '@/helpers/notify';
+import Button from '@/components/Button/Button';
 
 
 
@@ -46,6 +47,7 @@ function App({ Component, pageProps }: AppProps) {
 	const {locale} = router
 	const [wc, setWc] = useState(true)
 	const {width} = useWindowSize()
+	const [sw, setSw] = useState<ServiceWorkerRegistration | null>(null)
 
 	
 
@@ -67,14 +69,12 @@ function App({ Component, pageProps }: AppProps) {
 	useEffect(() => {
 		if('serviceWorker' in navigator) {
 			window.addEventListener('load', () => {
-				navigator.serviceWorker.register('/sw.js').then(sw => {	
-					if(sw) {
+				navigator.serviceWorker.register('/sw.js').then(s => {	
+					if(s) {
 						Notification.requestPermission(res => {
 							if(res !== 'denied') {
-								sw.showNotification('Title', {
-									body: 'text of push'
-								})
-							}
+								setSw(s)
+							} else setSw(null)
 						})
 					}
 				})
@@ -89,7 +89,7 @@ function App({ Component, pageProps }: AppProps) {
 			router.events.on('routeChangeStart', routeChangeStart)
 			router.events.on('routeChangeComplete', routeChangeEnd)
 		}
-
+		
 		return () => {
 			router && router?.events?.off('routeChangeStart', routeChangeStart)
 			router && router?.events?.off('routeChangeStart', routeChangeEnd)
@@ -127,7 +127,9 @@ function App({ Component, pageProps }: AppProps) {
 							}
 
 							<main>
+								
 								<Component {...pageProps} />
+							
 							</main>
 
 							<Navbar/>

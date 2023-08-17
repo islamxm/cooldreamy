@@ -22,6 +22,7 @@ import styles from './MainWrapper.module.scss';
 import socketEvents from '@/helpers/socketEvents';
 import UserTitle from '../UserTitle/UserTitle';
 import Link from 'next/link';
+import showPush from '@/helpers/showPush';
 
 const service = new ApiService()
 
@@ -189,7 +190,9 @@ const MainWrapper = ({
 							<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
 							<LinesEllipsis text={data?.chat_message?.chat_messageable?.text} maxLine={2}/>
 						</Link>, 'AVATAR', avatar)
+						showPush(`${name}, ${age}`, {body: data?.chat_message?.chat_messageable?.text})
 						break;
+						
 					case chatMessageTypeVariants.messageGift:
 						// notify(`${lc?.global?.notifications?.get_gift}(${data?.chat_message?.chat_messageable?.gifts?.length})`, 'AVATAR', avatar)
 						notify(<Link href={`/chat/${chatId}?type=chat`}>
