@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "paths": {"@/*": ["./*"]}
   },
-  "include": ["next-env.d.ts","**/*.ts","**/*.tsx"],
+  "include": ["next-env.d.ts","**/*.ts","**/*.tsx", "public/sw.js"],
   "exclude": ["node_modules"],
   "types": ["@types/gtag.js"],
 }

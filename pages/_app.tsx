@@ -60,7 +60,17 @@ function App({ Component, pageProps }: AppProps) {
 	}
 	const routeChangeEnd = (url: any) => {
 		setWc(false)
-	}
+	}	
+
+	useEffect(() => {
+		if('serviceWorker' in navigator) {
+			window.addEventListener('load', () => {
+				navigator.serviceWorker.register('/sw.js').then(res => {
+					alert('SW REGISTERED')
+				})
+			})
+		}
+	}, [])
 
 
 

@@ -46,6 +46,7 @@ const Hero: FC = ({}) => {
 
     const openInstall = (e: any) => {
         console.log(e)
+        e.preventDefault()
         setEnableInstall(false)
         setInstallEvent(e)
     }

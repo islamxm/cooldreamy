@@ -23,7 +23,6 @@ import socketEvents from '@/helpers/socketEvents';
 import UserTitle from '../UserTitle/UserTitle';
 import Link from 'next/link';
 
-
 const service = new ApiService()
 
 
@@ -36,7 +35,10 @@ const MainWrapper = ({
 	const lc = useAppSelector(s => s.locale)
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
-	
+
+
+
+
 
 	useEffect(() => {
 		if(token && query && typeof query?.token === 'string') {
@@ -254,6 +256,7 @@ const MainWrapper = ({
 	}, [socketChannel])
 
 
+	
 
     return (
         <>

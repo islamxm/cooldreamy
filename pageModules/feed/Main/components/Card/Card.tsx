@@ -38,7 +38,6 @@ const Card:FC<cardPropsType> = ({
         liking,
         canceling,
         user_thumbnail_url,
-        
     } = card
 
     const [rotate, setRotate] = useState(1)
@@ -92,16 +91,9 @@ const Card:FC<cardPropsType> = ({
                     onDragEnd={onDragEnd}
                     onDrag={onDrag}
                     whileDrag={{ rotate: rotate === 0 ? 1 : rotate }}
-                    // initial={{
-                    // scale: 1,
-                    // }}
-                    // animate={{
-                    // scale: 1.05,
-                    // }}
                     exit={{
                     x: leaveX?.x,
                     y: leaveY,
-                    // rotate,
                     opacity: 0,
                     scale: 0.5,
                     transition: { duration: .5},
