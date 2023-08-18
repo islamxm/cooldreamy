@@ -11,9 +11,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import Button from '@/components/Button/Button';
 import PayForm from '../PayForm/PayForm';
 import { useWindowSize } from 'usehooks-ts';
-import { StripeElementLocale } from '@stripe/stripe-js';
 import { PulseLoader } from 'react-spinners';
-import { useRouter } from 'next/router';
 
 const service = new ApiService()
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
@@ -28,13 +26,10 @@ const Main = () => {
     const [promo, setPromo] = useState<any>(null)
     const [load, setLoad] = useState(false)
     const [type, setType] = useState<string>('')
-    const router = useRouter()
 
     const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
-
     
     const [secretKey, setSecretKey] = useState<string>('')
-
 
     const getPlans = () => {
         if(token) {
@@ -44,7 +39,6 @@ const Main = () => {
             })
         }
     }
-
 
     const getPromo = () => {
         if(token) {
@@ -60,11 +54,9 @@ const Main = () => {
         }
     }
 
-
     useEffect(() => {
         setSecretKey('')
     }, [selectedPlan])
-
 
     const goToPayment = () => {
         if(width <= 768) {
@@ -75,7 +67,6 @@ const Main = () => {
         }
     }
     
-
     useEffect(() => {
         if(userData && userData?.is_donate === 1) {
             getPlans()
@@ -84,7 +75,6 @@ const Main = () => {
             getPromo()
         }
     }, [token, userData])
-
 
     const onAccept = (plan: any) => {
         if(token) {
@@ -98,8 +88,6 @@ const Main = () => {
             }).finally(() => setLoad(false))
         }
     }
-
-    // const stripeLocale: StripeElementLocale = router?.locale || 'auto'
 
     return (
         <div className={styles.wrapper}>
@@ -139,9 +127,7 @@ const Main = () => {
 
                             {
                                 list?.map((i, index) => {
-                                    if(i?.id === 1) {
-                                        return null
-                                    }
+                                    if(i?.id === 1) return null
                                     if(i?.status === 0) {
                                         return (
                                             <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
@@ -288,7 +274,6 @@ const Main = () => {
                         </div>
                     )
                 }
-                
                 {
                     selectedPlan && !secretKey && (
                         <div className={styles.buy}>
@@ -303,7 +288,6 @@ const Main = () => {
                         </div>
                     )
                 }
-                
             </div>
             <div className={styles.main}>
                 <div className={styles.adv}>

@@ -1,4 +1,4 @@
-import {Modal, ModalFuncProps, Row, Col} from 'antd';
+import {Modal, Row, Col} from 'antd';
 import {FC, useState, useEffect} from 'react';
 import { IEditModal } from '../type';
 import styles from './EditModalText.module.scss';
@@ -34,12 +34,10 @@ const EditModalText:FC<I> = (props) => {
     }
 
     const onSave = (type: editItemT | '') => {
-        console.log(type)
         if(token && value) {
             setLoad(true)
             if(type === 'name') {
                 service.updateMyProfile({name: value}, token).then(res => {
-                    console.log(res)
                     if(res?.id) {
                         notify('Настройки успешно сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))
@@ -53,7 +51,6 @@ const EditModalText:FC<I> = (props) => {
             }
             if(type === 'email') {
                 service.updateMyProfile({email: value}, token).then(res => {
-                    console.log(res)
                     if(res?.id) {
                         notify('Настройки успешно сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))
@@ -67,7 +64,6 @@ const EditModalText:FC<I> = (props) => {
             }
             if(type === 'about') {
                 service.updateMyProfile({about_self: value}, token).then(res => {
-                    console.log(res)
                     if(res?.id) {
                         notify('Настройки успешно сохранены', 'SUCCESS')
                         dispatch(updateUserData(res))

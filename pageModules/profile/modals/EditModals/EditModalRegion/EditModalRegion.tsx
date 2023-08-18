@@ -1,5 +1,5 @@
 import styles from './EditModalRegion.module.scss';
-import {Modal, ModalFuncProps, Row, Col} from 'antd';
+import {Modal, Row, Col} from 'antd';
 import {FC, useState, useEffect} from 'react';
 import { IEditModal } from '../type';
 import ApiService from '@/service/apiService';

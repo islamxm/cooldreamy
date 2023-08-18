@@ -5,7 +5,7 @@ import {FC, useState, useCallback, useEffect} from 'react';
 import { modalPropsType } from '@/models/modalTypes';
 import Button from '@/components/Button/Button';
 import {Row, Col} from 'antd';
-import getCroppedImg, { createFile, getBase64 } from '@/helpers/cropImage';
+import getCroppedImg, { createFile } from '@/helpers/cropImage';
 import Cropper from 'react-easy-crop'
 import ApiService from '@/service/apiService';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
@@ -91,9 +91,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                     rotation
                 )
                 setCroppedImage(croppedImage)
-            } catch(err) {
-                console.log(err)
-            }
+            } catch(err) {}
         }
     }, [croppedAreaPixels, rotation, srcImg])
     
@@ -109,7 +107,6 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                 checkData.append('file', res)
 
                 service.checkPhotoAi(token, checkData).then(r => {
-                    console.log(r)
                     if(r === 200) {
                         service.addProfileImage(data, token).then(d => {
                             if(d?.id) {

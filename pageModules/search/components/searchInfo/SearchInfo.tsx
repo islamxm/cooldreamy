@@ -1,9 +1,7 @@
 import styles from './SearchInfo.module.scss';
-import { tabsPropsTypes } from '../../types';
 import {FC, useState, useEffect} from 'react';
 import { searchInfoType } from './types';
 import { tabItemPropsTypes } from '../../types';
-import { useSelector } from 'react-redux';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
 

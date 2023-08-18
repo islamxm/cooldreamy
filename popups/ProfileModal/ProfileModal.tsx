@@ -1,17 +1,16 @@
 import { IUser } from '@/models/IUser';
 import styles from './ProfileModal.module.scss';
 import { Modal, ModalFuncProps, Row, Col } from 'antd';
-import {FC, useEffect, useState, useRef} from 'react';
+import {FC, useEffect, useState} from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { Swiper as SwiperWrap, SwiperSlide } from 'swiper/react';
-import Swiper , {Thumbs, Navigation} from 'swiper';
+import {Thumbs, Navigation} from 'swiper';
 import Skeleton from './components/Skeleton/Skeleton';
-import { updateCurrentProfileId, updateCurrentProfileUiid } from '@/store/actions';
+import { updateCurrentProfileUiid } from '@/store/actions';
 import Image from 'next/image';
 import ApiService from '@/service/apiService';
 import UserTitle from '@/components/UserTitle/UserTitle';
 import UserLocation from '@/components/UserLocation/UserLocation';
-import Textarea from '@/components/Textarea/Textarea';
 import Button from '@/components/Button/Button';
 import Router, { useRouter } from 'next/router';
 import placeholder from '@/public/assets/images/avatar-placeholder.png'
@@ -24,8 +23,8 @@ import {FiChevronLeft, FiChevronRight} from 'react-icons/fi'
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import notify from '@/helpers/notify';
 import {GoMail} from 'react-icons/go'
-const service = new ApiService()
 
+const service = new ApiService()
 
 const ProfileModal:FC<ModalFuncProps> = (props) => {
     const {query} = useRouter()
@@ -54,8 +53,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         dispatch(updateCurrentProfileUiid(null))
     }
   
-
-
     useEffect(() => {
         if(currentProfileId && token) {
             setLoad(true)
@@ -68,8 +65,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
             })
         }
     }, [currentProfileId, token])
-
-
 
     const onLike = () => {
         if(token) {

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import styles from './PromoModal.module.scss';
-import {Modal, Row, Col, ModalFuncProps} from 'antd'
+import {Modal, ModalFuncProps} from 'antd'
 import Button from '@/components/Button/Button';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
@@ -25,7 +25,6 @@ const PromoModal:FC<ModalFuncProps> = (props) => {
     useEffect(() => {
         if(open && token) {
             service.getPromo(token).then(res => {
-                console.log(res)
                 if(res?.data?.length > 0) {
                     setData(res?.data[0]?.promotion)
                 } 

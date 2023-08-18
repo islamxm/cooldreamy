@@ -53,7 +53,6 @@ const Body:FC = () => {
     
 
     const [sex, setSex] = useState<'male' | 'female'>('male')
-    const [avatar, setAvatar] = useState<File | null | undefined>(null)
     const [about, setAbout] = useState('')
     const [birthday, setBirthday] = useState<any>()
 
@@ -120,7 +119,6 @@ const Body:FC = () => {
     useEffect(() => {
         if(router?.locale && token) {
             service.getAllPrompts(token, router.locale).then(res => {
-                console.log(setIconsSg('careers', 1))
                 setPrompt_targets(res?.prompt_targets?.map((i: any) => ({...i, icon: setIconsSg('targets', i?.id)})))
                 setPrompt_careers(res?.prompt_careers?.map((i: any) => ({...i, icon: setIconsSg('careers', i?.id)})))
                 setPrompt_finance_states(res?.prompt_finance_states?.map((i:any) => ({...i, icon: setIconsSg('finance_states', i?.id)})))
@@ -408,10 +406,8 @@ const Body:FC = () => {
                                             />
                                     </div>
                                     <div className={styles.content}>
-                                        {/* STEPS */}
                                         <Row gutter={[12,12]}>
                                             <Col span={24}>
-                                                {/* <Step1/> */}
                                                 {switchStep(currentStep)}
                                             </Col>
                                             <Col span={24}>

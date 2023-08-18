@@ -1,6 +1,5 @@
 import Button from '@/components/Button/Button';
 import styles from './CardPremium.module.scss';
-import { useEffect } from 'react';
 import {AiFillDollarCircle} from 'react-icons/ai'
 
 
@@ -71,8 +70,6 @@ const CardPremium = ({
                 </div>
                 <div className={styles.action}>
                     <Button 
-                        // hover={{boxShadow: '0.872px 9.962px 20px rgba(255, 199, 0, 0.15)'}}
-                        // hover={null}
                         variant={'gold'}
                         text='Become Premium'
                         load={load && selected?.type === 'premium'}

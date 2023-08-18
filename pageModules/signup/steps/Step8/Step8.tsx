@@ -1,15 +1,7 @@
 import { FC } from 'react';
 import styles from './Step8.module.scss';
 import {motion} from 'framer-motion';
-import { interestTypes } from '../../types';
-import { selectCardPropsTypes } from '@/components/SelectCard/types';
 
-import img1 from '@/public/assets/icons/interest-1.svg';
-import img2 from '@/public/assets/icons/interest-2.svg';
-import img3 from '@/public/assets/icons/interest-3.svg';
-import img4 from '@/public/assets/icons/interest-4.svg';
-import img5 from '@/public/assets/icons/interest-5.svg';
-import img6 from '@/public/assets/icons/interest-6.svg';
 import SelectCard from '@/components/SelectCard/SelectCard';
 import { IPromptSelect } from '../../types';
 import { useAppSelector } from '@/hooks/useTypesRedux';
@@ -21,7 +13,6 @@ const Step8:FC<IPromptSelect> = ({
     setSelectedList
 }) => {
     const {locale} = useAppSelector(s => s)
-    console.log('wwwww');
     return (
         <motion.div 
             initial={{
@@ -48,7 +39,6 @@ const Step8:FC<IPromptSelect> = ({
                                 label={item.text}
                                 value={item.id.toString()}
                                 onSelect={() => {
-                                    console.log('wwww');
                                     setSelectedList([item.id])
                                 }}
                                 isSelect={selectedList && Number(selectedList[0]) === Number(item.id) ? true : false}

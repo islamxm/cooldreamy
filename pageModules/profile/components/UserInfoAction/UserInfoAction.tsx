@@ -1,6 +1,5 @@
 import styles from './UserInfoAction.module.scss';
 import {FC} from 'react';
-import {RiPencilLine} from 'react-icons/ri';
 import UserTitle from '@/components/UserTitle/UserTitle';
 import { IUser } from '@/models/IUser';
 import UserLocation from '@/components/UserLocation/UserLocation';
@@ -16,9 +15,7 @@ const UserInfoAction:FC<IUser> = ({
     country}) => {
     const {locale} = useAppSelector(s => s);
 
-    if(!name) {
-        return <SkeletonUserInfoAction/>
-    }
+    if(!name) return <SkeletonUserInfoAction/>
 
     return (
         <div className={styles.wrapper}>
@@ -30,15 +27,11 @@ const UserInfoAction:FC<IUser> = ({
                         age={age ? age?.toString() : ''}
                         style={{fontSize: 24}}
                         />
-                    {/* <button>
-                        <RiPencilLine/>
-                    </button> */}
                 </div>
                 <div className={styles.location}>
                     <UserLocation
                         country={country}
                         state={state}
-                        
                         />
                 </div>
             </div>

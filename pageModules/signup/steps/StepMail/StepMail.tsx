@@ -4,8 +4,7 @@ import {Row, Col} from 'antd'
 
 
 interface I {
-    email?: string,
-    
+    email?: string,   
 }
 
 const StepMail = ({

@@ -18,9 +18,9 @@ const MenuItem:FC<menuItemType> = ({
         return (
             <Link href={link} className={`${styles.item} ${isActive ? styles.active : ''}`}>
                 {
-                    badge  ? (
+                    badge && (
                         <div className={styles.badge}>{badge < 100 ? badge : `${99}+`}</div>
-                    ) : null
+                    )
                 }
                 <div className={styles.icon}>
                     {icon}
@@ -34,9 +34,9 @@ const MenuItem:FC<menuItemType> = ({
                 onClick={onClick}
                 className={styles.item}>
                 {
-                    badge  ? (
+                    badge && (
                         <div className={styles.badge}>{badge < 100 ? badge : `${99}+`}</div>
-                    ) : null
+                    ) 
                 }
                 <div className={styles.icon}>
                     {icon}

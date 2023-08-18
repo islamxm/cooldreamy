@@ -1,12 +1,8 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import styles from './Step10.module.scss';
 import {motion} from 'framer-motion';
-import img from '@/public/assets/images/signup-avatar-placeholder.svg';
 import Textarea from '@/components/Textarea/Textarea';
-import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-
-
 
 interface I {
     about: string,
@@ -18,7 +14,6 @@ const Step10:FC<I> = ({
     setAbout
 }) => {
     const {locale} = useAppSelector(s => s)
-
 
     return (
         <motion.div 

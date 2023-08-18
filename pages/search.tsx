@@ -3,24 +3,21 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Container from "@/components/Container/Container";
 import { Row, Col } from "antd";
 import SearchBody from "@/pageModules/search/components/searchBody/SearchBody";
-import { useAppSelector } from "@/hooks/useTypesRedux";
-import LimitModal from "@/popups/LimitModal/LimitModal";
-import Router from "next/router";
-import VerifyEmailModal from "@/popups/VerifyEmailModal/VerifyEmailModal";
-import { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar/Navbar";
+// import { useAppSelector } from "@/hooks/useTypesRedux";
+// import { useEffect, useState } from "react";
+
 const SearchPage = () => {
-    const {userData} = useAppSelector(s => s)
+    // const {userData} = useAppSelector(s => s)
 
-    const [modal, setModal] = useState(false)
+    // const [modal, setModal] = useState(false)
 
-    useEffect(() => {
-        if(userData?.hasOwnProperty('is_email_verified') && userData?.is_email_verified === 0) {
-            setModal(true)
-        } else {
-            setModal(false)
-        }
-    }, [userData])
+    // useEffect(() => {
+    //     if(userData?.hasOwnProperty('is_email_verified') && userData?.is_email_verified === 0) {
+    //         setModal(true)
+    //     } else {
+    //         setModal(false)
+    //     }
+    // }, [userData])
 
     return (
         <Container>

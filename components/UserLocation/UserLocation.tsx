@@ -1,6 +1,5 @@
 import styles from './UserLocation.module.scss';
 import {BsGeo} from 'react-icons/bs'
-import {GrLocationPin} from 'react-icons/gr';
 import { userLocationPropsType } from './types';
 import {FC} from 'react';
 

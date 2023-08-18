@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import styles from './MainLayout.module.scss';
-import {CSSProperties, FC} from 'react';
+import {CSSProperties} from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
 const MainLayout = ({children, style}:{

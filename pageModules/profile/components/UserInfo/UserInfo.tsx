@@ -67,8 +67,6 @@ const UserInfo:FC<IUser> = (props) => {
                     dispatch(updateSocket(null))
                     LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
                     LOCAL_STORAGE?.removeItem('cooldate-web-token')
-                    // Cookies.remove('cooldate-web-user-id')
-                    // Cookies.remove('cooldate-web-token')
                     
                     Router.push('/')
                     setLogoutModal(false)
@@ -78,8 +76,6 @@ const UserInfo:FC<IUser> = (props) => {
                 }
             })
         }
-        
-        
     }
 
 
@@ -94,16 +90,15 @@ const UserInfo:FC<IUser> = (props) => {
                 />
             <Row gutter={[15,15]}>
                 {
-                    width > 1000 ? (
+                    width > 1000 && (
                         <>
                             <Col span={24}>
                                 <UserInfoAction
                                     {...props}
                                     />
-                            </Col>
-                            
+                            </Col>       
                         </>
-                    ) : null
+                    )
                 }
                 
                 <Col span={24}>
@@ -127,7 +122,6 @@ const UserInfo:FC<IUser> = (props) => {
                         </Col>
                     )
                 }
-                
             </Row>
         </div>
     )

@@ -40,8 +40,6 @@ const IconButton:FC<iconButtonPropsType> = (props) => {
                 exit={{scale: 0, opacity: 0}}
                 transition={{type: 'spring', damping: 17, stiffness: 400}}
                 whileTap={{scale: 0.9}}
-                // disabled={disabled}
-                // type='button'
                 htmlFor={fileId}
                 style={{...style, width: size, height: size}}
                 className={`${styles.wrapper} ${switchVariant(variant)} ${disabled ? styles.disabled : ''}`}

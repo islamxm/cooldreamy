@@ -5,7 +5,6 @@ import {Row, Col} from 'antd';
 import Image from 'next/image';
 import maleIcon from '@/public/assets/icons/male-icon.svg';
 import femaleIcon from '@/public/assets/icons/female-icon.svg';
-import { useEffect } from 'react';
 import Ripple from '../Ripple/Ripple';
 import {motion} from 'framer-motion';
 import { useAppSelector } from '@/hooks/useTypesRedux';

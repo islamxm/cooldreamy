@@ -2,10 +2,8 @@ import styles from './Mail.module.scss';
 import MailItem from './components/MailItem/MailItem';
 import {IChat} from '../../types';
 import {FC, useEffect, useState} from 'react';
-import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useInView } from 'react-intersection-observer';
-import { PulseLoader } from 'react-spinners';
 import SkeletonMail from './components/SkeletonMail/SkeletonMail';
 
 interface I extends IChat {
@@ -23,10 +21,6 @@ const Mail:FC<I> = ({
         rootMargin: '150px'
     })
     const [loadMore, setLoadMore] = useState(false)
-
-    
-    
-    
         
     useEffect(() => {
         if(totalChatItemCount !== undefined) {
@@ -35,26 +29,17 @@ const Mail:FC<I> = ({
        
     }, [chatList, totalChatItemCount])
 
-
     useEffect(() => {
         if(loadMore && inView) {
             updateChatListPage && updateChatListPage((s: number) => s + 1)
         }
     }, [inView, loadMore, updateChatListPage])
 
-    useEffect(() => {
-        console.log(chatList)
-    }, [chatList])
-
     return (
         <div className={styles.wrapper} style={{maxHeight: height}}>
             <div className={styles.list} >
                 {
                     chatList?.map((item, index) => (
-                        // <DialogItem
-                        //     {...item}
-                        //     me={item.sender_user_id === Number(userId)} 
-                        //     key={index}/>
                         <MailItem
                             key={index}
                             id={item.id}
@@ -80,17 +65,15 @@ const Mail:FC<I> = ({
                             />
                     ))
                 }
-                
-                
             </div>
             {
-                chatList && chatList?.length > 0 ? (
-                    loadMore ? (
+                (chatList && chatList?.length > 0) && (
+                    loadMore && (
                         <div ref={ref} className={styles.load}>
                             <SkeletonMail/>
                         </div>
-                    ) : null
-                ) : null
+                    )
+                )
             }
         </div>
         

@@ -17,7 +17,7 @@ import Router from 'next/router';
 
 const Last:FC = () => {
     const {locale} = useAppSelector(s => s)
-    const {width, height} = useWindowSize()
+    const {width} = useWindowSize()
 
 
     return (

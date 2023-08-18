@@ -6,7 +6,6 @@ import { IUser } from '@/models/IUser';
 import {FC, useEffect, useState} from 'react'
 import ApiService from '@/service/apiService';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
-import { updateUserData } from '@/store/actions';
 import EditModalPl from '../../modals/EditModals/EditModalPl/EditModalPl';
 import EditModalText from '../../modals/EditModals/EditModalText/EditModalText';
 import EditModalRegion from '../../modals/EditModals/EditModalRegion/EditModalRegion';

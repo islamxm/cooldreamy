@@ -1,8 +1,7 @@
 import styles from './Button.module.scss';
-import {FC, useEffect, useRef} from 'react';
+import {FC, useRef} from 'react';
 import { ButtonPropsTypes, ButtonVariants } from './types';
 import {motion} from 'framer-motion';
-import ripple from 'ripple-effects'
 import { PulseLoader } from 'react-spinners';
 
 const Button: FC<ButtonPropsTypes> = ({
@@ -66,29 +65,28 @@ const Button: FC<ButtonPropsTypes> = ({
             style={style}
             className={`${styles.button} ${switchVariant(variant)} ${fill ? styles.fill : ''} ${small ? styles.sm : ''} ${load ? styles.load : ''} ${middle ? styles.md : ''} ${className}`}>
             {
-                load ? (
+                load && (
                     <div className={styles.load}>
                         <PulseLoader color='#fff' size={10}/>
                     </div>
-                ) : null
+                )
             }
             {
-                before ? (
+                before && (
                     <div className={styles.before}>{before}</div>
-                ) : null
+                )
             }
             {
-                text ? (
+                text && (
                     <div className={styles.text}>
                         {text}
                     </div>
-                ) : null
+                )
             }
-            
             {
-                after ? (
+                after && (
                     <div className={styles.after}>{after}</div>
-                ) : null
+                )
             }
         </motion.button>
     )

@@ -19,7 +19,6 @@ const Main = () => {
             </div>
             <div className={styles.body}>
                 <div className={styles.title}>Payment successful!</div>
-                {/* <div className={styles.subtitle}>Вам начислено 166 кредитов.</div> */}
                 <div className={styles.action}>
                     <Button
                         text={locale?.global?.back_to_site_btn}

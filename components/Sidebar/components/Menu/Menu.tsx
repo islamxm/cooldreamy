@@ -4,22 +4,15 @@ import MenuItem from './components/MenuItem/MenuItem';
 
 import {FiSearch} from 'react-icons/fi';
 import {IoChatbubblesOutline, IoMailOutline} from 'react-icons/io5';
-import {FiUsers, FiHeart, FiSettings} from 'react-icons/fi';
-import {RxExit} from 'react-icons/rx';
+import {FiUsers, FiHeart} from 'react-icons/fi';
 import { useRouter } from 'next/router';
-import { Cookies } from 'typescript-cookie';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-import { useEffect } from 'react';
-
-
-
 
 const Menu = () => {
     const {locale, unreadChatCount, unreadMailCount} = useAppSelector(s => s)
     const router  = useRouter()
 
     const {pathname} = router
-
 
     const menuList:menuItemType[] = [
         {
@@ -82,9 +75,6 @@ const Menu = () => {
         // },
     ]
 
-    // useEffect(() => {
-    //     console.log(router)
-    // }, [router])
 
 
     return (

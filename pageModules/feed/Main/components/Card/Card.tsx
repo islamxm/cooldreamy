@@ -1,9 +1,8 @@
 import styles from './Card.module.scss';
 import Image from 'next/image';
-import IFeedCard from '@/models/IFeedCard';
 import {FC} from 'react';
 import { cardPropsType } from './type';
-import {useState, useEffect, useCallback} from 'react';
+import {useState} from 'react';
 import IconButton from '@/components/IconButton/IconButton';
 import {motion, PanInfo, AnimatePresence} from 'framer-motion';
 import {CgClose} from 'react-icons/cg';
@@ -13,16 +12,13 @@ import UserTitle from '@/components/UserTitle/UserTitle';
 
 
 const Card:FC<cardPropsType> = ({
-    
-
     card,
-    // !! test
+
     active,
     removeCard,
 
     leaveX,
-    setLeaveX
-    
+    setLeaveX    
 }) => {
     const {age,
         user_avatar_url,
@@ -103,7 +99,7 @@ const Card:FC<cardPropsType> = ({
                     >
                     <AnimatePresence>
                         {
-                            canceling ? (
+                            canceling && (
                                 <motion.div 
                                     initial={{scale: 0}}
                                     animate={{scale: 1}}
@@ -118,10 +114,10 @@ const Card:FC<cardPropsType> = ({
                                         icon={<CgClose size={40} color='#fff'/>}
                                         />
                                 </motion.div>
-                            ) : null
+                            )
                         }
                         {
-                            liking ? (
+                            liking && (
                                 <motion.div 
                                     initial={{scale: 0}}
                                     animate={{scale: 1}}
@@ -135,15 +131,13 @@ const Card:FC<cardPropsType> = ({
                                         icon={<HiHeart size={35}/>}
                                         />
                                 </motion.div>
-                            )  : null
+                            )
                         }
                     </AnimatePresence>
-                    
-                    
                     <div className={styles.img}>
                         {
-                            user_avatar_url ? (
-                                index === 0 || index === 1 ? (
+                            user_avatar_url && (
+                                (index === 0 || index === 1) && (
                                     <Image 
                                         loader={() => user_thumbnail_url ? user_thumbnail_url : ''} 
                                         src={user_thumbnail_url ? user_thumbnail_url : logo} 
@@ -152,10 +146,9 @@ const Card:FC<cardPropsType> = ({
                                         width={560} 
                                         height={560}
                                         />
-                                ) : null
-                            ) : null
+                                )
+                            )
                         }
-                        
                     </div>
                     <div className={styles.label}>
                         <UserTitle
@@ -163,7 +156,6 @@ const Card:FC<cardPropsType> = ({
                             age={age ? age.toString() : ''}
                             textBold
                             style={{color: '#fff', fontSize: 30, lineHeight: '40px'}}
-                            // isOnline={}
                             />
                         <div className={styles.loc}>
                             {country}{state ? ', ' + state : ''}
@@ -176,8 +168,8 @@ const Card:FC<cardPropsType> = ({
                 >
                 <div className={styles.img}>
                     {
-                        user_avatar_url ? (
-                            index === 0 || index === 1 ? (
+                        user_avatar_url && (
+                            (index === 0 || index === 1) && (
                                 <Image 
                                     loader={() => user_avatar_url ? user_avatar_url : ''}
                                     src={user_avatar_url ? user_avatar_url : logo}
@@ -186,10 +178,9 @@ const Card:FC<cardPropsType> = ({
                                     width={560} 
                                     height={560}
                                     />
-                            ) : null
-                        ) : null
+                            )
+                        )
                     }
-                    
                 </div>
                 <div className={styles.label}>
                     <UserTitle
@@ -197,7 +188,6 @@ const Card:FC<cardPropsType> = ({
                             age={age ? age.toString() : ''}
                             textBold
                             style={{color: '#fff', fontSize: 30, lineHeight: '40px'}}
-                            // isOnline={}
                             />
                         <div className={styles.loc}>
                             {country}{state ? ', ' + state : ''}

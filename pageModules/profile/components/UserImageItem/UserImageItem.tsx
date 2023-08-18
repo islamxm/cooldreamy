@@ -2,9 +2,6 @@ import styles from './UserImageItem.module.scss';
 import Image, { StaticImageData } from 'next/image';
 import placeholder from '@/public/assets/images/placeholder.png';
 
-const textLoader = ({src}: {src: any}) => {
-    return `${placeholder}/${src}`
-}
 
 const UserImageItem = ({
     image

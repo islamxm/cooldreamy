@@ -2,8 +2,22 @@ import {useState, useEffect} from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
-import Pusher from 'pusher-js';
-import { updateNewMail, updateNewMessage, updateCurrentProfileId, updateSocket, updateUserData, updateUnreadChatCount, updateSoonModal, increaseUnreadChatCount, updateSympCountData, decSympWathces, incSympWathces, incSympLikes, updatePremiumData, inccreaseUnreadMailCount, updateUnreadMailCount } from '@/store/actions';
+import { 
+	updateNewMail, 
+	updateNewMessage, 
+	updateCurrentProfileId, 
+	updateSocket, 
+	updateUserData, 
+	updateUnreadChatCount, 
+	updateSoonModal, 
+	increaseUnreadChatCount, 
+	updateSympCountData, 
+	incSympWathces, 
+	incSympLikes, 
+	updatePremiumData, 
+	inccreaseUnreadMailCount, 
+	updateUnreadMailCount 
+} from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
@@ -16,13 +30,11 @@ import en from '@/locales/en';
 import LimitModal from '@/popups/LimitModal/LimitModal';
 import SoonModal from '@/popups/SoonModal/SoonModal';
 import { BASE_DOMAIN, BASE_WS_HOST, TEST_DOMAIN, TEST_WS_HOST } from '@/service/endpoints';
-import Button from '../Button/Button';
-import Navbar from '../Navbar/Navbar';
 import styles from './MainWrapper.module.scss';
 import socketEvents from '@/helpers/socketEvents';
 import UserTitle from '../UserTitle/UserTitle';
 import Link from 'next/link';
-import showPush from '@/helpers/showPush';
+// import UAParser from 'ua-parser-js';
 
 const service = new ApiService()
 
@@ -36,9 +48,6 @@ const MainWrapper = ({
 	const lc = useAppSelector(s => s.locale)
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
-
-
-
 
 
 	useEffect(() => {
@@ -85,11 +94,6 @@ const MainWrapper = ({
 	
 	useEffect(() => {
 		if(token) {
-			service.getAllPrompts(token).then(res => {
-				console.log(res)
-			})
-
-
 			setPusherConfig(
 				{
 					key: 's3cr3t',
@@ -111,7 +115,6 @@ const MainWrapper = ({
 			)
 			service.getMyProfile(token).then(res => {
 				dispatch(updateUserData(res))
-				// console.log(res)
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))
@@ -132,11 +135,11 @@ const MainWrapper = ({
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {
 				// notify(lc?.global?.notifications?.success_socket, 'SUCCESS')
-				console.log('SOCKET CONNECTED')
+				console.log('[WebSocket]: CONNECTED')
 			})
 			channels?.error(() => {
 				// notify(lc?.global?.notifications?.error_socket, 'ERROR')
-				console.log('SOCKET DISCONNECTED')
+				console.log('[WebSocket]: DISCONNECTED')
 			})
 		}
 	}, [pusherConfig, userId, socketChannel])
@@ -190,7 +193,7 @@ const MainWrapper = ({
 							<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
 							<LinesEllipsis text={data?.chat_message?.chat_messageable?.text} maxLine={2}/>
 						</Link>, 'AVATAR', avatar)
-						showPush(`${name}, ${age}`, {body: data?.chat_message?.chat_messageable?.text})
+						// showPush(`${name}, ${age}`, {body: data?.chat_message?.chat_messageable?.text})
 						break;
 						
 					case chatMessageTypeVariants.messageGift:
@@ -246,7 +249,7 @@ const MainWrapper = ({
 				if(data) {
 					notify(<Link href={`/chat/${chatId}?type=mail`}>
 					<UserTitle style={{color: 'var(--violet)'}} username={name} age={age}/>
-					Вы получили письмо
+					New mail
 					{
 						data?.letter_message?.letter_messageable?.text ? (
 							<div style={{color: '#aaa', fontSize: 12, lineHeight: '16px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', width: '100%'}}>{data?.letter_message?.letter_messageable?.text}</div>
@@ -281,14 +284,9 @@ const MainWrapper = ({
 				open={soonModal}
 				onCancel={() => dispatch(updateSoonModal(false))}
 				/>
-			{/* <div style={{marginTop: 100}}><Button
-				text='adsadasdas'
-				onClick={test}
-				/></div> */}
             <div className={styles.wrapper}>
 				{children}
 			</div>
-			{/* <Navbar/> */}
         </>
     )
 }

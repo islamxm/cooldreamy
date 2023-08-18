@@ -32,15 +32,14 @@ const  sequence = (start: any, end: any) => {
 const  datesInMonth = (year: number, month: number) => {
     switch (month) {
       case 2:
-        // 二月，閏年判斷
         var leapYear = ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
         return leapYear ? 29 : 28;
   
       case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-        return 31; // 大月
+        return 31;
   
       default:
-        return 30; // 小月
+        return 30;
     }
   }
 

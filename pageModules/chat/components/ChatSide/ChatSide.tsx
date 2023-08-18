@@ -1,7 +1,4 @@
 import styles from './ChatSide.module.scss';
-import {Row, Col} from 'antd';
-import Input from '@/components/Input/Input';
-import {FiSearch} from 'react-icons/fi';
 import ChatList from '../ChatList/ChatList';
 import { IDialogs } from '../../types';
 import {FC} from 'react';

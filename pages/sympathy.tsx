@@ -10,13 +10,11 @@ import Router, { useRouter } from "next/router";
 import { sympGroupTypes } from "@/pageModules/sympathy/components/List/types";
 import ApiService from "@/service/apiService";
 import { useAppSelector } from "@/hooks/useTypesRedux";
-import Loader from "@/components/Loader/Loader";
-import Navbar from "@/components/Navbar/Navbar";
 import { useAppDispatch } from "@/hooks/useTypesRedux";
 import { decSympLikes, decSympWathces } from "@/store/actions";
 import styles from '../pageModules/sympathy/sympathy.module.scss';
-const service = new ApiService()
 
+const service = new ApiService()
 
 const SymPage = () => {
     const dispatch = useAppDispatch()
@@ -118,7 +116,6 @@ const SymPage = () => {
             if(token && page) {
                 if(activeTab === 'views') {
                     service.getActivityViews(token,{page}).then(res => {
-                        console.log(res)
                         setTotal(res?.data?.total)
                         if(res?.data?.data) {
                             if(page === 1) {

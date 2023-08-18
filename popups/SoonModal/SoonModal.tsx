@@ -1,4 +1,3 @@
-import Button from '@/components/Button/Button';
 import styles from './SoonModal.module.scss';
 import { Modal, ModalFuncProps, Row, Col } from 'antd';
 import {FC} from 'react'
@@ -7,11 +6,6 @@ import Image from 'next/image';
 
 
 const SoonModal:FC<ModalFuncProps> = (props) => {
-    
-
-
-    
-
 
     return (
         <Modal
@@ -35,14 +29,6 @@ const SoonModal:FC<ModalFuncProps> = (props) => {
                         Coming soon
                     </div>
                 </Col>
-                {/* <Col span={24}>
-                    <div className={styles.action}>
-                        <Button
-                            middle
-                            text=''
-                            />
-                    </div>
-                </Col> */}
             </Row>
         </Modal>
     )

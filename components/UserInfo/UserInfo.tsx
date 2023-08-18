@@ -5,7 +5,6 @@ import UserImageSlider from './components/UserImageSlider/UserImageSlider';
 import UserInfoMain from './components/UserInfoMain/UserInfoMain';
 import UserInfoAction from './components/UserInfoAction/UserInfoAction';
 import { IUser } from '@/models/IUser';
-import {useEffect} from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
 
@@ -36,11 +35,6 @@ const UserInfo:FC<IUser> = (props) => {
                 <Col span={24}>
                     <UserInfoMain {...props}/>
                 </Col>
-                {/* <Col span={24}>
-                    <div className={styles.action}>
-                        <button>ПОЖАЛОВАТЬСЯ</button>
-                    </div>
-                </Col> */}
             </Row>            
         </div>
     )

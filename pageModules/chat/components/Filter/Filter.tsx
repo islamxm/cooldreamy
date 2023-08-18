@@ -5,24 +5,18 @@ import { IChatFilterType, chatTabsType } from '../../types';
 import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useWindowSize } from 'usehooks-ts';
-import ApiService from '@/service/apiService';
-
 
 interface I {
     tabsBadgeCount?: any
 }
 
-const service = new ApiService()
-
-
 const Filter:FC<IChatFilterType & I> = ({
     activeType,
-    onTypeChange,
 
     activeFilter,
     onFilterChange
 }) => {
-    const {locale, unreadChatCount, token, unreadMailCount} = useAppSelector(s => s)
+    const {locale, unreadChatCount, unreadMailCount} = useAppSelector(s => s)
     const {width} = useWindowSize()
     const [filterTabs, setFilterTabs] = useState<any[]>([
         {
@@ -46,7 +40,6 @@ const Filter:FC<IChatFilterType & I> = ({
             label: locale?.chatPage?.filter_tabs?.ignored
         }
     ])
-
 
     useEffect(() => {
         setFilterTabs([

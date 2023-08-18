@@ -12,7 +12,6 @@ const UserLayout:FC<userLayoutPropsType> = ({
         <div className={styles.wrapper}>
             <div className={styles.side}>
                 {side}
-
             </div>
             <div className={styles.main}>
                 {main}

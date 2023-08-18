@@ -4,7 +4,6 @@ import {BsCamera} from 'react-icons/bs';
 import {FC, useEffect, useState, useRef} from 'react';
 import ImageCropModal from '../../modals/ImageCropModal/ImageCropModal';
 import { createFile } from '@/helpers/cropImage';
-import ApiService from '@/service/apiService';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import { IUser } from '@/models/IUser';
 import { useAppSelector } from '@/hooks/useTypesRedux';

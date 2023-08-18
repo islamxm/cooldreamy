@@ -1,9 +1,8 @@
 import styles from './SelectDef.module.scss';
 import {Select} from 'antd';
 
-import {FC, useRef, useEffect} from 'react';
+import {FC, useRef} from 'react';
 import { selectDefType } from './types';
-import {DownOutlined} from '@ant-design/icons';
 
 interface test {
     open?: boolean
@@ -34,9 +33,9 @@ const SelectDef:FC<selectDefType & test> = ({
     return (
         <div className={`${styles.wrapper} ${!label ? styles.nonlabel : ''}`} style={{width: width}}>
             {
-                label ? (
+                label && (
                     <div className={styles.label}>{label}</div>
-                ) : null
+                ) 
             }
             {
                 multiple ? (
@@ -70,9 +69,7 @@ const SelectDef:FC<selectDefType & test> = ({
                         value={value}
                         disabled={disabled}
                         className={isRound ? 'round' : ''}
-
                         virtual={false}
-                        
                         />
                 )
             }

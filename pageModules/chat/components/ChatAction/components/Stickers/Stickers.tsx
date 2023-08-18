@@ -1,6 +1,5 @@
 import styles from './Stickers.module.scss';
-import {motion} from 'framer-motion';
-import {useState, useEffect, useCallback, useRef} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import ApiService from '@/service/apiService';
 import Sticker from '@/components/Sticker/Sticker';
 import emojiData from '@/helpers/emojiData';
@@ -8,48 +7,16 @@ import Smile from '@/components/Smile/Smile';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useRouter } from 'next/router';
 
-
-
-
 const service = new ApiService()
-
-
 const tabs = [
     {value: 1, label: 'Смайлы'},
     {value: 2, label: 'Стикеры'},
 ]
 
-
-
-// const useOutsideClick = (ref: any, handler: any, attached: boolean = true) => {
-   
-//     useEffect(() => {
-//         if(!attached) return;
-        
-//         const handleClick = (e: any) => {
-//             if (!ref?.current) return;
-//             if (!ref?.current?.contains(e.target)) {
-//                 handler()
-//             } else {
-//                 console.log('click in')
-//             }
-//         }
-
-//         document.addEventListener('click', handleClick)
-//         return () => {
-//             document.removeEventListener('click', handleClick)
-//         }
-
-//     }, [ref, handler, attached])
-// }
-
-
-
 const Stickers = ({
     pos,
     onSmileSelect,
     onStickerSelect,
-    onClose,
     isOpened
 }: {
     pos?: number,
@@ -83,9 +50,8 @@ const Stickers = ({
             case 1:
                 return (
                     <div className={styles.body}>
-
                     {
-                        emojiData?.map((item, index) => (
+                        emojiData?.map((item) => (
                             <div className={styles.item}  key={item.code}>
                                 <Smile 
                                     onSelect={onSmileSelect}
@@ -99,9 +65,8 @@ const Stickers = ({
             case 2:
                 return (
                     <div className={styles.body}>
-
                         {
-                            list?.map((item, index) => (
+                            list?.map((item) => (
                                 <div className={styles.item}  key={item.id}>
                                     <Sticker 
                                         {...item}
@@ -113,43 +78,27 @@ const Stickers = ({
                     </div>
                 )
         }
-    }, [activeTab, list, emojiData])
+    }, [activeTab, list, onSmileSelect, onStickerSelect])
     
-
-
-    if(!isOpened) {
-        return null
-    }
-
+    if(!isOpened) return null
 
     return (
         <div
-            
-            // initial={{height: 0}}
-            // animate={{height: 275}}
-            // exit={{height: 0}}
-            // transition={{
-            //     type: 'spring'
-            // }} 
             style={{bottom: pos}} 
             className={`${styles.wrapper}`}
-            >
-                
+            >    
             <div className={styles.in}>
                 <div className={styles.tabs}>
                     {
                         tabs?.map((item ,index) => {
                             if(index === 1 && type === 'mail') {
-                                return (
-                                    null
-                                ) 
-                            } else {
-                                return (
-                                    <div 
-                                    onClick={() => setActiveTab(item.value)}    
-                                    className={`${styles.tab} ${activeTab === item.value ? styles.active : ''}`} key={item.value}>{item.label}</div>
-                                )
+                                return null
                             }
+                            return (
+                                <div 
+                                onClick={() => setActiveTab(item.value)}    
+                                className={`${styles.tab} ${activeTab === item.value ? styles.active : ''}`} key={item.value}>{item.label}</div>
+                            )
                         })
                     }
                 </div>

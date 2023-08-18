@@ -1,6 +1,5 @@
 import styles from './MyCard.module.scss';
 import placeholder from '@/public/assets/images/avatar-placeholder.png';
-import Image from 'next/image';
 import {FC} from 'react';
 import Link from 'next/link';
 import UserTitle from '@/components/UserTitle/UserTitle';
@@ -9,8 +8,6 @@ import { IUser } from '@/models/IUser';
 import UserLocation from '@/components/UserLocation/UserLocation';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import {AiFillDollarCircle} from 'react-icons/ai';
-import {useEffect} from 'react';
-
 
 
 const MyCard:FC<IUser> = ({
@@ -22,7 +19,7 @@ const MyCard:FC<IUser> = ({
     age,
     online
 }) => {
-    const {userData, locale, premiumData} = useAppSelector(s => s)
+    const {locale, premiumData} = useAppSelector(s => s)
     const {is_premium} = premiumData
 
 
@@ -53,7 +50,6 @@ const MyCard:FC<IUser> = ({
                 <Link href={'/deposit'}>
                 {locale?.global.my_card.balance.title}: {credits ? credits : 0} <span><AiFillDollarCircle/></span>
                 </Link>
-                
             </div>
         </Link>
     )

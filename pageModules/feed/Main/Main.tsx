@@ -185,7 +185,6 @@ const Main = () => {
                                     removeCard={removeCard}
                                     active={activeIndex === index}
                                     key={item.id}
-                                    
                                     card={{
                                         ...item,
                                         // onLike: onLike,

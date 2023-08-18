@@ -27,7 +27,6 @@ const UserInfoAction:FC<IUser> = ({
     const onLike = () => {
         if(token) {
             service.feedItemLike({id: Number(id)}, token).then(res => {
-                console.log(res)
                 if(res?.status === 200) {
                     notify('User Liked', 'SUCCESS')
                 } else {
@@ -41,7 +40,6 @@ const UserInfoAction:FC<IUser> = ({
     const onFavorite = () => {  
         if(token) {
             service.addUserToFav({user_id: Number(id)}, token).then(res => {
-                console.log(res)
                 if(res?.status === 200) {
                     notify('Вы добавили в избранное', 'SUCCESS')
                 } else {
@@ -51,21 +49,18 @@ const UserInfoAction:FC<IUser> = ({
         }
     }
 
-    const removeFavorite = () => {
-        if(token) {
-            service.deleteUserFromFav({user_id: Number(id)}, token).then(res => {
-                console.log(res)
-            })
-        }
-    }
-
+    // const removeFavorite = () => {
+    //     if(token) {
+    //         service.deleteUserFromFav({user_id: Number(id)}, token).then(res => {
+    //         })
+    //     }
+    // }
 
 
 
     const onWink = () => {
         if(id && token) {
             service.createChat({user_id: id}, token).then(res => {
-                console.log(res)
                 if(res?.chat_id) {
                     service.sendWink({user_id: id}, token).then(r => {
                         if(r?.error) {
@@ -73,16 +68,11 @@ const UserInfoAction:FC<IUser> = ({
                         } else {
                             Router.push(`/chat/${res?.chat_id}?type=chat`)
                         }
-                        // условие
-                        
                     })
                 }
             })
         }
     }
-
-
-    
 
 
 
@@ -104,7 +94,6 @@ const UserInfoAction:FC<IUser> = ({
                         </div>
                     ) : null
                 }
-                
             </div>
             <div className={styles.action}>
                 <button onClick={onLike} className={styles.item}>

@@ -2,13 +2,12 @@ import styles from './PremiumBtn.module.scss';
 import {FC} from 'react';
 import {motion} from 'framer-motion';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
-import { updateSoonModal } from '@/store/actions';
+
 const PremiumBtn:FC = ({
     
 }) => {
-    const dispatch = useAppDispatch()
     const {locale} = useAppSelector(s => s)
 
     return (

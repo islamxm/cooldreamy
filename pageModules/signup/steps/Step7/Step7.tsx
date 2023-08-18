@@ -1,15 +1,6 @@
 import { FC } from 'react';
 import styles from './Step7.module.scss';
 import {motion} from 'framer-motion';
-import { interestTypes } from '../../types';
-import { selectCardPropsTypes } from '@/components/SelectCard/types';
-
-import img1 from '@/public/assets/icons/interest-1.svg';
-import img2 from '@/public/assets/icons/interest-2.svg';
-import img3 from '@/public/assets/icons/interest-3.svg';
-import img4 from '@/public/assets/icons/interest-4.svg';
-import img5 from '@/public/assets/icons/interest-5.svg';
-import img6 from '@/public/assets/icons/interest-6.svg';
 import SelectCard from '@/components/SelectCard/SelectCard';
 import { IPromptSelect } from '../../types';
 import { useAppSelector } from '@/hooks/useTypesRedux';

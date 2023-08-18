@@ -1,19 +1,15 @@
 import styles from './SearchDrawer.module.scss';
-import {FC, useState, useEffect, useRef} from 'react'
+import {FC, useState} from 'react'
 import IconButton from '@/components/IconButton/IconButton';
 import {GrClose} from 'react-icons/gr';
-import { searchDrawerPropsType } from './types';
-import { useAnimation, motion } from 'framer-motion';
 import {Row, Col} from 'antd';
 import SelectDef from '@/components/SelectDef/SelectDef';
 import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import Button from '@/components/Button/Button';
 import { searchFilterType } from '../searchFilter/types';
-import OnlyPremium from '@/components/OnlyPremium/OnlyPremium';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import LimitModal from '@/popups/LimitModal/LimitModal';
 import defCountryList from '@/helpers/defCountryList';
-
 
 interface I extends searchFilterType {
     isOpen: boolean,
@@ -117,7 +113,7 @@ const SearchDrawer:FC<I> = ({
                                     ) : null
                                 } */}
                                 {
-                                    states?.length > 0 ? (
+                                    states?.length > 0 && (
                                         <div className={styles.item}>
                                             <SelectDef
                                                 label={locale?.searchPage.filter.list.filter_state.label}
@@ -133,7 +129,7 @@ const SearchDrawer:FC<I> = ({
                                                 />
                                         </div>
                                     
-                                    ) : null
+                                    )
                                 }
                             </Col>
                             <Col span={12}>

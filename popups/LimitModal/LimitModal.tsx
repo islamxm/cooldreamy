@@ -6,8 +6,6 @@ import Router from 'next/router';
 import styles from './LimitModal.module.scss';
 import img from '@/public/assets/images/limit-img.png';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-// import { updateLimit } from '@/store/actions';
-// import { useAppDispatch } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import PromoCard from './components/PromoCard/PromoCard';
 
@@ -71,7 +69,7 @@ const LimitModal:FC<I> = (props) => {
                     <div className={styles.text}>{text}</div>
                 </Col>
                 {
-                    action?.label ? (
+                    action?.label && (
                         <Col span={24}>
                             <div className={styles.action}>
                                 <Button
@@ -88,7 +86,7 @@ const LimitModal:FC<I> = (props) => {
                                     />
                             </div>
                         </Col>
-                    ) : null
+                    )
                 }
                 {
                     promoData && (

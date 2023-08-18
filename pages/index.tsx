@@ -1,7 +1,6 @@
 import StartPage from "./start";
 
 const HomePage = () => {
-
     return <StartPage/>
 }
 

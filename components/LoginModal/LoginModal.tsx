@@ -1,28 +1,25 @@
 import {Modal, ModalFuncProps} from 'antd';
-import {FC, useState, useEffect} from 'react';
+import {FC, useState} from 'react';
 import styles from './LoginModal.module.scss';
 import {Row, Col} from 'antd';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import Link from 'next/link';
 import ApiService from '@/service/apiService';
-import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
-import { Cookies } from 'typescript-cookie';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 import { updateToken, updateUserId } from '@/store/actions';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
-import { RootState } from '@/store/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import notify from '@/helpers/notify';
 import { useWindowSize } from 'usehooks-ts';
 import LimitModal from '@/popups/LimitModal/LimitModal';
 import LOCAL_STORAGE from '@/helpers/localStorage';
+
 const service = new ApiService()
 
 const LoginModal:FC<ModalFuncProps> = (props) => {
     const {locale} = useAppSelector(s => s)
     const {width} = useWindowSize() 
-    const router = useRouter()
     const [blocked, setBlocked] = useState(false)
 
     const dispatch = useDispatch()
@@ -36,7 +33,6 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
         password: ''
     })
 
-
     const onClose = () => {
         setErrors({
             email: '',
@@ -46,7 +42,6 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
         setPassword('')
         onCancel && onCancel()
     }
-
 
     const onSubmit = () => {
         setLoad(true)
@@ -94,7 +89,6 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
     return (
         <>
             <LimitModal
-                // text='Пользователь заблокирован!'
                 text='User blocked!'
                 open={blocked}
                 onCancel={() => setBlocked(false)}
@@ -107,7 +101,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
             title={locale?.popups?.login?.title}
             footer={false}
             >
-            
+
             <Row gutter={[20,20]}>
                 <Col span={24}>
                     <Input

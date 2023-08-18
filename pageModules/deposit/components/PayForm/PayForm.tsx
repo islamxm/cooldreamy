@@ -43,9 +43,7 @@ const PayForm = ({plan, type}: {plan?: any, type?: string, price?: number | stri
         if(!stripe || !elements) {
             return;
         }
-
         setPayLoad(true)
-
         const {error} = await stripe.confirmPayment({
             elements,
             confirmParams: {
@@ -55,7 +53,6 @@ const PayForm = ({plan, type}: {plan?: any, type?: string, price?: number | stri
             // redirect: "if_required" 
         })
         const {payment_intent} = error || {}
-
         if(error) {
             setMessage(error)
             notify(locale?.global?.notifications?.error_default, 'ERROR')
@@ -64,7 +61,6 @@ const PayForm = ({plan, type}: {plan?: any, type?: string, price?: number | stri
         } else {
             setMessage('Unexpected state')
         }
-
         setPayLoad(false)
     }
 
@@ -98,7 +94,6 @@ const PayForm = ({plan, type}: {plan?: any, type?: string, price?: number | stri
                             />
                             )
                         }
-                        
                     </Col>
                 </Row>
             </form>

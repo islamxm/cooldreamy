@@ -3,14 +3,9 @@ import Footer from '@/components/Footer/Footer';
 import 'swiper/css';
 import '@/styles/styles.scss';
 import type { AppProps } from 'next/app'
-import AppLayout from '@/components/AppLayout/AppLayout';
 import {Provider} from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
-import { pusherConfigType } from '@/helpers/getChannels';
-import getChannels from '@/helpers/getChannels';
-import Pusher from 'pusher-js';
-import * as PusherTypes from 'pusher-js';
 import MainWrapper from '@/components/MainWrapper/MainWrapper';
 import store from '@/store/store';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,11 +19,10 @@ import { useRouter } from 'next/router';
 import 'moment/locale/ru'
 import moment from 'moment';
 import { useWindowSize } from 'usehooks-ts';
-import Div100vh from 'react-div-100vh'
 import Navbar from '@/components/Navbar/Navbar';
 import Head from 'next/head';
-import notify from '@/helpers/notify';
-import Button from '@/components/Button/Button';
+import notificationRequestPermission from '@/helpers/notificationRequestPermission';
+import swRegister from '@/helpers/swRegister';
 
 
 
@@ -62,25 +56,27 @@ function App({ Component, pageProps }: AppProps) {
 			setWc(true)
 		}
 	}
-	const routeChangeEnd = (url: any) => {
+	const routeChangeEnd = () => {
 		setWc(false)
-	}	
+	}
 
 	useEffect(() => {
-		if('serviceWorker' in navigator) {
-			window.addEventListener('load', () => {
-				navigator.serviceWorker.register('/sw.js').then(s => {	
-					if(s) {
-						Notification.requestPermission(res => {
-							if(res !== 'denied') {
-								setSw(s)
-							} else setSw(null)
-						})
+		swRegister({
+			path: '/sw.js',
+			onRegistered: (serviceWorker) => {
+				if(serviceWorker === null) {
+					//ServiceWorker not supported
+					return;
+				}
+				notificationRequestPermission(permissionStatus => {
+					if(permissionStatus === 'granted') {
+						
 					}
 				})
-			})
-		}
+			}
+		})
 	}, [])
+	
 
 
 
@@ -106,43 +102,46 @@ function App({ Component, pageProps }: AppProps) {
 	}, [router])
 	return (
 		<Provider store={store}>
+			<Head>
+				<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+			</Head>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 				<PrivateRoute>
-					
 					<MainWrapper>
-							<Head>
-								<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-							</Head>
-							<AnimatePresence>
-								{wc ? <WcLoader/> : null}
-							</AnimatePresence>
 							
+							<AnimatePresence>
+								{wc && <WcLoader/>}
+							</AnimatePresence>
 							<ToastContainer limit={width <= 768 ? 1 : 5}/>
-							{
+							{/* {
 								width <= 768 && router?.pathname?.includes('/chat') && router?.query?.id ? (
 									null
 								) : (
 									router?.pathname === '/unavailable' ? null : <Header auth={true}/>
 								)
-							}
-
-							<main>
-								
-								<Component {...pageProps} />
-							
-							</main>
-
-							<Navbar/>
-							
+							} */}
 							{
+								(width > 768 
+								&& !router?.pathname?.includes('/chat') 
+								&& !router?.query?.id && router?.pathname !== '/unavailable') 
+								&& <Header/>
+							}
+							<main><Component {...pageProps} /></main>
+							<Navbar/>
+							{/* {
 								width <= 768 && router?.pathname?.includes('/chat') ? (
 									null
 								) : (
 									router?.pathname === '/unavailable' ? null : <Footer/>
 								)
+							} */}
+							{
+								(width > 768 
+								&& !router?.pathname?.includes('/chat') 
+								&& router?.pathname !== '/unavailable' )
+								&& <Footer/>
 							}
 						</MainWrapper>	
-					
 				</PrivateRoute>
 			</ConfigProvider>
 

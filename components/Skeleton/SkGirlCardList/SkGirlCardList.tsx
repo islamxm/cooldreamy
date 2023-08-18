@@ -1,7 +1,5 @@
 import styles from './SkGirlCardList.module.scss';
-import { Row, Col } from 'antd';
 import {useState, useEffect} from 'react';
-
 
 const SkGirlCardList = ({count}: {count: number}) => {
     const [array, setArray] = useState<any[]>([])

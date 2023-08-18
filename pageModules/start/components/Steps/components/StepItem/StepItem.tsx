@@ -1,7 +1,7 @@
 import styles from './StepItem.module.scss';
 import { FC} from 'react';
 import { StepItemPropsTypes } from './types';
-import {motion, Variants} from 'framer-motion';
+import {motion} from 'framer-motion';
 import { item } from '@/helpers/variantsOrderAnim';
 
 const StepItem:FC<StepItemPropsTypes>  = ({

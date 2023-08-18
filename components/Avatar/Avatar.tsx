@@ -3,9 +3,6 @@ import { avatarPropsTypes } from "./types"
 import styles from './Avatar.module.scss';
 import placeholder from '@/public/assets/images/avatar-placeholder.png';
 import {HiOutlineCheck} from 'react-icons/hi';
-import {useEffect} from 'react';
-
-
 
 const Avatar = ({
     image,
@@ -15,10 +12,6 @@ const Avatar = ({
     round,
     verified
 }: avatarPropsTypes) => {
-
-   
-    
-    
 
     return (
         <div className={`${styles.wrapper} ${round ? styles.round : ''}`} style={{...wrapperStyle}}>
@@ -32,8 +25,6 @@ const Avatar = ({
                     height={size}
                     alt={'avatar'}
                     />
-
-                
             </div>
             {
                 verified ? (

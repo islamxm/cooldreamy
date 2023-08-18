@@ -1,5 +1,5 @@
 import styles from './RangeSlider.module.scss';
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import { Slider } from 'antd';
 import { rangeSliderPropsTypes } from './rangeTypes';
 

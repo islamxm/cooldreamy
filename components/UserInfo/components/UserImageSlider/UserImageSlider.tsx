@@ -1,11 +1,7 @@
 import styles from './UserImageSlider.module.scss';
 import {FC} from 'react';
-import { userImageSliderPropsType } from './types';
-import Image from 'next/image';
-import img from '@/public/assets/images/girl.png';
 import { IUser } from '@/models/IUser';
 import UserImageItem from '@/pageModules/profile/components/UserImageItem/UserImageItem';
-import {useEffect} from 'react';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 
 const UserImageSlider:FC<IUser> = ({

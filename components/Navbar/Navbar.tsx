@@ -27,7 +27,6 @@ const Navbar = ({
 
     useEffect(() => {
         setSympCount(sympCountData?.count_likes + sympCountData?.count_mutual + sympCountData?.count_my_likes + sympCountData?.count_watches)
-        console.log(sympCountData)
     }, [sympCountData])
 
 

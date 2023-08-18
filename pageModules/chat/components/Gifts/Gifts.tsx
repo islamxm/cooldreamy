@@ -3,7 +3,6 @@ import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import {useState, useEffect, useCallback} from 'react';
 import Button from '@/components/Button/Button';
-import GiftCard from '@/components/GiftCard/GiftCard';
 import {AiOutlineGift} from 'react-icons/ai';
 import GiftMainCard from '@/components/GiftMainCard/GiftMainCard';
 import {AnimatePresence} from 'framer-motion';

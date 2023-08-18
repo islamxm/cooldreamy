@@ -5,7 +5,7 @@ import img from '@/public/assets/images/descr-img.png';
 import Image from 'next/image';
 import {Row, Col} from 'antd';
 import {motion} from 'framer-motion';
-import { container, item } from '@/helpers/variantsOrderAnim';
+import { item } from '@/helpers/variantsOrderAnim';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import parse from 'html-react-parser';
 

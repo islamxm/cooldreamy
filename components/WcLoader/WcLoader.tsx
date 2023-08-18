@@ -8,11 +8,8 @@ const WcLoader = () => {
 
     return (
         <motion.div
-            // animate={{scale: 1}}
-            // initial={{scale: 0}}
             exit={{x: '-100%'}}
             transition={{
-                // ease: [.44, .13, .3, .1],
                 easings: ['easeInOut'],
                 duration: .7,
             }}

@@ -32,7 +32,7 @@ class ApiService {
 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -49,7 +49,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -64,7 +64,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -97,7 +97,7 @@ class ApiService {
 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -112,7 +112,7 @@ class ApiService {
             })
             return await res?.status
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -128,7 +128,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -144,7 +144,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -160,7 +160,7 @@ class ApiService {
 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -172,7 +172,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -183,7 +183,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -194,7 +194,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -213,7 +213,7 @@ class ApiService {
             }) 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -233,7 +233,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -254,7 +254,7 @@ class ApiService {
             }) 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -273,7 +273,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -294,7 +294,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -306,7 +306,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -324,7 +324,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -344,7 +344,7 @@ class ApiService {
 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -363,7 +363,7 @@ class ApiService {
             }) 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -382,7 +382,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -402,15 +402,9 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
-
-    // chatSearch = async (token: IToken) => {
-    //     try {
-    //         let res = await fetch(endpoints)
-    //     }
-    // }
 
     getChat = async ({id, page, per_page = 10}: 
         {
@@ -428,7 +422,7 @@ class ApiService {
             }) 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -442,7 +436,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -456,7 +450,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -474,7 +468,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -492,7 +486,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -507,7 +501,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -529,7 +523,7 @@ class ApiService {
 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -548,7 +542,7 @@ class ApiService {
             }) 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -567,7 +561,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -584,7 +578,7 @@ class ApiService {
             }) 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -603,7 +597,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -619,7 +613,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -634,7 +628,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
     
@@ -651,7 +645,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -668,7 +662,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -684,7 +678,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -710,7 +704,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -726,7 +720,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -743,7 +737,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -759,7 +753,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -773,7 +767,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -787,7 +781,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -801,7 +795,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -817,7 +811,7 @@ class ApiService {
             })
             return await res
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -833,7 +827,7 @@ class ApiService {
             })
             return await res
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -848,7 +842,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -866,7 +860,7 @@ class ApiService {
 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -881,7 +875,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -897,7 +891,7 @@ class ApiService {
 
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -912,7 +906,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -927,7 +921,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -949,7 +943,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -968,7 +962,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -984,7 +978,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1000,7 +994,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1018,7 +1012,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1039,7 +1033,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1055,7 +1049,7 @@ class ApiService {
             })
             return await res?.status
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1070,7 +1064,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1088,7 +1082,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1103,7 +1097,7 @@ class ApiService {
             })
             return await res?.json() 
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1118,7 +1112,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1133,7 +1127,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1149,7 +1143,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1164,7 +1158,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1180,7 +1174,7 @@ class ApiService {
             })
             return await res?.json()
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1195,7 +1189,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return;
         }
     }
 
@@ -1211,7 +1205,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return
         }
     }
 
@@ -1228,7 +1222,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return
         }
     }
 
@@ -1243,7 +1237,7 @@ class ApiService {
             })
             return await checkAuth(res)
         } catch(err) {
-            console.log(err)
+            return
         }
     }
    

@@ -45,8 +45,6 @@ const ChatMock = ({
     const {width} = useWindowSize()
     const [selectValue, setSelectValue] = useState('') 
 
-
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.body}>

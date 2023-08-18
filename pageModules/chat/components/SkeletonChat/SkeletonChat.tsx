@@ -9,12 +9,6 @@ const SkeletonChat = () => {
             <div className={styles.item}></div>
             <div className={styles.item}></div>
             <div className={styles.item}></div>
-            {/* <div className={styles.item}></div>
-            <div className={styles.item}></div>
-            <div className={styles.item}></div>
-            <div className={styles.item}></div>
-            <div className={styles.item}></div>
-            <div className={styles.item}></div> */}
         </div>
     )
 }

@@ -3,14 +3,11 @@ import { Row, Col } from 'antd';
 import Button from '@/components/Button/Button';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-import { updateSoonModal } from '@/store/actions';
 import Router from 'next/router';
 
 
 const PromoBadge = () => {
-    const dispatch = useAppDispatch()
     const {locale} = useAppSelector(s => s)
-
 
     return (
         <div className={styles.wrapper}>
@@ -23,7 +20,6 @@ const PromoBadge = () => {
                 <Col span={24}>
                     <div className={styles.action}>
                         <Button
-                            // onClick={() => dispatch(updateSoonModal(true))}
                             onClick={() => Router.push('/premium')}
                             text={locale?.chatPage.premium.btn}
                             variant={'white'}

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from './Item.module.scss';
 import { useSwiper } from 'swiper/react';
 

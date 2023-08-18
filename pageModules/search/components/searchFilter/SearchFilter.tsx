@@ -56,9 +56,7 @@ const SearchFilter:FC<searchFilterType> = ({
     }
 
     useEffect(() => {
-        if(width <= 768) {
-            setShowAll(false)
-        }
+        if(width <= 768) setShowAll(false)
     }, [width])
     
 
@@ -108,7 +106,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                     />
                             </div>
                             {
-                                states?.length > 0 ? (
+                                states?.length > 0 && (
                                     <div className={styles.item}>
                                         <SelectDef
                                             label={locale?.searchPage.filter.list.filter_state.label}
@@ -124,7 +122,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                             />
                                     </div>
                                    
-                                ) : null
+                                )
                             }
                             <div className={styles.item}>
                                 <SelectDef
@@ -161,7 +159,7 @@ const SearchFilter:FC<searchFilterType> = ({
                         </div>
                         <div className={styles.action}>
                             {
-                                width <= 768 ? (
+                                width <= 768 && (
                                     <div className={styles.action_item}>
                                         <Button
                                             before={<GoSettings/>}
@@ -171,9 +169,8 @@ const SearchFilter:FC<searchFilterType> = ({
                                             onClick={onToggleDrawer}
                                             />
                                     </div>
-                                ) : null
+                                )
                             }
-                            
                             {/* <div className={styles.action_item}>
                                 <Button
                                     load={load}
@@ -189,7 +186,7 @@ const SearchFilter:FC<searchFilterType> = ({
                     </div>
                 </Col>
                 {
-                    showAll ? (
+                    showAll && (
                         <Col span={24}>
                             <div
                                 className={styles.ex}>
@@ -207,7 +204,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                 </div> */}
                             </div>
                         </Col>
-                    ) : null
+                    )
                 }
             </Row>
             

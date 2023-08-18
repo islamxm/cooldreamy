@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-
 import { Fancybox as NativeFancybox } from "@fancyapps/ui";
 import { ComponentOptionsType as FancyboxOptionsType } from "@fancyapps/ui/types/Fancybox/options";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";

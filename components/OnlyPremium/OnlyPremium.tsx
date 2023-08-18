@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/hooks/useTypesRedux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from './OnlyPremium.module.scss';
 import LimitModal from "@/popups/LimitModal/LimitModal";
 

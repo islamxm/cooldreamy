@@ -5,14 +5,12 @@ import AdvItem from './components/AdvItem/AdvItem';
 import {motion} from 'framer-motion';
 import adv1 from '@/public/assets/images/adv-1.svg';
 import adv2 from '@/public/assets/images/adv-2.svg';
-import adv3 from '@/public/assets/images/adv-3.svg';
 import { container, item } from '@/helpers/variantsOrderAnim';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const Adv:FC = () => {
     const {locale} = useAppSelector(s => s)
 
-    
     return (
         <motion.div 
             initial={{

@@ -1,7 +1,6 @@
 import styles from './Step2.module.scss';
 import SelectCard from '@/components/SelectCard/SelectCard';
 import { FC, useState, useEffect } from 'react';
-import { selectCardPropsTypes } from '@/components/SelectCard/types';
 import {motion} from 'framer-motion';
 import { IPromptSelect } from '../../types';
 import { useAppSelector } from '@/hooks/useTypesRedux';
@@ -21,7 +20,6 @@ const Step2:FC<IPromptSelect> = ({
             setError(false)
         }
     }, [selectedList])
-
 
     return (
         <motion.div 

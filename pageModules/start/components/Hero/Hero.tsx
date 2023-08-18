@@ -23,11 +23,9 @@ import cloud6 from '@/public/assets/images/hero-cloud-6.svg'
 import cloud7 from '@/public/assets/images/hero-cloud-7.svg'
 import cloud8 from '@/public/assets/images/hero-cloud-8.svg'
 import stars from '@/public/assets/images/hero-stars.svg'
-import heart1 from '@/public/assets/images/hero-heart-1.svg';
 import heart2 from '@/public/assets/images/hero-heart-2.svg';
 import arrow1 from '@/public/assets/images/hero-arrow-1.svg';
 import arrow2 from '@/public/assets/images/hero-arrow-2.svg';
-
 
 
 const Hero: FC = ({}) => {
@@ -36,34 +34,10 @@ const Hero: FC = ({}) => {
     const {locale} = useAppSelector(s => s)
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const [loginModal, setLoginModal] = useState(false)
-    const [enableInstall, setEnableInstall] = useState(true)
-    const [installEvent, setInstallEvent] = useState<any>(null)
 
     const sexChange = (value: 'male' | 'female') => {
         setSex(value)
     }
-
-
-    const openInstall = (e: any) => {
-        console.log(e)
-        e.preventDefault()
-        setEnableInstall(false)
-        setInstallEvent(e)
-    }
-
-
-    useEffect(() => {
-        process?.browser && window.addEventListener('beforeinstallprompt', openInstall)
-
-        return () => {
-            window.removeEventListener('beforeinstallprompt', openInstall)
-        }
-    }, [])
-
-
-
-    
-
 
     return (
         <div className={styles.hero}>
@@ -290,7 +264,6 @@ const Hero: FC = ({}) => {
                         <Row gutter={[15,15]}>
                             <Col span={24}><Button onClick={() => Router.push('/signup')} text={locale?.global?.header.join_btn} fill middle/></Col>
                             <Col span={24}><Button onClick={() => setLoginModal(true)} text={locale?.global?.header?.login_btn} fill middle/></Col>
-                            {/* <Col span={24}><Button load={enableInstall ? true : false} onClick={() => installEvent?.prompt && installEvent?.prompt()} className='get-pwa-btn' text={'Get App'} fill middle/></Col> */}
                         </Row>
                     </div>
                 </motion.div>

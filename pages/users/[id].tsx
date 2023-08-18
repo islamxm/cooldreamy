@@ -12,14 +12,13 @@ import {GoMail} from 'react-icons/go'
 import UserInfo from '@/components/UserInfo/UserInfo';
 import { useRouter } from 'next/router';
 import ApiService from '@/service/apiService';
-import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
+import { useAppSelector } from '@/hooks/useTypesRedux';
 import { IUser } from '@/models/IUser';
 import Router from 'next/router';
 import { useWindowSize } from 'usehooks-ts';
 import UserCardMob from '@/pageModules/profile/components/UserCardMob/UserCardMob';
 import UserMobAction from '@/pageModules/user/components/UserMobAction/UserMobAction';
 import giftImg from '@/public/assets/images/gift-1.png'
-
 
 const service = new ApiService()
 
@@ -37,7 +36,6 @@ const UserPage:FC = () => {
         if(query && query?.id && typeof query?.id === 'string' && token && !query?.currentProfileUuid) {
             service.getProfile({user_id: Number(query?.id)}, token).then(res => {
                 setData(res)
-                console.log(res)
             })
         }
         if(query && typeof query?.id === 'string' && typeof query?.currentProfileUuid === 'string' && token) {

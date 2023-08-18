@@ -10,7 +10,6 @@ const GiftCard:FC<giftCardPropsType> = ({
     badgeValue,
     label,
     price
-
 }) => {
     
     return (

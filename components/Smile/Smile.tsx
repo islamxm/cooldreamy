@@ -1,5 +1,5 @@
 import styles from './Smile.module.scss';
-import {FC,memo, useCallback} from 'react';
+import {FC,memo} from 'react';
 import {motion} from 'framer-motion';
 
 

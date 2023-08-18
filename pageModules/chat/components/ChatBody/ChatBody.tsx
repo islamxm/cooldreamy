@@ -4,7 +4,7 @@ import Dialog from '../Dialog/Dialog';
 import ChatAction from '../ChatAction/ChatAction';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {FC} from 'react';
 import { IDialogs, IChat } from '../../types';
 import Input from '@/components/Input/Input';
@@ -34,13 +34,8 @@ import ChatMenu from './components/ChatMenu/ChatMenu';
 import ReportModal from '@/popups/ReportModal/ReportModal';
 import { updateUserData } from '@/store/actions';
 
-
-
 const service = new ApiService()
-
 const VH = '(var(--vh, 1vh) * 100)'
-
-
 
 type ChatBodyComponentType = {
     ChatType?: 'mail' | 'chat'
@@ -62,12 +57,10 @@ type ChatBodyComponentType = {
 
 
 const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
-    // для диалогов
     dialogsList,
     activeDialogId,
     updateDialogsPage,
 
-    // для чата
     chatList,
 
     updateChatListPage,
@@ -77,7 +70,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
     onUpdateChat,
 
-    // !! тестовый проп
     ChatType,
     loadSide,
     loadMain,
@@ -90,7 +82,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     setDialogSearch,
     updateChatList,
     filter
-
 }) => {
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
@@ -116,7 +107,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
             case '':
                 return null
         }
-    }, [mockType])
+    
+    }, [mockType, pb])
 
 
     const sendTextMessage = (text: string) => {
@@ -237,7 +229,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const onGetAllMedia = () => {
         if(token && id && typeof id === 'string') {
             service.getChatMedia(token, id).then(res => {
-                // console.log(res)
+                
             })
         }
     }
@@ -245,11 +237,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const onWink = () => {
         if(token && currentUser?.id) {
             service.sendWink({user_id: Number(currentUser?.id)}, token).then(res => {
-                if(res?.id) {
-                    // notify('')
-                } else {
-                    notify(locale?.global?.notifications?.error_wink, 'ERROR')
-                }
+                if(!res?.id) notify(locale?.global?.notifications?.error_wink, 'ERROR')
             })
         }
     }
@@ -286,19 +274,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
         }
     }
 
-
     const onReport = () => {
         setReportModal(true)
     }
-
-
-    // const goToDown = (ref: React.MutableRefObject<HTMLDivElement>) => {
-    //     ref?.current?.scrollTo({top: ref?.current?.scrollHeight})
-    // }
-
-
-
-
 
     return (
         <div className={styles.wrapper}>
@@ -315,7 +293,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                 onReject={() => setPromptModal(false)}
                 />
             {
-                width <= 768 && id ? (
+                (width <= 768 && id) && (
                     <div className={styles.bc}>
                         <div className={styles.back}>
                             <IconButton
@@ -335,11 +313,11 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 size={30}/>
                         </div>
                     </div>
-                ) : null
+                )
             }
             {
                 width <= 768 ? (
-                    !id ? (
+                    !id && (
                         <div className={styles.sidebar}>
                             <div className={styles.search}>
                                 <Input
@@ -369,7 +347,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 )
                             }
                         </div> 
-                    ) : null
+                    )
                 ) : (
                     <div className={styles.sidebar}>
                         <div className={styles.search}>
@@ -403,21 +381,18 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                 )
             }
             {
-                width <= 768 && !id ? (
-                    
-                        !id && loadedDialogs && dialogsList?.length === 0 ? (
+                (width <= 768 && !id) ? (
+                        (!id && loadedDialogs && dialogsList?.length === 0) && (
                             <div className={styles.main}>
                                 <DialogEmpty height={width <= 768 ? `calc(${VH} - 42px - ${pb}px - 20px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
                             </div>
-                        ) : null
-                    
+                        )
                 ) : (
-                    
                     <div className={styles.main}>
                         {
-                            !id && loadedDialogs && dialogsList?.length === 0 ? (
+                            (!id && loadedDialogs && dialogsList?.length === 0) && (
                                 <DialogEmpty absolute height={width <= 768 ? `calc(${VH} - 42px - ${pb}px - 20px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
-                            ) : null
+                            )
                         }
                         {
                             ChatType === 'chat' ? (
@@ -494,7 +469,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                     {
                                         loadMain ? (
                                             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}><PulseLoader color='var(--violet)'/></div>
-                                            
                                         ) : (
                                             chatList && chatList?.length > 0 ? (
                                                 <div className={styles.body_wr}>
@@ -518,9 +492,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                             )
                                         )
                                     }
-                                    {
-                                        switchMock()
-                                    }
+                                    {switchMock()}
                                 </div>
                             ) : null    
                         }
@@ -533,7 +505,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                         loadMain ? (
                                             <SkeletonMail/>
                                         ) : (
-                                            chatList && chatList?.length > 0 ? (
+                                            (chatList && chatList?.length > 0) && (
                                                 <Mail
                                                     height={width <= 768 ? `calc(${VH} - 42px - ${pb}px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px + 50px)`}
                                                     chatList={chatList}
@@ -541,14 +513,14 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                     updateChatListPage={updateChatListPage}
                                                     totalChatItemCount={totalChatItemCount}
                                                     />
-                                            ) : (
+                                            ) 
+                                            //: (
                                                 // activeDialogId && !mockType ? (
                                                 //     <ChatStart
                                                 //         onSelect={setMockType} 
                                                 //         avatar={currentUser?.avatar_url_thumbnail}/>
                                                 // ) : null
-                                                null
-                                            )
+                                            //)
                                         )
                                     }
                                     {
@@ -575,8 +547,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     </div>          
                 )
             }      
-             
-           
         </div>
     )
 }

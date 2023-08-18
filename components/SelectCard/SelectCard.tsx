@@ -22,12 +22,9 @@ const SelectCard:FC<selectCardPropsTypes> = ({
             }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}  
             className={`${styles.card} ${isSelect ? styles.active : ''} ${disabled ? styles.disabled : ''}`}>
-            
             {
                 isSelect && <motion.div className={styles.ind}></motion.div>
             }
-            
-
             <Col span={24}>
                 <Row gutter={[5,5]}>
                     <Col span={24}>
@@ -37,7 +34,6 @@ const SelectCard:FC<selectCardPropsTypes> = ({
                                     <Image width={90} height={90} src={image} alt={label}/>
                                 ) : null
                             }
-                            
                         </div>
                     </Col>
                     <Col span={24}>
@@ -48,8 +44,8 @@ const SelectCard:FC<selectCardPropsTypes> = ({
                 </Row>
             </Col>
             <Ripple
-                    color='var(--light_purp_2)'
-                    />
+                color='var(--light_purp_2)'
+                />
         </motion.div>
     )
 }

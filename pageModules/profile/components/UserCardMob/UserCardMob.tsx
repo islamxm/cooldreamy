@@ -2,7 +2,6 @@ import styles from './UserCardMob.module.scss';
 import Image from 'next/image';
 import { IUser } from '@/models/IUser';
 import {FC} from 'react';
-import Avatar from 'antd/es/avatar/avatar';
 import UserTitle from '@/components/UserTitle/UserTitle';
 import {Row, Col} from 'antd';
 import UserLocation from '@/components/UserLocation/UserLocation';
@@ -10,10 +9,10 @@ import Button from '@/components/Button/Button';
 import {motion} from 'framer-motion';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
+
 interface I extends IUser {
     children?: React.ReactNode
 }
-
 
 const UserCardMob:FC<I> = ({
     user_avatar_url,
@@ -26,7 +25,6 @@ const UserCardMob:FC<I> = ({
     is_premium,
 
     children
-
 }) => {
     const {locale} = useAppSelector(s => s)
     return (
@@ -88,7 +86,7 @@ const UserCardMob:FC<I> = ({
                             </motion.button>
                         </div>
                         {
-                            is_premium === 1 ? (
+                            is_premium === 1 && (
                                 <div className={styles.item}>
                                     <motion.button 
                                         whileTap={{scale: 0.9}} 
@@ -97,13 +95,11 @@ const UserCardMob:FC<I> = ({
                                         Premium
                                     </motion.button>
                                 </div>
-                            ) : null
-                        }
-                        
+                            )
+                        } 
                     </div>
                 )
             }
-            
         </div>
     )
 }

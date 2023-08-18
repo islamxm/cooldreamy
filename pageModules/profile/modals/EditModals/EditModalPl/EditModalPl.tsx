@@ -1,4 +1,4 @@
-import {Modal, ModalFuncProps, Row, Col} from 'antd';
+import {Modal, Row, Col} from 'antd';
 import {FC, useEffect, useState} from 'react';
 import { IEditModal } from '../type';
 import styles from './EditModalPl.module.scss';

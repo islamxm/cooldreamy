@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 
 
@@ -46,34 +47,38 @@ export default function Document() {
         <meta property="og:url" content="https://yourdomain.com" />
         <meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" /> */}
 
-        <script
+
+        <Script
+          id='gtm-script-1'
+          async
           type='text/javascript'
+          dangerouslySetInnerHTML={{
+            __html: `
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-59CJTBH')
+            `
+          }}/>
+        <Script
+          type='text/javascript' 
+          id='gtm-script-2'
+          async
+          src='https://www.googletagmanager.com/gtag/js?id=G-PZMJLXVY1B'
+          />
+        <Script
+          id='gtm-script-3'
+          type='text/javascript' 
           async
           dangerouslySetInnerHTML={{
             __html: `
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-59CJTBH')
-                `
-              }}
+            window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PZMJLXVY1B'); 
+            `
+          }}
           />
-          
-        <script
-          type='text/javascript' 
-          async 
-          src="https://www.googletagmanager.com/gtag/js?id=G-PZMJLXVY1B"/> 
-          <script 
-            type='text/javascript' 
-            async 
-            dangerouslySetInnerHTML={{
-              __html: `
-              window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PZMJLXVY1B'); 
-              `
-            }}
-           />
-        <script
+        <Script
+          id='ym-script-1'
           type='text/javascript'
           async
           dangerouslySetInnerHTML={{
@@ -91,8 +96,78 @@ export default function Document() {
             });`
           }}  
           />
+        <Script
+          id='ym-script-2'
+          async
+          type='text/javascript'
+          dangerouslySetInnerHTML={{
+            __html: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        
+            ym(94454907, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true,
+                ecommerce:"dataLayer"
+            });`
+          }}
+          />
+        <noscript
+            dangerouslySetInnerHTML={{
+                __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
+            }}
+          />
+        {/* <script
+          type='text/javascript'
+          async
+          dangerouslySetInnerHTML={{
+            __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-59CJTBH')
+                `
+              }}
+          /> */}
+          
+        {/* <script
+          type='text/javascript' 
+          async 
+          src="https://www.googletagmanager.com/gtag/js?id=G-PZMJLXVY1B"/> 
+          <script 
+            type='text/javascript' 
+            async 
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PZMJLXVY1B'); 
+              `
+            }}
+           /> */}
+        {/* <script
+          type='text/javascript'
+          async
+          dangerouslySetInnerHTML={{
+            __html: `(function(m,e,t,r,i,k,a){m[i]=m[i]function(){(m[i].a=m[i].a[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+         
+            ym(94454907, "init", {
+                 clickmap:true,
+                 trackLinks:true,
+                 accurateTrackBounce:true,
+                 webvisor:true
+            });`
+          }}  
+          /> */}
 
-          <script
+          {/* <script
               dangerouslySetInnerHTML={{
                   __html: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                        m[i].l=1*new Date();
@@ -108,30 +183,11 @@ export default function Document() {
                             ecommerce:"dataLayer"
                        });`
               }}
-          />
-          {/* <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                if('serviceWorker' in navigator) {
-                  window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/sw.js').then(res => console.log(res))
-                  })
-                }
-              `
-            }}
-            /> */}
-          <noscript
-            dangerouslySetInnerHTML={{
-                __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
-            }}
-          />
-
+          /> */}
       </Head>
       <body>
         <Main />
         <NextScript />
-
-
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59CJTBH"
         height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
       </body>

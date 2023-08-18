@@ -1,36 +1,17 @@
 import styles from './Dialog.module.scss';
-import ApiService from '@/service/apiService';
-import { useRouter } from 'next/router';
-import {useState, useEffect, useRef, FC} from 'react';
+import {useState, useEffect, FC} from 'react';
 import DialogItem from './components/DialogItem/DialogItem';
-import { dialogItemType, IChat } from '../../types';
+import { IChat } from '../../types';
 import { PulseLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { AnimatePresence } from 'framer-motion';
-import SkeletonChat from '../SkeletonChat/SkeletonChat';
-
-// import {FixedSizeList} from 'react-window';
-// import AutoSizer from 'react-virtualized-auto-sizer';
-// import InfiniteLoader from 'react-window-infinite-loader'
 
 interface I extends IChat {
     height?: string,
     updateDialogsList?: (...args: any[]) => any,
     updateChatList?: (...args: any[]) => any
 }
-
-const Item = ({data, index, style}: {data: any, index: number, style: any}) => (
-    <div style={style}>
-        {
-            data ? (
-                <DialogItem {...data}/>
-            ) : <div>Loading...</div>
-        }
-        
-    </div>
-)
-
 
 
 const Dialog:FC<I> = ({
@@ -44,29 +25,23 @@ const Dialog:FC<I> = ({
     updateChatList
 }) => {
     const {userId} = useAppSelector(s => s)
-    
     const {inView, ref} = useInView({
         rootMargin: '150px'
     })
+
     const [loadMore, setLoadMore] = useState(false)
 
-    
-
-    
     useEffect(() => {
         if(totalChatItemCount !== undefined) {
             chatList?.length >= totalChatItemCount ? setLoadMore(false) : setLoadMore(true)
         }
-       
     }, [chatList, totalChatItemCount])
-
 
     useEffect(() => {
         if(loadMore && inView) {
             updateChatListPage && updateChatListPage((s: number) => s + 1)
         }
     }, [inView, loadMore, updateChatListPage])
-   
 
     return (
         <div className={styles.wrapper} style={{maxHeight: height}}>
@@ -96,18 +71,14 @@ const Dialog:FC<I> = ({
                     ))
                 }
             </AnimatePresence>
-            
-            
-            
             {
-                chatList && chatList?.length > 0 ? (
-                    loadMore ? (
+                (chatList && chatList?.length > 0) && (
+                    loadMore && (
                         <div ref={ref} className={styles.load}>
                             <PulseLoader color='var(--violet)'/>
-                            {/* <SkeletonChat/> */}
                         </div>
-                    ) : null
-                ) : null
+                    )
+                )
             }
         </div>
     )

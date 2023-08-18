@@ -8,7 +8,6 @@ import Button from '@/components/Button/Button';
 const VerifyEmailModal:FC<ModalFuncProps> = (props) => {
     const {userData} = useAppSelector(s => s)
 
-
     return (
         <Modal
             {...props}

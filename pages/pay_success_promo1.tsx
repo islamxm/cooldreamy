@@ -15,9 +15,7 @@ const PaySuccess = () => {
 
     useEffect(() => {
         if(query && query?.user_promotion_id && typeof query?.user_promotion_id === 'string' && token) {
-            service.activatePay(token, {user_promotion_id: query?.user_promotion_id}).then(res => {
-                console.log(res)
-            })
+            service.activatePay(token, {user_promotion_id: query?.user_promotion_id})
         }
     }, [query, token])
 

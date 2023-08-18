@@ -2,15 +2,7 @@ import styles from './EmailInfoModal.module.scss';
 import {Modal, ModalFuncProps, Col, Row} from 'antd'
 import {FC} from 'react';
 
-
-interface I {
-
-}
-
-
 const EmailInfoModal:FC<ModalFuncProps> = (props) => {
-
-
     return (
         <Modal
             {...props}
@@ -43,3 +35,5 @@ const EmailInfoModal:FC<ModalFuncProps> = (props) => {
         </Modal>
     )
 }
+
+export default EmailInfoModal;

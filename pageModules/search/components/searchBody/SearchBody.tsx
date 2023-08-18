@@ -2,42 +2,29 @@ import styles from './SearchBody.module.scss';
 import SearchFilter from '../searchFilter/SearchFilter';
 import SearchInfo from '../searchInfo/SearchInfo';
 import {Row, Col} from 'antd';
-import { girlCardType } from '@/components/GirlCard/types';
 import GirlCard from '@/components/GirlCard/GirlCard';
-import img from '@/public/assets/images/girl.png';
 import Pagination from '@/components/Pagination/Pagination';
-import { useState, useEffect, useCallback } from 'react';
-import { tabItemPropsTypes } from '../../types';
+import { useState, useEffect,} from 'react';
 import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { selectOptionType } from '@/components/SelectDef/types';
 import SearchDrawer from '../searchDrawer/SearchDrawer';
-import { useWindowSize } from 'usehooks-ts';
 import SkGirlCardList from '@/components/Skeleton/SkGirlCardList/SkGirlCardList';
 import { IUser } from '@/models/IUser';
 
 
-
 const service = new ApiService();
-
-
-
 
 
 const SearchBody = () => {
     const {token, userData} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
    
-    const [searched, setSearched] = useState(false)
     const [currentPage, setCurrentPage] = useState(0);
 
     
     const [targetList, setTargetList] = useState([])
     const [financeList, setFinanceList] = useState([])
-    const [careerList, setCareerList] = useState([])
-    const [rlList, setRlList] = useState([])
-    const [interestsList, setInterestsList] = useState([])
-    const [kidsList, setKidsList] = useState([])
 
     const [state, setState] = useState<{value: string, id: string, label: string} | null>(null)
     const [country, setCountry] = useState<{value: string, id: string, label: string} | null>({value: 'All', id: 'All', label: 'All'})

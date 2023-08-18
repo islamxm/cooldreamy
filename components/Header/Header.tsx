@@ -1,38 +1,26 @@
 import styles from '../Header/Header.module.scss';
-import { HeaderPropsTypes } from "./types";
 import Container from '../Container/Container';
 import logoImage from '@/public/assets/images/logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import {motion} from 'framer-motion';
 import LoginModal from '../LoginModal/LoginModal';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
-import { Cookies } from 'typescript-cookie';
-import { updateToken, updateUserId, updateSocket, updateMenu, updateLocale } from '@/store/actions';
+import { updateToken, updateUserId, updateSocket, updateMenu } from '@/store/actions';
 import Router, { useRouter } from 'next/router';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import { useWindowSize } from 'usehooks-ts';
-import SelectDef from '../SelectDef/SelectDef';
-import en from '@/locales/en';
-import ru from '@/locales/ru';
 import PremiumBtn from '../Sidebar/components/PremiumBtn/PremiumBtn';
-import TagManager from 'react-gtm-module';
 import ApiService from '@/service/apiService';
 import notify from '@/helpers/notify';
-import { updateSoonModal } from '@/store/actions';
 import LOCAL_STORAGE from '@/helpers/localStorage';
+
 const service = new ApiService()
-
-const locales = [
-    // {value: '1', label: 'RU'},
-    // {value: '2', label: 'EN'}
-]
-
 
 const Header: React.FC<any> = () => {
     const dispatch = useAppDispatch()
-    const {token, socketChannel, isMenuOpen, locale, userData, premiumData} = useAppSelector(s => s)
+    const {token, socketChannel, isMenuOpen, locale, premiumData} = useAppSelector(s => s)
     const {is_premium} = premiumData
     const [loginModal, setLoginModal] = useState(false)
     const {width} = useWindowSize()
@@ -51,8 +39,6 @@ const Header: React.FC<any> = () => {
                     dispatch(updateSocket(null))
                     LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
                     LOCAL_STORAGE?.removeItem('cooldate-web-token')
-                    // Cookies.remove('cooldate-web-user-id')
-                    // Cookies.remove('cooldate-web-token')
                     
                     Router.push('/')
                     setLogoutModal(false)
@@ -62,8 +48,6 @@ const Header: React.FC<any> = () => {
                 }
             })
         }
-        
-        
     }
 
     const testGtag = () => {
@@ -72,7 +56,6 @@ const Header: React.FC<any> = () => {
         })
         Router.push('/signup')
     }
-
     
 
     return (
@@ -81,12 +64,10 @@ const Header: React.FC<any> = () => {
             animate={{y: '0%'}}
             transition={{type: 'spring'}}
             className={`${styles.header} ${width <= 768 && (router?.pathname === '/' || router?.pathname === '/start') ? styles.show : ''}`}>
-
             <LoginModal
                 open={loginModal}
                 onCancel={() => setLoginModal(false)}
                 />
-
             <PromptModal
                 text={locale?.popups.logout.title}
                 open={logoutModal}
@@ -94,10 +75,8 @@ const Header: React.FC<any> = () => {
                 onAccept={onLogout}
                 onReject={() => setLogoutModal(false)}
                 />
-
             <Container>
                 <motion.div 
-                    // сделать анимацию поочередного появления opacity: 0 => 1
                     className={styles.inner}>
                     {
                         token ? (
@@ -151,9 +130,7 @@ const Header: React.FC<any> = () => {
                                 }
                             </div>
                         ) : (
-                            width <= 768 ? (
-                                null
-                            ) : (
+                            width > 768 && (
                                 <div className={styles.main}>
                                     {
                                         !is_premium && <div className={styles.prem}>
@@ -194,10 +171,8 @@ const Header: React.FC<any> = () => {
                                     }
                                 </div>
                             )
-                            
                         )
                     }
-                    
                 </motion.div>
             </Container>
         </motion.header>

@@ -1,21 +1,18 @@
 import styles from './DialogItem.module.scss';
-import {FC, useState, useEffect, useCallback, memo} from 'react';
-import { chatMessageTypes, dialogItemType } from '@/pageModules/chat/types';
+import {FC, useEffect, memo} from 'react';
+import { chatMessageTypes} from '@/pageModules/chat/types';
 import Avatar from '@/components/Avatar/Avatar';
-import img from '@/public/assets/images/avatar-placeholder.png';
 import {BsCheckAll, BsCheck} from 'react-icons/bs';
-import Moment from 'react-moment';
 import Image from 'next/image';
 import {motion} from 'framer-motion';
 import moment from 'moment';
-import {FaSmileWink} from 'react-icons/fa';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import { IMessage } from '@/pageModules/chat/types';
 import { useInView } from 'react-intersection-observer';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
-import Router, { useRouter } from 'next/router';
-import { decreaseUnreadChatCount, updateCurrentProfileId, updateUnreadChatCount, updateUserData } from '@/store/actions';
+import { useRouter } from 'next/router';
+import { decreaseUnreadChatCount, updateCurrentProfileId, updateUserData } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import winkImg from '@/public/assets/images/wink-sticker.png';
 import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
@@ -24,15 +21,12 @@ import notify from '@/helpers/notify';
 
 const service = new ApiService()
 
-
 interface I extends IMessage {
     showAvatar?: boolean,
     updateDialogsList?: (...args: any[]) => any,
     updateChatList?: (...args: any[]) => any
     is_payed?: 1 | 0
 }
-
-
 
 const DialogItemComponent:FC<I> = ({
     id,
@@ -55,14 +49,10 @@ const DialogItemComponent:FC<I> = ({
     updateChatList
 }) => {
     const dispatch = useAppDispatch()
-    const {token, unreadChatCount, userData} = useAppSelector(s => s)
-    const {inView, ref} = useInView({
-        // triggerOnce: true,
-    })
+    const {token, userData} = useAppSelector(s => s)
+    const {inView, ref} = useInView()
 
     const {query} = useRouter()
-
-   
 
     useEffect(() => {
         if(status === 'unread' && id && inView && !isSelf) {
@@ -167,8 +157,6 @@ const DialogItemComponent:FC<I> = ({
                         <div className={styles.text}>
                             <p>
                                 {text}
-                                {/* {id} <br/>
-                                {status} */}
                             </p>
                             
                         </div>
@@ -244,9 +232,6 @@ const DialogItemComponent:FC<I> = ({
 
     return (
         <div ref={ref} className={`${styles.wrapper} ${isSelf ? styles.right : styles.left}`}>
-            {/* {
-                <div className={styles.id}>{id}</div>
-            } */}
             {
                 isSelf ? (
                     <div className={`${styles.body} ${styles.me}`}>

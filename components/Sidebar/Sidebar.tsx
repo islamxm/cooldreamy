@@ -1,32 +1,24 @@
 import styles from './Sidebar.module.scss';
 import { FC, useEffect, useState } from 'react';
 import MyCard from './components/MyCard/MyCard';
-import PremiumBtn from './components/PremiumBtn/PremiumBtn';
 import { Row, Col } from 'antd';
 import Menu from './components/Menu/Menu';
-import { IUser } from '@/models/IUser';
 import ApiService from '@/service/apiService';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import { useWindowSize } from 'usehooks-ts';
 import { updateMenu } from '@/store/actions';
 import {motion} from 'framer-motion';
 import Button from '../Button/Button';
-import notify from '@/helpers/notify';
 import Router, { useRouter } from 'next/router';
 import PromoModal from '@/popups/PromoModal/PromoModal';
-import Link from 'next/link';
 
-
-const service = new ApiService()
 
 const Sidebar:FC = () => {
-    const {userData, isMenuOpen, token, locale, premiumData} = useAppSelector(s => s)
+    const {userData, isMenuOpen, locale, premiumData} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
-    const [load, setLoad] = useState(false)
+    
     const router = useRouter()
-
-    const {is_premium} = premiumData
 
  
     
@@ -83,9 +75,9 @@ const Sidebar:FC = () => {
                 Promo
             </motion.button> */}
 
-            <PromoModal
-                // open
-                />
+            {/* <PromoModal
+                
+                /> */}
         </motion.div>
     )
 }

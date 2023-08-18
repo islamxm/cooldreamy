@@ -3,15 +3,12 @@ import Container from '@/components/Container/Container';
 import {motion} from 'framer-motion';
 import Button from '@/components/Button/Button';
 import StepItem from './components/StepItem/StepItem';
-import {Row, Col} from 'antd';
-import { container, item } from '@/helpers/variantsOrderAnim';
+import { container} from '@/helpers/variantsOrderAnim';
 import Router from 'next/router';
-import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const Steps = () => {
     const {locale} = useAppSelector(s => s)
-    const {width, height} = useWindowSize()
 
     return (
         <motion.div
@@ -34,10 +31,8 @@ const Steps = () => {
                         variants={container}
                         initial="hidden"
                         whileInView="visible"
-                        // animate="visible" 
                         viewport={{once: true}}
                         className={styles.main}>
-                        
                         <motion.div 
                             variants={{
                                 hidden: { width: '0%' },
@@ -82,9 +77,7 @@ const Steps = () => {
                     <div className={styles.action}>
                         <Button
                             onClick={() => Router.push('/signup')}
-                            // disabled={true}
                             text={locale?.startPage?.start_steps_btn}
-                            // middle={width <= 768}
                             />
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import styles from './StepLine.module.scss';
 import { FC, useEffect, useState } from 'react';
 import { StepLinePropsTypes } from './types';
-import { useCallback } from 'react';
 
 const StepLine:FC<StepLinePropsTypes> = ({
     total,
@@ -9,7 +8,6 @@ const StepLine:FC<StepLinePropsTypes> = ({
 }) => {
 
     const [arr, setArr] = useState<number[]>([])
-
 
     useEffect(() => {
         if(total) {
@@ -30,7 +28,7 @@ const StepLine:FC<StepLinePropsTypes> = ({
                     ></div>
             </div>
             {
-                arr?.map((item, index) => (
+                arr?.map((i,index) => (
                     <div key={index} className={`${styles.item} ${index == currentIndex ? styles.current : ''} ${index < currentIndex ? styles.done : ''}`}>
                         <div className={styles.el}></div>
                     </div>

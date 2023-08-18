@@ -1,5 +1,5 @@
 import styles from './UserInfoMain.module.scss';
-import {FC, useState, useEffect} from 'react';
+import {FC} from 'react';
 import Badge from '@/components/Badge/Badge';
 import { Row, Col } from 'antd';
 import { IUser } from '@/models/IUser';
@@ -9,11 +9,10 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 const service = new ApiService()
 
 const UserInfoMain:FC<IUser> = (props) => {
-    const {token, locale} = useAppSelector(s => s)
+    const {locale} = useAppSelector(s => s)
 
     const {
         about_self,
-        
         prompt_careers,
         prompt_relationships,
         prompt_finance_states,

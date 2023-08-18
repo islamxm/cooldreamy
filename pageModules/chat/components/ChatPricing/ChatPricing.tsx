@@ -1,13 +1,8 @@
 import styles from './ChatPricing.module.scss';
-import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-import {useEffect, useState} from 'react';
-
-const service = new ApiService()
-
 
 const ChatPricing = () => {
-    const {token, locale, actionsPricing} = useAppSelector(s => s)
+    const {locale, actionsPricing} = useAppSelector(s => s)
 
     return (
         <div className={styles.wrapper}>

@@ -1,6 +1,4 @@
-import Echo from "laravel-echo";
 import { PusherPrivateChannel } from "laravel-echo/dist/channel";
-import { Cookies } from "typescript-cookie";
 import { IUser } from "@/models/IUser";
 import ru from "@/locales/ru";
 import en from "@/locales/en";

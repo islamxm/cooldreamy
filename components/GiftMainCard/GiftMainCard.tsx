@@ -6,9 +6,9 @@ import placeholder from '@/public/assets/images/logo.svg';
 import Button from '../Button/Button';
 import {AiOutlineGift} from 'react-icons/ai'
 import IconButton from '../IconButton/IconButton';
-import {FiShoppingCart} from 'react-icons/fi';
 import {BsTrash, BsPlus} from 'react-icons/bs';
 import { useWindowSize } from 'usehooks-ts';
+
 const GiftMainCard:FC<giftCardPropsType> = ({
     onSelect,
     image,
@@ -24,9 +24,9 @@ const GiftMainCard:FC<giftCardPropsType> = ({
             <div className={styles.head}>
                 <div className={styles.label}>{label}</div>
                 {
-                    price ? (
+                    price && (
                         <div className={styles.price}>{price} кредитов</div>
-                    ) : null
+                    )
                 }
             </div>
             <div className={styles.img}>

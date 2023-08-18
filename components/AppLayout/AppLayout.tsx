@@ -7,13 +7,12 @@ const AppLayout = ({children, isSidebar}: {children?: React.ReactNode, isSidebar
     return (
         <main className={styles.wrapper}>
             {
-                isSidebar ? (
+                isSidebar && (
                     <div className={styles.side}>
                         <Sidebar/>
                     </div>
-                ) : null
+                ) 
             }
-            
             <div className={styles.main}>
                 {children}
             </div>

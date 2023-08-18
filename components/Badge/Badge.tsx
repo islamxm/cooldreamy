@@ -4,7 +4,6 @@ import { badgePropsType } from './types';
 
 const Badge:FC<badgePropsType> = ({
     value,
-    style,
     icon
 }) => {
     return (

@@ -1,14 +1,11 @@
 import styles from './Footer.module.scss';
 import { FC } from 'react';
-import {motion} from 'framer-motion';
-import { container, item } from '@/helpers/variantsOrderAnim';
 import Container from '../Container/Container';
 import Image from 'next/image';
 import logo from '@/public/assets/images/logo-big.svg';
 import FooterPart from './components/FooterPart/FooterPart';
 import { FooterPartPropsTypes } from './components/FooterPart/types';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-
 
 
 

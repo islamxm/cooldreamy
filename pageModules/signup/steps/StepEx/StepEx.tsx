@@ -1,32 +1,11 @@
 import styles from './StepEx.module.scss';
 import {motion} from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
-import Input from '@/components/Input/Input';
 import { Row, Col } from 'antd';
 import SelectDef from '@/components/SelectDef/SelectDef';
 import ApiService from '@/service/apiService';
-import Button from '@/components/Button/Button';
-
 
 const service = new ApiService()
-
-// const languagesList = [
-//     {label: 'Ukraine', value:''},
-//     {label: 'USA', value:''},
-//     {label: 'Belgium', value:''},
-//     {label: 'Bulgaria', value:''},
-//     {label: 'France', value:''},
-//     {label: 'Germany', value:''},
-//     {label: 'Ireland', value:''},
-//     {label: 'Italy', value:''},
-//     {label: 'Poland', value:''},
-//     {label: 'Portugal', value:''},
-//     {label: 'Romania', value:''},
-//     {label: 'Spain', value:''},
-//     {label: 'England', value:''},
-//     {label: 'Czech', value:''},
-//     {label: 'Hungary', value:''},
-// ]
 
 const languagesList = [
     {label: 'English', value: 'en'},
@@ -37,7 +16,6 @@ const languagesList = [
     {label: 'Russian', value: 'ru'},
     {label: 'Italian', value: 'it'},
 ]
-
 
 interface IStepEx {
     language?: string,
@@ -66,7 +44,6 @@ const StepEx:FC<IStepEx> = ({
 
     useEffect(() => {
         service.getCountries().then(res => {
-            console.log(res)
             setCountryList(res?.map((i: any) => ({value: i?.id, label: i?.title})))
         })
     }, [])

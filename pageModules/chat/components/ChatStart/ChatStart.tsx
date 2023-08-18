@@ -1,20 +1,20 @@
 import styles from './ChatStart.module.scss';
 import Image from 'next/image';
 import placeholder from '@/public/assets/images/avatar-placeholder.png';
-import {FaRegSmileWink} from 'react-icons/fa';
 import {HiOutlineGift} from 'react-icons/hi';
 import {HiOutlineChatBubbleOvalLeftEllipsis} from 'react-icons/hi2';
 import IconButton from '@/components/IconButton/IconButton';
 import {motion} from 'framer-motion';
-import ChatMock from '../ChatMock/ChatMock';
-import { useState } from 'react';
+import {FC} from 'react'; 
 
+interface I {
+    avatar?: string, 
+    onSelect: (type: 'wink' | 'gift' | 'text' | '') => void
+}
 
-
-
-
-const ChatStart = ({avatar, onSelect}: {avatar?: string, onSelect: (type: 'wink' | 'gift' | 'text' | '') => void}) => {
-
+const ChatStart:FC<I> = ({
+    avatar, 
+    onSelect}: I) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.body}>

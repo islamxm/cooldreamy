@@ -3,23 +3,17 @@ import { Row, Col } from 'antd';
 import Filter from '../Filter/Filter';
 import ChatBody from '../ChatBody/ChatBody';
 import ApiService from '@/service/apiService';
-import {FC, useState, useEffect, useCallback, ChangeEvent} from 'react';
+import {useState, useEffect} from 'react';
 import { useRouter } from 'next/router';
-import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-import moment from 'moment';
 import notify from '@/helpers/notify';
 import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
 import { useWindowSize } from 'usehooks-ts';
 import { sortingMailChatList } from '@/helpers/sorting';
-import Button from '@/components/Button/Button';
 import {useDebounce} from 'usehooks-ts';
 import socketEvents from '@/helpers/socketEvents';
 
-
 const service = new ApiService()
-
-
 
 const ChatLayout = () => {
     // !! глобальные инстанции
@@ -59,17 +53,6 @@ const ChatLayout = () => {
     const dialogSearchDebounce = useDebounce<string>(dialogSearch, 500)
 
 
-
-
-    // !! новая механика обновления чата
-    const [newRead, setNewRead] = useState<any>(null)
-    const [newMsg, setNewMsg] = useState<any>(null)
-
-
-
-
-
-
     // ?? получение ид текущего чата из роута (опционально)
     useEffect(() => {
         if(query) {
@@ -78,14 +61,10 @@ const ChatLayout = () => {
                 setCurrentChatId(Number(query?.id))
             }
         }
-
         if(query?.type === 'mail' || query?.type === 'chat') {
             setChatType(query?.type)
         }
     }, [query])
-
-
-
 
     // ** получение диалогов (чат лист)
     const getDialogs = () => {
@@ -98,7 +77,6 @@ const ChatLayout = () => {
                 page: dialogsPage,
                 search: dialogSearchDebounce
             }, token).then(res => {
-                
                 setTotalDialogItemCount(res?.total)
                 if(dialogsPage === 1) {
                     setDialogsList(res?.data)
@@ -230,25 +208,11 @@ const ChatLayout = () => {
     }, [chatListPage, currentChatId, token, chatType])
 
 
-
-   
-
-
-
     // сброс пагинации диалогов при смене фильтра
     useEffect(() => {
         setDialogsList([])
         setDialogsPage(1)
     }, [filter])
-
-
-    useEffect(() => {
-        if(token && currentChatId) {
-            service.getChatMedia(token, currentChatId).then(res => {
-              
-            })
-        }
-    }, [token, currentChatId])
 
 
     // !! подписка на события по сокету
@@ -296,38 +260,7 @@ const ChatLayout = () => {
             // })
         }
     }, [chatType, socketChannel, chatList, dialogsList, currentChatId])
-
-
-
-    // useEffect(() => {
-    //     socketChannel && socketChannel?.listen(socketEvents?.eventChatReadMessage, (data: any) => {
-    //         setNewRead(data)  
-    //     })
-    //     socketChannel && socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
-    //         setNewMsg(data)
-    //     })
-    // }, [socketChannel])
-
-    // useEffect(() => {
-    //     if(newRead) {
-    //         onUpdateChat && onUpdateChat({
-    //             messageBody: newRead?.chat_message, 
-    //             dialogBody: {...newRead?.chat_list_item, another_user: newRead?.chat_message?.recepient_user, self_user: newRead?.chat_message?.sender_user, last_message: newRead?.chat_message}
-    //         }, 'read')
-    //     }
-    // }, [newRead])
-
-    // useEffect(() => {
-    //     if(newMsg) {
-    //         onUpdateChat && onUpdateChat({
-    //             messageBody: newMsg?.chat_message, 
-    //             dialogBody: {...newMsg?.chat_list_item, another_user: newMsg?.chat_message?.recepient_user, self_user: newMsg?.chat_message?.sender_user, last_message: newMsg?.chat_message}
-    //         }, 'read')
-    //     }
-    // }, [newMsg])
-
     
-
     const onDeleteDialog = (dialogId: number | string) => {
         if(dialogId && token) {
             service.deleteChat(token, Number(dialogId)).then(res => {
@@ -358,18 +291,11 @@ const ChatLayout = () => {
         }
     }
 
-    useEffect(() => console.log(dialogsList[0]),[dialogsList])
-
     const onUpdateChat = (body: {
         messageBody?: any,
         dialogBody?:any
     }, type: 'read' | 'new' = 'new') => {
-        // ?? В САМОМ ЧАТЕ
         if(body?.dialogBody && body?.messageBody) {
-
-
-
-            // TODO Если выбран ЧАТ
             if(chatType === 'chat') {
                 if(type === 'read') {
                     if(chatList?.length > 0 && dialogsList?.length > 0) {
@@ -402,11 +328,9 @@ const ChatLayout = () => {
                             })
                         }
                     }
-                    
                 } else {
                     // ?? обновление чата
-                    if(currentChatId == body?.dialogBody?.id) {
-                                        
+                    if(currentChatId == body?.dialogBody?.id) {           
                         const foundMessage = chatList?.find(s =>  s?.id == body?.messageBody?.id)
                         if(currentChatId == body?.dialogBody?.id) {
                      
@@ -491,8 +415,6 @@ const ChatLayout = () => {
                                         onFilterChange={setFilter}
                                         activeType={chatType}
                                         onTypeChange={setChatType}
-
-                                        // tabsBadgeCount={}
                                         />
                                 </div>
                             </Col>
@@ -524,9 +446,7 @@ const ChatLayout = () => {
                             updateChatListPage={setChatListPage}
                             updateDialogsList={setDialogsList}
                                          
-
                             onUpdateChat={onUpdateChat}
-                            // !!тестовый проп
                             
                             ChatType={chatType}
                             loadMain={loadMain}
@@ -538,7 +458,6 @@ const ChatLayout = () => {
                             dialogSearch={dialogSearch}
                             setDialogSearch={setDialogSearch}
                             updateChatList={setChatList}
-                            
                             />
                     </div>
                 </Col>

@@ -1,4 +1,3 @@
-import { Cookies } from "typescript-cookie";
 import LOCAL_STORAGE from "@/helpers/localStorage";
 const checkAuth = (res: any) => {
     if(res?.status === 401) {
@@ -8,7 +7,5 @@ const checkAuth = (res: any) => {
     } else {
         return res?.json()
     } 
-
 }
-
 export default checkAuth;

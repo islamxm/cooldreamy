@@ -54,7 +54,6 @@ const MailItem:FC<IMail> = ({
 
     useEffect(() => {
         if(status === 'unread' && id && inView && !isSelf) {
-            console.log('READ')
             if(token) {
                 service.readMail({letter_message_id: Number(id)}, token).then(res => {
                     if(res?.message === 'success') {
@@ -85,15 +84,15 @@ const MailItem:FC<IMail> = ({
                 return  (
                     <div className={styles.content_text}>
                         {
-                            text ? (
+                            text && (
                                 <div className={styles.text_body}>
                                     {text}
                                 </div>
-                            ) : null
+                            )
                         }
                         {
                             isSelf ? (
-                                images?.length > 0 ? (
+                                images?.length > 0 && (
                                     <FancyboxWrapper>
                                         <div className={styles.media}>
                                             {images?.map((item, index) => (
@@ -109,10 +108,10 @@ const MailItem:FC<IMail> = ({
                                             ))}
                                         </div>
                                     </FancyboxWrapper>
-                                ) : null
+                                )
                             ) : (
                                 isPayed ? (
-                                    images?.length > 0 ? (
+                                    images?.length > 0 && (
                                         <FancyboxWrapper>
                                             <div className={styles.media}>
                                                 {images?.map((item, index) => (
@@ -142,9 +141,9 @@ const MailItem:FC<IMail> = ({
                                             </div>
                                         </FancyboxWrapper>
                                         
-                                    ) : null
+                                    )
                                 ) : (
-                                    images?.length > 0 ? (
+                                    images?.length > 0 && (
                                         <div className={styles.media}>
                                             {images?.map((item, index) => (
                                                 <div className={styles.item} key={index}>
@@ -158,18 +157,12 @@ const MailItem:FC<IMail> = ({
                                                 </div>
                                             ))}
                                         </div>
-                                    ) : null
+                                    )
                                 )
                             )
                         }
-                        
-                        
                     </div>
                 )
-            // case chatMessageTypeVariants?.letterGift:
-            //     return (
-
-            //     )
             default:
                 return null
     
@@ -177,17 +170,16 @@ const MailItem:FC<IMail> = ({
     }
 
 
-    const openMail = () => {
-        if(token && id) {
-            setOpenLoad(true)
-            service.mailOpenPay({letter_text_message_id: id}, token).then(res => {
-                // console.log(res)
-                console.log(res)
-            }).finally(() => {
-                setOpenLoad(false)
-            })
-        }        
-    }
+    // const openMail = () => {
+    //     if(token && id) {
+    //         setOpenLoad(true)
+    //         service.mailOpenPay({letter_text_message_id: id}, token).then(res => {
+
+    //         }).finally(() => {
+    //             setOpenLoad(false)
+    //         })
+    //     }        
+    // }
 
 
     return (
@@ -220,14 +212,12 @@ const MailItem:FC<IMail> = ({
                     {switchMessageType(type)}
                 </div>
                 {
-                    isPayed || isSelf ? (
-                        null
-                    ) : (
+                    !(isPayed || isSelf) && (
                         <div className={styles.action}>
                             <div className={styles.item}>
-                                <button onClick={openMail} className={styles.open}>Open mail</button>
+                                <button className={styles.open}>Open mail</button>
                             </div>
-                        </div>
+                        </div>   
                     )
                 }
                 {

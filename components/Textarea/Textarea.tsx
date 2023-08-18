@@ -9,7 +9,10 @@ const Textarea:FC<TextareaPropsType> = (props) => {
 
 
     return (
-        <textarea style={{...props.style, height, resize:resize ? 'vertical' : 'none'}} {...props} className={styles.wrapper}/>
+        <textarea 
+            style={{...props.style, height, resize:resize ? 'vertical' : 'none'}} 
+            {...props} 
+            className={styles.wrapper}/>
     )
 }
 

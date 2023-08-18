@@ -8,7 +8,6 @@ import UserInfo from "@/pageModules/profile/components/UserInfo/UserInfo";
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import UserCardMob from "@/pageModules/profile/components/UserCardMob/UserCardMob";
 import { useWindowSize } from "usehooks-ts";
-import Navbar from "@/components/Navbar/Navbar";
 
 const Profile = () => {
     const {userData, locale} = useAppSelector(s => s)

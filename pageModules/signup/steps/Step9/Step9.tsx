@@ -18,25 +18,17 @@ const Step9:FC<I> = ({
     const [file, setFile] = useState<File | null>(null)
     const [editModal, setEditModal] = useState(false)
 
-
     useEffect(() => {
         if(file) {
             setEditModal(true)
         }
     }, [file])
 
-
-
     const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(e.target.files !== null ) {
             setFile(e.target.files[0])
         }
     }
-
-
-    
-
-
 
     return (
         <motion.div 

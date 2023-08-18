@@ -1,21 +1,16 @@
 import styles from './Step1.module.scss';
-import { FC, useEffect, useState } from 'react';
+import { FC} from 'react';
 import Input from '@/components/Input/Input';
 import { Row, Col } from 'antd';
-import {RxCalendar} from 'react-icons/rx';
 import SelectSex from '@/components/SelectSex/SelectSex';
 import Link from 'next/link';
 import {motion} from 'framer-motion';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
-import BthPicker from '@/components/BthPicker/BthPicker';
 import moment from 'moment';
-import SelectDef from '@/components/SelectDef/SelectDef';
 import BirthdaySelect from '../../components/BirthdaySelect/BirthdaySelect';
 import BirthdaySelectMob from '../../components/BirthdaySelectMob/BirthdaySelectMob';
 import { useWindowSize } from 'usehooks-ts';
-
-const service = new ApiService()
 
 interface IStep1 {
     email: string,
@@ -107,20 +102,11 @@ const Step1:FC<IStep1> = ({
                             }
                             <Col span={24}>
                                 {
-                                    token ? (
-                                        null
-                                    ) : (
-                                        
+                                    token && (
                                             width <= 768 ? (
                                                 <BirthdaySelectMob
                                                     minAge={18}
                                                     maxAge={70}
-                
-                                                    // initYear={birthday && !Number.isNaN(moment(birthday).get('year')) ? moment(birthday).get('year') : undefined}
-                                                    // initMonth={birthday && !Number.isNaN(moment(birthday).get('month')) ? moment(birthday).get('month') + 1 : undefined}
-                                                    // initDay={birthday && !Number.isNaN(moment(birthday).get('D')) ? moment(birthday).get('D') : undefined}
-        
-        
                                                     setValue={setBirthday}
                                                     value={birthday}
                                                     />
@@ -135,12 +121,8 @@ const Step1:FC<IStep1> = ({
                                                     initDay={birthday && !Number.isNaN(moment(birthday).get('D')) ? moment(birthday).get('D') : undefined}
                                                     />
                                             )
-                                        
                                     )
                                 }
-                                
-                                
-                               
                             </Col>
                         </Row>
                     </Col>
