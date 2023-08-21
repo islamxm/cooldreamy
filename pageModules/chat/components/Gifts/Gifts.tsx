@@ -40,7 +40,6 @@ const Gifts = ({
 
 
     const selectItem = (type: 'remove' | 'add', id: number) => {
-        console.log(type)
         if(type === 'add') {
             setSelected(s => [...s, id])
         }

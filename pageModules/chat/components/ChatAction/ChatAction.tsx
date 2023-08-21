@@ -89,7 +89,7 @@ const ChatAction = ({
                         letter_id: Number(query?.id),
                         sticker_id: id
                     }, token).then(res => {
-                        console.log(res)
+
                         if(res?.error) {
                             // !! ERROR
                         } else {

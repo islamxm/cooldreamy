@@ -86,7 +86,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const dispatch = useAppDispatch()
     const {width} = useWindowSize()
     const {query: {id}} = useRouter()
-    const {token, actionsPricing, locale, userData} = useAppSelector(s => s)
+    const {token, actionsPricing, locale, userData, userId} = useAppSelector(s => s)
     const [pb, setPb] = useState<number>(70)
     const [promptModal, setPromptModal] = useState(false)
     const [reportModal, setReportModal] = useState(false)
@@ -162,7 +162,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const sendGiftMessage = (gifts: string) => {
         if(gifts && token && activeDialogId && ChatType) {
             if(ChatType === 'chat') {
-                service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts}, token).then(res => {
+                service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts, user_id: userId}, token).then(res => {
                     if(res?.error) {
                         dispatch(updateLimit({
                             open: true,

@@ -1,6 +1,6 @@
 import styles from './MenuItem.module.scss';
 import { menuItemType } from '../../types';
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import Link from 'next/link';
 
 
@@ -13,12 +13,11 @@ const MenuItem:FC<menuItemType> = ({
     badge
 }) => {
 
-
     if(link) {
         return (
             <Link href={link} className={`${styles.item} ${isActive ? styles.active : ''}`}>
                 {
-                    badge && (
+                    Number(badge) > 0 && (
                         <div className={styles.badge}>{badge < 100 ? badge : `${99}+`}</div>
                     )
                 }
@@ -34,9 +33,9 @@ const MenuItem:FC<menuItemType> = ({
                 onClick={onClick}
                 className={styles.item}>
                 {
-                    badge && (
+                    Number(badge) > 0 && (
                         <div className={styles.badge}>{badge < 100 ? badge : `${99}+`}</div>
-                    ) 
+                    )
                 }
                 <div className={styles.icon}>
                     {icon}
