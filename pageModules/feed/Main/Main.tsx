@@ -9,7 +9,6 @@ import Card from './components/Card/Card';
 import ApiService from '@/service/apiService';
 import img from '@/public/assets/images/girl-big.png';
 import { AnimatePresence } from 'framer-motion';
-import CreateChatModal from '@/components/CreateChatModal/CreateChatModal';
 import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
