@@ -106,8 +106,10 @@ function App({ Component, pageProps }: AppProps) {
 				<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 			</Head>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
-				<PrivateRoute>
-					<MainWrapper>
+				{/* <PrivateRoute>
+					
+				</PrivateRoute> */}
+				<MainWrapper>
 							
 							<AnimatePresence>
 								{wc && <WcLoader/>}
@@ -142,7 +144,6 @@ function App({ Component, pageProps }: AppProps) {
 								&& <Footer/>
 							}
 						</MainWrapper>	
-				</PrivateRoute>
 			</ConfigProvider>
 
 		</Provider>

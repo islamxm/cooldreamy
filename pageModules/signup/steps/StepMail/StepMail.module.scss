@@ -1,3 +1,41 @@
 .wrapper {
+  .head {
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+
+    .title {
+      font-size: 24px;
+    }
+
+    .subtitle {
+      color: rgba(53, 53, 53, 0.70);
+      line-height: 25px;
+      font-size: 18px;
+    }
+  }
+
+  .body {
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
+
+    .label {
+      color: rgba(53, 53, 53, 0.50);
+      font-size: 18px;
+    }
+
+    .value {
+      font-size: 18px;
+    }
+
+  }
+
+  .action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
+  }
 }

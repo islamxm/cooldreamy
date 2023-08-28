@@ -27,6 +27,8 @@ const Main = () => {
     const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
     const [secretKey, setSecretKey] = useState<string>('')
     const [load, setLoad] = useState<boolean>(false)
+
+    
     
 
     const getPrem = () => {

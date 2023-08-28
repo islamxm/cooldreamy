@@ -1,15 +1,18 @@
 import styles from './StepMail.module.scss';
 import {motion} from 'framer-motion';
 import {Row, Col} from 'antd'
-
-
+import Button from '@/components/Button/Button';
+import { useAppSelector } from '@/hooks/useTypesRedux';
+import { FC } from 'react';
+import { useWindowSize } from 'usehooks-ts';
 interface I {
     email?: string,   
 }
 
-const StepMail = ({
-
+const StepMail:FC<I> = ({
+    email
 }) => {
+    const {width} = useWindowSize()
 
     return (
         <motion.div 
@@ -35,10 +38,18 @@ const StepMail = ({
                 <Col span={24}>
                     <div className={styles.body}>
                         <div className={styles.label}>Письмо отправлено на</div>
-                        <div className={styles.value}>forexample@email.com</div>
+                        <div className={styles.value}>{email}</div>
                     </div>
                 </Col>
-                <Col span={24}></Col>
+                <Col span={24}>
+                    <div className={styles.action}>
+                        <Button
+                            middle={width <= 768}
+                            onClick={() => window.open(`https://${email?.split('@')[1]}`)}
+                            text='Перейти в почту'
+                            />
+                    </div>
+                </Col>
             </Row>
 
 

@@ -43,7 +43,7 @@ const Body:FC = () => {
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(11)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -51,7 +51,6 @@ const Body:FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
-
     const [sex, setSex] = useState<'male' | 'female'>('male')
     const [about, setAbout] = useState('')
     const [birthday, setBirthday] = useState<any>()
@@ -65,13 +64,11 @@ const Body:FC = () => {
 
     const [registered, setRegistered] = useState(false)
 
-
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
         name: [],
         email: [],
         password: []
     })
-
 
     useEffect(() => {
         service.getLocation().then(res => {
@@ -80,14 +77,12 @@ const Body:FC = () => {
         })
     }, [])
 
-
     useEffect(() => {
         if(router?.query?.gender && typeof router?.query?.gender === 'string' && (router?.query?.gender === 'male' || router?.query?.gender === 'female')) {
             setSex(router?.query?.gender)
         }
     }, [router])
 
-    
     const [prompt_targets, setPrompt_targets] = useState([])
     const [prompt_interests, setPrompt_interests] = useState([])
     const [prompt_finance_states, setPrompt_finance_states] = useState([])
@@ -128,8 +123,6 @@ const Body:FC = () => {
                 setPrompt_relationships(res?.prompt_relationships?.map((i:any) => ({...i, icon: setIconsSg('rl', i?.id)})))
             })
         }
-        
-        
     }, [token, router])
 
 
@@ -173,6 +166,8 @@ const Body:FC = () => {
                 return <Step9 nextStep={() => setCurrentStep(s => s + 1)}/>
             case 10:
                 return <Step10 about={about} setAbout={setAbout}/>
+            case 11:
+                return <StepMail email={email}/>
             // case 11:
             //     return <StepMail/>
             default:
@@ -249,11 +244,11 @@ const Body:FC = () => {
           
         }
      
-        if(currentStep > 0 && currentStep < 10) {
+        if(currentStep > 0 && currentStep < 11) {
             setCurrentStep(s => s + 1)
         }
-      
-        if(currentStep === 10) {
+        
+        if(currentStep === 11) {
             setLoad(true)
             const updateBody: IUser = {
                 prompt_careers: `[${selectedCareers?.join(',')}]`,
@@ -401,7 +396,7 @@ const Body:FC = () => {
                                 <div className={styles.panel}>
                                     <div className={styles.head}>
                                         <StepLine
-                                            total={11}
+                                            total={12}
                                             currentIndex={currentStep}
                                             />
                                     </div>
