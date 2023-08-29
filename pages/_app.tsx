@@ -106,44 +106,43 @@ function App({ Component, pageProps }: AppProps) {
 				<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 			</Head>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
-				{/* <PrivateRoute>
-					
-				</PrivateRoute> */}
-				<MainWrapper>
-							
-							<AnimatePresence>
-								{wc && <WcLoader/>}
-							</AnimatePresence>
-							<ToastContainer limit={width <= 768 ? 1 : 5}/>
-							{/* {
-								width <= 768 && router?.pathname?.includes('/chat') && router?.query?.id ? (
-									null
-								) : (
-									router?.pathname === '/unavailable' ? null : <Header auth={true}/>
-								)
-							} */}
-							{
-								(width > 768 
-								&& !router?.pathname?.includes('/chat') 
-								&& !router?.query?.id && router?.pathname !== '/unavailable') 
-								&& <Header/>
-							}
-							<main><Component {...pageProps} /></main>
-							<Navbar/>
-							{/* {
-								width <= 768 && router?.pathname?.includes('/chat') ? (
-									null
-								) : (
-									router?.pathname === '/unavailable' ? null : <Footer/>
-								)
-							} */}
-							{
-								(width > 768 
-								&& !router?.pathname?.includes('/chat') 
-								&& router?.pathname !== '/unavailable' )
-								&& <Footer/>
-							}
-						</MainWrapper>	
+				<PrivateRoute>
+					<MainWrapper>	
+						<AnimatePresence>
+							{wc && <WcLoader/>}
+						</AnimatePresence>
+						<ToastContainer limit={width <= 768 ? 1 : 5}/>
+						{/* {
+							width <= 768 && router?.pathname?.includes('/chat') && router?.query?.id ? (
+								null
+							) : (
+								router?.pathname === '/unavailable' ? null : <Header auth={true}/>
+							)
+						} */}
+						{
+							(width > 768 
+							&& !router?.pathname?.includes('/chat') 
+							&& !router?.query?.id && router?.pathname !== '/unavailable') 
+							&& <Header/>
+						}
+						<main><Component {...pageProps} /></main>
+						<Navbar/>
+						{/* {
+							width <= 768 && router?.pathname?.includes('/chat') ? (
+								null
+							) : (
+								router?.pathname === '/unavailable' ? null : <Footer/>
+							)
+						} */}
+						{
+							(width > 768 
+							&& !router?.pathname?.includes('/chat') 
+							&& router?.pathname !== '/unavailable' )
+							&& <Footer/>
+						}
+					</MainWrapper>		
+				</PrivateRoute>
+				
 			</ConfigProvider>
 
 		</Provider>
