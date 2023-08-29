@@ -45,6 +45,10 @@ const Button: FC<ButtonPropsTypes> = ({
                 return styles.gold
             case 'green':
                 return styles.green
+            case 'black':
+                return styles.black
+            default:
+                return styles.default
         }
     }
 

@@ -126,14 +126,13 @@ const SearchFilter:FC<searchFilterType> = ({
                             }
                             <div className={styles.item}>
                                 <SelectDef
-                                    // disabled={premiumData?.is_premium === 1}
                                     list={targetList}
                                     onChange={(e, v) => {
                                         premiumData?.is_premium === true ? 
                                         setprompt_target_id && setprompt_target_id(e) :
                                         setLimitModal(true)
                                     }}
-                                    placeholder={'Не указано'}
+                                    placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_target.label}
                                     width={230}
                                     multiple
@@ -149,7 +148,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                         setLimitModal(true)
                                     }}
                                     
-                                    placeholder={'Не указано'}
+                                    placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_finance.label}
                                     width={230}
                                     multiple
@@ -171,17 +170,6 @@ const SearchFilter:FC<searchFilterType> = ({
                                     </div>
                                 )
                             }
-                            {/* <div className={styles.action_item}>
-                                <Button
-                                    load={load}
-                                    onClick={() => {
-                                        // onSearch && onSearch()
-                                        // console.log(onSearch)
-                                        setCurrentPage && setCurrentPage(0)
-                                    }} 
-                                    style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px'}} 
-                                    text={locale?.searchPage.filter.action.search_btn ?? ''}/>
-                            </div> */}
                         </div>
                     </div>
                 </Col>
@@ -193,15 +181,6 @@ const SearchFilter:FC<searchFilterType> = ({
                                 <div className={styles.list}>
                                     
                                 </div>
-                                {/* <div className={styles.action}>
-                                    <div className={styles.item}>
-                                        <button 
-                                            onClick={clearFilter}
-                                            className={styles.reset}>
-                                            Очистить
-                                        </button>
-                                    </div>
-                                </div> */}
                             </div>
                         </Col>
                     )

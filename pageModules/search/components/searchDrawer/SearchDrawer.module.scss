@@ -48,6 +48,12 @@
 
         .body {
             margin-bottom: 25px;
+
+            .item.disabled {
+                pointer-events: none;
+                touch-action: none;
+                opacity: .5;
+            }
         }
 
         .action {

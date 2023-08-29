@@ -16,7 +16,9 @@ import {
 	incSympLikes, 
 	updatePremiumData, 
 	inccreaseUnreadMailCount, 
-	updateUnreadMailCount 
+	updateUnreadMailCount, 
+	updatePremModal,
+	updateSubsModal
 } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
@@ -34,7 +36,8 @@ import styles from './MainWrapper.module.scss';
 import socketEvents from '@/helpers/socketEvents';
 import UserTitle from '../UserTitle/UserTitle';
 import Link from 'next/link';
-// import UAParser from 'ua-parser-js';
+import PremModal from '@/popups/PremModal/PremModal';
+import SubsModal from '@/popups/SubsModal/SubsModal';
 
 const service = new ApiService()
 
@@ -44,7 +47,20 @@ const MainWrapper = ({
 }: {children?: React.ReactNode}) => {
 	const {locale, pathname, push, asPath, query} = useRouter()
 	const dispatch = useAppDispatch()
-    const {token, userId, socketChannel, userData, currentProfileId, limit, unreadChatCount, newMessage, newMail, soonModal} = useAppSelector(s => s);
+    const {
+			token, 
+			userId, 
+			socketChannel, 
+			userData, 
+			currentProfileId, 
+			limit, 
+			unreadChatCount, 
+			newMessage, 
+			newMail, 
+			soonModal,
+			premModal,
+			subsModal
+		} = useAppSelector(s => s);
 	const lc = useAppSelector(s => s.locale)
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
@@ -275,6 +291,14 @@ const MainWrapper = ({
 					link: limit?.data?.action?.link
 				}}
 				onCancel={() => dispatch(updateLimit({open: false}))}
+				/>
+			<PremModal 
+				open={premModal}
+				onCancel={() => dispatch(updatePremModal(false))}
+				/>
+			<SubsModal
+				open={subsModal}
+				onCancel={() => dispatch(updateSubsModal(false))}
 				/>
 			<ProfileModal
 				onCancel={() => dispatch(updateCurrentProfileId(null))}

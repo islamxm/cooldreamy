@@ -4,12 +4,12 @@ import IconButton from '@/components/IconButton/IconButton';
 import {GrClose} from 'react-icons/gr';
 import {Row, Col} from 'antd';
 import SelectDef from '@/components/SelectDef/SelectDef';
-import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import Button from '@/components/Button/Button';
 import { searchFilterType } from '../searchFilter/types';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import LimitModal from '@/popups/LimitModal/LimitModal';
 import defCountryList from '@/helpers/defCountryList';
+import getClassNames from '@/helpers/getClassNames';
 
 interface I extends searchFilterType {
     isOpen: boolean,
@@ -94,24 +94,10 @@ const SearchDrawer:FC<I> = ({
                                         setCountry(v)
                                     }}
                                     onClear={clearStates}
-                                    // list={countries}
                                     list={defCountryList}
                                     />
                             </Col>
                             <Col span={12}>
-                                {/* {
-                                    states?.length > 0 ? (
-                                        <SelectDef
-                                                label='Город'
-                                    
-                                                onChange={(e, v) => {
-                                                    setState(v)
-                                                }}
-                                                placeholder='Город'
-                                                list={states}
-                                                />
-                                    ) : null
-                                } */}
                                 {
                                     states?.length > 0 && (
                                         <div className={styles.item}>
@@ -131,6 +117,20 @@ const SearchDrawer:FC<I> = ({
                                     
                                     )
                                 }
+                                <div className={getClassNames([styles.item, states?.length === 0 && styles.disabled ])}>
+                                    <SelectDef
+                                        label={locale?.searchPage.filter.list.filter_state.label}
+                                        // width={230}
+                                        onChange={(e, v) => {
+                                            setState(v)
+                                        }}
+                                        placeholder={locale?.searchPage.filter.list.filter_state.placeholder ?? ''}
+                                        list={states}
+                                        onClear={() => {
+                                            setState('')
+                                        }}
+                                        />
+                                </div>
                             </Col>
                             <Col span={12}>
                                 <SelectDef
@@ -141,7 +141,7 @@ const SearchDrawer:FC<I> = ({
                                         setprompt_target_id && setprompt_target_id(e) :
                                         setLimitModal(true)
                                     }}
-                                    placeholder={'Не указано'}
+                                    placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_target.label}
                                     // width={230}
                                     multiple
@@ -157,25 +157,12 @@ const SearchDrawer:FC<I> = ({
                                         setLimitModal(true)
                                     }}
                                     
-                                    placeholder={'Не указано'}
+                                    placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_finance.label}
                                     // width={230}
                                     multiple
                                     customIcon={true}
                                     /> 
-                            </Col>
-                            <Col span={12}>
-                                <RangeSlider
-                                    min={18}
-                                    max={70}
-                                    onChange={e => {
-                                        setage_range_start && setage_range_start(e[0])
-                                        setage_range_end && setage_range_end(e[1])
-                                    }}
-                                    range={true}
-                                    value={[age_range_start,age_range_end]}    
-                                    label={locale?.searchPage.filter.list.filter_age.label}
-                                    />
                             </Col>
                         </Row>
                     </div>
@@ -187,7 +174,6 @@ const SearchDrawer:FC<I> = ({
                                         text={locale?.searchPage.filter.action.search_btn ?? ''}
                                         middle
                                         onClick={() => {
-                                            // onSearch && onSearch()
                                             setCurrentPage && setCurrentPage(0)
                                             onClose()
                                         }}

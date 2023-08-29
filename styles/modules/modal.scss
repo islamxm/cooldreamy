@@ -18,3 +18,9 @@
         background-color: var(--light_purp_1);
     }
 }
+
+.modal.no-close-icon {
+    .ant-modal-close {
+        display: none;
+    }
+}

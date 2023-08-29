@@ -22,10 +22,9 @@ interface cropModalPropsType extends modalPropsType {
     initCategory?: number
 }
 
-
 const imageCats:{id: number, text: string, disabled?: boolean}[] = [
-    {id: 1, text: 'Аватар', disabled: true},
-    {id: 2, text: 'Публичная картинка', disabled: false},
+    {id: 1, text: 'Avatar', disabled: true},
+    {id: 2, text: 'Public', disabled: false},
     // {id: 3, text: 'Приватная картинка', disabled: true},
     // {id: 4, text: '18+', disabled: true},
     // {id: 5, text: 'Профиль', disabled: true}

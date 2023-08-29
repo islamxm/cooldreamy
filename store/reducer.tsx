@@ -49,7 +49,10 @@ export interface IGlobalState {
 
     premiumData: {
         is_premium: boolean,
-    }
+    },
+
+    premModal: boolean,
+    subsModal: boolean
 }
 
 
@@ -79,7 +82,9 @@ export const globalState: IGlobalState = {
     },
     premiumData: {
         is_premium: false
-    }
+    },
+    premModal: false,
+    subsModal: false
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -224,6 +229,16 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 premiumData: action.data
+            }
+        case 'UPDATE_PREM_MODAL':
+            return {
+                ...state,
+                premModal: action.data
+            }
+        case 'UPDATE_SUBS_MODAL':
+            return {
+                ...state,
+                subsModal: action.data
             }
         default:
             return state;

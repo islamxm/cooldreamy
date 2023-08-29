@@ -32,7 +32,7 @@ if(process?.browser) {
 	// screen.orientation.lock('portrait')
 }
 
-
+process?.browser && screen.orientation.lock('portrait')
 
 
 
