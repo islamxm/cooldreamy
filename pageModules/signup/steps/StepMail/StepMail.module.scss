@@ -20,6 +20,7 @@
     max-width: 460px;
     width: 100%;
     margin: 0 auto;
+    border-bottom: 1px solid var(--gray);
 
     .label {
       color: rgba(53, 53, 53, 0.50);
@@ -27,9 +28,46 @@
     }
 
     .value {
-      font-size: 18px;
+      font-size: 22px;
+      line-height: 22px;
+      font-weight: 600;
+      color: var(--violet);
     }
 
+  }
+
+  .ex {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+
+
+    .ex_title {
+      text-align: center;
+      //font-weight: 600;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .ex_part {
+      display: flex;
+      align-items: flex-start;
+
+      .ex_icon {
+        flex: 0 0 auto;
+        border: 1px solid var(--violet);
+        border-radius: 100%;
+        width: 60px;
+        height: 60px;
+      }
+
+      .ex_text {
+        padding-left: 10px;
+        font-size: 18px;
+
+
+      }
+    }
   }
 
   .action {

@@ -412,7 +412,7 @@ const Body:FC = () => {
                                                         middle={width <= 768}
                                                         onClick={stepChange}
                                                         disabled={btnDisable}
-                                                        text={currentStep === 10 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
+                                                        text={currentStep === 11 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
                                                         />
                                                 </div>
                                             </Col>

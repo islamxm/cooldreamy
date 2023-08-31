@@ -31,14 +31,47 @@ const StepMail:FC<I> = ({
             <Row gutter={[25,25]}>
                 <Col span={24}>
                     <div className={styles.head}>
-                        <div className={styles.title}>Подтвердите электронную почту</div>
-                        <div className={styles.subtitle}>Подтверждение позволит смотреть фото пользователей и откроет больше возможностей сайта</div>
+                        <div className={styles.title}>Email Confirmation</div>
+                        <div className={styles.subtitle}>Confirm your email to be able to message users.</div>
                     </div>
                 </Col>
                 <Col span={24}>
                     <div className={styles.body}>
-                        <div className={styles.label}>Письмо отправлено на</div>
+                        <div className={styles.label}>Email has been sent to</div>
                         <div className={styles.value}>{email}</div>
+                    </div>
+                </Col>
+                <Col span={24}>
+                    <div className={styles.ex}>
+                        <div className={styles.ex_title}>Didn&quot;t get the email?</div>
+                        <div className={styles.ex_body}>
+                            <Row gutter={[10,10]}>
+                                <Col span={24}>
+                                    <div className={styles.ex_part}>
+                                        <div className={styles.ex_icon}></div>
+                                        <div className={styles.ex_text}>
+                                            <b>Check your Spam folder</b> — sometimes our emails might accidentally end up there.
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col span={24}>
+                                    <div className={styles.ex_part}>
+                                        <div className={styles.ex_icon}></div>
+                                        <div className={styles.ex_text}>
+                                            <b>Change your email</b> — if you&quot;ve made a typo or want to use a different email, you can update it.
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col span={24}>
+                                    <div className={styles.ex_part}>
+                                        <div className={styles.ex_icon}></div>
+                                        <div className={styles.ex_text}>
+                                            <b>Resend email</b> — we can also resend the verification email.
+                                        </div>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
                     </div>
                 </Col>
                 <Col span={24}>
@@ -46,7 +79,7 @@ const StepMail:FC<I> = ({
                         <Button
                             middle={width <= 768}
                             onClick={() => window.open(`https://${email?.split('@')[1]}`)}
-                            text='Перейти в почту'
+                            text='Go to email'
                             />
                     </div>
                 </Col>
