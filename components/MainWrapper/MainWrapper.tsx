@@ -113,8 +113,8 @@ const MainWrapper = ({
 			setPusherConfig(
 				{
 					key: 's3cr3t',
-					wsHost: TEST_WS_HOST,
-					authEndpoint: TEST_DOMAIN + 'broadcasting/auth',
+					wsHost: BASE_WS_HOST,
+					authEndpoint: BASE_DOMAIN + 'broadcasting/auth',
 					cluster: 'mt1',
 					encrypted: true,
 					forceTLS: false,
@@ -151,11 +151,11 @@ const MainWrapper = ({
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {
 				// notify(lc?.global?.notifications?.success_socket, 'SUCCESS')
-				console.log('[WebSocket]: CONNECTED')
+				alert('[WebSocket]: CONNECTED')
 			})
 			channels?.error(() => {
 				// notify(lc?.global?.notifications?.error_socket, 'ERROR')
-				console.log('[WebSocket]: DISCONNECTED')
+				alert('[WebSocket]: DISCONNECTED')
 			})
 		}
 	}, [pusherConfig, userId, socketChannel])
