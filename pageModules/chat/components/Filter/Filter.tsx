@@ -72,11 +72,11 @@ const Filter:FC<IChatFilterType & I> = ({
             badge: unreadChatCount,
             label: locale?.chatPage.type_tabs.chat ?? ''
         },
-        {
-            id: '2',
-            badge: unreadMailCount,
-            label: locale?.chatPage.type_tabs.mail ?? ''
-        }
+        // {
+        //     id: '2',
+        //     badge: unreadMailCount,
+        //     label: locale?.chatPage.type_tabs.mail ?? ''
+        // }
     ]
 
     const switchActiveType = (type?: chatTabsType) => {

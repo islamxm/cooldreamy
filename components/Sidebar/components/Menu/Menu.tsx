@@ -31,14 +31,14 @@ const Menu = () => {
             badge: unreadChatCount,
             onClick: () => {},
         },
-        {
-            label: 'My Mails',
-            link: '/chat?type=mail',
-            root: '/chat',
-            icon: <IoMailOutline/>,
-            onClick: () => {},
-            badge: unreadMailCount
-        },
+        // {
+        //     label: 'My Mails',
+        //     link: '/chat?type=mail',
+        //     root: '/chat',
+        //     icon: <IoMailOutline/>,
+        //     onClick: () => {},
+        //     badge: unreadMailCount
+        // },
         {
             label: locale?.global.menu.feed ?? '',
             link: '/feed',
