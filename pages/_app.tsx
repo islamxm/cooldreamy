@@ -121,7 +121,7 @@ function App({ Component, pageProps }: AppProps) {
 						} */}
 						{
 							(width > 768 
-							&& !router?.pathname?.includes('/chat') 
+							// && !router?.pathname?.includes('/chat')
 							&& !router?.query?.id && router?.pathname !== '/unavailable') 
 							&& <Header/>
 						}

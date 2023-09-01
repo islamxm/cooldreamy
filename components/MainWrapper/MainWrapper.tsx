@@ -151,11 +151,11 @@ const MainWrapper = ({
 			dispatch(updateSocket(channels))
 			channels.subscribed(() => {
 				// notify(lc?.global?.notifications?.success_socket, 'SUCCESS')
-				alert('[WebSocket]: CONNECTED')
+				console.log('[WebSocket]: CONNECTED')
 			})
 			channels?.error(() => {
 				// notify(lc?.global?.notifications?.error_socket, 'ERROR')
-				alert('[WebSocket]: DISCONNECTED')
+				console.log('[WebSocket]: DISCONNECTED')
 			})
 		}
 	}, [pusherConfig, userId, socketChannel])

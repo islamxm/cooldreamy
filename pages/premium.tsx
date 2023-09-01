@@ -9,7 +9,7 @@ const PremiumPage = () => {
     const {width} = useWindowSize()
 
     useEffect(() => {
-        if(width <= 768) {
+        if(width <= 768 && width !== 0) {
             Router.replace('/deposit-mb')
         }
     }, [width])

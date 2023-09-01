@@ -134,9 +134,6 @@ const Main = () => {
                     return (
                       <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
                         <div
-                          onClick={() => {
-                            setSelectedPlan(i)
-                          }}
                           className={`${styles.item}`} key={index}>
                           {
                             i?.discount !== 0 && (
@@ -178,7 +175,11 @@ const Main = () => {
                             </div>
                           </div>
                           <div className={styles.action}>
-                            <Button 
+                            <Button
+                              onClick={() => {
+                                onAccept(i)
+                                goToPayment()
+                              }}
                               middle={width <= 768}
                               text='Buy' 
                               variant={'black'}/>
@@ -192,9 +193,6 @@ const Main = () => {
                     return (
                       <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
                         <div
-                          onClick={() => {
-                            setSelectedPlan(i)
-                          }}
                           className={`${styles.item} ${styles.pop}`}>
                           {
                             i?.discount !== 0 && (
@@ -234,7 +232,11 @@ const Main = () => {
                             </div>
                           </div>
                           <div className={styles.action}>
-                            <Button 
+                            <Button
+                              onClick={() => {
+                                onAccept(i)
+                                goToPayment()
+                              }}
                               middle={width <= 768}
                               text='Buy' 
                               variant={'white'}/>
@@ -247,10 +249,6 @@ const Main = () => {
                     return (
                       <div className={`${styles.item_wr} ${selectedPlan?.id == i?.id ? styles?.active : ''}`} key={i?.id}>
                         <div
-                          onClick={() => {
-
-                            setSelectedPlan(i)
-                          }}
                           className={`${styles.item} ${styles.dsc}`} key={index}>
                           {
                             i?.discount !== 0 && (
@@ -286,7 +284,11 @@ const Main = () => {
                             </div>
                           </div>
                           <div className={styles.action}>
-                            <Button 
+                            <Button
+                              onClick={() => {
+                                onAccept(i)
+                                goToPayment()
+                              }}
                               middle={width <= 768}
                               text='Buy' 
                               variant={'black'}/>
@@ -301,20 +303,20 @@ const Main = () => {
             </div>
           )
         }
-        {
-          selectedPlan && !secretKey && (
-            <div className={styles.buy}>
-              <Button
-                text={`${locale?.depositPage?.select_btn} ${selectedPlan?.price}$`}
-                onClick={() => {
-                  onAccept(selectedPlan)
-                  goToPayment()
-                }}
-                variant={width <= 1200 ? 'green' : 'default'}
-              />
-            </div>
-          )
-        }
+        {/*{*/}
+        {/*  selectedPlan && !secretKey && (*/}
+        {/*    <div className={styles.buy}>*/}
+        {/*      <Button*/}
+        {/*        text={`${locale?.depositPage?.select_btn} ${selectedPlan?.price}$`}*/}
+        {/*        onClick={() => {*/}
+        {/*          onAccept(selectedPlan)*/}
+        {/*          goToPayment()*/}
+        {/*        }}*/}
+        {/*        variant={width <= 1200 ? 'green' : 'default'}*/}
+        {/*      />*/}
+        {/*    </div>*/}
+        {/*  )*/}
+        {/*}*/}
       </div>
       <div className={styles.main}>
         <div className={styles.adv}>
