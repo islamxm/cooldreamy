@@ -132,7 +132,6 @@ const DepositPage = () => {
                 } else {
                     notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
-                
             }).finally(() => setLoad(false))
         }
        
