@@ -6,13 +6,13 @@ import { Cookies } from 'typescript-cookie';
 import { updateToken, updateUserId, updateSocket } from '@/store/actions';
 import UnvWrapper from './UnvWrapper';
 import LOCAL_STORAGE from '@/helpers/localStorage';
-
+import { useWindowSize } from 'usehooks-ts';
 const PrivateRoute = ({
     children
 }: {
     children: React.ReactElement<unknown, string | React.JSXElementConstructor<unknown>>;
 }) => {
-
+    const {width} = useWindowSize()
     const router = useRouter()
     const [auth, setAuth] = useState(false)
     const {token, socketChannel} = useAppSelector(s => s)
@@ -39,7 +39,11 @@ const PrivateRoute = ({
             } else {
                 setAuth(true)
                 if(router?.pathname === '/') {
-                    router?.push('/search')
+                    if(width <= 768) {
+                        Router.push('/sympathy')
+                    } else {
+                        Router.push('/search')
+                    }
                 } else {
                     return;
                 }
