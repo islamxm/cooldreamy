@@ -196,7 +196,7 @@ const MainWrapper = ({
 	useEffect(() => {
 		if(socketChannel) {
 			//?? получение сообщений
-            socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
+      socketChannel?.listen(socketEvents?.eventNewChatMessage, (data: any) => {
 				dispatch(updateNewMessage(data))
 				const avatar = data?.chat_message?.sender_user?.user_avatar_url;
 				const name = data?.chat_message?.sender_user?.name;
