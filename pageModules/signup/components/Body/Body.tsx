@@ -261,7 +261,6 @@ const Body:FC = () => {
             }
             if(token) {
                 service.updateMyProfile(updateBody, token).then(res => {
-                  
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
@@ -270,9 +269,11 @@ const Body:FC = () => {
                                 Router.push(`/search`)
                             } else Router.push(`/search`)
                         })
+
+                        service.signupEnd(token).finally(() => setLoad(false))
                     }
-                }).then(() => {
-                    service.signupEnd(token).finally(() => setLoad(false))
+                }).finally(() => {
+                  setLoad(false)  
                 })
             }
         }

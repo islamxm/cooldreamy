@@ -9,6 +9,7 @@ import Button from '@/components/Button/Button';
 import {motion} from 'framer-motion';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
+import { StatusCredits, StatusPremium, StatusVip } from '@/components/donateStatus/donateStatus';
 
 interface I extends IUser {
     children?: React.ReactNode
@@ -76,7 +77,7 @@ const UserCardMob:FC<I> = ({
             {
                 !children && (
                     <div className={styles.action}>
-                        <div className={styles.item}>
+                        {/* <div className={styles.item}>
                             <motion.button
                                 onClick={() => Router.push('/deposit')}
                                 whileTap={{scale: 0.9}} 
@@ -96,7 +97,18 @@ const UserCardMob:FC<I> = ({
                                     </motion.button>
                                 </div>
                             )
-                        } 
+                        }  */}
+                        <Row gutter={[10,10]}>
+                            <Col span={24}>
+                                <StatusPremium/>
+                            </Col>
+                            <Col span={24}>
+                                <StatusVip/>
+                            </Col>
+                            <Col span={24}>
+                                <StatusCredits/>
+                            </Col>
+                        </Row>
                     </div>
                 )
             }
