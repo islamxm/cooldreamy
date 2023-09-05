@@ -99,8 +99,7 @@ const GirlCard:FC<IUser> = ({
                 <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
                     <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                        // src={user_thumbnail_url ? replaceSpace(user_thumbnail_url)  : placeholder}
-                        src={placeholder}
+                        src={user_thumbnail_url ? replaceSpace(user_thumbnail_url)  : placeholder}
                         width={300}
                         height={300}
                         alt=""/>
