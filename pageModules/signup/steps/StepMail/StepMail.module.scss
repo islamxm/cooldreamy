@@ -55,10 +55,12 @@
 
       .ex_icon {
         flex: 0 0 auto;
-        border: 1px solid var(--violet);
         border-radius: 100%;
         width: 60px;
         height: 60px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
       }
 
       .ex_text {
@@ -66,6 +68,22 @@
         font-size: 18px;
 
 
+      }
+    }
+
+    .ex_part.first {
+      .ex_icon {
+        background-image: url('../../../../public/assets/icons/signup-email-1.svg');
+      }
+    }
+    .ex_part.second {
+      .ex_icon {
+        background-image: url('../../../../public/assets/icons/signup-email-2.svg');
+      }
+    }
+    .ex_part.third {
+      .ex_icon {
+        background-image: url('../../../../public/assets/icons/signup-email-3.svg');
       }
     }
   }

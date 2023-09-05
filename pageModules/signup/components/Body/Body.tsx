@@ -43,7 +43,7 @@ const Body:FC = () => {
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState(11)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP

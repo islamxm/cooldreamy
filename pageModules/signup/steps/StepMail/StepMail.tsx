@@ -5,6 +5,11 @@ import Button from '@/components/Button/Button';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { FC } from 'react';
 import { useWindowSize } from 'usehooks-ts';
+import img1 from '@/public/assets/icons/signup-email-1.svg'
+import img2 from '@/public/assets/icons/signup-email-2.svg'
+import img3 from '@/public/assets/icons/signup-email-3.svg'
+import getClassNames from '@/helpers/getClassNames';
+
 interface I {
     email?: string,   
 }
@@ -47,7 +52,7 @@ const StepMail:FC<I> = ({
                         <div className={styles.ex_body}>
                             <Row gutter={[10,10]}>
                                 <Col span={24}>
-                                    <div className={styles.ex_part}>
+                                    <div className={getClassNames([styles.ex_part, styles.first])}>
                                         <div className={styles.ex_icon}></div>
                                         <div className={styles.ex_text}>
                                             <b>Check your Spam folder</b> — sometimes our emails might accidentally end up there.
@@ -55,16 +60,16 @@ const StepMail:FC<I> = ({
                                     </div>
                                 </Col>
                                 <Col span={24}>
-                                    <div className={styles.ex_part}>
-                                        <div className={styles.ex_icon}></div>
+                                    <div className={getClassNames([styles.ex_part, styles.second])}>
+                                    <div className={styles.ex_icon}></div>
                                         <div className={styles.ex_text}>
                                             <b>Change your email</b> — if you&quot;ve made a typo or want to use a different email, you can update it.
                                         </div>
                                     </div>
                                 </Col>
                                 <Col span={24}>
-                                    <div className={styles.ex_part}>
-                                        <div className={styles.ex_icon}></div>
+                                    <div className={getClassNames([styles.ex_part, styles.third])}>
+                                    <div className={styles.ex_icon}></div>
                                         <div className={styles.ex_text}>
                                             <b>Resend email</b> — we can also resend the verification email.
                                         </div>
@@ -77,6 +82,7 @@ const StepMail:FC<I> = ({
                 <Col span={24}>
                     <div className={styles.action}>
                         <Button
+                            variant={'bordered'}
                             middle={width <= 768}
                             onClick={() => window.open(`https://${email?.split('@')[1]}`)}
                             text='Go to email'
