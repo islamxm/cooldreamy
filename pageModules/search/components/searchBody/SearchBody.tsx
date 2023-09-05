@@ -26,7 +26,7 @@ const SearchBody = () => {
     const [targetList, setTargetList] = useState([])
     const [financeList, setFinanceList] = useState([])
 
-    const [state, setState] = useState<{value: string, id: string, label: string} | null>(null)
+    const [state, setState] = useState<{value: string, id: string, label: string} | null | undefined>(null)
     const [country, setCountry] = useState<{value: string, id: string, label: string} | null>({value: 'All', id: 'All', label: 'All'})
     const [age_range_start, setage_range_start] = useState(18)
     const [age_range_end, setage_range_end] = useState(70)
@@ -34,7 +34,7 @@ const SearchBody = () => {
     const [prompt_targets, setprompt_targets] = useState<number[]>([])
     const [prompt_finance_states, setprompt_finance_states] = useState<number[]>([])
 
-    const [filter_type, setfilter_type] = useState<'all' | 'nearby' | 'online' | 'new'>()
+    const [filter_type, setfilter_type] = useState<'all' | 'nearby' | 'online' | 'new' | ''>('')
 
     const [totalFound, setTotalFound] = useState(0);
 
@@ -92,28 +92,29 @@ const SearchBody = () => {
 
 
     const onSearch = () => {
-        
-        if(token && currentPage > 0 && country && age_range_end && age_range_start && filter_type) {
-            // setCurrentPage(1)
-            setLoad(true)
-            service.search({
-                page: 1,
-                filter_type: filter_type === 'all' ? undefined : filter_type, 
-                state: state?.label, 
-                country: country?.label == 'All' ? '' : country?.label, 
-                age_range_start, 
-                age_range_end,
-                prompt_targets: `[${prompt_targets?.join(',')}]`, 
-                prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
-                per_page: 25
-            }, token
-            ).then(res => {
-                setTotalFound(res?.total)
-                setList(res?.data)
-            }).finally(() => {
-                setLoad(false)
-                setIsFilterChanged(true)
-            })
+        if(currentPage) {
+            if(token && currentPage > 0 && country && age_range_end && age_range_start && filter_type) {
+                // setCurrentPage(1)
+                setLoad(true)
+                service.search({
+                    page: 1,
+                    filter_type: filter_type === 'all' ? undefined : filter_type, 
+                    state: state?.label, 
+                    country: country?.label == 'All' ? '' : country?.label, 
+                    age_range_start, 
+                    age_range_end,
+                    prompt_targets: `[${prompt_targets?.join(',')}]`, 
+                    prompt_finance_states: `[${prompt_finance_states?.join(',')}]`, 
+                    per_page: 25
+                }, token
+                ).then(res => {
+                    setTotalFound(res?.total)
+                    setList(res?.data)
+                }).finally(() => {
+                    setLoad(false)
+                    setIsFilterChanged(true)
+                })
+            }
         }
     }
 
@@ -122,16 +123,15 @@ const SearchBody = () => {
     }, [currentPage])
 
     useEffect(() => {
-        if(currentPage === 0 || currentPage > 1) {
-            setCurrentPage(1)
-        } 
-        if(currentPage === 1) {
-            onSearch()
-        } 
-        if(currentPage > 1) {
-            setCurrentPage(1)
+        if(country !== undefined && age_range_end !== undefined && filter_type !== undefined && state !== undefined) {
+            if(currentPage === 0 || currentPage > 1) {
+                setCurrentPage(1)
+            } 
+            if(currentPage === 1) {
+                onSearch()
+            } 
         }
-    }, [token, country, age_range_end, age_range_start, filter_type, currentPage, state])
+    }, [token, country, age_range_end, age_range_start, filter_type, state])
 
 
 
@@ -211,7 +211,7 @@ const SearchBody = () => {
                     }
                 </Col>
                 {
-                    list?.length > 0 && Math.ceil(totalFound / 25) >= 2 ? (
+                    (list?.length > 0 && Math.ceil(totalFound / 25) >= 2) && (
                         <Col span={24}>
                             <Pagination
                                 showQuickJumper={false}
@@ -222,7 +222,7 @@ const SearchBody = () => {
                                 onChange={e => setCurrentPage(e)}
                                 />
                         </Col>
-                    ) : null
+                    )
                 }
             </Row>
             <SearchDrawer
