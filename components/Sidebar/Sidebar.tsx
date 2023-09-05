@@ -19,20 +19,18 @@ const Sidebar:FC = () => {
     const {width} = useWindowSize()
     
     const router = useRouter()
-
  
-    
     const onClose = (e: any) => {
         if(width <= 768 && e.target.dataset.close === 'true') {
             dispatch(updateMenu(false))
         }
     }
 
-
     useEffect(() => {
         dispatch(updateMenu(false))
     }, [router])
  
+    
     return (
         <motion.div
             onClick={onClose}

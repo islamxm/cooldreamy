@@ -30,7 +30,7 @@ const Main = () => {
   const [load, setLoad] = useState(false)
   const [type, setType] = useState<string>('')
 
-  const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
+  const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY_TEST))
 
   const [secretKey, setSecretKey] = useState<string>('')
 
@@ -81,6 +81,7 @@ const Main = () => {
 
   const onAccept = (plan: any) => {
     if (token) {
+      setSelectedPlan(plan?.id)
       setLoad(true)
       service.pay(token, {
         list_type: type,
