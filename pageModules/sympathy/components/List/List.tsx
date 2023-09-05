@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 const List = ({list, type, setPage, total}: {list: any[], type: sympGroupTypes, setPage?: (...args: any[]) => any, total?: number}) => {
     const {ref, inView} = useInView()
     const [loadMore, setLoadMore] = useState(false)
-
+    
 
     useEffect(() => {
         list?.length === total ? setLoadMore(false) : setLoadMore(true)

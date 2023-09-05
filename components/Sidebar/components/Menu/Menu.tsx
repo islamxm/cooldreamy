@@ -9,7 +9,8 @@ import { useRouter } from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const Menu = () => {
-    const {locale, unreadChatCount, unreadMailCount} = useAppSelector(s => s)
+    const {locale, unreadChatCount, unreadMailCount, sympCountData} = useAppSelector(s => s)
+    const {count_likes, count_mutual, count_my_likes, count_watches} = sympCountData || {}
     const router  = useRouter()
 
     const {pathname} = router
@@ -52,7 +53,7 @@ const Menu = () => {
             link: '/sympathy?type=views',
             root: '/sympathy',
             icon: <FiHeart/>,
-            badge: 0,
+            badge: (count_likes + count_mutual + count_my_likes + count_watches) > 0 ? (count_likes + count_mutual + count_my_likes + count_watches) : 0,
             onClick: () => {},
         },
         // {
