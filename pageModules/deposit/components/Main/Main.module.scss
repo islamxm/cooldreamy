@@ -33,15 +33,18 @@
                 .item {
                     
 
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                
                 background-image: url('../../../../public/assets/images/promo-bg.svg');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
                 min-height: 140px;
-                // position: relative;
+
+                .kl {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
 
                 .discount {
                     position: absolute;
