@@ -211,7 +211,6 @@ const MainWrapper = ({
 						</Link>, 'AVATAR', avatar)
 						// showPush(`${name}, ${age}`, {body: data?.chat_message?.chat_messageable?.text})
 						break;
-						
 					case chatMessageTypeVariants.messageGift:
 						// notify(`${lc?.global?.notifications?.get_gift}(${data?.chat_message?.chat_messageable?.gifts?.length})`, 'AVATAR', avatar)
 						notify(<Link href={`/chat/${chatId}?type=chat`}>
