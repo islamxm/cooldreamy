@@ -46,7 +46,7 @@ const StepMail:FC<I> = ({
                         <div className={styles.value}>{email}</div>
                     </div>
                 </Col>
-                <Col span={24}>
+                {/* <Col span={24}>
                     <div className={styles.ex}>
                         <div className={styles.ex_title}>Didn&quot;t get the email?</div>
                         <div className={styles.ex_body}>
@@ -78,7 +78,7 @@ const StepMail:FC<I> = ({
                             </Row>
                         </div>
                     </div>
-                </Col>
+                </Col> */}
                 <Col span={24}>
                     <div className={styles.action}>
                         <Button
