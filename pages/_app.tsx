@@ -25,7 +25,6 @@ import notificationRequestPermission from '@/helpers/notificationRequestPermissi
 import swRegister from '@/helpers/swRegister';
 
 
-
 if(process?.browser) {
 	const vh = process?.browser && window.innerHeight / 100;
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -104,6 +103,7 @@ function App({ Component, pageProps }: AppProps) {
 		<Provider store={store}>
 			<Head>
 				<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+				<title>Cool dreamy</title>
 			</Head>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 				<PrivateRoute>

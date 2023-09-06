@@ -126,7 +126,7 @@ const Step1:FC<IStep1> = ({
                             {/*</Col>*/}
                             <Col span={24}>
                                 {
-                                  (token && width <= 768) && (
+                                    width <= 768 && (
                                     <BirthdaySelectMob
                                       minAge={18}
                                       maxAge={70}
