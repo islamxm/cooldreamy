@@ -24,6 +24,7 @@ import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import notify from '@/helpers/notify';
 import {GoMail} from 'react-icons/go'
 
+
 const service = new ApiService()
 
 const ProfileModal:FC<ModalFuncProps> = (props) => {
@@ -46,6 +47,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         id,
         avatar_url_thumbnail,
         user_avatar_url,
+        online
     } = data || {}
 
     const onClose = () => {
@@ -209,6 +211,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                                         width={70}
                                                                         height={70}
                                                                         loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                        
                                                                         />
                                                                 </SwiperSlide>
                                                             ))
@@ -259,7 +262,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                     style={{marginRight: 15}}
                                                     />
                                                 <UserTitle
-                                                    isOnline
+                                                    isOnline={online == 1}
                                                     username={name}
                                                     age={age ? age.toString() : ''}
                                                     style={{fontSize: 20}}

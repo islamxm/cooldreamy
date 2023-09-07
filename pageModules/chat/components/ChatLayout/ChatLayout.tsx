@@ -90,6 +90,18 @@ const ChatLayout = () => {
         }
     }
 
+    const updateDialogs = () => {
+        if(token) {
+            service.getChatList({
+                filter: filter != 'all' ? filter : '',
+                page: dialogsList?.length,
+                search: dialogSearchDebounce
+            }, token).then(res => {
+                setDialogsList(res?.data)
+            })
+        }
+    }
+
 
     // ** получение чата (конкретного)
     const getChat = () => {
@@ -120,6 +132,42 @@ const ChatLayout = () => {
             }
         }
     }
+
+    const updateChat = () => {
+        if(token && currentChatId) {
+            service.getChat({
+                id: currentChatId,
+                page: 1,
+                per_page: chatList?.length
+            }, token).then(res => {
+                if(res?.another_user) {
+                    setChatList(res?.chat_messages?.data)
+                } else {
+                    // !! НАПРАВЛЯЕМ НА СЛЕДУЮЩИЙ ДИАЛОГ ЕСЛИ ЕСТЬ, ЕСЛИ НЕТ ТО ПУСТОЙ ЧАТ
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        let tm:any;
+        if(token) {
+            tm = setInterval(updateChat, 5000)
+        }
+        return () => {
+            if(tm) clearInterval(tm)
+        }
+    }, [token, currentChatId])
+
+    useEffect(() => {
+        let tm:any = null;
+        if(token) {
+            tm = setInterval(updateDialogs, 5000)
+        }
+        return () => {
+            if(tm) clearInterval(tm)
+        }
+    }, [token, filter, dialogSearchDebounce])
 
 
     const getMailDialogs = () => {
