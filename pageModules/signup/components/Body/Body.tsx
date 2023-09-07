@@ -166,10 +166,8 @@ const Body:FC = () => {
                 return <Step9 nextStep={() => setCurrentStep(s => s + 1)}/>
             case 10:
                 return <Step10 about={about} setAbout={setAbout}/>
-            case 11:
-                return <StepMail email={email}/>
             // case 11:
-            //     return <StepMail/>
+            //     return <StepMail email={email}/>
             default:
                 return null; 
                 
@@ -244,11 +242,11 @@ const Body:FC = () => {
           
         }
      
-        if(currentStep > 0 && currentStep < 11) {
+        if(currentStep > 0 && currentStep < 10) {
             setCurrentStep(s => s + 1)
         }
         
-        if(currentStep === 11) {
+        if(currentStep === 10) {
             setLoad(true)
             const updateBody: IUser = {
                 prompt_careers: `[${selectedCareers?.join(',')}]`,
@@ -351,7 +349,6 @@ const Body:FC = () => {
                 setBtnDisable(true)
             } else setBtnDisable(false)
         }
-
     }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl, email, name, password, birthday, about])
 
    
@@ -397,7 +394,7 @@ const Body:FC = () => {
                                 <div className={styles.panel}>
                                     <div className={styles.head}>
                                         <StepLine
-                                            total={12}
+                                            total={11}
                                             currentIndex={currentStep}
                                             />
                                     </div>
