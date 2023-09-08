@@ -94,7 +94,8 @@ const ChatLayout = () => {
         if(token) {
             service.getChatList({
                 filter: filter != 'all' ? filter : '',
-                page: dialogsList?.length,
+                page: 1,
+                per_page: 1000,
                 search: dialogSearchDebounce
             }, token).then(res => {
                 setDialogsList(res?.data)
@@ -138,7 +139,7 @@ const ChatLayout = () => {
             service.getChat({
                 id: currentChatId,
                 page: 1,
-                per_page: chatList?.length
+                per_page: 1000
             }, token).then(res => {
                 if(res?.another_user) {
                     setChatList(res?.chat_messages?.data)
@@ -239,7 +240,6 @@ const ChatLayout = () => {
             getDialogs && getDialogs()
         }
         if(chatType === 'mail') {
-            console.log('mail')
             getMailDialogs && getMailDialogs()
         }
     }, [dialogsPage, token, chatType, filter, dialogSearchDebounce])
