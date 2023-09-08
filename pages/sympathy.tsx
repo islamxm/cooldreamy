@@ -183,9 +183,11 @@ const SymPage = () => {
         if(token) {
             if(activeTab === 'views') {
                 // service.readProfile(token, 'WATCH').then(res => res?.message === 'success' && dispatch(decSympWathces()))
+                service.readProfile(token, 'WATCH')
             }
             if(activeTab === 'inlikes') {
                 // service.readProfile(token, 'LIKE').then(res => res?.message === 'success' && dispatch(decSympLikes()))
+                service.readProfile(token, 'LIKE')
             }
             // if(activeTab === 'matches') {
             //     service.readProfile(token, '').then(res => dispatch())
