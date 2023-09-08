@@ -11,12 +11,13 @@
     cursor: pointer;
     border: 1px solid transparent;
     overflow: hidden;
-    
+    padding: 10px;
     // transition: all .3s ease;
 
-    &:hover  {
-        border-color: var(--violet);
-    }
+    // &:hover  {
+    //     border-color: var(--violet);
+    // }
+
     .ind {
         position: absolute;
         top: 14px;
@@ -37,6 +38,8 @@
         img {
             object-fit: contain;
             display: flex;
+            width: 100%;
+            height: 100%;
         }
     }
 
@@ -70,13 +73,6 @@
             border-color: transparent;
         }
 
-        // .img {
-        //     width: 45px;
-        //     height: 45px;
-
-            
-        // }
-
         .ind {
             top: 10px;
             right: 10px;
@@ -86,7 +82,11 @@
 
         .label {
             font-size: 10px;
-            line-height: 15px;
+            line-height: 12px;
         }
+    }
+
+    .card.active {
+        border-color: var(--violet) !important;
     }
 }
