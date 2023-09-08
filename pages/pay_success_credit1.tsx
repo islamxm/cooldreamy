@@ -26,13 +26,11 @@ const PaySuccess = () => {
                     `
                 }}
                 />
-                <noscript
-                dangerouslySetInnerHTML={{
-                    __html: `<img height="1" width="1"
+                <noscript>
+                <img height="1" width="1"
                     src="https://www.facebook.com/tr?id=618085683724877&ev=PageView
-                    &noscript=1"/>`
-                }}
-                />
+                    &noscript=1"/>
+                </noscript>
             <MainLayout>
                 <div style={{width: '100%'}}>
                     <Main/>

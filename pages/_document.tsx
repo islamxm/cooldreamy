@@ -11,9 +11,6 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={'anonymous'}/>
         <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 
-        
-
-
         <meta name="application-name" content="Cool dreamy"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
@@ -50,36 +47,29 @@ export default function Document() {
         <meta property="og:url" content="https://yourdomain.com" />
         <meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" /> */}
 
-
+        {/* <Script
+          id='gtm-script-2'
+          src='https://www.googletagmanager.com/gtag/js?id=G-PZMJLXVY1B'
+          /> */}
+        {/* <Script
+          id='gtm-script-3'
+          >
+            {
+              `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PZMJLXVY1B');`
+            }
+        </Script> */}
         <Script
           id='gtm-script-1'
-          async
-          type='text/javascript'
-          dangerouslySetInnerHTML={{
-            __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-59CJTBH')
-            `
-          }}/>
-        <Script
-          type='text/javascript' 
-          id='gtm-script-2'
-          async
-          src='https://www.googletagmanager.com/gtag/js?id=G-PZMJLXVY1B'
-          />
-        <Script
-          id='gtm-script-3'
-          type='text/javascript' 
-          async
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PZMJLXVY1B'); 
-            `
-          }}
-          />
+          >
+            {
+              `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-59CJTBH')`
+            }
+        </Script>
+
         <Script
           id='ym-script-1'
           type='text/javascript'
@@ -90,7 +80,6 @@ export default function Document() {
             for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
             k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
             (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-         
             ym(94454907, "init", {
                  clickmap:true,
                  trackLinks:true,
@@ -136,6 +125,17 @@ export default function Document() {
             fbq('track', 'PageView');`
           }}
           />
+        <Script
+          id='twitter-pixel-1'
+          async
+          type='text/javascript'
+          dangerouslySetInnerHTML={{
+            __html: `!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+            },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+            a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+            twq('config','ogcsq');`
+          }}
+          />
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<img height="1" width="1"
@@ -148,69 +148,6 @@ export default function Document() {
                 __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
             }}
           />
-        {/* <script
-          type='text/javascript'
-          async
-          dangerouslySetInnerHTML={{
-            __html: `
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-59CJTBH')
-                `
-              }}
-          /> */}
-          
-        {/* <script
-          type='text/javascript' 
-          async 
-          src="https://www.googletagmanager.com/gtag/js?id=G-PZMJLXVY1B"/> 
-          <script 
-            type='text/javascript' 
-            async 
-            dangerouslySetInnerHTML={{
-              __html: `
-              window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PZMJLXVY1B'); 
-              `
-            }}
-           /> */}
-        {/* <script
-          type='text/javascript'
-          async
-          dangerouslySetInnerHTML={{
-            __html: `(function(m,e,t,r,i,k,a){m[i]=m[i]function(){(m[i].a=m[i].a[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-         
-            ym(94454907, "init", {
-                 clickmap:true,
-                 trackLinks:true,
-                 accurateTrackBounce:true,
-                 webvisor:true
-            });`
-          }}  
-          /> */}
-
-          {/* <script
-              dangerouslySetInnerHTML={{
-                  __html: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                       m[i].l=1*new Date();
-                       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-                       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-                       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-                    
-                       ym(94454907, "init", {
-                            clickmap:true,
-                            trackLinks:true,
-                            accurateTrackBounce:true,
-                            webvisor:true,
-                            ecommerce:"dataLayer"
-                       });`
-              }}
-          /> */}
       </Head>
       <body>
         <Main />
