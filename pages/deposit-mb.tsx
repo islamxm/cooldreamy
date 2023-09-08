@@ -52,7 +52,9 @@ const DepositPage = () => {
   }
 
   useEffect(() => {
-    setSelected(null)
+    if(activeTab == '1') {
+      setSelected({value: 1, type: 'premium'})
+    } else setSelected(null)
   }, [activeTab])
 
   const getPromo = () => {
