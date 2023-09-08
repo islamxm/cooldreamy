@@ -300,6 +300,9 @@ const Hero: FC = ({}) => {
                                 <Button
                                     disabled={!install}
                                     onClick={onInstall}
+                                    text='Install'
+                                    middle
+                                    fill
                                     />
                             </Col>
                         </Row>
