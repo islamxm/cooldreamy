@@ -35,9 +35,35 @@ const Hero: FC = ({}) => {
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const [loginModal, setLoginModal] = useState(false)
 
+    const [install, setInstall] = useState<any>(null)
+
     const sexChange = (value: 'male' | 'female') => {
         setSex(value)
     }
+
+    const getInstallEvent = (e:any) => {
+        e?.preventDefault()
+        setInstall(e)
+    }
+
+    useEffect(() => {
+        window.addEventListener('beforeinstallprompt', getInstallEvent)
+    }, [])
+
+    const onInstall = () => {
+        if(install) {
+            install?.prompt()
+            install?.userChoice.then((choiceResult:any) => {
+                if (choiceResult?.outcome === 'accepted') {
+                  console.log('User accepted the A2HS prompt');
+                } else {
+                  console.log('User dismissed the A2HS prompt');
+                }
+                setInstall(null)
+              });
+        }
+    }
+
 
     return (
         <div className={styles.hero}>
@@ -79,7 +105,6 @@ const Hero: FC = ({}) => {
                                     />
                             </motion.div>
                         </div>
-                        
                     </div>
                     <div className={styles.motion}>
                            
@@ -253,17 +278,30 @@ const Hero: FC = ({}) => {
                                     </motion.div>
                                     
                                 </motion.div>
-                                {/* <motion.div
-                                    className={styles.}
-                                    >
-
-                                </motion.div> */}
                             </motion.div>
                     </div>
                     <div className={styles.action}>
                         <Row gutter={[15,15]}>
-                            <Col span={24}><Button onClick={() => Router.push('/signup')} text={locale?.global?.header.join_btn} fill middle/></Col>
-                            <Col span={24}><Button onClick={() => setLoginModal(true)} text={locale?.global?.header?.login_btn} fill middle/></Col>
+                            <Col span={24}>
+                                <Button 
+                                    onClick={() => Router.push('/signup')} 
+                                    text={locale?.global?.header.join_btn} 
+                                    fill 
+                                    middle/>
+                            </Col>
+                            <Col span={24}>
+                                <Button 
+                                    onClick={() => setLoginModal(true)} 
+                                    text={locale?.global?.header?.login_btn} 
+                                    fill 
+                                    middle/>
+                            </Col>
+                            <Col span={24}>
+                                <Button
+                                    disabled={!install}
+                                    onClick={onInstall}
+                                    />
+                            </Col>
                         </Row>
                     </div>
                 </motion.div>
