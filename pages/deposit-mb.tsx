@@ -25,9 +25,9 @@ const DepositPage = () => {
   const {width} = useWindowSize()
   const payRef = useRef<HTMLDivElement>(null)
   const {token, locale, userData} = useAppSelector(s => s)
-  const [activeTab, setActiveTab] = useState<any>('')
+  const [activeTab, setActiveTab] = useState<any>('1')
   
-  const [selected, setSelected] = useState<{value: string | number, type: string} | null>(null)
+  const [selected, setSelected] = useState<{value: string | number, type: string} | null>({value: 1, type: 'premium'})
 
   const [listPrem, setListPrem] = useState<any[]>([])
   const [listSub, setListSub] = useState<any[]>([])
@@ -50,6 +50,10 @@ const DepositPage = () => {
         })
     }
   }
+
+  useEffect(() => {
+    setSelected(null)
+  }, [activeTab])
 
   const getPromo = () => {
       if(token) {

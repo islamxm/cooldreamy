@@ -59,6 +59,31 @@
                 margin-bottom: 8px;
             }
 
+            ul {
+                li {
+                    text-align: left;
+                    margin-bottom: 5px;
+                    padding-left: 15px;
+                    position: relative;
+
+                    &:after {
+                        position: absolute;
+                        content: '';
+                        width: 10px;
+                        height: 10px;
+                        top: calc(50% - 5px);
+                        left: 0;
+                        background-image: url('../../../public/assets/icons/star.svg');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: contain;
+                    }
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+
             .text {
                 text-align: center;
                 color: rgba(53, 53, 53, 0.5);
@@ -162,6 +187,17 @@
             display: flex;
             align-items: flex-end;
             flex: 1 0 auto;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        .in {
+            .title {
+                font-size: 22px;
+                line-height: 25px;
+            }
         }
     }
 }

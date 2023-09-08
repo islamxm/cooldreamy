@@ -12,18 +12,18 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
         <div className={styles.wrapper}>
             <div className={styles.in}>
                 <div className={styles.title}>
-                Unlimited chat subscription
+                    Premium status
                 </div>
                 <div className={styles.icon}>
                     <div className={styles.icon_img}></div>
                 </div>
                 <div className={styles.body}>
-                    {/* <div className={styles.head}>
-                        Купите подписку и общайтесь 
-                        на сайте без ограничений!
-                    </div> */}
+                    <div className={styles.head}>
+                        Buy Premium and 
+                        chat without limits
+                    </div>
                     <div className={styles.text}>
-                        With a subscription, you get unlimited chat access and free limits on sending photos and videos
+                    With a subscription, enjoy unlimited chat and free allowances for sending photos and videos.
                     </div>
                     <div className={styles.list}>
                         {
@@ -62,7 +62,7 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
                         onClick={onAccept}
                         fill
                         disabled={selected?.type !== 'subscription'}
-                        text={'Subscribe'}
+                        text={'Buy Premium'}
                         />
                 </div>
             </div>

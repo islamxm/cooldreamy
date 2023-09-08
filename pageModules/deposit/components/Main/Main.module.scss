@@ -449,6 +449,9 @@
 @media (max-width: 768px) {
     .wrapper {
         .top {
+            .head,.balance {
+                display: none;
+            }
             .list {
                 .item {
                     min-height: 170px;
@@ -465,7 +468,7 @@
 
         .main {
 
-        
+            
             .adv {
                 flex-wrap: wrap;
                 

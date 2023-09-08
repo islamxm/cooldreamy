@@ -14,7 +14,7 @@ import { useWindowSize } from 'usehooks-ts';
 import { PulseLoader } from 'react-spinners';
 import getClassNames from '@/helpers/getClassNames';
 import {RiMoneyDollarCircleFill} from 'react-icons/ri';
-
+import Loader from '@/components/Loader/Loader';
 
 const service = new ApiService()
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
@@ -29,6 +29,7 @@ const Main = () => {
   const [promo, setPromo] = useState<any>(null)
   const [load, setLoad] = useState(false)
   const [type, setType] = useState<string>('')
+  const [listLoad, setListLoad] = useState(false)
 
   const [stripePromise, setStripePromise] = useState<any>(loadStripe(PUBLIC_KEY))
 
@@ -36,10 +37,11 @@ const Main = () => {
 
   const getPlans = () => {
     if (token) {
+      setListLoad(true)
       service.getPayPlans(token).then(res => {
         setList(res)
         setType('credit')
-      })
+      }).finally(() => setListLoad(false))
     }
   }
 

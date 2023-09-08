@@ -20,7 +20,7 @@ const Tabs:FC<I> = ({
             onClick={() => onChange('1')}
             className={getClassNames([styles.item, styles.premium, activeTab == '1' && styles.active])}>
             <div className={styles.icon}></div>
-            <div className={styles.label}>Премиум</div>
+            <div className={styles.label}>VIP</div>
           </button>
         </Col>
         <Col span={8}>
@@ -28,7 +28,7 @@ const Tabs:FC<I> = ({
             onClick={() => onChange('2')}
             className={getClassNames([styles.item, styles.subscribe, activeTab == '2' && styles.active])}>
             <div className={styles.icon}></div>
-            <div className={styles.label}>Подписка</div>
+            <div className={styles.label}>Premium</div>
           </button>
         </Col>
         <Col span={8}>
@@ -36,7 +36,7 @@ const Tabs:FC<I> = ({
             onClick={() => onChange('3')}
             className={getClassNames([styles.item, styles.credits, activeTab == '3' && styles.active])}>
             <div className={styles.icon}></div>
-            <div className={styles.label}>Кредиты</div>
+            <div className={styles.label}>Credits</div>
           </button>
         </Col>
       </Row>

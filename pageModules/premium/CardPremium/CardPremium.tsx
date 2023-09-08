@@ -25,20 +25,19 @@ const CardPremium = ({
     return (
         <div className={styles.wrapper}>
             <div className={styles.in}>
-                <div className={styles.title}>Premium status</div>
+                <div className={styles.title}>VIP Status</div>
                 <div className={styles.icon}><div className={styles.icon_img}></div></div>
                 <div className={styles.body}>
                     <div className={styles.head}>Unlock all site features:</div>
                     <div className={styles.text}>
                     <ul>
-                        <li>Exclusive avatar badge</li>
-                        <li>Female search filters</li>
-                        <li>View profiles that added you to favorites</li>
-                        <li>View profiles that liked you back</li>
+                        <li>Unique avatar badge.</li>
+                        <li>Advanced search filter.</li>
+                        <li>View profiles that added you to favorites.</li>
+                        <li>See profiles that liked you back.</li>
                     </ul>
                     </div>
                     <div className={styles.pricing}>
-
                         {
                             (list && list?.length > 0) && (
                                 list?.map(i => (
@@ -71,7 +70,7 @@ const CardPremium = ({
                 <div className={styles.action}>
                     <Button 
                         variant={'gold'}
-                        text='Become Premium'
+                        text='Buy VIP'
                         load={load && selected?.type === 'premium'}
                         onClick={onAccept}
                         disabled={selected?.type !== 'premium'}

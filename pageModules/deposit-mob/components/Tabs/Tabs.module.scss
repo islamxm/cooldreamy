@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
     border-radius: 12px;
     background: #F5F5F5;
     border: 2px solid transparent;
@@ -25,6 +25,9 @@
       justify-content: center;
       flex: 0 0 auto;
       margin-right: 4px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     .label {
       font-weight: 400;
@@ -37,7 +40,9 @@
 
   .item.premium {
     .icon {
-      background: radial-gradient(53.23% 53.23% at 50.00% 46.77%, #F4972A 0%, #F3BD0D 100%);
+      // background: radial-gradient(53.23% 53.23% at 50.00% 46.77%, #F4972A 0%, #F3BD0D 100%);
+      // background-image: url();
+      background-image: url('../../../../public/assets/icons/status-premium.svg');
     }
   }
 
@@ -51,7 +56,11 @@
 
   .item.subscribe {
     .icon {
-      background: linear-gradient(180deg, #AC6DEC 0%, #EC82FF 100%);
+      background-color: #EC82FF;
+      background-image: url('../../../../public/assets/icons/premium-adv-icon.svg');
+      background-position: center;
+      background-size: 60%;
+      background-repeat: no-repeat;
     }
   }
   .item.subscribe.active {
@@ -62,9 +71,10 @@
     }
   }
 
-  .item.item.credits {
+  .item.credits {
     .icon {
-      background: radial-gradient(53.23% 53.23% at 50.00% 46.77%, #9E58EA 0%, #6B60EC 100%);
+      // background: radial-gradient(53.23% 53.23% at 50.00% 46.77%, #9E58EA 0%, #6B60EC 100%);
+      background-image: url('../../../../public/assets/icons/status-credits.svg');
     }
   }
   .item.credits.active {

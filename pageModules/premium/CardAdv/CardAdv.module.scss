@@ -164,3 +164,19 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+        .in {
+            .title {
+                font-size: 22px;
+                line-height: 25px;
+            }
+            .body {
+                .list {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
