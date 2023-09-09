@@ -152,6 +152,9 @@ const Main = () => {
         }
       }
 
+      useEffect(() => {
+        setSecretKey('')
+      }, [selected])
 
     return (
         <div className={`${styles.wrapper}`}>
