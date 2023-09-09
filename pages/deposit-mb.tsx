@@ -25,9 +25,9 @@ const DepositPage = () => {
   const {width} = useWindowSize()
   const payRef = useRef<HTMLDivElement>(null)
   const {token, locale, userData} = useAppSelector(s => s)
-  const [activeTab, setActiveTab] = useState<any>('1')
+  const [activeTab, setActiveTab] = useState<any>('2')
   
-  const [selected, setSelected] = useState<{value: string | number, type: string} | null>({value: 1, type: 'premium'})
+  const [selected, setSelected] = useState<{value: string | number, type: string} | null>({value: 4, type: 'subscription'})
 
   const [listPrem, setListPrem] = useState<any[]>([])
   const [listSub, setListSub] = useState<any[]>([])
@@ -52,8 +52,8 @@ const DepositPage = () => {
   }
 
   useEffect(() => {
-    if(activeTab == '1') {
-      setSelected({value: 1, type: 'premium'})
+    if(activeTab == '2') {
+      setSelected({value: 4, type: 'subscription'})
     } else setSelected(null)
     setSecretKey('')
   }, [activeTab])
@@ -88,6 +88,7 @@ const DepositPage = () => {
   const getSub = () => {
     if(token) {
       service.getPaySubs(token).then(res => {
+        console.log(res)
           const m = res;
           const rm = m.splice(0,1)
           setListSub([...m])
