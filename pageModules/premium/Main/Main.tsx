@@ -184,7 +184,7 @@ const Main = () => {
             <div className={styles.body}>
                 {
                     !load && (
-                        (secretKey && stripePromise && selected?.type === 'credit') && (
+                        (secretKey && stripePromise && selected) && (
                             <Elements
                                 stripe={stripePromise}
                                 options={{clientSecret: secretKey, locale: 'en'}}
