@@ -55,7 +55,12 @@ const DepositPage = () => {
     if(activeTab == '1') {
       setSelected({value: 1, type: 'premium'})
     } else setSelected(null)
+    setSecretKey('')
   }, [activeTab])
+
+  useEffect(() => {
+    setSecretKey('')
+  }, [selected])
 
   const getPromo = () => {
       if(token) {
@@ -111,33 +116,41 @@ const DepositPage = () => {
             }).finally(() => setLoad(false))
         }
         if(selected?.type === 'premium') {
-            service.payS(token, {
+            service.pay(token, {
                 list_type: selected?.type,
                 list_id: selected?.value
             }).then(res => {
-                if(res?.message === 'success') {
-                    if(selected?.value == 1) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem1')
+                // if(res?.message === 'success') {
+                //     if(selected?.value == 1) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem1')
                     
-                    if(selected?.value == 2) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem2')
+                //     if(selected?.value == 2) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem2')
                     
-                    if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem3')
-                } else {
-                    notify(locale?.global?.notifications?.error_default, 'ERROR')
-                }
+                //     if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem3')
+                // } else {
+                //     notify(locale?.global?.notifications?.error_default, 'ERROR')
+                // }
+                if(res?.clientSecret) {
+                  const clientSecret = res?.clientSecret;
+                  setSecretKey(clientSecret)
+                } else notify(locale?.global?.notifications?.error_default, 'ERROR')
             }).finally(() => setLoad(false))
         }
         if(selected?.type === 'subscription') {
-            service.payS(token, {
+            service.pay(token, {
                 list_type: selected?.type,
                 list_id: selected?.value
             }).then(res => {
-                if(res?.message === 'success') {
-                    if(selected?.value == 4) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub2')
-                    if(selected?.value == 5) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
-                    if(selected?.value == 6) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
-                } else {
-                    notify(locale?.global?.notifications?.error_default, 'ERROR')
-                }
+                // if(res?.message === 'success') {
+                //     if(selected?.value == 4) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub2')
+                //     if(selected?.value == 5) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
+                //     if(selected?.value == 6) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
+                // } else {
+                //     notify(locale?.global?.notifications?.error_default, 'ERROR')
+                // }
+                if(res?.clientSecret) {
+                  const clientSecret = res?.clientSecret;
+                  setSecretKey(clientSecret)
+                } else notify(locale?.global?.notifications?.error_default, 'ERROR')
             }).finally(() => setLoad(false))
         }
        
@@ -224,16 +237,14 @@ const DepositPage = () => {
               <Col span={24}>
                 <div>
                   {
-                      !load && (
-                          (secretKey && stripePromise && selected?.type === 'credit') && (
-                              <Elements
-                                  stripe={stripePromise}
-                                  options={{clientSecret: secretKey, locale: 'en'}}
-                                  >
-                                  <PayForm type={selected?.type} plan={selected?.value}/>
-                              </Elements>
-                          ) 
-                      )
+                    (!load && secretKey && stripePromise && selected?.type) && (
+                        <Elements
+                            stripe={stripePromise}
+                            options={{clientSecret: secretKey, locale: 'en'}}
+                            >
+                            <PayForm secretKey={secretKey} type={selected?.type} plan={selected?.value}/>
+                        </Elements>
+                    ) 
                   }
                 </div>
               </Col>

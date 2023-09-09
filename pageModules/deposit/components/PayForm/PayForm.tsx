@@ -29,7 +29,7 @@ const switchRedirect = (planId: number | string, type?: string) => {
     return `${window.location.origin}/deposit`
 }
 
-const PayForm = ({plan, type}: {plan?: any, type?: string, price?: number | string}) => {
+const PayForm = ({plan, type, secretKey}: {plan?: any, type?: string, price?: number | string, secretKey?: any}) => {
     const [payLoad, setPayLoad] = useState<boolean>(false)
     const [message, setMessage] = useState<any>(null)
     const {locale} = useAppSelector(s => s)
@@ -44,23 +44,26 @@ const PayForm = ({plan, type}: {plan?: any, type?: string, price?: number | stri
             return;
         }
         setPayLoad(true)
-        const {error} = await stripe.confirmPayment({
-            elements,
-            confirmParams: {
-                return_url: switchRedirect(plan?.id, type),
-                
-            },
-            // redirect: "if_required" 
-        })
-        const {payment_intent} = error || {}
-        if(error) {
-            setMessage(error)
-            notify(locale?.global?.notifications?.error_default, 'ERROR')
-        } else if(payment_intent && payment_intent?.status === 'succeeded') {
-            setMessage("Payment status: " + payment_intent?.status + "")
-        } else {
-            setMessage('Unexpected state')
+        if(stripe) {
+            const {error} = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    return_url: switchRedirect(plan?.id, type),
+                    
+                },
+                // redirect: "if_required" 
+            })
+            const {payment_intent} = error || {}
+            if(error) {
+                setMessage(error)
+                notify(locale?.global?.notifications?.error_default, 'ERROR')
+            } else if(payment_intent && payment_intent?.status === 'succeeded') {
+                setMessage("Payment status: " + payment_intent?.status + "")
+            } else {
+                setMessage('Unexpected state')
+            }
         }
+        
         setPayLoad(false)
     }
 
@@ -80,21 +83,25 @@ const PayForm = ({plan, type}: {plan?: any, type?: string, price?: number | stri
                     <Col span={24}>
                         <PaymentElement/>
                     </Col>
-                    <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
-                        {
-                            plan?.price ? (
-                                <Button
-                                    text={`${locale?.depositPage?.form?.btn} ${plan?.price}$`}
-                                    load={payLoad}
+                    {
+                        secretKey && (
+                            <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
+                                {
+                                    plan?.price ? (
+                                        <Button
+                                            text={`${locale?.depositPage?.form?.btn} ${plan?.price}$`}
+                                            load={payLoad}
+                                            />
+                                    ) : (
+                                        <Button
+                                            text={`${locale?.depositPage?.form?.btn}`}
+                                            load={payLoad}
                                     />
-                            ) : (
-                                <Button
-                                    text={`${locale?.depositPage?.form?.btn}`}
-                                    load={payLoad}
-                            />
-                            )
-                        }
-                    </Col>
+                                    )
+                                }
+                            </Col>
+                        )
+                    }
                 </Row>
             </form>
         </div>

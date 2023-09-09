@@ -12,9 +12,7 @@ import Button from '@/components/Button/Button';
 import PayForm from '../PayForm/PayForm';
 import { useWindowSize } from 'usehooks-ts';
 import { PulseLoader } from 'react-spinners';
-import getClassNames from '@/helpers/getClassNames';
 import {RiMoneyDollarCircleFill} from 'react-icons/ri';
-import Loader from '@/components/Loader/Loader';
 
 const service = new ApiService()
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
@@ -373,7 +371,7 @@ const Main = () => {
                   stripe={stripePromise}
                   options={{ clientSecret: secretKey, locale: 'en' }}
                 >
-                  <PayForm type={type} plan={selectedPlan} />
+                  <PayForm secretKey={secretKey} type={type} plan={selectedPlan} />
                 </Elements>
               )
             )
