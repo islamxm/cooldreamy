@@ -21,7 +21,8 @@ const MyCard:FC<IUser> = ({
 }) => {
     const {locale, premiumData} = useAppSelector(s => s)
     const {is_premium} = premiumData
-
+    
+    
 
     return (
         <Link href={'/profile'} className={`${styles.card} ${is_premium ? styles.premium : ''}`} >

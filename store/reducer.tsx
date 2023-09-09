@@ -240,6 +240,11 @@ const reducer = (state = globalState, action: any) => {
                 ...state,
                 subsModal: action.data
             }
+        case 'SET_CREDITS':
+            return {
+                ...state,
+                userData: {...state.userData, credits: action.data}
+            }
         default:
             return state;
     }

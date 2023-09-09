@@ -18,7 +18,8 @@ import {
 	inccreaseUnreadMailCount, 
 	updateUnreadMailCount, 
 	updatePremModal,
-	updateSubsModal
+	updateSubsModal,
+	setCredits
 } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
@@ -130,7 +131,11 @@ const MainWrapper = ({
 			// 	}
 			// )
 			service.getMyProfile(token).then(res => {
-				dispatch(updateUserData(res))
+				const {
+					credits,
+					...other
+				} = res
+				dispatch(updateUserData(other))
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))
@@ -140,9 +145,11 @@ const MainWrapper = ({
 					dispatch(updatePremiumData({is_premium: true}))
 				}
 			})
+			service.getCredits(token).then(res => {
+				dispatch(setCredits(res))
+			})
 		}
 	}, [token])
-
 
 
 	// useEffect(() => {

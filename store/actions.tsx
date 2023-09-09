@@ -56,3 +56,5 @@ export const updatePremiumData = (data: any) => ({type: 'UPDATE_PREMIUM_DATA', d
 
 export const updatePremModal = (data: any) => ({type: 'UPDATE_PREM_MODAL', data})
 export const updateSubsModal = (data: any) => ({type: 'UPDATE_SUBS_MODAL', data})
+
+export const setCredits = (data:any) => ({type:'SET_CREDITS', data})
