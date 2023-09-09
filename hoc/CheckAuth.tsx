@@ -39,10 +39,12 @@ const PrivateRoute = ({
             } else {
                 setAuth(true)
                 if(router?.pathname === '/') {
-                    if(width <= 768) {
-                        Router.push('/sympathy')
-                    } else {
-                        Router.push('/search')
+                    if(width !== 0) {
+                        if(width <= 768) {
+                            Router.push('/sympathy')
+                        } else {
+                            Router.push('/search')
+                        }
                     }
                 } else {
                     return;
@@ -50,7 +52,7 @@ const PrivateRoute = ({
             }
         }
         
-    }, [token, router, dispatch, socketChannel])
+    }, [token, router, dispatch, socketChannel, width])
 
 
     return auth ? (
