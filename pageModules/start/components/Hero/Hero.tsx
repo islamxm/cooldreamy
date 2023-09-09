@@ -296,7 +296,7 @@ const Hero: FC = ({}) => {
                                     fill 
                                     middle/>
                             </Col>
-                            <Col span={24}>
+                            {/* <Col span={24}>
                                 <Button
                                     disabled={!install}
                                     onClick={onInstall}
@@ -304,7 +304,7 @@ const Hero: FC = ({}) => {
                                     middle
                                     fill
                                     />
-                            </Col>
+                            </Col> */}
                         </Row>
                     </div>
                 </motion.div>

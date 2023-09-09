@@ -135,7 +135,7 @@ const MainWrapper = ({
 					credits,
 					...other
 				} = res
-				dispatch(updateUserData(other))
+				dispatch(updateUserData({...other, free_credits: credits}))
 			})
 			service.getActionPricing(token).then(res => {
 				dispatch(updatePricing(res))

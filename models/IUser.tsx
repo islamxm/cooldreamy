@@ -39,5 +39,6 @@ export interface IUser {
     is_donate?: 1 | 0
 
     profile_photo?: any[],
-    user_thumbnail_url?: string
+    user_thumbnail_url?: string,
+    free_credits?:number
 }

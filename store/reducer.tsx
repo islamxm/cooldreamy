@@ -245,6 +245,11 @@ const reducer = (state = globalState, action: any) => {
                 ...state,
                 userData: {...state.userData, credits: action.data}
             }
+        case 'SET_FREE_CREDITS':
+            return {
+                ...state,
+                userData: {...state.userData, free_credits: action.data}
+            }
         default:
             return state;
     }

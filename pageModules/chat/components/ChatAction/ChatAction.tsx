@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { PulseLoader } from 'react-spinners';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useWindowSize } from 'usehooks-ts';
-import { updateLimit, updateUserData } from '@/store/actions';
+import { setCredits, setFreeCredits, updateLimit, updateSubsModal, updateUserData } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import OutsideClickHandler from 'react-outside-click-handler';
 
@@ -64,14 +64,17 @@ const ChatAction = ({
                         sticker_id: id
                     }, token).then(res => {
                         if(res?.error) {
-                            dispatch(updateLimit({
-                                open: true,
-                                data: {
-                                    head: locale?.popups?.nocredit_sticker_message?.title,
-                                    // text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
-                                    text: locale?.popups?.nocredit_global_chat
-                                }
-                            }))
+                            if(userData?.free_credits && userData?.free_credits < 3) {
+                                dispatch(updateSubsModal(true))
+                            }
+                            // dispatch(updateLimit({
+                            //     open: true,
+                            //     data: {
+                            //         head: locale?.popups?.nocredit_sticker_message?.title,
+                            //         // text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
+                            //         text: locale?.popups?.nocredit_global_chat
+                            //     }
+                            // }))
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                             service.getCredits(token).then(credits => {
@@ -120,21 +123,26 @@ const ChatAction = ({
                         chat_id: Number(query?.id),
                         text
                     }, token).then(res => {
-                        console.log(res)
+                        
                         if(res?.error) {
-                            dispatch(updateLimit({
-                                open: true,
-                                data: {
-                                    head: locale?.popups?.nocredit_chat_message?.title,
-                                    // text: `${locale?.popups?.nocredit_chat_message?.text_part_1}${currentUser?.name} 
-                                    // ${locale?.popups?.nocredit_chat_message?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
-                                    text: locale?.popups?.nocredit_global_chat
-                                }
-                            }))
+                            console.log(userData?.free_credits)
+                            if(userData?.free_credits && userData?.free_credits < 3) {
+                                dispatch(updateSubsModal(true))
+                            }
+                            // dispatch(updateLimit({
+                            //     open: true,
+                            //     data: {
+                            //         head: locale?.popups?.nocredit_chat_message?.title,
+                            //         // text: `${locale?.popups?.nocredit_chat_message?.text_part_1}${currentUser?.name} 
+                            //         // ${locale?.popups?.nocredit_chat_message?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
+                            //         text: locale?.popups?.nocredit_global_chat
+                            //     }
+                            // }))
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
-                            service.getCredits(token).then(credits => {
-                                dispatch(updateUserData({...userData, credits}))
+                            service.getMyProfile(token).then(res => {
+                                const {credits} = res
+                                dispatch(setFreeCredits(credits))
                             })
                         }
                     }).finally(() => {
@@ -149,19 +157,23 @@ const ChatAction = ({
                         text
                     }, token).then(res => {
                         if(res?.error) {
-                            dispatch(updateLimit({
-                                open: true,
-                                data: {
-                                    head: locale?.popups?.nocredit_mail_message?.title,
-                                    // text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
-                                    // ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
-                                    text: locale?.popups?.nocredit_global_chat
-                                }
-                            }))
+                            if(userData?.free_credits && userData?.free_credits < 3) {
+                                dispatch(updateSubsModal(true))
+                            }
+                            // dispatch(updateLimit({
+                            //     open: true,
+                            //     data: {
+                            //         head: locale?.popups?.nocredit_mail_message?.title,
+                            //         // text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
+                            //         // ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                            //         text: locale?.popups?.nocredit_global_chat
+                            //     }
+                            // }))
                         } else {
                             onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
-                            service.getCredits(token).then(credits => {
-                                dispatch(updateUserData({...userData, credits}))
+                            service.getMyProfile(token).then(res => {
+                                const {credits} = res
+                                dispatch(setFreeCredits(credits))
                             })
                         }
                     }).finally(() => {
@@ -191,19 +203,23 @@ const ChatAction = ({
                             image_url: res.image_url
                         }, token).then(r => {
                             if(r?.error) {
-                                dispatch(updateLimit({
-                                    open: true,
-                                    data: {
-                                        head: locale?.popups?.nocredit_chat_picture?.title,
-                                        // text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
-                                        // ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
-                                        text: locale?.popups?.nocredit_global_chat
-                                    }
-                                }))
+                                if(userData?.free_credits && userData?.free_credits < 3) {
+                                    dispatch(updateSubsModal(true))
+                                }
+                                // dispatch(updateLimit({
+                                //     open: true,
+                                //     data: {
+                                //         head: locale?.popups?.nocredit_chat_picture?.title,
+                                //         // text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
+                                //         // ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
+                                //         text: locale?.popups?.nocredit_global_chat
+                                //     }
+                                // }))
                             } else {
                                 onUpdateChat({messageBody: r?.chat?.last_message, dialogBody: r?.chat})
-                                service.getCredits(token).then(credits => {
-                                    dispatch(updateUserData({...userData, credits}))
+                                service.getMyProfile(token).then(res => {
+                                    const {credits} = res
+                                    dispatch(setFreeCredits(credits))
                                 })
                             }
                         }).finally(() => {
@@ -236,19 +252,23 @@ const ChatAction = ({
                         }, token).then(r => {
                             // !! нужно включить после того как Даниил поправить модель
                             if(r?.error) {
-                                dispatch(updateLimit({
-                                    open: true,
-                                    data: {
-                                        head: locale?.popups?.nocredit_mail_message?.title,
-                                        // text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
-                                        // ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
-                                        text: locale?.popups?.nocredit_global_chat
-                                    }
-                                }))
+                                if(userData?.free_credits && userData?.free_credits < 3) {
+                                    dispatch(updateSubsModal(true))
+                                }
+                                // dispatch(updateLimit({
+                                //     open: true,
+                                //     data: {
+                                //         head: locale?.popups?.nocredit_mail_message?.title,
+                                //         // text: `${locale?.popups?.nocredit_mail_message?.text_part_1}${currentUser?.name} 
+                                //         // ${locale?.popups?.nocredit_mail_message?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_MESSAGE')}`
+                                //         text: locale?.popups?.nocredit_global_chat
+                                //     }
+                                // }))
                             } else {
                                 onUpdateChat({messageBody: r?.letter?.last_message, dialogBody: r?.letter})
-                                service.getCredits(token).then(credits => {
-                                    dispatch(updateUserData({...userData, credits}))
+                                service.getMyProfile(token).then(res => {
+                                    const {credits} = res
+                                    dispatch(setFreeCredits(credits))
                                 })
                             }
                         }).finally(() => {
