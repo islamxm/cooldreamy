@@ -28,7 +28,6 @@ const SearchPage = () => {
                 // onCancel={() => Router.push('/feed')}
                 onCancel={() => setModal(false)}
                 /> */}
-
             <Script
                 id='fb-pixel-1'
                 >
