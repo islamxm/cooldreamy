@@ -80,12 +80,10 @@ const DepositPage = () => {
     if(token) {
       service.getPayPrems(token).then(res => {
           setListPrem(res)
-          console.log(res)
       })
     }
   }
 
-  useEffect(() => console.log(selected), [selected])
 
   const getSub = () => {
     if(token) {
@@ -123,15 +121,6 @@ const DepositPage = () => {
                 list_type: selected?.type,
                 list_id: selected?.value
             }).then(res => {
-                // if(res?.message === 'success') {
-                //     if(selected?.value == 1) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem1')
-                    
-                //     if(selected?.value == 2) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem2')
-                    
-                //     if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem3')
-                // } else {
-                //     notify(locale?.global?.notifications?.error_default, 'ERROR')
-                // }
                 if(res?.clientSecret) {
                   const clientSecret = res?.clientSecret;
                   setSecretKey(clientSecret)
@@ -143,13 +132,6 @@ const DepositPage = () => {
                 list_type: selected?.type,
                 list_id: selected?.value
             }).then(res => {
-                // if(res?.message === 'success') {
-                //     if(selected?.value == 4) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub2')
-                //     if(selected?.value == 5) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
-                //     if(selected?.value == 6) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
-                // } else {
-                //     notify(locale?.global?.notifications?.error_default, 'ERROR')
-                // }
                 if(res?.clientSecret) {
                   const clientSecret = res?.clientSecret;
                   setSecretKey(clientSecret)

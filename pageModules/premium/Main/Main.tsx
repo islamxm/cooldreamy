@@ -67,6 +67,53 @@ const Main = () => {
     }, [token])
 
 
+    // const onAccept = () => {
+    //     if(token && selected) {
+    //         setLoad(true)
+    //         if(selected?.type === 'credit') {
+    //             service.pay(token, {
+    //                 list_type: selected?.type,
+    //                 list_id: selected?.value
+    //             }).then(res => {
+    //                 const clientSecret = res?.clientSecret;
+    //                 setSecretKey(clientSecret)
+    //             }).finally(() => setLoad(false))
+    //         }
+    //         if(selected?.type === 'premium') {
+    //             service.payS(token, {
+    //                 list_type: selected?.type,
+    //                 list_id: selected?.value
+    //             }).then(res => {
+    //                 if(res?.message === 'success') {
+    //                     if(selected?.value == 1) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem1')
+                        
+    //                     if(selected?.value == 2) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem2')
+                        
+    //                     if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem3')
+    //                 } else {
+    //                     notify(locale?.global?.notifications?.error_default, 'ERROR')
+    //                 }
+    //             }).finally(() => setLoad(false))
+    //         }
+    //         if(selected?.type === 'subscription') {
+    //             service.payS(token, {
+    //                 list_type: selected?.type,
+    //                 list_id: selected?.value
+    //             }).then(res => {
+    //                 if(res?.message === 'success') {
+    //                     if(selected?.value == 4) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub2')
+    //                     if(selected?.value == 5) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
+    //                     if(selected?.value == 6) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
+    //                 } else {
+    //                     notify(locale?.global?.notifications?.error_default, 'ERROR')
+    //                 }
+                    
+    //             }).finally(() => setLoad(false))
+    //         }
+           
+    //     }
+    // }
+
     const onAccept = () => {
         if(token && selected) {
             setLoad(true)
@@ -80,39 +127,30 @@ const Main = () => {
                 }).finally(() => setLoad(false))
             }
             if(selected?.type === 'premium') {
-                service.payS(token, {
+                service.pay(token, {
                     list_type: selected?.type,
                     list_id: selected?.value
                 }).then(res => {
-                    if(res?.message === 'success') {
-                        if(selected?.value == 1) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem1')
-                        
-                        if(selected?.value == 2) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem2')
-                        
-                        if(selected?.value == 3) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_prem3')
-                    } else {
-                        notify(locale?.global?.notifications?.error_default, 'ERROR')
-                    }
+                    if(res?.clientSecret) {
+                      const clientSecret = res?.clientSecret;
+                      setSecretKey(clientSecret)
+                    } else notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }).finally(() => setLoad(false))
             }
             if(selected?.type === 'subscription') {
-                service.payS(token, {
+                service.pay(token, {
                     list_type: selected?.type,
                     list_id: selected?.value
                 }).then(res => {
-                    if(res?.message === 'success') {
-                        if(selected?.value == 4) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub2')
-                        if(selected?.value == 5) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub3')
-                        if(selected?.value == 6) process?.browser && window.location?.replace(window?.location?.origin + '/pay_success_sub4')
-                    } else {
-                        notify(locale?.global?.notifications?.error_default, 'ERROR')
-                    }
-                    
+                    if(res?.clientSecret) {
+                      const clientSecret = res?.clientSecret;
+                      setSecretKey(clientSecret)
+                    } else notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }).finally(() => setLoad(false))
             }
            
         }
-    }
+      }
 
 
     return (
