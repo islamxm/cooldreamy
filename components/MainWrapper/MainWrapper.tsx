@@ -148,6 +148,9 @@ const MainWrapper = ({
 			service.getCredits(token).then(res => {
 				dispatch(setCredits(res))
 			})
+			service.getCurrentSub(token).then(res => {
+				console.log(res)
+			})
 		}
 	}, [token])
 
@@ -281,11 +284,6 @@ const MainWrapper = ({
 	// 		})
   //   }
 	// }, [socketChannel])
-
-
-		useEffect(() => {
-			console.log(userData)
-		}, [userData])
 	
 
     return (

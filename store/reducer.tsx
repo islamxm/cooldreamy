@@ -52,7 +52,12 @@ export interface IGlobalState {
     },
 
     premModal: boolean,
-    subsModal: boolean
+    subsModal: boolean,
+
+    currentSub: null | {
+        from: any,
+        to: any
+    }
 }
 
 
@@ -84,7 +89,8 @@ export const globalState: IGlobalState = {
         is_premium: false
     },
     premModal: false,
-    subsModal: false
+    subsModal: false,
+    currentSub: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -249,6 +255,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 userData: {...state.userData, free_credits: action.data}
+            }
+        case 'UPDATE_CURRENT_SUB':
+            return {
+                ...state,
+                currentSub: action.data
             }
         default:
             return state;

@@ -667,7 +667,6 @@ class ApiService {
         }
     }
 
-
     getProfile = async ({user_id, uuid}: {user_id:number, uuid?: string}, token: IToken) => {
         try {
             let res = await fetch(endpoints.getProfile + `?user_id=${user_id}&uuid=${uuid}`, {
@@ -682,7 +681,7 @@ class ApiService {
             return;
         }
     }
-
+    
     // updateMyProfile = async (token: IToken) => {
     //     try {
     //         let res = await fetch(endpoints.updateMyProfile, {
@@ -1235,6 +1234,21 @@ class ApiService {
                     ...headers,
                     'Authorization': `Bearer ${token}`
                 },
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            return
+        }
+    }
+
+    getCurrentSub = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getSub, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
             })
             return await checkAuth(res)
         } catch(err) {

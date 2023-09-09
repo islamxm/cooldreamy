@@ -55,12 +55,10 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 dispatch(updateToken(res?.token))
                 dispatch(updateUserId(res?.id))
                 
-                if(width !== 0) {
-                    if(width <= 768) {
-                        Router.push('/sympathy')
-                    } else {
-                        Router.push('/search')
-                    }
+                if(width <= 768) {
+                    Router.push('/sympathy')
+                } else {
+                    Router.push('/search')
                 }
                 
                 onClose()
