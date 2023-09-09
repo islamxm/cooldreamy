@@ -101,25 +101,21 @@ const PayForm = ({plan, type, secretKey}: {plan?: any, type?: string, price?: nu
                     <Col span={24}>
                         <PaymentElement/>
                     </Col>
-                    {
-                        secretKey && (
-                            <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
-                                {
-                                    plan?.price ? (
-                                        <Button
-                                            text={`${locale?.depositPage?.form?.btn} ${plan?.price}$`}
-                                            load={payLoad}
-                                            />
-                                    ) : (
-                                        <Button
-                                            text={`${locale?.depositPage?.form?.btn}`}
-                                            load={payLoad}
+                    <Col span={24} style={{display: 'flex', justifyContent: 'center'}}>
+                        {
+                            plan?.price ? (
+                                <Button
+                                    text={`${locale?.depositPage?.form?.btn} ${plan?.price}$`}
+                                    load={payLoad}
                                     />
-                                    )
-                                }
-                            </Col>
-                        )
-                    }
+                            ) : (
+                                <Button
+                                    text={`${locale?.depositPage?.form?.btn}`}
+                                    load={payLoad}
+                            />
+                            )
+                        }
+                    </Col>
                 </Row>
             </form>
         </div>

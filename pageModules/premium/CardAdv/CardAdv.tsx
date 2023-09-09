@@ -1,13 +1,14 @@
 import Button from '@/components/Button/Button';
 import styles from './CardAdv.module.scss';
 import {AiFillDollarCircle} from 'react-icons/ai'
-
+import * as _ from 'lodash';
+import { useEffect } from 'react';
 
 
 const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], selected: any, onSelect: any, onAccept: (...args: any[]) => any, load: boolean}) => {
 
     
-
+    useEffect(() => console.log(list), [list])
     return (
         <div className={styles.wrapper}>
             <div className={styles.in}>
@@ -35,7 +36,7 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
                                         <input type="radio" checked={i?.id == selected?.value && selected?.type == 'subscription'}/>
                                         <label className={styles.label} htmlFor="">
                                             <div className={styles.value}>
-                                            {i?.duration} <br/>
+                                            {_.round(i?.duration / 1440, 2)} <br/>
                                             days
                                             </div>
                                             <div className={styles.info}>

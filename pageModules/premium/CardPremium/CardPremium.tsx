@@ -1,7 +1,7 @@
 import Button from '@/components/Button/Button';
 import styles from './CardPremium.module.scss';
 import {AiFillDollarCircle} from 'react-icons/ai'
-
+import * as _ from 'lodash'
 
 interface I {
     list?: any[],
