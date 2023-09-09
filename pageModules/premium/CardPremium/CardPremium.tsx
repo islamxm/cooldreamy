@@ -2,6 +2,7 @@ import Button from '@/components/Button/Button';
 import styles from './CardPremium.module.scss';
 import {AiFillDollarCircle} from 'react-icons/ai'
 import * as _ from 'lodash'
+import { useEffect } from 'react';
 
 interface I {
     list?: any[],
@@ -21,6 +22,7 @@ const CardPremium = ({
     onAccept
 }: I) => {  
 
+    useEffect(() => console.log(list), [list])
 
     return (
         <div className={styles.wrapper}>

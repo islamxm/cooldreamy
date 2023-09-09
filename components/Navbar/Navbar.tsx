@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import Avatar from '../Avatar/Avatar';
 import { CSSProperties, useEffect, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
-
+import placeholder from '@/public/assets/images/avatar-placeholder.png'
 
 
 const Navbar = ({
@@ -41,7 +41,7 @@ const Navbar = ({
                                 size={30}
                                 style={{border: pathname?.includes('/profile') ? '1px solid var(--violet)' : '1px solid transparent'}}
                                 round
-                                image={userData?.user_thumbnail_url}
+                                image={userData?.user_thumbnail_url && !userData?.user_thumbnail_url?.includes('api.cooldremy.com') ? userData?.user_thumbnail_url : placeholder}
                                 />
                         </Link>
                     </div>
