@@ -370,7 +370,7 @@ const Main = () => {
                 <PulseLoader color='var(--violet)' />
               </div>
             ) : (
-              (secretKey && stripePromise) && (
+              (secretKey && stripePromise && selectedPlan) && (
                 <Elements
                   stripe={stripePromise}
                   options={{ clientSecret: secretKey, locale: 'en' }}

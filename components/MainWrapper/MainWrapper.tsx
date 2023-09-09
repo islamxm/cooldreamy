@@ -283,6 +283,9 @@ const MainWrapper = ({
 	// }, [socketChannel])
 
 
+		useEffect(() => {
+			console.log(userData)
+		}, [userData])
 	
 
     return (

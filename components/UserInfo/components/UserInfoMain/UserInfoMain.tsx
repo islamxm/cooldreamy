@@ -1,5 +1,5 @@
 import styles from './UserInfoMain.module.scss';
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import Badge from '@/components/Badge/Badge';
 import { Row, Col } from 'antd';
 import { IUser } from '@/models/IUser';
@@ -21,7 +21,7 @@ const UserInfoMain:FC<IUser> = (props) => {
     } = props
     
 
-
+    useEffect(() => console.log(props), [props])
 
 
     return (
