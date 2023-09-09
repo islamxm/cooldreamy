@@ -1,25 +1,23 @@
 .wrapper {
   .in {
-    border: 2px solid var(--violet);
+    border: 2px solid #EC82FF;
     padding: 20px;
     border-radius: 10px;
   }
 
   .title {
     text-align: center;
-    color: var(--violet);
+    color: #EC82FF;
     font-size: 21px;
     line-height: 23px;
     font-weight: 500;
   }
   .icon {
-    
     background-image: url('../../public/assets/icons/premium-2-icon.svg');
-    background-color: var(--violet);
+    background-color: #EC82FF;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 60%;
-    box-shadow: 0 0 20px 10px rgba(#6862ED, .7);
     
     width: 57px;
     height: 57px;

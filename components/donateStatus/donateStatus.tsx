@@ -24,7 +24,7 @@ export const StatusPremium:FC<any> = () => {
           
         </div>
         <div className={styles.body}>
-          <div className={styles.title}>Premium</div>
+          <div className={styles.title}>VIP-status</div>
           <div className={styles.value}>Not active</div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export const StatusVip:FC<any> = () => {
           
         </div>
         <div className={styles.body}>
-          <div className={styles.title}>VIP-status</div>
+          <div className={styles.title}>Premium</div>
           <div className={styles.value}>
             {is_premium == 1 ? 'Active' : 'Not active'}
           </div>

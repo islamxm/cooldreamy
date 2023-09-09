@@ -25,6 +25,7 @@ const SubsModal:FC<ModalFuncProps> = (props) => {
     <Modal
       {...props}
       footer={null}
+      open
       className={getClassNames([styles.wrapper, 'modal', 'no-close-icon'])}
       >
       <div className={styles.in}>
@@ -55,6 +56,7 @@ const SubsModal:FC<ModalFuncProps> = (props) => {
                 text='Go to store'
                 middle={width <= 768}
                 onClick={onGoToStore}
+                style={{background: 'linear-gradient(180deg, #AC6DEC 0%, #EC82FF 100%)'}}
                 />
             </div>
           </Col>
