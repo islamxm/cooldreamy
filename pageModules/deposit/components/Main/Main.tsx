@@ -61,6 +61,10 @@ const Main = () => {
     setSecretKey('')
   }, [selectedPlan])
 
+  useEffect(() => {
+    setSecretKey('')
+  }, [selectedPlan])
+
   const goToPayment = () => {
     if (width <= 768) {
       const top = payRef?.current?.getBoundingClientRect()?.top;

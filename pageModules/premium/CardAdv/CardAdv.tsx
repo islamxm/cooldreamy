@@ -36,7 +36,7 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
                                         <label className={styles.label} htmlFor="">
                                             <div className={styles.value}>
                                             {i?.duration} <br/>
-                                            hours
+                                            days
                                             </div>
                                             <div className={styles.info}>
                                                 <span>Photos: {i?.count_watch_or_send_photos}</span>

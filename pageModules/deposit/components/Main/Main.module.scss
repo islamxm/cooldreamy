@@ -439,9 +439,7 @@
                     width: calc(100% - 30px);
                     margin-bottom: 30px;
                 }
-            }
-
-            
+            }            
         }
     }
 }
@@ -455,6 +453,13 @@
             .list {
                 .item {
                     min-height: 170px;
+                }
+            }
+            .list.one {
+                .item_wr {
+                    .item {
+                        background-image: url('../../../../public/assets/images/promo-mob-bg.svg');
+                    }
                 }
             }
             .buy {

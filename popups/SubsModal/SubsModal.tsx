@@ -31,7 +31,7 @@ const SubsModal:FC<ModalFuncProps> = (props) => {
         <Row gutter={[15,15]}>
           <Col span={24}>
             <div className={styles.title}>
-              Unlimited Communication Subscription
+            Activate Premium Status.
             </div>
           </Col>
           <Col span={24}>
@@ -46,7 +46,7 @@ const SubsModal:FC<ModalFuncProps> = (props) => {
           </Col>
           <Col span={24}>
             <div className={styles.text}>
-              With your subscription, you can chat without limits and enjoy free allowances for sending and receiving photo or video content.
+            For an enhanced chatting experience, purchase Premium access and communicate without limitations. With Premium, you can also send and receive photos and videos for free.
             </div>
           </Col>
           <Col span={24}>
