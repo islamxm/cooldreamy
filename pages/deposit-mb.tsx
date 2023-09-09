@@ -80,9 +80,12 @@ const DepositPage = () => {
     if(token) {
       service.getPayPrems(token).then(res => {
           setListPrem(res)
+          console.log(res)
       })
     }
   }
+
+  useEffect(() => console.log(selected), [selected])
 
   const getSub = () => {
     if(token) {

@@ -26,6 +26,24 @@ const switchRedirect = (planId: number | string, type?: string) => {
     if(planId == '5' && type === 'credit') {
         return `${window.location.origin}/pay_success_credit5`
     }
+    if(planId == '1' && type === 'premium') {
+        return `${window.location.origin}/pay_success_prem1`
+    }
+    if(planId == '2' && type === 'premium') {
+        return `${window.location.origin}/pay_success_prem2`
+    }
+    if(planId == '3' && type === 'premium') {
+        return `${window.location.origin}/pay_success_prem3`
+    }
+    if(planId == '4' && type === 'subscription') {
+        return `${window.location.origin}/pay_success_sub2`
+    }
+    if(planId == '5' && type === 'subscription') {
+        return `${window.location.origin}/pay_success_sub3`
+    }
+    if(planId == '6' && type === 'subscription') {
+        return `${window.location.origin}/pay_success_sub4`
+    }
     return `${window.location.origin}/deposit`
 }
 
