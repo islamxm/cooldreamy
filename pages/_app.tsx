@@ -119,10 +119,16 @@ function App({ Component, pageProps }: AppProps) {
 								router?.pathname === '/unavailable' ? null : <Header auth={true}/>
 							)
 						} */}
-						{
+						{/* {
 							(width > 768 
 							// && !router?.pathname?.includes('/chat')
 							&& !router?.query?.id && router?.pathname !== '/unavailable') 
+							&& <Header/>
+						} */}
+						{
+							(width > 768 
+							// && !router?.pathname?.includes('/chat')
+							 && router?.pathname !== '/unavailable') 
 							&& <Header/>
 						}
 						<main><Component {...pageProps} /></main>
