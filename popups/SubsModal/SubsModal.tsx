@@ -32,22 +32,20 @@ const SubsModal:FC<ModalFuncProps> = (props) => {
         <Row gutter={[15,15]}>
           <Col span={24}>
             <div className={styles.title}>
-            Activate Premium Status.
+            Premium Status
             </div>
           </Col>
           <Col span={24}>
-            <div className={styles.icon}>
-
-            </div>
+            <div className={styles.icon}></div>
           </Col>
           <Col span={24}>
             <div className={styles.label}>
-            Get a subscription and chat freely!
+              Activate Premium Status and chat without limitations!
             </div>
           </Col>
           <Col span={24}>
             <div className={styles.text}>
-            For an enhanced chatting experience, purchase Premium access and communicate without limitations. With Premium, you can also send and receive photos and videos for free.
+              For an enhanced chatting experience, purchase Premium access and communicate without limitations. With Premium, you can also send and receive photos and videos for free.
             </div>
           </Col>
           <Col span={24}>
