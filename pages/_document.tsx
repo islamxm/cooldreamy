@@ -47,24 +47,6 @@ export default function Document() {
         <meta property="og:url" content="https://yourdomain.com" />
         <meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" /> */}
 
-        {/* <Script
-          id='gtm-script-2'
-          src='https://www.googletagmanager.com/gtag/js?id=G-PZMJLXVY1B'
-          /> */}
-        {/* <Script
-          id='gtm-script-3'
-          >
-            {
-              `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PZMJLXVY1B');`
-            }
-        </Script> */}
-        {/* <Script
-          id='gtm-script-1'
-          async
-          dangerouslySetInnerHTML={{
-            __html: 
-          }}
-          /> */}
         <script
           id='gtm-gtm'
           type='text/javascript'
@@ -76,7 +58,7 @@ export default function Document() {
             })(window,document,'script','dataLayer','GTM-59CJTBH');`
           }}
           />
-        <Script
+        <script
           id='ym-script-1'
           type='text/javascript'
           async
@@ -94,7 +76,7 @@ export default function Document() {
             });`
           }}  
           />
-        <Script
+        <script
           id='ym-script-2'
           async
           type='text/javascript'
@@ -114,7 +96,7 @@ export default function Document() {
             });`
           }}
           />
-        <Script
+        <script
           id='fb-pixel-1'
           async
           type='text/javascript'
@@ -131,7 +113,7 @@ export default function Document() {
             fbq('track', 'PageView');`
           }}
           />
-        <Script
+        <script
           id='twitter-pixel-1'
           async
           type='text/javascript'
@@ -140,13 +122,6 @@ export default function Document() {
             },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
             a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
             twq('config','ogcsq');`
-          }}
-          />
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<img height="1" width="1"
-            src="https://www.facebook.com/tr?id=618085683724877&ev=PageView
-            &noscript=1"/>`
           }}
           />
         <noscript
