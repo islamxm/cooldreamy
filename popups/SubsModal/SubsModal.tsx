@@ -25,7 +25,6 @@ const SubsModal:FC<ModalFuncProps> = (props) => {
     <Modal
       {...props}
       footer={null}
-      open
       className={getClassNames([styles.wrapper, 'modal', 'no-close-icon'])}
       >
       <div className={styles.in}>
