@@ -6,7 +6,7 @@ const PaySuccess = () => {
 
     return (
         <Container>
-            <Script
+            {/* <Script
                 id='fb-pixel-1'>
                 {
                     `!function(f,b,e,v,n,t,s)
@@ -26,7 +26,7 @@ const PaySuccess = () => {
                 <img height="1" width="1"
                     src="https://www.facebook.com/tr?id=618085683724877&ev=PageView
                     &noscript=1"/>
-                </noscript>
+                </noscript> */}
             <MainLayout>
                 <div style={{width: '100%'}}>
                     <Main/>

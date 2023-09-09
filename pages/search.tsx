@@ -28,7 +28,7 @@ const SearchPage = () => {
                 // onCancel={() => Router.push('/feed')}
                 onCancel={() => setModal(false)}
                 /> */}
-            <Script
+            {/* <Script
                 id='fb-pixel-1'
                 >
                 {
@@ -49,7 +49,7 @@ const SearchPage = () => {
                 <img height="1" width="1"
                     src="https://www.facebook.com/tr?id=618085683724877&ev=PageView
                     &noscript=1"/>
-                </noscript>
+                </noscript> */}
             <MainLayout>
                 <Sidebar/>
                 <div style={{width: '100%'}}>

@@ -96,7 +96,7 @@ export default function Document() {
             });`
           }}
           />
-        <script
+        {/* <script
           id='fb-pixel-1'
           async
           type='text/javascript'
@@ -112,8 +112,8 @@ export default function Document() {
             fbq('init', '618085683724877');
             fbq('track', 'PageView');`
           }}
-          />
-        <script
+          /> */}
+        {/* <script
           id='twitter-pixel-1'
           async
           type='text/javascript'
@@ -123,7 +123,7 @@ export default function Document() {
             a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
             twq('config','ogcsq');`
           }}
-          />
+          /> */}
         <noscript
             dangerouslySetInnerHTML={{
                 __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
