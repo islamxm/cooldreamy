@@ -64,17 +64,17 @@ const ChatAction = ({
                         sticker_id: id
                     }, token).then(res => {
                         if(res?.error) {
-                            if(userData?.free_credits && userData?.free_credits < 3) {
-                                dispatch(updateSubsModal(true))
-                            }
-                            // dispatch(updateLimit({
-                            //     open: true,
-                            //     data: {
-                            //         head: locale?.popups?.nocredit_sticker_message?.title,
-                            //         // text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
-                            //         text: locale?.popups?.nocredit_global_chat
-                            //     }
-                            // }))
+                            // if(userData?.free_credits && userData?.free_credits < 3) {
+                            //     dispatch(updateSubsModal(true))
+                            // }
+                            dispatch(updateLimit({
+                                open: true,
+                                data: {
+                                    head: locale?.popups?.nocredit_sticker_message?.title,
+                                    // text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
+                                    text: locale?.popups?.nocredit_global_chat
+                                }
+                            }))
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                             service.getCredits(token).then(credits => {
@@ -203,18 +203,18 @@ const ChatAction = ({
                             image_url: res.image_url
                         }, token).then(r => {
                             if(r?.error) {
-                                if(userData?.free_credits && userData?.free_credits < 3) {
-                                    dispatch(updateSubsModal(true))
-                                }
-                                // dispatch(updateLimit({
-                                //     open: true,
-                                //     data: {
-                                //         head: locale?.popups?.nocredit_chat_picture?.title,
-                                //         // text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
-                                //         // ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
-                                //         text: locale?.popups?.nocredit_global_chat
-                                //     }
-                                // }))
+                                // if(userData?.free_credits && userData?.free_credits < 3) {
+                                //     dispatch(updateSubsModal(true))
+                                // }
+                                dispatch(updateLimit({
+                                    open: true,
+                                    data: {
+                                        head: locale?.popups?.nocredit_chat_picture?.title,
+                                        // text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
+                                        // ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
+                                        text: locale?.popups?.nocredit_global_chat
+                                    }
+                                }))
                             } else {
                                 onUpdateChat({messageBody: r?.chat?.last_message, dialogBody: r?.chat})
                                 service.getMyProfile(token).then(res => {
@@ -292,10 +292,6 @@ const ChatAction = ({
             }
         }
     }
-    
-
-  
-
 
 
     return (
