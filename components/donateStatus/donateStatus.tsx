@@ -1,5 +1,5 @@
 import styles from './donateStatus.module.scss';
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import getClassNames from '@/helpers/getClassNames';
 import Button from '../Button/Button';
@@ -11,11 +11,27 @@ const service = new ApiService()
 
 //SUBSCRIBE
 export const StatusPremium:FC<any> = () => {
-  const {userData, token} = useAppSelector(s => s)
-  const {
-    
-  } = userData || {}
+  const {userData, token, currentVip} = useAppSelector(s => s)
+  const [deadline, setDeadLine] = useState<any>(null)
 
+  useEffect(() => {
+    if(currentVip) {
+      const dateFrom = moment.utc()
+      const dateNow = moment.utc(currentVip.period_end)
+
+      const diff = dateNow.diff(dateFrom)
+      const start = moment.utc(diff).valueOf()
+      if(moment.utc(start).get('hours') >= 24) {
+        setDeadLine(`${Math.floor(moment.utc(start).get('hours') / 24).toString()}д`)
+      }
+      if(moment.utc(start).get('hours') < 24 && moment.utc(start).get('hours') >= 1) {
+        setDeadLine(`${moment.utc(start).format('HH')}ч ${moment.utc(start).format('mm')}мин`)
+      }
+      if(moment.utc(start).get('hours') < 1) {
+        setDeadLine(moment.utc(start).get('minutes') + 'мин')
+      }
+    }
+  }, [currentVip])
 
   return (
     <div className={getClassNames([styles.wrapper, styles.premium])}>
@@ -25,7 +41,9 @@ export const StatusPremium:FC<any> = () => {
         </div>
         <div className={styles.body}>
           <div className={styles.title}>VIP-status</div>
-          <div className={styles.value}>Not active</div>
+          <div className={styles.value}>
+          {currentVip && deadline ? 'Active' : 'Not active'}
+          </div>
         </div>
       </div>
       <div className={styles.action}>
@@ -37,11 +55,17 @@ export const StatusPremium:FC<any> = () => {
           text={'3 д. 18:33'}
           /> */}
         <Button
-          text="Activate"
+          text={deadline ? deadline : 'Activate'}
           variant={'gold'}
           middle
           style={{padding: '7px 5px'}}
-          onClick={() => Router.push('/premium')}
+          onClick={() => {
+            if(currentVip) {
+              
+            } else {
+              Router.push('/premium')
+            }
+          }}
           fill
           />
       </div>
@@ -52,10 +76,30 @@ export const StatusPremium:FC<any> = () => {
 
 //PREMIUM
 export const StatusVip:FC<any> = () => {
-  const {userData} = useAppSelector(s => s)
+  const {userData, currentSub} = useAppSelector(s => s)
+  const [deadline, setDeadLine] = useState<any>(null)
+
+  useEffect(() => {
+    if(currentSub) {
+      const dateFrom = moment.utc()
+      const dateNow = moment.utc(currentSub.period_end)
+
+    const diff = dateNow.diff(dateFrom)
+    const start = moment.utc(diff).valueOf()
+    if(moment.utc(start).get('hours') >= 24) {
+      setDeadLine(`${Math.floor(moment.utc(start).get('hours') / 24).toString()}д`)
+    }
+    if(moment.utc(start).get('hours') < 24 && moment.utc(start).get('hours') >= 1) {
+      setDeadLine(`${moment.utc(start).format('HH')}ч ${moment.utc(start).format('mm')}мин`)
+    }
+    if(moment.utc(start).get('hours') < 1) {
+      setDeadLine(moment.utc(start).get('minutes') + 'мин')
+    }
+    }
+  },[currentSub])
+
   const {
-    is_premium,
-    premium_expire
+    is_premium
   } = userData || {}
 
   return (
@@ -67,31 +111,25 @@ export const StatusVip:FC<any> = () => {
         <div className={styles.body}>
           <div className={styles.title}>Premium</div>
           <div className={styles.value}>
-            {is_premium == 1 ? 'Active' : 'Not active'}
+            {currentSub && deadline ? `Active` : 'Not active'}
           </div>
         </div>
       </div>
       <div className={styles.action}>
-        {
-          is_premium == 1 ? (
-            <Button
-              variant={'white'}
-              style={{padding: '7px 5px', backgroundColor: '#F5F5F5'}}
-              text='Active'
-              middle
-              fill
-              />
-          ) : (
-            <Button
-              text='Activate'
-              onClick={() => Router.push('/premium')}
-              middle
-              style={{padding: '7px 5px', backgroundColor: '#1E85FE', color: '#fff'}}
-              variant={'white'}
-              fill
-              />
-          )
-        }
+        <Button
+          text={deadline ? deadline : 'Activate'}
+          onClick={() => {
+            if(currentSub) {
+              
+            } else {
+              Router.push('/premium')
+            }
+          }}
+          middle
+          style={{padding: '7px 5px', backgroundColor: '#1E85FE', color: '#fff'}}
+          variant={'white'}
+          fill
+          />
       </div>
     </div>
   )

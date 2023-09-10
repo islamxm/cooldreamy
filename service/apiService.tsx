@@ -1255,6 +1255,21 @@ class ApiService {
             return
         }
     }
+
+    getCurrentVip = async (token: IToken) => {
+        try {
+            let res = await fetch(endpoints.getCurrentVip, {
+                method: "GET",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await checkAuth(res)
+        } catch(err) {
+            return
+        }
+    }
    
 }
 

@@ -145,6 +145,7 @@ const endpoints = {
     readProfile: `${API_PATH}feeds/read`,
 
     getPremiumStatus: `${API_PATH}payments/premium`,
+    getCurrentVip: `${API_PATH}payments/premium`,
 }
 
 export default endpoints;

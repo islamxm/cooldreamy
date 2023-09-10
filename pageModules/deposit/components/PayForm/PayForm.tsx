@@ -66,10 +66,9 @@ const PayForm = ({plan, type, secretKey}: {plan?: any, type?: string, price?: nu
             const {error} = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: switchRedirect(plan?.id, type),
-                    
+                    return_url: switchRedirect(plan?.id, type), 
                 },
-                // redirect: "if_required" 
+                redirect: 'if_required'
             })
             const {payment_intent} = error || {}
             if(error) {

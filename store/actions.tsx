@@ -60,3 +60,4 @@ export const updateSubsModal = (data: any) => ({type: 'UPDATE_SUBS_MODAL', data}
 export const setCredits = (data:any) => ({type:'SET_CREDITS', data})
 export const setFreeCredits = (data:any) => ({type: 'SET_FREE_CREDITS', data})
 export const updateCurrentSub = (data:any) => ({type: 'UPDATE_CURRENT_SUB', data})
+export const updateCurrentVip = (data:any) => ({type:'UPDATE_CURRENT_VIP', data})

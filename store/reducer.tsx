@@ -54,10 +54,8 @@ export interface IGlobalState {
     premModal: boolean,
     subsModal: boolean,
 
-    currentSub: null | {
-        from: any,
-        to: any
-    }
+    currentSub: any,
+    currentVip: any
 }
 
 
@@ -90,7 +88,8 @@ export const globalState: IGlobalState = {
     },
     premModal: false,
     subsModal: false,
-    currentSub: null
+    currentSub: null,
+    currentVip: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -260,6 +259,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 currentSub: action.data
+            }
+        case 'UPDATE_CURRENT_VIP':
+            return {
+                ...state,
+                currentVip: action.data
             }
         default:
             return state;

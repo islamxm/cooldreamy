@@ -19,7 +19,9 @@ import {
 	updateUnreadMailCount, 
 	updatePremModal,
 	updateSubsModal,
-	setCredits
+	setCredits,
+	updateCurrentSub,
+	updateCurrentVip
 } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
@@ -149,11 +151,21 @@ const MainWrapper = ({
 				dispatch(setCredits(res))
 			})
 			service.getCurrentSub(token).then(res => {
-				console.log(res)
+				if(res?.id) {
+					dispatch(updateCurrentSub(res))
+				} else {
+					dispatch(updateCurrentSub(null))
+				}
+			})
+			service.getCurrentVip(token).then(res => {
+				if(res?.id) {
+					dispatch(updateCurrentVip(res))
+				} else {
+					dispatch(updateCurrentVip(null))
+				}
 			})
 		}
 	}, [token])
-
 
 	// useEffect(() => {
 	// 	if(pusherConfig && userId && !socketChannel) {
@@ -169,7 +181,6 @@ const MainWrapper = ({
 	// 		})
 	// 	}
 	// }, [pusherConfig, userId, socketChannel])
-
 
 	const getIndicators = () => {
 		if(token) {
