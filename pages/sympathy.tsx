@@ -34,10 +34,10 @@ const SymPage = () => {
             id: 'matches',
             label: locale?.sympathyPage.tabs.matches ?? ''
         },
-        {
-            id: 'likes',
-            label: locale?.sympathyPage.tabs.you_like ?? ''
-        },
+        // {
+        //     id: 'likes',
+        //     label: locale?.sympathyPage.tabs.you_like ?? ''
+        // },
         {
             id: 'inlikes',
             label: locale?.sympathyPage.tabs.likes_you ?? ''
