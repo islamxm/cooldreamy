@@ -18,6 +18,7 @@ import winkImg from '@/public/assets/images/wink-sticker.png';
 import { sortingChatList, sortingDialogList } from '@/helpers/sorting';
 import blur2 from '@/public/assets/images/censor-blur-effect-texture-isolated-blurry-pixel-color-censorship-element-naked-pixel-blur-nude-skin-censor-pattern-vector.jpg'
 import notify from '@/helpers/notify';
+import placeholder from '@/public/assets/images/avatar-placeholder.png';
 
 const service = new ApiService()
 
@@ -257,7 +258,7 @@ const DialogItemComponent:FC<I> = ({
                         <div className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
-                                image={avatar}
+                                image={(avatar && !avatar?.includes('cooldremy')) ? avatar : placeholder}
                                 size={40}
                                 />
                         </div>
@@ -268,7 +269,7 @@ const DialogItemComponent:FC<I> = ({
                         <div onClick={() => dispatch(updateCurrentProfileId(senderUser?.id))} className={`${styles.avatar} ${!showAvatar ? styles.hide : ''}`}>
                             <Avatar
                                 round
-                                image={avatar}
+                                image={(avatar && !avatar?.includes('cooldremy')) ? avatar : placeholder}
                                 size={40}
                                 />
                         </div>

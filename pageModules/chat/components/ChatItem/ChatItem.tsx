@@ -15,7 +15,7 @@ import IconButton from '@/components/IconButton/IconButton';
 import notify from '@/helpers/notify';
 import { updateCurrentProfileId, updateCurrentProfileUiid } from '@/store/actions';
 import chatMessageTypeVariants from '@/helpers/messageVariants';
-
+import placeholder from '@/public/assets/images/avatar-placeholder.png';
 const service = new ApiService()
 
 interface I extends chatItemPropsTypes {
@@ -138,7 +138,7 @@ const ChatItem = ({
                     <Avatar
                         size={63}
                         verified={is_confirmed_user == 1}
-                        image={user_thumbnail_url || user_avatar_url}    
+                        image={(user_avatar_url && !user_avatar_url?.includes('cooldremy')) ? user_avatar_url : placeholder}    
                         />
                 </div>
                 <div className={styles.body}>
@@ -219,7 +219,7 @@ const ChatItem = ({
                 <Avatar
                     size={63}
                     verified={is_confirmed_user == 1}
-                    image={user_thumbnail_url || avatar_url_thumbnail}    
+                    image={(user_avatar_url && !user_avatar_url?.includes('cooldremy')) ? user_avatar_url : placeholder}
                     />
             </div>
             <div className={styles.body}>

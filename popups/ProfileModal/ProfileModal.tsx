@@ -258,7 +258,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                         <Col span={24}>
                                             <div className={styles.user}>
                                                 <Avatar
-                                                    image={avatar_url_thumbnail || user_avatar_url}
+                                                    image={(user_avatar_url && !user_avatar_url?.includes('cooldremy')) ? user_avatar_url : placeholder}
                                                     style={{marginRight: 15}}
                                                     />
                                                 <UserTitle
