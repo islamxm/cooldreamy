@@ -95,7 +95,7 @@ const en: ILocale = {
           }
       },
       menu: {
-          get_premium: "Become VIP",
+          get_premium: "Become Premium",
           search: "Search",
           chats: "My Chats",
           feed: "Dating",

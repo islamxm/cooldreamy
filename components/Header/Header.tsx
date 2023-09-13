@@ -20,7 +20,7 @@ const service = new ApiService()
 
 const Header: React.FC<any> = () => {
     const dispatch = useAppDispatch()
-    const {token, socketChannel, isMenuOpen, locale, premiumData, currentVip} = useAppSelector(s => s)
+    const {token, socketChannel, isMenuOpen, locale, premiumData, currentSub} = useAppSelector(s => s)
     const {is_premium} = premiumData
     const [loginModal, setLoginModal] = useState(false)
     const {width} = useWindowSize()
@@ -133,7 +133,7 @@ const Header: React.FC<any> = () => {
                             width > 768 && (
                                 <div className={styles.main}>
                                     {
-                                        !currentVip && <div className={styles.prem}>
+                                        !currentSub && <div className={styles.prem}>
                                             <PremiumBtn/>
                                         </div>
                                     }
