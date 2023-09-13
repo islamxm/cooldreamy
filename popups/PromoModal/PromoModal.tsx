@@ -4,6 +4,7 @@ import {Modal, ModalFuncProps} from 'antd'
 import Button from '@/components/Button/Button';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
+import Router from 'next/router';
 
 
 const service = new ApiService()
@@ -58,6 +59,7 @@ const PromoModal:FC<ModalFuncProps> = (props) => {
                         <Button
                             text='Buy'
                             middle
+                            onClick={() => Router.push('/deposit-mb')}
                             />
                     </div>
                 </div>

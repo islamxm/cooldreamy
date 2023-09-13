@@ -14,11 +14,7 @@ const PremModal:FC<ModalFuncProps> = (props) => {
   const dispatch = useAppDispatch()
 
   const onGoToStore = () => {
-    if(width <= 768) {
-      Router.push('/deposit-mb')
-    } else {
-      Router.push('/premium')
-    }
+    Router.push('/deposit-mb')
     dispatch(updatePremModal(false))
   }
   

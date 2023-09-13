@@ -59,7 +59,7 @@ const PromoCard:FC<any> = (props) => {
                                     text={locale?.popups?.promo?.buy}
                                     middle
                                     onClick={() => {
-                                        Router.push('/deposit')
+                                        Router.push('/deposit-mb')
                                         onClose && onClose()
                                     }}
                                     />
