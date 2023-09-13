@@ -46,7 +46,7 @@ const Sidebar:FC = () => {
                     <Col span={24}>
                         <Button
                             text={locale?.global?.menu?.buy_credits}
-                            onClick={() => Router.push('/deposit')}
+                            onClick={() => Router.push('/deposit-mb?credits=1')}
                             middle
                             fill
                             variant={'default'}

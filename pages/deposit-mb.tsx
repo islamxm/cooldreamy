@@ -14,7 +14,11 @@ import { Elements } from "@stripe/react-stripe-js";
 import PayForm from "@/pageModules/deposit/components/PayForm/PayForm";
 import { useWindowSize } from "usehooks-ts";
 import Main from "@/pageModules/deposit/components/Main/Main";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
+import styles from '../pageModules/deposit-mob/components/Main/Main.module.scss';
+import getClassNames from "@/helpers/getClassNames";
+import {FiArrowLeft, FiArrowRight} from 'react-icons/fi'
+import Credits from "@/pageModules/deposit-mob/components/Credits/Credits";
 
 const service = new ApiService()
 
@@ -23,11 +27,12 @@ const PUBLIC_KEY_TEST = 'pk_test_51MzlPfFjkPZRdnX1dn6HeooarP7ShRYGfBoSNMCAfPRZPl
 
 const DepositPage = () => {
   const {width} = useWindowSize()
+  const {query} = useRouter()
   const payRef = useRef<HTMLDivElement>(null)
   const {token, locale, userData} = useAppSelector(s => s)
   const [activeTab, setActiveTab] = useState<any>('2')
   
-  const [selected, setSelected] = useState<{value: string | number, type: string} | null>({value: 4, type: 'subscription'})
+  const [selected, setSelected] = useState<{value: string | number, type: string} | null>({value: 5, type: 'subscription'})
 
   const [listPrem, setListPrem] = useState<any[]>([])
   const [listSub, setListSub] = useState<any[]>([])
@@ -51,12 +56,20 @@ const DepositPage = () => {
     }
   }
 
+  
+
   useEffect(() => {
-    if(activeTab == '2') {
-      setSelected({value: 4, type: 'subscription'})
-    } else setSelected(null)
-    setSecretKey('')
-  }, [activeTab])
+    if(query?.credits === '1') {
+      setActiveTab('3')
+      setSelected(null)
+    } else {
+      if(activeTab == '2') {
+        setSelected({value: 5, type: 'subscription'})
+      } else setSelected(null)
+      setSecretKey('')
+    }
+    
+  }, [activeTab, query])
 
   useEffect(() => {
     setSecretKey('')
@@ -88,10 +101,9 @@ const DepositPage = () => {
   const getSub = () => {
     if(token) {
       service.getPaySubs(token).then(res => {
-        console.log(res)
-          const m = res;
-          const rm = m.splice(0,1)
-          setListSub([...m])
+        const m = res;
+        const rm = m.splice(0,1)
+        setListSub([...m])
       })
     }
   }
@@ -198,9 +210,40 @@ const DepositPage = () => {
                   list={listSub}
                   />
       case '3':
-        return <Main/>
+        return <Credits/>
       default:
         return null
+    }
+  }
+
+
+  const onPrev = () => {
+    if(activeTab === '2') setActiveTab('1')
+    if(activeTab === '3') setActiveTab('2') 
+  }
+
+  const onNext = () => {
+    if(activeTab === '1') setActiveTab('2')
+    if(activeTab === '2') setActiveTab('3')
+  }
+
+  const switchNavLabel = () => {
+    switch(activeTab) {
+      case '1':
+        return {
+          prev: null,
+          next: 'Premium'
+        }
+      case '2':
+        return {
+          prev: 'VIP',
+          next: 'Credits'
+        }
+      case '3':
+        return {
+          prev: 'Premium',
+          next: null
+        }
     }
   }
 
@@ -208,7 +251,7 @@ const DepositPage = () => {
     <Container>
       <MainLayout>
         <Sidebar/>
-        <div style={{width: '100%'}}>
+        <div className={styles.d}>
           <Row gutter={[20,20]}>
             <Col span={24}>
               <Tabs
@@ -217,7 +260,27 @@ const DepositPage = () => {
                 />
             </Col>
             <Col span={24}>
-              {switchTabs()}
+              <div className={styles.wrapper}>
+                <button onClick={onPrev} className={getClassNames([styles.nav, styles.prev, activeTab === '1' && styles.disabled])}>
+                  <div className={styles.icon}>
+                    <FiArrowLeft/>
+                  </div>
+                  <div className={styles.label}>
+                    {switchNavLabel()?.prev}
+                  </div>
+                </button>
+                <div className={styles.body}>
+                  {switchTabs()}
+                </div>
+                <button onClick={onNext} className={getClassNames([styles.nav, styles.next, activeTab === '3' && styles.disabled])}>
+                  <div className={styles.icon}>
+                    <FiArrowRight/>
+                  </div>
+                  <div className={styles.label}>
+                    {switchNavLabel()?.next}
+                  </div>
+                </button>
+              </div>
             </Col>
             {
               <Col span={24}>

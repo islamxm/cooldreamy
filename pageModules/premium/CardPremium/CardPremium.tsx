@@ -22,8 +22,6 @@ const CardPremium = ({
     onAccept
 }: I) => {  
 
-    useEffect(() => console.log(list), [list])
-
     return (
         <div className={styles.wrapper}>
             <div className={styles.in}>

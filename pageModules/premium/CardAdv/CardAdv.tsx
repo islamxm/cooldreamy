@@ -7,8 +7,7 @@ import { useEffect } from 'react';
 
 const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], selected: any, onSelect: any, onAccept: (...args: any[]) => any, load: boolean}) => {
 
-    
-    useEffect(() => console.log(list), [list])
+   
     return (
         <div className={styles.wrapper}>
             <div className={styles.in}>

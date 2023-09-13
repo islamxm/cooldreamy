@@ -9,11 +9,11 @@ import { useEffect } from "react";
 const DepositPage = () => {
     const {width} = useWindowSize()
 
-    useEffect(() => {
-        if(width <= 768 && width !== 0) {
-            Router.replace('/deposit-mb')
-        }
-    }, [width])
+    // useEffect(() => {
+    //     if(width <= 768 && width !== 0) {
+    //         Router.replace('/deposit-mb')
+    //     }
+    // }, [width])
 
     return (
         <Container>
