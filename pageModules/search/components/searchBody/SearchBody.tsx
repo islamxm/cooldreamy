@@ -91,13 +91,12 @@ const SearchBody = () => {
 
 
 
-    const onSearch = () => {
+    const onSearch = (initPage?: number) => {
         if(currentPage) {
-            if(token && currentPage > 0 && country && age_range_end && age_range_start && filter_type) {
-                // setCurrentPage(1)
+            if(token && currentPage > 0 && filter_type) {
                 setLoad(true)
                 service.search({
-                    page: 1,
+                    page: initPage || currentPage,
                     filter_type: filter_type === 'all' ? undefined : filter_type, 
                     state: state?.label, 
                     country: country?.label == 'All' ? '' : country?.label, 
@@ -119,16 +118,18 @@ const SearchBody = () => {
     }
 
     useEffect(() => {
-        onSearch()
+        if(currentPage) {
+            onSearch()
+        }
     }, [currentPage])
 
     useEffect(() => {
-        if(country !== undefined && age_range_end !== undefined && filter_type !== undefined && state !== undefined) {
+        if(country !== undefined && age_range_end !== undefined && filter_type !== undefined && state !== undefined && prompt_targets !== undefined && prompt_finance_states !== undefined && token) {
             if(currentPage === 0 || currentPage > 1) {
                 setCurrentPage(1)
             } 
             if(currentPage === 1) {
-                onSearch()
+                onSearch(1)
             } 
         }
     }, [token, country, age_range_end, age_range_start, filter_type, state])

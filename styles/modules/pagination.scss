@@ -36,7 +36,7 @@
         align-items: center;
         justify-content: center;
         flex: 0 0 auto;
-        display: none;
+        // display: none;
         a {
             padding: 0;
         }
@@ -47,10 +47,10 @@
     }
 
     .ant-pagination-jump-next {
-        display: none;
+        // display: none;
     }
     .ant-pagination-options {
-        display: none;
+        // display: none;
     }
 
     .ant-pagination-item.ant-pagination-item-active {
