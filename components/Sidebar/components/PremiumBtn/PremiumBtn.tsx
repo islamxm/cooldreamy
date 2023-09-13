@@ -15,7 +15,7 @@ const PremiumBtn:FC = ({
             whileTap={{
                 scale: 0.9,
             }}
-            onClick={() => Router.push('/deposit-mb?tab=1')}
+            onClick={() => Router.push('/deposit-mb?tab=2')}
             transition={{ type: "spring", stiffness: 400, damping: 17 }} 
             whileHover={{
                 boxShadow: '0.872px 9.962px 20px rgba(148, 45, 217, 0.35)',

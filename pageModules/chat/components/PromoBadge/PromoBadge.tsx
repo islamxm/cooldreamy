@@ -20,7 +20,7 @@ const PromoBadge = () => {
                 <Col span={24}>
                     <div className={styles.action}>
                         <Button
-                            onClick={() => Router.push('/premium')}
+                            onClick={() => Router.push('/deposit-mb?tab=2')}
                             text={locale?.chatPage.premium.btn}
                             variant={'white'}
                             small
