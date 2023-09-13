@@ -97,12 +97,12 @@ const GirlCard:FC<IUser> = ({
                         } */}
                 </div>
                 <div onClick={() => id && dispatch(updateCurrentProfileId(id))} className={styles.img}>
-                    {/* <Image
+                    <Image
                         loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
                         src={(user_thumbnail_url && !user_thumbnail_url?.includes('cooldremy')) ? replaceSpace(user_thumbnail_url)  : placeholder}
                         width={300}
                         height={300}
-                        alt=""/> */}
+                        alt=""/>
                 </div>
                 <div className={styles.info}>
                     <Col span={24}>

@@ -56,20 +56,17 @@ const DepositPage = () => {
     }
   }
 
-  
-
   useEffect(() => {
-    if(query?.credits === '1') {
-      setActiveTab('3')
-      setSelected(null)
-    } else {
-      if(activeTab == '2') {
+    if(query && query?.tab) {
+      const tab = query?.tab
+      setActiveTab(tab) 
+      if(tab === '2') {
         setSelected({value: 5, type: 'subscription'})
-      } else setSelected(null)
-      setSecretKey('')
-    }
-    
-  }, [activeTab, query])
+      } else {
+        setSelected(null)
+      }
+    } else Router.push('deposit-mb?tab=2')
+  }, [query])
 
   useEffect(() => {
     setSecretKey('')
@@ -155,12 +152,6 @@ const DepositPage = () => {
     }
   }
 
-  useEffect(() => {
-    if(width > 768) {
-      // Router.replace('/deposit')
-    }
-  }, [width])
-
   const goToPayment = () => {
     if(width <= 768) {
         const top = payRef?.current?.getBoundingClientRect()?.top;
@@ -218,13 +209,13 @@ const DepositPage = () => {
 
 
   const onPrev = () => {
-    if(activeTab === '2') setActiveTab('1')
-    if(activeTab === '3') setActiveTab('2') 
+    if(activeTab === '2') Router.push('deposit-mb?tab=1')
+    if(activeTab === '3') Router.push('deposit-mb?tab=2')
   }
 
   const onNext = () => {
-    if(activeTab === '1') setActiveTab('2')
-    if(activeTab === '2') setActiveTab('3')
+    if(activeTab === '1') Router.push('deposit-mb?tab=2')
+    if(activeTab === '2') Router.push('deposit-mb?tab=3')
   }
 
   const switchNavLabel = () => {

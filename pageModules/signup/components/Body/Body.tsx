@@ -91,7 +91,6 @@ const Body:FC = () => {
     const [prompt_relationships, setPrompt_relationships] = useState([])
     const [prompt_careers, setPrompt_careers] = useState([])   
 
-
     const [selectedTargets, setSelectedTargets] = useState<any[]>([])
     const [selectedInterests, setSelectedIntersets] = useState<any[]>([])
     const [selectedFinance, setSelectedFinance] = useState<any[]>([])
@@ -100,7 +99,6 @@ const Body:FC = () => {
     const [selectedRl, setSelectedRl] = useState<any[]>([])
     const [selectedCareers, setSelectedCareers] = useState<any[]>([])
 
-
     useEffect(() => {
         LOCAL_STORAGE?.removeItem('cooldate-web-token')
         LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
@@ -108,8 +106,6 @@ const Body:FC = () => {
         dispatch(updateUserData(null))
         dispatch(updateUserId(null))
     }, [])
-
-
 
     useEffect(() => {
         if(router?.locale && token) {
@@ -124,7 +120,6 @@ const Body:FC = () => {
             })
         }
     }, [token, router])
-
 
     const switchStep = (step: number) => {
         switch(step) {
@@ -177,8 +172,6 @@ const Body:FC = () => {
     useEffect(() => {
         setNextBtn(false)
     }, [currentStep])
-
-
 
 
     const stepChange = () => {
