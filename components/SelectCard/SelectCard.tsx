@@ -26,24 +26,18 @@ const SelectCard:FC<selectCardPropsTypes> = ({
             {
                 isSelect && <motion.div className={styles.ind}></motion.div>
             }
-            <Col span={24}>
-                <Row gutter={[5,5]}>
-                    <Col span={24}>
-                        <div className={styles.img}>
-                            {
-                                image ? (
-                                    <Image width={90} height={90} src={image} alt={label}/>
-                                ) : null
-                            }
-                        </div>
-                    </Col>
-                    <Col span={24}>
-                        <div className={styles.label}>
-                            {label}
-                        </div>
-                    </Col>
-                </Row>
-            </Col>
+            <div className={styles.body}>
+                    <div className={styles.img}>
+                        {
+                            image ? (
+                                <Image width={90} height={90} src={image} alt={label}/>
+                            ) : null
+                        }
+                    </div>
+                    <div className={styles.label}>
+                        {label}
+                    </div>
+                </div>
             <Ripple
                 color='var(--light_purp_2)'
                 />
