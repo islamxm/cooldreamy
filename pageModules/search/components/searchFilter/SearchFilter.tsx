@@ -59,7 +59,13 @@ const SearchFilter:FC<searchFilterType> = ({
         if(width <= 768) setShowAll(false)
     }, [width])
     
+    const [localRange, setLocalRange] = useState<[number, number]>([18,70])
 
+    useEffect(() => {
+        if(age_range_end && age_range_start) {
+            setLocalRange([age_range_start, age_range_end])
+        }
+    }, [age_range_start, age_range_end])
 
     return (
         <div className={styles.wrapper}>
@@ -78,12 +84,20 @@ const SearchFilter:FC<searchFilterType> = ({
                                     style={{width: 140}}
                                     min={18}
                                     max={70}
+                                    // onChange={e => {
+                                    //     setage_range_start && setage_range_start(e[0])
+                                    //     setage_range_end && setage_range_end(e[1])
+                                    // }}
                                     onChange={e => {
+                                        setLocalRange([e[0], e[1]])
+                                    }}
+                                    onAfterChange={e => {
                                         setage_range_start && setage_range_start(e[0])
                                         setage_range_end && setage_range_end(e[1])
                                     }}
                                     range={true}
-                                    value={[age_range_start,age_range_end]}    
+                                    // value={[age_range_start,age_range_end]}    
+                                    value={[localRange[0], localRange[1]]}
                                     label={locale?.searchPage.filter.list.filter_age.label}
                                     />
                             </div>

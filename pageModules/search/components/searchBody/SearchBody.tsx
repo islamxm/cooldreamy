@@ -20,7 +20,7 @@ const SearchBody = () => {
     const {token, userData} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
    
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     
     const [targetList, setTargetList] = useState([])
@@ -94,6 +94,7 @@ const SearchBody = () => {
     const onSearch = (initPage?: number) => {
         if(currentPage) {
             if(token && currentPage > 0 && filter_type) {
+                console.log('SEARCH')
                 setLoad(true)
                 service.search({
                     page: initPage || currentPage,
@@ -112,22 +113,23 @@ const SearchBody = () => {
                 }).finally(() => {
                     setLoad(false)
                     setIsFilterChanged(true)
+                    setIsDrawerOpen(false)
                 })
             }
         }
     }
 
     useEffect(() => {
-        if(currentPage) {
+        if(token && currentPage) {
             onSearch()
         }
-    }, [currentPage])
+    }, [currentPage, token])
 
     useEffect(() => {
         if(country !== undefined && age_range_end !== undefined && filter_type !== undefined && state !== undefined && prompt_targets !== undefined && prompt_finance_states !== undefined && token) {
-            if(currentPage === 0 || currentPage > 1) {
+            if(currentPage > 1) {
                 setCurrentPage(1)
-            } 
+            }   
             if(currentPage === 1) {
                 onSearch(1)
             } 
@@ -138,7 +140,7 @@ const SearchBody = () => {
 
     useEffect(() => {
         getCountries()
-    }, [token])
+    }, [token, userData])
 
     const clearFilter = () => {
         setState(null)

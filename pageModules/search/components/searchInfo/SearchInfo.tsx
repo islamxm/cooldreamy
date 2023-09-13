@@ -58,7 +58,7 @@ const SearchInfo:FC<searchInfoType> = ({
                             key={index} 
                             onClick={() => {
                                 if(setCurrentPage) {
-                                    setCurrentPage(0)
+                                    // setCurrentPage(0)
                                     // setCurrentPage(1)
                                 }  
                                 setActiveId(item.id)

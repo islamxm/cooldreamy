@@ -94,7 +94,7 @@ const SearchDrawer:FC<I> = ({
                                         setCountry(v)
                                     }}
                                     onClear={clearStates}
-                                    list={defCountryList}
+                                    list={countries}
                                     />
                             </Col>
                             <Col span={12}>
