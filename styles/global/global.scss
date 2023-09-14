@@ -75,11 +75,14 @@ body.unavailable {
 
 
 main {
-    // padding-top: 75px;
+    
     overflow: hidden;
     flex: 1 0 auto;
     overflow-y: auto;
     
+}
+main.main-wp {
+    padding-top: 75px;
 }
 
 @media (max-width: 768px) {

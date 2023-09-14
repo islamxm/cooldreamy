@@ -17,6 +17,7 @@ import notify from '@/helpers/notify';
 import { useEffect } from 'react';
 import LOCAL_STORAGE from '@/helpers/localStorage';
 import getClassNames from '@/helpers/getClassNames';
+import { deauthorize } from '@/helpers/authApi';
 
 const service = new ApiService()
 
@@ -31,7 +32,6 @@ const Header: React.FC<any> = () => {
     const [active, setActive] = useState(false)
 
     const onScroll = () => {
-        console.log('onScroll')
         if(document.documentElement.scrollTop > 10) {
             setActive(true)
         } else setActive(false)
@@ -50,16 +50,13 @@ const Header: React.FC<any> = () => {
             service.logout(token).then(res => {
                 if(res?.message === 'success') {
                     socketChannel?.unsubscribe()
-
                     dispatch(updateToken(''))
                     dispatch(updateUserId(null))
                     dispatch(updateSocket(null))
-                    LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
-                    LOCAL_STORAGE?.removeItem('cooldate-web-token')
+                    deauthorize()
                     
-                    Router.push('/')
+                    Router.push('/start')
                     setLogoutModal(false)
-                    window.location.reload()
                 } else {
                     notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
@@ -67,12 +64,7 @@ const Header: React.FC<any> = () => {
         }
     }
 
-    const testGtag = () => {
-        window.gtag('event', 'conversion', {
-            send_to: 'AW-992358861/FuW7CJr87aMYEM3jmNkD'
-        })
-        Router.push('/signup')
-    }
+   
     
 
     return (
@@ -81,7 +73,7 @@ const Header: React.FC<any> = () => {
             animate={{y: '0%'}}
             transition={{type: 'spring'}}
             // className={`${styles.header} ${width <= 768 && (router?.pathname === '/' || router?.pathname === '/start') ? styles.show : ''}`}
-            className={getClassNames([styles.header, width <= 768 && (router?.pathname === '/' || router?.pathname === '/start') && styles.show, active && styles.active])}
+            className={getClassNames([styles.header, width <= 768 && (router?.pathname === '/' || router?.pathname === '/start') && styles.show, (active || router?.pathname !== '/' && router?.pathname !== '/start') && styles.active])}
             >
             <LoginModal
                 open={loginModal}
@@ -179,7 +171,7 @@ const Header: React.FC<any> = () => {
                                                 <div
                                                      
                                                     className={styles.item} 
-                                                    onClick={testGtag}>{locale?.global?.header?.login_btn}</div>
+                                                    >{locale?.global?.header?.login_btn}</div>
                                             </div>
                                         ) : (
                                             width > 768 ? (

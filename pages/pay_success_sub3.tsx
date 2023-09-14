@@ -1,11 +1,12 @@
 import Container from "@/components/Container/Container";
 import MainLayout from "@/components/MainLayout/MainLayout";
 import Main from "@/pageModules/pay_success/components/Main/Main";
-import Script from "next/script";
+import PrivateRoute from "@/hoc/PrivateRoute";
 const PaySuccess = () => {
 
     return (
-        <Container>
+        <PrivateRoute>
+            <Container>
             {/* <Script
                 id='fb-pixel-1'>
                 {
@@ -33,6 +34,7 @@ const PaySuccess = () => {
                 </div>
             </MainLayout>
         </Container>
+        </PrivateRoute>
     )
 }
 

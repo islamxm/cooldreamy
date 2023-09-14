@@ -1,14 +1,10 @@
 import styles from './Hero.module.scss';
-import { FC, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect } from 'react';
 import Container from '@/components/Container/Container';
-import SelectSex from '@/components/SelectSex/SelectSex';
 import { useState } from 'react';
 import {Row, Col} from 'antd';
 import Link from 'next/link';
 import {container, item} from '../../../../helpers/variantsOrderAnim';
-import Image from 'next/image';
-import phone1 from '@/public/assets/images/phone-1.svg';
-import phone2 from '@/public/assets/images/phone-2.svg';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
@@ -16,20 +12,33 @@ import Button from '@/components/Button/Button';
 import LoginModal from '@/components/LoginModal/LoginModal';
 import Input from '@/components/Input/Input';
 import BirthdaySelect from '@/pageModules/signup/components/BirthdaySelect/BirthdaySelect';
-import img from '@/public/assets/images/start-hero-bg.png';
 import getClassNames from '@/helpers/getClassNames';
-
+import ApiService from '@/service/apiService';
+import { useAppDispatch } from '@/hooks/useTypesRedux';
+import { updateUserData, updateToken } from '@/store/actions';
+import LOCAL_STORAGE from '@/helpers/localStorage';
+import { useRouter } from 'next/router';
+const service = new ApiService()
 
 const Hero: FC = ({}) => {
-    const [sex, setSex] = useState<'male' | 'female'>()
+    const router = useRouter()
+    const dispatch = useAppDispatch()
     const {scrollYProgress} = useScroll()
     const {locale} = useAppSelector(s => s)
     const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const [loginModal, setLoginModal] = useState(false)
 
     const [install, setInstall] = useState<any>(null)
-    
+    const [load, setLoad] = useState(false)
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [birthday, setBirthday] = useState<any>()
+    const [sex, setSex] = useState<'male' | 'female'>('male')
+
+    const [registered, setRegistered] = useState(false)
+    
     const sexChange = (value: 'male' | 'female') => {
         setSex(value)
     }
@@ -42,10 +51,6 @@ const Hero: FC = ({}) => {
     useEffect(() => {
         window.addEventListener('beforeinstallprompt', getInstallEvent)
     }, [])
-
-    
-
-    
 
     const onInstall = () => {
         if(install) {
@@ -60,6 +65,40 @@ const Hero: FC = ({}) => {
               });
         }
     }
+
+
+
+    const onSubmit = () => {
+        if(email && password && birthday && sex && name) {
+            setLoad(true)
+            service.register({
+                name,
+                password,
+                email,
+            }).then(res => {
+                if(res?.token) {
+                    service.updateMyProfile({
+                        gender: sex,
+                        birthday
+                    }, res?.token).then(data => {
+                        if(data?.id) {
+                            dispatch(updateToken(res?.token))
+                            dispatch(updateUserData(data))
+                            LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
+                            LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
+                            setRegistered(true)
+                        }
+                    })
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        if(registered) {
+            router?.push('/signup?signup_step=1', undefined, {shallow: true})
+        }
+    }, [registered])
 
 
     return (
@@ -84,24 +123,61 @@ const Hero: FC = ({}) => {
                         <motion.div className={styles.form}>
                             <Row gutter={[10,10]}>
                                 <Col span={24}>
+                                    {/* <SelectSex
+                                        value={sex}
+                                        onSelect={(e) => {
+                                            sexChange(e)
+                                            if(e === 'male') {
+                                                Router.push('/signup?gender=male')
+                                            }
+                                            if(e === 'female') {
+                                                Router.push('/signup?gender=female')
+                                            }
+                                        }}
+                                        /> */}
+                                    <div className={styles.sex}>
+                                        <Row gutter={[4,4]}>
+                                            <Col span={12}>
+                                                <div onClick={() => setSex('male')} className={getClassNames([styles.sex_item, sex === 'male' && styles.active, styles.male])}>
+                                                    I am a man
+                                                </div>
+                                            </Col>
+                                            <Col span={12}>
+                                                <div onClick={() => setSex('female')} className={getClassNames([styles.sex_item, sex === 'female' && styles.active, styles.female])}>
+                                                    I am a woman
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                </Col>
+                                <Col span={24}>
                                     <Input
                                         placeholder='Username'
+                                        value={name}
+                                        onChange={(e:ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <Input
                                         placeholder='E-mail'
+                                        value={email}
+                                        onChange={(e:ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <Input
                                         placeholder='Password'
                                         type='password'
+                                        value={password}
+                                        onChange={(e:ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                         />
                                 </Col>
                                 <Col span={24}>
                                     <BirthdaySelect
-                                        
+                                        minAge={18}
+                                        maxAge={70}
+                                        setValue={setBirthday}
+                                        value={birthday}
                                         />
                                 </Col>
                                 <Col span={24}>
@@ -114,6 +190,8 @@ const Hero: FC = ({}) => {
                                         <Button
                                             text='Найти свою пару'
                                             middle
+                                            load={load}
+                                            onClick={onSubmit}
                                             />
                                     </div>
                                 </Col>
@@ -124,18 +202,7 @@ const Hero: FC = ({}) => {
                         </div> */}
                         {/* <div className={styles.selects}>
                             <motion.div variants={item}>
-                                <SelectSex
-                                    value={sex}
-                                    onSelect={(e) => {
-                                        sexChange(e)
-                                        if(e === 'male') {
-                                            Router.push('/signup?gender=male')
-                                        }
-                                        if(e === 'female') {
-                                            Router.push('/signup?gender=female')
-                                        }
-                                    }}
-                                    />
+                                
                             </motion.div>
                         </div> */}
                     </div>
@@ -143,7 +210,7 @@ const Hero: FC = ({}) => {
                         <Row gutter={[15,15]}>
                             <Col span={24}>
                                 <Button 
-                                    onClick={() => Router.push('/signup')} 
+                                    // onClick={() => Router.push('/signup')} 
                                     text={locale?.global?.header.join_btn} 
                                     fill 
                                     middle/>

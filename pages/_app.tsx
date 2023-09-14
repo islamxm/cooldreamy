@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import MainWrapper from '@/components/MainWrapper/MainWrapper';
 import store from '@/store/store';
 import 'react-toastify/dist/ReactToastify.css';
-import PrivateRoute from '@/hoc/CheckAuth';
+import CheckAuth from '@/hoc/CheckAuth';
 import { ToastContainer } from 'react-toastify';
 import { ConfigProvider } from 'antd';
 import ruRu from 'antd/locale/ru_RU';
@@ -60,22 +60,22 @@ function App({ Component, pageProps }: AppProps) {
 		setWc(false)
 	}
 
-	useEffect(() => {
-		swRegister({
-			path: '/sw.js',
-			onRegistered: (serviceWorker) => {
-				if(serviceWorker === null) {
-					//ServiceWorker not supported
-					return;
-				}
-				notificationRequestPermission(permissionStatus => {
-					if(permissionStatus === 'granted') {
+	// useEffect(() => {
+	// 	swRegister({
+	// 		path: '/sw.js',
+	// 		onRegistered: (serviceWorker) => {
+	// 			if(serviceWorker === null) {
+	// 				//ServiceWorker not supported
+	// 				return;
+	// 			}
+	// 			notificationRequestPermission(permissionStatus => {
+	// 				if(permissionStatus === 'granted') {
 						
-					}
-				})
-			}
-		})
-	}, [])
+	// 				}
+	// 			})
+	// 		}
+	// 	})
+	// }, [])
 	
 
 
@@ -107,7 +107,6 @@ function App({ Component, pageProps }: AppProps) {
 				<title>Cool dreamy</title>
 			</Head>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
-				<PrivateRoute>
 					<MainWrapper>	
 						<AnimatePresence>
 							{wc && <WcLoader/>}
@@ -116,7 +115,7 @@ function App({ Component, pageProps }: AppProps) {
 						{
 							(width > 768 && router?.pathname !== '/unavailable') && <Header/>
 						}
-						<main ><Component {...pageProps} /></main>
+						<main className={getClassNames([(router?.pathname !== '/start' && router?.pathname !== '/') && 'main-wp'])} ><Component {...pageProps} /></main>
 						<Navbar/>
 						{
 							(width > 768 
@@ -125,8 +124,6 @@ function App({ Component, pageProps }: AppProps) {
 							&& <Footer/>
 						}
 					</MainWrapper>		
-				</PrivateRoute>
-				
 			</ConfigProvider>
 
 		</Provider>

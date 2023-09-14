@@ -47,7 +47,7 @@ export default function Document() {
         <meta property="og:url" content="https://yourdomain.com" />
         <meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" /> */}
 
-        <script
+        {/* <script
           id='gtm-gtm'
           type='text/javascript'
           dangerouslySetInnerHTML={{
@@ -96,39 +96,11 @@ export default function Document() {
             });`
           }}
           />
-        {/* <script
-          id='fb-pixel-1'
-          async
-          type='text/javascript'
-          dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window,document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');; "‌")
-            fbq('init', '618085683724877');
-            fbq('track', 'PageView');`
-          }}
-          /> */}
-        {/* <script
-          id='twitter-pixel-1'
-          async
-          type='text/javascript'
-          dangerouslySetInnerHTML={{
-            __html: `!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
-            },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
-            a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
-            twq('config','ogcsq');`
-          }}
-          /> */}
         <noscript
             dangerouslySetInnerHTML={{
                 __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
             }}
-          />
+          /> */}
       </Head>
       <body>
         <Main />

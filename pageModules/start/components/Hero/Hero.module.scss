@@ -52,6 +52,56 @@
                 width: 100%;
                 box-shadow: 0 0 50px var(--violet);
 
+                .sex {
+
+                    .sex_item.active {
+                        border-color: var(--violet);
+                        color: var(--violet);
+                        background-color: var(--light_purp_2);
+                    }
+
+                    .sex_item {
+                        cursor: pointer;
+                        border-radius: 30px;
+                        border: 2px solid var(--light_purp_2);
+                        padding: 10px;
+                        position: relative;
+                        padding-left: 50px;
+                        transition: all .3s ease;
+                        font-size: 18px;
+                        line-height: 150%;
+
+
+                        &:hover {
+                            border-color: var(--violet);
+                            color: var(--violet);
+                        }
+
+                        &:after {
+                            position: absolute;
+                            content: '';
+                            top: calc(50% - 15px);
+                            left: 10px;
+                            width: 30px;
+                            height: 30px;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-size: contain;
+                        }
+                    }
+
+                    .sex_item.male {
+                        &:after {
+                            background-image: url('../../../../public/assets/icons/male-icon.svg');
+                        }
+                    }
+                    .sex_item.female {
+                        &:after {
+                            background-image: url('../../../../public/assets/icons/female-icon.svg');
+                        }
+                    }
+                }
+
                 .terms {
                     font-size: 15px;
                     font-weight: 500;

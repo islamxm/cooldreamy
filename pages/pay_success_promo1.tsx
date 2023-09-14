@@ -5,7 +5,8 @@ import Main from "@/pageModules/pay_success/components/Main/Main";
 import ApiService from "@/service/apiService";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import Script from "next/script";
+import PrivateRoute from "@/hoc/PrivateRoute";
+
 const service = new ApiService()
 
 const PaySuccess = () => {
@@ -21,7 +22,8 @@ const PaySuccess = () => {
 
 
     return (
-        <Container>
+        <PrivateRoute>
+            <Container>
             {/* <Script
                 id='fb-pixel-1'>
                 {
@@ -49,6 +51,7 @@ const PaySuccess = () => {
                 </div>
             </MainLayout>
         </Container>
+        </PrivateRoute>
     )
 }
 

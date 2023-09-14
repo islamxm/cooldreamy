@@ -43,7 +43,7 @@ const Body:FC = () => {
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState(0)
+    const [currentStep, setCurrentStep] = useState<any>(undefined)
     const [nextBtn, setNextBtn] = useState(false)
 
     // 1 STEP
@@ -83,6 +83,13 @@ const Body:FC = () => {
         }
     }, [router])
 
+    useEffect(() => {
+        if(router && router?.query && router?.query?.signup_step) {
+            const queryStep = Number(router?.query?.signup_step)
+            setCurrentStep(queryStep)
+        }
+    }, [router])
+
     const [prompt_targets, setPrompt_targets] = useState([])
     const [prompt_interests, setPrompt_interests] = useState([])
     const [prompt_finance_states, setPrompt_finance_states] = useState([])
@@ -99,13 +106,13 @@ const Body:FC = () => {
     const [selectedRl, setSelectedRl] = useState<any[]>([])
     const [selectedCareers, setSelectedCareers] = useState<any[]>([])
 
-    useEffect(() => {
-        LOCAL_STORAGE?.removeItem('cooldate-web-token')
-        LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
-        dispatch(updateToken(null))
-        dispatch(updateUserData(null))
-        dispatch(updateUserId(null))
-    }, [])
+    // useEffect(() => {
+    //     LOCAL_STORAGE?.removeItem('cooldate-web-token')
+    //     LOCAL_STORAGE?.removeItem('cooldate-web-user-id')
+    //     dispatch(updateToken(null))
+    //     dispatch(updateUserData(null))
+    //     dispatch(updateUserId(null))
+    // }, [])
 
     useEffect(() => {
         if(router?.locale && token) {
@@ -158,7 +165,7 @@ const Body:FC = () => {
             case 8:
                 return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
             case 9:
-                return <Step9 nextStep={() => setCurrentStep(s => s + 1)}/>
+                return <Step9 nextStep={() => Router.push('/signup?signup_step=10')}/>
             case 10:
                 return <Step10 about={about} setAbout={setAbout}/>
             // case 11:
@@ -189,7 +196,7 @@ const Body:FC = () => {
                     service.updateMyProfile(body, token).then(res => {
                         if(res?.id) {
                             dispatch(updateUserData(res))
-                            setCurrentStep(s => s + 1)
+                            Router.push('/signup?signup_step=1')
                         } else {
                             notify(locale?.global?.notifications?.error_default, 'ERROR')
                         }
@@ -224,10 +231,8 @@ const Body:FC = () => {
                         
                         LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
                         LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
-                        // Cookies.set('cooldate-web-user-id', res?.id)
-                        // Cookies.set('cooldate-web-token', res?.token)
                         setRegistered(true)
-                        setCurrentStep(s => s + 1)
+                        Router.push(`/signup?signup_step=${currentStep + 1}`)
                     }
                 }).finally(() => setLoad(false))
             }
@@ -236,7 +241,7 @@ const Body:FC = () => {
         }
      
         if(currentStep > 0 && currentStep < 10) {
-            setCurrentStep(s => s + 1)
+            Router.push(`/signup?signup_step=${currentStep + 1}`)
         }
         
         if(currentStep === 10) {
@@ -256,9 +261,8 @@ const Body:FC = () => {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         service.getMyProfile(token).then(profile => {
-                            if(!profile?.avatar_url) {
-                                Router.push(`/search`)
-                            } else Router.push(`/search`)
+                            alert('TO SEARCH')
+                            router?.push('/search')
                         })
 
                         service.signupEnd(token).finally(() => setLoad(false))
@@ -362,7 +366,9 @@ const Body:FC = () => {
                                                     middle
                                                     fill
                                                     variant={'white'}
-                                                    onClick={() => setCurrentStep(s => s - 1)}
+                                                    onClick={() => {
+                                                        Router.push(`/signup?signup_step=${currentStep - 1}`)
+                                                    }}
                                                     />
                                             )
                                         }

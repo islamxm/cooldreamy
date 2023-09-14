@@ -12,6 +12,7 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 import parse from 'html-react-parser';
 import Router from 'next/router';
 import img from '@/public/assets/images/start-last-img.png';
+import goToTop from '@/helpers/goToTop';
 
 
 
@@ -44,7 +45,7 @@ const Last:FC = () => {
                                 <Col span={24}>
                                     <motion.div className={styles.action} variants={item}>
                                         <Button
-                                            onClick={() => Router.push('/signup')}
+                                            onClick={goToTop}
                                             middle={width <= 768}
                                             text={locale?.startPage?.start_meet_btn}
                                             />

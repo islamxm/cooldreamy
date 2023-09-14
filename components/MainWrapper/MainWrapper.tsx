@@ -69,20 +69,20 @@ const MainWrapper = ({
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
 
-	useEffect(() => {
-		if(token && query && typeof query?.token === 'string') {
-			service.verifyEmail(token, query?.token).then(res => {
-				if(res === 200) {
-					notify(lc?.global?.notifications?.success_email_verify, 'SUCCESS')
-					service.getMyProfile(token).then(userData => {
-						dispatch(updateUserData(userData))
-					})
-				} else {
-					notify(lc?.global?.notifications?.error_email_verify, 'ERROR')
-				}
-			})
-		}
-	}, [token, query])
+	// useEffect(() => {
+	// 	if(token && query && typeof query?.token === 'string') {
+	// 		service.verifyEmail(token, query?.token).then(res => {
+	// 			if(res === 200) {
+	// 				notify(lc?.global?.notifications?.success_email_verify, 'SUCCESS')
+	// 				service.getMyProfile(token).then(userData => {
+	// 					dispatch(updateUserData(userData))
+	// 				})
+	// 			} else {
+	// 				notify(lc?.global?.notifications?.error_email_verify, 'ERROR')
+	// 			}
+	// 		})
+	// 	}
+	// }, [token, query])
 
 
 	useEffect(() => {
@@ -95,20 +95,20 @@ const MainWrapper = ({
 	}, [locale])
 
 
-	useEffect(() => {
-		if(window?.navigator?.language) {
-			if(window?.navigator?.language === 'ru') {
-				if(asPath) {
-					// push(asPath, undefined, {locale: 'ru'})
-					push(asPath, undefined, {locale: 'en'})
-				}
-			} else {
-				if(asPath) {
-					push(asPath, undefined, {locale: 'en'})
-				}
-			}
-		}
-	}, [])
+	// useEffect(() => {
+	// 	if(window?.navigator?.language) {
+	// 		if(window?.navigator?.language === 'ru') {
+	// 			if(asPath) {
+	// 				// push(asPath, undefined, {locale: 'ru'})
+	// 				push(asPath, undefined, {locale: 'en'})
+	// 			}
+	// 		} else {
+	// 			if(asPath) {
+	// 				push(asPath, undefined, {locale: 'en'})
+	// 			}
+	// 		}
+	// 	}
+	// }, [])
 
 	
 	useEffect(() => {
@@ -194,13 +194,13 @@ const MainWrapper = ({
 		}
 	}
 
-	useEffect(() => {
-		let tm:any;
-		if(token) {
-			getIndicators()
-			tm = setInterval(getIndicators, 4000)
-		}
-	}, [token])
+	// useEffect(() => {
+	// 	let tm:any;
+	// 	if(token) {
+	// 		getIndicators()
+	// 		tm = setInterval(getIndicators, 4000)
+	// 	}
+	// }, [token])
 
 
 	// useEffect(() => {

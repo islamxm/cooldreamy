@@ -3,8 +3,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Container from "@/components/Container/Container";
 import { Row, Col } from "antd";
 import SearchBody from "@/pageModules/search/components/searchBody/SearchBody";
-import Head from "next/head";
-import Script from "next/script";
+import PrivateRoute from "@/hoc/PrivateRoute";
 // import { useAppSelector } from "@/hooks/useTypesRedux";
 // import { useEffect, useState } from "react";
 
@@ -22,7 +21,8 @@ const SearchPage = () => {
     // }, [userData])
 
     return (
-        <Container>
+        <PrivateRoute>
+            <Container>
             {/* <VerifyEmailModal
                 open={modal}
                 // onCancel={() => Router.push('/feed')}
@@ -64,6 +64,7 @@ const SearchPage = () => {
                 
             </MainLayout>
         </Container>
+        </PrivateRoute>
     )
 
 }

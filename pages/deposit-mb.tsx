@@ -19,7 +19,7 @@ import styles from '../pageModules/deposit-mob/components/Main/Main.module.scss'
 import getClassNames from "@/helpers/getClassNames";
 import {FiArrowLeft, FiArrowRight} from 'react-icons/fi'
 import Credits from "@/pageModules/deposit-mob/components/Credits/Credits";
-
+import PrivateRoute from "@/hoc/PrivateRoute";
 const service = new ApiService()
 
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
@@ -239,7 +239,8 @@ const DepositPage = () => {
   }
 
   return (
-    <Container>
+    <PrivateRoute>
+      <Container>
       <MainLayout>
         <Sidebar/>
         <div className={styles.d}>
@@ -293,6 +294,7 @@ const DepositPage = () => {
         </div>
       </MainLayout>
     </Container>
+    </PrivateRoute>
   )
 }
 

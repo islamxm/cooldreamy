@@ -13,11 +13,11 @@ import { useAppSelector } from "@/hooks/useTypesRedux";
 import { useAppDispatch } from "@/hooks/useTypesRedux";
 import { decSympLikes, decSympWathces } from "@/store/actions";
 import styles from '../pageModules/sympathy/sympathy.module.scss';
+import PrivateRoute from "@/hoc/PrivateRoute";
 
 const service = new ApiService()
 
 const SymPage = () => {
-    const dispatch = useAppDispatch()
     const {token, locale, sympCountData} = useAppSelector(s => s)
     const {query} = useRouter()
     const [activeTab, setActiveTab] = useState<sympGroupTypes | any>('');
@@ -196,7 +196,8 @@ const SymPage = () => {
 
 
     return (
-        <Container>
+        <PrivateRoute>
+            <Container>
             <MainLayout>
                 <Sidebar/>
                 <div className={styles.wrapper}>
@@ -226,6 +227,7 @@ const SymPage = () => {
                 </div>
             </MainLayout>
         </Container>
+        </PrivateRoute>
     )
 }
 

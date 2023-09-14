@@ -10,6 +10,7 @@ import UserCardMob from "@/pageModules/profile/components/UserCardMob/UserCardMo
 import { useWindowSize } from "usehooks-ts";
 import { useEffect } from "react";
 import {Row, Col} from 'antd';
+import PrivateRoute from "@/hoc/PrivateRoute";
 import { 
     StatusCredits, 
     StatusPremium, 
@@ -20,12 +21,9 @@ const Profile = () => {
     const {userData, locale} = useAppSelector(s => s)
     const {width} = useWindowSize()
 
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
-
     return (
-        <Container>
+        <PrivateRoute>
+            <Container>
             <MainLayout>
                 <Sidebar/>
                 <UserLayout
@@ -72,6 +70,7 @@ const Profile = () => {
                     />
             </MainLayout>
         </Container>
+        </PrivateRoute>
     )
 }
 
