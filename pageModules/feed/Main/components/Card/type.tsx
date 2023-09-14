@@ -16,5 +16,7 @@ export interface cardPropsType {
     leaveX: {id: any, x: any} | null,
     setLeaveX: (...args: any[]) => any
     active?: boolean,
-    removeCard: (...args: any[]) => any
+    removeCard: (...args: any[]) => any,
+    disable: boolean,
+    setDisable: (...args:any[]) => any
 }

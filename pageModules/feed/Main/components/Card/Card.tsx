@@ -9,6 +9,7 @@ import {CgClose} from 'react-icons/cg';
 import {HiHeart} from 'react-icons/hi';
 import logo from '@/public/assets/images/logo-big.svg';
 import UserTitle from '@/components/UserTitle/UserTitle';
+import getClassNames from '@/helpers/getClassNames';
 
 
 const Card:FC<cardPropsType> = ({
@@ -18,7 +19,10 @@ const Card:FC<cardPropsType> = ({
     removeCard,
 
     leaveX,
-    setLeaveX    
+    setLeaveX,
+
+    disable,
+    setDisable
 }) => {
     const {age,
         user_avatar_url,
@@ -37,24 +41,18 @@ const Card:FC<cardPropsType> = ({
     } = card
 
     const [rotate, setRotate] = useState(1)
-    // const [leaveX, setLeaveX] = useState<number | string>(0);
     const [leaveY, setLeaveY] = useState(0);
 
     const onDragEnd = (_e: any, info: PanInfo) => {
-        // if (info.offset.y < -100) {
-        //   setLeaveY(-2000);
-        //   removeCard(card, "superlike");
-        //   return;
-        // }
         if (info.offset.x > 100) {
-        //   setLeaveX('100%');
           setLeaveY(info.offset.y)
           removeCard(card, "like");
+          setDisable(true)
         }
         if (info.offset.x < -100) {
-        //   setLeaveX('-100%');
           setLeaveY(info.offset.y)
           removeCard(card, "nope");
+          setDisable(true)
         }
         setLiking(false)
         setCanceling(false)
@@ -77,8 +75,11 @@ const Card:FC<cardPropsType> = ({
 
 
 
+
+
     return (
         <>
+            
         {
             active ? (
                 <motion.div
@@ -94,7 +95,7 @@ const Card:FC<cardPropsType> = ({
                     scale: 0.5,
                     transition: { duration: .5},
                     }}
-                    transition={{ease: [0,0,1,1], duration: .1}}
+                    transition={{ease: [0,0,1,1], duration: 0.1}}
                     className={styles.wrapper}
                     >
                     <AnimatePresence>
@@ -196,6 +197,7 @@ const Card:FC<cardPropsType> = ({
             </div>
             )
         }
+        
         </>
     )
 }

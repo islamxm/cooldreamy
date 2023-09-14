@@ -11,6 +11,7 @@ import img from '@/public/assets/images/girl-big.png';
 import { AnimatePresence } from 'framer-motion';
 import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import getClassNames from '@/helpers/getClassNames';
 
 const service = new ApiService()
 
@@ -21,6 +22,8 @@ export type ResultType = { [k in SwipeType]: number };
 
 const Main = () => {
     const {token} = useAppSelector(s => s);
+
+    const [disable, setDisable] = useState(false)
 
 
 
@@ -41,6 +44,19 @@ const Main = () => {
     const [canceling, setCanceling] = useState(false)
 
     const [leaveX, setLeaveX] = useState<any>(null)
+
+    useEffect(() => {
+        let tm:any;
+        if(disable) {
+            tm = setTimeout(() => {
+                setDisable(false)
+            }, 1500)
+        }
+        return () => {
+            clearInterval(tm)
+        }
+        
+    }, [disable])
         
 
     
@@ -174,7 +190,10 @@ const Main = () => {
                 id={list[0]?.id}
                 onCancel={closeCreateChatModal}
                 /> */}
-            <div className={styles.slider}>
+            <div className={getClassNames([styles.slider])}>
+                {
+                    disable && <div className={styles.mask}></div>
+                }
                 <AnimatePresence>
                         {
                             list?.map((item, index) => (
@@ -194,16 +213,21 @@ const Main = () => {
                                         canceling,
                                         liking
                                     }}
+                                    disable={disable}
+                                    setDisable={setDisable}
                                     />
                             ))
                         }
                 </AnimatePresence>
             </div>
-            <div className={styles.action}>
+            <div className={getClassNames([styles.action, disable && styles.disabled])}>
                 <div className={`${styles.item} ${canceling ? styles.active : ''}`}>
                     <IconButton
                         disabled={list?.length === 0}
-                        onClick={() => removeCard(list[0], 'nope')}
+                        onClick={() => {
+                            removeCard(list[0], 'nope')
+                            setDisable(true)
+                        }}
                         variant={'danger'}
                         icon={<CgClose size={40} color='#fff'/>}
                         />
@@ -220,7 +244,10 @@ const Main = () => {
                 <div className={`${styles.item} ${liking ? styles.active : ''}`}>
                     <IconButton
                         disabled={list?.length === 0}
-                        onClick={() => removeCard(list[0], 'like')}
+                        onClick={() => {
+                            removeCard(list[0], 'like')
+                            setDisable(true)
+                        }}
                         icon={<HiHeart size={35}/>}
                         />
                 </div>
