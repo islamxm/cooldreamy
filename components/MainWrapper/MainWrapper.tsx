@@ -325,7 +325,7 @@ const MainWrapper = ({
 				open={soonModal}
 				onCancel={() => dispatch(updateSoonModal(false))}
 				/>
-            <div className={styles.wrapper}>
+        <div className={styles.wrapper}>
 				{children}
 			</div>
         </>

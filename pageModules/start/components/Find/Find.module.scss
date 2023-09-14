@@ -1,0 +1,31 @@
+.wrapper {
+  .in {
+    padding: 50px 0;
+
+    .title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 600;
+    }
+
+    .body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      .img {
+        width: 100%;
+        height: 100%; 
+        object-fit: contain;
+        display: flex;
+      }
+    }
+    .action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+  }
+}

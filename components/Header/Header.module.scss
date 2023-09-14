@@ -1,22 +1,12 @@
 .header {
     padding: 12px 0;
-    background-color: #fff;
+    // background-color: #fff;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
-
-    &:after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        content: '';
-        transform: translateY(-50%);
-    }
+    transition: all .3s ease;
 
     .inner {
         position: relative;
@@ -60,16 +50,20 @@
                 .item {
                     color: var(--violet);
                     transition: all .3s ease;
-                    text-transform: uppercase;
                     font-size: 15px;
                     line-height: 21px;
                     margin: 0 12px;
                     font-weight: 500;
                     cursor: pointer;
-                    letter-spacing: 5px;
+                    
+                    border: 1px solid #fff;
+                    border-radius: 20px;
+                    color: #fff;
+                    padding: 10px 40px;
                     
                     &:hover {
                         color: var(--purp);
+                        border-color: var(--purp);
                     }
 
                     &:last-child {
@@ -80,6 +74,21 @@
 
             .prem {
                 margin: 0 10px;
+            }
+        }
+    }
+}
+
+.header.active {
+    background-color: #fff;
+
+    .inner {
+        .main {
+            .auth {
+                .item {
+                    color: var(--purp);
+                    border-color: var(--purp);
+                }
             }
         }
     }

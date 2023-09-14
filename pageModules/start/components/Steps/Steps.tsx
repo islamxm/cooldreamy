@@ -6,6 +6,10 @@ import StepItem from './components/StepItem/StepItem';
 import { container} from '@/helpers/variantsOrderAnim';
 import Router from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import img1 from '@/public/assets/images/start-steps-1.svg'
+import img2 from '@/public/assets/images/start-steps-2.svg'
+import img3 from '@/public/assets/images/start-steps-3.svg'
+import Image from 'next/image';
 
 const Steps = () => {
     const {locale} = useAppSelector(s => s)
@@ -33,53 +37,67 @@ const Steps = () => {
                         whileInView="visible"
                         viewport={{once: true}}
                         className={styles.main}>
-                        <motion.div 
-                            variants={{
-                                hidden: { width: '0%' },
-                                visible: {
-                                    width: '100%',
-                                    transition: {
-                                        duration: 1
-                                    }
-                                },
-                            }}
-                            className={styles.line}></motion.div>
                             <div className={styles.list}>
                                 <div
                                     className={styles.item}
                                     >
                                     <StepItem
-                                        value={1}
-                                        total={3}
-                                        label={locale?.startPage?.start_steps_1}
+                                        icon={
+                                            <Image
+                                            src={img1}
+                                            alt=""
+                                            />
+                                        }
+                                        text={
+                                            <>
+                                            Cool Dreamy является <span>надежным</span> сайтом, имеет сертификат безопасности TrustedSite!
+                                            </>
+                                        }
+
                                         />
                                 </div>
                                 <div
                                     className={styles.item}
                                     >
                                     <StepItem
-                                        value={2}
-                                        total={3}
-                                        label={locale?.startPage?.start_steps_2}
+                                        icon={
+                                            <Image
+                                            src={img2}
+                                            alt=""
+                                            />
+                                        }
+                                        text={
+                                            <>
+                                            Cool Dreamy входит в <span>десятку лучших сайтов</span> знакомств по версии iDate Award!
+                                            </>
+                                        }
                                         />
                                 </div>
                                 <div
                                     className={styles.item}
                                     >
                                     <StepItem
-                                        value={3}
-                                        total={3}
-                                        label={locale?.startPage?.start_steps_3}
+                                        text={
+                                            <>
+                                            На сайте Cool Dreamy <span>нашли идеальную пару</span> более 5 000 пользователей!   
+                                            </>
+                                        }
+                                        icon={
+                                            <Image
+                                            src={img3}
+                                            alt=""
+                                            />
+                                        }
                                         />
                                 </div>
                             </div>
                     </motion.div>
-                    <div className={styles.action}>
+                    {/* <div className={styles.action}>
                         <Button
                             onClick={() => Router.push('/signup')}
                             text={locale?.startPage?.start_steps_btn}
                             />
-                    </div>
+                    </div> */}
                 </div>
             </Container>
         </motion.div>

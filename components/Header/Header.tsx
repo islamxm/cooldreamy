@@ -14,7 +14,9 @@ import { useWindowSize } from 'usehooks-ts';
 import PremiumBtn from '../Sidebar/components/PremiumBtn/PremiumBtn';
 import ApiService from '@/service/apiService';
 import notify from '@/helpers/notify';
+import { useEffect } from 'react';
 import LOCAL_STORAGE from '@/helpers/localStorage';
+import getClassNames from '@/helpers/getClassNames';
 
 const service = new ApiService()
 
@@ -26,6 +28,21 @@ const Header: React.FC<any> = () => {
     const {width} = useWindowSize()
     const router = useRouter()
     const [logoutModal, setLogoutModal] = useState(false)
+    const [active, setActive] = useState(false)
+
+    const onScroll = () => {
+        console.log('onScroll')
+        if(document.documentElement.scrollTop > 10) {
+            setActive(true)
+        } else setActive(false)
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll)
+        return () => {
+            window.removeEventListener('scroll', onScroll)
+        }
+    }, [])
 
     
     const onLogout = () => {
@@ -63,7 +80,9 @@ const Header: React.FC<any> = () => {
             initial={{y: '-100%'}}
             animate={{y: '0%'}}
             transition={{type: 'spring'}}
-            className={`${styles.header} ${width <= 768 && (router?.pathname === '/' || router?.pathname === '/start') ? styles.show : ''}`}>
+            // className={`${styles.header} ${width <= 768 && (router?.pathname === '/' || router?.pathname === '/start') ? styles.show : ''}`}
+            className={getClassNames([styles.header, width <= 768 && (router?.pathname === '/' || router?.pathname === '/start') && styles.show, active && styles.active])}
+            >
             <LoginModal
                 open={loginModal}
                 onCancel={() => setLoginModal(false)}
@@ -118,7 +137,6 @@ const Header: React.FC<any> = () => {
                                     !token ? (
                                         <div className={styles.auth}>
                                             <span onClick={() => setLoginModal(true)} className={styles.item}>{locale?.global?.header?.login_btn}</span>
-                                            <Link className={styles.item} href={'/signup'}>{locale?.global?.header?.join_btn}</Link>
                                         </div>
                                     ) : (
                                         width > 768 ? (
@@ -158,8 +176,10 @@ const Header: React.FC<any> = () => {
                                     {
                                         !token ? (
                                             <div className={styles.auth}>
-                                                <span onClick={() => setLoginModal(true)} className={styles.item}>{locale?.global?.header?.join_btn}</span>
-                                                <div className={styles.item} onClick={testGtag}>{locale?.global?.header?.login_btn}</div>
+                                                <div
+                                                     
+                                                    className={styles.item} 
+                                                    onClick={testGtag}>{locale?.global?.header?.login_btn}</div>
                                             </div>
                                         ) : (
                                             width > 768 ? (

@@ -1,5 +1,5 @@
 export type StepItemPropsTypes = {
-    total: number,
-    value: number,
-    label: string
+    icon:any,
+    text: any
+
 }

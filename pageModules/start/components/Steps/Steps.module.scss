@@ -1,12 +1,12 @@
 .steps {
     position: relative;
     z-index: 2;
-    margin-top: -70px;
+    // margin-top: -70px;
 
     .inner {
         min-height: 140px;
-        background-color: #fff;
-        border-radius: 44px;
+        
+        
         padding: 25px 15px;
         padding-bottom: 0;
     }
@@ -15,24 +15,16 @@
         position: relative;
         overflow: hidden;
 
-        .line {
-            position: absolute;
-            height: 2px;
-            width: 100%;
-            background-color: var(--violet);
-            top: calc(50% - 1px);
-            left: 0;
-        }
-
         .list {
             display: flex;  
-            margin-left: -50px;
-            margin-right: -50px;    
+            margin-left: -10px;
+            margin-right: -10px;    
             // justify-content: space-between;
 
             .item {
                 width: 100%;
-                padding: 0 50px;
+                margin: 0 10px;
+                width: calc((100% / 3) - 20px);
             }
         }
 

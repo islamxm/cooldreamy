@@ -9,6 +9,7 @@ import { useWindowSize } from "usehooks-ts";
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import Head from "next/head";
 import Header from "@/components/Header/Header";
+import Find from "@/pageModules/start/components/Find/Find";
 
 const StartPage: React.FC = () => {
     const {width} = useWindowSize()
@@ -28,6 +29,7 @@ const StartPage: React.FC = () => {
             <Hero/>
             <Steps/>
             <Descr/>
+            <Find/>
             <Adv/>
             <Last/>
             <Faq/>

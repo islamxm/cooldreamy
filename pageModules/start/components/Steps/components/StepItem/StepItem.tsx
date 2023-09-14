@@ -5,21 +5,18 @@ import {motion} from 'framer-motion';
 import { item } from '@/helpers/variantsOrderAnim';
 
 const StepItem:FC<StepItemPropsTypes>  = ({
-    value,
-    total,
-    label
+    icon,
+    text
 }) => {
 
     return (
-        <motion.div
-            variants={item}
+        <div
             className={styles.item}>
-            <div className={styles.value}>
-                <span className={styles.current}>{value}</span>
-                <span className={styles.total}>/{total}</span>
+            <div className={styles.icon}>{icon}</div>
+            <div className={styles.text}>
+                {text}
             </div>
-            <div className={styles.label}>{label}</div>
-        </motion.div>
+        </div>
     )
 }
 

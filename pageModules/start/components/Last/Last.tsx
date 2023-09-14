@@ -11,6 +11,7 @@ import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import parse from 'html-react-parser';
 import Router from 'next/router';
+import img from '@/public/assets/images/start-last-img.png';
 
 
 
@@ -52,19 +53,13 @@ const Last:FC = () => {
                             </Row>
                         </Col>
                     </div>
-                    <div className={styles.motion}>
-                        <motion.div variants={item} className={styles.img}>
+                    <div className={styles.img}>
+                        <div className={styles.el}>
                             <Image
-                                src={mainImg}
-                                alt="img"
+                                src={img}
+                                alt=''
                                 />
-                        </motion.div>
-                        <motion.div variants={item} className={styles.pn}>
-                            {locale?.startPage?.start_meet_message_1}
-                        </motion.div>
-                        <motion.div variants={item} className={styles.pl}>
-                            {locale?.startPage?.start_meet_message_2}
-                        </motion.div>
+                        </div>
                     </div>
                 </motion.div>
             </Container>
