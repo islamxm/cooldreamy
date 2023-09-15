@@ -65,6 +65,10 @@ const Body:FC = () => {
     const [avatar, setAvatar] = useState<string | null>(null)
     const [registered, setRegistered] = useState(false)
 
+    const [search_gender, setsearch_gender] = useState<'male' | 'female'>('male')
+    const [search_age_from, setsearch_age_from] = useState(18)
+    const [search_age_to, setsearch_age_to] = useState(70)
+
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
         name: [],
         email: [],
@@ -129,6 +133,11 @@ const Body:FC = () => {
         }
     }, [token, router])
 
+    const setAgeRange = (from: number, to: number) => {
+        setsearch_age_from(from)
+        setsearch_age_to(to)
+    }
+
     const switchStep = (step: number) => {
         switch(step) {
             case 0: 
@@ -152,7 +161,15 @@ const Body:FC = () => {
                 return null
             case 1:
                 // return <StepEx language={language} setLanguage={setLanguage} country={country} setCountry={setCountry} state={state} setState={setState}/>
-                return <SignupSearch/>
+                return (
+                    <SignupSearch 
+                        gender={search_gender}
+                        setGender={setsearch_gender}
+                        from={search_age_from}
+                        to={search_age_to}
+                        setRange={setAgeRange}
+                        />
+                )
             case 2:
                 return <Step9 img={avatar} setImg={setAvatar} nextStep={() => Router.push('/signup?signup_step=10')}/>
             case 3:
@@ -284,6 +301,9 @@ const Body:FC = () => {
                     gender: registerData?.gender,
                     birthday,
                     file: avatar,
+                    search_age_from,
+                    search_age_to,
+                    search_gender
                 }).then(res => {
                     console.log(res)
                 })

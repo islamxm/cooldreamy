@@ -6,11 +6,21 @@ import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import SelectSex from '@/components/SelectSex/SelectSex';
 
 interface I {
-    
+  gender: 'male' | 'female',
+  setGender: (...args:any[]) => any,
+
+  from: number,
+  to: number,
+  setRange: (...args:any[]) => any
 }
 
 const SignupSearch:FC<I> = ({
+  gender,
+  setGender,
 
+  from,
+  to,
+  setRange
 }) => {
   return (
     <motion.div
@@ -29,9 +39,6 @@ const SignupSearch:FC<I> = ({
         <Col span={24}>
           <div className={styles.field}>
             <Row gutter={[20, 20]}>
-              {/* <Col span={24}>
-                <div className={styles.num}></div>
-              </Col> */}
               <Col span={24}>
                 <div className={styles.label}>
                   Укажите возраст, который Вас интересует
@@ -40,6 +47,10 @@ const SignupSearch:FC<I> = ({
               <Col span={24}>
                 <div className={styles.range}>
                   <RangeSlider
+                    value={[from,to]}
+                    onChange={(e) => {
+                      setRange(e[0],e[1])
+                    }}
                     range={true}
                     min={18}
                     max={80}
@@ -61,8 +72,8 @@ const SignupSearch:FC<I> = ({
               <Col span={24}>
                 <div className={styles.body}>
                   <SelectSex
-                  onSelect={() => {}}
-                  value='male'
+                  onSelect={(e) => setGender(e)}
+                  value={gender}
                   />
                 </div>
               </Col>
