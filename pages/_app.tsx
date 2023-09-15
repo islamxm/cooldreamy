@@ -60,6 +60,8 @@ function App({ Component, pageProps }: AppProps) {
 		setWc(false)
 	}
 
+	
+
 	// useEffect(() => {
 	// 	swRegister({
 	// 		path: '/sw.js',

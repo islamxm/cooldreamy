@@ -25,6 +25,7 @@ import Step9 from '../../steps/Step9/Step9';
 import Step10 from '../../steps/Step10/Step10';
 import StepEx from '../../steps/StepEx/StepEx';
 import StepMail from '../../steps/StepMail/StepMail';
+import SignupSearch from '../../steps/SignupSearch/SignupSearch';
 import { IUser } from '@/models/IUser';
 import notify from '@/helpers/notify';
 import LOCAL_STORAGE from '@/helpers/localStorage';
@@ -149,27 +150,30 @@ const Body:FC = () => {
                         />
                 )
             case 1:
-                return <StepEx language={language} setLanguage={setLanguage} country={country} setCountry={setCountry} state={state} setState={setState}/>
+                // return <StepEx language={language} setLanguage={setLanguage} country={country} setCountry={setCountry} state={state} setState={setState}/>
+                return <SignupSearch/>
             case 2:
-                return <Step2 list={prompt_targets} selectedList={selectedTargets} setSelectedList={setSelectedTargets}/>
-            case 3:
-                return <Step3 list={prompt_interests} selectedList={selectedInterests} setSelectedList={setSelectedIntersets}/>
-            case 4:
-                return <Step4 list={prompt_finance_states} selectedList={selectedFinance} setSelectedList={setSelectedFinance}/>
-            case 5:
-                return <Step5 list={prompt_sources} selectedList={selectedSources} setSelectedList={setSelectedSources}/>
-            case 6:
-                return <Step6 list={prompt_want_kids} selectedList={selectedKids} setSelectedList={setSelectedKids}/>
-            case 7:
-                return <Step7 list={prompt_relationships} selectedList={selectedRl} setSelectedList={setSelectedRl}/>
-            case 8:
-                return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
-            case 9:
                 return <Step9 nextStep={() => Router.push('/signup?signup_step=10')}/>
-            case 10:
+            case 3:
                 return <Step10 about={about} setAbout={setAbout}/>
-            // case 11:
-            //     return <StepMail email={email}/>
+            // case 2:
+            //     return <Step2 list={prompt_targets} selectedList={selectedTargets} setSelectedList={setSelectedTargets}/>
+            // case 3:
+            //     return <Step3 list={prompt_interests} selectedList={selectedInterests} setSelectedList={setSelectedIntersets}/>
+            // case 4:
+            //     return <Step4 list={prompt_finance_states} selectedList={selectedFinance} setSelectedList={setSelectedFinance}/>
+            // case 5:
+            //     return <Step5 list={prompt_sources} selectedList={selectedSources} setSelectedList={setSelectedSources}/>
+            // case 6:
+            //     return <Step6 list={prompt_want_kids} selectedList={selectedKids} setSelectedList={setSelectedKids}/>
+            // case 7:
+            //     return <Step7 list={prompt_relationships} selectedList={selectedRl} setSelectedList={setSelectedRl}/>
+            // case 8:
+            //     return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
+            // case 9:
+            //     return <Step9 nextStep={() => Router.push('/signup?signup_step=10')}/>
+            // case 10:
+            //     return <Step10 about={about} setAbout={setAbout}/>
             default:
                 return null; 
                 
@@ -239,20 +243,20 @@ const Body:FC = () => {
             
           
         }
-     
-        if(currentStep > 0 && currentStep < 10) {
+    
+        if(currentStep > 0 && currentStep < 3) {
             Router.push(`/signup?signup_step=${currentStep + 1}`)
         }
-        
-        if(currentStep === 10) {
+    
+        if(currentStep === 3) {
             setLoad(true)
             const updateBody: IUser = {
-                prompt_careers: `[${selectedCareers?.join(',')}]`,
-                prompt_finance_states: `[${selectedFinance?.join(',')}]`,
-                prompt_sources: `[${selectedSources?.join(',')}]`,
-                prompt_targets: `[${selectedTargets?.join(',')}]`,
-                prompt_want_kids: `[${selectedKids?.join(',')}]`,
-                prompt_relationships: `[${selectedRl?.join(',')}]`,
+                // prompt_careers: `[${selectedCareers?.join(',')}]`,
+                // prompt_finance_states: `[${selectedFinance?.join(',')}]`,
+                // prompt_sources: `[${selectedSources?.join(',')}]`,
+                // prompt_targets: `[${selectedTargets?.join(',')}]`,
+                // prompt_want_kids: `[${selectedKids?.join(',')}]`,
+                // prompt_relationships: `[${selectedRl?.join(',')}]`,
                 about_self: about
             }
             if(token) {
@@ -261,10 +265,10 @@ const Body:FC = () => {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         service.getMyProfile(token).then(profile => {
-                            alert('TO SEARCH')
-                            router?.push('/search')
+                            // router?.push('/search')
+                            if(width <= 768) Router.push('/sympathy')
+                            if(width > 768) Router.push('/search')
                         })
-
                         service.signupEnd(token).finally(() => setLoad(false))
                     }
                 }).finally(() => {
@@ -282,17 +286,17 @@ const Body:FC = () => {
     }, [currentStep, token, birthday, about])
     
 
-    useEffect(() => {
-        if(currentStep === 2 && token) {
-            service.setExUserData(token, {
-                language: language ? language : 'en',
-                country: country?.label ? country?.label : countryDef,
-                state: (country?.label && state?.label) ? state?.label : (state?.label ? state?.label : stateDef)
-            }).then(res => {
+    // useEffect(() => {
+    //     if(currentStep === 2 && token) {
+    //         service.setExUserData(token, {
+    //             language: language ? language : 'en',
+    //             country: country?.label ? country?.label : countryDef,
+    //             state: (country?.label && state?.label) ? state?.label : (state?.label ? state?.label : stateDef)
+    //         }).then(res => {
                 
-            })
-        }
-    }, [currentStep, token, countryDef, country, stateDef, state])
+    //         })
+    //     }
+    // }, [currentStep, token, countryDef, country, stateDef, state])
 
 
     useEffect(() => {
@@ -306,42 +310,42 @@ const Body:FC = () => {
         if(currentStep === 1) {
             setBtnDisable(false)
         }
-        if(currentStep === 2) {
-            if(selectedTargets?.length < 1 || selectedTargets?.length > 3) {
-                setBtnDisable(true)
-            } else setBtnDisable(false)
-        }
+        // if(currentStep === 2) {
+        //     if(selectedTargets?.length < 1 || selectedTargets?.length > 3) {
+        //         setBtnDisable(true)
+        //     } else setBtnDisable(false)
+        // }
+        // if(currentStep === 3) {
+        //     if(selectedInterests?.length < 5 || selectedCareers?.length > 5) {
+        //         setBtnDisable(true)
+        //     } else setBtnDisable(false)
+        // }
+        // if(currentStep === 4) {
+        //     if(selectedFinance?.length !== 1) {
+        //         setBtnDisable(true)
+        //     } else setBtnDisable(false)
+        // }
+        // if(currentStep === 5) {
+        //     if(selectedSources?.length !== 1) {
+        //         setBtnDisable(true)
+        //     } else setBtnDisable(false)
+        // }
+        // if(currentStep === 6) {
+        //     if(selectedKids?.length !== 1) {
+        //         setBtnDisable(true)
+        //     } else setBtnDisable(false)
+        // }
+        // if(currentStep === 7) {
+        //     if(selectedRl?.length !== 1) {
+        //         setBtnDisable(true)
+        //     } else setBtnDisable(false)
+        // }
+        // if(currentStep === 8) {
+        //     if(selectedCareers?.length !== 1) {
+        //         setBtnDisable(true)
+        //     } else setBtnDisable(false)
+        // }
         if(currentStep === 3) {
-            if(selectedInterests?.length < 5 || selectedCareers?.length > 5) {
-                setBtnDisable(true)
-            } else setBtnDisable(false)
-        }
-        if(currentStep === 4) {
-            if(selectedFinance?.length !== 1) {
-                setBtnDisable(true)
-            } else setBtnDisable(false)
-        }
-        if(currentStep === 5) {
-            if(selectedSources?.length !== 1) {
-                setBtnDisable(true)
-            } else setBtnDisable(false)
-        }
-        if(currentStep === 6) {
-            if(selectedKids?.length !== 1) {
-                setBtnDisable(true)
-            } else setBtnDisable(false)
-        }
-        if(currentStep === 7) {
-            if(selectedRl?.length !== 1) {
-                setBtnDisable(true)
-            } else setBtnDisable(false)
-        }
-        if(currentStep === 8) {
-            if(selectedCareers?.length !== 1) {
-                setBtnDisable(true)
-            } else setBtnDisable(false)
-        }
-        if(currentStep === 10) {
             if(about?.length < 6 || about?.length > 200) {
                 setBtnDisable(true)
             } else setBtnDisable(false)
@@ -383,7 +387,7 @@ const Body:FC = () => {
                                             fill
                                             onClick={stepChange}
                                             disabled={btnDisable}
-                                            text={currentStep === 10 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
+                                            text={currentStep === 3 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
                                             load={load}
                                             />
                                     </div>
@@ -391,12 +395,12 @@ const Body:FC = () => {
                             </Col>
                             <Col span={24}>
                                 <div className={styles.panel}>
-                                    <div className={styles.head}>
+                                    {/* <div className={styles.head}>
                                         <StepLine
-                                            total={11}
+                                            total={4}
                                             currentIndex={currentStep}
                                             />
-                                    </div>
+                                    </div> */}
                                     <div className={styles.content}>
                                         <Row gutter={[12,12]}>
                                             <Col span={24}>
@@ -409,7 +413,7 @@ const Body:FC = () => {
                                                         middle={width <= 768}
                                                         onClick={stepChange}
                                                         disabled={btnDisable}
-                                                        text={currentStep === 10 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
+                                                        text={currentStep === 3 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
                                                         />
                                                 </div>
                                             </Col>

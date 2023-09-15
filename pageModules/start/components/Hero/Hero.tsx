@@ -86,19 +86,13 @@ const Hero: FC = ({}) => {
                             dispatch(updateUserData(data))
                             LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
                             LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
-                            setRegistered(true)
+                            Router?.push('/signup?signup_step=1', undefined, {shallow: true})
                         }
                     })
                 }
             })
         }
     }
-
-    useEffect(() => {
-        if(registered) {
-            router?.push('/signup?signup_step=1', undefined, {shallow: true})
-        }
-    }, [registered])
 
 
     return (
