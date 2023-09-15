@@ -27,27 +27,17 @@ const service = new ApiService()
 
 const Hero: FC = ({}) => {
     const {width} = useWindowSize()
-    const router = useRouter()
     const dispatch = useAppDispatch()
-    const {scrollYProgress} = useScroll()
     const {locale} = useAppSelector(s => s)
-    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const [loginModal, setLoginModal] = useState(false)
 
     const [install, setInstall] = useState<any>(null)
-    const [load, setLoad] = useState(false)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [birthday, setBirthday] = useState<any>()
     const [sex, setSex] = useState<'male' | 'female'>('male')
-
-    const [registered, setRegistered] = useState(false)
-    
-    const sexChange = (value: 'male' | 'female') => {
-        setSex(value)
-    }
 
     const getInstallEvent = (e:any) => {
         e?.preventDefault()
@@ -74,27 +64,6 @@ const Hero: FC = ({}) => {
 
     const onSubmit = () => {
         if(email && password && birthday && sex && name) {
-            // setLoad(true)
-            // service.register({
-            //     name,
-            //     password,
-            //     email,
-            // }).then(res => {
-            //     if(res?.token) {
-            //         service.updateMyProfile({
-            //             gender: sex,
-            //             birthday
-            //         }, res?.token).then(data => {
-            //             if(data?.id) {
-            //                 dispatch(updateToken(res?.token))
-            //                 dispatch(updateUserData(data))
-            //                 LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
-            //                 LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
-            //                 Router?.push('/signup?signup_step=1', undefined, {shallow: true})
-            //             }
-            //         }).finally(() => setLoad(false))
-            //     }
-            // })
             dispatch(updateRegisterData({
                 name,
                 password,
@@ -102,10 +71,9 @@ const Hero: FC = ({}) => {
                 gender: sex,
                 birthday
             }))
-            Router?.push('/signup?signup_step=1', undefined, {shallow: true})
+            Router?.push('/signup?signup_step=1')
         }
     }
-
 
     return (
         <div className={getClassNames([styles.hero])}>
@@ -161,6 +129,7 @@ const Hero: FC = ({}) => {
                                     <Input
                                         placeholder='E-mail'
                                         value={email}
+                                        type='email'
                                         onChange={(e:ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                                         />
                                 </Col>
@@ -201,21 +170,13 @@ const Hero: FC = ({}) => {
                                         <Button
                                             text='Найти свою пару'
                                             middle
-                                            load={load}
+                                            disabled={!(name && password && email && birthday && sex)}
                                             onClick={onSubmit}
                                             />
                                     </div>
                                 </Col>
                             </Row>
                         </motion.div>
-                        {/* <div className={styles.mob}>
-                            <div className={styles.mob_img}>
-                                <Image
-                                    src={mobimg}
-                                    alt=''
-                                    />
-                            </div>
-                        </div> */}
                     </div>
                 </motion.div>
             </Container>

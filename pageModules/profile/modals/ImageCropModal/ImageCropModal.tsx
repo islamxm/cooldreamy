@@ -65,7 +65,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
         setZoom(1)
         setCroppedAreaPixels(null)
         setCroppedImage(null)
-        setCategory(0)
+        if(!isGetBase64) setCategory(0)
         onClose()
     }
 

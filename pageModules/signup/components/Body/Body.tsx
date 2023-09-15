@@ -7,7 +7,7 @@ import Button from '@/components/Button/Button';
 import { useEffect, useState } from 'react';
 import ApiService from '@/service/apiService';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
-import { updateToken, updateUserId, updateUserData } from '@/store/actions';
+import { updateToken, updateUserId, updateUserData, updateRegisterData } from '@/store/actions';
 import Router, { useRouter } from 'next/router';
 import { useWindowSize } from 'usehooks-ts';
 import setIconsSg from '@/helpers/setIconsSg';
@@ -293,19 +293,33 @@ const Body:FC = () => {
             // }
             
             if(registerData) {
+                setLoad(true)
                 service.register({
                     email: registerData?.email,
                     name: registerData?.name,
                     password: registerData?.password,
                     about,
                     gender: registerData?.gender,
-                    birthday,
+                    birthday: registerData?.birthday,
                     file: avatar,
                     search_age_from,
                     search_age_to,
-                    search_gender
+                    search_gender,
                 }).then(res => {
-                    console.log(res)
+                    if(res?.token) {
+                        service.signupEnd(res?.token)
+
+                        dispatch(updateToken(res?.token))
+                        dispatch(updateUserId(res?.id))
+                        dispatch(updateRegisterData(null))
+                        LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
+                        LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
+
+                        if(width <= 768) Router.push('/sympathy')
+                        if(width > 768) Router.push('/search')
+                    }
+                }).finally(() => {
+                    setLoad(false)
                 })
             }
         }
