@@ -20,3 +20,30 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .item {
+        flex-direction: row;
+
+        .icon {
+            margin-bottom: 0;
+            width: 75px;
+            height: 75px;
+            flex: 0 0 auto;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: flex;
+            }
+        }
+        
+        .text {
+            padding-left: 15px;
+            text-align: left;
+            font-size: 18px;
+            line-height: 25px;
+        }
+    }
+}

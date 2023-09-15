@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {motion} from 'framer-motion';
 import LoginModal from '../LoginModal/LoginModal';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateToken, updateUserId, updateSocket, updateMenu } from '@/store/actions';
 import Router, { useRouter } from 'next/router';
@@ -30,20 +30,31 @@ const Header: React.FC<any> = () => {
     const router = useRouter()
     const [logoutModal, setLogoutModal] = useState(false)
     const [active, setActive] = useState(false)
+    const [main, setMain] = useState<HTMLElement | null>(null)
+
+    useEffect(() => {
+        const m = document.querySelector('main')
+        setMain(m)
+    }, [])
 
     const onScroll = () => {
-        if(document.documentElement.scrollTop > 10) {
+        
+        if(document.documentElement.scrollTop > 10 || main?.scrollTop && main?.scrollTop > 10) {
             setActive(true)
         } else setActive(false)
     }
 
     useEffect(() => {
-        window.addEventListener('scroll', onScroll)
+        if(main) {
+            window.addEventListener('scroll', onScroll)
+            main.addEventListener('scroll', onScroll)
+        }
+        
         return () => {
             window.removeEventListener('scroll', onScroll)
+            main?.removeEventListener('scroll', onScroll)
         }
-    }, [])
-
+    }, [main])
     
     const onLogout = () => {
         if(token) {
@@ -63,9 +74,6 @@ const Header: React.FC<any> = () => {
             })
         }
     }
-
-   
-    
 
     return (
         <motion.header 

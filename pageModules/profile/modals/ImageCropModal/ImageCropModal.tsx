@@ -5,7 +5,7 @@ import {FC, useState, useCallback, useEffect} from 'react';
 import { modalPropsType } from '@/models/modalTypes';
 import Button from '@/components/Button/Button';
 import {Row, Col} from 'antd';
-import getCroppedImg, { createFile } from '@/helpers/cropImage';
+import getCroppedImg, { blobToBase64, createFile, getBase64 } from '@/helpers/cropImage';
 import Cropper from 'react-easy-crop'
 import ApiService from '@/service/apiService';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
@@ -19,7 +19,10 @@ interface cropModalPropsType extends modalPropsType {
     uploadedFile: File | null,
     onSave?: (file?: File | null, id?: number) => any,
     onAfterUpload?: (...args: any[]) => any,
-    initCategory?: number
+    initCategory?: number,
+    
+    isGetBase64?:boolean,
+    getConvertedFile?: (...args:any[]) => any
 }
 
 const imageCats:{id: number, text: string, disabled?: boolean}[] = [
@@ -36,7 +39,10 @@ const ImageCropModal:FC<cropModalPropsType> = ({
     onClose,
     uploadedFile,
     onAfterUpload,
-    initCategory
+    initCategory,
+
+    isGetBase64,
+    getConvertedFile
 }) => {
     const dispatch = useAppDispatch()
     const {token} = useAppSelector(s => s);
@@ -63,11 +69,9 @@ const ImageCropModal:FC<cropModalPropsType> = ({
         onClose()
     }
 
-
     useEffect(() => {
         if(initCategory) setCategory(initCategory)
     }, [initCategory]) 
-
 
     useEffect(() => {
         if(uploadedFile) {
@@ -95,6 +99,30 @@ const ImageCropModal:FC<cropModalPropsType> = ({
     }, [croppedAreaPixels, rotation, srcImg])
     
     const onSave = () => {
+        if(!token && croppedImage) {
+            createFile(croppedImage).then(res => {
+
+                if(isGetBase64) {
+                    setLoad(true)
+                    blobToBase64(res).then(res => {
+                        getConvertedFile && getConvertedFile(res)
+                        onCancel()
+                    }).finally(() => setLoad(false))
+                }
+
+                // service.checkPhotoAi(checkData).then(r => {
+                //     if(r === 200) {
+                //         if(isGetBase64) {
+                //             getConvertedFile && getConvertedFile(getBase64(res))
+                //         } 
+                //     } else {
+                //         notify('Wrong Image', 'ERROR')
+                //         setLoad(false)
+                //     }
+                // })
+            })
+            
+        }
         if(token && croppedImage) {
             setLoad(true)
             const data = new FormData()
@@ -105,27 +133,41 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                 const checkData = new FormData()
                 checkData.append('file', res)
 
-                service.checkPhotoAi(token, checkData).then(r => {
-                    if(r === 200) {
-                        service.addProfileImage(data, token).then(d => {
-                            if(d?.id) {
-                                service.getMyProfile(token).then(userData => {
-                                    if(userData) {
-                                        dispatch(updateUserData(userData))
-                                    }
-                                })
-                                notify('Image Added', 'SUCCESS')
-                                onCancel()
-                                onAfterUpload && onAfterUpload()
+                service.addProfileImage(data, token).then(d => {
+                    if(d?.id) {
+                        service.getMyProfile(token).then(userData => {
+                            if(userData) {
+                                dispatch(updateUserData(userData))
                             }
-                        }).finally(() => {
-                            setLoad(false)
                         })
-                    } else {
-                        notify('Wrong Image', 'ERROR')
-                        setLoad(false)
+                        notify('Image Added', 'SUCCESS')
+                        onCancel()
+                        onAfterUpload && onAfterUpload()
                     }
+                }).finally(() => {
+                    setLoad(false)
                 })
+                // service.checkPhotoAi(token, checkData).then(r => {
+                //     if(r === 200) {
+                //         service.addProfileImage(data, token).then(d => {
+                //             if(d?.id) {
+                //                 service.getMyProfile(token).then(userData => {
+                //                     if(userData) {
+                //                         dispatch(updateUserData(userData))
+                //                     }
+                //                 })
+                //                 notify('Image Added', 'SUCCESS')
+                //                 onCancel()
+                //                 onAfterUpload && onAfterUpload()
+                //             }
+                //         }).finally(() => {
+                //             setLoad(false)
+                //         })
+                //     } else {
+                //         notify('Wrong Image', 'ERROR')
+                //         setLoad(false)
+                //     }
+                // })
             })
         }
     }

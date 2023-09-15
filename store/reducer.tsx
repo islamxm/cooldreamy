@@ -55,7 +55,9 @@ export interface IGlobalState {
     subsModal: boolean,
 
     currentSub: any,
-    currentVip: any
+    currentVip: any,
+
+    registerData:any
 }
 
 
@@ -89,7 +91,8 @@ export const globalState: IGlobalState = {
     premModal: false,
     subsModal: false,
     currentSub: null,
-    currentVip: null
+    currentVip: null,
+    registerData: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -264,6 +267,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 currentVip: action.data
+            }
+        case 'UPDATE_REGISTER_DATA':
+            return {
+                ...state,
+                registerData: action.data
             }
         default:
             return state;

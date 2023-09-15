@@ -15,12 +15,18 @@ import BirthdaySelect from '@/pageModules/signup/components/BirthdaySelect/Birth
 import getClassNames from '@/helpers/getClassNames';
 import ApiService from '@/service/apiService';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
-import { updateUserData, updateToken } from '@/store/actions';
+import { updateUserData, updateToken, updateRegisterData } from '@/store/actions';
 import LOCAL_STORAGE from '@/helpers/localStorage';
 import { useRouter } from 'next/router';
+import { useWindowSize } from 'usehooks-ts';
+import BirthdaySelectMob from '@/pageModules/signup/components/BirthdaySelectMob/BirthdaySelectMob';
+import mobimg from '@/public/assets/images/start-hero-mob-bg.png'
+import Image from 'next/image';
+
 const service = new ApiService()
 
 const Hero: FC = ({}) => {
+    const {width} = useWindowSize()
     const router = useRouter()
     const dispatch = useAppDispatch()
     const {scrollYProgress} = useScroll()
@@ -66,31 +72,37 @@ const Hero: FC = ({}) => {
         }
     }
 
-
-
     const onSubmit = () => {
         if(email && password && birthday && sex && name) {
-            setLoad(true)
-            service.register({
+            // setLoad(true)
+            // service.register({
+            //     name,
+            //     password,
+            //     email,
+            // }).then(res => {
+            //     if(res?.token) {
+            //         service.updateMyProfile({
+            //             gender: sex,
+            //             birthday
+            //         }, res?.token).then(data => {
+            //             if(data?.id) {
+            //                 dispatch(updateToken(res?.token))
+            //                 dispatch(updateUserData(data))
+            //                 LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
+            //                 LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
+            //                 Router?.push('/signup?signup_step=1', undefined, {shallow: true})
+            //             }
+            //         }).finally(() => setLoad(false))
+            //     }
+            // })
+            dispatch(updateRegisterData({
                 name,
                 password,
                 email,
-            }).then(res => {
-                if(res?.token) {
-                    service.updateMyProfile({
-                        gender: sex,
-                        birthday
-                    }, res?.token).then(data => {
-                        if(data?.id) {
-                            dispatch(updateToken(res?.token))
-                            dispatch(updateUserData(data))
-                            LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
-                            LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
-                            Router?.push('/signup?signup_step=1', undefined, {shallow: true})
-                        }
-                    })
-                }
-            })
+                gender: sex,
+                birthday
+            }))
+            Router?.push('/signup?signup_step=1', undefined, {shallow: true})
         }
     }
 
@@ -101,44 +113,38 @@ const Hero: FC = ({}) => {
                 open={loginModal}
                 onCancel={() => setLoginModal(false)}
                 />
-            <Container>
+            <Container
+                style={{
+                    padding: width <= 768 ? 0 : '0 15px'
+                }}
+                >
                 <motion.div
                     initial="hidden"
                     animate="visible" 
                     variants={container} 
                     className={styles.inner}>
                     <div className={styles.main} >
-                        <motion.h1 variants={item} className={styles.title}>
-                            {locale?.startPage?.start_hero_title}
-                        </motion.h1>
-                        <motion.div variants={item} className={styles.subtitle}>
-                            {locale?.startPage?.start_hero_subtitle}
-                        </motion.div>
+                        <div className={styles.top}>
+                            <motion.h1 variants={item} className={styles.title}>
+                                {locale?.startPage?.start_hero_title}
+                            </motion.h1>
+                            <motion.div variants={item} className={styles.subtitle}>
+                                {locale?.startPage?.start_hero_subtitle}
+                            </motion.div>
+                        </div>
                         <motion.div className={styles.form}>
                             <Row gutter={[10,10]}>
                                 <Col span={24}>
-                                    {/* <SelectSex
-                                        value={sex}
-                                        onSelect={(e) => {
-                                            sexChange(e)
-                                            if(e === 'male') {
-                                                Router.push('/signup?gender=male')
-                                            }
-                                            if(e === 'female') {
-                                                Router.push('/signup?gender=female')
-                                            }
-                                        }}
-                                        /> */}
                                     <div className={styles.sex}>
                                         <Row gutter={[4,4]}>
                                             <Col span={12}>
                                                 <div onClick={() => setSex('male')} className={getClassNames([styles.sex_item, sex === 'male' && styles.active, styles.male])}>
-                                                    I am a man
+                                                    <span>I am a man</span>
                                                 </div>
                                             </Col>
                                             <Col span={12}>
                                                 <div onClick={() => setSex('female')} className={getClassNames([styles.sex_item, sex === 'female' && styles.active, styles.female])}>
-                                                    I am a woman
+                                                    <span>I am a woman</span>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -167,12 +173,23 @@ const Hero: FC = ({}) => {
                                         />
                                 </Col>
                                 <Col span={24}>
-                                    <BirthdaySelect
-                                        minAge={18}
-                                        maxAge={70}
-                                        setValue={setBirthday}
-                                        value={birthday}
-                                        />
+                                    {
+                                        width <= 768 ? (
+                                            <BirthdaySelectMob
+                                                minAge={18}
+                                                maxAge={70}
+                                                setValue={setBirthday}
+                                                value={birthday}
+                                                />
+                                        ) : (
+                                            <BirthdaySelect
+                                                minAge={18}
+                                                maxAge={70}
+                                                setValue={setBirthday}
+                                                value={birthday}
+                                                />
+                                        )
+                                    }
                                 </Col>
                                 <Col span={24}>
                                     <div className={styles.terms}>
@@ -191,41 +208,14 @@ const Hero: FC = ({}) => {
                                 </Col>
                             </Row>
                         </motion.div>
-                        {/* <div className={styles.adv}>
-                        {parse(locale?.startPage?.start_hero_adv)}
-                        </div> */}
-                        {/* <div className={styles.selects}>
-                            <motion.div variants={item}>
-                                
-                            </motion.div>
-                        </div> */}
-                    </div>
-                    <div className={styles.action}>
-                        <Row gutter={[15,15]}>
-                            <Col span={24}>
-                                <Button 
-                                    // onClick={() => Router.push('/signup')} 
-                                    text={locale?.global?.header.join_btn} 
-                                    fill 
-                                    middle/>
-                            </Col>
-                            <Col span={24}>
-                                <Button 
-                                    onClick={() => setLoginModal(true)} 
-                                    text={locale?.global?.header?.login_btn} 
-                                    fill 
-                                    middle/>
-                            </Col>
-                            {/* <Col span={24}>
-                                <Button
-                                    disabled={!install}
-                                    onClick={onInstall}
-                                    text='Install'
-                                    middle
-                                    fill
+                        {/* <div className={styles.mob}>
+                            <div className={styles.mob_img}>
+                                <Image
+                                    src={mobimg}
+                                    alt=''
                                     />
-                            </Col> */}
-                        </Row>
+                            </div>
+                        </div> */}
                     </div>
                 </motion.div>
             </Container>

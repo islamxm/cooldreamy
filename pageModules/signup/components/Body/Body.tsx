@@ -39,7 +39,7 @@ const service = new ApiService()
 const Body:FC = () => {
     const {width} = useWindowSize()
     // !! для теста
-    const {token, locale} = useAppSelector(s => s)
+    const {token, locale, registerData} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
     const router = useRouter()
 
@@ -62,7 +62,7 @@ const Body:FC = () => {
     const [state, setState] = useState<any>()
     const [language, setLanguage] = useState<any>('en')
     const [btnDisable, setBtnDisable] = useState(false)
-
+    const [avatar, setAvatar] = useState<string | null>(null)
     const [registered, setRegistered] = useState(false)
 
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
@@ -132,28 +132,29 @@ const Body:FC = () => {
     const switchStep = (step: number) => {
         switch(step) {
             case 0: 
-                return (
-                    <Step1
-                        sex={sex}
-                        email={email}
-                        password={password}
-                        name={name}
-                        birthday={birthday}
+                // return (
+                //     <Step1
+                //         sex={sex}
+                //         email={email}
+                //         password={password}
+                //         name={name}
+                //         birthday={birthday}
 
-                        setEmail={setEmail}
-                        setPassword={setPassword}
-                        setName={setName}
-                        setSex={setSex}
-                        setBirthday={setBirthday}
+                //         setEmail={setEmail}
+                //         setPassword={setPassword}
+                //         setName={setName}
+                //         setSex={setSex}
+                //         setBirthday={setBirthday}
                         
-                        errors={errors}
-                        />
-                )
+                //         errors={errors}
+                //         />
+                // )
+                return null
             case 1:
                 // return <StepEx language={language} setLanguage={setLanguage} country={country} setCountry={setCountry} state={state} setState={setState}/>
                 return <SignupSearch/>
             case 2:
-                return <Step9 nextStep={() => Router.push('/signup?signup_step=10')}/>
+                return <Step9 img={avatar} setImg={setAvatar} nextStep={() => Router.push('/signup?signup_step=10')}/>
             case 3:
                 return <Step10 about={about} setAbout={setAbout}/>
             // case 2:
@@ -240,8 +241,6 @@ const Body:FC = () => {
                     }
                 }).finally(() => setLoad(false))
             }
-            
-          
         }
     
         if(currentStep > 0 && currentStep < 3) {
@@ -250,40 +249,53 @@ const Body:FC = () => {
     
         if(currentStep === 3) {
             setLoad(true)
-            const updateBody: IUser = {
-                // prompt_careers: `[${selectedCareers?.join(',')}]`,
-                // prompt_finance_states: `[${selectedFinance?.join(',')}]`,
-                // prompt_sources: `[${selectedSources?.join(',')}]`,
-                // prompt_targets: `[${selectedTargets?.join(',')}]`,
-                // prompt_want_kids: `[${selectedKids?.join(',')}]`,
-                // prompt_relationships: `[${selectedRl?.join(',')}]`,
-                about_self: about
-            }
-            if(token) {
-                service.updateMyProfile(updateBody, token).then(res => {
-                    if(res?.id) {
-                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
-                        service.getMyProfile(token).then(profile => {
-                            // router?.push('/search')
-                            if(width <= 768) Router.push('/sympathy')
-                            if(width > 768) Router.push('/search')
-                        })
-                        service.signupEnd(token).finally(() => setLoad(false))
-                    }
-                }).finally(() => {
-                  setLoad(false)  
+            // const updateBody: IUser = {
+            //     prompt_careers: `[${selectedCareers?.join(',')}]`,
+            //     prompt_finance_states: `[${selectedFinance?.join(',')}]`,
+            //     prompt_sources: `[${selectedSources?.join(',')}]`,
+            //     prompt_targets: `[${selectedTargets?.join(',')}]`,
+            //     prompt_want_kids: `[${selectedKids?.join(',')}]`,
+            //     prompt_relationships: `[${selectedRl?.join(',')}]`,
+            //     about_self: about
+            // }
+            // if(token) {
+            //     service.updateMyProfile(updateBody, token).then(res => {
+            //         if(res?.id) {
+            //             notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
+            //             dispatch(updateUserData(res))
+            //             service.getMyProfile(token).then(profile => {
+            //                 // router?.push('/search')
+            //                 if(width <= 768) Router.push('/sympathy')
+            //                 if(width > 768) Router.push('/search')
+            //             })
+            //             service.signupEnd(token).finally(() => setLoad(false))
+            //         }
+            //     }).finally(() => {
+            //       setLoad(false)  
+            //     })
+            // }
+            
+            if(registerData) {
+                service.register({
+                    email: registerData?.email,
+                    name: registerData?.name,
+                    password: registerData?.password,
+                    about,
+                    gender: registerData?.gender,
+                    birthday,
+                    file: avatar,
+                }).then(res => {
+                    console.log(res)
                 })
             }
         }
     }
 
-
-    useEffect(() => {
-        if(currentStep === 1 && token && birthday) {
-            service.updateMyProfile({birthday: birthday}, token)
-        }
-    }, [currentStep, token, birthday, about])
+    // useEffect(() => {
+    //     if(currentStep === 1 && token && birthday) {
+    //         service.updateMyProfile({birthday: birthday}, token)
+    //     }
+    // }, [currentStep, token, birthday, about])
     
 
     // useEffect(() => {
@@ -364,7 +376,7 @@ const Body:FC = () => {
                                 <div className={styles.top}>
                                     <div className={styles.top_btn}>
                                         {
-                                            currentStep > 0 && (
+                                            currentStep > 1 && (
                                                 <Button
                                                     text='BACK'
                                                     middle

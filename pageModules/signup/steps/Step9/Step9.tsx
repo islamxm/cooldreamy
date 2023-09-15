@@ -1,18 +1,22 @@
 import { FC, useState, useEffect } from 'react';
 import styles from './Step9.module.scss';
 import {motion} from 'framer-motion';
-import img from '@/public/assets/images/signup-avatar-placeholder.svg';
+import placeholder from '@/public/assets/images/signup-avatar-placeholder.svg';
 import Image from 'next/image';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ImageCropModal from '@/pageModules/profile/modals/ImageCropModal/ImageCropModal';
 
 
 interface I {
-    nextStep: (...args: any[]) => any
+    nextStep: (...args: any[]) => any,
+    img: any,
+    setImg: (...args:any[]) => any
 }
 
 const Step9:FC<I> = ({
-    nextStep
+    nextStep,
+    img,
+    setImg
 }) => {
     const {locale} = useAppSelector(s => s)
     const [file, setFile] = useState<File | null>(null)
@@ -54,6 +58,9 @@ const Step9:FC<I> = ({
                 uploadedFile={file}
                 onAfterUpload={nextStep}
                 initCategory={1}
+
+                isGetBase64={true}
+                getConvertedFile={setImg}
                 />
             
             <div className={styles.head}>
@@ -73,7 +80,7 @@ const Step9:FC<I> = ({
                         whileTap={{scale: 0.9}}
                         className={styles.upload} htmlFor="signup-avatar">
                         <Image
-                            src={img}
+                            src={img || placeholder}
                             alt=''
                             width={186}
                             height={186}

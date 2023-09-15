@@ -88,7 +88,7 @@ main.main-wp {
 @media (max-width: 768px) {
     main {
         // padding-top: 40px;
-        padding-top: 0;
+        padding-top: 0 !important;
         height: calc((var(--vh, 1vh) * 100) - 61px);
 
         // padding-bottom: 56px;

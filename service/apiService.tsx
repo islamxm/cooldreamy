@@ -17,11 +17,7 @@ class ApiService {
 
 
     register = async (
-        body: {
-            name: string,
-            email: string,
-            password: string
-        }
+        body: any
     ) => {
         try {
             let res = await fetch(endpoints.register, {

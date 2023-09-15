@@ -21,28 +21,34 @@
             max-width: 512px;
             flex: 0 0 auto;
             width: 100%;
-            
-            .title {
-                font-size: 60px;
-                line-height: 60px;
-                font-weight: 600;
-                max-width: 1000px;
-                margin-bottom: 20px;
 
-                span {
-                    font-size: 40px;
-                    line-height: 56px;
-
+            .top {
+                display: block;
+                .title {
+                    font-size: 60px;
+                    line-height: 60px;
+                    font-weight: 600;
+                    max-width: 1000px;
+                    margin-bottom: 20px;
+                    line-height: 57px;
+    
+                    span {
+                        font-size: 40px;
+                        // line-height: 56px;
+    
+                    }
+                }
+    
+                .subtitle {
+                    font-size: 22px;
+                    line-height: 34px;
+                    font-weight: 500;
+                    margin-top: 15px;
+                    margin-bottom: 24px;
                 }
             }
-
-            .subtitle {
-                font-size: 22px;
-                line-height: 34px;
-                font-weight: 500;
-                margin-top: 15px;
-                margin-bottom: 24px;
-            }
+            
+            
 
             .form {
                 padding: 25px;
@@ -50,7 +56,7 @@
                 background-color: #fff;
                 max-width: 420px;
                 width: 100%;
-                box-shadow: 0 0 50px var(--violet);
+                // box-shadow: 0 0 50px var(--violet);
 
                 .sex {
 
@@ -122,6 +128,10 @@
                 }
             }
 
+            .mob {
+                display: none;
+            }
+
             .adv {
                 margin-bottom: 35px;
                 ul {
@@ -178,11 +188,6 @@
                 right: 30px;
             }
         }
-
-    
-        .action {
-            display: none;
-        }
     }
 }
 
@@ -190,27 +195,73 @@
 
     .hero {
         padding-top: 15px;
+        background-image: none;
         
         .inner {
-            padding-bottom: 100px;
+            padding-bottom: 20px;
+            padding-top: 30px;
 
             .main {
                 margin-bottom: 30px;
-                .title {
-                    font-size: 24px;
-                    line-height: 33px;
+                max-width: unset;
 
-                    span {
-                        font-size: 16px;
-                        line-height: 22px;
+                .top {
+                    background-image: url('../../../../public/assets/images/start-hero-mob.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    // height: 80vh;
+                    padding: 250px 15px 30px;
+                    position: relative;
+
+                    &:after {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(180deg, rgba(240, 235, 255, 0.00) 0%, rgba(240, 235, 255, 0.69) 29.43%, #F0EBFF 100%);
+                        content: '';
                     }
+
+                    
+
+                    .title {
+                        font-size: 24px;
+                        line-height: 33px;
+                        margin-bottom: 12px;
+                        position: relative;
+                        z-index: 3;
+
+                        span {
+                            font-size: 16px;
+                            line-height: 22px;
+                        }
+                    }
+    
+                    .subtitle {
+                        font-size: 12px;
+                        line-height: 140%;
+                        margin-bottom: 0;
+                        margin-top: 0;
+                        position: relative;
+                        z-index: 3;
+                    }
+
                 }
 
-                .subtitle {
-                    font-size: 12px;
-                    line-height: 140%;
-                    margin-bottom: 20px;
+                .form {
+                    margin: 0 auto;
+                    margin-top: -20px;
+                    position: relative;
+                    z-index: 5;
+                    padding: 15px;
+                    
                 }
+                
 
                 .selects {
                     display: flex;
@@ -223,42 +274,35 @@
                     line-height: 22px;
                 }
 
-            }
 
-            .motion {
-                position: static;
-                height: auto;
-                justify-content: center;
-                display: none;
-
-                .phones {
-                    height: 300px;
-                    max-width: 300px;
-                    .item {
-                        height: 200px;
-                        width: 50%;
-
-                        &:first-child {
-
-                        }
-
-                        &:last-child {
-                            right: 20px;
-                        }
-
-                        img {
-                            object-fit: contain;
+                .form {
+                    .sex {
+                        .sex_item {
+                            height: 50px;
+                            display: flex;
+                            align-items: center;
+                            span {
+                                font-size: 12px;
+                                line-height: 17px;
+                                
+                            }
                         }
                     }
                 }
-            }
 
-            .action {
-                display: block;
-                max-width: 150px;
-                margin: 0 auto;
-                width: 100%;
+                .mob {
+                    display: block;
+                    background-image: url('../../../../public/assets/images/start-hero-mob-bg.png');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    width: 100%;
 
+                    .mob_img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
             }
         }
     }

@@ -111,8 +111,8 @@ export function blobToBase64(blob: Blob | any) {
 export function getBase64(file: File) {
   var reader = new FileReader();
   reader.readAsDataURL(file);
-  reader.onload = function () {
-    console.log(reader.result);
+  reader.onload = async function () {
+    return await reader?.result
   };
   reader.onerror = function (error) {
     console.log('Error: ', error);

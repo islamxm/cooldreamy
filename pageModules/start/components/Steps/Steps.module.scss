@@ -1,25 +1,18 @@
 .steps {
     position: relative;
     z-index: 2;
-    // margin-top: -70px;
 
     .inner {
-        min-height: 140px;
-        
-        
         padding: 25px 15px;
         padding-bottom: 0;
     }
 
     .main {
-        position: relative;
-        overflow: hidden;
 
         .list {
             display: flex;  
             margin-left: -10px;
             margin-right: -10px;    
-            // justify-content: space-between;
 
             .item {
                 width: 100%;
@@ -39,39 +32,25 @@
     }
 }
 
-@media (max-width: 1000px) {
-    .steps {
-        .main {
-            .list {
-                margin-left: -25px;
-                margin-right: -25px;
-                .item {
-                    padding: 0 25px;
-                }
-            }
-        }
-    }
-}
-
 @media (max-width: 768px) {
 
     .steps {
-        
 
         .inner {
           padding: 15px 10px;
-          max-height: 140px;
-          min-height: 100px;
         }
 
         .main {
             
             .list {
-                margin-left: -10px;
-                margin-right: -10px;
+                flex-wrap: wrap;
+                margin-left: 0;
+                margin-right: 0;
 
                 .item {
-                    padding: 0 10px;
+                    margin: 0;
+                    margin-bottom: 20px;
+                    width: 100%;
                 }
             } 
         }
