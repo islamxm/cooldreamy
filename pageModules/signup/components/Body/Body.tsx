@@ -268,7 +268,7 @@ const Body:FC = () => {
                 }).finally(() => setLoad(false))
             }
         }
-        if(currentStep > 1) {
+        if(currentStep === 1) {
             Router.push(`/signup?signup_step=2`)
         }
         if(currentStep === 2 && !avatar) {
