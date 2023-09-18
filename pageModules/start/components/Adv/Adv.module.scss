@@ -1,7 +1,7 @@
 .wrapper {
-    margin-bottom: -200px;
     position: relative;
     z-index: 3;
+    background-color: #fff;
 
     .inner {
         border-radius: 44px;
@@ -36,7 +36,6 @@
 @media (max-width: 768px) {
 
     .wrapper {
-        margin: 0;
 
         .inner {
 
