@@ -6,19 +6,25 @@ import {Row, Col} from 'antd';
 import img from '@/public/assets/images/comp-reg.svg';
 import Button from '@/components/Button/Button';
 import { useWindowSize } from 'usehooks-ts';
+import getClassNames from '@/helpers/getClassNames';
 
 const CompReg:FC<ModalFuncProps> = (props) => {
   const {width} = useWindowSize()
   return (
     <Modal
       {...props}
+      width={340}
+      footer={false}
+      className={getClassNames([styles.wrapper, 'modal'])}
       >
       <Row gutter={[20,20]}>
         <Col span={24}>
+          <div className={styles.img}>
           <Image
             src={img}
             alt=''
             />
+          </div>
         </Col>
         <Col span={24}>
           <h3 className={styles.title}>Complete Your Registration</h3>
