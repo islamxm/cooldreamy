@@ -66,7 +66,7 @@ const ChatAction = ({
                     }, token).then(res => {
                         if(res?.error) {
                             if(res?.error === 'You need to fill in information about yoursel') {
-
+                                setCr(true)
                             } else {
                                 dispatch(updateLimit({
                                     open: true,
@@ -132,7 +132,7 @@ const ChatAction = ({
                         
                         if(res?.error) {
                             if(res?.error === 'You need to fill in information about yoursel') {
-
+                                setCr(true)
                             } else {
                                 if(userData?.free_credits && userData?.free_credits < 3) {
                                     dispatch(updateSubsModal(true))
@@ -168,7 +168,7 @@ const ChatAction = ({
                     }, token).then(res => {
                         if(res?.error) {
                             if(res?.error === 'You need to fill in information about yoursel') {
-                                
+                                setCr(true)
                             } else {
                                 if(userData?.free_credits && userData?.free_credits < 3) {
                                     dispatch(updateSubsModal(true))
@@ -221,7 +221,7 @@ const ChatAction = ({
                                 //     dispatch(updateSubsModal(true))
                                 // }
                                 if(res?.error === 'You need to fill in information about yoursel') {
-
+                                    setCr(true)
                                 } else {
                                     dispatch(updateLimit({
                                         open: true,
@@ -272,7 +272,7 @@ const ChatAction = ({
                             // !! нужно включить после того как Даниил поправить модель
                             if(r?.error) {
                                 if(r?.error === 'You need to fill in information about yoursel') {
-
+                                    setCr(true)
                                 } else {
                                     if(userData?.free_credits && userData?.free_credits < 3) {
                                         dispatch(updateSubsModal(true))
