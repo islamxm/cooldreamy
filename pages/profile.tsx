@@ -10,6 +10,7 @@ import UserCardMob from "@/pageModules/profile/components/UserCardMob/UserCardMo
 import { useWindowSize } from "usehooks-ts";
 import { useEffect } from "react";
 import {Row, Col} from 'antd';
+
 import PrivateRoute from "@/hoc/PrivateRoute";
 import { 
     StatusCredits, 
@@ -48,20 +49,25 @@ const Profile = () => {
                                             }}
                                             />
                                     </Col>
-                                    <Col span={24}>
-                                        <Button
-                                            onClick={() => Router.push('/complete')}
-                                            text="Complete registration"
-                                            style={{
-                                                padding: '8px 10px',
-                                                fontSize: 18,
-                                                lineHeight: '27px',
-                                                width: '100%'
-                                            }}
-                                            hover={null}
-                                            variant={'white'}
-                                            />
-                                    </Col>
+                                    {
+                                        !userData?.prompt_career_id && (
+                                            <Col span={24}>
+                                                <Button
+                                                    onClick={() => Router.push('/complete')}
+                                                    text="Complete registration"
+                                                    style={{
+                                                        padding: '8px 10px',
+                                                        fontSize: 18,
+                                                        lineHeight: '27px',
+                                                        width: '100%'
+                                                    }}
+                                                    hover={null}
+                                                    variant={'white'}
+                                                    />
+                                            </Col>
+                                        )
+                                    }
+                                    
                                     <Col span={24}>
                                         <StatusPremium/>
                                     </Col>

@@ -27,7 +27,7 @@ const UserCardMob:FC<I> = ({
 
     children
 }) => {
-    const {locale} = useAppSelector(s => s)
+    const {locale, userData} = useAppSelector(s => s)
     return (
         <div className={styles.wrapper}>
             <div className={styles.main}>
@@ -99,16 +99,21 @@ const UserCardMob:FC<I> = ({
                             )
                         }  */}
                         <Row gutter={[10,10]}>
-                            <Col span={24}>
-                                <Button
-                                    text='Complete registration'
-                                    variant='white'
-                                    onClick={() => Router.push('/complete')}
-                                    fill
-                                    middle
-                                    hover={null}
-                                    />
-                            </Col>
+                            {
+                                !userData?.prompt_career_id && (
+                                    <Col span={24}>
+                                        <Button
+                                            text='Complete registration'
+                                            variant='white'
+                                            onClick={() => Router.push('/complete')}
+                                            fill
+                                            middle
+                                            hover={null}
+                                            />
+                                    </Col>
+                                )
+                            }
+                            
                             <Col span={24}>
                                 <StatusPremium/>
                             </Col>

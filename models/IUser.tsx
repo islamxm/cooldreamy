@@ -40,5 +40,6 @@ export interface IUser {
 
     profile_photo?: any[],
     user_thumbnail_url?: string,
-    free_credits?:number
+    free_credits?:number,
+    prompt_career_id?: any
 }

@@ -31,13 +31,12 @@ const service = new ApiService()
 const Body:FC = () => {
     const {width} = useWindowSize()
     // !! для теста
-    const {token, locale, registerData} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState<number>(7)
-    const [nextBtn, setNextBtn] = useState(false)
+    const [currentStep, setCurrentStep] = useState<number>(0)
 
     const [countryDef, setCountryDef] = useState<any>(null)
     const [stateDef, setStateDef] = useState<any>(null)
@@ -127,31 +126,43 @@ const Body:FC = () => {
       if(currentStep === 1) {
         if(selectedTargets?.length === 3) {
           setCurrentStep(s => s + 1)
+        } else {
+          notify('Select the appropriate items', 'ERROR')
         }
       }
       if(currentStep === 2) {
         if(selectedInterests?.length === 5) {
           setCurrentStep(s => s + 1)
+        } else {
+          notify('Select the appropriate items', 'ERROR')
         }
       }
       if(currentStep === 3) {
         if(selectedFinance?.length === 1) {
           setCurrentStep(s => s + 1)
+        } else {
+          notify('Select the appropriate items', 'ERROR')
         }
       }
       if(currentStep === 4) {
         if(selectedSources?.length === 1) {
           setCurrentStep(s => s + 1)
+        } else {
+          notify('Select the appropriate items', 'ERROR')
         }
       }
       if(currentStep === 5) {
         if(selectedKids?.length === 1) {
           setCurrentStep(s => s + 1)
+        } else {
+          notify('Select the appropriate items', 'ERROR')
         }
       }
       if(currentStep === 6) {
         if(selectedRl?.length === 1) {
           setCurrentStep(s => s + 1)
+        } else {
+          notify('Select the appropriate items', 'ERROR')
         }
       }
       if(currentStep === 7) {
@@ -176,6 +187,8 @@ const Body:FC = () => {
                 setLoad(false)  
               })
           }
+        } else {
+          notify('Select the appropriate items', 'ERROR')
         }
       }
     }
