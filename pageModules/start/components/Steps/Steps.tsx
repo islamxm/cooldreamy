@@ -50,7 +50,7 @@ const Steps = () => {
                                         }
                                         text={
                                             <>
-                                            Cool Dreamy является <span>надежным</span> сайтом, имеет сертификат безопасности TrustedSite!
+                                            Cool Dreamy is a <span>trustworthy</span> site, has a TrustedSite security certificate!
                                             </>
                                         }
 
@@ -68,7 +68,7 @@ const Steps = () => {
                                         }
                                         text={
                                             <>
-                                            Cool Dreamy входит в <span>десятку лучших сайтов</span> знакомств по версии iDate Award!
+                                            Cool Dreamy is one of the <span>top ten best dating sites</span> according to the iDate Award!
                                             </>
                                         }
                                         />
@@ -79,7 +79,7 @@ const Steps = () => {
                                     <StepItem
                                         text={
                                             <>
-                                            На сайте Cool Dreamy <span>нашли идеальную пару</span> более 5 000 пользователей!   
+                                            More than 5,000 users have <span>found the perfect match</span> on the Cool Dreamy website! 
                                             </>
                                         }
                                         icon={

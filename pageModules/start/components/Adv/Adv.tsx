@@ -5,6 +5,7 @@ import AdvItem from './components/AdvItem/AdvItem';
 import {motion} from 'framer-motion';
 import adv1 from '@/public/assets/images/adv-1.svg';
 import adv2 from '@/public/assets/images/adv-2.svg';
+import adv3 from '@/public/assets/images/adv-3.svg';
 import { container, item } from '@/helpers/variantsOrderAnim';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
@@ -50,7 +51,7 @@ const Adv:FC = () => {
                         </motion.div>
                         <motion.div variants={item} className={styles.item}>
                             <AdvItem
-                                img={adv2}
+                                img={adv3}
                                 label={locale?.startPage?.start_adv_3?.title}
                                 text={locale?.startPage?.start_adv_3?.text}
                                 />

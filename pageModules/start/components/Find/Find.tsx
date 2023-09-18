@@ -6,6 +6,9 @@ import Image from 'next/image';
 import Button from '@/components/Button/Button';
 import goToTop from '@/helpers/goToTop';
 import { useWindowSize } from 'usehooks-ts';
+import imgmob1 from '@/public/assets/images/start-find-mob-1.png'
+import imgmob2 from '@/public/assets/images/start-find-mob-2.png'
+import getClassNames from '@/helpers/getClassNames';
 
 const Find:FC<any> = () => {
   const {width} = useWindowSize()
@@ -14,12 +17,27 @@ const Find:FC<any> = () => {
     <div className={styles.wrapper}>
       <Container>
         <div className={styles.in}>
-          <h2 className={styles.title}>Найди подходящую пару уже сейчас!</h2>
+          <h2 className={getClassNames([styles.title, 'block-title'])}>Найди подходящую пару уже сейчас!</h2>
+          
           <div className={styles.body}>
             <Image
               src={img}
               alt=''
               />
+          </div>
+          <div className={styles.mob}>
+            <div className={styles.part}>
+              <Image
+                src={imgmob1}
+                alt=''
+                />
+            </div>
+            <div className={styles.part}>
+              <Image
+                src={imgmob2}
+                alt=''
+                />
+            </div>
           </div>
           <div className={styles.action}>
             <Button
