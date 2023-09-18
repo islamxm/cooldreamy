@@ -72,6 +72,7 @@ const SignupSearch:FC<I> = ({
               <Col span={24}>
                 <div className={styles.body}>
                   <SelectSex
+                  isSelf={false}
                   onSelect={(e) => setGender(e)}
                   value={gender}
                   />

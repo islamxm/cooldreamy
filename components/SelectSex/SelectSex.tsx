@@ -12,7 +12,8 @@ import { useAppSelector } from '@/hooks/useTypesRedux';
 const SelectSex: FC<SelectSexPropsTypes>  = ({
     value,
     onSelect,
-    shadow = true
+    shadow = true,
+    isSelf = true
 }) => {
     const {locale} = useAppSelector(s => s)
 
@@ -33,7 +34,14 @@ const SelectSex: FC<SelectSexPropsTypes>  = ({
                             </div>
                         </Col>
                         <Col span={24}>
-                            <div className={styles.label}>{locale?.global?.select_gender?.male}</div>
+                            {
+                                isSelf ? (
+                                    <div className={styles.label}>{locale?.global?.select_gender?.male}</div>
+                                ) : (
+                                    <div className={styles.label}>{'Male'}</div>
+                                    
+                                )
+                            }
                         </Col>
                     </Row>
                 </Col>
@@ -55,7 +63,13 @@ const SelectSex: FC<SelectSexPropsTypes>  = ({
                             </div>
                         </Col>
                         <Col span={24}>
-                            <div className={styles.label}>{locale?.global?.select_gender?.female}</div>
+                            {
+                                isSelf ? (
+                                    <div className={styles.label}>{locale?.global?.select_gender?.female}</div>
+                                ) : (
+                                    <div className={styles.label}>{'Female'}</div>
+                                )
+                            }
                         </Col>
                     </Row>
                 </Col>
