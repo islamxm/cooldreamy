@@ -48,6 +48,19 @@ const Profile = () => {
                                             />
                                     </Col>
                                     <Col span={24}>
+                                        <Button
+                                            disabled
+                                            text="Complete registration"
+                                            style={{
+                                                padding: '8px 10px',
+                                                fontSize: 18,
+                                                lineHeight: '27px',
+                                                width: '100%'
+                                            }}
+                                            variant={'white'}
+                                            />
+                                    </Col>
+                                    <Col span={24}>
                                         <StatusPremium/>
                                     </Col>
                                     <Col span={24}>

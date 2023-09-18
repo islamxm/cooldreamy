@@ -100,6 +100,15 @@ const UserCardMob:FC<I> = ({
                         }  */}
                         <Row gutter={[10,10]}>
                             <Col span={24}>
+                                <Button
+                                    text='Complete registration'
+                                    variant='white'
+                                    fill
+                                    middle
+                                    hover={null}
+                                    />
+                            </Col>
+                            <Col span={24}>
                                 <StatusPremium/>
                             </Col>
                             <Col span={24}>
