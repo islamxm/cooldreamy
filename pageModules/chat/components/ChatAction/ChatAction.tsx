@@ -13,6 +13,7 @@ import { useWindowSize } from 'usehooks-ts';
 import { setCredits, setFreeCredits, updateLimit, updateSubsModal, updateUserData } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import OutsideClickHandler from 'react-outside-click-handler';
+import CompReg from '@/popups/CompReg/CompReg';
 
 
 const service = new ApiService()
@@ -31,7 +32,7 @@ const ChatAction = ({
     updateDialogsList?: (...args: any[]) => any
 }) => {
     const dispatch = useAppDispatch()
-
+    const [cr, setCr] = useState(false)
 
     const {width} = useWindowSize()
     const {token, locale, actionsPricing, userData} = useAppSelector(s => s)
@@ -64,17 +65,22 @@ const ChatAction = ({
                         sticker_id: id
                     }, token).then(res => {
                         if(res?.error) {
+                            if(res?.error === 'You need to fill in information about yoursel') {
+
+                            } else {
+                                dispatch(updateLimit({
+                                    open: true,
+                                    data: {
+                                        head: locale?.popups?.nocredit_sticker_message?.title,
+                                        // text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
+                                        text: locale?.popups?.nocredit_global_chat
+                                    }
+                                }))
+                            }
                             // if(userData?.free_credits && userData?.free_credits < 3) {
                             //     dispatch(updateSubsModal(true))
                             // }
-                            dispatch(updateLimit({
-                                open: true,
-                                data: {
-                                    head: locale?.popups?.nocredit_sticker_message?.title,
-                                    // text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
-                                    text: locale?.popups?.nocredit_global_chat
-                                }
-                            }))
+                            
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                             service.getCredits(token).then(credits => {
@@ -125,10 +131,14 @@ const ChatAction = ({
                     }, token).then(res => {
                         
                         if(res?.error) {
-                            console.log(userData?.free_credits)
-                            if(userData?.free_credits && userData?.free_credits < 3) {
-                                dispatch(updateSubsModal(true))
+                            if(res?.error === 'You need to fill in information about yoursel') {
+
+                            } else {
+                                if(userData?.free_credits && userData?.free_credits < 3) {
+                                    dispatch(updateSubsModal(true))
+                                }
                             }
+                            
                             // dispatch(updateLimit({
                             //     open: true,
                             //     data: {
@@ -157,8 +167,12 @@ const ChatAction = ({
                         text
                     }, token).then(res => {
                         if(res?.error) {
-                            if(userData?.free_credits && userData?.free_credits < 3) {
-                                dispatch(updateSubsModal(true))
+                            if(res?.error === 'You need to fill in information about yoursel') {
+                                
+                            } else {
+                                if(userData?.free_credits && userData?.free_credits < 3) {
+                                    dispatch(updateSubsModal(true))
+                                }
                             }
                             // dispatch(updateLimit({
                             //     open: true,
@@ -206,15 +220,20 @@ const ChatAction = ({
                                 // if(userData?.free_credits && userData?.free_credits < 3) {
                                 //     dispatch(updateSubsModal(true))
                                 // }
-                                dispatch(updateLimit({
-                                    open: true,
-                                    data: {
-                                        head: locale?.popups?.nocredit_chat_picture?.title,
-                                        // text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
-                                        // ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
-                                        text: locale?.popups?.nocredit_global_chat
-                                    }
-                                }))
+                                if(res?.error === 'You need to fill in information about yoursel') {
+
+                                } else {
+                                    dispatch(updateLimit({
+                                        open: true,
+                                        data: {
+                                            head: locale?.popups?.nocredit_chat_picture?.title,
+                                            // text: `${locale?.popups?.nocredit_chat_picture?.text_part_1}${currentUser?.name} 
+                                            // ${locale?.popups?.nocredit_chat_picture?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_PHOTO')}`
+                                            text: locale?.popups?.nocredit_global_chat
+                                        }
+                                    }))
+                                }
+                                
                             } else {
                                 onUpdateChat({messageBody: r?.chat?.last_message, dialogBody: r?.chat})
                                 service.getMyProfile(token).then(res => {
@@ -252,9 +271,14 @@ const ChatAction = ({
                         }, token).then(r => {
                             // !! нужно включить после того как Даниил поправить модель
                             if(r?.error) {
-                                if(userData?.free_credits && userData?.free_credits < 3) {
-                                    dispatch(updateSubsModal(true))
+                                if(r?.error === 'You need to fill in information about yoursel') {
+
+                                } else {
+                                    if(userData?.free_credits && userData?.free_credits < 3) {
+                                        dispatch(updateSubsModal(true))
+                                    }
                                 }
+                                
                                 // dispatch(updateLimit({
                                 //     open: true,
                                 //     data: {
@@ -296,6 +320,10 @@ const ChatAction = ({
 
     return (
         <div className={styles.lt}>
+            <CompReg
+                open={cr}
+                onCancel={() => setCr(false)}
+                />
             {
                 load ? (
                     <div className={styles.load}><PulseLoader color='var(--violet)'/></div>
