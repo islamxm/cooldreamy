@@ -103,6 +103,7 @@ const UserCardMob:FC<I> = ({
                                 <Button
                                     text='Complete registration'
                                     variant='white'
+                                    onClick={() => Router.push('/complete')}
                                     fill
                                     middle
                                     hover={null}

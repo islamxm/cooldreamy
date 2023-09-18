@@ -76,7 +76,7 @@ const Hero: FC = ({}) => {
                     }))
                     Router?.push('/signup?signup_step=1')
                 } else {
-                    notify('This email address is busy', 'ERROR')
+                    notify('This e-mail is already registered.', 'ERROR')
                 }
             })
             

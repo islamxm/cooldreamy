@@ -13,7 +13,7 @@ const CompReg:FC<ModalFuncProps> = (props) => {
   return (
     <Modal
       {...props}
-      width={340}
+      width={width <= 768 ? 340 : 510}
       footer={false}
       className={getClassNames([styles.wrapper, 'modal'])}
       >

@@ -16,6 +16,7 @@ import {
     StatusPremium, 
     StatusVip 
 } from "@/components/donateStatus/donateStatus";
+import Router from "next/router";
 
 const Profile = () => {
     const {userData, locale} = useAppSelector(s => s)
@@ -49,7 +50,7 @@ const Profile = () => {
                                     </Col>
                                     <Col span={24}>
                                         <Button
-                                            disabled
+                                            onClick={() => Router.push('/complete')}
                                             text="Complete registration"
                                             style={{
                                                 padding: '8px 10px',
@@ -57,6 +58,7 @@ const Profile = () => {
                                                 lineHeight: '27px',
                                                 width: '100%'
                                             }}
+                                            hover={null}
                                             variant={'white'}
                                             />
                                     </Col>
