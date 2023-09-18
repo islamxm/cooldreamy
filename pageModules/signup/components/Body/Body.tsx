@@ -65,7 +65,7 @@ const Body:FC = () => {
     const [avatar, setAvatar] = useState<string | null>(null)
     const [registered, setRegistered] = useState(false)
 
-    const [search_gender, setsearch_gender] = useState<'male' | 'female'>('male')
+    const [search_gender, setsearch_gender] = useState<'male' | 'female'>('female')
     const [search_age_from, setsearch_age_from] = useState(18)
     const [search_age_to, setsearch_age_to] = useState(70)
 
@@ -210,6 +210,7 @@ const Body:FC = () => {
 
 
     const stepChange = () => {
+        
         if(currentStep === 0) {
             if(registered) {
                 setLoad(true)
@@ -261,15 +262,21 @@ const Body:FC = () => {
                         LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
                         setRegistered(true)
                         Router.push(`/signup?signup_step=${currentStep + 1}`)
+                    } else {
+                        notify('An error occurred!', 'ERROR')
                     }
                 }).finally(() => setLoad(false))
             }
         }
-    
-        if(currentStep > 0 && currentStep < 3) {
-            Router.push(`/signup?signup_step=${currentStep + 1}`)
+        if(currentStep > 1) {
+            Router.push(`/signup?signup_step=2`)
         }
-    
+        if(currentStep === 2 && !avatar) {
+            notify('To continue, please upload a photo', 'ERROR')
+        }
+        if(currentStep === 2 && avatar) {
+            Router.push(`/signup?signup_step=3`)
+        }
         if(currentStep === 3) {
             setLoad(true)
             // const updateBody: IUser = {
@@ -402,9 +409,13 @@ const Body:FC = () => {
                 setBtnDisable(true)
             } else setBtnDisable(false)
         }
-    }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl, email, name, password, birthday, about])
+    }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl, email, name, password, birthday, about, avatar])
 
-   
+    useEffect(() => {
+        if(currentStep === 3 && !avatar) {
+            Router.push(`/signup?signup_step=2`)
+        }
+    }, [currentStep, avatar, about, registerData])
 
     return (
         <div className={styles.body}>

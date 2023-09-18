@@ -10,6 +10,7 @@ const endpoints = {
     login: `${API_PATH}token`,
     logout: `${API_PATH}logout`,
     verifyEmail: `${API_PATH}verify`,
+    checkMail: `${API_PATH}check/email`,
 
     //users
     search: `${API_PATH}users/search`,
