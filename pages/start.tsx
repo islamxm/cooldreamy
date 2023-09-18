@@ -10,13 +10,14 @@ import { useAppSelector } from "@/hooks/useTypesRedux";
 import Head from "next/head";
 import Header from "@/components/Header/Header";
 import Find from "@/pageModules/start/components/Find/Find";
+import PrivateRoute from "@/hoc/PrivateRoute";
 
 const StartPage: React.FC = () => {
     const {width} = useWindowSize()
     const {token} = useAppSelector(s => s)
 
     return (
-        <>
+        <PrivateRoute>
             <Head>
                 <meta name="verification" content="34dda10c8f41dd109f446ea1555c563c"/>
             </Head>
@@ -33,7 +34,7 @@ const StartPage: React.FC = () => {
             <Adv/>
             <Last/>
             <Faq/>
-        </>
+        </PrivateRoute>
     )
 }
 

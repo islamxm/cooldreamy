@@ -202,6 +202,12 @@ const Body:FC = () => {
         setNextBtn(false)
     }, [currentStep])
 
+    useEffect(() => {
+        if(currentStep && !registerData) {
+            Router.push('/start')
+        }
+    }, [currentStep, registerData])
+
 
     const stepChange = () => {
         if(currentStep === 0) {

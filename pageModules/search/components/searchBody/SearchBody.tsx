@@ -86,11 +86,6 @@ const SearchBody = () => {
         }
     }, [token, country])    
 
-  
-
-
-
-
     const onSearch = (initPage?: number) => {
         if(currentPage) {
             if(token && currentPage > 0 && filter_type) {

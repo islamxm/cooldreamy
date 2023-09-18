@@ -61,7 +61,7 @@ const Header: React.FC<any> = () => {
             service.logout(token).then(res => {
                 if(res?.message === 'success') {
                     socketChannel?.unsubscribe()
-                    dispatch(updateToken(''))
+                    dispatch(updateToken(null))
                     dispatch(updateUserId(null))
                     dispatch(updateSocket(null))
                     deauthorize()
