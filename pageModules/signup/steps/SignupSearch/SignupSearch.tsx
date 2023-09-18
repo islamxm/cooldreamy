@@ -41,7 +41,7 @@ const SignupSearch:FC<I> = ({
             <Row gutter={[20, 20]}>
               <Col span={24}>
                 <div className={styles.label}>
-                  Укажите возраст, который Вас интересует
+                Specify the age of the partner you&apos;d like to meet.
                 </div>
               </Col>
               <Col span={24}>
@@ -66,7 +66,7 @@ const SignupSearch:FC<I> = ({
             <Row gutter={[20,20]}>
               <Col span={24}>
                 <div className={styles.label}>
-                  Кого Вы ищете?
+                Who are you looking for?
                 </div>
               </Col>
               <Col span={24}>
