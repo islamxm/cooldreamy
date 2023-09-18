@@ -162,13 +162,13 @@ const Hero: FC = ({}) => {
                                 </Col>
                                 <Col span={24}>
                                     <div className={styles.terms}>
-                                        Продолжив, Вы принимаете <Link href={'/'}>условия пользовательского соглашения и конфидициальности</Link>
+                                    By continuing, you accept the <Link href={'/articles/privacy'}>terms and conditions of the user agreement and confidentiality</Link>
                                     </div>
                                 </Col>
                                 <Col span={24}>
                                     <div className={styles.action}>
                                         <Button
-                                            text='Найти свою пару'
+                                            text='Find your match'
                                             middle
                                             disabled={!(name && password && email && birthday && sex)}
                                             onClick={onSubmit}
