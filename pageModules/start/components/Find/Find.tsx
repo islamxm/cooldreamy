@@ -17,7 +17,7 @@ const Find:FC<any> = () => {
     <div className={styles.wrapper}>
       <Container>
         <div className={styles.in}>
-          <h2 className={getClassNames([styles.title, 'block-title'])}>Найди подходящую пару уже сейчас!</h2>
+          <h2 className={getClassNames([styles.title, 'block-title'])}>Find the right match now!</h2>
           
           <div className={styles.body}>
             <Image

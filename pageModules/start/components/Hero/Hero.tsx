@@ -22,6 +22,7 @@ import { useWindowSize } from 'usehooks-ts';
 import BirthdaySelectMob from '@/pageModules/signup/components/BirthdaySelectMob/BirthdaySelectMob';
 import mobimg from '@/public/assets/images/start-hero-mob-bg.png'
 import Image from 'next/image';
+import notify from '@/helpers/notify';
 
 const service = new ApiService()
 
@@ -64,14 +65,21 @@ const Hero: FC = ({}) => {
 
     const onSubmit = () => {
         if(email && password && birthday && sex && name) {
-            dispatch(updateRegisterData({
-                name,
-                password,
-                email,
-                gender: sex,
-                birthday
-            }))
-            Router?.push('/signup?signup_step=1')
+            service.checkMail({email}).then(res => {
+                if(res === 200) {
+                    dispatch(updateRegisterData({
+                        name,
+                        password,
+                        email,
+                        gender: sex,
+                        birthday
+                    }))
+                    Router?.push('/signup?signup_step=1')
+                } else {
+                    notify('This email address is busy', 'ERROR')
+                }
+            })
+            
         }
     }
 

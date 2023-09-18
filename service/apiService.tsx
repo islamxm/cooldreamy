@@ -64,14 +64,18 @@ class ApiService {
         }
     }
 
-    // checkMail = async () => {
-    //     try {
-    //         let res = await fetch(endpoints.checkMail, {
-    //             method: "POST",
-    //             headers
-    //         })
-    //     }
-    // }
+    checkMail = async (body: {email: string}) => {
+        try {
+            let res = await fetch(endpoints.checkMail, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(body)
+            })
+            return await res.status
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
     search = async (
         body: {
