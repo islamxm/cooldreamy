@@ -56,7 +56,7 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 dispatch(updateUserId(res?.id))
                 
                 if(width <= 768) {
-                    Router.push('/sympathy')
+                    Router.push('/feed')
                 } else {
                     Router.push('/search')
                 }

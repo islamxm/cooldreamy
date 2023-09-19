@@ -35,7 +35,7 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
     }
     if(auth === 'SUCCESS') {
       if(pathname === '/start' || pathname === '/' || pathname === '/signup') {
-        if(width <= 768) Router.push('/sympathy')
+        if(width <= 768) Router.push('/feed')
         if(width > 768) Router.push('/search')
       }
     }
