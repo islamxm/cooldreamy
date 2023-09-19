@@ -65,20 +65,25 @@ const Hero: FC = ({}) => {
 
     const onSubmit = () => {
         if(email && password && birthday && sex && name) {
-            service.checkMail({email}).then(res => {
-                if(res === 200) {
-                    dispatch(updateRegisterData({
-                        name,
-                        password,
-                        email,
-                        gender: sex,
-                        birthday
-                    }))
-                    Router?.push('/signup?signup_step=1')
-                } else {
-                    notify('This e-mail is already registered.', 'ERROR')
-                }
-            })
+            if(password?.length < 6) {
+                notify('Password must be at least 6 characters long')
+            } else {
+                service.checkMail({email}).then(res => {
+                    if(res === 200) {
+                        dispatch(updateRegisterData({
+                            name,
+                            password,
+                            email,
+                            gender: sex,
+                            birthday
+                        }))
+                        Router?.push('/signup?signup_step=1')
+                    } else {
+                        notify('This e-mail is already registered.', 'ERROR')
+                    }
+                })
+            }
+            
             
         }
     }
