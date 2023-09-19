@@ -194,13 +194,13 @@ const MainWrapper = ({
 		}
 	}
 
-	// useEffect(() => {
-	// 	let tm:any;
-	// 	if(token) {
-	// 		getIndicators()
-	// 		tm = setInterval(getIndicators, 4000)
-	// 	}
-	// }, [token])
+	useEffect(() => {
+		let tm:any;
+		if(token) {
+			getIndicators()
+			tm = setInterval(getIndicators, 4000)
+		}
+	}, [token])
 
 
 	// useEffect(() => {

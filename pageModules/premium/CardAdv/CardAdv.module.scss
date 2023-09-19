@@ -70,10 +70,11 @@
 
             .list {
                 display: flex;
-                width: calc(100% + 40px);
+                // width: calc(100% + 40px);
                 background-color: #F0EBFF;
                 margin-left: -20px;
-                padding: 0 20px;
+                margin-right: -20px;
+                
 
                 .item {
                     width: calc(100% / 3);
@@ -175,7 +176,7 @@
             }
             .body {
                 .list {
-                    padding: 0;
+                    
                 }
             }
         }
