@@ -66,8 +66,9 @@ const Header: React.FC<any> = () => {
                     dispatch(updateSocket(null))
                     deauthorize()
                     
-                    Router.push('/start')
+                    // Router.push('/start')
                     setLogoutModal(false)
+                    Router.reload()
                 } else {
                     notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
