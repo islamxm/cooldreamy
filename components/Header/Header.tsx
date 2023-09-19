@@ -177,7 +177,6 @@ const Header: React.FC<any> = () => {
                                         !token ? (
                                             <div className={styles.auth}>
                                                 <div
-                                                     
                                                     className={styles.item} 
                                                     >{locale?.global?.header?.login_btn}</div>
                                             </div>

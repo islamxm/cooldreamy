@@ -7,6 +7,7 @@ import img from '@/public/assets/images/comp-reg.svg';
 import Button from '@/components/Button/Button';
 import { useWindowSize } from 'usehooks-ts';
 import getClassNames from '@/helpers/getClassNames';
+import Router from 'next/router';
 
 const CompReg:FC<ModalFuncProps> = (props) => {
   const {width} = useWindowSize()
@@ -39,6 +40,7 @@ const CompReg:FC<ModalFuncProps> = (props) => {
             <Button
               text='Complete registration'
               middle={width <= 768}
+              onClick={() => Router.push('/complete')}
               />
           </div>
         </Col>

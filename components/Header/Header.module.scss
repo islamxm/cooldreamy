@@ -162,15 +162,20 @@
             .main {
 
                 .auth {
-                    display: none;
+                    // display: none;
                     .item {
                         font-size: 10px;
                         line-height: 15px;
                         margin: 0 5px;
                         letter-spacing: 3px;
+                        padding: 5px 20px;
+                        letter-spacing: normal;
+                        color: var(--purp);
+                        border-color: var(--purp);
                     }
                 }
             }
         }
     }
+
 }
