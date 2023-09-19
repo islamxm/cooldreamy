@@ -23,10 +23,6 @@ const Profile = () => {
     const {userData, locale} = useAppSelector(s => s)
     const {width} = useWindowSize()
 
-    useEffect(() => {
-        console.log(userData)
-    }, [userData])
-
     return (
         <PrivateRoute>
             <Container>

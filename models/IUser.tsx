@@ -25,6 +25,7 @@ export interface IUser {
     prompt_sources?: any | any[],
     prompt_targets?: any | any[],
     prompt_want_kids?: any | any[],
+    prompt_interests?: any | any[]
     state?: string,
     tags?: any,
     top_expire?: any,
