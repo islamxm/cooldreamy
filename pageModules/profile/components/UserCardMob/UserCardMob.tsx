@@ -10,6 +10,7 @@ import {motion} from 'framer-motion';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Router from 'next/router';
 import { StatusCredits, StatusPremium, StatusVip } from '@/components/donateStatus/donateStatus';
+import placeholder from '@/public/assets/images/avatar-placeholder.png'
 
 interface I extends IUser {
     children?: React.ReactNode
@@ -35,7 +36,7 @@ const UserCardMob:FC<I> = ({
                 <Image
                     width={120}
                     height={120}
-                    src={user_avatar_url ? user_avatar_url : ''}
+                    src={(user_avatar_url && !user_avatar_url?.includes('cooldremy')) ? user_avatar_url : placeholder}
                     loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
                     alt=''
                     />  
