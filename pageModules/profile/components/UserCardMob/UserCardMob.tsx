@@ -100,7 +100,7 @@ const UserCardMob:FC<I> = ({
                         }  */}
                         <Row gutter={[10,10]}>
                             {
-                                !userData?.prompt_career_id && (
+                                userData?.prompt_careers && userData?.prompt_careers.length === 0 && (
                                     <Col span={24}>
                                         <Button
                                             text='Complete registration'

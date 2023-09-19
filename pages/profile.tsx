@@ -23,6 +23,10 @@ const Profile = () => {
     const {userData, locale} = useAppSelector(s => s)
     const {width} = useWindowSize()
 
+    useEffect(() => {
+        console.log(userData)
+    }, [userData])
+
     return (
         <PrivateRoute>
             <Container>
@@ -50,7 +54,7 @@ const Profile = () => {
                                             />
                                     </Col>
                                     {
-                                        !userData?.prompt_career_id && (
+                                        userData?.prompt_careers && userData?.prompt_careers.length === 0 && (
                                             <Col span={24}>
                                                 <Button
                                                     onClick={() => Router.push('/complete')}

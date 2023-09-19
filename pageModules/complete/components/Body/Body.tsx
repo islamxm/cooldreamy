@@ -179,6 +179,7 @@ const Body:FC = () => {
           if(token) {
               service.updateMyProfile(updateBody, token).then(res => {
                 if(res?.id) {
+                  console.log(res)
                   notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                   dispatch(updateUserData(res))
                   if(width > 768) Router.push('/search')

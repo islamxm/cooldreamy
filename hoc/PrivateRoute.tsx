@@ -15,7 +15,6 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
   const [auth, setAuth] = useState<'SUCCESS' | 'ND' | 'ERROR'>('ND')
 
   useEffect(() => {
-    console.log(token)
     if(token === null) {
       setAuth('ERROR')
     }
