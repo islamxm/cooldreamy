@@ -16,9 +16,9 @@ import Router, { useRouter } from 'next/router';
 import placeholder from '@/public/assets/images/avatar-placeholder.png'
 import Avatar from '@/components/Avatar/Avatar';
 import { BsCamera } from 'react-icons/bs';
-import { FiHeart } from 'react-icons/fi';
+
 import { FaRegSmileWink } from 'react-icons/fa';
-import { AiOutlineStar } from 'react-icons/ai';
+import { AiOutlineStar, AiFillStar, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import {FiChevronLeft, FiChevronRight} from 'react-icons/fi'
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import notify from '@/helpers/notify';
@@ -36,6 +36,17 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     const [load, setLoad] = useState(true)
     const [createChatLoad, setCreateChatLoad] = useState(false)
     const [data, setData] = useState<IUser | null>(null)
+
+    const [isFav, setIsFav] = useState<any>(false)
+    const [isLiked, setIsLiked] = useState<any>(false)
+    const [isWinked, setIsWinked] = useState<any>(false)
+
+    useEffect(() => {
+        if(data) {
+            setIsFav(data?.is_favorite)
+            setIsLiked(data?.is_liked)
+        }
+    }, [data])
 
     const {
         profile_photo, 
@@ -122,7 +133,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                             notify(locale?.global?.notifications?.already_wink, 'ERROR')
                         } else {
                             onClose()
-                            Router.push(`/chat/${res?.chat_id}?type=chat`)
+                            // Router.push(`/chat/${res?.chat_id}?type=chat`)
                         }
                     })
                 }
@@ -235,9 +246,13 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                             }
                             <div className={styles.body}>
                                 <div className={styles.body_action}>
-                                    <button onClick={onLike} className={styles.item}>
+                                    <button onClick={() => {
+                                        !isLiked && onLike()
+                                    }} className={styles.item}>
                                         <div className={styles.icon}>
-                                            <FiHeart/>
+                                            {
+                                                isLiked ? <AiFillHeart/> : <AiOutlineHeart/>
+                                            }
                                         </div>
                                         <div className={styles.text}>{locale?.global?.user_action?.like}</div>
                                     </button>
@@ -247,9 +262,13 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                         </div>
                                         <div className={styles.text}>{locale?.global?.user_action?.wink}</div>
                                     </button>
-                                    <button onClick={onFavorite} className={styles.item}>
+                                    <button onClick={() => {
+                                        !isFav && onFavorite()
+                                    }} className={styles.item}>
                                         <div className={styles.icon}>
-                                            <AiOutlineStar/>
+                                            {
+                                                isFav ? <AiFillStar/> : <AiOutlineStar/>
+                                            }
                                         </div>
                                         <div className={styles.text}>{locale?.global?.user_action?.fav}</div>
                                     </button>
