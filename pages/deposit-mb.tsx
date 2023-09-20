@@ -60,13 +60,30 @@ const DepositPage = () => {
     if(query && query?.tab) {
       const tab = query?.tab
       setActiveTab(tab) 
-      if(tab === '2') {
-        setSelected({value: 5, type: 'subscription'})
-      } else {
-        setSelected(null)
-      }
+      // if(tab === '2') {
+      //   setSelected({value: 5, type: 'subscription'})
+      // } else {
+      //   setSelected(null)
+      // }
     } else Router.push('deposit-mb?tab=2')
   }, [query])
+
+  useEffect(() => {
+    if(activeTab === '1') {
+      if(listPrem?.length > 0) {
+        setSelected({value: listPrem[1]?.id, type: 'premium'})
+      }
+    }
+    if(activeTab === '2') {
+      if(listSub) {
+        setSelected({value: listSub[1]?.id, type: 'subscription'})
+      }
+    }
+    if(activeTab === '3') {
+      setSelected(null)
+    }
+    
+  }, [activeTab, listPrem, listSub])
 
   useEffect(() => {
     setSecretKey('')
@@ -89,7 +106,15 @@ const DepositPage = () => {
   const getPrem = () => {
     if(token) {
       service.getPayPrems(token).then(res => {
-          setListPrem(res)
+        const findItem = res?.find((i:any) => i?.one_time === 1)
+        const filtered = res?.filter((i:any) => i?.one_time === 0)
+        if(findItem) {
+            const m = [...filtered]
+            const rm = m.splice(0, 1, findItem)
+            setListPrem([...m])
+        } else {
+            setListPrem(filtered)
+        }
       })
     }
   }

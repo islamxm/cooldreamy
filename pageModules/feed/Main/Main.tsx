@@ -223,7 +223,7 @@ const Main = () => {
             <div className={getClassNames([styles.action, disable && styles.disabled])}>
                 <div className={`${styles.item} ${canceling ? styles.active : ''}`}>
                     <IconButton
-                        disabled={list?.length === 0}
+                        disabled={list?.length === 0 || disable}
                         onClick={() => {
                             removeCard(list[0], 'nope')
                             setDisable(true)
@@ -234,7 +234,7 @@ const Main = () => {
                 </div>
                 <div className={styles.item}>
                     <IconButton
-                        disabled={list?.length === 0}
+                        disabled={list?.length === 0 || disable}
                         onClick={createChat}
                         size={50}
                         variant={'bordered'}
@@ -243,7 +243,7 @@ const Main = () => {
                 </div>
                 <div className={`${styles.item} ${liking ? styles.active : ''}`}>
                     <IconButton
-                        disabled={list?.length === 0}
+                        disabled={list?.length === 0 || disable}
                         onClick={() => {
                             removeCard(list[0], 'like')
                             setDisable(true)

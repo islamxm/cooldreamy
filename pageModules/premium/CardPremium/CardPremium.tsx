@@ -22,34 +22,8 @@ const CardPremium = ({
     load,
     onAccept
 }: I) => {  
-    const [localList, setLocalList] = useState<any>([])
-    const [isOneTime, setIsOneTime] = useState(false)
+    
 
-    useEffect(() => {
-        console.log(list)
-    }, [list])
-
-    const getOneTime = () => {
-        if(list && list?.length > 0) {
-            // setLocalList(list)
-            const findItem = list?.find(i => i?.one_time === 1)
-            const filtered = list?.filter(i => i?.one_time === 0)
-            // console.log(filtered)
-            if(findItem) {
-                setIsOneTime(true)
-                const m = [...filtered]
-                const rm = m.splice(0, 1, findItem)
-                setLocalList([...m])
-            } else {
-                setLocalList(filtered)
-            }
-        }
-    }
-
-    useEffect(() => {
-        getOneTime()
-    }, [list])
-    useEffect(() => console.log(localList), [localList])
 
     return (
         <div className={styles.wrapper}>
@@ -68,14 +42,14 @@ const CardPremium = ({
                     </div>
                     <div className={styles.pricing}>
                         {
-                            (localList && localList?.length > 0) && (
-                                localList?.map((i:any, index: number) => {
+                            (list && list?.length > 0) && (
+                                list?.map((i:any, index: number) => {
                                     if(index === 0) {
                                         return (
                                             <div 
                                                 onClick={() => onSelect({value: i?.id, type: 'premium'})}
                                                 className={styles.item} key={i?.id}>
-                                                {isOneTime && <div className={styles.onetime}><span><AiFillStar/></span>SALE</div>}
+                                                {list?.find(i => i.one_time === 1) && <div className={styles.onetime}><span><AiFillStar/></span>SALE</div>}
                                                 <input type="radio" checked={selected?.value == i?.id && selected?.type == 'premium'}/>
                                                 <label className={styles.label}>
                                                     <div className={styles.date}>
