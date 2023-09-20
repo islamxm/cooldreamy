@@ -138,10 +138,8 @@ export const StatusVip:FC<any> = () => {
 
 //CREDITS
 export const StatusCredits:FC<any> = () => {
-  const {userData} = useAppSelector(s => s)
-  const {
-    credits
-  } = userData || {}
+  const {userData, credits} = useAppSelector(s => s)
+  
 
   return (
     <div className={getClassNames([styles.wrapper, styles.credits])}>

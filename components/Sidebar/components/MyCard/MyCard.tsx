@@ -14,12 +14,12 @@ const MyCard:FC<IUser> = ({
     name,
     state,
     country,
-    credits,
+    // credits,
     avatar_url_thumbnail,
     age,
-    online
+    online,
 }) => {
-    const {locale, premiumData} = useAppSelector(s => s)
+    const {locale, premiumData, credits} = useAppSelector(s => s)
     const {is_premium} = premiumData
     
     

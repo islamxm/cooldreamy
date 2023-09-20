@@ -57,7 +57,9 @@ export interface IGlobalState {
     currentSub: any,
     currentVip: any,
 
-    registerData:any
+    registerData:any,
+
+    credits: number
 }
 
 
@@ -92,7 +94,8 @@ export const globalState: IGlobalState = {
     subsModal: false,
     currentSub: null,
     currentVip: null,
-    registerData: null
+    registerData: null,
+    credits: 0
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -147,7 +150,6 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 locale: action.data
-                
             }
         }
         case 'UPDATE_PRICING':
@@ -251,7 +253,8 @@ const reducer = (state = globalState, action: any) => {
         case 'SET_CREDITS':
             return {
                 ...state,
-                userData: {...state.userData, credits: action.data}
+                // userData: {...state.userData, credits: action.data}
+                credits: action.data
             }
         case 'SET_FREE_CREDITS':
             return {
