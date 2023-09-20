@@ -29,10 +29,12 @@ const CardPremium = ({
 
     const getOneTime = () => {
         if(list && list?.length > 0) {
-            const find = list.find(i => i?.one_time)
+            const find = list.find(i => i?.one_time === 1)
+            const findIndex = list.findIndex(i => i?.one_time)
             if(find) {
                 const m = [...list]
-                const rm = m.splice(0,1)
+                const rm = m.splice(0,1, find).splice(findIndex, 1)
+
                 setLocalList([find, ...m])
             } else {
                 setLocalList(list)

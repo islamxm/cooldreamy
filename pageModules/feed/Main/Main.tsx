@@ -64,7 +64,7 @@ const Main = () => {
     const getInitFeed = () => {
         if(token) {
             service.getFeed({
-                page
+                page: 1
             }, token).then(res => {
                 setList(res?.data)
             })
@@ -72,7 +72,7 @@ const Main = () => {
     }
 
     // ** дополнение списка по мере необходимости
-    const updateFeed = useCallback(() => {
+    const updateFeed = () => {
         if(token) {
             page && service.getFeed({page}, token).then(res => {
                 if(res?.data?.length > 0) {
@@ -83,19 +83,20 @@ const Main = () => {
             })
         }
         
-    }, [page, token])
+    }
 
     // ** первая загрузка карточек
     useEffect(() => {
+        console.log(token)
         getInitFeed()
     }, [token])
 
-    // ** изменение страницы когда в списке остается меньше или равно 3 карточек (догрузка)
-    useEffect(() => {
-        if(list?.length <= 3) {
-            setPage(s => s + 1)
-        }
-    }, [list])
+    // // ** изменение страницы когда в списке остается меньше или равно 3 карточек (догрузка)
+    // useEffect(() => {
+    //     if(list?.length <= 3 && list?.length > 0) {
+    //         setPage(s => s + 1)
+    //     }
+    // }, [list])
 
     // ** догрузка карточек
     useEffect(() => {

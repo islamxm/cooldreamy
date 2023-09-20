@@ -100,6 +100,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
     
     const onSave = () => {
         if(!token && croppedImage) {
+
             createFile(croppedImage).then(res => {
 
                 if(isGetBase64) {
@@ -124,6 +125,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
             
         }
         if(token && croppedImage) {
+            console.log(croppedImage)
             setLoad(true)
             const data = new FormData()
             createFile(croppedImage).then(res => {
