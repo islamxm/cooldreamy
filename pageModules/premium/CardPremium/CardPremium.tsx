@@ -1,8 +1,9 @@
 import Button from '@/components/Button/Button';
 import styles from './CardPremium.module.scss';
-import {AiFillDollarCircle} from 'react-icons/ai'
+import {AiFillStar} from 'react-icons/ai'
 import * as _ from 'lodash'
 import { useEffect, useState } from 'react';
+
 
 interface I {
     list?: any[],
@@ -22,6 +23,7 @@ const CardPremium = ({
     onAccept
 }: I) => {  
     const [localList, setLocalList] = useState<any>([])
+    const [isOneTime, setIsOneTime] = useState(false)
 
     useEffect(() => {
         console.log(list)
@@ -29,15 +31,17 @@ const CardPremium = ({
 
     const getOneTime = () => {
         if(list && list?.length > 0) {
-            const find = list.find(i => i?.one_time === 1)
-            const findIndex = list.findIndex(i => i?.one_time)
-            if(find) {
-                const m = [...list]
-                const rm = m.splice(0,1, find).splice(findIndex, 1)
-
-                setLocalList([find, ...m])
+            // setLocalList(list)
+            const findItem = list?.find(i => i?.one_time === 1)
+            const filtered = list?.filter(i => i?.one_time === 0)
+            // console.log(filtered)
+            if(findItem) {
+                setIsOneTime(true)
+                const m = [...filtered]
+                const rm = m.splice(0, 1, findItem)
+                setLocalList([...m])
             } else {
-                setLocalList(list)
+                setLocalList(filtered)
             }
         }
     }
@@ -45,6 +49,7 @@ const CardPremium = ({
     useEffect(() => {
         getOneTime()
     }, [list])
+    useEffect(() => console.log(localList), [localList])
 
     return (
         <div className={styles.wrapper}>
@@ -64,27 +69,55 @@ const CardPremium = ({
                     <div className={styles.pricing}>
                         {
                             (localList && localList?.length > 0) && (
-                                localList?.map((i:any) => (
-                                    <div 
-                                        onClick={() => onSelect({value: i?.id, type: 'premium'})}
-                                        className={styles.item} key={i?.id}>
-                                        <input type="radio" checked={selected?.value == i?.id && selected?.type == 'premium'}/>
-                                        <label className={styles.label}>
-                                            <div className={styles.date}>
-                                                <span>
-                                                    {i?.duration === 4 && i?.duration / 4}
-                                                    {i?.duration < 4 && i?.duration}
-                                                    {i?.duration > 4 && i?.duration / 4}
-                                                </span>
-                                                {i?.duration === 4 && 'month'}
-                                                {i?.duration > 4 && 'months'}
-                                                {(i?.duration < 4 && i?.duration > 1) && 'weeks'}
-                                                {(i?.duration === 1) && 'week'}
+                                localList?.map((i:any, index: number) => {
+                                    if(index === 0) {
+                                        return (
+                                            <div 
+                                                onClick={() => onSelect({value: i?.id, type: 'premium'})}
+                                                className={styles.item} key={i?.id}>
+                                                {isOneTime && <div className={styles.onetime}><span><AiFillStar/></span>SALE</div>}
+                                                <input type="radio" checked={selected?.value == i?.id && selected?.type == 'premium'}/>
+                                                <label className={styles.label}>
+                                                    <div className={styles.date}>
+                                                        <span>
+                                                            {i?.duration === 4 && i?.duration / 4}
+                                                            {i?.duration < 4 && i?.duration}
+                                                            {i?.duration > 4 && i?.duration / 4}
+                                                        </span>
+                                                        {i?.duration === 4 && 'month'}
+                                                        {i?.duration > 4 && 'months'}
+                                                        {(i?.duration < 4 && i?.duration > 1) && 'weeks'}
+                                                        {(i?.duration === 1) && 'week'}
+                                                    </div>
+                                                    <div className={styles.price}><span>$</span>{i?.price}</div>
+                                                </label>
                                             </div>
-                                            <div className={styles.price}><span>$</span>{i?.price}</div>
-                                        </label>
-                                    </div>
-                                ))
+                                        )
+                                    } else {
+                                        return (
+                                            <div 
+                                                onClick={() => onSelect({value: i?.id, type: 'premium'})}
+                                                className={styles.item} key={i?.id}>
+                                                <input type="radio" checked={selected?.value == i?.id && selected?.type == 'premium'}/>
+                                                <label className={styles.label}>
+                                                    <div className={styles.date}>
+                                                        <span>
+                                                            {i?.duration === 4 && i?.duration / 4}
+                                                            {i?.duration < 4 && i?.duration}
+                                                            {i?.duration > 4 && i?.duration / 4}
+                                                        </span>
+                                                        {i?.duration === 4 && 'month'}
+                                                        {i?.duration > 4 && 'months'}
+                                                        {(i?.duration < 4 && i?.duration > 1) && 'weeks'}
+                                                        {(i?.duration === 1) && 'week'}
+                                                    </div>
+                                                    <div className={styles.price}><span>$</span>{i?.price}</div>
+                                                </label>
+                                            </div>
+                                        )
+                                    }
+                                    
+                                })
                             )
                         }
                     </div>

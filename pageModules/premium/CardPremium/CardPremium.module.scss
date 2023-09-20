@@ -108,6 +108,33 @@
                 
                 .item {
                     width: calc(100% / 3);
+                    position: relative;
+
+                    .onetime {
+                        position: absolute;
+                        top: 5px;
+                        left: 5px;
+                        padding: 2px 8px;
+                        font-size: 11px;
+                        line-height: 11px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        color: #fff;
+                        background-color: #F178B6;
+                        border-radius: 22px;
+
+                        span {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-right: 2px;
+                            line-height: 11px;
+                            font-size: 11px;
+                        }
+                    }
 
                     input {
                         position: absolute;
