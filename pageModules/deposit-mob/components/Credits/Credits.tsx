@@ -48,7 +48,7 @@ const Credits = () => {
       service.getPromo(token).then(res => {
         if (res?.data?.length > 0) {
           setPromo(res?.data[0]?.promotion)
-          setType('promotion')
+          setType('credit')
         } else {
           getPlans()
           setType('credit')

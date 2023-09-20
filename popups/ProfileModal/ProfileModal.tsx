@@ -86,10 +86,12 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         if(token) {
             service.addUserToFav({user_id: Number(id)}, token).then(res => {
                 if(res?.status === 200) {
-                    notify(locale?.global?.notifications?.add_to_fav, 'SUCCESS')
+                    // notify(locale?.global?.notifications?.add_to_fav, 'SUCCESS')
+                    notify('User added to favorites', 'SUCCESS')
                     onClose()
                 } else {
-                    notify(locale?.global?.notifications?.already_added_to_fav, 'ERROR')
+                    // notify(locale?.global?.notifications?.already_added_to_fav, 'ERROR')
+                    notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
             })
         }

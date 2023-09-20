@@ -34,7 +34,7 @@ const GirlCard:FC<IUser> = ({
     online
     
 }) => {
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
 
     const createChat = () => {
@@ -78,7 +78,7 @@ const GirlCard:FC<IUser> = ({
                     })
                     notify('User added to favorites', 'SUCCESS')
                 } else {
-                    notify('Не удалось добавить пользователя в избранные', 'ERROR')
+                    notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
             })
         }

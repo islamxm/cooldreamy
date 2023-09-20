@@ -1,6 +1,6 @@
 import Button from '@/components/Button/Button';
 import styles from './CardAdv.module.scss';
-import {AiFillDollarCircle} from 'react-icons/ai'
+import {AiFillStar} from 'react-icons/ai'
 import * as _ from 'lodash';
 
 const CardAdv = ({
@@ -37,29 +37,59 @@ const CardAdv = ({
                     <div className={styles.list}>
                         {
                             (list && list?.length > 0) && (
-                                list?.map(i => (
-                                    <div 
-                                        onClick={() => onSelect({value: i?.id, type: 'subscription'})}
-                                        className={styles.item} key={i?.id}>
-                                        <input type="radio" checked={i?.id == selected?.value && selected?.type == 'subscription'}/>
-                                        <label className={styles.label} htmlFor="">
-                                            <div className={styles.value}>
-                                            {_.round(i?.duration / 1440, 2)} <br/>
-                                            days
+                                list?.map((i, index) => {
+                                    if(index === 0) {
+                                        return (
+                                            <div 
+                                                onClick={() => onSelect({value: i?.id, type: 'subscription'})}
+                                                className={styles.item} key={i?.id}>
+                                                <div className={styles.onetime}><span><AiFillStar/></span>SALE</div>
+                                                <input type="radio" checked={i?.id == selected?.value && selected?.type == 'subscription'}/>
+                                                <label className={styles.label} htmlFor="">
+                                                    <div className={styles.value}>
+                                                    {_.round(i?.duration / 1440, 2)} <br/>
+                                                    days
+                                                    </div>
+                                                    <div className={styles.info}>
+                                                        <span>Photos: {i?.count_watch_or_send_photos}</span>
+                                                        <span>Videos: {i?.count_watch_or_send_video}</span>
+                                                    </div>
+                                                    <div className={styles.price}>
+                                                    <span>$</span>{i?.price} 
+                                                    </div>
+                                                    {/* <div className={styles.dsc}>
+                                                    Экономия 36%
+                                                    </div> */}
+                                                </label>
                                             </div>
-                                            <div className={styles.info}>
-                                                <span>Photos: {i?.count_watch_or_send_photos}</span>
-                                                <span>Videos: {i?.count_watch_or_send_video}</span>
+                                        )
+                                    } else {    
+                                        return (
+                                            <div 
+                                                onClick={() => onSelect({value: i?.id, type: 'subscription'})}
+                                                className={styles.item} key={i?.id}>
+                                                <input type="radio" checked={i?.id == selected?.value && selected?.type == 'subscription'}/>
+                                                <label className={styles.label} htmlFor="">
+                                                    <div className={styles.value}>
+                                                    {_.round(i?.duration / 1440, 2)} <br/>
+                                                    days
+                                                    </div>
+                                                    <div className={styles.info}>
+                                                        <span>Photos: {i?.count_watch_or_send_photos}</span>
+                                                        <span>Videos: {i?.count_watch_or_send_video}</span>
+                                                    </div>
+                                                    <div className={styles.price}>
+                                                    <span>$</span>{i?.price} 
+                                                    </div>
+                                                    {/* <div className={styles.dsc}>
+                                                    Экономия 36%
+                                                    </div> */}
+                                                </label>
                                             </div>
-                                            <div className={styles.price}>
-                                            <span>$</span>{i?.price} 
-                                            </div>
-                                            {/* <div className={styles.dsc}>
-                                            Экономия 36%
-                                            </div> */}
-                                        </label>
-                                    </div>
-                                ))
+                                        )
+                                    }
+                                    
+                                })
                             )
                         }
                     </div>

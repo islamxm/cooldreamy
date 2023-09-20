@@ -106,7 +106,7 @@ function App({ Component, pageProps }: AppProps) {
 		<Provider store={store}>
 			<Head>
 				<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-				<title>Cool dreamy</title>
+				<title>Cool Dreamy</title>
 			</Head>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 					<MainWrapper>	
