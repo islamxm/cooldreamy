@@ -11,9 +11,8 @@ const UserInfoAction:FC<IUser> = ({
     name,
     age,
     state,
-    credits,
     country}) => {
-    const {locale} = useAppSelector(s => s);
+    const {locale, credits} = useAppSelector(s => s);
 
     if(!name) return <SkeletonUserInfoAction/>
 
