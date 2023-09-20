@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
+import { useIdleTimer } from 'react-idle-timer'
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
 import { 
@@ -67,6 +68,12 @@ const MainWrapper = ({
 	const lc = useAppSelector(s => s.locale)
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
+
+
+	const idle = useIdleTimer({
+		onIdle: () => window.location.reload(),
+		timeout: 7200000,
+	})
 
 
 	// useEffect(() => {
