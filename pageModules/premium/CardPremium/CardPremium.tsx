@@ -62,7 +62,7 @@ const CardPremium = ({
                     <div className={styles.pricing}>
                         {
                             (localList && localList?.length > 0) && (
-                                localList?.map(i => (
+                                localList?.map((i:any) => (
                                     <div 
                                         onClick={() => onSelect({value: i?.id, type: 'premium'})}
                                         className={styles.item} key={i?.id}>
