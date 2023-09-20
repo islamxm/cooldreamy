@@ -63,7 +63,7 @@ export const StatusPremium:FC<any> = () => {
             if(currentVip) {
               
             } else {
-              Router.push('/premium')
+              Router.push('/deposit-mb?tab=1')
             }
           }}
           fill
@@ -122,7 +122,7 @@ export const StatusVip:FC<any> = () => {
             if(currentSub) {
               
             } else {
-              Router.push('/premium')
+              Router.push('/deposit-mb?tab=2')
             }
           }}
           middle
@@ -150,7 +150,7 @@ export const StatusCredits:FC<any> = () => {
           
         </div>
         <div className={styles.body}>
-          <div className={styles.title}>Кредиты</div>
+          <div className={styles.title}>Credits</div>
           <div className={styles.value}><b>{credits}</b></div>
         </div>
       </div>
@@ -158,7 +158,7 @@ export const StatusCredits:FC<any> = () => {
         <Button
           text='Buy'
           style={{padding: '7px 5px'}}
-          onClick={() => Router.push('/deposit')}
+          onClick={() => Router.push('/deposit-mb?tab=3')}
           middle
           fill
           />

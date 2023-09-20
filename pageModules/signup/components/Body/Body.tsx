@@ -224,7 +224,11 @@ const Body:FC = () => {
                     setLoad(true)
                     service.updateMyProfile(body, token).then(res => {
                         if(res?.id) {
-                            dispatch(updateUserData(res))
+                            const {
+                                credits,
+                                ...other
+                            } = res
+                            dispatch(updateUserData({...other, free_credits: credits}))
                             Router.push('/signup?signup_step=1')
                         } else {
                             notify(locale?.global?.notifications?.error_default, 'ERROR')
@@ -321,7 +325,6 @@ const Body:FC = () => {
                 }).then(res => {
                     if(res?.token) {
                         service.signupEnd(res?.token)
-
                         dispatch(updateToken(res?.token))
                         dispatch(updateUserId(res?.id))
                         dispatch(updateRegisterData(null))

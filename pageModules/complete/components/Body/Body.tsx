@@ -181,7 +181,11 @@ const Body:FC = () => {
               service.updateMyProfile(updateBody, token).then(res => {
                 if(res?.id) {
                   notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                  dispatch(updateUserData(res))
+                  const {
+                    credits,
+                    ...other
+                  } = res
+                  dispatch(updateUserData({...other, free_credits: credits}))
                   if(width > 768) Router.push('/search')
                 }
               }).finally(() => {

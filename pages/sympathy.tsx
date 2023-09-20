@@ -30,10 +30,10 @@ const SymPage = () => {
             id: 'views',
             label: locale?.sympathyPage.tabs.views ?? ''
         },
-        {
-            id: 'matches',
-            label: locale?.sympathyPage.tabs.matches ?? ''
-        },
+        // {
+        //     id: 'matches',
+        //     label: locale?.sympathyPage.tabs.matches ?? ''
+        // },
         {
             id: 'likes',
             label: locale?.sympathyPage.tabs.you_like ?? ''
@@ -66,11 +66,11 @@ const SymPage = () => {
                 label: locale?.sympathyPage.tabs.views ?? '',
                 badge: sympCountData.count_watches
             },
-            {
-                id: 'matches',
-                label: locale?.sympathyPage.tabs.matches ?? '',
-                badge: sympCountData.count_mutual
-            },
+            // {
+            //     id: 'matches',
+            //     label: locale?.sympathyPage.tabs.matches ?? '',
+            //     badge: sympCountData.count_mutual
+            // },
             {
                 id: 'likes',
                 label: locale?.sympathyPage.tabs.you_like ?? '',

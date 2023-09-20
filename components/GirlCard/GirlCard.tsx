@@ -76,7 +76,7 @@ const GirlCard:FC<IUser> = ({
                 if(res?.status === 200) {
                     res?.json().then(r => {
                     })
-                    notify('Пользователь добавлен в избранные', 'SUCCESS')
+                    notify('User added to favorites', 'SUCCESS')
                 } else {
                     notify('Не удалось добавить пользователя в избранные', 'ERROR')
                 }
