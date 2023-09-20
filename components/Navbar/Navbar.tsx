@@ -41,7 +41,7 @@ const Navbar = ({
                                 size={30}
                                 style={{border: pathname?.includes('/profile') ? '1px solid var(--violet)' : '1px solid transparent'}}
                                 round
-                                image={userData?.user_thumbnail_url && !userData?.user_thumbnail_url?.includes('api.cooldremy.com') ? userData?.user_thumbnail_url : placeholder}
+                                image={userData?.user_thumbnail_url && !userData?.user_thumbnail_url?.includes('cooldremy') ? userData?.user_thumbnail_url : placeholder}
                                 />
                         </Link>
                     </div>
@@ -76,7 +76,7 @@ const Navbar = ({
                         </Link>
                     </div>
                     <div className={styles.item}>
-                        <Link className={`${styles.btn} ${styles.market} ${pathname?.includes('/deposit') ? styles.active : ''}`} href={'/deposit'}>
+                        <Link className={`${styles.btn} ${styles.market} ${pathname?.includes('/deposit') ? styles.active : ''}`} href={'/deposit-mb'}>
                             <BiStore/>
                         </Link>
                     </div>

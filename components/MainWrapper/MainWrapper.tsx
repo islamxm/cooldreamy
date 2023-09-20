@@ -194,6 +194,8 @@ const MainWrapper = ({
 		}
 	}
 
+	useEffect(() => console.log(userData),[userData])
+
 	useEffect(() => {
 		let tm:any;
 		if(token) {

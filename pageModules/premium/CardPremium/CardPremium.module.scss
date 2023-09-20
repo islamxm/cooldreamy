@@ -15,6 +15,7 @@
         .title {
             text-align: center;
             color: #DE890B;
+            font-size: 22px;line-height: 30px;
             margin-bottom: 22px;
         }
 
@@ -66,6 +67,9 @@
                     margin-bottom: 5px;
                     padding-left: 15px;
                     position: relative;
+                    color: rgba(53, 53, 53, 0.80);
+                    font-size: 12px;
+                    line-height: 140%;
 
                     &:after {
                         position: absolute;
@@ -87,7 +91,7 @@
 
             .text {
                 text-align: center;
-                color: rgba(53, 53, 53, 0.5);
+                color: rgba(53, 53, 53, 0.80);
                 font-size: 12px;
                 line-height: 140%;
                 margin-bottom: 20px;
@@ -156,14 +160,7 @@
                             justify-content: center;
 
                             span {
-                                line-height: 100%;
-                                display: inline-flex;
-                                justify-content: center;
-                                align-items: center;
-                                color: #FBC20E;
-                                font-size: 27px;
-                                line-height: 27px;
-                                margin-left: 3px;
+                                margin-right: 3px;
                             }
                         }
 

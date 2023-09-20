@@ -2,11 +2,20 @@ import Button from '@/components/Button/Button';
 import styles from './CardAdv.module.scss';
 import {AiFillDollarCircle} from 'react-icons/ai'
 import * as _ from 'lodash';
-import { useEffect } from 'react';
 
-
-const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], selected: any, onSelect: any, onAccept: (...args: any[]) => any, load: boolean}) => {
-
+const CardAdv = ({
+    list, 
+    selected, 
+    onSelect, 
+    onAccept, 
+    load
+}: {
+    list?: any[], 
+    selected: any, 
+    onSelect: any, 
+    onAccept: (...args: any[]) => any, 
+    load: boolean
+}) => {
    
     return (
         <div className={styles.wrapper}>
@@ -43,7 +52,7 @@ const CardAdv = ({list, selected, onSelect, onAccept, load}: {list?: any[], sele
                                                 <span>Videos: {i?.count_watch_or_send_video}</span>
                                             </div>
                                             <div className={styles.price}>
-                                            {i?.price} <span><AiFillDollarCircle/></span>
+                                            <span>$</span>{i?.price} 
                                             </div>
                                             {/* <div className={styles.dsc}>
                                             Экономия 36%

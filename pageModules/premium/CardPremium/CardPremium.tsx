@@ -2,7 +2,7 @@ import Button from '@/components/Button/Button';
 import styles from './CardPremium.module.scss';
 import {AiFillDollarCircle} from 'react-icons/ai'
 import * as _ from 'lodash'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface I {
     list?: any[],
@@ -21,6 +21,28 @@ const CardPremium = ({
     load,
     onAccept
 }: I) => {  
+    const [localList, setLocalList] = useState<any>([])
+
+    useEffect(() => {
+        console.log(list)
+    }, [list])
+
+    const getOneTime = () => {
+        if(list && list?.length > 0) {
+            const find = list.find(i => i?.one_time)
+            if(find) {
+                const m = [...list]
+                const rm = m.splice(0,1)
+                setLocalList([find, ...m])
+            } else {
+                setLocalList(list)
+            }
+        }
+    }
+
+    useEffect(() => {
+        getOneTime()
+    }, [list])
 
     return (
         <div className={styles.wrapper}>
@@ -39,8 +61,8 @@ const CardPremium = ({
                     </div>
                     <div className={styles.pricing}>
                         {
-                            (list && list?.length > 0) && (
-                                list?.map(i => (
+                            (localList && localList?.length > 0) && (
+                                localList?.map(i => (
                                     <div 
                                         onClick={() => onSelect({value: i?.id, type: 'premium'})}
                                         className={styles.item} key={i?.id}>
@@ -57,9 +79,7 @@ const CardPremium = ({
                                                 {(i?.duration < 4 && i?.duration > 1) && 'weeks'}
                                                 {(i?.duration === 1) && 'week'}
                                             </div>
-                                            <div className={styles.price}>{i?.price}
-                                                <span><AiFillDollarCircle/></span>
-                                            </div>
+                                            <div className={styles.price}><span>$</span>{i?.price}</div>
                                         </label>
                                     </div>
                                 ))

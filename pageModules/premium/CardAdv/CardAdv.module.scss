@@ -17,6 +17,7 @@
             text-align: center;
             color: #AD6DEC;
             margin-bottom: 22px;
+            font-size: 22px;line-height: 30px;
         }
 
         .icon {
@@ -62,7 +63,7 @@
 
             .text {
                 text-align: center;
-                color: rgba(53, 53, 53, 0.5);
+                color: rgba(53, 53, 53, 0.80);
                 font-size: 12px;
                 line-height: 140%;
                 margin-bottom: 20px;
@@ -135,13 +136,13 @@
                             justify-content: center;
 
                             span {
-                                color: #FBC20E;
-                                display: inline-flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-size: 27px;
-                                line-height: 27px;
-                                margin-left: 3px;
+                                
+                                // display: inline-flex;
+                                // align-items: center;
+                                // justify-content: center;
+                                // font-size: 27px;
+                                // line-height: 27px;
+                                margin-right: 3px;
                             }   
                         }   
 
