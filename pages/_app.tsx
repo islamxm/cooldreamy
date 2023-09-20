@@ -82,17 +82,17 @@ function App({ Component, pageProps }: AppProps) {
 
 
 
-	useEffect(() => {
-		if(router) {
-			router.events.on('routeChangeStart', routeChangeStart)
-			router.events.on('routeChangeComplete', routeChangeEnd)
-		}
+	// useEffect(() => {
+	// 	if(router) {
+	// 		router.events.on('routeChangeStart', routeChangeStart)
+	// 		router.events.on('routeChangeComplete', routeChangeEnd)
+	// 	}
 		
-		return () => {
-			router && router?.events?.off('routeChangeStart', routeChangeStart)
-			router && router?.events?.off('routeChangeStart', routeChangeEnd)
-		}
-	},[router])
+	// 	return () => {
+	// 		router && router?.events?.off('routeChangeStart', routeChangeStart)
+	// 		router && router?.events?.off('routeChangeStart', routeChangeEnd)
+	// 	}
+	// },[router])
 
 
 	useEffect(() => {
@@ -111,7 +111,7 @@ function App({ Component, pageProps }: AppProps) {
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 					<MainWrapper>	
 						<AnimatePresence>
-							{wc && <WcLoader/>}
+							{/* {wc && <WcLoader/>} */}
 						</AnimatePresence>
 						<ToastContainer limit={width <= 768 ? 1 : 5}/>
 						{
