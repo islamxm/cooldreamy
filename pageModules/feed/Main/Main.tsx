@@ -87,16 +87,15 @@ const Main = () => {
 
     // ** первая загрузка карточек
     useEffect(() => {
-        console.log(token)
         getInitFeed()
     }, [token])
 
     // // ** изменение страницы когда в списке остается меньше или равно 3 карточек (догрузка)
-    // useEffect(() => {
-    //     if(list?.length <= 3 && list?.length > 0) {
-    //         setPage(s => s + 1)
-    //     }
-    // }, [list])
+    useEffect(() => {
+        if(list?.length <= 3 && list?.length > 0) {
+            setPage(s => s + 1)
+        }
+    }, [list])
 
     // ** догрузка карточек
     useEffect(() => {
