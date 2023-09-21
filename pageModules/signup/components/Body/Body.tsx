@@ -373,11 +373,11 @@ const Body:FC = () => {
         }
     }, [currentStep, selectedCareers, selectedTargets, selectedSources, selectedFinance, selectedInterests, selectedKids, selectedRl, email, name, password, birthday, about, avatar])
 
-    useEffect(() => {
-        if(currentStep === 3 && !avatar) {
-            Router.push(`/signup?signup_step=2`)
-        }
-    }, [currentStep, avatar, about, registerData])
+    // useEffect(() => {
+    //     if(currentStep === 3 && !avatar) {
+    //         Router.push(`/signup?signup_step=2`)
+    //     }
+    // }, [currentStep, avatar, about, registerData])
 
     return (
         <div className={styles.body}>
