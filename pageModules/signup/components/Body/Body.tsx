@@ -141,26 +141,8 @@ const Body:FC = () => {
     const switchStep = (step: number) => {
         switch(step) {
             case 0: 
-                // return (
-                //     <Step1
-                //         sex={sex}
-                //         email={email}
-                //         password={password}
-                //         name={name}
-                //         birthday={birthday}
-
-                //         setEmail={setEmail}
-                //         setPassword={setPassword}
-                //         setName={setName}
-                //         setSex={setSex}
-                //         setBirthday={setBirthday}
-                        
-                //         errors={errors}
-                //         />
-                // )
                 return null
             case 1:
-                // return <StepEx language={language} setLanguage={setLanguage} country={country} setCountry={setCountry} state={state} setState={setState}/>
                 return (
                     <SignupSearch 
                         gender={search_gender}
@@ -174,27 +156,8 @@ const Body:FC = () => {
                 return <Step9 img={avatar} setImg={setAvatar} nextStep={() => Router.push('/signup?signup_step=10')}/>
             case 3:
                 return <Step10 about={about} setAbout={setAbout}/>
-            // case 2:
-            //     return <Step2 list={prompt_targets} selectedList={selectedTargets} setSelectedList={setSelectedTargets}/>
-            // case 3:
-            //     return <Step3 list={prompt_interests} selectedList={selectedInterests} setSelectedList={setSelectedIntersets}/>
-            // case 4:
-            //     return <Step4 list={prompt_finance_states} selectedList={selectedFinance} setSelectedList={setSelectedFinance}/>
-            // case 5:
-            //     return <Step5 list={prompt_sources} selectedList={selectedSources} setSelectedList={setSelectedSources}/>
-            // case 6:
-            //     return <Step6 list={prompt_want_kids} selectedList={selectedKids} setSelectedList={setSelectedKids}/>
-            // case 7:
-            //     return <Step7 list={prompt_relationships} selectedList={selectedRl} setSelectedList={setSelectedRl}/>
-            // case 8:
-            //     return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
-            // case 9:
-            //     return <Step9 nextStep={() => Router.push('/signup?signup_step=10')}/>
-            // case 10:
-            //     return <Step10 about={about} setAbout={setAbout}/>
             default:
                 return null; 
-                
         }
     }
 

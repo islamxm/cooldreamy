@@ -19,7 +19,7 @@ interface I extends IEditModal {
 
 
 const EditModalPl:FC<I> = (props) => {
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const [load, setLoad] = useState(false)
     const {head, activeIds, promptList, onCancel, editItemType} = props;
@@ -31,8 +31,6 @@ const EditModalPl:FC<I> = (props) => {
         activeIds && activeIds?.length > 0 ? setActiveList(activeIds?.map(i => i.id)) : setActiveList([])
     }, [activeIds])
 
-
-    
 
     const onClose = () => {
         setActiveList([])
@@ -55,11 +53,11 @@ const EditModalPl:FC<I> = (props) => {
             if(type === 'target') {
                 service.updateMyProfile({prompt_targets: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
-                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         onClose()
                     } else {
-                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => {
                     setLoad(false)
@@ -68,11 +66,11 @@ const EditModalPl:FC<I> = (props) => {
             if(type === 'finance') {
                 service.updateMyProfile({prompt_finance_states: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
-                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         onClose()
                     } else {
-                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => {
                     setLoad(false)
@@ -81,11 +79,11 @@ const EditModalPl:FC<I> = (props) => {
             if(type === 'career') {
                 service.updateMyProfile({prompt_careers: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
-                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         onClose()
                     } else {
-                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => {
                     setLoad(false)
@@ -94,11 +92,11 @@ const EditModalPl:FC<I> = (props) => {
             if(type === 'kids') {
                 service.updateMyProfile({prompt_want_kids: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
-                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         onClose()
                     } else {
-                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => {
                     setLoad(false)
@@ -107,11 +105,11 @@ const EditModalPl:FC<I> = (props) => {
             if(type === 'rl') {
                 service.updateMyProfile({prompt_relationships: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
-                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         onClose()
                     } else {
-                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => {
                     setLoad(false)
@@ -140,6 +138,7 @@ const EditModalPl:FC<I> = (props) => {
                                     {
                                         isUnitSelect ? (
                                             <SelectCard
+                                                image={item?.icon}
                                                 label={item?.text}
                                                 value={item?.id?.toString()}
                                                 onSelect={() => setActiveList([item.id])}
@@ -147,6 +146,7 @@ const EditModalPl:FC<I> = (props) => {
                                             />
                                         ) : (
                                             <SelectCard
+                                                image={item?.icon}
                                                 label={item?.text}
                                                 value={item?.id?.toString()}
                                                 onSelect={() => {
@@ -176,7 +176,7 @@ const EditModalPl:FC<I> = (props) => {
                             <Col span={12}>
                                 <Button
                                     style={{width: '100%'}}
-                                    text='Отмена'
+                                    text='Cancel'
                                     variant={'danger'}
                                     onClick={onClose}
                                     />
@@ -186,7 +186,7 @@ const EditModalPl:FC<I> = (props) => {
                                     load={load}
                                     disabled={activeList?.length === 0}
                                     style={{width: '100%'}}
-                                    text='Сохранить'
+                                    text='Save'
                                     onClick={() => onSave(editItemType)}
                                     />
                             </Col>

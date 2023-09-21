@@ -21,10 +21,10 @@ interface I extends IEditModal {
 const EditModalRegion:FC<I> = (props) => {
     const dispatch = useAppDispatch()
     const {onCancel, head} = props
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
+    const [country, setCountry] = useState<selectOptionType | null>({value: '2', label: 'USA'})
     const [state, setState] = useState<selectOptionType>()
-    const [country, setCountry] = useState<selectOptionType>()
 
 
 
@@ -36,29 +36,39 @@ const EditModalRegion:FC<I> = (props) => {
     }
 
     useEffect(() => {
-        if(token) {
-            service.getCountries().then(res => {
-                setCountryList(res?.map((i:any) => ({id: i.id, value: i.id.toString(), label: i.title})))
+        service.getCountries().then(res => {
+            setCountryList(res?.map((i: any) => ({value: i?.id, label: i?.title})))
+        })
+    }, [])
+
+    useEffect(() => {
+        if(country) {
+            service.getStates(Number(country?.value)).then(res => {
+                setStateList(res?.map((i: any) => ({value: i?.id, label: i?.title})))
             })
+        } else {
+            setStateList([])
         }
-    }, [token])
+    }, [country])
 
 
-    // ** определить страну если она уже выдрана
-    useEffect(() => {
-        if(props?.country && countryList?.length > 0) {
-            const f = countryList.find(i => i.label === props?.country)
-            if(f) setCountry(f)
-        }
-    }, [props, countryList])
 
-    // ** определить регион если изначально выбрана страна
-    useEffect(() => {
-        if(props?.state && stateList?.length > 0) {
-            const f = stateList.find(i => i.label === props?.state)
-            if(f) setState(f)
-        } 
-    }, [props, stateList])
+
+    // // ** определить страну если она уже выдрана
+    // useEffect(() => {
+    //     if(props?.country && countryList?.length > 0) {
+    //         const f = countryList.find(i => i.label === props?.country)
+    //         if(f) setCountry(f)
+    //     }
+    // }, [props, countryList])
+
+    // // ** определить регион если изначально выбрана страна
+    // useEffect(() => {
+    //     if(props?.state && stateList?.length > 0) {
+    //         const f = stateList.find(i => i.label === props?.state)
+    //         if(f) setState(f)
+    //     } 
+    // }, [props, stateList])
 
 
     useEffect(() => {
@@ -90,11 +100,11 @@ const EditModalRegion:FC<I> = (props) => {
             service.updateMyProfile(body, token).then(res => {
                 
                 if(res?.id) {
-                    notify('Настройки успешно сохранены', 'SUCCESS')
+                    notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                     dispatch(updateUserData(res))
                     onClose()
                 } else {
-                    notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                    notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
             }).finally(() => {
                 setLoad(false)
@@ -120,11 +130,28 @@ const EditModalRegion:FC<I> = (props) => {
                 <Col span={24}>
                     <div className={styles.body}>
                         <Row gutter={[20,20]}>
+                            {
+                                (countryList && countryList?.length) > 0 && (
+                                    <Col span={24}>
+                                        <SelectDef
+                                            onClear={() => setCountry && setCountry(null)}
+                                            isRound
+                                            value={country?.value}
+                                            list={countryList}
+                                            
+                                            placeholder='Country'
+                                            onChange={(e, v) => setCountry && setCountry(v)}
+
+                                            open
+                                            />    
+                                    </Col>    
+                                )
+                            }
                             <Col span={24}>
                                 <SelectDef
-                                    label='Выберите страну'
+                                    label='Select country'
                                     width={'100%'}
-                                    placeholder='Страна'
+                                    placeholder='Country'
                                     list={countryList}
                                     value={country?.label}
                                     onChange={(e, v) => {
@@ -136,9 +163,9 @@ const EditModalRegion:FC<I> = (props) => {
                                 country && stateList?.length > 0 ? (
                                     <Col span={24}>
                                         <SelectDef
-                                            label='Выберите регион'
+                                            label='Select state'
                                             width={'100%'}
-                                            placeholder='Регион'
+                                            placeholder='State'
                                             list={stateList}
                                             value={state?.label}
                                             onChange={(e, v) => {
@@ -158,7 +185,7 @@ const EditModalRegion:FC<I> = (props) => {
                                 <Button
                                     onClick={onClose}
                                     style={{width: '100%'}}
-                                    text='Отмена'
+                                    text='Cancel'
                                     variant={'danger'}
                                     />
                             </Col>
@@ -168,7 +195,7 @@ const EditModalRegion:FC<I> = (props) => {
                                     load={load}
                                     onClick={onSave}
                                     style={{width: '100%'}}
-                                    text='Сохранить'
+                                    text='Save'
                                     />
                             </Col>
                         </Row>

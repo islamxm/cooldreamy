@@ -10,6 +10,7 @@ import EditModalPl from '../../modals/EditModals/EditModalPl/EditModalPl';
 import EditModalText from '../../modals/EditModals/EditModalText/EditModalText';
 import EditModalRegion from '../../modals/EditModals/EditModalRegion/EditModalRegion';
 import { useRouter } from 'next/router';
+import setIconsSg from '@/helpers/setIconsSg';
 const service = new ApiService()
 
 export type editItemT = 'career' | 'finance' | 'rl' | 'target' | 'kids' | 'name' | 'email' | 'about' | 'country'
@@ -53,16 +54,15 @@ const UserMain:FC<IUser> = (props) => {
 
 
     useEffect(() => {
-        if(token && router?.locale) {
-            
+        if(router?.locale && token) {
             service.getAllPrompts(token, router.locale).then(res => {
-                setPrompt_targets_list(res?.prompt_targets)
-                setPrompt_careers_list(res?.prompt_careers)
-                setPrompt_finance_states_list(res?.prompt_finance_states)
-                setPrompt_sources_list(res?.prompt_sources)
-
-                setPrompt_want_kids_list(res?.prompt_want_kids)
-                setPrompt_relationships_list(res?.prompt_relationships)
+                setPrompt_targets_list(res?.prompt_targets?.map((i: any) => ({...i, icon: setIconsSg('targets', i?.id)})))
+                setPrompt_careers_list(res?.prompt_careers?.map((i: any) => ({...i, icon: setIconsSg('careers', i?.id)})))
+                setPrompt_finance_states_list(res?.prompt_finance_states?.map((i:any) => ({...i, icon: setIconsSg('finance_states', i?.id)})))
+                setPrompt_sources_list(res?.prompt_sources?.map((i: any) => ({...i, icon: setIconsSg('sources', i?.id)})))
+                // setPrompt_interests(res?.prompt_interests?.map((i:any) => ({...i, icon: setIconsSg('intersets', i?.id)})))
+                setPrompt_want_kids_list(res?.prompt_want_kids?.map((i:any) => ({...i, icon: setIconsSg('want_kids', i?.id)})))
+                setPrompt_relationships_list(res?.prompt_relationships?.map((i:any) => ({...i, icon: setIconsSg('rl', i?.id)})))
             })
         }
     }, [token, router])
@@ -80,27 +80,29 @@ const UserMain:FC<IUser> = (props) => {
     const switchHead = (type: editItemT | '') => {
         switch(type) {
             case 'name':
-                return 'Редактировать имя'
+                return 'Edit name'
             case 'email':
-                return 'Редактировать e-mail'
+                return 'Edit e-mail'
             case 'about':
-                return 'Расскажите о себе'
+                return 'Tell me about yourself'
             case 'finance':
-                return 'Финансовые предпочтения'
+                return 'Financial preferences'
             case 'career':
-                return 'Карьера'
+                return 'Career'
             case 'kids':
-                return 'Дети'
+                return 'Children'
             case 'rl':
-                return 'Семейное положение'
+                return 'Marital status'
             case 'target':
-                return 'Цели знакомства'
+                return 'Dating goals'
             case 'country':
-                return 'Страна/Регион'
+                return 'Country/State'
             default:
-                return 'Редактировать'
+                return 'Edit'
         }
     }
+
+    
 
     const switchPlList = (type: editItemT | '') => {
         switch(type) {

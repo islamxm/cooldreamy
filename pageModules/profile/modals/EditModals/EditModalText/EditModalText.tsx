@@ -9,15 +9,15 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateUserData } from '@/store/actions';
 import { editItemT } from '@/pageModules/profile/components/UserMain/UserMain';
 import notify from '@/helpers/notify';
-const service = new ApiService()
 
+const service = new ApiService()
 
 interface I extends IEditModal {
     textValue?: string,
 }
 
 const EditModalText:FC<I> = (props) => {
-    const {token} = useAppSelector(s => s)
+    const {token, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch();
     const {head, textValue, onCancel, editItemType} = props;
     const [load, setLoad] = useState(false)
@@ -39,11 +39,11 @@ const EditModalText:FC<I> = (props) => {
             if(type === 'name') {
                 service.updateMyProfile({name: value}, token).then(res => {
                     if(res?.id) {
-                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         onClose()
                     } else {
-                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => {
                     setLoad(false)
@@ -52,11 +52,11 @@ const EditModalText:FC<I> = (props) => {
             if(type === 'email') {
                 service.updateMyProfile({email: value}, token).then(res => {
                     if(res?.id) {
-                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         onClose()
                     } else {
-                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => {
                     setLoad(false)
@@ -65,11 +65,11 @@ const EditModalText:FC<I> = (props) => {
             if(type === 'about') {
                 service.updateMyProfile({about_self: value}, token).then(res => {
                     if(res?.id) {
-                        notify('Настройки успешно сохранены', 'SUCCESS')
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
                         dispatch(updateUserData(res))
                         onClose()
                     } else {
-                        notify('Произошла ошибка, повторите еще раз', 'ERROR')
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
                     }
                 }).finally(() => {
                     setLoad(false)
@@ -109,7 +109,7 @@ const EditModalText:FC<I> = (props) => {
                                 <Button
                                     onClick={onClose}
                                     style={{width: '100%'}}
-                                    text='Отмена'
+                                    text='Cancel'
                                     variant={'danger'}
                                     />
                             </Col>
@@ -119,7 +119,7 @@ const EditModalText:FC<I> = (props) => {
                                     load={load}
                                     onClick={() => onSave(editItemType)}
                                     style={{width: '100%'}}
-                                    text='Сохранить'
+                                    text='Save'
                                     />
                             </Col>
                         </Row>

@@ -36,12 +36,9 @@ const StepEx:FC<IStepEx> = ({
     setCountry,
     setState
 }) => {
-
     const [countryList, setCountryList] = useState<any[]>([])
     const [regionList, setRegionList] = useState<any[]>([])
     
-    
-
     useEffect(() => {
         service.getCountries().then(res => {
             setCountryList(res?.map((i: any) => ({value: i?.id, label: i?.title})))
