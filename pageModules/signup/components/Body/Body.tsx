@@ -312,12 +312,8 @@ const Body:FC = () => {
             if(registerData) {
                 setLoad(true)
                 service.register({
-                    email: registerData?.email,
-                    name: registerData?.name,
-                    password: registerData?.password,
-                    about,
-                    gender: registerData?.gender,
-                    birthday: registerData?.birthday,
+                    ...registerData,
+                    about_self: about,
                     file: avatar,
                     search_age_from,
                     search_age_to,

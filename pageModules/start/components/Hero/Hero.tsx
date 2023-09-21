@@ -31,6 +31,7 @@ const Hero: FC = ({}) => {
     const dispatch = useAppDispatch()
     const {locale} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
+    const {query} = useRouter()
 
     const [install, setInstall] = useState<any>(null)
 
@@ -39,6 +40,22 @@ const Hero: FC = ({}) => {
     const [password, setPassword] = useState('')
     const [birthday, setBirthday] = useState<any>()
     const [sex, setSex] = useState<'male' | 'female'>('male')
+
+    const [queryData, setQueryData] = useState<any>(null)
+
+    useEffect(() => {
+        if(query?.subid && query?.af_id && query?.app_name) {
+            const subid = query?.subid;
+            const af_id = query?.af_id;
+            const app_name = query?.app_name;
+
+            setQueryData({
+                subid,
+                af_id,
+                app_name
+            })
+        }
+    }, [query])
 
     const getInstallEvent = (e:any) => {
         e?.preventDefault()
@@ -71,6 +88,7 @@ const Hero: FC = ({}) => {
                 service.checkMail({email}).then(res => {
                     if(res === 200) {
                         dispatch(updateRegisterData({
+                            ...queryData,
                             name,
                             password,
                             email,
