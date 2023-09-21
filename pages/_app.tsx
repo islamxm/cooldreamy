@@ -111,7 +111,7 @@ function App({ Component, pageProps }: AppProps) {
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 					<MainWrapper>	
 						<AnimatePresence>
-							{/* {wc && <WcLoader/>} */}
+							{wc && <WcLoader/>}
 						</AnimatePresence>
 						<ToastContainer limit={width <= 768 ? 1 : 5}/>
 						{
