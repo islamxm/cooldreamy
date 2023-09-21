@@ -23,9 +23,7 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
     }
   }, [token])
 
-  useEffect(() => {
-    console.log(pathname)
-  }, [pathname])
+
 
 
   useEffect(() => {
@@ -35,10 +33,11 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
       dispatch(updateSocket(null))
       dispatch(updateUserData(null))
       deauthorize()
-      console.log(Router.router?.query)
+
       const subid = Router?.router?.query?.subid
       const af_id = Router?.router?.query?.af_id
       const app_name = Router?.router?.query?.app_name
+      
       if(subid && af_id && app_name) {
         Router.push(`/start?subid=${subid}&af_id=${af_id}&app_name=${app_name}`)
       } else {

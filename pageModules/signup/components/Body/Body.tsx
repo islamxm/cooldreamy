@@ -278,7 +278,7 @@ const Body:FC = () => {
         // if(currentStep === 2 && !avatar) {
         //     notify('To continue, please upload a photo', 'ERROR')
         // }
-        if(currentStep === 2 && avatar) {
+        if(currentStep === 2) {
             Router.push(`/signup?signup_step=3`)
         }
         if(currentStep === 3) {
@@ -310,37 +310,29 @@ const Body:FC = () => {
             // }
             
             if(registerData) {
-                console.log({
+                setLoad(true)
+                service.register({
                     ...registerData,
                     about_self: about,
                     file: avatar,
                     search_age_from,
                     search_age_to,
                     search_gender,
-                })
-                // setLoad(true)
-                // service.register({
-                //     ...registerData,
-                //     about_self: about,
-                //     file: avatar,
-                //     search_age_from,
-                //     search_age_to,
-                //     search_gender,
-                // }).then(res => {
-                //     if(res?.token) {
-                //         service.signupEnd(res?.token)
-                //         dispatch(updateToken(res?.token))
-                //         dispatch(updateUserId(res?.id))
-                //         dispatch(updateRegisterData(null))
-                //         LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
-                //         LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
+                }).then(res => {
+                    if(res?.token) {
+                        service.signupEnd(res?.token)
+                        dispatch(updateToken(res?.token))
+                        dispatch(updateUserId(res?.id))
+                        dispatch(updateRegisterData(null))
+                        LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
+                        LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
 
-                //         if(width <= 768) Router.push('/sympathy')
-                //         if(width > 768) Router.push('/search')
-                //     }
-                // }).finally(() => {
-                //     setLoad(false)
-                // })
+                        if(width <= 768) Router.push('/sympathy')
+                        if(width > 768) Router.push('/search')
+                    }
+                }).finally(() => {
+                    setLoad(false)
+                })
             }
         }
     }
