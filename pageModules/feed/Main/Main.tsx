@@ -50,7 +50,7 @@ const Main = () => {
         if(disable) {
             tm = setTimeout(() => {
                 setDisable(false)
-            }, 1500)
+            }, 300)
         }
         return () => {
             clearInterval(tm)
