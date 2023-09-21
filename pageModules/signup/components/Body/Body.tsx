@@ -310,29 +310,37 @@ const Body:FC = () => {
             // }
             
             if(registerData) {
-                setLoad(true)
-                service.register({
+                console.log({
                     ...registerData,
                     about_self: about,
                     file: avatar,
                     search_age_from,
                     search_age_to,
                     search_gender,
-                }).then(res => {
-                    if(res?.token) {
-                        service.signupEnd(res?.token)
-                        dispatch(updateToken(res?.token))
-                        dispatch(updateUserId(res?.id))
-                        dispatch(updateRegisterData(null))
-                        LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
-                        LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
-
-                        if(width <= 768) Router.push('/sympathy')
-                        if(width > 768) Router.push('/search')
-                    }
-                }).finally(() => {
-                    setLoad(false)
                 })
+                // setLoad(true)
+                // service.register({
+                //     ...registerData,
+                //     about_self: about,
+                //     file: avatar,
+                //     search_age_from,
+                //     search_age_to,
+                //     search_gender,
+                // }).then(res => {
+                //     if(res?.token) {
+                //         service.signupEnd(res?.token)
+                //         dispatch(updateToken(res?.token))
+                //         dispatch(updateUserId(res?.id))
+                //         dispatch(updateRegisterData(null))
+                //         LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
+                //         LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
+
+                //         if(width <= 768) Router.push('/sympathy')
+                //         if(width > 768) Router.push('/search')
+                //     }
+                // }).finally(() => {
+                //     setLoad(false)
+                // })
             }
         }
     }
