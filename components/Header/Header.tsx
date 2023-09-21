@@ -2,10 +2,9 @@ import styles from '../Header/Header.module.scss';
 import Container from '../Container/Container';
 import logoImage from '@/public/assets/images/logo.svg';
 import Image from 'next/image';
-import Link from 'next/link';
 import {motion} from 'framer-motion';
 import LoginModal from '../LoginModal/LoginModal';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { updateToken, updateUserId, updateSocket, updateMenu } from '@/store/actions';
 import Router, { useRouter } from 'next/router';
@@ -15,7 +14,6 @@ import PremiumBtn from '../Sidebar/components/PremiumBtn/PremiumBtn';
 import ApiService from '@/service/apiService';
 import notify from '@/helpers/notify';
 import { useEffect } from 'react';
-import LOCAL_STORAGE from '@/helpers/localStorage';
 import getClassNames from '@/helpers/getClassNames';
 import { deauthorize } from '@/helpers/authApi';
 
@@ -24,7 +22,6 @@ const service = new ApiService()
 const Header: React.FC<any> = () => {
     const dispatch = useAppDispatch()
     const {token, socketChannel, isMenuOpen, locale, premiumData, currentSub} = useAppSelector(s => s)
-    const {is_premium} = premiumData
     const [loginModal, setLoginModal] = useState(false)
     const {width} = useWindowSize()
     const router = useRouter()
@@ -38,7 +35,6 @@ const Header: React.FC<any> = () => {
     }, [])
 
     const onScroll = () => {
-        
         if(document.documentElement.scrollTop > 10 || main?.scrollTop && main?.scrollTop > 10) {
             setActive(true)
         } else setActive(false)

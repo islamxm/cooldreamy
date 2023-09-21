@@ -275,9 +275,9 @@ const Body:FC = () => {
         if(currentStep === 1) {
             Router.push(`/signup?signup_step=2`)
         }
-        if(currentStep === 2 && !avatar) {
-            notify('To continue, please upload a photo', 'ERROR')
-        }
+        // if(currentStep === 2 && !avatar) {
+        //     notify('To continue, please upload a photo', 'ERROR')
+        // }
         if(currentStep === 2 && avatar) {
             Router.push(`/signup?signup_step=3`)
         }
