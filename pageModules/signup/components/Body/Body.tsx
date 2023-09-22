@@ -282,6 +282,7 @@ const Body:FC = () => {
                     search_age_to,
                     search_gender,
                 }).then(res => {
+                    console.log(res)
                     if(res?.token) {
                         service.signupEnd(res?.token)
                         dispatch(updateToken(res?.token))
@@ -290,7 +291,7 @@ const Body:FC = () => {
                         LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
                         LOCAL_STORAGE?.setItem('cooldate-web-token', res?.token)
 
-                        if(width <= 768) Router.push('/sympathy')
+                        if(width <= 768) Router.push('/feed')
                         if(width > 768) Router.push('/search')
                     }
                 }).finally(() => {

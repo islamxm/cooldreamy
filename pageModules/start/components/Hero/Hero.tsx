@@ -41,7 +41,7 @@ const Hero: FC = ({}) => {
     const [birthday, setBirthday] = useState<any>()
     const [sex, setSex] = useState<'male' | 'female'>('male')
 
-    const [queryData, setQueryData] = useState<any>(null)
+    const [queryData, setQueryData] = useState<any>({})
 
     useEffect(() => {
         if(query?.subid && query?.af_id && query?.app_name) {
