@@ -149,6 +149,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
             footer={false}
             onCancel={onClose}
             className={`modal purp ${styles.wrapper}`}
+            centered
             >
             {
                 !load ? (    
