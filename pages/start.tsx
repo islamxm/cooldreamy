@@ -11,6 +11,7 @@ import Head from "next/head";
 import Header from "@/components/Header/Header";
 import Find from "@/pageModules/start/components/Find/Find";
 import PrivateRoute from "@/hoc/PrivateRoute";
+import TopBtn from "@/components/TopBtn/TopBtn";
 
 const StartPage: React.FC = () => {
     const {width} = useWindowSize()
@@ -34,6 +35,7 @@ const StartPage: React.FC = () => {
             <Adv/>
             <Last/>
             <Faq/>
+            <TopBtn/>
         </PrivateRoute>
     )
 }
