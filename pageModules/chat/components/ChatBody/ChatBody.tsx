@@ -33,7 +33,7 @@ import { Dropdown, Popover } from 'antd';
 import ChatMenu from './components/ChatMenu/ChatMenu';
 import ReportModal from '@/popups/ReportModal/ReportModal';
 import { updateUserData } from '@/store/actions';
-
+import CompReg from '@/popups/CompReg/CompReg';
 const service = new ApiService()
 const VH = '(var(--vh, 1vh) * 100)'
 
@@ -92,7 +92,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const [reportModal, setReportModal] = useState(false)
 
     const [mockType, setMockType] = useState<'wink' | 'gift' | 'text' | ''>('')
-
+    const [cr, setCr] = useState(false)
 
 
 
@@ -116,14 +116,18 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
             if(ChatType === 'chat') {
                 service.sendMessage_text({chat_id: Number(activeDialogId), text}, token).then(res => {
                     if(res?.error) {
-                        dispatch(updateLimit({
-                            open: true,
-                            data: {
-                                head: 'Вам не хватает кредитов...',
-                                text: `К сожалению сообщение к ${currentUser?.name} 
-                                не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
-                            }
-                        }))
+                        if(res?.error === 'You need to fill in information about yoursel') {
+                            setCr(true)
+                        } else {
+                            dispatch(updateLimit({
+                                open: true,
+                                data: {
+                                    head: 'Вам не хватает кредитов...',
+                                    text: `К сожалению сообщение к ${currentUser?.name} 
+                                    не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
+                                }
+                            }))
+                        }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         service.getCredits(token).then(credits => {
@@ -164,13 +168,17 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
             if(ChatType === 'chat') {
                 service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts, user_id: userId}, token).then(res => {
                     if(res?.error) {
-                        dispatch(updateLimit({
-                            open: true,
-                            data: {
-                                head: locale?.popups?.nocredit_gift?.title,
-                                text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_GIFT')}`
-                            }
-                        }))
+                        if(res?.error === 'You need to fill in information about yoursel') {
+                            setCr(true)
+                        } else {
+                            dispatch(updateLimit({
+                                open: true,
+                                data: {
+                                    head: locale?.popups?.nocredit_gift?.title,
+                                    text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_GIFT')}`
+                                }
+                            }))
+                        }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         service.getCredits(token).then(credits => {
@@ -280,6 +288,10 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
     return (
         <div className={styles.wrapper}>
+            <CompReg
+                open={cr}
+                onCancel={() => setCr(false)}
+                />
             <ReportModal
                 open={reportModal}
                 chatId={Number(id)}
