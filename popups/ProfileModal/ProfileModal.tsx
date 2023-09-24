@@ -41,6 +41,8 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     const [isLiked, setIsLiked] = useState<any>(false)
     const [isWinked, setIsWinked] = useState<any>(false)
 
+    const [localPhotos, setLocalPhotos] = useState<any[]>([])
+
     useEffect(() => {
         if(data) {
             setIsFav(data?.is_favorite)
@@ -142,6 +144,10 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     }
 
 
+    
+
+
+
     return (
         <Modal
             {...props}
@@ -156,7 +162,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                     <>
                         <div className={styles.in}>
                             {
-                                (profile_photo && profile_photo?.length > 0) && (
+                                (profile_photo && profile_photo?.length > 0) ? (
                                     <div className={styles.main}>
                                         {
                                             thumbsSwiper && (
@@ -242,6 +248,29 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                             ) : null
                                         }
                                         
+                                    </div>
+                                ) : (
+                                    <div className={styles.main}>
+                                        <div className={styles.slider}>
+                                            <SwiperWrap
+                                                className={styles.slider_body}
+                                                spaceBetween={10}
+                                                >
+                                                <SwiperSlide className={styles.slider_item}>
+                                                    <div className={styles.item}>
+                                                        <Image
+                                                            width={300}
+                                                            height={300}
+                                                            src={(user_avatar_url && !user_avatar_url?.includes('cooldremy')) ? user_avatar_url : placeholder}
+                                                            alt=''
+                                                            loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                            />
+                                                    </div>
+                                                    
+                                                </SwiperSlide>
+                                                
+                                            </SwiperWrap>
+                                        </div>
                                     </div>
                                 )
                             }
