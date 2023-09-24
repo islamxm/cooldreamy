@@ -186,8 +186,9 @@ const Body:FC = () => {
                     ...other
                   } = res
                   dispatch(updateUserData({...other, free_credits: credits}))
-                  if(width > 768) Router.push('/search')
-                  if(width <= 768) Router.push('/feed')
+                  // if(width > 768) Router.push('/search')
+                  // if(width <= 768) Router.push('/feed')
+                  Router.back()
                 }
               }).finally(() => {
                 setLoad(false)  
