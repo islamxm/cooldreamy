@@ -25,7 +25,7 @@ const GiftMainCard:FC<giftCardPropsType> = ({
                 <div className={styles.label}>{label}</div>
                 {
                     price && (
-                        <div className={styles.price}>{price} кредитов</div>
+                        <div className={styles.price}>{price} credits</div>
                     )
                 }
             </div>
@@ -55,7 +55,7 @@ const GiftMainCard:FC<giftCardPropsType> = ({
                                 />
                         ) : (
                             <Button
-                                text='Добавлен'
+                                text='Added'
                                 after={<AiOutlineGift/>}
                                 middle={width > 768}
                                 small={width <= 768}
@@ -84,7 +84,7 @@ const GiftMainCard:FC<giftCardPropsType> = ({
                                 small={width <= 768}
                                 variant={'bordered'}
                                 after={<AiOutlineGift/>}
-                                text='Добавить'/>
+                                text='Add'/>
                         )
                         
                     )

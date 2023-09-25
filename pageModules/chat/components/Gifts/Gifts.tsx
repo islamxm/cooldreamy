@@ -96,7 +96,7 @@ const Gifts = ({
                                 middle={width <= 768}
                                 onClick={onSubmit}
                                 after={<AiOutlineGift/>}
-                                text={`Купить ${selected?.length} ${selected?.length > 1 ? 'подарка' : 'подарок'}`}
+                                text={`Buy ${selected?.length} ${selected?.length > 1 ? 'gifts' : 'gift'}`}
                             />
                         </div>  
                     ) : null

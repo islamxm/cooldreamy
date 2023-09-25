@@ -161,6 +161,34 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                 !load ? (    
                     <>
                         <div className={styles.in}>
+                            <div className={styles.top_action}>
+                                <button onClick={() => {
+                                    !isLiked && onLike()
+                                }} className={styles.item}>
+                                    <div className={styles.icon}>
+                                        {
+                                            isLiked ? <AiFillHeart/> : <AiOutlineHeart/>
+                                        }
+                                    </div>
+                                    <div className={styles.text}>{locale?.global?.user_action?.like}</div>
+                                </button>
+                                <button onClick={onWink} className={styles.item}>
+                                    <div className={styles.icon}>
+                                        <FaRegSmileWink/>
+                                    </div>
+                                    <div className={styles.text}>{locale?.global?.user_action?.wink}</div>
+                                </button>
+                                <button onClick={() => {
+                                    !isFav && onFavorite()
+                                }} className={styles.item}>
+                                    <div className={styles.icon}>
+                                        {
+                                            isFav ? <AiFillStar/> : <AiOutlineStar/>
+                                        }
+                                    </div>
+                                    <div className={styles.text}>{locale?.global?.user_action?.fav}</div>
+                                </button>
+                            </div>
                             {
                                 (profile_photo && profile_photo?.length > 0) ? (
                                     <div className={styles.main}>
