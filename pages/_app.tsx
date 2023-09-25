@@ -122,7 +122,7 @@ function App({ Component, pageProps }: AppProps) {
 						{
 							(width > 768 
 							&& !router?.pathname?.includes('/chat') 
-							&& router?.pathname !== '/unavailable' )
+							&& router?.pathname !== '/unavailable' && router?.pathname !== '/store-play')
 							&& <Footer/>
 						}
 					</MainWrapper>		

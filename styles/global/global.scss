@@ -79,12 +79,24 @@ main {
     overflow: hidden;
     flex: 1 0 auto;
     overflow-y: auto;
+
+    
     
 }
 
 main.main-white {
     background-color: #fff;
     padding-top: 0 !important;
+
+    &::-webkit-scrollbar {
+        height: unset;
+        background-color: unset;
+        border-radius: unset;
+      }
+      &::-webkit-scrollbar-thumb {
+          background-color: unset; 
+          border-radius: unset;
+      }
 }
 main.main-wp {
     padding-top: 75px;

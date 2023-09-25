@@ -208,7 +208,7 @@ const Main:FC<any> = () => {
             </div>
           </div>
         </div>
-        <div className={styles.list}>
+        <div className={styles.rev_list}>
           <div className={styles.item}>
             <div className={styles.head}>
               <div className={styles.user}>
@@ -221,6 +221,7 @@ const Main:FC<any> = () => {
                 </div>
                 <div className={styles.name}>Simens Nomi</div>
               </div>
+              <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
             <div className={styles.info}>
               <div className={styles.rating}></div>
@@ -249,6 +250,7 @@ const Main:FC<any> = () => {
                 </div>
                 <div className={styles.name}>Rob Fowler</div>
               </div>
+              <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
             <div className={styles.info}>
               <div className={styles.rating}></div>
@@ -277,6 +279,7 @@ const Main:FC<any> = () => {
                 </div>
                 <div className={styles.name}>Inisemu</div>
               </div>
+              <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
             <div className={styles.info}>
               <div className={styles.rating}></div>
@@ -313,6 +316,10 @@ const Main:FC<any> = () => {
             list={secondList}
             />
         </div>
+      </div>
+      <div className={styles.ex}>
+        <div className={styles.icon}></div> 
+        <div className={styles.label}>Erstattungsrichtlinien von Play Store</div>
       </div>
     </div>
   )
