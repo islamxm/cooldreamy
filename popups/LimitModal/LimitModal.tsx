@@ -100,7 +100,7 @@ const LimitModal:FC<I> = (props) => {
                                         text={locale?.popups?.promo?.open_market}
                                         middle
                                         onClick={() => {
-                                            Router.push('/deposit-mb')
+                                            Router.push('/deposit-mb?tab=3')
                                             onClose()
                                         }}
                                         />
