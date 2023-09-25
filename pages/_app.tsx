@@ -111,14 +111,14 @@ function App({ Component, pageProps }: AppProps) {
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 					<MainWrapper>	
 						<AnimatePresence>
-							{wc && <WcLoader/>}
+							{(wc && router?.pathname !== '/store-play') && <WcLoader/>}
 						</AnimatePresence>
 						<ToastContainer limit={width <= 768 ? 1 : 5}/>
 						{
-							(width > 768 && router?.pathname !== '/unavailable') && <Header/>
+							(width > 768 && router?.pathname !== '/unavailable' && router?.pathname !== '/store-play') && <Header/>
 						}
-						<main className={getClassNames([(router?.pathname !== '/start' && router?.pathname !== '/') && 'main-wp'])} ><Component {...pageProps} /></main>
-						<Navbar/>
+						<main className={getClassNames([(router?.pathname !== '/start' && router?.pathname !== '/') && 'main-wp', router?.pathname === '/store-play' && 'main-white'])} ><Component {...pageProps} /></main>
+						{router?.pathname !== '/store-play' && <Navbar/>}
 						{
 							(width > 768 
 							&& !router?.pathname?.includes('/chat') 
