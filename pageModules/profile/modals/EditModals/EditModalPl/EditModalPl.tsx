@@ -14,7 +14,8 @@ const service = new ApiService()
 
 interface I extends IEditModal {
     promptList: any[],
-    activeIds?: any[]
+    activeIds?: any[],
+    maxSelect?: number
 }
 
 
@@ -22,7 +23,14 @@ const EditModalPl:FC<I> = (props) => {
     const {token, locale} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const [load, setLoad] = useState(false)
-    const {head, activeIds, promptList, onCancel, editItemType} = props;
+    const {
+        head, 
+        activeIds, 
+        promptList, 
+        onCancel, 
+        editItemType,
+        maxSelect
+    } = props;
     const [activeList, setActiveList] = useState<any[]>([])
 
     const [isUnitSelect, setIsUnitSelect] = useState(false)
@@ -118,6 +126,24 @@ const EditModalPl:FC<I> = (props) => {
         }
     }
 
+    const onSelect = (id: any) => {
+        if(maxSelect === 1) {
+            if(activeList == id) {
+                setActiveList([])
+            } else {
+                setActiveList([id])
+            }
+        } else {
+            const find = activeList?.find(i => i == id)
+            if(find) {
+                setActiveList(s => s.filter(s => s != id))
+            } else {
+                setActiveList(s => [...s, id])
+            }
+        }
+           
+    }
+
     return (
         <Modal
             {...props}
@@ -135,35 +161,14 @@ const EditModalPl:FC<I> = (props) => {
                         {
                             promptList?.map((item,index) => (
                                 <div className={styles.item} key={index}>
-                                    {
-                                        isUnitSelect ? (
-                                            <SelectCard
-                                                image={item?.icon}
-                                                label={item?.text}
-                                                value={item?.id?.toString()}
-                                                onSelect={() => setActiveList([item.id])}
-                                                isSelect={activeList && Number(activeList[0]) === item.id ? true : false}
-                                            />
-                                        ) : (
-                                            <SelectCard
-                                                image={item?.icon}
-                                                label={item?.text}
-                                                value={item?.id?.toString()}
-                                                onSelect={() => {
-                                                    if(activeList?.find(i => Number(i) === Number(item.id))) {
-                                                        setActiveList((s:any[]) => {
-                                                            const r = s;
-                                                            const rm = s.splice(r.findIndex(r => Number(r) === Number(item.id)), 1)
-                                                            return [...r]
-                                                        })
-                                                    } else {
-                                                        setActiveList((s: any[]) => [...s, Number(item.id)])
-                                                    }
-                                                }}
-                                                isSelect={activeList?.find(i => Number(i) === Number(item.id)) ? true : false}
-                                            />
-                                        )
-                                    }
+                                    <SelectCard  
+                                        disabled={!(activeList?.find(i => item?.id == i)) && activeList?.length === maxSelect}  
+                                        image={item?.icon}
+                                        label={item?.text}
+                                        value={item?.id?.toString()}
+                                        onSelect={() => onSelect(item?.id)}
+                                        isSelect={activeList?.find(i => item?.id == i)}
+                                    />
                                    
                                 </div>
                             ))

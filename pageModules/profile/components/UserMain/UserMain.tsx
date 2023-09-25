@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import setIconsSg from '@/helpers/setIconsSg';
 const service = new ApiService()
 
-export type editItemT = 'career' | 'finance' | 'rl' | 'target' | 'kids' | 'name' | 'email' | 'about' | 'country'
+export type editItemT = 'career' | 'finance' | 'rl' | 'target' | 'kids' | 'name' | 'email' | 'about' | 'country' | 'interest'
 
 
 const UserMain:FC<IUser> = (props) => {
@@ -28,7 +28,8 @@ const UserMain:FC<IUser> = (props) => {
         prompt_relationships,
         prompt_finance_states,
         prompt_targets,
-        prompt_want_kids
+        prompt_want_kids,
+        prompt_interests
     } = props
     
     const router = useRouter()
@@ -48,6 +49,7 @@ const UserMain:FC<IUser> = (props) => {
     const [prompt_want_kids_list, setPrompt_want_kids_list] = useState<any[]>([])
     const [prompt_relationships_list, setPrompt_relationships_list] = useState<any[]>([])
     const [prompt_careers_list, setPrompt_careers_list] = useState<any[]>([])   
+    const [prompt_interests_list, setPrompt_interests_list] = useState<any[]>([])
 
 
 
@@ -60,7 +62,7 @@ const UserMain:FC<IUser> = (props) => {
                 setPrompt_careers_list(res?.prompt_careers?.map((i: any) => ({...i, icon: setIconsSg('careers', i?.id)})))
                 setPrompt_finance_states_list(res?.prompt_finance_states?.map((i:any) => ({...i, icon: setIconsSg('finance_states', i?.id)})))
                 setPrompt_sources_list(res?.prompt_sources?.map((i: any) => ({...i, icon: setIconsSg('sources', i?.id)})))
-                // setPrompt_interests(res?.prompt_interests?.map((i:any) => ({...i, icon: setIconsSg('intersets', i?.id)})))
+                setPrompt_interests_list(res?.prompt_interests?.map((i:any) => ({...i, icon: setIconsSg('intersets', i?.id)})))
                 setPrompt_want_kids_list(res?.prompt_want_kids?.map((i:any) => ({...i, icon: setIconsSg('want_kids', i?.id)})))
                 setPrompt_relationships_list(res?.prompt_relationships?.map((i:any) => ({...i, icon: setIconsSg('rl', i?.id)})))
             })
@@ -97,6 +99,8 @@ const UserMain:FC<IUser> = (props) => {
                 return 'Dating goals'
             case 'country':
                 return 'Country/State'
+            case 'interest':
+                return 'Interests'
             default:
                 return 'Edit'
         }
@@ -107,17 +111,40 @@ const UserMain:FC<IUser> = (props) => {
     const switchPlList = (type: editItemT | '') => {
         switch(type) {
             case 'career':
-                return prompt_careers_list
+                return {
+                    list: prompt_careers_list,
+                    maxSelect: 1
+                }
             case 'finance':
-                return prompt_finance_states_list
+                return {
+                    list: prompt_finance_states_list,
+                    maxSelect: 1
+                }
             case 'kids':
-                return prompt_want_kids_list
+                return {
+                    list: prompt_want_kids_list,
+                    maxSelect: 1
+                }
             case 'rl':
-                return prompt_relationships_list
+                return {
+                    list: prompt_relationships_list,
+                    maxSelect: 1
+                }
             case 'target':
-                return prompt_targets_list
+                return {
+                    list: prompt_targets_list,
+                    maxSelect: 3
+                }
+            case 'interest':
+                return {
+                    list: prompt_interests_list,
+                    maxSelect: 5
+                }
             default:
-                return []
+                return {
+                    list: [],
+                    maxSelect: 1
+                }
         }
     }
 
@@ -140,6 +167,8 @@ const UserMain:FC<IUser> = (props) => {
                 return prompt_relationships
             case 'target':
                 return prompt_targets
+            case 'interest':
+                return prompt_interests
             default:
                 return ''
         }
@@ -164,18 +193,16 @@ const UserMain:FC<IUser> = (props) => {
         }
     }
 
-
-
-
     return (
         <div className={styles.wrapper}>
 
             <EditModalPl 
-                promptList={switchPlList(editItemType)}
+                promptList={switchPlList(editItemType).list}
                 head={modalHead} 
                 editItemType={editItemType}
                 open={promptModal}
                 onCancel={closeEditModal}
+                maxSelect={switchPlList(editItemType).maxSelect}
                 activeIds={typeof switchInitValue(editItemType) === 'object' ? switchInitValue(editItemType) : []}
                 />
 
@@ -373,6 +400,35 @@ const UserMain:FC<IUser> = (props) => {
                             {
                                 prompt_relationships?.length > 0 ? (
                                     prompt_relationships?.map((item: any,index: number) => (
+                                        <div className={styles.item} key={index}>
+                                            <Badge/>
+                                            {item.text}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
+                                        {locale?.global?.placeholders?.nd}
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                </Col>
+                <Col span={24}>
+                    <div className={styles.part}>
+                        <div className={styles.label}>
+                        Interests
+                            <button
+                                onClick={() => {
+                                    setModalProps('interest')
+                                    openModal('prompt')
+                                }}
+                                ><RiPencilLine/></button>
+                        </div>
+                        <div className={styles.interests}>
+                            {
+                                prompt_interests?.length > 0 ? (
+                                    prompt_interests?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
                                             <Badge/>
                                             {item.text}

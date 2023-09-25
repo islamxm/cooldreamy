@@ -19,7 +19,7 @@ const GiftCard:FC<giftCardPropsType> = ({
                     label && <div className={styles.label}>{label}</div>
                 }
                 {
-                    price && <div className={styles.price}>{price} кредитов</div>
+                    price && <div className={styles.price}>{price} credits</div>
                 }
             </div>
             <div className={styles.main}>

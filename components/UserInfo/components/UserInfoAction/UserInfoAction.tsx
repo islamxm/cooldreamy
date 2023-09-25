@@ -30,7 +30,7 @@ const UserInfoAction:FC<IUser> = ({
                 if(res?.status === 200) {
                     notify('User Liked', 'SUCCESS')
                 } else {
-                    notify('User Already Liked', 'ERROR')
+                    notify('User already Liked', 'ERROR')
                 }
             })
         }
@@ -41,9 +41,9 @@ const UserInfoAction:FC<IUser> = ({
         if(token) {
             service.addUserToFav({user_id: Number(id)}, token).then(res => {
                 if(res?.status === 200) {
-                    notify('Вы добавили в избранное', 'SUCCESS')
+                    notify(locale?.global?.notifications?.add_to_fav, 'SUCCESS')
                 } else {
-                    notify('Вы уже добавили данного пользователя в избранные', 'ERROR')
+                    notify(locale?.global?.notifications?.already_added_to_fav, 'ERROR')
                 }
             })
         }
@@ -64,7 +64,7 @@ const UserInfoAction:FC<IUser> = ({
                 if(res?.chat_id) {
                     service.sendWink({user_id: id}, token).then(r => {
                         if(r?.error) {
-                            notify('Вы уже подмигнули', 'ERROR')
+                            notify(locale?.global?.notifications?.already_wink, 'ERROR')
                         } else {
                             Router.push(`/chat/${res?.chat_id}?type=chat`)
                         }
