@@ -17,7 +17,8 @@ const UserInfoMain:FC<IUser> = (props) => {
         prompt_relationships,
         prompt_finance_states,
         prompt_targets,
-        prompt_want_kids
+        prompt_want_kids,
+        prompt_interests
     } = props
     
 
@@ -115,6 +116,29 @@ const UserInfoMain:FC<IUser> = (props) => {
                             {
                                 prompt_relationships?.length > 0 ? (
                                     prompt_relationships?.map((item: any,index: number) => (
+                                        <div className={styles.item} key={index}>
+                                            <Badge/>
+                                            {item.text}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
+                                        {locale?.global?.placeholders?.nd}
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                </Col>
+                <Col span={24}>
+                    <div className={styles.part}>
+                        <div className={styles.label}>
+                            Interest
+                        </div>
+                        <div className={styles.interests}>
+                            {
+                                prompt_interests?.length > 0 ? (
+                                    prompt_interests?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
                                             <Badge/>
                                             {item.text}
