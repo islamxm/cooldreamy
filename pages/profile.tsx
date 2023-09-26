@@ -67,7 +67,6 @@ const Profile = () => {
                                             </Col>
                                         )
                                     }
-                                    
                                     <Col span={24}>
                                         <StatusPremium/>
                                     </Col>
@@ -78,8 +77,6 @@ const Profile = () => {
                                         <StatusCredits/>
                                     </Col>
                                 </Row>
-                                
-                                
                             </UserCard>
                         )
                     }

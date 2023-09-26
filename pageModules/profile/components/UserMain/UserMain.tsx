@@ -300,6 +300,35 @@ const UserMain:FC<IUser> = (props) => {
                 <Col span={24}>
                     <div className={styles.part}>
                         <div className={styles.label}>
+                        Interests
+                            <button
+                                onClick={() => {
+                                    setModalProps('interest')
+                                    openModal('prompt')
+                                }}
+                                ><RiPencilLine/></button>
+                        </div>
+                        <div className={styles.interests}>
+                            {
+                                prompt_interests?.length > 0 ? (
+                                    prompt_interests?.map((item: any,index: number) => (
+                                        <div className={styles.item} key={index}>
+                                            <Badge/>
+                                            {item.text}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
+                                        {locale?.global?.placeholders?.nd}
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                </Col>
+                <Col span={24}>
+                    <div className={styles.part}>
+                        <div className={styles.label}>
                         {locale?.profilePage.info.target}
                             <button
                                 onClick={() => {
@@ -401,35 +430,6 @@ const UserMain:FC<IUser> = (props) => {
                             {
                                 prompt_relationships?.length > 0 ? (
                                     prompt_relationships?.map((item: any,index: number) => (
-                                        <div className={styles.item} key={index}>
-                                            <Badge/>
-                                            {item.text}
-                                        </div>
-                                    ))
-                                ) : (
-                                    <div className={styles.text} style={{color: 'var(--red)', marginLeft: 5}}>
-                                        {locale?.global?.placeholders?.nd}
-                                    </div>
-                                )
-                            }
-                        </div>
-                    </div>
-                </Col>
-                <Col span={24}>
-                    <div className={styles.part}>
-                        <div className={styles.label}>
-                        Interests
-                            <button
-                                onClick={() => {
-                                    setModalProps('interest')
-                                    openModal('prompt')
-                                }}
-                                ><RiPencilLine/></button>
-                        </div>
-                        <div className={styles.interests}>
-                            {
-                                prompt_interests?.length > 0 ? (
-                                    prompt_interests?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
                                             <Badge/>
                                             {item.text}
