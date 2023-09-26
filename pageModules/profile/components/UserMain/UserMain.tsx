@@ -192,6 +192,7 @@ const UserMain:FC<IUser> = (props) => {
             setRegionModal(true)
         }
     }
+    useEffect(() => console.log(prompt_interests), [prompt_interests])
 
     return (
         <div className={styles.wrapper}>

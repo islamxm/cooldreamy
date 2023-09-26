@@ -3,6 +3,7 @@ import { FC } from 'react'
 import Head from '../head/Head';
 import List from '../list/List';
 import Image from 'next/image';
+import Card from '../card/Card';
 
 import {FiMoreVertical} from 'react-icons/fi';
 import {IoMdArrowBack} from 'react-icons/io';
@@ -145,7 +146,7 @@ const Main:FC<any> = () => {
         </div>
       </div>
       <div className={styles.main}>
-        
+        <Card/>
       </div>
       <div className={styles.descr}>
         <div className={styles.head}>
