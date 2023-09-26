@@ -143,10 +143,10 @@ const Card:FC<any> = () => {
           (status === 'WAIT' || status === 'LOADING') && (
             <Row gutter={[12,12]}>
               <Col span={12}>
-                <Button isFill variant={'outlined'}>Open</Button>
+                <Button isFill variant={'outlined'}>Delete</Button>
               </Col>
               <Col span={12}>
-                <Button isFill disabled>Delete</Button>
+                <Button isFill disabled>Open</Button>
               </Col>
             </Row>
           )
@@ -155,10 +155,10 @@ const Card:FC<any> = () => {
           status === 'INSTALL' && (
             <Row gutter={[12,12]}>
               <Col span={12}>
-                <Button isFill variant={'outlined'} disabled>Open</Button>
+                <Button isFill variant={'outlined'} disabled>Delete</Button>
               </Col>
               <Col span={12}>
-                <Button isFill disabled>Delete</Button>
+                <Button isFill disabled>Open</Button>
               </Col>
             </Row>
           )
@@ -167,10 +167,10 @@ const Card:FC<any> = () => {
           status === 'DONE' && (
             <Row gutter={[12,12]}>
               <Col span={12}>
-                <Button isFill variant={'outlined'}>Open</Button>
+                <Button isFill variant={'outlined'}>Delete</Button>
               </Col>
               <Col span={12}>
-                <Button isFill>Delete</Button>
+                <Button isFill>Open</Button>
               </Col>
             </Row>
           )
