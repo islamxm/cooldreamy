@@ -65,6 +65,13 @@ const UserMain:FC<IUser> = (props) => {
                 setPrompt_interests_list(res?.prompt_interests?.map((i:any) => ({...i, icon: setIconsSg('intersets', i?.id)})))
                 setPrompt_want_kids_list(res?.prompt_want_kids?.map((i:any) => ({...i, icon: setIconsSg('want_kids', i?.id)})))
                 setPrompt_relationships_list(res?.prompt_relationships?.map((i:any) => ({...i, icon: setIconsSg('rl', i?.id)})))
+                // setPrompt_targets_list(res?.prompt_targets)
+                // setPrompt_careers_list(res?.prompt_careers)
+                // setPrompt_finance_states_list(res?.prompt_finance_states)
+                // setPrompt_sources_list(res?.prompt_sources)
+                // setPrompt_interests_list(res?.prompt_interests)
+                // setPrompt_want_kids_list(res?.prompt_want_kids)
+                // setPrompt_relationships_list(res?.prompt_relationships)
             })
         }
     }, [token, router])
@@ -192,7 +199,7 @@ const UserMain:FC<IUser> = (props) => {
             setRegionModal(true)
         }
     }
-    useEffect(() => console.log(prompt_interests), [prompt_interests])
+    
 
     return (
         <div className={styles.wrapper}>
@@ -313,7 +320,7 @@ const UserMain:FC<IUser> = (props) => {
                                 prompt_interests?.length > 0 ? (
                                     prompt_interests?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge/>
+                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -344,7 +351,7 @@ const UserMain:FC<IUser> = (props) => {
                                 prompt_targets?.length > 0 ? (
                                     prompt_targets?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge/>
+                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -373,7 +380,7 @@ const UserMain:FC<IUser> = (props) => {
                                 prompt_finance_states?.length > 0 ? (
                                     prompt_finance_states?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge/>
+                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -402,7 +409,7 @@ const UserMain:FC<IUser> = (props) => {
                                 prompt_careers?.length > 0 ? (
                                     prompt_careers?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge/>
+                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -431,7 +438,7 @@ const UserMain:FC<IUser> = (props) => {
                                 prompt_relationships?.length > 0 ? (
                                     prompt_relationships?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge/>
+                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -460,7 +467,7 @@ const UserMain:FC<IUser> = (props) => {
                                 prompt_want_kids?.length > 0 ? (
                                     prompt_want_kids?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge/>
+                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))

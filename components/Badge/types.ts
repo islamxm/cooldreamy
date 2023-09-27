@@ -1,5 +1,7 @@
+import { CSSProperties } from "react"
+
 export type badgePropsType = {
     value?: number,
-    style?: CSSStyleSheet,
-    icon?: React.ReactNode
+    style?: CSSProperties,
+    icon?: any
 }
