@@ -62,7 +62,11 @@ const EditModalPl:FC<I> = (props) => {
                 service.updateMyProfile({prompt_targets: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
+                        const {
+                            credits,
+                            ...other
+                        } = res
+                        dispatch(updateUserData({...other, free_credits: credits}))
                         onClose()
                     } else {
                         notify(locale?.global?.notifications?.error_default, 'ERROR')
@@ -75,7 +79,11 @@ const EditModalPl:FC<I> = (props) => {
                 service.updateMyProfile({prompt_finance_states: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
+                        const {
+                            credits,
+                            ...other
+                        } = res
+                        dispatch(updateUserData({...other, free_credits: credits}))
                         onClose()
                     } else {
                         notify(locale?.global?.notifications?.error_default, 'ERROR')
@@ -88,7 +96,11 @@ const EditModalPl:FC<I> = (props) => {
                 service.updateMyProfile({prompt_careers: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
+                        const {
+                            credits,
+                            ...other
+                        } = res
+                        dispatch(updateUserData({...other, free_credits: credits}))
                         onClose()
                     } else {
                         notify(locale?.global?.notifications?.error_default, 'ERROR')
@@ -101,7 +113,11 @@ const EditModalPl:FC<I> = (props) => {
                 service.updateMyProfile({prompt_want_kids: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
+                        const {
+                            credits,
+                            ...other
+                        } = res
+                        dispatch(updateUserData({...other, free_credits: credits}))
                         onClose()
                     } else {
                         notify(locale?.global?.notifications?.error_default, 'ERROR')
@@ -114,7 +130,28 @@ const EditModalPl:FC<I> = (props) => {
                 service.updateMyProfile({prompt_relationships: `[${activeList?.join(',')}]`}, token).then(res => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
+                        const {
+                            credits,
+                            ...other
+                        } = res
+                        dispatch(updateUserData({...other, free_credits: credits}))
+                        onClose()
+                    } else {
+                        notify(locale?.global?.notifications?.error_default, 'ERROR')
+                    }
+                }).finally(() => {
+                    setLoad(false)
+                })
+            }
+            if(type === 'interest') {
+                service.updateMyProfile({prompt_interests: `[${activeList?.join(',')}]`}, token).then(res => {
+                    if(res?.id) {
+                        notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
+                        const {
+                            credits,
+                            ...other
+                        } = res
+                        dispatch(updateUserData({...other, free_credits: credits}))
                         onClose()
                     } else {
                         notify(locale?.global?.notifications?.error_default, 'ERROR')

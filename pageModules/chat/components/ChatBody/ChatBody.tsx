@@ -25,7 +25,7 @@ import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
 import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
 import { PulseLoader } from 'react-spinners';
 import getPrice from '@/helpers/getPrice';
-import { updateLimit } from '@/store/actions';
+import { updateLimit, updateSubsModal } from '@/store/actions';
 import { BsTrash } from 'react-icons/bs';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import notify from '@/helpers/notify';
@@ -171,13 +171,16 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         if(res?.error === 'You need to fill in information about yoursel') {
                             setCr(true)
                         } else {
-                            dispatch(updateLimit({
-                                open: true,
-                                data: {
-                                    head: locale?.popups?.nocredit_gift?.title,
-                                    text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_GIFT')}`
-                                }
-                            }))
+                            // dispatch(updateLimit({
+                            //     open: true,
+                            //     data: {
+                            //         head: locale?.popups?.nocredit_gift?.title,
+                            //         text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_GIFT')}`
+                            //     }
+                            // }))
+                            if(userData?.free_credits && userData?.free_credits < 3) {
+                                dispatch(updateSubsModal(true))
+                            }
                         }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
