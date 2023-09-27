@@ -75,6 +75,7 @@ const Body:FC = () => {
     const [selectedCareers, setSelectedCareers] = useState<any[]>([])
 
 
+
     useEffect(() => {
         if(router?.locale && token) {
             service.getAllPrompts(token, router.locale).then(res => {
