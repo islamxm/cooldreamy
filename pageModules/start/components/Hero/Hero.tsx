@@ -57,28 +57,28 @@ const Hero: FC = ({}) => {
         }
     }, [query])
 
-    const getInstallEvent = (e:any) => {
-        e?.preventDefault()
-        setInstall(e)
-    }
+    // const getInstallEvent = (e:any) => {
+    //     e?.preventDefault()
+    //     setInstall(e)
+    // }
 
-    useEffect(() => {
-        window.addEventListener('beforeinstallprompt', getInstallEvent)
-    }, [])
+    // useEffect(() => {
+    //     window.addEventListener('beforeinstallprompt', getInstallEvent)
+    // }, [])
 
-    const onInstall = () => {
-        if(install) {
-            install?.prompt()
-            install?.userChoice.then((choiceResult:any) => {
-                if (choiceResult?.outcome === 'accepted') {
-                  console.log('User accepted the A2HS prompt');
-                } else {
-                  console.log('User dismissed the A2HS prompt');
-                }
-                setInstall(null)
-              });
-        }
-    }
+    // const onInstall = () => {
+    //     if(install) {
+    //         install?.prompt()
+    //         install?.userChoice.then((choiceResult:any) => {
+    //             if (choiceResult?.outcome === 'accepted') {
+    //               console.log('User accepted the A2HS prompt');
+    //             } else {
+    //               console.log('User dismissed the A2HS prompt');
+    //             }
+    //             setInstall(null)
+    //           });
+    //     }
+    // }
 
     const onSubmit = () => {
         if(email && password && birthday && sex && name) {

@@ -1,24 +1,29 @@
 import styles from './Card.module.scss';
 import { FC, useEffect, useState } from 'react'
-import logo from '@/public/assets/images/app-logo.png';
+import logo from '@/public/assets/images/store-app-icon.svg';
 import Image from 'next/image';
 import Button from '../button/Button';
 import { useWindowSize } from 'usehooks-ts';
-import {Row, Col} from 'antd';
+import { Row, Col } from 'antd';
 import getClassNames from '@/helpers/getClassNames';
+import Router from 'next/router';
+import img1 from '@/public/assets/images/store-slide-1.png'
+import img2 from '@/public/assets/images/store-slide-2.png'
+import img3 from '@/public/assets/images/store-slide-3.png'
+import img4 from '@/public/assets/images/store-slide-4.png'
+import img5 from '@/public/assets/images/store-slide-5.png'
 
 type statusType = 'INIT' | 'WAIT' | 'LOADING' | 'INSTALL' | 'DONE';
 type progressType = 1 | 2 | 3;
 
-const Card:FC<any> = () => {
+const Card: FC<any> = () => {
   const [status, setStatus] = useState<statusType>('INIT')
-  const {width} = useWindowSize()
-
-  const [progress, setProgress] = useState<progressType>(1)
-
+  const { width } = useWindowSize()
+  const [install, setInstall] = useState<any>(null)
+  const [pwaPermission, setPwaPermission] = useState<boolean>(false)
 
   const switchVendorPlace = () => {
-    switch(status) {
+    switch (status) {
       case 'INIT':
         return 'Casino Baden-Baden inc.'
       case 'WAIT':
@@ -34,26 +39,66 @@ const Card:FC<any> = () => {
 
 
   useEffect(() => {
-    let tm:any;
+    let tm: any;
     clearTimeout(tm)
-    if(status && status !== 'INIT' && status !== 'DONE') {
+    if (status && pwaPermission &&  status !== 'INIT' && status !== 'DONE') {
       tm = setTimeout(() => {
-        if(status === 'WAIT') {
+        if (status === 'WAIT') {
           setStatus('LOADING')
         }
-        if(status === 'LOADING') {
+        if (status === 'LOADING') {
           setStatus('INSTALL')
         }
-        if(status === 'INSTALL') {
+        if (status === 'INSTALL') {
           setStatus('DONE')
         }
       }, 5000)
-    }   
+    }
 
     return () => {
       clearTimeout(tm)
     }
-  }, [status])
+  }, [status, pwaPermission])
+
+
+  const isAppInstalled = () => {
+    console.log('APP INSTALLED')
+  }
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', getInstallEvent)
+    window.addEventListener('appinstalled', isAppInstalled)
+    return () => {
+      window.removeEventListener('beforeinstallprompt', getInstallEvent)
+    }
+  }, [])
+
+  const getInstallEvent = (e: any) => {
+    console.log('BEFORE INSTALL')
+    e?.preventDefault()
+    setInstall(e)
+  }
+
+  const onInstall = () => {
+    if (install) {
+      
+      install?.prompt()
+      install?.userChoice.then((choiceResult: any) => {
+        if (choiceResult?.outcome === 'accepted') {
+          setPwaPermission(true)
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+          setInstall(null)
+          setStatus('INIT')
+        }
+        setInstall(null)
+      });
+    }
+  }
+
+
+  
 
   return (
     <div className={styles.wrapper}>
@@ -71,7 +116,7 @@ const Card:FC<any> = () => {
                   {
                     status === 'LOADING' && (
                       <svg width="100" height="100" viewBox="0 0 100 100">
-                        <circle stroke-linecap="round"  cx="50" cy="50" r="48" stroke="#00875F" stroke-width="4" fill="none" stroke-dasharray="315" stroke-dashoffset="100" stroke-mitterlimit="0" transform="rotate(-90 ) translate(-100 0)" />
+                        <circle stroke-linecap="round" cx="50" cy="50" r="48" stroke="#00875F" stroke-width="4" fill="none" stroke-dasharray="315" stroke-dashoffset="100" stroke-mitterlimit="0" transform="rotate(-90 ) translate(-100 0)" />
                       </svg>
                     )
                   }
@@ -82,7 +127,7 @@ const Card:FC<any> = () => {
               <Image
                 src={logo}
                 alt=''
-                />
+              />
             </div>
           </div>
           <div className={styles.app_descr}>
@@ -99,9 +144,15 @@ const Card:FC<any> = () => {
           </div>
         </div>
         {
-          status === 'INIT' && (
+          (status === 'INIT') && (
             <div className={styles.main_action}>
-              <Button onClick={() => setStatus('WAIT')}>
+              <Button 
+                onClick={() => {
+                  setStatus('WAIT')
+                  onInstall()
+                }}
+                disabled={!install}
+                >
                 Install
               </Button>
             </div>
@@ -137,44 +188,98 @@ const Card:FC<any> = () => {
       </div>
       <div className={styles.action}>
         {
-          (status === 'INIT' && width <= 768) && <Button onClick={() => setStatus('WAIT')} isFill>Install</Button>
+          (status === 'INIT' && width <= 768 && install) && 
+          <Button onClick={() => {
+            setStatus('WAIT')
+            onInstall()
+          }} isFill>Install</Button>
         }
         {
           (status === 'WAIT' || status === 'LOADING') && (
-            <Row gutter={[12,12]}>
+            <Row gutter={[12, 12]}>
               <Col span={12}>
-                <Button isFill variant={'outlined'}>Delete</Button>
+                <Button
+                  isFill
+                  variant={'outlined'}>Delete</Button>
               </Col>
               <Col span={12}>
-                <Button isFill disabled>Open</Button>
+                <Button
+                  isFill
+                  disabled>Open</Button>
               </Col>
             </Row>
           )
         }
         {
           status === 'INSTALL' && (
-            <Row gutter={[12,12]}>
+            <Row gutter={[12, 12]}>
               <Col span={12}>
-                <Button isFill variant={'outlined'} disabled>Delete</Button>
+                <Button
+                  isFill
+                  variant={'outlined'}
+                  disabled>Delete</Button>
               </Col>
               <Col span={12}>
-                <Button isFill disabled>Open</Button>
+                <Button
+                  isFill
+                  disabled>Open</Button>
               </Col>
             </Row>
           )
         }
         {
           status === 'DONE' && (
-            <Row gutter={[12,12]}>
+            <Row gutter={[12, 12]}>
               <Col span={12}>
-                <Button isFill variant={'outlined'}>Delete</Button>
+                <Button
+                  isFill
+                  variant={'outlined'}>Delete</Button>
               </Col>
               <Col span={12}>
-                <Button isFill>Open</Button>
+                <Button
+                  onClick={() => Router.push('/search')}
+                  isFill>Open</Button>
               </Col>
             </Row>
           )
         }
+      </div>
+      <div className={styles.slider}>
+        <div className={styles.slide}>
+          <Image
+            src={img1}
+            alt=''
+            placeholder='blur'
+            />
+        </div>
+        <div className={styles.slide}>
+          <Image
+            src={img2}
+            alt=''
+            placeholder='blur'
+            />
+        </div>
+        <div className={styles.slide}>
+          <Image
+            src={img3}
+            alt=''
+            placeholder='blur'
+            />
+        </div>
+        <div className={styles.slide}>
+          <Image
+            src={img4}
+            alt=''
+            placeholder='blur'
+            />
+        </div>
+        <div className={styles.slide}>
+          <Image
+            src={img5}
+            alt=''
+            placeholder='blur'
+            />
+        </div>
       </div>
     </div>
   )
