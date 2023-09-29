@@ -13,6 +13,7 @@ import Find from "@/pageModules/start/components/Find/Find";
 import PrivateRoute from "@/hoc/PrivateRoute";
 import TopBtn from "@/components/TopBtn/TopBtn";
 
+
 const StartPage: React.FC = () => {
     const {width} = useWindowSize()
     const {token} = useAppSelector(s => s)
@@ -29,13 +30,19 @@ const StartPage: React.FC = () => {
                 ) : null
             }
             <Hero/>
-            <Steps/>
-            <Descr/>
-            <Find/>
-            <Adv/>
-            <Last/>
-            <Faq/>
-            <TopBtn/>
+            {
+                width > 768 && (
+                    <>
+                        <Steps/>
+                        <Descr/>
+                        <Find/>
+                        <Adv/>
+                        <Last/>
+                        <Faq/>
+                        <TopBtn/>
+                    </>
+                )
+            }
         </PrivateRoute>
     )
 }

@@ -38,17 +38,15 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
       const af_id = Router?.router?.query?.af_id
       const app_name = Router?.router?.query?.app_name
 
-      console.log('AUTH ERROR')
-      console.log(Router?.router?.query)
-
       if(subid && af_id && app_name) {
         Router.push(`/start?subid=${subid}&af_id=${af_id}&app_name=${app_name}`)
       } else {
-        Router.push('/start')
+        if(pathname !== '/login') {
+          Router.push('/start')
+        }
       }
     }
     if(auth === 'SUCCESS') {
-      console.log("AUTH SUCCESS")
       if(pathname === '/start' || pathname === '/' || pathname === '/signup') {
         if(width <= 768) Router.push('/feed')
         if(width > 768) Router.push('/search')
@@ -57,7 +55,7 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
   }, [auth, pathname])
 
   if(auth === 'SUCCESS' && !(pathname === '/start' || pathname === '/' || pathname === '/signup')) return <>{children}</>
-  if(auth === 'ERROR' && (pathname === '/start' || pathname === '/' || pathname === '/signup')) return <>{children}</>
+  if(auth === 'ERROR' && (pathname === '/start' || pathname === '/' || pathname === '/signup' || pathname === '/login')) return <>{children}</>
   return null
 }
 

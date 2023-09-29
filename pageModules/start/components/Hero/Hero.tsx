@@ -57,6 +57,7 @@ const Hero: FC = ({}) => {
         }
     }, [query])
 
+
     // const getInstallEvent = (e:any) => {
     //     e?.preventDefault()
     //     setInstall(e)

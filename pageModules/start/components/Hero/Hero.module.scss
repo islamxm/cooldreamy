@@ -204,7 +204,7 @@
             padding-top: 30px;
 
             .main {
-                margin-bottom: 30px;
+                // margin-bottom: 30px;
                 max-width: unset;
 
                 .top {
@@ -218,6 +218,7 @@
                     // height: 80vh;
                     padding: 170px 15px 50px;
                     position: relative;
+                    
 
                     &:after {
                         position: absolute;
@@ -254,7 +255,6 @@
                         position: relative;
                         z-index: 3;
                     }
-
                 }
 
                 .form {
@@ -263,7 +263,8 @@
                     position: relative;
                     z-index: 5;
                     padding: 15px;
-                    
+                    border-radius: 0;
+                    margin-bottom: -20px;
                 }
                 
 

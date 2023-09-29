@@ -42,6 +42,7 @@ import UserTitle from '../UserTitle/UserTitle';
 import Link from 'next/link';
 import PremModal from '@/popups/PremModal/PremModal';
 import SubsModal from '@/popups/SubsModal/SubsModal';
+import useCheckDevice from '@/hooks/useCheckDevice';
 
 const service = new ApiService()
 
@@ -66,6 +67,7 @@ const MainWrapper = ({
 			subsModal
 		} = useAppSelector(s => s);
 	const lc = useAppSelector(s => s.locale)
+	const userDevice = useCheckDevice()
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 
@@ -91,6 +93,7 @@ const MainWrapper = ({
 	// 	}
 	// }, [token, query])
 
+	
 
 	useEffect(() => {
 		if(locale === 'ru') {
