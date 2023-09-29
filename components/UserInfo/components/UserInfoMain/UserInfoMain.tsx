@@ -22,7 +22,6 @@ const UserInfoMain:FC<IUser> = (props) => {
     } = props
     
 
-    useEffect(() => console.log(props), [props])
 
 
     return (
@@ -48,7 +47,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                 prompt_interests?.length > 0 ? (
                                     prompt_interests?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
+                                            <Badge size={30} style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -71,7 +70,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                 prompt_targets?.length > 0 ? (
                                     prompt_targets?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
+                                            <Badge size={30} style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -94,7 +93,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                 prompt_finance_states?.length > 0 ? (
                                     prompt_finance_states?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
+                                            <Badge size={30} style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -117,7 +116,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                 prompt_careers?.length > 0 ? (
                                     prompt_careers?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
+                                            <Badge size={30} style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -140,7 +139,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                 prompt_relationships?.length > 0 ? (
                                     prompt_relationships?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
+                                            <Badge size={30} style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))
@@ -163,7 +162,7 @@ const UserInfoMain:FC<IUser> = (props) => {
                                 prompt_want_kids?.length > 0 ? (
                                     prompt_want_kids?.map((item: any,index: number) => (
                                         <div className={styles.item} key={index}>
-                                            <Badge style={{background: 'var(--violet)'}} icon={item?.icon}/>
+                                            <Badge size={30} style={{background: 'var(--violet)'}} icon={item?.icon}/>
                                             {item.text}
                                         </div>
                                     ))

@@ -5,19 +5,20 @@ import Image from 'next/image';
 const Badge:FC<badgePropsType> = ({
     value,
     icon,
-    style
+    style,
+    size = 22
 }) => {
     return (
-        <div className={styles.badge} style={style}>
+        <div className={styles.badge} style={{...style, width: size, height: size}}>
             {icon ? (
                 <div className={styles.img}>
                     <Image
-                    width={20}
-                    height={20}
-                    src={icon}
-                    loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
-                    alt='icon'
-                    />
+                        width={50}
+                        height={50}
+                        src={icon}
+                        loader={p => p?.src && typeof p?.src === 'string' ? p.src : ''}
+                        alt='icon'
+                        />
                 </div>
                 
             ) : (
