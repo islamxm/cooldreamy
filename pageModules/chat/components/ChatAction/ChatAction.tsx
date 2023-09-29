@@ -15,7 +15,6 @@ import { useAppDispatch } from '@/hooks/useTypesRedux';
 import OutsideClickHandler from 'react-outside-click-handler';
 import CompReg from '@/popups/CompReg/CompReg';
 
-
 const service = new ApiService()
 
 const ChatAction = ({

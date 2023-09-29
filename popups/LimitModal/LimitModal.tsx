@@ -8,6 +8,7 @@ import img from '@/public/assets/images/limit-img.png';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import PromoCard from './components/PromoCard/PromoCard';
+import { useWindowSize } from 'usehooks-ts';
 
 
 
@@ -23,10 +24,17 @@ interface I extends ModalFuncProps {
 const service = new ApiService()
 
 const LimitModal:FC<I> = (props) => {
-    const {head, text, action, onCancel, open} = props;
+    const {
+        head = 'Recharge Needed', 
+        text = "You're low on credits. Top up to keep chatting!", 
+        action, 
+        onCancel, 
+        open
+    } = props;
     const {token, locale} = useAppSelector(s => s)
     const [promoData, setPromoData] = useState<any>(null)
     const [timerStart, setTimerStart] = useState<any>(null)
+    const {width} = useWindowSize()
 
     const onClose = () => {
         setPromoData(null)
@@ -54,16 +62,15 @@ const LimitModal:FC<I> = (props) => {
             footer={false}
             onCancel={onClose}
             width={385}
-            className={`modal ${styles.wrapper}`}
+            
+            className={`modal ${styles.wrapper} purp`}
             >
             <Row gutter={[20,20]}>
                 <Col span={24}>
-                    <div className={styles.img}>
-                        <Image src={img} alt='' width={172} height={172}/>
-                    </div>
+                    <h4 className={styles.title}>{head}</h4>
                 </Col>
                 <Col span={24}>
-                    <h4 className={styles.title}>{head}</h4>
+                    <div className={styles.icon}></div>
                 </Col>
                 <Col span={24}>
                     <div className={styles.text}>{text}</div>
@@ -74,7 +81,7 @@ const LimitModal:FC<I> = (props) => {
                             <div className={styles.action}>
                                 <Button
                                     text={action.label}
-                                    small
+                                    middle={width !== 0 && width <= 768}
                                     onClick={() => {
                                         if(action?.link) {
                                             Router.push(action.link)
@@ -98,7 +105,6 @@ const LimitModal:FC<I> = (props) => {
                                 <div className={styles.market}>
                                     <Button
                                         text={locale?.popups?.promo?.open_market}
-                                        middle
                                         onClick={() => {
                                             Router.push('/deposit-mb?tab=3')
                                             onClose()

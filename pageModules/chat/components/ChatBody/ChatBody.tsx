@@ -4,7 +4,7 @@ import Dialog from '../Dialog/Dialog';
 import ChatAction from '../ChatAction/ChatAction';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {FC} from 'react';
 import { IDialogs, IChat } from '../../types';
 import Input from '@/components/Input/Input';
@@ -110,11 +110,11 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     
     }, [mockType, pb])
 
-
     const sendTextMessage = (text: string) => {
         if(text && activeDialogId && token && ChatType) {
             if(ChatType === 'chat') {
                 service.sendMessage_text({chat_id: Number(activeDialogId), text}, token).then(res => {
+                    
                     if(res?.error) {
                         if(res?.error === 'You need to fill in information about yoursel') {
                             setCr(true)
@@ -123,8 +123,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 open: true,
                                 data: {
                                     head: 'Вам не хватает кредитов...',
-                                    text: `К сожалению сообщение к ${currentUser?.name} 
-                                    не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
+                                    // text: `К сожалению сообщение к ${currentUser?.name} 
+                                    // не доставлено. Пополните баланс. Стоимость действия: ${getPrice(actionsPricing, 'SEND_CHAT_MESSAGE')}`
                                 }
                             }))
                         }
@@ -167,20 +167,24 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
         if(gifts && token && activeDialogId && ChatType) {
             if(ChatType === 'chat') {
                 service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts, user_id: userId}, token).then(res => {
+                    
                     if(res?.error) {
                         if(res?.error === 'You need to fill in information about yoursel') {
-                            setCr(true)
+                            // setCr(true)
                         } else {
-                            // dispatch(updateLimit({
-                            //     open: true,
-                            //     data: {
-                            //         head: locale?.popups?.nocredit_gift?.title,
-                            //         text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_CHAT_GIFT')}`
-                            //     }
-                            // }))
-                            if(userData?.free_credits && userData?.free_credits < 3) {
-                                dispatch(updateSubsModal(true))
-                            }
+                            dispatch(updateLimit({
+                                open: true,
+                                data: {
+                                    // head: locale?.popups?.nocredit_gift?.title,
+                                    action: {
+                                        label: 'Go to store',
+                                        link: '/deposit-mb?tab=3'
+                                    }
+                                }
+                            }))
+                            // if(userData?.free_credits && userData?.free_credits < 3) {
+                            //     dispatch(updateSubsModal(true))
+                            // }
                         }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})

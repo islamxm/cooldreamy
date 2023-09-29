@@ -1,21 +1,15 @@
 .wrapper {
 
-    .img {
+    .icon {
         margin: 0 auto;
-
-        width: 172px;
-        height: 172px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: flex;
-        }
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        // background-color: red;
+        background-image: url('../../public/assets/icons/status-credits.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
     }
 
     .title {
@@ -23,6 +17,7 @@
         font-weight: 500;
         font-size: 21px;
         line-height: 23px;
+        color: var(--violet);
     }
 
     .text {
@@ -34,6 +29,11 @@
     .market {
         display: flex;
         align-items: center;
+        justify-content: center;
+    }
+
+    .action {
+        display: flex;
         justify-content: center;
     }
 }
