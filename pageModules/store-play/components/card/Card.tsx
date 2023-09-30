@@ -182,8 +182,8 @@ const Card: FC<any> = () => {
       </div>
       <div className={styles.action}>
         {
-          (status === 'INIT' && width <= 768 && install) && 
-          <Button onClick={() => {
+          (status === 'INIT' && width <= 768 && width > 0) && 
+          <Button disabled={!install} onClick={() => {
             setStatus('WAIT')
             onInstall()
           }} isFill>Install</Button>
