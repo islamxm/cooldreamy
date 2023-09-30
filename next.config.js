@@ -1,12 +1,12 @@
-// /** @type {import('next').NextConfig} */
-// const withPWA = require('next-pwa')({
-//   dest: 'public',
-//   register: true,
-//   disableDevLogs: true,
-//   customWorkerDir: './helpers/swTest.js',
-// })
+/** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  disableDevLogs: true,
+  customWorkerDir: './helpers/swTest.js',
+})
 
-const nextConfig = {
+const nextConfig = withPWA({
   reactStrictMode: false,
   compiler: {
     styledComponents: true
@@ -15,6 +15,6 @@ const nextConfig = {
     locales: ['en'],
     defaultLocale: 'en'
   },
-}
+})
 
 module.exports = nextConfig

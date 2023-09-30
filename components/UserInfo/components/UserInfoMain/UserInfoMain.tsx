@@ -175,16 +175,6 @@ const UserInfoMain:FC<IUser> = (props) => {
                         </div>
                     </div>
                 </Col>
-                {/* <Col span={24}>
-                    <div className={styles.part}>
-                        <div className={styles.label}>
-                            Подарки
-                        </div>
-                        <div className={styles.text}>
-                        Я надежный матрос, при шторме не сбегу с корабля.
-                        </div>
-                    </div>
-                </Col> */}
             </Row>
         </div>
     )
