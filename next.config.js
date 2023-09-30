@@ -2,8 +2,6 @@
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
-  disableDevLogs: true,
-  customWorkerDir: './helpers/swTest.js',
 })
 
 const nextConfig = withPWA({
