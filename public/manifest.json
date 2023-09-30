@@ -3,10 +3,6 @@
     "background_color": "#7d5eec",
     "display": "fullscreen",
     "start_url": "/search",
-    "related_applications": {
-        "platform": "webapp",
-        "url": ""
-    },
     "name": "Cool Dreamy",
     "short_name": "Cool Dreamy",
     "description": "Dating for a relationship",

@@ -61,20 +61,17 @@ const Card: FC<any> = () => {
   }, [status, pwaPermission])
 
 
-  const isAppInstalled = () => {
-    console.log('APP INSTALLED')
-  }
+  
 
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', getInstallEvent)
-    window.addEventListener('appinstalled', isAppInstalled)
+    
     return () => {
       window.removeEventListener('beforeinstallprompt', getInstallEvent)
     }
   }, [])
 
   const getInstallEvent = (e: any) => {
-    console.log('BEFORE INSTALL')
     e?.preventDefault()
     setInstall(e)
   }
@@ -96,9 +93,6 @@ const Card: FC<any> = () => {
       });
     }
   }
-
-
-  
 
   return (
     <div className={styles.wrapper}>

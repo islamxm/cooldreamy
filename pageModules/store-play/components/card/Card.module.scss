@@ -202,13 +202,22 @@
     }
   }
 
-
   .slider {
     display: flex;
     overflow-x: auto;
     margin-left: -5px;
     margin-right: -5px;
     margin-top: 20px;
+
+    &::-webkit-scrollbar {
+      height: unset !important;
+      background-color: unset !important;
+      border-radius: unset !important;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: unset !important;
+        border-radius: unset !important; 
+    }
 
     .slide {
       width: 93px;
