@@ -156,7 +156,7 @@ const Main:FC<any> = () => {
         </div>
         <div className={styles.text}>
           <p>
-            Erhalten Sie exklusive Boni und beste Aktionen mit nur einem Klick - Installieren Sie die Casino Baden-Baden App auf Ihrem Handy und spielen Sie um
+            Erhalten Sie exklusive Boni und beste Aktionen mit nur einem Klick - Installieren Sie die Casino Cooldreamy App auf Ihrem Handy und spielen Sie um
             echtes Geld.
           </p>
         </div>

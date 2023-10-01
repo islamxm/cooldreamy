@@ -14,7 +14,6 @@ import img4 from '@/public/assets/images/store-slide-4.png'
 import img5 from '@/public/assets/images/store-slide-5.png'
 
 type statusType = 'INIT' | 'WAIT' | 'LOADING' | 'INSTALL' | 'DONE';
-type progressType = 1 | 2 | 3;
 
 const Card: FC<any> = () => {
   const [status, setStatus] = useState<statusType>('INIT')
@@ -83,9 +82,9 @@ const Card: FC<any> = () => {
       install?.userChoice.then((choiceResult: any) => {
         if (choiceResult?.outcome === 'accepted') {
           setPwaPermission(true)
-          console.log('User accepted the A2HS prompt');
+          
         } else {
-          console.log('User dismissed the A2HS prompt');
+    
           setInstall(null)
           setStatus('INIT')
         }
@@ -125,7 +124,7 @@ const Card: FC<any> = () => {
             </div>
           </div>
           <div className={styles.app_descr}>
-            <div className={styles.app_name}>Casino Baden-Baden</div>
+            <div className={styles.app_name}>Cooldreamy</div>
             <div className={styles.app_vendor}>
               {
                 status === 'LOADING' && (
@@ -134,7 +133,7 @@ const Card: FC<any> = () => {
               }
               {switchVendorPlace()}
             </div>
-            <div className={styles.app_opt}>Casino</div>
+            <div className={styles.app_opt}>Cooldreamy</div>
           </div>
         </div>
         {
