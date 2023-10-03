@@ -44,6 +44,15 @@ const Hero: FC = ({}) => {
     const [queryData, setQueryData] = useState<any>({})
 
     useEffect(() => {
+        if(query?.subid && !query?.af_id && query?.app_name) {
+            const subid = query?.subid;
+            const app_name = query?.app_name;
+
+            setQueryData({
+                subid,
+                app_name
+            })
+        } 
         if(query?.subid && query?.af_id && query?.app_name) {
             const subid = query?.subid;
             const af_id = query?.af_id;
@@ -51,10 +60,10 @@ const Hero: FC = ({}) => {
 
             setQueryData({
                 subid,
-                af_id,
-                app_name
+                app_name,
+                af_id
             })
-        }
+        }         
     }, [query])
 
 
