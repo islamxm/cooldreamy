@@ -47,7 +47,7 @@ export default function Document() {
         <meta property="og:site_name" content="PWA App" />
         <meta property="og:url" content="https://yourdomain.com" />
         <meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" /> */}
-        {/* <script
+        <script
           id='gtm-gtm'
           type='text/javascript'
           dangerouslySetInnerHTML={{
@@ -100,7 +100,7 @@ export default function Document() {
             dangerouslySetInnerHTML={{
                 __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
             }}
-          /> */}
+          />
       </Head>
       <body>
         
