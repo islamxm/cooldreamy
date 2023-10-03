@@ -114,7 +114,18 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 25px;
+    overflow-x: auto;
 
+    &::-webkit-scrollbar {
+      height: unset !important;
+      background-color: unset !important;
+      border-radius: unset !important;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: unset !important;
+        border-radius: unset !important; 
+    }
+    
     .ex_part {
       display: flex;
       flex-direction: column;
@@ -151,6 +162,7 @@
           font-weight: 500;
           line-height: 16px;
           margin: 0 1px;
+
         }
         .ex_icon {
           margin: 0 1px;
@@ -168,6 +180,7 @@
         font-weight: 400;
         line-height: 20px;
         text-align: center;
+        white-space: nowrap;
       }
 
       &:nth-child(1) {

@@ -1,7 +1,7 @@
 {
     "theme_color": "#7d5eec",
     "background_color": "#7d5eec",
-    "display": "standalone",
+    "display": "browser",
     "start_url": "/",
     "name": "Cool Dreamy",
     "scope": "/",
