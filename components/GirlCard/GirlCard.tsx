@@ -133,10 +133,10 @@ const GirlCard:FC<IUser> = ({
                             <button onClick={sendWink} className={styles.button}><FaRegSmileWink/></button>
                         )
                     }
-                    <button 
+                    {/* <button 
                         onClick={addToFav}
                         className={styles.button}><AiOutlineStar/>
-                    </button>
+                    </button> */}
                     <button
                         onClick={createChat}
                         className={styles.button}>
