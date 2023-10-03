@@ -56,6 +56,7 @@ export default function Document() {
             }}
           /> */}
         <script
+          async
           id='gtm-1'
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
