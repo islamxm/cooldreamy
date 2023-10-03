@@ -23,6 +23,7 @@ import Navbar from '@/components/Navbar/Navbar';
 import Head from 'next/head';
 import notificationRequestPermission from '@/helpers/notificationRequestPermission';
 import swRegister from '@/helpers/swRegister';
+import Script from 'next/script';
 import getClassNames from '@/helpers/getClassNames';
 
 
@@ -104,9 +105,11 @@ function App({ Component, pageProps }: AppProps) {
 	}, [router])
 	return (
 		<Provider store={store}>
+			
 			<Head>
 				<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 				<title>Cool Dreamy</title>
+				
 			</Head>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 					<MainWrapper>	
