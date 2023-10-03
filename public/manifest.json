@@ -1,9 +1,10 @@
 {
     "theme_color": "#7d5eec",
     "background_color": "#7d5eec",
-    "display": "fullscreen",
-    "start_url": "/search",
+    "display": "standalone",
+    "start_url": "/",
     "name": "Cool Dreamy",
+    "scope": "/",
     "short_name": "Cool Dreamy",
     "description": "Dating for a relationship",
     "icons": [
