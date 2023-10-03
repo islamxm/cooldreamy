@@ -82,9 +82,7 @@ const Card: FC<any> = () => {
       install?.userChoice.then((choiceResult: any) => {
         if (choiceResult?.outcome === 'accepted') {
           setPwaPermission(true)
-          
         } else {
-    
           setInstall(null)
           setStatus('INIT')
         }

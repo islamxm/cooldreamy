@@ -96,6 +96,7 @@ define(['./workbox-c3f7a1b6'], (function (workbox) { 'use strict';
     "cacheName": "dev",
     plugins: []
   }), 'GET');
+  self.__WB_DISABLE_DEV_LOGS = true;
 
 }));
 //# sourceMappingURL=sw.js.map
