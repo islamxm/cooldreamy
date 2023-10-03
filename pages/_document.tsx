@@ -47,7 +47,7 @@ export default function Document() {
         <meta property="og:site_name" content="PWA App" />
         <meta property="og:url" content="https://yourdomain.com" />
         <meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" /> */}
-        <script
+        {/* <script
           id='gtm-gtm'
           type='text/javascript'
           dangerouslySetInnerHTML={{
@@ -95,7 +95,9 @@ export default function Document() {
                 ecommerce:"dataLayer"
             });`
           }}
-          />
+          /> */}
+
+
         <noscript
             dangerouslySetInnerHTML={{
                 __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
@@ -103,11 +105,21 @@ export default function Document() {
           />
       </Head>
       <body>
-        
+      <Script
+          id='gtm-1'
+          >
+          {
+            `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-59CJTBH');`
+          }
+        </Script>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59CJTBH"
+      height="0" width="0" style={{display: 'none', visibility: 'hidden'}}></iframe></noscript>
         <Main />
         <NextScript />
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59CJTBH"
-        height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
       </body>
     </Html>
   )
