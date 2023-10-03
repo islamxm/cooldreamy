@@ -36,47 +36,52 @@ import { ListItem } from '../item/Item';
 const firstList:ListItem[] = [
   {
     img: item1,
-    name: '1win',
+    name: 'dating & real love',
     size: 44
   },
   {
     img: item2,
-    name: 'KatsuBet Casino',
+    name: 'Once',
     size: 47
   },
   {
     img: item3,
-    name: 'Champion Casino',
+    name: 'JAUMO',
     size: 35
   },
   {
     img: item4,
-    name: 'Stay Casino',
+    name: 'Coffee Meets',
     size: 56
   },
   {
     img: item5,
-    name: 'Rocket Play Casino',
+    name: 'iFlirts',
     size: 49
   },
   {
     img: item6,
-    name: 'Red Dog',
+    name: 'Muzz',
     size: 52
   },
   {
     img: item7,
-    name: 'Bet Tilt',
+    name: 'Spotted',
     size: 45
   },
   {
     img: item8,
-    name: 'Cherry Gold',
+    name: 'LOVOO',
     size: 26
   },
   {
     img: item9,
-    name: 'GunsBet',
+    name: 'Amur',
+    size: 37
+  },
+  {
+    img: item9,
+    name: 'Love one',
     size: 37
   }
   
@@ -311,12 +316,12 @@ const Main:FC<any> = () => {
             list={firstList}
             />
         </div>
-        <div className={styles.part}>
+        {/* <div className={styles.part}>
           <List
             head={'Werbeanzeigen'}
             list={secondList}
             />
-        </div>
+        </div> */}
       </div>
       <div className={styles.ex}>
         <div className={styles.icon}></div> 
