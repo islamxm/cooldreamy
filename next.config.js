@@ -3,7 +3,8 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   disableDevLogs: true,
-  mode: process.env.NODE_ENV
+  mode: process.env.NODE_ENV,
+  
 })
 
 const nextConfig = withPWA({
