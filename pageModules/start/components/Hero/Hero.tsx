@@ -211,11 +211,16 @@ const Hero: FC = ({}) => {
                                         <Button
                                             text='Find your match'
                                             middle
-                                            disabled={!(name && password && email && birthday && sex)}
-                                            onClick={onSubmit}
+                                            // disabled={!(name && password && email && birthday && sex)}
+                                            // onClick={onSubmit}
+                                            onClick={() => window.open('/start', '_blank')}
                                             />
                                     </div>
+                                    
                                 </Col>
+                                <Link href='http://localhost:3000' target='_blank'>Open PWA</Link>
+
+
                             </Row>
                         </motion.div>
                     </div>
