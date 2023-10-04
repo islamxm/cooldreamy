@@ -221,7 +221,7 @@ const Main:FC<any> = () => {
                     alt=''
                     />
                 </div>
-                <div className={styles.name}>Simens Nomi</div>
+                <div className={styles.name}>John Smith</div>
               </div>
               <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
@@ -250,7 +250,7 @@ const Main:FC<any> = () => {
                     alt=''
                     />
                 </div>
-                <div className={styles.name}>Rob Fowler</div>
+                <div className={styles.name}>Michael Johnson</div>
               </div>
               <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
@@ -279,7 +279,7 @@ const Main:FC<any> = () => {
                     alt=''
                     />
                 </div>
-                <div className={styles.name}>Inisemu</div>
+                <div className={styles.name}>David Williams</div>
               </div>
               <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
@@ -308,7 +308,7 @@ const Main:FC<any> = () => {
                     alt=''
                     />
                 </div>
-                <div className={styles.name}>Jjjkom</div>
+                <div className={styles.name}>Robert Brown</div>
               </div>
               <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
@@ -337,7 +337,7 @@ const Main:FC<any> = () => {
                     alt=''
                     />
                 </div>
-                <div className={styles.name}>Alex</div>
+                <div className={styles.name}>James Davis</div>
               </div>
               <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
