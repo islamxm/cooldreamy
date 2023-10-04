@@ -20,9 +20,6 @@ const StartPage: React.FC = () => {
 
     return (
         <PrivateRoute>
-            <Head>
-                <meta name="verification" content="34dda10c8f41dd109f446ea1555c563c"/>
-            </Head>
             <Header/>
             {
                 token && width <= 768 ? (

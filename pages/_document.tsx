@@ -55,7 +55,7 @@ export default function Document() {
                 __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
             }}
           /> */}
-        <script
+        <Script
           async
           id='gtm-1'
           dangerouslySetInnerHTML={{
@@ -66,13 +66,11 @@ export default function Document() {
             })(window,document,'script','dataLayer','GTM-59CJTBH');`
           }}
           >
-        </script>
+        </Script>
       </Head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59CJTBH"
         height="0" width="0" style={{display: 'none', visibility: 'hidden'}}></iframe></noscript>
-      
-        
         <Main />
         <NextScript />
       </body>
