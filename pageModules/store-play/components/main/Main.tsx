@@ -12,6 +12,8 @@ import {BiSearchAlt2} from 'react-icons/bi';
 import avatar1 from '@/public/assets/images/store-avatar-1.png'
 import avatar2 from '@/public/assets/images/store-avatar-2.png'
 import avatar3 from '@/public/assets/images/store-avatar-3.png'
+import avatar4 from '@/public/assets/images/store-avatar-4.jpeg';
+import avatar5 from '@/public/assets/images/store-avatar-5.jpeg';
 
 
 import item1 from '@/public/assets/images/store-list-1.webp';
@@ -301,12 +303,12 @@ const Main:FC<any> = () => {
               <div className={styles.user}>
                 <div className={styles.avatar}>
                   <Image
-                    src={avatar3}
+                    src={avatar4}
                     placeholder='blur'
                     alt=''
                     />
                 </div>
-                <div className={styles.name}>Inisemu</div>
+                <div className={styles.name}>Jjjkom</div>
               </div>
               <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
@@ -330,12 +332,12 @@ const Main:FC<any> = () => {
               <div className={styles.user}>
                 <div className={styles.avatar}>
                   <Image
-                    src={avatar3}
+                    src={avatar5}
                     placeholder='blur'
                     alt=''
                     />
                 </div>
-                <div className={styles.name}>Inisemu</div>
+                <div className={styles.name}>Alex</div>
               </div>
               <div className={styles.list_icon}><FiMoreVertical/></div>
             </div>
