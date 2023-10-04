@@ -14,16 +14,16 @@ import avatar2 from '@/public/assets/images/store-avatar-2.png'
 import avatar3 from '@/public/assets/images/store-avatar-3.png'
 
 
-import item1 from '@/public/assets/images/store-list-1.png';
-import item2 from '@/public/assets/images/store-list-2.png';
-import item3 from '@/public/assets/images/store-list-3.png';
-import item4 from '@/public/assets/images/store-list-4.png';
-import item5 from '@/public/assets/images/store-list-5.png';
-import item6 from '@/public/assets/images/store-list-6.png';
-import item7 from '@/public/assets/images/store-list-7.png';
-import item8 from '@/public/assets/images/store-list-8.png';
-import item9 from '@/public/assets/images/store-list-9.png';
-import item10 from '@/public/assets/images/store-list-10.png';
+import item1 from '@/public/assets/images/store-list-1.webp';
+import item2 from '@/public/assets/images/store-list-2.webp';
+import item3 from '@/public/assets/images/store-list-3.webp';
+import item4 from '@/public/assets/images/store-list-4.webp';
+import item5 from '@/public/assets/images/store-list-5.webp';
+import item6 from '@/public/assets/images/store-list-6.webp';
+import item7 from '@/public/assets/images/store-list-7.webp';
+import item8 from '@/public/assets/images/store-list-8.webp';
+import item9 from '@/public/assets/images/store-list-9.webp';
+import item10 from '@/public/assets/images/store-list-10.webp';
 import item11 from '@/public/assets/images/store-list-11.png';
 import item12 from '@/public/assets/images/store-list-12.png';
 import item13 from '@/public/assets/images/store-list-13.png';
@@ -80,54 +80,11 @@ const firstList:ListItem[] = [
     size: 37
   },
   {
-    img: item9,
+    img: item10,
     name: 'Love one',
     size: 37
   }
   
-]
-
-const secondList:ListItem[] = [
-  {
-    img: item10,
-    name: 'GGBet',
-    size: 49
-  },
-  {
-    img: item11,
-    name: 'Freespin Casino',
-    size: 35
-  },
-  {
-    img: item12,
-    name: 'Golden Star',
-    size:44
-  },
-  {
-    img: item13,
-    name: 'Champion Casino',
-    size: 35
-  },
-  {
-    img: item14,
-    name: '7Bit Casino',
-    size: 32
-  },
-  {
-    img: item15,
-    name: 'Sloto Zen',
-    size: 61
-  },
-  {
-    img: item16,
-    name: 'BoVegas Casino',
-    size: 42
-  },
-  {
-    img: item17,
-    name: 'BitStarz Casino',
-    size: 51
-  }
 ]
 
 

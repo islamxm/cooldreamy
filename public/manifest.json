@@ -7,10 +7,6 @@
     "scope": "/",
     "short_name": "Cool Dreamy",
     "description": "Dating for a relationship",
-    "related_applications": [{
-        "platform": "webapp",
-        "url": "https://beautiful-maamoul-b87044.netlify.app/store-play"
-    }],
     "icons": [
         {
             "src": "/icon-192x192.png",

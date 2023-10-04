@@ -211,9 +211,8 @@ const Hero: FC = ({}) => {
                                         <Button
                                             text='Find your match'
                                             middle
-                                            // disabled={!(name && password && email && birthday && sex)}
-                                            // onClick={onSubmit}
-                                            onClick={() => Router.push('/store-play')}
+                                            disabled={!(name && password && email && birthday && sex)}
+                                            onClick={onSubmit}
                                             />
                                     </div>
                                     
