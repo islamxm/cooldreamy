@@ -362,7 +362,7 @@ const Main:FC<any> = () => {
       </div>
       <div className={styles.ex}>
         <div className={styles.icon}></div> 
-        <div className={styles.label}>Erstattungsrichtlinien von Play Store</div>
+        <div className={styles.label}>Play Store Refund Policy</div>
       </div>
     </div>
   )
