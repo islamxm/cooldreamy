@@ -59,12 +59,18 @@ const Card: FC<any> = () => {
     }
   }, [status, pwaPermission])
 
-
+  
   
 
   useEffect(() => {
+    if('getInstalledRelatedApps' in navigator && typeof navigator.getInstalledRelatedApps === 'function') {
+      console.log(navigator.getInstalledRelatedApps())
+    }
+
     window.addEventListener('beforeinstallprompt', getInstallEvent)
-    
+    window.addEventListener('appinstalled', () => {
+      console.log('INSTALLED')
+    })
     return () => {
       window.removeEventListener('beforeinstallprompt', getInstallEvent)
     }

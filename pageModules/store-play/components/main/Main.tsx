@@ -271,7 +271,7 @@ const Main:FC<any> = () => {
               <div className={styles.date}>23.09.23</div>
             </div>
             <div className={styles.text}>
-            I really like the variety with the slots
+            Real people here, no catfish!
             </div>
             <div className={styles.ex}>
               <div className={styles.label}>Did you find this helpful?</div>
@@ -300,7 +300,7 @@ const Main:FC<any> = () => {
               <div className={styles.date}>23.09.23</div>
             </div>
             <div className={styles.text}>
-            Love playing with my wife and lot&apos;s of fun and very good amount win. good work!
+            This app ain&apos;t no letdown, found exactly what I was looking for.
             </div>
             <div className={styles.ex}>
               <div className={styles.label}>Did you find this helpful?</div>
@@ -329,7 +329,65 @@ const Main:FC<any> = () => {
               <div className={styles.date}>23.09.23</div>
             </div>
             <div className={styles.text}>
-            Really well done game/app! I think that you can play this for hours just on the first deposit!
+            Finally, some real connections, man!
+            </div>
+            <div className={styles.ex}>
+              <div className={styles.label}>Did you find this helpful?</div>
+              <div className={styles.action}>
+                <div className={styles.action_item}>Yes</div>
+                <div className={styles.action_item}>No</div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.item}>
+            <div className={styles.head}>
+              <div className={styles.user}>
+                <div className={styles.avatar}>
+                  <Image
+                    src={avatar3}
+                    placeholder='blur'
+                    alt=''
+                    />
+                </div>
+                <div className={styles.name}>Inisemu</div>
+              </div>
+              <div className={styles.list_icon}><FiMoreVertical/></div>
+            </div>
+            <div className={styles.info}>
+              <div className={styles.rating}></div>
+              <div className={styles.date}>23.09.23</div>
+            </div>
+            <div className={styles.text}>
+            No scamming on this site, found some legit meetups!
+            </div>
+            <div className={styles.ex}>
+              <div className={styles.label}>Did you find this helpful?</div>
+              <div className={styles.action}>
+                <div className={styles.action_item}>Yes</div>
+                <div className={styles.action_item}>No</div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.item}>
+            <div className={styles.head}>
+              <div className={styles.user}>
+                <div className={styles.avatar}>
+                  <Image
+                    src={avatar3}
+                    placeholder='blur'
+                    alt=''
+                    />
+                </div>
+                <div className={styles.name}>Inisemu</div>
+              </div>
+              <div className={styles.list_icon}><FiMoreVertical/></div>
+            </div>
+            <div className={styles.info}>
+              <div className={styles.rating}></div>
+              <div className={styles.date}>23.09.23</div>
+            </div>
+            <div className={styles.text}>
+            I ain&apos;t mad about spending time here. Real meetups happening!
             </div>
             <div className={styles.ex}>
               <div className={styles.label}>Did you find this helpful?</div>
