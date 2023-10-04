@@ -213,14 +213,11 @@ const Hero: FC = ({}) => {
                                             middle
                                             // disabled={!(name && password && email && birthday && sex)}
                                             // onClick={onSubmit}
-                                            onClick={() => window.open('/start', '_blank')}
+                                            onClick={() => Router.push('/store-play')}
                                             />
                                     </div>
                                     
                                 </Col>
-                                <Link href='http://localhost:3000' target='_blank'>Open PWA</Link>
-
-
                             </Row>
                         </motion.div>
                     </div>
