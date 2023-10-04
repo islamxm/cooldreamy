@@ -156,13 +156,50 @@ const Main:FC<any> = () => {
       <div className={styles.descr}>
         <div className={styles.head}>
           <Head>
-            Über diese App
+            About this app
           </Head>
         </div>
         <div className={styles.text}>
           <p>
-            Erhalten Sie exklusive Boni und beste Aktionen mit nur einem Klick - Installieren Sie die Casino Cooldreamy App auf Ihrem Handy und spielen Sie um
-            echtes Geld.
+          🚀 Welcome to the world of CoolDreamy – your ultimate destination for connecting with compatible and like-minded individuals. Whether you&apos;re looking for love, meaningful conversations, lasting friendships, or simply to expand your social circle, CoolDreamy has got you covered!
+          </p>
+          <p>
+          💖 Why CoolDreamy?
+          </p>
+          <p>
+          🔥 Find Your Perfect Match: Join millions of singles and discover your ideal partner faster than ever before. We&apos;re dedicated to helping you find love or friendship with ease.
+          </p>
+          <p>
+          🚀 More Than Just a Dating App: We&apos;re not just about swiping left or right. CoolDreamy is your trusted tour guide through the intricate landscape of someone else&apos;s heart and mind.
+          </p>
+          <p>
+          🧠 Personality-Based Matching: We leverage cutting-edge personality psychology to connect you with people who truly resonate with your authentic self. Say goodbye to superficial connections and hello to genuine, soulful interactions.
+          </p>
+          <p>
+          👫 Find Your Soulmate: Discover that special someone who makes your heart skip a beat. Our advanced matching algorithms ensure you&apos;re introduced to potential soulmates who truly understand, appreciate, and love you for who you are.
+          </p>
+          <p>
+          🤝 Build Meaningful Friendships: It&apos;s not just about romance; CoolDreamy is a platform for forming lasting friendships too. Connect with individuals who share your interests, values, and dreams.
+          </p>
+          <p>
+          🌟 Key Features:
+          </p>
+          <ul>
+            <li>
+            Personalized Matches: Our intelligent matchmaking system suggests profiles that align with your personality and preferences.
+            </li>
+            <li>
+            Engaging Chat: Start conversations that matter and make a real connection with our user-friendly chat interface.
+            </li>
+            <li>
+            Secure and Safe: Your privacy and security are our top priorities. Rest easy knowing your data is protected.
+            </li>
+          </ul>
+          <p>
+          ✨ CoolDreamy is more than just a dating app; it&apos;s a gateway to a world of meaningful connections and unforgettable experiences. Join our vibrant community today and let the journey to finding your soulmate or your new best friend begin! 🌈
+          </p>
+          <p>
+          Get ready for a life-changing experience. Download CoolDreamy now and discover your path to love and friendship! 💑👫
           </p>
         </div>
         <div className={styles.badges}>
@@ -172,7 +209,7 @@ const Main:FC<any> = () => {
       <div className={styles.revs}>
         <div className={styles.head}>
           <Head>
-            Bewertungen und Rezensionen
+          Ratings and reviews
           </Head>
         </div>
         <div className={styles.rating}>
@@ -237,10 +274,10 @@ const Main:FC<any> = () => {
             I really like the variety with the slots
             </div>
             <div className={styles.ex}>
-              <div className={styles.label}>War diese Rezension fur dich</div>
+              <div className={styles.label}>Did you find this helpful?</div>
               <div className={styles.action}>
-                <div className={styles.action_item}>Ja</div>
-                <div className={styles.action_item}>Nein</div>
+                <div className={styles.action_item}>Yes</div>
+                <div className={styles.action_item}>No</div>
               </div>
             </div>
           </div>
@@ -263,13 +300,13 @@ const Main:FC<any> = () => {
               <div className={styles.date}>23.09.23</div>
             </div>
             <div className={styles.text}>
-            Love playing with my wife and lot&qpos;s of fun and very good amount win. good work!
+            Love playing with my wife and lot&apos;s of fun and very good amount win. good work!
             </div>
             <div className={styles.ex}>
-              <div className={styles.label}>War diese Rezension fur dich</div>
+              <div className={styles.label}>Did you find this helpful?</div>
               <div className={styles.action}>
-                <div className={styles.action_item}>Ja</div>
-                <div className={styles.action_item}>Nein</div>
+                <div className={styles.action_item}>Yes</div>
+                <div className={styles.action_item}>No</div>
               </div>
             </div>
           </div>
@@ -295,16 +332,16 @@ const Main:FC<any> = () => {
             Really well done game/app! I think that you can play this for hours just on the first deposit!
             </div>
             <div className={styles.ex}>
-              <div className={styles.label}>War diese Rezension fur dich</div>
+              <div className={styles.label}>Did you find this helpful?</div>
               <div className={styles.action}>
-                <div className={styles.action_item}>Ja</div>
-                <div className={styles.action_item}>Nein</div>
+                <div className={styles.action_item}>Yes</div>
+                <div className={styles.action_item}>No</div>
               </div>
             </div>
           </div>
           <div className={styles.action}>
             <div className={styles.action_item}>
-            Alle Rezensionen anzeigen
+              App support
             </div>
           </div>
         </div>
@@ -312,7 +349,7 @@ const Main:FC<any> = () => {
       <div className={styles.list}>
         <div className={styles.part}>
           <List
-            head={'Ähnliche Spiele'}
+            head={'Similar apps'}
             list={firstList}
             />
         </div>

@@ -24,7 +24,7 @@ const Card: FC<any> = () => {
   const switchVendorPlace = () => {
     switch (status) {
       case 'INIT':
-        return 'Cooldreamy inc.'
+        return 'SOLUTIONS INC.'
       case 'WAIT':
         return <><span>Wait...</span></>
       case 'LOADING':
@@ -32,7 +32,7 @@ const Card: FC<any> = () => {
       case "INSTALL":
         return <><span>Installation...</span></>
       case 'DONE':
-        return 'Cooldreamy inc.'
+        return 'SOLUTIONS INC.'
     }
   }
 
@@ -131,7 +131,7 @@ const Card: FC<any> = () => {
               }
               {switchVendorPlace()}
             </div>
-            <div className={styles.app_opt}>Cooldreamy</div>
+            <div className={styles.app_opt}>CoolDreamy: Chat, Meet People</div>
           </div>
         </div>
         {
