@@ -6,7 +6,7 @@ import Button from '../button/Button';
 import { useWindowSize } from 'usehooks-ts';
 import { Row, Col } from 'antd';
 import getClassNames from '@/helpers/getClassNames';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import img1 from '@/public/assets/images/store-slide-1.png'
 import img2 from '@/public/assets/images/store-slide-2.png'
 import img3 from '@/public/assets/images/store-slide-3.png'
@@ -17,9 +17,11 @@ type statusType = 'INIT' | 'WAIT' | 'LOADING' | 'INSTALL' | 'DONE';
 
 const Card: FC<any> = () => {
   const [status, setStatus] = useState<statusType>('INIT')
+  const {query} = useRouter()
   const { width } = useWindowSize()
   const [install, setInstall] = useState<any>(null)
   const [pwaPermission, setPwaPermission] = useState<boolean>(false)
+  const [regData, setRegData] = useState<{af_id?:any,app_name:any, sub_id:any} | null>(null)
 
   const switchVendorPlace = () => {
     switch (status) {
@@ -35,6 +37,14 @@ const Card: FC<any> = () => {
         return 'SOLUTIONS INC.'
     }
   }
+
+  useEffect(() => {
+    setRegData({
+      af_id: query?.af_id,
+      app_name: query?.app_name,
+      sub_id: query?.sub_id
+    })
+  }, [query])
 
 
   useEffect(() => {
@@ -88,6 +98,18 @@ const Card: FC<any> = () => {
         }
         setInstall(null)
       });
+    }
+  }
+
+  const goToStart = () => {
+    const {app_name, af_id, sub_id} = regData || {}
+    if(sub_id && !af_id && app_name) {
+      Router.push(`/start?sub_id=${sub_id}&app_name=${app_name}`)
+    } else if(sub_id && af_id && app_name) {
+      Router.push(`/start?sub_id=${sub_id}&af_id=${af_id}&app_name=${app_name}`)
+    }
+    if(regData === null) {
+      Router.push('/start')
     }
   }
 
@@ -200,6 +222,7 @@ const Card: FC<any> = () => {
               <Col span={12}>
                 <Button
                   isFill
+                  onClick={goToStart}
                   disabled>Open</Button>
               </Col>
             </Row>
@@ -217,6 +240,7 @@ const Card: FC<any> = () => {
               <Col span={12}>
                 <Button
                   isFill
+                  onClick={goToStart}
                   disabled>Open</Button>
               </Col>
             </Row>
@@ -232,7 +256,7 @@ const Card: FC<any> = () => {
               </Col>
               <Col span={12}>
                 <Button
-                  onClick={() => Router.push('/search')}
+                  onClick={goToStart}
                   isFill>Open</Button>
               </Col>
             </Row>
