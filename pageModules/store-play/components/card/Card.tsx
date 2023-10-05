@@ -44,6 +44,9 @@ const Card: FC<any> = () => {
       app_name: query?.app_name,
       sub_id: query?.sub_id
     })
+    if(!query?.af_id && !query?.app_name && !query?.sub_id) {
+      setRegData(null)
+    }
   }, [query])
 
 
