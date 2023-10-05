@@ -106,9 +106,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 			</Head>
 			<ConfigProvider locale={locale === 'ru' ? ruRu : enUs}>
 					<MainWrapper>	
-						<AnimatePresence>
+						{/* <AnimatePresence>
 							{(wc && router?.pathname !== '/store-play') && <WcLoader/>}
-						</AnimatePresence>
+						</AnimatePresence> */}
 						<ToastContainer limit={width <= 768 ? 1 : 5}/>
 						{
 							(width > 768 && router?.pathname !== '/unavailable' && router?.pathname !== '/store-play') && <Header/>
