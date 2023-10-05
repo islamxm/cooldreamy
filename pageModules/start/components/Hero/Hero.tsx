@@ -69,9 +69,7 @@ const Hero: FC = ({}) => {
 
 
     useEffect(() => {
-        
         if(conversData) {
-            
             const {af_id, subid, app_name} = conversData || {}
             if(subid && app_name && !af_id) {
                 // Router.push(`/start?subid=${subid}&app_name=${app_name}`)
@@ -87,6 +85,11 @@ const Hero: FC = ({}) => {
                     app_name,
                     af_id
                 })
+            }
+        } else {
+            const a:any = LOCAL_STORAGE?.getItem('conversData')
+            if(typeof a === 'string' && a !== null) {
+                setQueryData(JSON.parse(a))
             }
         }
     }, [conversData])

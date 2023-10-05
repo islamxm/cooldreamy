@@ -15,6 +15,7 @@ import img5 from '@/public/assets/images/store-slide-5.png'
 import { updateConversData } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
+import LOCAL_STORAGE from '@/helpers/localStorage';
 
 type statusType = 'INIT' | 'WAIT' | 'LOADING' | 'INSTALL' | 'DONE';
 
@@ -49,6 +50,12 @@ const Card: FC<any> = () => {
       app_name: query?.app_name,
       subid: query?.subid
     }))
+    const obj = {
+      af_id: query?.af_id,
+      app_name: query?.app_name,
+      subid: query?.subid
+    }
+    LOCAL_STORAGE?.setItem('conversData', JSON.stringify(obj))
     if(!query?.af_id && !query?.app_name && !query?.subid) {
       dispatch(updateConversData(null))
     }
