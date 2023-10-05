@@ -54,7 +54,6 @@ const Hero: FC = ({}) => {
                 app_name
             })
         } 
-
         if(query?.subid && query?.af_id && query?.app_name) {
             const subid = query?.subid;
             const af_id = query?.af_id;
