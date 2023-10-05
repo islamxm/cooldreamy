@@ -66,20 +66,28 @@ const Hero: FC = ({}) => {
                 af_id
             })
         }   
-        console.log(query)
     }, [query])
 
 
     useEffect(() => {
-        console.log(conversData)
+        
         if(conversData) {
             
             const {af_id, subid, app_name} = conversData || {}
             if(subid && app_name && !af_id) {
-                Router.push(`/start?subid=${subid}&app_name=${app_name}`)
+                // Router.push(`/start?subid=${subid}&app_name=${app_name}`)
+                setQueryData({
+                    subid,
+                    app_name
+                })
             }
             if(subid && af_id && app_name) {
-                Router.push(`/start?subid=${subid}&app_name=${app_name}&af_id=${af_id}`)
+                // Router.push(`/start?subid=${subid}&app_name=${app_name}&af_id=${af_id}`)
+                setQueryData({
+                    subid,
+                    app_name,
+                    af_id
+                })
             }
         }
     }, [conversData])
