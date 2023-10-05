@@ -14,6 +14,7 @@ import img4 from '@/public/assets/images/store-slide-4.png'
 import img5 from '@/public/assets/images/store-slide-5.png'
 import { updateConversData } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
+import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 
 type statusType = 'INIT' | 'WAIT' | 'LOADING' | 'INSTALL' | 'DONE';
 
@@ -260,43 +261,52 @@ const Card: FC<any> = () => {
           )
         }
       </div>
-      <div className={styles.slider}>
-        <div className={styles.slide}>
-          <Image
-            src={img1}
-            alt=''
-            placeholder='blur'
-            />
+      <FancyboxWrapper
+        options={{
+          Toolbar:false,
+          Slideshow:false,
+        }}
+        >
+        <div className={styles.slider}>
+          <a data-fancybox="gallery" href={img1.src} className={styles.slide}>
+            <Image
+              src={img1}
+              alt=''
+              placeholder='blur'
+              />
+          </a>
+          <a data-fancybox="gallery" href={img2.src} className={styles.slide}>
+            <Image
+              src={img2}
+              alt=''
+              placeholder='blur'
+              />
+          </a>
+          <a data-fancybox="gallery" href={img3.src} className={styles.slide}>
+            <Image
+              src={img3}
+              alt=''
+              placeholder='blur'
+              />
+          </a>
+          <a data-fancybox="gallery" href={img4.src} className={styles.slide}>
+            <Image
+              src={img4}
+              alt=''
+              placeholder='blur'
+              />
+          </a>
+          <a data-fancybox="gallery" href={img5.src} className={styles.slide}>
+            <Image
+              src={img5}
+              alt=''
+              placeholder='blur'
+              />
+          </a>
         </div>
-        <div className={styles.slide}>
-          <Image
-            src={img2}
-            alt=''
-            placeholder='blur'
-            />
-        </div>
-        <div className={styles.slide}>
-          <Image
-            src={img3}
-            alt=''
-            placeholder='blur'
-            />
-        </div>
-        <div className={styles.slide}>
-          <Image
-            src={img4}
-            alt=''
-            placeholder='blur'
-            />
-        </div>
-        <div className={styles.slide}>
-          <Image
-            src={img5}
-            alt=''
-            placeholder='blur'
-            />
-        </div>
-      </div>
+        
+      </FancyboxWrapper>
+     
     </div>
   )
 }
