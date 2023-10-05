@@ -21,12 +21,13 @@ const Navbar = ({
     style?: CSSProperties
 }) => {
     const {unreadChatCount, userData, token, sympCountData} = useAppSelector(s => s)
+    const {count_likes,count_mutual,count_watches} = sympCountData || {}
     const {pathname} = useRouter()
     const {width} = useWindowSize()
     const [sympCount, setSympCount] = useState(0)
 
     useEffect(() => {
-        setSympCount(sympCountData?.count_likes + sympCountData?.count_mutual + sympCountData?.count_my_likes + sympCountData?.count_watches)
+        setSympCount((count_likes + count_mutual + count_watches) > 0 ? (count_likes + count_mutual + count_watches) : 0)
     }, [sympCountData])
 
 

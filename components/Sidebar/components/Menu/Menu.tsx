@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 
 const Menu = () => {
-    const {locale, unreadChatCount, unreadMailCount, sympCountData} = useAppSelector(s => s)
+    const {locale, unreadChatCount, unreadMailCount, sympCountData, } = useAppSelector(s => s)
     const {count_likes, count_mutual, count_my_likes, count_watches} = sympCountData || {}
     const router  = useRouter()
 
