@@ -21,7 +21,7 @@ const Card: FC<any> = () => {
   const { width } = useWindowSize()
   const [install, setInstall] = useState<any>(null)
   const [pwaPermission, setPwaPermission] = useState<boolean>(false)
-  const [regData, setRegData] = useState<{af_id?:any,app_name:any, sub_id:any} | null>(null)
+  const [regData, setRegData] = useState<{af_id?:any,app_name:any, subid:any} | null>(null)
 
   const switchVendorPlace = () => {
     switch (status) {
@@ -42,9 +42,9 @@ const Card: FC<any> = () => {
     setRegData({
       af_id: query?.af_id,
       app_name: query?.app_name,
-      sub_id: query?.sub_id
+      subid: query?.subid
     })
-    if(!query?.af_id && !query?.app_name && !query?.sub_id) {
+    if(!query?.af_id && !query?.app_name && !query?.subid) {
       setRegData(null)
     }
   }, [query])
@@ -105,17 +105,16 @@ const Card: FC<any> = () => {
   }
 
   const goToStart = () => {
-    const {app_name, af_id, sub_id} = regData || {}
-    if(sub_id && !af_id && app_name) {
-      Router.push(`/start?sub_id=${sub_id}&app_name=${app_name}`)
-    } else if(sub_id && af_id && app_name) {
-      Router.push(`/start?sub_id=${sub_id}&af_id=${af_id}&app_name=${app_name}`)
+    const {app_name, af_id, subid} = regData || {}
+    if(subid && !af_id && app_name) {
+      Router.push(`/start?sub_id=${subid}&app_name=${app_name}`)
+    } else if(subid && af_id && app_name) {
+      Router.push(`/start?sub_id=${subid}&af_id=${af_id}&app_name=${app_name}`)
     }
     if(regData === null) {
       Router.push('/start')
     }
-
-    console.log(regData)
+    
   }
 
   return (
@@ -149,7 +148,7 @@ const Card: FC<any> = () => {
             </div>
           </div>
           <div className={styles.app_descr}>
-            <div className={styles.app_name}>Cooldreamy</div>
+            <div className={styles.app_name}>CoolDreamy: Chat, Meet People</div>
             <div className={styles.app_vendor}>
               {
                 status === 'LOADING' && (
@@ -158,7 +157,6 @@ const Card: FC<any> = () => {
               }
               {switchVendorPlace()}
             </div>
-            <div className={styles.app_opt}>CoolDreamy: Chat, Meet People</div>
           </div>
         </div>
         {
@@ -185,7 +183,7 @@ const Card: FC<any> = () => {
             <div className={styles.ex_label}>4.7</div>
             <div className={styles.ex_icon}></div>
           </div>
-          <div className={styles.ex_text}>364 577 rezensionen</div>
+          <div className={styles.ex_text}>364К reviews</div>
         </div>
         <div className={styles.ex_part}>
           <div className={styles.ex_top}>
