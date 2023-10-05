@@ -15,7 +15,7 @@ import BirthdaySelect from '@/pageModules/signup/components/BirthdaySelect/Birth
 import getClassNames from '@/helpers/getClassNames';
 import ApiService from '@/service/apiService';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
-import { updateUserData, updateToken, updateRegisterData } from '@/store/actions';
+import { updateUserData, updateToken, updateRegisterData, updateConversData } from '@/store/actions';
 import LOCAL_STORAGE from '@/helpers/localStorage';
 import { useRouter } from 'next/router';
 import { useWindowSize } from 'usehooks-ts';
@@ -103,6 +103,9 @@ const Hero: FC = ({}) => {
             } else {
                 service.checkMail({email}).then(res => {
                     if(res === 200) {
+                        LOCAL_STORAGE?.removeItem('conversData')
+                        dispatch(updateConversData(null))
+
                         dispatch(updateRegisterData({
                             ...queryData,
                             name,
