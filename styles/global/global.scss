@@ -100,7 +100,6 @@ main.main-wp {
 
 @media (max-width: 768px) {
     main {
-        border: 1px solid red;
         padding-top: 0 !important;
         height: calc((var(--vh, 1vh) * 100) - 61px - 60px);
     }
