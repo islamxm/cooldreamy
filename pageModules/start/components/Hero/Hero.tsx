@@ -71,7 +71,9 @@ const Hero: FC = ({}) => {
 
 
     useEffect(() => {
+        console.log(conversData)
         if(conversData) {
+            
             const {af_id, subid, app_name} = conversData || {}
             if(subid && app_name && !af_id) {
                 Router.push(`/start?subid=${subid}&app_name=${app_name}`)

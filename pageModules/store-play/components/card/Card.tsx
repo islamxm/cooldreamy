@@ -108,7 +108,6 @@ const Card: FC<any> = () => {
   }
 
   const goToStart = () => {
-    // const {app_name, af_id, subid} = conversData || {}
     Router.push('/start')
   }
 
