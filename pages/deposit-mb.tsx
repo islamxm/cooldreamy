@@ -12,7 +12,7 @@ import { useAppSelector } from "@/hooks/useTypesRedux";
 import notify from "@/helpers/notify";
 import { Elements } from "@stripe/react-stripe-js";
 import PayForm from "@/pageModules/deposit/components/PayForm/PayForm";
-import { useWindowSize } from "usehooks-ts";
+import { useFetch, useWindowSize } from "usehooks-ts";
 import Main from "@/pageModules/deposit/components/Main/Main";
 import Router, { useRouter } from "next/router";
 import styles from '../pageModules/deposit-mob/components/Main/Main.module.scss';
@@ -109,26 +109,29 @@ const DepositPage = () => {
         const findItem = res?.find((i:any) => i?.one_time === 1)
         const filtered = res?.filter((i:any) => i?.one_time === 0)
         if(findItem) {
-            const m = [...filtered]
-            const rm = m.splice(0, 1, findItem)
-            setListPrem([...m])
+            setListPrem(filtered?.map((i:any, index: number) => index === 0 ? findItem : i))
         } else {
             setListPrem(filtered)
         }
       })
     }
   }
-
+  
 
   const getSub = () => {
     if(token) {
       service.getPaySubs(token).then(res => {
-        const m = res;
-        const rm = m.splice(0,1)
-        setListSub([...m])
+        const findItem = res?.find((i:any) => i?.one_time === 1)
+        const filtered = res?.filter((i:any) => i?.one_time === 0)
+        if(findItem) {
+          setListSub(filtered?.map((i:any, index: number) => index === 0 ? findItem : i))
+        } else {
+          setListSub(filtered)
+        }
       })
     }
   }
+  
   const getCred = () => {
     if(token) {
       service.getPayPlans(token).then(res => {
@@ -177,14 +180,6 @@ const DepositPage = () => {
     }
   }
 
-  const goToPayment = () => {
-    if(width <= 768) {
-        const top = payRef?.current?.getBoundingClientRect()?.top;
-        if(typeof top === 'number') {
-            document.documentElement.scrollTo(0, top)
-        }
-    }
-  }
   useEffect(() => {
     if(userData && userData?.is_donate === 1) {
         getPlans()
@@ -193,7 +188,6 @@ const DepositPage = () => {
         getPromo()
     }
   }, [token, userData])
-
 
   useEffect(() => {
     if(token) {
