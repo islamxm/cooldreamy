@@ -66,7 +66,7 @@ const Hero: FC = ({}) => {
                 af_id
             })
         }   
-
+        console.log(query)
     }, [query])
 
 
@@ -83,6 +83,8 @@ const Hero: FC = ({}) => {
             }
         }
     }, [conversData])
+
+    
 
     const onSubmit = () => {
         if(email && password && birthday && sex && name) {
