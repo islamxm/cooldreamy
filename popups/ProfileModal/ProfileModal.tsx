@@ -173,16 +173,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                     </div>
                                     <div className={styles.text}>{locale?.global?.user_action?.wink}</div>
                                 </button>
-                                <button onClick={() => {
-                                    !isFav && onFavorite()
-                                }} className={styles.item}>
-                                    <div className={styles.icon}>
-                                        {
-                                            isFav ? <AiFillStar/> : <AiOutlineStar/>
-                                        }
-                                    </div>
-                                    <div className={styles.text}>{locale?.global?.user_action?.fav}</div>
-                                </button>
                             </div>
                             {
                                 (profile_photo && profile_photo?.length > 0) ? (
@@ -315,16 +305,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                             <FaRegSmileWink/>
                                         </div>
                                         <div className={styles.text}>{locale?.global?.user_action?.wink}</div>
-                                    </button>
-                                    <button onClick={() => {
-                                        !isFav && onFavorite()
-                                    }} className={styles.item}>
-                                        <div className={styles.icon}>
-                                            {
-                                                isFav ? <AiFillStar/> : <AiOutlineStar/>
-                                            }
-                                        </div>
-                                        <div className={styles.text}>{locale?.global?.user_action?.fav}</div>
                                     </button>
                                 </div>
                                 <div className={styles.body_main}>
