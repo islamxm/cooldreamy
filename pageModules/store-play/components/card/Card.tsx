@@ -114,6 +114,7 @@ const Card: FC<any> = () => {
     if(regData === null) {
       Router.push('/start')
     }
+    console.log('regData', regData)
     
   }
 
