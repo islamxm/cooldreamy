@@ -23,12 +23,12 @@ import {FiChevronLeft, FiChevronRight} from 'react-icons/fi'
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import notify from '@/helpers/notify';
 import {GoMail} from 'react-icons/go'
+import getClassNames from '@/helpers/getClassNames';
 
 
 const service = new ApiService()
 
 const ProfileModal:FC<ModalFuncProps> = (props) => {
-    const {query} = useRouter()
     const {currentProfileId, token, locale, currentProfileUuid} = useAppSelector(s => s)
     const dispatch = useAppDispatch()
     const {onCancel} = props
@@ -36,12 +36,11 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     const [load, setLoad] = useState(true)
     const [createChatLoad, setCreateChatLoad] = useState(false)
     const [data, setData] = useState<IUser | null>(null)
+    const [loadedImages, setLoadedImages] = useState<number>(0)
 
     const [isFav, setIsFav] = useState<any>(false)
     const [isLiked, setIsLiked] = useState<any>(false)
-    const [isWinked, setIsWinked] = useState<any>(false)
 
-    const [localPhotos, setLocalPhotos] = useState<any[]>([])
 
     useEffect(() => {
         if(data) {
@@ -64,6 +63,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     } = data || {}
 
     const onClose = () => {
+        setLoadedImages(0)
         onCancel && onCancel()
         dispatch(updateCurrentProfileUiid(null))
     }
@@ -144,7 +144,10 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
     }
 
 
-    
+    useEffect(() => {
+        console.log('LOADED IMAGES',loadedImages)
+        console.log('IMAGES COUNT',profile_photo?.length)
+    }, [loadedImages, profile_photo])
 
 
 
@@ -237,7 +240,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                         }
                                         {
                                             profile_photo && profile_photo?.length > 1 ? (
-                                                <div className={styles.thumbs}>
+                                                <div className={getClassNames([styles.thumbs, profile_photo?.length === loadedImages && styles.show])}>
                                                     <SwiperWrap
                                                         modules={[Thumbs, Navigation]}
                                                         className={styles.thumbs_body}
@@ -255,11 +258,12 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                                 <SwiperSlide className={styles.thumbs_item} key={i.id}>
                                                                     <Image
                                                                         src={i.image_url}
-                                                                        alt=''
+                                                                        alt='img'
                                                                         width={70}
                                                                         height={70}
+                                                                        priority
+                                                                        onLoad={() => setLoadedImages(s => s + 1)}
                                                                         loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                                        
                                                                         />
                                                                 </SwiperSlide>
                                                             ))
