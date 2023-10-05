@@ -40,18 +40,13 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
 
       if(subid && !af_id && app_name) {
         Router.push(`/start?subid=${subid}&af_id=${af_id}&app_name=${app_name}`)
-        console.log('NO af_id')
       } else if (subid && af_id && app_name) {  
         Router.push(`/start?subid=${subid}&app_name=${app_name}&af_id=${af_id}`)
-        console.log('WITH af_id')
       } else {
         if(pathname !== '/login') {
           Router.push('/start')
         }
       }
-      console.log('subid', subid)
-      console.log('af_id', af_id)
-      console.log('app_name', app_name)
       
     }
     if(auth === 'SUCCESS') {

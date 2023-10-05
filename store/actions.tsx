@@ -62,3 +62,5 @@ export const setFreeCredits = (data:any) => ({type: 'SET_FREE_CREDITS', data})
 export const updateCurrentSub = (data:any) => ({type: 'UPDATE_CURRENT_SUB', data})
 export const updateCurrentVip = (data:any) => ({type:'UPDATE_CURRENT_VIP', data})
 export const updateRegisterData = (data:any) => ({type: 'UPDATE_REGISTER_DATA', data})
+
+export const updateConversData = (data:any) => ({type: 'UPDATE_CONVERS_DATA', data})

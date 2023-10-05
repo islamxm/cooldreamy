@@ -59,7 +59,9 @@ export interface IGlobalState {
 
     registerData:any,
 
-    credits: number
+    credits: number,
+
+    conversData: any
 }
 
 
@@ -95,7 +97,8 @@ export const globalState: IGlobalState = {
     currentSub: null,
     currentVip: null,
     registerData: null,
-    credits: 0
+    credits: 0,
+    conversData: null
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -275,6 +278,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 registerData: action.data
+            }
+        case 'UPDATE_CONVERS_DATA':
+            return {
+                ...state,
+                conversData: action.data
             }
         default:
             return state;

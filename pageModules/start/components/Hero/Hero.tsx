@@ -29,7 +29,7 @@ const service = new ApiService()
 const Hero: FC = ({}) => {
     const {width} = useWindowSize()
     const dispatch = useAppDispatch()
-    const {locale} = useAppSelector(s => s)
+    const {locale, conversData} = useAppSelector(s => s)
     const [loginModal, setLoginModal] = useState(false)
     const {query} = useRouter()
 
@@ -44,7 +44,7 @@ const Hero: FC = ({}) => {
     const [queryData, setQueryData] = useState<any>({})
 
     useEffect(() => {
-        console.log('HERO QUERY', query)
+
         if(query?.subid && !query?.af_id && query?.app_name) {
             const subid = query?.subid;
             const app_name = query?.app_name;
@@ -70,28 +70,17 @@ const Hero: FC = ({}) => {
     }, [query])
 
 
-    // const getInstallEvent = (e:any) => {
-    //     e?.preventDefault()
-    //     setInstall(e)
-    // }
-
-    // useEffect(() => {
-    //     window.addEventListener('beforeinstallprompt', getInstallEvent)
-    // }, [])
-
-    // const onInstall = () => {
-    //     if(install) {
-    //         install?.prompt()
-    //         install?.userChoice.then((choiceResult:any) => {
-    //             if (choiceResult?.outcome === 'accepted') {
-    //               console.log('User accepted the A2HS prompt');
-    //             } else {
-    //               console.log('User dismissed the A2HS prompt');
-    //             }
-    //             setInstall(null)
-    //           });
-    //     }
-    // }
+    useEffect(() => {
+        if(conversData) {
+            const {af_id, subid, app_name} = conversData || {}
+            if(subid && app_name && !af_id) {
+                Router.push(`/start?subid=${subid}&app_name=${app_name}`)
+            }
+            if(subid && af_id && app_name) {
+                Router.push(`/start?subid=${subid}&app_name=${app_name}&af_id=${af_id}`)
+            }
+        }
+    }, [conversData])
 
     const onSubmit = () => {
         if(email && password && birthday && sex && name) {

@@ -12,10 +12,14 @@ import img2 from '@/public/assets/images/store-slide-2.png'
 import img3 from '@/public/assets/images/store-slide-3.png'
 import img4 from '@/public/assets/images/store-slide-4.png'
 import img5 from '@/public/assets/images/store-slide-5.png'
+import { updateConversData } from '@/store/actions';
+import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 
 type statusType = 'INIT' | 'WAIT' | 'LOADING' | 'INSTALL' | 'DONE';
 
 const Card: FC<any> = () => {
+  const dispatch = useAppDispatch()
+  const {conversData} = useAppSelector(s => s)
   const [status, setStatus] = useState<statusType>('INIT')
   const {query} = useRouter()
   const { width } = useWindowSize()
@@ -39,13 +43,13 @@ const Card: FC<any> = () => {
   }
 
   useEffect(() => {
-    setRegData({
+    dispatch(updateConversData({
       af_id: query?.af_id,
       app_name: query?.app_name,
       subid: query?.subid
-    })
+    }))
     if(!query?.af_id && !query?.app_name && !query?.subid) {
-      setRegData(null)
+      dispatch(updateConversData(null))
     }
   }, [query])
 
@@ -76,7 +80,6 @@ const Card: FC<any> = () => {
   
 
   useEffect(() => {
-
     window.addEventListener('beforeinstallprompt', getInstallEvent)
     return () => {
       window.removeEventListener('beforeinstallprompt', getInstallEvent)
@@ -105,17 +108,8 @@ const Card: FC<any> = () => {
   }
 
   const goToStart = () => {
-    const {app_name, af_id, subid} = regData || {}
-    if(subid && !af_id && app_name) {
-      Router.push(`/start?sub_id=${subid}&app_name=${app_name}`)
-    } else if(subid && af_id && app_name) {
-      Router.push(`/start?sub_id=${subid}&af_id=${af_id}&app_name=${app_name}`)
-    }
-    if(regData === null) {
-      Router.push('/start')
-    }
-    console.log('regData', regData)
-    
+    // const {app_name, af_id, subid} = conversData || {}
+    Router.push('/start')
   }
 
   return (
