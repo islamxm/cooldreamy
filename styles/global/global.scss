@@ -65,7 +65,6 @@ body {
 
     // min-height: 100vh;
     min-height: calc((var(--vh, 1vh) * 100) - 60px);
-
 }
 
 
@@ -79,9 +78,6 @@ main {
     overflow: hidden;
     flex: 1 0 auto;
     overflow-y: auto;
-
-    
-    
 }
 
 main.main-white {
@@ -104,11 +100,9 @@ main.main-wp {
 
 @media (max-width: 768px) {
     main {
-        // padding-top: 40px;
+        border: 1px solid red;
         padding-top: 0 !important;
-        height: calc((var(--vh, 1vh) * 100) - 61px);
-
-        // padding-bottom: 56px;
+        height: calc((var(--vh, 1vh) * 100) - 61px - 60px);
     }
 }
 

@@ -30,23 +30,17 @@ import getClassNames from '@/helpers/getClassNames';
 if(process?.browser) {
 	const vh = process?.browser && window.innerHeight / 100;
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
-	// screen.orientation.lock('portrait')
 }
 
-// process?.browser && screen.orientation.lock('portrait')
-
-
-
-function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
 	const router = useRouter()
 	const {locale} = router
 	const [wc, setWc] = useState(true)
 	const {width} = useWindowSize()
 	const [sw, setSw] = useState<ServiceWorkerRegistration | null>(null)
-
 	
 
-
+	
 	useEffect(() => {
 		moment.locale(locale === 'ru' ? 'ru' : 'en')
 		setWc(false)
@@ -60,7 +54,6 @@ function App({ Component, pageProps }: AppProps) {
 	const routeChangeEnd = () => {
 		setWc(false)
 	}
-
 	
 
 	// useEffect(() => {

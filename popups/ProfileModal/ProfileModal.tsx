@@ -143,14 +143,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         }
     }
 
-
-    useEffect(() => {
-        console.log('LOADED IMAGES',loadedImages)
-        console.log('IMAGES COUNT',profile_photo?.length)
-    }, [loadedImages, profile_photo])
-
-
-
     return (
         <Modal
             {...props}
