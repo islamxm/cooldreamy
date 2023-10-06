@@ -4,7 +4,6 @@
 //   register: true,
 //   disableDevLogs: true,
 //   mode: process.env.NODE_ENV,
-  
 // })
 
 const nextConfig = {
