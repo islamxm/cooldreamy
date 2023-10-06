@@ -6,7 +6,7 @@ const withPWA = require('next-pwa')({
   mode: process.env.NODE_ENV,
 })
 
-const nextConfig = {
+const nextConfig = withPWA({
   reactStrictMode: false,
   compiler: {
     styledComponents: true
@@ -15,6 +15,6 @@ const nextConfig = {
     locales: ['en'],
     defaultLocale: 'en'
   },
-}
+})
 
 module.exports = nextConfig
