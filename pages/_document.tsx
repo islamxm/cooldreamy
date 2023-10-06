@@ -23,13 +23,13 @@ export default function Document() {
         <meta name="msapplication-tap-highlight" content="no"/>
         <meta name="theme-color" content="#7d5eec"/>
 
-        <link rel="apple-touch-icon" href="/touch-icon-iphone.png"/>
-        <link rel="apple-touch-icon" sizes="152x152" href="/touch-icon-ipad.png"/>
-        <link rel="apple-touch-icon" sizes="180x180" href="/touch-icon-iphone-retina.png"/>
-        <link rel="apple-touch-icon" sizes="167x167" href="/touch-icon-ipad-retina.png"/>
+        <link rel="apple-touch-icon" href="/ios/32.png"/>
+        <link rel="apple-touch-icon" sizes="152x152" href="/ios/152.png"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="/ios/180.png"/>
+        <link rel="apple-touch-icon" sizes="167x167" href="/ios/167.png"/>
 
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/windows11/LargeTile.scale-100.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/windows11/LargeTile.scale-100.png"/>
         <link rel="manifest" href="/manifest.json"/>
         <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5"/>
         
