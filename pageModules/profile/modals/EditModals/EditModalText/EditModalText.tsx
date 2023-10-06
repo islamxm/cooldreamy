@@ -40,7 +40,11 @@ const EditModalText:FC<I> = (props) => {
                 service.updateMyProfile({name: value}, token).then(res => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
+                        const {
+                            credits,
+                            ...other
+                          } = res
+                          dispatch(updateUserData({...other, free_credits: credits}))
                         onClose()
                     } else {
                         notify(locale?.global?.notifications?.error_default, 'ERROR')
@@ -53,7 +57,11 @@ const EditModalText:FC<I> = (props) => {
                 service.updateMyProfile({email: value}, token).then(res => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
+                        const {
+                            credits,
+                            ...other
+                          } = res
+                          dispatch(updateUserData({...other, free_credits: credits}))
                         onClose()
                     } else {
                         notify(locale?.global?.notifications?.error_default, 'ERROR')
@@ -66,7 +74,11 @@ const EditModalText:FC<I> = (props) => {
                 service.updateMyProfile({about_self: value}, token).then(res => {
                     if(res?.id) {
                         notify(locale?.global?.notifications?.success_edit_profile, 'SUCCESS')
-                        dispatch(updateUserData(res))
+                        const {
+                            credits,
+                            ...other
+                          } = res
+                          dispatch(updateUserData({...other, free_credits: credits}))
                         onClose()
                     } else {
                         notify(locale?.global?.notifications?.error_default, 'ERROR')

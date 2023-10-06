@@ -264,7 +264,7 @@ const UserMain:FC<IUser> = (props) => {
                                 <RiPencilLine/>
                             </button>
                             {
-                                is_email_verified && <span className={styles.confirmed}>confirmed</span>
+                                is_email_verified === 1 && <span className={styles.confirmed}>confirmed</span>
                             }
                         </div>
                         <div className={styles.text} style={{color: email ? 'var(--text)' : 'var(--red)'}}>

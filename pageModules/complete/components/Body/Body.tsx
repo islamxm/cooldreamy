@@ -37,7 +37,7 @@ const Body:FC = () => {
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState<number>(8)
+    const [currentStep, setCurrentStep] = useState<number>(0)
 
     const [countryDef, setCountryDef] = useState<any>(null)
     const [stateDef, setStateDef] = useState<any>(null)

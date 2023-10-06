@@ -100,7 +100,6 @@ const UserInfo:FC<IUser> = (props) => {
                         </>
                     )
                 }
-                
                 <Col span={24}>
                     <UserImages
                         {...props}

@@ -3,13 +3,14 @@ import {motion} from 'framer-motion';
 import {Row, Col} from 'antd'
 import Button from '@/components/Button/Button';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 import img1 from '@/public/assets/icons/signup-email-1.svg'
 import img2 from '@/public/assets/icons/signup-email-2.svg'
 import img3 from '@/public/assets/icons/signup-email-3.svg'
 import getClassNames from '@/helpers/getClassNames';
 import Link from 'next/link';
+import EditModalText from '@/pageModules/profile/modals/EditModals/EditModalText/EditModalText';
 
 interface I {
     email?: string,   
@@ -19,6 +20,7 @@ const StepMail:FC<I> = ({
     email
 }) => {
     const {width} = useWindowSize()
+    const [modal, setModal] = useState(false)
 
     return (
         <motion.div 
@@ -34,6 +36,12 @@ const StepMail:FC<I> = ({
         }}
         transition={{type: 'spring', stiffness: 400, damping: 17 }}
             className={styles.wrapper}>
+            <EditModalText
+                editItemType={'email'}
+                head='Edit e-mail'
+                open={modal}
+                onCancel={() => setModal(false)}
+                />
             <Row gutter={[25,25]}>
                 <Col span={24}>
                     <div className={styles.head}>
@@ -45,7 +53,7 @@ const StepMail:FC<I> = ({
                     <div className={styles.body}>
                         <div className={styles.label}>Email has been sent to</div>
                         <div className={styles.value}>{email}</div>
-                        <Link href={'/'}>Change your email</Link>
+                        <button onClick={() => setModal(true)} className={styles.change}>Change your email</button>
                     </div>
                 </Col>
                 {/* <Col span={24}>
