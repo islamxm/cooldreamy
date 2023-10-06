@@ -194,6 +194,9 @@ const Body:FC = () => {
                     ...other
                   } = res
                   dispatch(updateUserData({...other, free_credits: credits}))
+                  setCurrentStep(s => s + 1)
+                } else {
+                  notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
               }).finally(() => {
                 setLoad(false)  
