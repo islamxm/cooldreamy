@@ -348,9 +348,9 @@ const MainWrapper = ({
 				open={soonModal}
 				onCancel={() => dispatch(updateSoonModal(false))}
 				/>
-			<VerifyEmailModal
+			{/* <VerifyEmailModal
 				open
-				/>
+				/> */}
         <div className={styles.wrapper}>
 				{children}
 			</div>
