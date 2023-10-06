@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import { useIdleTimer } from 'react-idle-timer'
 import { pusherConfigType } from '@/helpers/getChannels';
 import getChannels from '@/helpers/getChannels';
+import Script from 'next/script';
 import { 
 	updateNewMail, 
 	updateNewMessage, 
@@ -348,6 +349,18 @@ const MainWrapper = ({
 				open={soonModal}
 				onCancel={() => dispatch(updateSoonModal(false))}
 				/>
+			<Script
+          id='gtm-1'
+					async
+          >
+          {
+            `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-59CJTBH');`
+          }
+        </Script>
 			{/* <VerifyEmailModal
 				open
 				/> */}
