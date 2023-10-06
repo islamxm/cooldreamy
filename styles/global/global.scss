@@ -48,6 +48,10 @@ button, input {
     border: none;
 }
 
+button {
+    user-select: none !important;
+}
+
 img {
     user-select: none;
 }

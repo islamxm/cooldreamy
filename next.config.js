@@ -6,7 +6,7 @@ const withPWA = require('next-pwa')({
   mode: process.env.NODE_ENV,
 })
 
-const nextConfig = withPWA({
+const nextConfig = nextPWA({
   reactStrictMode: true,
   compiler: {
     styledComponents: true
