@@ -89,7 +89,6 @@ const SearchBody = () => {
     const onSearch = (initPage?: number) => {
         if(currentPage) {
             if(token && currentPage > 0 && filter_type) {
-                console.log('SEARCH')
                 setLoad(true)
                 service.search({
                     page: initPage || currentPage,

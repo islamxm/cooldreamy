@@ -19,16 +19,16 @@ import { useWindowSize } from 'usehooks-ts';
 import UserCardMob from '@/pageModules/profile/components/UserCardMob/UserCardMob';
 import UserMobAction from '@/pageModules/user/components/UserMobAction/UserMobAction';
 import giftImg from '@/public/assets/images/gift-1.png'
-
+import Link from 'next/link';
 const service = new ApiService()
 
 const UserPage:FC = () => {
     const {width} = useWindowSize()
     const [createChatLoad, setCreateChatLoad] = useState(false)
-    const {query} = useRouter()
+    const router = useRouter()
     const {token, locale} = useAppSelector(s => s)
     const [data, setData] = useState<IUser | null>(null)
-
+    const {query} = router
 
 
     useEffect(() => {
@@ -103,7 +103,7 @@ const UserPage:FC = () => {
                                         />
                                 </Col>
                                 <Col span={24}>
-                                    <Button onClick={() => Router.back()} text={locale?.global?.back_btn} middle fill/>
+                                    <Button onClick={() => router.back()} text={locale?.global?.back_btn} middle fill/>
                                 </Col>
                             </Row>
                         )

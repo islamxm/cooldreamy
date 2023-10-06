@@ -128,14 +128,14 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 }
                             }))
                         }
-                        if(userData?.is_email_verified === 0) {
-                            dispatch(updateEmailModal(true))
-                        }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         service.getCredits(token).then(credits => {
                             dispatch(updateUserData({...userData, credits}))
                         })
+                    }
+                    if(userData?.is_email_verified === 0) {
+                        dispatch(updateEmailModal(true))
                     }
                     setMockType('')
                 })
@@ -189,14 +189,14 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             //     dispatch(updateSubsModal(true))
                             // }
                         }
-                        if(userData?.is_email_verified === 0) {
-                            dispatch(updateEmailModal(true))
-                        }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         service.getCredits(token).then(credits => {
                             dispatch(updateUserData({...userData, credits}))
                         })
+                    }
+                    if(userData?.is_email_verified === 0) {
+                        dispatch(updateEmailModal(true))
                     }
                     setMockType('')
                 })

@@ -181,6 +181,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                             thumbsSwiper && (
                                                 <div className={styles.slider}>
                                                     <div className={styles.photo_count}><BsCamera/>{profile_photo?.length}</div>
+                                                    <FancyboxWrapper>
                                                     <SwiperWrap
                                                         modules={[Thumbs]}
                                                         thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
@@ -190,17 +191,15 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                         {
                                                             (profile_photo && profile_photo?.length > 0) ? profile_photo?.map(i => (
                                                                 <SwiperSlide className={styles.slider_item} key={i.id}>
-                                                                    <FancyboxWrapper>
-                                                                        <a data-fancybox="gallery" href={i.image_url} className={styles.item}>
-                                                                                <Image
-                                                                                    width={300}
-                                                                                    height={300}
-                                                                                    src={i.image_url}
-                                                                                    alt=''
-                                                                                    loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
-                                                                                    />
-                                                                            </a>
-                                                                    </FancyboxWrapper>
+                                                                    <a data-fancybox="gallery" href={i.image_url} className={styles.item}>
+                                                                        <Image
+                                                                            width={300}
+                                                                            height={300}
+                                                                            src={i.image_url}
+                                                                            alt=''
+                                                                            loader={p => p?.src && typeof p?.src === 'string' ? p?.src : ''}
+                                                                            />
+                                                                    </a>
                                                                     
                                                                 </SwiperSlide>
                                                             )) : (
@@ -217,6 +216,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                         }
                                                         
                                                     </SwiperWrap>
+                                                    </FancyboxWrapper>
                                                 </div>
                                             ) 
                                         }
@@ -250,14 +250,19 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                                                 </SwiperSlide>
                                                             ))
                                                         }
-                                                        
                                                     </SwiperWrap>
-                                                    <div className={`profile-modal-nav-prev ${styles.nav} ${styles.prev}`}>
-                                                        <FiChevronLeft/>
-                                                    </div>
-                                                    <div className={`profile-modal-nav-next ${styles.nav} ${styles.next}`}>
-                                                        <FiChevronRight/>
-                                                    </div>
+                                                    {
+                                                        profile_photo?.length > 3 && (
+                                                            <>
+                                                                <div className={`profile-modal-nav-prev ${styles.nav} ${styles.prev}`}>
+                                                                    <FiChevronLeft/>
+                                                                </div>
+                                                                <div className={`profile-modal-nav-next ${styles.nav} ${styles.next}`}>
+                                                                    <FiChevronRight/>
+                                                                </div>
+                                                            </>
+                                                        )
+                                                    }
                                                 </div>
                                             ) : null
                                         }
@@ -268,8 +273,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                         <div className={styles.slider}>
                                             <SwiperWrap
                                                 className={styles.slider_body}
-                                                spaceBetween={10}
-                                                >
+                                                spaceBetween={10}>
                                                 <SwiperSlide className={styles.slider_item}>
                                                     <div className={styles.item}>
                                                         <Image

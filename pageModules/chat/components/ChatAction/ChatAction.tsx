@@ -76,9 +76,6 @@ const ChatAction = ({
                                     }
                                 }))
                             }
-                            if(userData?.is_email_verified === 0) {
-                                dispatch(updateEmailModal(true))
-                            }
                             
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
@@ -86,7 +83,9 @@ const ChatAction = ({
                                 dispatch(updateUserData({...userData, credits}))
                             })
                         }
-                       
+                        if(userData?.is_email_verified === 0) {
+                            dispatch(updateEmailModal(true))
+                        }
                     }).finally(() => {
                         setLoad(false)
                     })
@@ -136,9 +135,6 @@ const ChatAction = ({
                                     dispatch(updateSubsModal(true))
                                 }
                             }
-                            if(userData?.is_email_verified === 0) {
-                                dispatch(updateEmailModal(true))
-                            }
                             
                             // dispatch(updateLimit({
                             //     open: true,
@@ -155,6 +151,9 @@ const ChatAction = ({
                                 const {credits} = res
                                 dispatch(setFreeCredits(credits))
                             })
+                        }
+                        if(userData?.is_email_verified === 0) {
+                            dispatch(updateEmailModal(true))
                         }
                     }).finally(() => {
                         setLoad(false)
@@ -234,9 +233,6 @@ const ChatAction = ({
                                         }
                                     }))
                                 }
-                                if(userData?.is_email_verified === 0) {
-                                    dispatch(updateEmailModal(true))
-                                }
                                 
                             } else {
                                 onUpdateChat({messageBody: r?.chat?.last_message, dialogBody: r?.chat})
@@ -244,6 +240,9 @@ const ChatAction = ({
                                     const {credits} = res
                                     dispatch(setFreeCredits(credits))
                                 })
+                            }
+                            if(userData?.is_email_verified === 0) {
+                                dispatch(updateEmailModal(true))
                             }
                         }).finally(() => {
                             setLoad(false)
