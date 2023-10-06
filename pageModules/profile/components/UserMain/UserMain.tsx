@@ -29,7 +29,8 @@ const UserMain:FC<IUser> = (props) => {
         prompt_finance_states,
         prompt_targets,
         prompt_want_kids,
-        prompt_interests
+        prompt_interests,
+        is_email_verified
     } = props
     
     const router = useRouter()
@@ -262,6 +263,9 @@ const UserMain:FC<IUser> = (props) => {
                                 >
                                 <RiPencilLine/>
                             </button>
+                            {
+                                is_email_verified && <span className={styles.confirmed}>confirmed</span>
+                            }
                         </div>
                         <div className={styles.text} style={{color: email ? 'var(--text)' : 'var(--red)'}}>
                             {email ? email : locale?.global?.placeholders?.nd}
