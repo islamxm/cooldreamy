@@ -43,6 +43,7 @@ import Link from 'next/link';
 import PremModal from '@/popups/PremModal/PremModal';
 import SubsModal from '@/popups/SubsModal/SubsModal';
 import useCheckDevice from '@/hooks/useCheckDevice';
+import VerifyEmailModal from '@/popups/VerifyEmailModal/VerifyEmailModal';
 
 const service = new ApiService()
 
@@ -346,6 +347,9 @@ const MainWrapper = ({
 			<SoonModal
 				open={soonModal}
 				onCancel={() => dispatch(updateSoonModal(false))}
+				/>
+			<VerifyEmailModal
+				open
 				/>
         <div className={styles.wrapper}>
 				{children}

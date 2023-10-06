@@ -16,39 +16,7 @@ const VerifyEmailModal:FC<ModalFuncProps> = (props) => {
             >
             <Row gutter={[35,35]}>
                 <Col span={24}>
-                    <div className={styles.head}>
-                        <div className={styles.title}>
-                            Подтвердите электронную почту
-                        </div>
-                        <div className={styles.subtitle}>
-                            Данный функционал доступен только для пользователей которые подтвердили свою почту
-                        </div>
-                    </div>
-                </Col>
-                <Col span={24}>
-                    <div className={styles.body}>
-                        <div className={styles.label}>Письмо отправлено на</div>
-                        <div className={styles.email}>{userData?.email}</div>
-                        <div className={styles.edit}><Link href={'/profile'}>Изменить email</Link></div>
-                    </div>
-                </Col>
-                <Col span={24}>
-                    <div className={styles.action}>
-                        <div className={styles.item}>
-                            <Button
-                                middle
-                                onClick={() => window.open(`https://${userData?.email?.split('@')[1]}`)}
-                                text='Перейти в почту'
-                                />
-                        </div>
-                        <div className={styles.item}>
-                            <Button
-                                middle
-                                text='Отправить письмо повторно'
-                                variant={'bordered'}
-                                />
-                        </div>
-                    </div>
+                    <div className={styles.head}></div>
                 </Col>
             </Row>
         </Modal>
