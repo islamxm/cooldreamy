@@ -73,7 +73,22 @@ class ApiService {
             })
             return await res.status
         } catch(err) {
-            console.log(err)
+            return;
+        }
+    }
+
+    sendVerifyEmail = async (token:any) => {
+        try {
+            let res = await fetch(endpoints.sendVerifyEmail, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return await res?.status
+        } catch(err) {
+            return;
         }
     }
 

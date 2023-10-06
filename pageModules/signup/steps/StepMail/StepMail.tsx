@@ -53,7 +53,7 @@ const StepMail:FC<I> = ({
                     <div className={styles.body}>
                         <div className={styles.label}>Email has been sent to</div>
                         <div className={styles.value}>{email}</div>
-                        <button onClick={() => setModal(true)} className={styles.change}>Change your email</button>
+                        <button onClick={() => setModal(true)} className={styles.change}>Change your e-mail</button>
                     </div>
                 </Col>
                 {/* <Col span={24}>

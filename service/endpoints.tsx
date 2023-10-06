@@ -11,6 +11,7 @@ const endpoints = {
     logout: `${API_PATH}logout`,
     verifyEmail: `${API_PATH}verify`,
     checkMail: `${API_PATH}check/email`,
+    sendVerifyEmail: `${API_PATH}send/verification`,
 
     //users
     search: `${API_PATH}users/search`,

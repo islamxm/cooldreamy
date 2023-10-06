@@ -61,7 +61,9 @@ export interface IGlobalState {
 
     credits: number,
 
-    conversData: any
+    conversData: any,
+    emailModal:boolean
+
 }
 
 
@@ -98,7 +100,8 @@ export const globalState: IGlobalState = {
     currentVip: null,
     registerData: null,
     credits: 0,
-    conversData: null
+    conversData: null,
+    emailModal: false
 }
 
 const reducer = (state = globalState, action: any) => {
@@ -283,6 +286,11 @@ const reducer = (state = globalState, action: any) => {
             return {
                 ...state,
                 conversData: action.data
+            }
+        case 'UPDATE_EMAIL_MODAL':
+            return {
+                ...state,
+                emailModal: action.data
             }
         default:
             return state;

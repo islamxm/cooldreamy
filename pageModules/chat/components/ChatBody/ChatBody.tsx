@@ -25,7 +25,7 @@ import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
 import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
 import { PulseLoader } from 'react-spinners';
 import getPrice from '@/helpers/getPrice';
-import { updateLimit, updateSubsModal } from '@/store/actions';
+import { updateEmailModal, updateLimit, updateSubsModal } from '@/store/actions';
 import { BsTrash } from 'react-icons/bs';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import notify from '@/helpers/notify';
@@ -128,6 +128,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                 }
                             }))
                         }
+                        if(userData?.is_email_verified === 0) {
+                            dispatch(updateEmailModal(true))
+                        }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         service.getCredits(token).then(credits => {
@@ -185,6 +188,9 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             // if(userData?.free_credits && userData?.free_credits < 3) {
                             //     dispatch(updateSubsModal(true))
                             // }
+                        }
+                        if(userData?.is_email_verified === 0) {
+                            dispatch(updateEmailModal(true))
                         }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})

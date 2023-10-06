@@ -23,7 +23,8 @@ import {
 	updateSubsModal,
 	setCredits,
 	updateCurrentSub,
-	updateCurrentVip
+	updateCurrentVip,
+	updateEmailModal
 } from '@/store/actions';
 import notify from '@/helpers/notify';
 import ApiService from '@/service/apiService';
@@ -45,6 +46,7 @@ import PremModal from '@/popups/PremModal/PremModal';
 import SubsModal from '@/popups/SubsModal/SubsModal';
 import useCheckDevice from '@/hooks/useCheckDevice';
 import VerifyEmailModal from '@/popups/VerifyEmailModal/VerifyEmailModal';
+import EditModalText from '@/pageModules/profile/modals/EditModals/EditModalText/EditModalText';
 
 const service = new ApiService()
 
@@ -66,13 +68,14 @@ const MainWrapper = ({
 			newMail, 
 			soonModal,
 			premModal,
-			subsModal
+			subsModal,
+			emailModal
 		} = useAppSelector(s => s);
 	const lc = useAppSelector(s => s.locale)
 	const userDevice = useCheckDevice()
 
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
-
+	const [emailEditModal, setEmailEditModal] = useState(false)
 
 	const idle = useIdleTimer({
 		onIdle: () => window.location.reload(),
@@ -349,6 +352,17 @@ const MainWrapper = ({
 				open={soonModal}
 				onCancel={() => dispatch(updateSoonModal(false))}
 				/>
+				<VerifyEmailModal
+				open={emailModal}
+				onCancel={() => dispatch(updateEmailModal(false))}
+				onOpenEdit={() => setEmailEditModal(true)}
+				/>
+				<EditModalText
+					editItemType={'email'}
+					onCancel={() => setEmailEditModal(false)}
+					open={emailEditModal}
+					head='Edit e-mail'
+					/>
 			<Script
           id='gtm-1'
 					async
@@ -361,9 +375,7 @@ const MainWrapper = ({
             })(window,document,'script','dataLayer','GTM-59CJTBH');`
           }
         </Script>
-			{/* <VerifyEmailModal
-				open
-				/> */}
+			
         <div className={styles.wrapper}>
 				{children}
 			</div>

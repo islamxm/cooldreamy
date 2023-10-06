@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { PulseLoader } from 'react-spinners';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { useWindowSize } from 'usehooks-ts';
-import { setCredits, setFreeCredits, updateLimit, updateSubsModal, updateUserData } from '@/store/actions';
+import { setCredits, setFreeCredits, updateEmailModal, updateLimit, updateSubsModal, updateUserData } from '@/store/actions';
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import OutsideClickHandler from 'react-outside-click-handler';
 import CompReg from '@/popups/CompReg/CompReg';
@@ -76,9 +76,9 @@ const ChatAction = ({
                                     }
                                 }))
                             }
-                            // if(userData?.free_credits && userData?.free_credits < 3) {
-                            //     dispatch(updateSubsModal(true))
-                            // }
+                            if(userData?.is_email_verified === 0) {
+                                dispatch(updateEmailModal(true))
+                            }
                             
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
@@ -128,7 +128,6 @@ const ChatAction = ({
                         chat_id: Number(query?.id),
                         text
                     }, token).then(res => {
-                        
                         if(res?.error) {
                             if(res?.error === 'You need to fill in information about yoursel') {
                                 setCr(true)
@@ -136,6 +135,9 @@ const ChatAction = ({
                                 if(userData?.free_credits && userData?.free_credits < 3) {
                                     dispatch(updateSubsModal(true))
                                 }
+                            }
+                            if(userData?.is_email_verified === 0) {
+                                dispatch(updateEmailModal(true))
                             }
                             
                             // dispatch(updateLimit({
@@ -231,6 +233,9 @@ const ChatAction = ({
                                             text: locale?.popups?.nocredit_global_chat
                                         }
                                     }))
+                                }
+                                if(userData?.is_email_verified === 0) {
+                                    dispatch(updateEmailModal(true))
                                 }
                                 
                             } else {
