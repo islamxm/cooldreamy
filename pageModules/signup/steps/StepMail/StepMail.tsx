@@ -9,6 +9,7 @@ import img1 from '@/public/assets/icons/signup-email-1.svg'
 import img2 from '@/public/assets/icons/signup-email-2.svg'
 import img3 from '@/public/assets/icons/signup-email-3.svg'
 import getClassNames from '@/helpers/getClassNames';
+import Link from 'next/link';
 
 interface I {
     email?: string,   
@@ -44,6 +45,7 @@ const StepMail:FC<I> = ({
                     <div className={styles.body}>
                         <div className={styles.label}>Email has been sent to</div>
                         <div className={styles.value}>{email}</div>
+                        <Link href={'/'}>Change your email</Link>
                     </div>
                 </Col>
                 {/* <Col span={24}>
@@ -82,7 +84,7 @@ const StepMail:FC<I> = ({
                 <Col span={24}>
                     <div className={styles.action}>
                         <Button
-                            variant={'bordered'}
+                            // variant={'bordered'}
                             middle={width <= 768}
                             onClick={() => window.open(`https://${email?.split('@')[1]}`)}
                             text='Go to email'

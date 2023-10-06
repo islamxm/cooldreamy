@@ -20,6 +20,7 @@ import Step6 from '@/pageModules/signup/steps/Step6/Step6';
 import Step7 from '@/pageModules/signup/steps/Step7/Step7';
 import Step8 from '@/pageModules/signup/steps/Step8/Step8';
 import StepEx from '@/pageModules/signup/steps/StepEx/StepEx';
+import StepMail from '@/pageModules/signup/steps/StepMail/StepMail';
 
 import { IUser } from '@/models/IUser';
 import notify from '@/helpers/notify';
@@ -31,12 +32,12 @@ const service = new ApiService()
 const Body:FC = () => {
     const {width} = useWindowSize()
     // !! для теста
-    const {token, locale} = useAppSelector(s => s)
+    const {token, locale, userData} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
     const router = useRouter()
 
     const dispatch = useAppDispatch()
-    const [currentStep, setCurrentStep] = useState<number>(0)
+    const [currentStep, setCurrentStep] = useState<number>(8)
 
     const [countryDef, setCountryDef] = useState<any>(null)
     const [stateDef, setStateDef] = useState<any>(null)
@@ -44,6 +45,10 @@ const Body:FC = () => {
     const [state, setState] = useState<any>()
     const [language, setLanguage] = useState<any>('en')
     const [btnDisable, setBtnDisable] = useState(false)
+
+    const { 
+      email
+    } = userData || {}
 
     const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
         name: [],
@@ -109,6 +114,8 @@ const Body:FC = () => {
               return <Step7 list={prompt_relationships} selectedList={selectedRl} setSelectedList={setSelectedRl}/>
             case 7:
               return <Step8 list={prompt_careers} selectedList={selectedCareers} setSelectedList={setSelectedCareers}/>
+            case 8: 
+              return <StepMail email={email}/>
             default:
                 return null; 
         }
@@ -187,7 +194,6 @@ const Body:FC = () => {
                     ...other
                   } = res
                   dispatch(updateUserData({...other, free_credits: credits}))
-                  Router.back()
                 }
               }).finally(() => {
                 setLoad(false)  
@@ -196,6 +202,9 @@ const Body:FC = () => {
         } else {
           notify('Select the appropriate items', 'ERROR')
         }
+      }
+      if(currentStep === 8) {
+        Router.back()
       }
     }
     
@@ -308,10 +317,11 @@ const Body:FC = () => {
                                                 <div className={styles.action}>
                                                     <Button
                                                         load={load}
+                                                        variant={currentStep === 8 ? 'bordered' : 'default'}
                                                         middle={width <= 768}
                                                         onClick={stepChange}
                                                         disabled={btnDisable}
-                                                        text={currentStep === 7 ? locale?.signupPage.main.end_btn : locale?.signupPage.main.next_btn}
+                                                        text={currentStep === 8 ? 'Check later' : locale?.signupPage.main.next_btn}
                                                         />
                                                 </div>
                                             </Col>
