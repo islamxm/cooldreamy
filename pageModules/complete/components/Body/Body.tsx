@@ -124,7 +124,18 @@ const Body:FC = () => {
     // useEffect(() => {
     //     setNextBtn(false)
     // }, [currentStep])
-
+    const onResendLetter = () => {
+      if(token) {
+          setLoad(true)
+          service.sendVerifyEmail(token).then(res => {
+              if(res === 200) {
+                  notify('Verification letter sent', 'SUCCESS')
+              } else {
+                  notify(locale?.global?.notifications?.error_default, 'ERROR')
+              }
+          }).finally(() => setLoad(false))
+      }
+    }
     
 
     const stepChange = () => {
@@ -207,7 +218,9 @@ const Body:FC = () => {
         }
       }
       if(currentStep === 8) {
-        Router.back()
+        // Router.back()
+        onResendLetter()
+
       }
     }
     
@@ -316,6 +329,9 @@ const Body:FC = () => {
                                             <Col span={24}>
                                                 {switchStep(currentStep)}
                                             </Col>
+                                            {
+
+                                            }
                                             <Col span={24}>
                                                 <div className={styles.action}>
                                                     <Button
@@ -324,7 +340,7 @@ const Body:FC = () => {
                                                         middle={width <= 768}
                                                         onClick={stepChange}
                                                         disabled={btnDisable}
-                                                        text={currentStep === 8 ? 'Check later' : locale?.signupPage.main.next_btn}
+                                                        text={currentStep === 8 ? 'Resend the letter' : locale?.signupPage.main.next_btn}
                                                         />
                                                 </div>
                                             </Col>
