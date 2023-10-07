@@ -105,7 +105,7 @@ class ApiService {
                 headers,
                 body: JSON.stringify(body)
             })
-            return await checkAuth(res)
+            return await res?.status
         } catch(err) {return}
     }
 

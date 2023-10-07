@@ -1,7 +1,7 @@
 import styles from './SearchFilter.module.scss';
 import SelectDef from '@/components/SelectDef/SelectDef';
 import Button from '@/components/Button/Button';
-import {GoSettings} from 'react-icons/go';
+import {VscSettings} from 'react-icons/vsc';
 import { useState } from 'react';
 import { Row, Col } from 'antd';
 import RangeSlider from '@/components/RangeSlider/RangeSlider';
@@ -175,7 +175,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                 width <= 768 && (
                                     <div className={styles.action_item}>
                                         <Button
-                                            before={<GoSettings/>}
+                                            before={<VscSettings/>}
                                             variant={'simple'}
                                             text={locale?.searchPage.filter.action.mobile_filter_btn ?? ''}
                                             style={{padding: '8px 35px', fontSize: '18px', lineHeight: '27px', boxShadow: 'none !important'}}
