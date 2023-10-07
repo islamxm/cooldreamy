@@ -20,6 +20,7 @@ import getClassNames from "@/helpers/getClassNames";
 import {FiArrowLeft, FiArrowRight} from 'react-icons/fi'
 import Credits from "@/pageModules/deposit-mob/components/Credits/Credits";
 import PrivateRoute from "@/hoc/PrivateRoute";
+import PayModal from "@/popups/PayModal/PayModal";
 const service = new ApiService()
 
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
@@ -46,6 +47,9 @@ const DepositPage = () => {
   const [list, setList] = useState<any[]>([])
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [promo, setPromo] = useState<any>(null)
+
+  const [modal, setModal] = useState(false)
+  
 
   const getPlans = () => {
     if(token) {
@@ -257,8 +261,25 @@ const DepositPage = () => {
     }
   }
 
+  useEffect(() => {
+    if(!load && secretKey && stripePromise && selected?.type && (width > 0 && width <= 768)) {
+      setModal(true)
+    } else {
+      setModal(false)
+    }
+  }, [load, secretKey, stripePromise, selected, width])
+
   return (
     <PrivateRoute>
+      <PayModal
+        customProps={{
+          secretKey,
+          stripePromise,
+          plan: selected
+        }}
+        open={modal}
+        onCancel={() => setModal(false)}
+        />
       <Container>
       <MainLayout>
         <Sidebar/>
@@ -297,7 +318,7 @@ const DepositPage = () => {
               <Col span={24}>
                 <div>
                   {
-                    (!load && secretKey && stripePromise && selected?.type) && (
+                    (!load && secretKey && stripePromise && selected?.type && width > 768) && (
                         <Elements
                             stripe={stripePromise}
                             options={{clientSecret: secretKey, locale: 'en'}}
