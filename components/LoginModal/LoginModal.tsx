@@ -14,10 +14,12 @@ import notify from '@/helpers/notify';
 import { useWindowSize } from 'usehooks-ts';
 import LimitModal from '@/popups/LimitModal/LimitModal';
 import LOCAL_STORAGE from '@/helpers/localStorage';
+import ResetPassModal from '@/popups/ResetPassModal/ResetPassModal';
 
 const service = new ApiService()
 
 const LoginModal:FC<ModalFuncProps> = (props) => {
+    const [resetModal, setResetModal] = useState(false)
     const {locale} = useAppSelector(s => s)
     const {width} = useWindowSize() 
     const [blocked, setBlocked] = useState(false)
@@ -93,6 +95,10 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
 
     return (
         <>
+            <ResetPassModal
+                open={resetModal}
+                onCancel={() => setResetModal(false)}
+                />
             <LimitModal
                 text='User blocked!'
                 open={blocked}
@@ -133,7 +139,10 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                             onClose()
                             Router.push('/signup')
                         }} className={styles.item}>{locale?.popups?.login?.links.register}</span>
-                        <span className={styles.item}>{locale?.popups?.login?.links?.forgot_password}</span>
+                        <span onClick={() => {
+                            setResetModal(true)
+                            onClose()
+                        }} className={styles.item}>{locale?.popups?.login?.links?.forgot_password}</span>
                     </div>
                 </Col>
                 <Col span={24}>

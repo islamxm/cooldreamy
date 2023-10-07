@@ -92,6 +92,64 @@ class ApiService {
         }
     }
 
+    getResetCode = async ({
+        body
+    }: {
+        body: {
+            email: string
+        }
+    }) => {
+        try {
+            let res = await fetch(endpoints.getResetCode, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(body)
+            })
+            return await checkAuth(res)
+        } catch(err) {return}
+    }
+
+    sendReestCode = async ({
+        body
+    }: {
+        body: {
+            email:string,
+            code:string
+        }
+    }) => {
+        try {
+            let res = await fetch(endpoints.sendResetCode, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(body)
+            })
+            return await checkAuth(res)
+        } catch(err) {return}
+    }
+
+    changePassword = async ({
+        token,
+        body
+    }: {
+        token:any,
+        body: {
+            password:string,
+            password_confirmation:string
+        }
+    }) => {
+        try {
+            let res = await fetch(endpoints.changePassword, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            return await checkAuth(res)
+        } catch(err) {return}
+    }
+
     search = async (
         body: {
         page: number,

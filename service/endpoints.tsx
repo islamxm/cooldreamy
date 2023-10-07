@@ -13,6 +13,11 @@ const endpoints = {
     checkMail: `${API_PATH}check/email`,
     sendVerifyEmail: `${API_PATH}send/verification`,
 
+    //reset pass
+    getResetCode: `${API_PATH}send/code/password`,
+    sendResetCode: `${API_PATH}send/code/password`,
+    changePassword: `${API_PATH}send/password/change`,
+
     //users
     search: `${API_PATH}users/search`,
     getPromptTargets: `${API_PATH}get_prompt_targets_table`,

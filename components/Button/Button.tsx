@@ -18,17 +18,9 @@ const Button: FC<ButtonPropsTypes> = ({
     load,
     middle,
     className,
-    type
+    type = 'button'
 }) => {
     const ref = useRef(null);
-
-    // useEffect(() => {
-    //     ripple(ref?.current, {
-    //         background: 'var(--purp)',
-    //         duration: 1000,
-    //         opacity: 0.2
-    //     })
-    // }, [])
 
     const switchVariant = (variant: ButtonVariants) => {
         switch(variant) {
