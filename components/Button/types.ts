@@ -18,6 +18,7 @@ export type ButtonPropsTypes = {
     small?: boolean,
     middle?: boolean,
     load?: boolean,
-    className?: string
+    className?: string,
+    type?: 'submit' | 'reset' | 'button' | undefined
 }
 

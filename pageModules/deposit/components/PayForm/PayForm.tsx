@@ -57,6 +57,7 @@ const PayForm = ({plan, type, secretKey}: {plan?: any, type?: string, price?: nu
 
 
     const onPay = async (e: React.ChangeEvent<HTMLFormElement>) => {
+        console.log('PAY')
         e.preventDefault()
         if(!stripe || !elements) {
             return;
@@ -80,7 +81,6 @@ const PayForm = ({plan, type, secretKey}: {plan?: any, type?: string, price?: nu
                 setMessage('Unexpected state')
             }
         }
-        
         setPayLoad(false)
     }
 
@@ -104,11 +104,13 @@ const PayForm = ({plan, type, secretKey}: {plan?: any, type?: string, price?: nu
                         {
                             plan?.price ? (
                                 <Button
+                                    type='submit'
                                     text={`${locale?.depositPage?.form?.btn} ${plan?.price}$`}
                                     load={payLoad}
                                     />
                             ) : (
                                 <Button
+                                    type='submit'
                                     text={`${locale?.depositPage?.form?.btn}`}
                                     load={payLoad}
                             />

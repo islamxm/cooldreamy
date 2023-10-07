@@ -17,7 +17,8 @@ const Button: FC<ButtonPropsTypes> = ({
     small,
     load,
     middle,
-    className
+    className,
+    type
 }) => {
     const ref = useRef(null);
 
@@ -67,7 +68,7 @@ const Button: FC<ButtonPropsTypes> = ({
             disabled={disabled}
             onClick={onClick}
             style={style}
-            type='button'
+            type={type}
             className={`${styles.button} ${switchVariant(variant)} ${fill ? styles.fill : ''} ${small ? styles.sm : ''} ${load ? styles.load : ''} ${middle ? styles.md : ''} ${className}`}>
             {
                 load && (
