@@ -5,13 +5,18 @@ import {FC, useState, useEffect} from 'react';
 import { startGiftPropsType } from './types';
 import Button from '@/components/Button/Button';
 import {HiOutlineGift} from 'react-icons/hi';
-import { useAppSelector } from '@/hooks/useTypesRedux';
+import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
+import { updateLimit, updateEmailModal } from '@/store/actions';
 
 const service = new ApiService()
-const StartGift:FC<startGiftPropsType> = () => {
-    const {locale, token} = useAppSelector(s => s)
+const StartGift:FC<startGiftPropsType> = ({
+    id
+}) => {
+    const dispatch = useAppDispatch()
+    const {locale, token, userData} = useAppSelector(s => s)
     const [gift, setGift] = useState<any>(null)
+    const [load, setLoad] = useState(false)
 
     useEffect(() => {
         if(token) {
@@ -21,12 +26,48 @@ const StartGift:FC<startGiftPropsType> = () => {
         }
     }, [token])
 
-    const sendGift = () => {
-        
+    const sendGiftMessage = () => {
+        if(token) {
+            setLoad(true)
+            service.sendMessage_gift({gifts: `[${12}]`, user_id: id}, token).then(res => {
+                console.log(res)
+                if(res?.error) {
+                    if(res?.error === 'You need to fill in information about yoursel') {
+                        // setCr(true)
+                    } else {
+                        dispatch(updateLimit({
+                            open: true,
+                            data: {
+                                // head: locale?.popups?.nocredit_gift?.title,
+                                action: {
+                                    label: 'Go to store',
+                                    link: '/deposit-mb?tab=3'
+                                }
+                            }
+                        }))
+                        // if(userData?.free_credits && userData?.free_credits < 3) {
+                        //     dispatch(updateSubsModal(true))
+                        // }
+                    }
+                } else {
+                    // onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                    // service.getCredits(token).then(credits => {
+                    //     dispatch(updateUserData({...userData, credits}))
+                    // })
+                }
+                if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
+                    dispatch(updateEmailModal(true))
+                }
+            }).finally(() => setLoad(false))
+        }
     }
 
     return (
         <div className={styles.card}>
+            {/* <GiftModal
+                open={true}
+                onCancel={() => setModal(false)}
+                /> */}
             <Row gutter={[12,12]}>
                 <Col span={24}>
                     <div className={styles.head}>
@@ -52,9 +93,8 @@ const StartGift:FC<startGiftPropsType> = () => {
                             }}
                             text={locale?.global?.start_gift.btn}
                             variant={'bordered'}
-                            hover={{
-                                backgroundColor: 'var(--violet)',color: '#fff'
-                            }}
+                            onClick={sendGiftMessage}
+                            load={load}
                             after={<HiOutlineGift/>}
                             />
                     </div>

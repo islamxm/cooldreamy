@@ -19,7 +19,7 @@ import { useWindowSize } from 'usehooks-ts';
 import UserCardMob from '@/pageModules/profile/components/UserCardMob/UserCardMob';
 import UserMobAction from '@/pageModules/user/components/UserMobAction/UserMobAction';
 import giftImg from '@/public/assets/images/gift-1.png'
-import Link from 'next/link';
+
 const service = new ApiService()
 
 const UserPage:FC = () => {
@@ -44,7 +44,6 @@ const UserPage:FC = () => {
             })
         }
     }, [query, token])
-
 
 
     const createChat = () => {
@@ -99,7 +98,7 @@ const UserPage:FC = () => {
                                 </Col>
                                 <Col span={24}>
                                     <StartGift
-                                        image={giftImg}
+                                        id={data?.id}
                                         />
                                 </Col>
                                 <Col span={24}>
