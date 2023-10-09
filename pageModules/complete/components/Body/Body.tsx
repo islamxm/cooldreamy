@@ -212,7 +212,7 @@ const Body:FC = () => {
           service.setExUserData(token, {
             language: language ? language : 'en',
             country: country?.label ? country?.label : countryDef,
-            state: (country?.label && state?.label) ? state?.label : (state?.label ? state?.label : stateDef)
+            state: (country?.label && state?.label) ? state?.label : (!country?.label ? stateDef : '')
           })
         }
     }, [currentStep, token, countryDef, country, stateDef, state])
