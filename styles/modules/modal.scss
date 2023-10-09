@@ -24,3 +24,14 @@
         display: none;
     }
 }
+
+.modal.close-icon-big {
+    .ant-modal-close {
+        width: 35px;
+        height: 35px;
+        span {
+            font-size: 30px;
+            line-height: 30px;
+        }
+    }
+}

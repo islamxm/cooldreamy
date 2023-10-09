@@ -133,7 +133,7 @@ const ChatAction = ({
                             } else {
                                 if(userData?.free_credits && userData?.free_credits < 3) {
                                     dispatch(updateSubsModal(true))
-                                }
+                                }   
                             }
                             
                             // dispatch(updateLimit({

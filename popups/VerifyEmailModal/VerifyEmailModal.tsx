@@ -12,6 +12,7 @@ import { useWindowSize } from 'usehooks-ts';
 import ApiService from '@/service/apiService';
 import notify from '@/helpers/notify';
 
+
 interface I extends ModalFuncProps {
     onOpenEdit?: (...args:any[]) => void
 }
@@ -42,9 +43,10 @@ const VerifyEmailModal:FC<I> = (props) => {
         <Modal
             {...otherProps}
             footer={null}
-            className={`${styles.wrapper} modal`}
+            centered
+            className={`${styles.wrapper} modal close-icon-big`}
             >
-            <Row gutter={[35,35]}>
+            <Row gutter={[10,10]}>
                 <Col span={24}>
                     <div className={styles.head}>
                         <div className={styles.title}>E-mail confirmation</div>
@@ -55,46 +57,6 @@ const VerifyEmailModal:FC<I> = (props) => {
                         Email has been sent to <br/>
                             <div className={styles.email} onClick={() => window.open(`https://${userData?.email?.split('@')[1]}`)}>
                                 {userData?.email}
-                            </div>
-                        </div>
-                    </div>
-                </Col>
-                <Col span={24}>
-                    <div className={styles.body}>
-                        <div className={styles.title}>Didn&apos;t get the email?</div>
-                        <div className={styles.list}>
-                            <div className={styles.item}>
-                                <div className={styles.icon}>
-                                    <Image
-                                        src={img1}
-                                        alt=''
-                                        />
-                                </div>
-                                <div className={styles.text}>
-                                    Check your Spam folder—sometimes our emails might accidentally end up there.
-                                </div>
-                            </div>
-                            <div className={styles.item}>
-                                <div className={styles.icon}>
-                                    <Image
-                                        src={img2}
-                                        alt=''
-                                        />
-                                </div>
-                                <div className={styles.text}>
-                                    Change your email—if you&apos;ve made a typo or want to use a different email, you can update it.
-                                </div>
-                            </div>
-                            <div className={styles.item}>
-                                <div className={styles.icon}>
-                                    <Image
-                                        src={img3}
-                                        alt=''
-                                        />
-                                </div>
-                                <div className={styles.text}>
-                                    Resend email—we can also resend the verification email.
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,6 +85,47 @@ const VerifyEmailModal:FC<I> = (props) => {
                         </Row>
                     </div>
                 </Col>
+                <Col span={24}>
+                    <div className={styles.body}>
+                        <div className={styles.title}>Didn&apos;t get the email?</div>
+                        <div className={styles.list}>
+                            <div className={styles.item}>
+                                <div className={styles.icon}>
+                                    <Image
+                                        src={img1}
+                                        alt=''
+                                        />
+                                </div>
+                                <div className={styles.text}>
+                                    Check your Spam folder — sometimes our emails might accidentally end up there.
+                                </div>
+                            </div>
+                            <div className={styles.item}>
+                                <div className={styles.icon}>
+                                    <Image
+                                        src={img2}
+                                        alt=''
+                                        />
+                                </div>
+                                <div className={styles.text}>
+                                    <span onClick={onOpenEdit}>Change your email</span> — if you&apos;ve made a typo or want to use a different email, you can update it.
+                                </div>
+                            </div>
+                            <div className={styles.item}>
+                                <div className={styles.icon}>
+                                    <Image
+                                        src={img3}
+                                        alt=''
+                                        />
+                                </div>
+                                <div className={styles.text}>
+                                    <span onClick={onResendLetter}>Resend email</span> — we can also resend the verification email.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+                
             </Row>
         </Modal>
     )

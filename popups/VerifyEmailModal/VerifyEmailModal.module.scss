@@ -67,6 +67,7 @@
                     span {
                         color: var(--violet);
                         transition: all .3s ease;
+                        font-weight: 600;
                         &:hover {
                             color: var(--purp);
                         }
@@ -76,6 +77,42 @@
         }
     }
     .action {
-        
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--gray);
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        .head {
+            .title {
+                font-size: 16px;
+                line-height: 22px;
+            }
+            .ex {
+                font-size: 14px;
+                line-height: 18px;
+                margin-bottom: 0;
+            }
+        }
+        .body {
+            .title {
+                font-size: 16px;
+                line-height: 22px;
+            }
+            .list {
+                .item {
+                    align-items: center;
+                    .icon {
+                        width: 40px;
+                        height: 40px;
+                    }
+                    .text {
+                        font-size: 14px;
+                        line-height: 18px;
+                    }
+                }
+            }
+        }
     }
 }
