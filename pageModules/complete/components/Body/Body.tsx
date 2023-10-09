@@ -50,11 +50,6 @@ const Body:FC = () => {
       email
     } = userData || {}
 
-    const [errors, setErrors] = useState<{name: string[], email: string[], password: string[]}>({
-        name: [],
-        email: [],
-        password: []
-    })
 
     useEffect(() => {
         service.getLocation().then(res => {
@@ -132,7 +127,7 @@ const Body:FC = () => {
         setCurrentStep(s => s + 1)
       }
       if(currentStep === 1) {
-        if(selectedTargets?.length === 3) {
+        if(selectedTargets?.length > 0 && selectedTargets?.length <= 3) {
           setCurrentStep(s => s + 1)
         } else {
           notify('Select the appropriate items', 'ERROR')
