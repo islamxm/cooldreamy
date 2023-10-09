@@ -175,7 +175,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                 </button>
                             </div>
                             {
-                                (profile_photo && profile_photo?.length > 0) ? (
+                                (profile_photo && profile_photo?.length > 0) && (
                                     <div className={styles.main}>
                                         {
                                             thumbsSwiper && (
@@ -268,7 +268,10 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                         }
                                         
                                     </div>
-                                ) : (
+                                ) 
+                            }
+                            {
+                                profile_photo && profile_photo?.length === 0 && (
                                     <div className={styles.main}>
                                         <div className={styles.slider}>
                                             <SwiperWrap

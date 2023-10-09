@@ -9,8 +9,8 @@ import { useRouter } from 'next/router';
 
 const service = new ApiService()
 const tabs = [
-    {value: 1, label: 'Смайлы'},
-    {value: 2, label: 'Стикеры'},
+    {value: 1, label: 'Emoji'},
+    {value: 2, label: 'Stickers'},
 ]
 
 const Stickers = ({

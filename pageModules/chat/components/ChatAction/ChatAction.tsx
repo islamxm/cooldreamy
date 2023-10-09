@@ -83,7 +83,7 @@ const ChatAction = ({
                                 dispatch(updateUserData({...userData, credits}))
                             })
                         }
-                        if(userData?.is_email_verified === 0) {
+                        if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                             dispatch(updateEmailModal(true))
                         }
                     }).finally(() => {
@@ -152,7 +152,7 @@ const ChatAction = ({
                                 dispatch(setFreeCredits(credits))
                             })
                         }
-                        if(userData?.is_email_verified === 0) {
+                        if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                             dispatch(updateEmailModal(true))
                         }
                     }).finally(() => {
@@ -241,7 +241,7 @@ const ChatAction = ({
                                     dispatch(setFreeCredits(credits))
                                 })
                             }
-                            if(userData?.is_email_verified === 0) {
+                            if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                                 dispatch(updateEmailModal(true))
                             }
                         }).finally(() => {

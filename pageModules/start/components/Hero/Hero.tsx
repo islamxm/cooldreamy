@@ -172,7 +172,11 @@ const Hero: FC = ({}) => {
                                     <Input
                                         placeholder='Username'
                                         value={name}
-                                        onChange={(e:ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                                        onChange={(e:ChangeEvent<HTMLInputElement>) => {
+                                            if(!/[а-яё]+/i.test(e.target.value)) {
+                                               setName(e.target.value) 
+                                            }
+                                        }}
                                         />
                                 </Col>
                                 <Col span={24}>
@@ -180,7 +184,11 @@ const Hero: FC = ({}) => {
                                         placeholder='E-mail'
                                         value={email}
                                         type='email'
-                                        onChange={(e:ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                                        onChange={(e:ChangeEvent<HTMLInputElement>) => {
+                                            if(!/[а-яё]+/i.test(e.target.value)) {
+                                               setEmail(e.target.value) 
+                                            }
+                                        }}
                                         />
                                 </Col>
                                 <Col span={24}>
@@ -188,7 +196,11 @@ const Hero: FC = ({}) => {
                                         placeholder='Password'
                                         type='password'
                                         value={password}
-                                        onChange={(e:ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                                        onChange={(e:ChangeEvent<HTMLInputElement>) => {
+                                            if(!/[а-яё]+/i.test(e.target.value)) {
+                                               setPassword(e.target.value) 
+                                            }
+                                        }}
                                         />
                                 </Col>
                                 <Col span={24}>
