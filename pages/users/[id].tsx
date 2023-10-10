@@ -59,7 +59,7 @@ const UserPage:FC = () => {
         }
     }
 
- 
+    
 
     return (
         <Container>
@@ -102,7 +102,7 @@ const UserPage:FC = () => {
                                         />
                                 </Col>
                                 <Col span={24}>
-                                    <Button onClick={() => router.back()} text={locale?.global?.back_btn} middle fill/>
+                                    <Button onClick={() => process?.browser && window.location.replace('/search')} text={locale?.global?.back_btn} middle fill/>
                                 </Col>
                             </Row>
                         )
