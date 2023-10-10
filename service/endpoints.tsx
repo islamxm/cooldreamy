@@ -12,6 +12,7 @@ const endpoints = {
     verifyEmail: `${API_PATH}verify`,
     checkMail: `${API_PATH}check/email`,
     sendVerifyEmail: `${API_PATH}send/verification`,
+    authAfterVerify: `${API_PATH}verification`,
 
     //reset pass
     getResetCode: `${API_PATH}reset/password`,

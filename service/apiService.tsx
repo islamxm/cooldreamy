@@ -76,6 +76,22 @@ class ApiService {
             return;
         }
     }
+    
+    authAfterVerify = async (body: {
+        token:any,
+        user_id:any
+    }) => {
+        try {
+            let res = await fetch(endpoints.authAfterVerify, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(body)
+            })
+            return await res?.json()
+        } catch(err) {
+            return;
+        }
+    }
 
     sendVerifyEmail = async (token:any) => {
         try {
