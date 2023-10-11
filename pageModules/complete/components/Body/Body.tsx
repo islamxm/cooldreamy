@@ -189,7 +189,11 @@ const Body:FC = () => {
                     ...other
                   } = res
                   dispatch(updateUserData({...other, free_credits: credits}))
-                  setCurrentStep(s => s + 1)
+                  if(userData?.is_email_verified === 1) {
+                    Router.back()
+                  } else {
+                    setCurrentStep(s => s + 1)
+                  }
                 } else {
                   notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
