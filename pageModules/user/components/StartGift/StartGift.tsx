@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
 import { updateLimit, updateEmailModal, updateSubsModal } from '@/store/actions';
 import CompReg from '@/popups/CompReg/CompReg';
+import notify from '@/helpers/notify';
 
 const service = new ApiService()
 const StartGift:FC<startGiftPropsType> = ({
@@ -56,6 +57,7 @@ const StartGift:FC<startGiftPropsType> = ({
                     // service.getCredits(token).then(credits => {
                     //     dispatch(updateUserData({...userData, credits}))
                     // })
+                    notify('You send a gift', 'SUCCESS')
                 }
                 if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                     dispatch(updateEmailModal(true))

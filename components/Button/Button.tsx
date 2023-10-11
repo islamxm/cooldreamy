@@ -65,7 +65,7 @@ const Button: FC<ButtonPropsTypes> = ({
             {
                 load && (
                     <div className={styles.load}>
-                        <PulseLoader color='#fff' size={10}/>
+                        <PulseLoader color={variant === 'simple' || variant === 'bordered' || variant === 'white' ? 'var(--violet)' : '#fff'} size={10}/>
                     </div>
                 )
             }
