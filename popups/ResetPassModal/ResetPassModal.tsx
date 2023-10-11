@@ -128,15 +128,15 @@ const ResetPassModal:FC<ModalFuncProps> = (props) => {
               <Col span={24}>
                 <div className={styles.title}>
                   {
-                    status === 'NEWPASS' ? 'Придумайте новый пароль' : 'Восстановление пароля'
+                    status === 'NEWPASS' ? 'New password' : 'Password recovery'
                   }
                 </div>
               </Col>
               <Col span={24}>
                 <div className={styles.text}>
-                  {status === 'INIT' && 'Введите вашу электронную почту, мы отправим на него письмо.'}
-                  {status === 'SENT' && 'Введите код из письма. Если письмо не пришло проверьте страницу ”Спам”.'}
-                  {status === 'NEWPASS' && 'Пароль должен содержать не менее 6 символов.'}
+                  {status === 'INIT' && 'Enter your email, we will send an email to it.'}
+                  {status === 'SENT' && 'Enter the code from the email. If the email did not arrive, check the "Spam".'}
+                  {status === 'NEWPASS' && 'The password must contain at least 6 characters.'}
                 </div>
               </Col>
             </Row>

@@ -7,7 +7,8 @@ import Button from '@/components/Button/Button';
 import {HiOutlineGift} from 'react-icons/hi';
 import { useAppSelector, useAppDispatch } from '@/hooks/useTypesRedux';
 import ApiService from '@/service/apiService';
-import { updateLimit, updateEmailModal } from '@/store/actions';
+import { updateLimit, updateEmailModal, updateSubsModal } from '@/store/actions';
+import CompReg from '@/popups/CompReg/CompReg';
 
 const service = new ApiService()
 const StartGift:FC<startGiftPropsType> = ({
@@ -17,10 +18,12 @@ const StartGift:FC<startGiftPropsType> = ({
     const {locale, token, userData} = useAppSelector(s => s)
     const [gift, setGift] = useState<any>(null)
     const [load, setLoad] = useState(false)
+    const [cr, setCr] = useState(false)
 
     useEffect(() => {
         if(token) {
             service.getGifts(token).then(res => {
+                
                 setGift(res?.find((i: any) => i.id == 12))
             })
         }
@@ -30,10 +33,9 @@ const StartGift:FC<startGiftPropsType> = ({
         if(token) {
             setLoad(true)
             service.sendMessage_gift({gifts: `[${12}]`, user_id: id}, token).then(res => {
-                console.log(res)
                 if(res?.error) {
                     if(res?.error === 'You need to fill in information about yoursel') {
-                        // setCr(true)
+                        setCr(true)
                     } else {
                         dispatch(updateLimit({
                             open: true,
@@ -45,9 +47,9 @@ const StartGift:FC<startGiftPropsType> = ({
                                 }
                             }
                         }))
-                        // if(userData?.free_credits && userData?.free_credits < 3) {
-                        //     dispatch(updateSubsModal(true))
-                        // }
+                        if(userData?.free_credits && userData?.free_credits < 3) {
+                            dispatch(updateSubsModal(true))
+                        }
                     }
                 } else {
                     // onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
@@ -68,6 +70,10 @@ const StartGift:FC<startGiftPropsType> = ({
                 open={true}
                 onCancel={() => setModal(false)}
                 /> */}
+             <CompReg
+                open={cr}
+                onCancel={() => setCr(false)}
+                />
             <Row gutter={[12,12]}>
                 <Col span={24}>
                     <div className={styles.head}>

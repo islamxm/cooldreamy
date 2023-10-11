@@ -23,7 +23,6 @@ const UserInfoAction:FC<IUser> = ({
 }) => {
     const {token, locale} = useAppSelector(s => s)
 
-
     const onLike = () => {
         if(token) {
             service.feedItemLike({id: Number(id)}, token).then(res => {
@@ -36,27 +35,6 @@ const UserInfoAction:FC<IUser> = ({
         }
         
     }
-
-    const onFavorite = () => {  
-        if(token) {
-            service.addUserToFav({user_id: Number(id)}, token).then(res => {
-                if(res?.status === 200) {
-                    notify(locale?.global?.notifications?.add_to_fav, 'SUCCESS')
-                } else {
-                    notify(locale?.global?.notifications?.already_added_to_fav, 'ERROR')
-                }
-            })
-        }
-    }
-
-    // const removeFavorite = () => {
-    //     if(token) {
-    //         service.deleteUserFromFav({user_id: Number(id)}, token).then(res => {
-    //         })
-    //     }
-    // }
-
-
 
     const onWink = () => {
         if(id && token) {
@@ -73,8 +51,6 @@ const UserInfoAction:FC<IUser> = ({
             })
         }
     }
-
-
 
     return (
         <div className={`${styles.wrapper} ${styles.online}`}>
@@ -107,12 +83,6 @@ const UserInfoAction:FC<IUser> = ({
                         <FaRegSmileWink/>
                     </div>
                     <div className={styles.text}>{locale?.global?.user_action?.wink}</div>
-                </button>
-                <button onClick={onFavorite} className={styles.item}>
-                    <div className={styles.icon}>
-                        <AiOutlineStar/>
-                    </div>
-                    <div className={styles.text}>{locale?.global?.user_action?.fav}</div>
                 </button>
             </div>
         </div>
