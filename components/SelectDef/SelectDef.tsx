@@ -54,6 +54,7 @@ const SelectDef:FC<selectDefType & test> = ({
                         disabled={disabled}
                         className={`${isRound ? 'round' : ''} ${customIcon ? 'custom-icon' : ''}`}
                         virtual={false}
+                        showSearch={false}
                         />
                 ) : (
                     <Select
@@ -66,6 +67,7 @@ const SelectDef:FC<selectDefType & test> = ({
                         onChange={onChange}
                         onClear={onClear}
                         options={list}
+                        showSearch={false}
                         value={value}
                         disabled={disabled}
                         className={isRound ? 'round' : ''}
