@@ -6,5 +6,6 @@ export type avatarPropsTypes = {
     round?: boolean,
     wrapperStyle?: React.CSSProperties,
     style?: React.CSSProperties,
-    verified?: boolean
+    verified?: boolean,
+    onClick?: (...args:any[]) => any
 }

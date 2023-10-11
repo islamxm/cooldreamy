@@ -333,6 +333,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             <Avatar
                                 image={currentUser?.avatar_url_thumbnail} 
                                 round 
+                                onClick={() => Router?.push(`/users/${currentUser?.id}`)}
                                 size={30}/>
                         </div>
                     </div>

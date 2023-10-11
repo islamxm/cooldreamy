@@ -10,11 +10,12 @@ const Avatar = ({
     wrapperStyle,
     style,
     round,
-    verified
+    verified,
+    onClick
 }: avatarPropsTypes) => {
 
     return (
-        <div className={`${styles.wrapper} ${round ? styles.round : ''}`} style={{...wrapperStyle}}>
+        <div onClick={onClick} className={`${styles.wrapper} ${round ? styles.round : ''}`} style={{...wrapperStyle}}>
             <div className={styles.in} style={{width: size, height: size, ...style}}>
                 <Image
                     src={image ? image : placeholder}
