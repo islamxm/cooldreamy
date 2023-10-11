@@ -53,6 +53,11 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
             LOCAL_STORAGE?.setItem('cooldate-web-user-id', res?.id)
             dispatch(updateToken(res?.token))
             dispatch(updateUserId(res?.id))
+
+            if(pathname === '/start' || pathname === '/' || pathname === '/signup') {
+              if(width <= 768) Router.push('/feed')
+              if(width > 768) Router.push('/search')
+            }
           }
         })
       }
@@ -62,7 +67,7 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
       } else if (subid && af_id && app_name) {  
         Router.push(`/start?subid=${subid}&app_name=${app_name}&af_id=${af_id}`)
       } else {
-        if(pathname !== '/login') {
+        if(pathname !== '/login' && !userId && !verifyToken) {
           Router.push('/start')
         }
       } 
