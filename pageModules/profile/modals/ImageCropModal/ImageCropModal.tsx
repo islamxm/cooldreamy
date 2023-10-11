@@ -125,7 +125,6 @@ const ImageCropModal:FC<cropModalPropsType> = ({
             
         }
         if(token && croppedImage) {
-            console.log(croppedImage)
             setLoad(true)
             const data = new FormData()
             createFile(croppedImage).then(res => {
@@ -199,7 +198,7 @@ const ImageCropModal:FC<cropModalPropsType> = ({
                                         label={item.text}
                                         isSelect={category === item.id}
                                         onSelect={(e) => setCategory(Number(e))}
-                                        // disabled={item.disabled}
+                                        isOnlyLabel
                                         />
                                 </div>
                             ))

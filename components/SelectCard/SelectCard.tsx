@@ -13,7 +13,8 @@ const SelectCard:FC<selectCardPropsTypes> = ({
     isSelect,
     onSelect,
     value,
-    disabled
+    disabled,
+    isOnlyLabel = false
 }) => {
     return (
         <motion.div 
@@ -22,18 +23,23 @@ const SelectCard:FC<selectCardPropsTypes> = ({
                 scale: 0.9,
             }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }} 
-            className={getClassNames([styles.card, isSelect && styles.active, disabled && styles.disabled])} >
+            className={getClassNames([styles.card, isSelect && styles.active, disabled && styles.disabled, isOnlyLabel && styles.onlyLabel])} >
             {
                 isSelect && <motion.div className={styles.ind}></motion.div>
             }
             <div className={styles.body}>
-                    <div className={styles.img}>
-                        {
-                            image ? (
-                                <Image width={90} height={90} src={image} alt={label}/>
-                            ) : null
-                        }
-                    </div>
+                {
+                    !isOnlyLabel && (
+                        <div className={styles.img}>
+                            {
+                                image ? (
+                                    <Image width={90} height={90} src={image} alt={label}/>
+                                ) : null
+                            }
+                        </div>
+                    )
+                }
+                    
                     <div className={styles.label}>
                         {label}
                     </div>
