@@ -7,14 +7,30 @@ import { createFile } from '@/helpers/cropImage';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import { IUser } from '@/models/IUser';
 import { useAppSelector } from '@/hooks/useTypesRedux';
+import ApiService from '@/service/apiService';
+import PromptModal from '@/popups/PromptModal/PromptModal';
+import IconButton from '@/components/IconButton/IconButton';
+import { BsTrash } from 'react-icons/bs';
+import notify from '@/helpers/notify';
 
+const service = new ApiService;
 const UserImages:FC<IUser> = ({
     profile_photo
 }) => {
-    const {locale} = useAppSelector(s => s)
+    const {locale, token, userData} = useAppSelector(s => s)
+    const [deleteModal, setDeleteModal] = useState(false)
     const [imageCropModal, setImageCropModal] = useState(false)
     const ref = useRef<HTMLInputElement>(null)
+    const [imgToDelete, setImgToDelete] = useState<string | number | null>(null)
     const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+
+    const [photoList, setPhotoList] = useState<any[]>([])
+    
+    useEffect(() => {
+        if(profile_photo && profile_photo?.length > 0) {
+            setPhotoList(profile_photo)
+        }
+    }, [profile_photo])
 
     const closeCropModal = () => {
         setUploadedFile(null)
@@ -46,9 +62,45 @@ const UserImages:FC<IUser> = ({
     }
 
 
+    const onDeleteImage = () => {  
+        if(imgToDelete && token && userData?.id) {
+            service.deleteProfileImage({
+                token,
+                body: {
+                    user_id: userData?.id,
+                    image_id: imgToDelete
+                }
+            }).then(res => {
+                if(res === 200) {
+                    notify('Image is deleted', 'SUCCESS')
+                    setPhotoList(s => s.filter(i => i?.id !== imgToDelete))
+                } else {
+                    notify(locale?.global?.notifications?.error_default, 'ERROR')
+                }
+            }).finally(() => {
+                setImgToDelete(null)
+                setDeleteModal(false)
+            })
+        }
+    }
+
+
 
     return (
         <FancyboxWrapper>
+            <PromptModal
+                text='Do you really want to delete the picture?'
+                open={deleteModal}
+                onAccept={onDeleteImage}
+                onCancel={() => {
+                    setDeleteModal(false)
+                    setImgToDelete(null)
+                }}
+                onReject={() => {
+                    setDeleteModal(false)
+                    setImgToDelete(null)
+                }}
+                />
             <div className={`${styles.wrapper} horizontal-scroll`}>
                 <ImageCropModal
                     uploadedFile={uploadedFile}
@@ -65,12 +117,26 @@ const UserImages:FC<IUser> = ({
                     </label>
                 </div>
                 {
-                    profile_photo?.map((item, index) => (
-                        <a data-fancybox="gallery" href={item.image_url} className={styles.item} key={index}>
-                            <UserImageItem
-                                image={item?.image_url}
-                            />
-                        </a>
+                    photoList?.map((item, index) => (
+                        <div key={index} className={styles.pic}>
+                             <div className={styles.action}>
+                                <IconButton
+                                    onClick={() => {
+                                        setImgToDelete(item?.id)
+                                        setDeleteModal(true)
+                                    }}
+                                    variant={'danger'}
+                                    icon={<BsTrash fontSize={15}/>}
+                                    size={30}
+                                    />
+                            </div>
+                            <a data-fancybox="gallery" href={item.image_url} className={styles.item}>
+                                <UserImageItem
+                                    image={item?.image_url}
+                                />
+                            </a>
+                        </div>
+                        
                     ))
                 }
             </div>

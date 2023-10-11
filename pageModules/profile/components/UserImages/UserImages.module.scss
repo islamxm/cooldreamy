@@ -24,6 +24,18 @@
             display: flex;
         }
     }
+
+    .pic {
+        position: relative;
+
+        .action {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            z-index: 2;
+        }
+
+    }
     
     .add {
         width: 130px;

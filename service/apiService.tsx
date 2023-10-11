@@ -1369,6 +1369,27 @@ class ApiService {
         }
     }
    
+    deleteProfileImage = async ({token, body}: {
+        token: IToken,
+        body: {
+            image_id: number | string,
+            user_id: number | string
+        }
+    }) => {
+        try {
+            let res = await fetch(endpoints.deleteProfileImage, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(body)
+            })
+            return await res?.status
+        } catch(err) {
+            return
+        }
+    }
 }
 
 

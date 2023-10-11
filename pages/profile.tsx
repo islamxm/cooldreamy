@@ -8,7 +8,6 @@ import UserInfo from "@/pageModules/profile/components/UserInfo/UserInfo";
 import { useAppSelector } from "@/hooks/useTypesRedux";
 import UserCardMob from "@/pageModules/profile/components/UserCardMob/UserCardMob";
 import { useWindowSize } from "usehooks-ts";
-import { useEffect } from "react";
 import {Row, Col} from 'antd';
 
 import PrivateRoute from "@/hoc/PrivateRoute";

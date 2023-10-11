@@ -1,17 +1,21 @@
 import styles from './UserImageItem.module.scss';
 import Image, { StaticImageData } from 'next/image';
 import placeholder from '@/public/assets/images/placeholder.png';
+import IconButton from '@/components/IconButton/IconButton';
+import {BsTrash} from 'react-icons/bs';
 
 
 const UserImageItem = ({
-    image
+    image,
 }: {
-    image: StaticImageData | string
+    image: StaticImageData | string,
 }) => {
 
 
     return (
         <div className={styles.item}>
+           
+            
             <Image
                 width={150}
                 height={150}
