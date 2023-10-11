@@ -44,7 +44,7 @@ const PrivateRoute:FC<{children?: ReactNode}> = ({
       const userId = Router?.router?.query?.user_id
 
       console.log('VERIFY TOKEN:', verifyToken)
-      console.log('USER_ID:' userId)
+      console.log('USER_ID:', userId)
 
       if(verifyToken && userId) {
         service.authAfterVerify({token: verifyToken, user_id: userId}).then(res => {
