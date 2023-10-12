@@ -58,6 +58,7 @@ export default function Document() {
         <Script
           async
           id='gtm-1'
+          strategy={'beforeInteractive'}
           >
           {
             `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
