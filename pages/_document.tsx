@@ -55,10 +55,9 @@ export default function Document() {
                 __html: `<div><img src="https://mc.yandex.ru/watch/94454907" style="position:absolute; left:-9999px;" alt="" /></div>`
             }}
           /> */}
-        <Script
+        <script
           async
           id='gtm-1'
-          strategy={'beforeInteractive'}
           >
           {
             `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -67,7 +66,7 @@ export default function Document() {
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-59CJTBH');`
           }
-        </Script>
+        </script>
       </Head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59CJTBH"
