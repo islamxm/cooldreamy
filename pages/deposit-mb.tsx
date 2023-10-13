@@ -146,8 +146,12 @@ const DepositPage = () => {
     }
   }
 
-  const onAccept = () => {
+  const onAccept = (plan:{value:number | string, type: string}) => {
+
+    console.log(plan)
+
     if(token && selected) {
+        console.log("NO CREDIT")
         setLoad(true)
         if(selected?.type === 'credit') {
             service.pay(token, {
@@ -180,7 +184,17 @@ const DepositPage = () => {
                 } else notify(locale?.global?.notifications?.error_default, 'ERROR')
             }).finally(() => setLoad(false))
         }
-       
+    }
+    if(token && !selected && plan) {
+      console.log("CREDIT")
+      setLoad(true)
+      service.pay(token, {
+        list_type: plan?.type,
+        list_id: plan?.value
+      }).then(res => {
+          const clientSecret = res?.clientSecret;
+          setSecretKey(clientSecret)
+      }).finally(() => setLoad(false))
     }
   }
 
@@ -224,7 +238,11 @@ const DepositPage = () => {
                   list={listSub}
                   />
       case '3':
-        return <Credits/>
+        return <Credits
+                  load={load}
+                  onAccept={onAccept}
+                  onSelect={setSelected}
+                  />
       default:
         return null
     }
@@ -278,7 +296,10 @@ const DepositPage = () => {
           plan: selected
         }}
         open={modal}
-        onCancel={() => setModal(false)}
+        onCancel={() => {
+          setSecretKey('')
+          setModal(false)
+        }}
         />
       <Container>
       <MainLayout>
