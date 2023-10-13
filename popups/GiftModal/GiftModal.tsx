@@ -23,7 +23,7 @@ const GiftModal:FC<I> = (props) => {
 
     const {onCancel} = otherProps
 
-    const sendGiftMessage = (gifts: string) => {
+    const sendGiftMessage = (gifts: any[]) => {
         if(gifts && token) {
             service.sendMessage_gift({gifts, user_id: userId}, token).then(res => {
                     
