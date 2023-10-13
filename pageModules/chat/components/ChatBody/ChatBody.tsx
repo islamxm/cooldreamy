@@ -166,11 +166,10 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     }
 
 
-    const sendGiftMessage = (gifts: string) => {
+    const sendGiftMessage = (gifts: any[]) => {
         if(gifts && token && activeDialogId && ChatType) {
             if(ChatType === 'chat') {
                 service.sendMessage_gift({chat_id: activeDialogId.toString(), gifts, user_id: userId}, token).then(res => {
-                    
                     if(res?.error) {
                         if(res?.error === 'You need to fill in information about yoursel') {
                             // setCr(true)
@@ -202,23 +201,23 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                 })
             }
             if(ChatType === 'mail') {
-                service.sendMail_gift({letter_id: activeDialogId.toString(), gifts}, token).then(res => {
-                    if(res?.error) {
-                        dispatch(updateLimit({
-                            open: true,
-                            data: {
-                                head: locale?.popups?.nocredit_gift?.title,
-                                text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_GIFT')}`
-                            }
-                        }))
-                    } else {
-                        onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
-                        service.getCredits(token).then(credits => {
-                            dispatch(updateUserData({...userData, credits}))
-                        })
-                    }
-                    setMockType('')
-                })
+                // service.sendMail_gift({letter_id: activeDialogId.toString(), gifts}, token).then(res => {
+                //     if(res?.error) {
+                //         dispatch(updateLimit({
+                //             open: true,
+                //             data: {
+                //                 head: locale?.popups?.nocredit_gift?.title,
+                //                 text: `${locale?.popups?.nocredit_gift?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_gift?.text_part_2}${getPrice(actionsPricing, 'SEND_MAIL_GIFT')}`
+                //             }
+                //         }))
+                //     } else {
+                //         onUpdateChat({messageBody: res?.letter?.last_message, dialogBody: res?.letter})
+                //         service.getCredits(token).then(credits => {
+                //             dispatch(updateUserData({...userData, credits}))
+                //         })
+                //     }
+                //     setMockType('')
+                // })
             }
         }
     }

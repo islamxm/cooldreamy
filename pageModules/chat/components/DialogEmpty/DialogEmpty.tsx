@@ -16,9 +16,9 @@ const DialogEmpty = ({height, absolute} : {height?: number | string, absolute?:b
                 </div>
                 <div className={styles.head}>{locale?.global.placeholders.chat_empty.title}</div>
                 <div className={styles.text}>{locale?.global.placeholders.chat_empty.text}</div>
-                <div className={styles.action}>
+                {/* <div className={styles.action}>
                     <Button middle text={locale?.global.placeholders.chat_empty.btn} onClick={() => Router.push('/feed')} variant={'bordered'}/>
-                </div>
+                </div> */}
             </div>
 
         </div>

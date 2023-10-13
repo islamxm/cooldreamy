@@ -33,7 +33,7 @@ const StartGift:FC<startGiftPropsType> = ({
     const sendGiftMessage = () => {
         if(token) {
             setLoad(true)
-            service.sendMessage_gift({gifts: `[${12}]`, user_id: id}, token).then(res => {
+            service.sendMessage_gift({gifts: [12], user_id: id}, token).then(res => {
                 if(res?.error) {
                     if(res?.error === 'You need to fill in information about yoursel') {
                         setCr(true)
