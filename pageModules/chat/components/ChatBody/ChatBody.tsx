@@ -310,7 +310,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
             <PromptModal
                 open={promptModal}
                 onCancel={() => setPromptModal(false)}
-                text='Желаете удалить диалог?'
+                text='Would you like to delete the dialog?'
                 onAccept={onDeleteChat}
                 onReject={() => setPromptModal(false)}
                 />

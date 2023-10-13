@@ -67,12 +67,15 @@ const Profile = () => {
                                         )
                                     }
                                     <Col span={24}>
+                                        {/* VIP */}
                                         <StatusPremium/>
                                     </Col>
                                     <Col span={24}>
+                                        {/* PREMIUM */}
                                         <StatusVip/>
                                     </Col>
                                     <Col span={24}>
+                                        {/* CREDITS */}
                                         <StatusCredits/>
                                     </Col>
                                 </Row>
