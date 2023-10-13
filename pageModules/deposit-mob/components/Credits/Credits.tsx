@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import Image from 'next/image';
 import mcafee from '@/public/assets/images/mcafee.svg';
@@ -18,14 +18,24 @@ const service = new ApiService()
 const PUBLIC_KEY = 'pk_live_51MzlPfFjkPZRdnX1xG5oZ2f5LVylisRVV2O6Ym7c20knPF5GsjuKfcdl6fE3oXmqLIKwjhNNw4id48bpOXOC4n3R00zouqX2k9';
 const PUBLIC_KEY_TEST = 'sk_test_51MzlPfFjkPZRdnX1wfytyiMDJ2b8Xg5NGPgZfLsRIJrf3GxTv1lC93kK7Gk2cYUNLBsNwnolqdIXghan7EYrJyi400dkmxVZ1Y'
 
-const Credits = () => {
+interface I {
+  load?: boolean,
+  onAccept?: (...args:any[]) => any,
+  onSelect?: (...args:any[]) => any
+}
+
+const Credits:FC<I> = ({
+  load,
+  onAccept,
+  onSelect
+}) => {
   const { width } = useWindowSize()
   const payRef = useRef<HTMLDivElement>(null)
   const { userData, token, locale } = useAppSelector(s => s)
   const [list, setList] = useState<any[]>([])
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [promo, setPromo] = useState<any>(null)
-  const [load, setLoad] = useState(false)
+  // const [load, setLoad] = useState(false)
   const [type, setType] = useState<string>('')
   const [listLoad, setListLoad] = useState(false)
 
@@ -37,6 +47,7 @@ const Credits = () => {
     if (token) {
       setListLoad(true)
       service.getPayPlans(token).then(res => {
+        console.log(res)
         setList(res)
         setType('credit')
       }).finally(() => setListLoad(false))
@@ -46,6 +57,7 @@ const Credits = () => {
   const getPromo = () => {
     if (token) {
       service.getPromo(token).then(res => {
+        console.log(res)
         if (res?.data?.length > 0) {
           setPromo(res?.data[0]?.promotion)
           setType('credit')
@@ -83,19 +95,22 @@ const Credits = () => {
     }
   }, [token, userData])
 
-  const onAccept = (plan: any) => {
-    if (token) {
-      setSelectedPlan(plan?.id)
-      setLoad(true)
-      service.pay(token, {
-        list_type: type,
-        list_id: plan?.id
-      }).then(res => {
-        const clientSecret = res?.clientSecret;
-        setSecretKey(clientSecret)
-      }).finally(() => setLoad(false))
-    }
-  }
+  // const onAccept = (plan: any) => {
+  //   if (token) {
+  //     setSelectedPlan(plan?.id)
+  //     setLoad(true)
+  //     service.pay(token, {
+  //       list_type: type,
+  //       list_id: plan?.id
+  //     }).then(res => {
+  //       const clientSecret = res?.clientSecret;
+  //       setSecretKey(clientSecret)
+  //     }).finally(() => setLoad(false))
+  //   }
+  // }
+
+
+  
 
   return (
     <div className={styles.wrapper}>
@@ -129,9 +144,12 @@ const Credits = () => {
                   <div className={styles.action}>
                     <Button
                       onClick={() => {
-                        onAccept(promo)
+                        // onAccept && onAccept(promo)
+                        onSelect && onSelect({value: promo?.id, type: 'credit'})
+                        onAccept && onAccept({value: promo?.id, type: 'credit'})
                         goToPayment()
                       }}
+                      load={load}
                       middle={width <= 768}
                       text='Buy' 
                       variant={'black'}/>
@@ -195,9 +213,11 @@ const Credits = () => {
                           <div className={styles.action}>
                             <Button
                               onClick={() => {
-                                onAccept(i)
+                                onSelect && onSelect({value: i?.id, type: 'credit'})
+                                onAccept && onAccept({value: promo?.id, type: 'credit'})
                                 goToPayment()
                               }}
+                              load={load}
                               middle={width <= 768}
                               text='Buy' 
                               variant={'black'}/>
@@ -221,7 +241,6 @@ const Credits = () => {
                             )
                           }
                           <div className={styles.adds}>
-
                             <div className={styles.badge}>
                               {locale?.depositPage?.card?.popular}
                             </div>
@@ -252,7 +271,8 @@ const Credits = () => {
                           <div className={styles.action}>
                             <Button
                               onClick={() => {
-                                onAccept(i)
+                                onSelect && onSelect({value: i?.id, type: 'credit'})
+                                onAccept && onAccept({value: promo?.id, type: 'credit'})
                                 goToPayment()
                               }}
                               middle={width <= 768}
@@ -304,11 +324,13 @@ const Credits = () => {
                           <div className={styles.action}>
                             <Button
                               onClick={() => {
-                                onAccept(i)
+                                onSelect && onSelect({value: i?.id, type: 'credit'})
+                                onAccept && onAccept({value: promo?.id, type: 'credit'})
                                 goToPayment()
                               }}
                               middle={width <= 768}
                               text='Buy' 
+                              load={load}
                               variant={'black'}/>
                           </div>
                         </div>
@@ -321,22 +343,8 @@ const Credits = () => {
             </div>
           )
         }
-        {/*{*/}
-        {/*  selectedPlan && !secretKey && (*/}
-        {/*    <div className={styles.buy}>*/}
-        {/*      <Button*/}
-        {/*        text={`${locale?.depositPage?.select_btn} ${selectedPlan?.price}$`}*/}
-        {/*        onClick={() => {*/}
-        {/*          onAccept(selectedPlan)*/}
-        {/*          goToPayment()*/}
-        {/*        }}*/}
-        {/*        variant={width <= 1200 ? 'green' : 'default'}*/}
-        {/*      />*/}
-        {/*    </div>*/}
-        {/*  )*/}
-        {/*}*/}
       </div>
-      <div className={styles.main}>
+      {/* <div className={styles.main}>
         <div ref={payRef} className={styles.field}>
           {
             load ? (
@@ -355,7 +363,7 @@ const Credits = () => {
             )
           }
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

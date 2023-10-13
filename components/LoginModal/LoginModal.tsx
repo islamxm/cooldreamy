@@ -8,7 +8,6 @@ import ApiService from '@/service/apiService';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import { updateToken, updateUserId } from '@/store/actions';
 import Router from 'next/router';
-import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import notify from '@/helpers/notify';
 import { useWindowSize } from 'usehooks-ts';
@@ -134,10 +133,10 @@ const LoginModal:FC<ModalFuncProps> = (props) => {
                 </Col>
                 <Col span={24}>
                     <div className={styles.ex}>
-                        <span onClick={() => {
+                        {/* <span onClick={() => {
                             onClose()
                             Router.push('/signup')
-                        }} className={styles.item}>{locale?.popups?.login?.links.register}</span>
+                        }} className={styles.item}>{locale?.popups?.login?.links.register}</span> */}
                         <span onClick={() => {
                             setResetModal(true)
                             onClose()

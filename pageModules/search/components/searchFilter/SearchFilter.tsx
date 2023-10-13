@@ -10,6 +10,7 @@ import { searchFilterType } from './types';
 import { useWindowSize } from 'usehooks-ts';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import LimitModal from '@/popups/LimitModal/LimitModal';
+import PremModal from '@/popups/PremModal/PremModal';
 
 
 
@@ -69,11 +70,9 @@ const SearchFilter:FC<searchFilterType> = ({
 
     return (
         <div className={styles.wrapper}>
-             <LimitModal
+            <PremModal
                 open={limitModal}
                 onCancel={() => setLimitModal(false)}
-                head="Limitation"
-                text="Functionality available only in 'Premium subscription'"
                 />
             <Row gutter={[10,10]}>
                 <Col span={24}>
@@ -111,8 +110,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                     }}
                                     onClear={() => {
                                         clearStates()
-                                        setCountry('')
-                                        setState('')
+                                        setState(null)
                                     }}
                                     value={country?.value}
                                     // list={countries}

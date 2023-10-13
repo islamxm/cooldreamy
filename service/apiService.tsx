@@ -467,7 +467,7 @@ class ApiService {
 
     sendMessage_gift = async (body: {
         chat_id?: string,
-        gifts: string, //string: [1,2,3]
+        gifts: any[], //string: [1,2,3]
         user_id?: any
     }, token: IToken) => {
         try {

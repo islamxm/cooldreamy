@@ -21,7 +21,7 @@ const Gifts = ({
     onClose
 }: {
     pb: number,
-    onSend: (list: string) => any,
+    onSend: (list: any[]) => any,
     onClose: (...args: any[]) => any
 }) => {
     const {width} = useWindowSize()
@@ -44,17 +44,15 @@ const Gifts = ({
             setSelected(s => [...s, id])
         }
         if(type === 'remove') {
-            const m = selected;
-            const rm = m.splice(m.findIndex(i => i === id), 1)
-            setSelected([...m])
+            setSelected(s => s?.filter(f => f !== id))
         }
     }
 
 
     const onSubmit = useCallback(() => {
         if(selected?.length > 0) {
-            const mod = `[${selected.join(',')}]`
-            onSend(mod)
+            // const mod = `[${selected.join(',')}]`
+            onSend(selected)
             onClose()
         }
     }, [selected, onSend])
