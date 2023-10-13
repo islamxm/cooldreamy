@@ -14,7 +14,7 @@ const PremModal:FC<ModalFuncProps> = (props) => {
   const dispatch = useAppDispatch()
 
   const onGoToStore = () => {
-    Router.push('/deposit-mb')
+    Router.push('/deposit-mb?tab=1')
     dispatch(updatePremModal(false))
   }
   

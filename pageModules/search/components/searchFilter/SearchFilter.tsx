@@ -110,8 +110,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                     }}
                                     onClear={() => {
                                         clearStates()
-                                        setCountry('')
-                                        setState('')
+                                        setState(null)
                                     }}
                                     value={country?.value}
                                     // list={countries}

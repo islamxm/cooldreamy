@@ -47,6 +47,11 @@ const SearchBody = () => {
 
     const [isFilterChanged, setIsFilterChanged] = useState(false)
 
+    useEffect(() => {
+        if(!country) {
+            setCountry({value: 'All', id: 'All', label: 'All'})
+        }
+    }, [country])
 
     useEffect(() => {
         if(token) {
@@ -130,7 +135,7 @@ const SearchBody = () => {
         }
     }, [token, country, age_range_end, age_range_start, filter_type, state])
 
-
+    
 
     useEffect(() => {
         getCountries()
