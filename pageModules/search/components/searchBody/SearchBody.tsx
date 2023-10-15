@@ -54,6 +54,12 @@ const SearchBody = () => {
     }, [country])
 
     useEffect(() => {
+        if(!state) {
+            setState(null)
+        }
+    }, [state])
+
+    useEffect(() => {
         if(token) {
             service.getAllPrompts(token).then(res => {
                 if(res) {
