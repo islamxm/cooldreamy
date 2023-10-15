@@ -21,13 +21,15 @@ const PUBLIC_KEY_TEST = 'sk_test_51MzlPfFjkPZRdnX1wfytyiMDJ2b8Xg5NGPgZfLsRIJrf3G
 interface I {
   load?: boolean,
   onAccept?: (...args:any[]) => any,
-  onSelect?: (...args:any[]) => any
+  onSelect?: (...args:any[]) => any,
+  selected?: {value: number | string, type: string} | null
 }
 
 const Credits:FC<I> = ({
   load,
   onAccept,
-  onSelect
+  onSelect,
+  selected
 }) => {
   const { width } = useWindowSize()
   const payRef = useRef<HTMLDivElement>(null)
@@ -109,13 +111,13 @@ const Credits:FC<I> = ({
   //   }
   // }
 
-
+  useEffect(() => console.log(list), [list])
   
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>
-        {
+        {/* {
           promo && (
             <div className={`${styles.list} ${styles.one}`}>
               <div className={`${styles.item_wr} ${selectedPlan?.id == promo?.id ? styles?.active : ''}`}>
@@ -149,7 +151,7 @@ const Credits:FC<I> = ({
                         onAccept && onAccept({value: promo?.id, type: 'credit'})
                         goToPayment()
                       }}
-                      load={load}
+                      load={load && selected?.value === promo?.id}
                       middle={width <= 768}
                       text='Buy' 
                       variant={'black'}/>
@@ -159,7 +161,7 @@ const Credits:FC<I> = ({
               </div>
             </div>
           )
-        }
+        } */}
         {
           list?.length > 0 && (
             <div className={styles.list}>
@@ -214,10 +216,10 @@ const Credits:FC<I> = ({
                             <Button
                               onClick={() => {
                                 onSelect && onSelect({value: i?.id, type: 'credit'})
-                                onAccept && onAccept({value: promo?.id, type: 'credit'})
+                                onAccept && onAccept({value: i?.id, type: 'credit'})
                                 goToPayment()
                               }}
-                              load={load}
+                              load={load && selected?.value === i?.id}
                               middle={width <= 768}
                               text='Buy' 
                               variant={'black'}/>
@@ -272,11 +274,12 @@ const Credits:FC<I> = ({
                             <Button
                               onClick={() => {
                                 onSelect && onSelect({value: i?.id, type: 'credit'})
-                                onAccept && onAccept({value: promo?.id, type: 'credit'})
+                                onAccept && onAccept({value: i?.id, type: 'credit'})
                                 goToPayment()
                               }}
                               middle={width <= 768}
                               text='Buy' 
+                              load={load && selected?.value === i?.id}
                               variant={'white'}/>
                           </div>
                         </div>
@@ -325,12 +328,12 @@ const Credits:FC<I> = ({
                             <Button
                               onClick={() => {
                                 onSelect && onSelect({value: i?.id, type: 'credit'})
-                                onAccept && onAccept({value: promo?.id, type: 'credit'})
+                                onAccept && onAccept({value: i?.id, type: 'credit'})
                                 goToPayment()
                               }}
                               middle={width <= 768}
                               text='Buy' 
-                              load={load}
+                              load={load && selected?.value === i?.id}
                               variant={'black'}/>
                           </div>
                         </div>

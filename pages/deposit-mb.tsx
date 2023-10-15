@@ -120,7 +120,6 @@ const DepositPage = () => {
       })
     }
   }
-  
 
   const getSub = () => {
     if(token) {
@@ -147,9 +146,6 @@ const DepositPage = () => {
   }
 
   const onAccept = (plan:{value:number | string, type: string}) => {
-
-    console.log(plan)
-
     if(token && selected) {
         console.log("NO CREDIT")
         setLoad(true)
@@ -242,6 +238,7 @@ const DepositPage = () => {
                   load={load}
                   onAccept={onAccept}
                   onSelect={setSelected}
+                  selected={selected}
                   />
       default:
         return null
