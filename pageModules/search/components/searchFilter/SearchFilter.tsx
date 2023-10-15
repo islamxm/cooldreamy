@@ -140,14 +140,18 @@ const SearchFilter:FC<searchFilterType> = ({
                                 <SelectDef
                                     list={targetList}
                                     onChange={(e, v) => {
-                                        premiumData?.is_premium === true ? 
-                                        setprompt_target_id && setprompt_target_id(e) :
-                                        setLimitModal(true)
+                                        if(premiumData?.is_premium === true) {
+                                            setprompt_target_id && setprompt_target_id(e)
+                                        } else {
+                                            setLimitModal(true)
+                                            setprompt_target_id && setprompt_target_id([])
+                                        }
                                     }}
                                     placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_target.label}
                                     width={230}
                                     multiple
+                                    value={prompt_target_id}
                                     customIcon={true}
                                     />
                             </div>
@@ -155,11 +159,13 @@ const SearchFilter:FC<searchFilterType> = ({
                                 <SelectDef
                                     list={financeList}
                                     onChange={(e, v) => {
-                                        premiumData?.is_premium === true ? 
-                                        setprompt_finance_state_id && setprompt_finance_state_id(e) :
-                                        setLimitModal(true)
+                                        if(premiumData?.is_premium === true) {
+                                            setprompt_finance_state_id && setprompt_finance_state_id(e)
+                                        } else {
+                                            setLimitModal(true)
+                                            setprompt_finance_state_id && setprompt_finance_state_id([])
+                                        }
                                     }}
-                                    
                                     placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_finance.label}
                                     width={230}

@@ -8,7 +8,7 @@ export type selectOptionType = {
 export type selectDefType = {
     placeholder?: string,
     list: selectOptionType[],
-    value?: number | string,
+    value?: number | string | any,
     width?: number | string,
     label?: string,
     multiple?: boolean,
