@@ -1,5 +1,7 @@
 .wrapper {
-    
+    * {
+        user-select: none !important;
+    }
     .in {
         padding: 30px 0;
 
