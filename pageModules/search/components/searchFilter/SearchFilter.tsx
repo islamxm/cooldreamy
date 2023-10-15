@@ -166,6 +166,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                             setprompt_finance_state_id && setprompt_finance_state_id([])
                                         }
                                     }}
+                                    value={prompt_finance_state_id}
                                     placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_finance.label}
                                     width={230}
