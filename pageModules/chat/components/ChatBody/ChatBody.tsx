@@ -189,7 +189,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             // }
                         }
                     } else {
-                        onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                        // onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         service.getCredits(token).then(credits => {
                             dispatch(updateUserData({...userData, credits}))
                         })
