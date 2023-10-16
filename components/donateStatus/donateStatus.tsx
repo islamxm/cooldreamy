@@ -25,7 +25,7 @@ export const StatusPremium:FC<any> = () => {
         setDeadLine(`${Math.floor(moment.utc(start).get('hours') / 24).toString()}d`)
       }
       if(moment.utc(start).get('hours') < 24 && moment.utc(start).get('hours') >= 1) {
-        setDeadLine(`${moment.utc(start).format('HH')}ч ${moment.utc(start).format('mm')}min`)
+        setDeadLine(`${moment.utc(start).format('HH')}h ${moment.utc(start).format('mm')}min`)
       }
       if(moment.utc(start).get('hours') < 1) {
         setDeadLine(moment.utc(start).get('minutes') + 'min')
@@ -87,13 +87,13 @@ export const StatusVip:FC<any> = () => {
     const diff = dateNow.diff(dateFrom)
     const start = moment.utc(diff).valueOf()
     if(moment.utc(start).get('hours') >= 24) {
-      setDeadLine(`${Math.floor(moment.utc(start).get('hours') / 24).toString()}д`)
+      setDeadLine(`${Math.floor(moment.utc(start).get('hours') / 24).toString()}d`)
     }
     if(moment.utc(start).get('hours') < 24 && moment.utc(start).get('hours') >= 1) {
-      setDeadLine(`${moment.utc(start).format('HH')}ч ${moment.utc(start).format('mm')}мин`)
+      setDeadLine(`${moment.utc(start).format('HH')}h ${moment.utc(start).format('mm')}min`)
     }
     if(moment.utc(start).get('hours') < 1) {
-      setDeadLine(moment.utc(start).get('minutes') + 'мин')
+      setDeadLine(moment.utc(start).get('minutes') + 'mins')
     }
     }
   },[currentSub])

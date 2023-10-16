@@ -49,7 +49,6 @@ const Credits:FC<I> = ({
     if (token) {
       setListLoad(true)
       service.getPayPlans(token).then(res => {
-        console.log(res)
         setList(res)
         setType('credit')
       }).finally(() => setListLoad(false))
@@ -59,7 +58,6 @@ const Credits:FC<I> = ({
   const getPromo = () => {
     if (token) {
       service.getPromo(token).then(res => {
-        console.log(res)
         if (res?.data?.length > 0) {
           setPromo(res?.data[0]?.promotion)
           setType('credit')

@@ -147,7 +147,6 @@ const DepositPage = () => {
 
   const onAccept = (plan:{value:number | string, type: string}) => {
     if(token && selected) {
-        console.log("NO CREDIT")
         setLoad(true)
         if(selected?.type === 'credit') {
             service.pay(token, {
@@ -182,7 +181,6 @@ const DepositPage = () => {
         }
     }
     if(token && !selected && plan) {
-      console.log("CREDIT")
       setLoad(true)
       service.pay(token, {
         list_type: plan?.type,

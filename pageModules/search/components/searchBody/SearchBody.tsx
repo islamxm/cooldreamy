@@ -139,7 +139,7 @@ const SearchBody = () => {
                 onSearch(1)
             } 
         }
-    }, [token, country, age_range_end, age_range_start, filter_type, state])
+    }, [token, country, age_range_end, age_range_start, filter_type, state, prompt_finance_states, prompt_targets])
 
     
 
