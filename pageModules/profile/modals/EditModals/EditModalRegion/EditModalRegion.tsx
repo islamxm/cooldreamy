@@ -37,6 +37,7 @@ const EditModalRegion:FC<I> = (props) => {
 
     useEffect(() => {
         service.getCountries().then(res => {
+            console.log(res)
             setCountryList(res?.map((i: any) => ({value: i?.id, label: i?.title})))
         })
     }, [])
@@ -130,23 +131,6 @@ const EditModalRegion:FC<I> = (props) => {
                 <Col span={24}>
                     <div className={styles.body}>
                         <Row gutter={[20,20]}>
-                            {
-                                (countryList && countryList?.length) > 0 && (
-                                    <Col span={24}>
-                                        <SelectDef
-                                            onClear={() => setCountry && setCountry(null)}
-                                            isRound
-                                            value={country?.value}
-                                            list={countryList}
-                                            
-                                            placeholder='Country'
-                                            onChange={(e, v) => setCountry && setCountry(v)}
-
-                                            open
-                                            />    
-                                    </Col>    
-                                )
-                            }
                             <Col span={24}>
                                 <SelectDef
                                     label='Select country'
