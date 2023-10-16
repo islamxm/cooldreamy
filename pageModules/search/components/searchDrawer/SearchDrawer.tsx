@@ -93,12 +93,15 @@ const SearchDrawer:FC<I> = ({
                                     onChange={(e,v) => {
                                         setCountry(v)
                                     }}
-                                    onClear={clearStates}
+                                    onClear={() => {
+                                        clearStates()
+                                        setState(null)
+                                    }}
                                     list={countries}
                                     />
                             </Col>
                             <Col span={12}>
-                                {
+                                {/* {
                                     states?.length > 0 && (
                                         <div className={styles.item}>
                                             <SelectDef
@@ -116,7 +119,7 @@ const SearchDrawer:FC<I> = ({
                                         </div>
                                     
                                     )
-                                }
+                                } */}
                                 <div className={getClassNames([styles.item, states?.length === 0 && styles.disabled ])}>
                                     <SelectDef
                                         label={locale?.searchPage.filter.list.filter_state.label}
