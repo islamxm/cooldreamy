@@ -79,8 +79,15 @@ const ChatAction = ({
                             
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                            // service.getCredits(token).then(credits => {
+                            //     dispatch(updateUserData({...userData, credits}))
+                            // })
                             service.getCredits(token).then(credits => {
                                 dispatch(updateUserData({...userData, credits}))
+                            })
+                            service.getMyProfile(token).then(res => {
+                                const {credits} = res
+                                dispatch(setFreeCredits(credits))
                             })
                         }
                         if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
@@ -147,6 +154,13 @@ const ChatAction = ({
                             // }))
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                            // service.getMyProfile(token).then(res => {
+                            //     const {credits} = res
+                            //     dispatch(setFreeCredits(credits))
+                            // })
+                            service.getCredits(token).then(credits => {
+                                dispatch(updateUserData({...userData, credits}))
+                            })
                             service.getMyProfile(token).then(res => {
                                 const {credits} = res
                                 dispatch(setFreeCredits(credits))
@@ -236,6 +250,13 @@ const ChatAction = ({
                                 
                             } else {
                                 onUpdateChat({messageBody: r?.chat?.last_message, dialogBody: r?.chat})
+                                // service.getMyProfile(token).then(res => {
+                                //     const {credits} = res
+                                //     dispatch(setFreeCredits(credits))
+                                // })
+                                service.getCredits(token).then(credits => {
+                                    dispatch(updateUserData({...userData, credits}))
+                                })
                                 service.getMyProfile(token).then(res => {
                                     const {credits} = res
                                     dispatch(setFreeCredits(credits))

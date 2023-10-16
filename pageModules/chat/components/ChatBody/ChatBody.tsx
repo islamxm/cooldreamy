@@ -25,7 +25,7 @@ import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
 import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
 import { PulseLoader } from 'react-spinners';
 import getPrice from '@/helpers/getPrice';
-import { updateEmailModal, updateLimit, updateSubsModal } from '@/store/actions';
+import { setFreeCredits, updateEmailModal, updateLimit, updateSubsModal } from '@/store/actions';
 import { BsTrash } from 'react-icons/bs';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import notify from '@/helpers/notify';
@@ -130,8 +130,15 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         }
                     } else {
                         onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
+                        // service.getCredits(token).then(credits => {
+                        //     dispatch(updateUserData({...userData, credits}))
+                        // })
                         service.getCredits(token).then(credits => {
                             dispatch(updateUserData({...userData, credits}))
+                        })
+                        service.getMyProfile(token).then(res => {
+                            const {credits} = res
+                            dispatch(setFreeCredits(credits))
                         })
                     }
                     if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
@@ -192,6 +199,10 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         // onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         service.getCredits(token).then(credits => {
                             dispatch(updateUserData({...userData, credits}))
+                        })
+                        service.getMyProfile(token).then(res => {
+                            const {credits} = res
+                            dispatch(setFreeCredits(credits))
                         })
                     }
                     if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
