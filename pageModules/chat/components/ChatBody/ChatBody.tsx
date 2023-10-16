@@ -114,7 +114,6 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
         if(text && activeDialogId && token && ChatType) {
             if(ChatType === 'chat') {
                 service.sendMessage_text({chat_id: Number(activeDialogId), text}, token).then(res => {
-                    
                     if(res?.error) {
                         if(res?.error === 'You need to fill in information about yoursel') {
                             setCr(true)
@@ -140,10 +139,11 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             const {credits} = res
                             dispatch(setFreeCredits(credits))
                         })
+                        if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
+                            dispatch(updateEmailModal(true))
+                        }
                     }
-                    if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
-                        dispatch(updateEmailModal(true))
-                    }
+                    
                     setMockType('')
                 })
             }
@@ -204,10 +204,11 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                             const {credits} = res
                             dispatch(setFreeCredits(credits))
                         })
+                        if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
+                            dispatch(updateEmailModal(true))
+                        }
                     }
-                    if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
-                        dispatch(updateEmailModal(true))
-                    }
+                    
                     setMockType('')
                 })
             }

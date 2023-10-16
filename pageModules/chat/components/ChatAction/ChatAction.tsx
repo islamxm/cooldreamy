@@ -73,10 +73,9 @@ const ChatAction = ({
                                         head: locale?.popups?.nocredit_sticker_message?.title,
                                         // text: `${locale?.popups?.nocredit_sticker_message?.text_part_1}${currentUser?.name}${locale?.popups?.nocredit_sticker_message?.text_part_2} ${getPrice(actionsPricing, 'SEND_CHAT_STICKER')}`
                                         text: locale?.popups?.nocredit_global_chat
-                                    }
+                                    } 
                                 }))
                             }
-                            
                         } else {
                             onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                             // service.getCredits(token).then(credits => {
@@ -89,10 +88,11 @@ const ChatAction = ({
                                 const {credits} = res
                                 dispatch(setFreeCredits(credits))
                             })
+                            if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
+                                dispatch(updateEmailModal(true))
+                            }
                         }
-                        if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
-                            dispatch(updateEmailModal(true))
-                        }
+                        
                     }).finally(() => {
                         setLoad(false)
                     })
@@ -142,7 +142,6 @@ const ChatAction = ({
                                     dispatch(updateSubsModal(true))
                                 }   
                             }
-                            
                             // dispatch(updateLimit({
                             //     open: true,
                             //     data: {
@@ -165,10 +164,11 @@ const ChatAction = ({
                                 const {credits} = res
                                 dispatch(setFreeCredits(credits))
                             })
+                            if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
+                                dispatch(updateEmailModal(true))
+                            }
                         }
-                        if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
-                            dispatch(updateEmailModal(true))
-                        }
+                        
                     }).finally(() => {
                         setLoad(false)
                         setText('')
@@ -261,10 +261,11 @@ const ChatAction = ({
                                     const {credits} = res
                                     dispatch(setFreeCredits(credits))
                                 })
+                                if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
+                                    dispatch(updateEmailModal(true))
+                                }
                             }
-                            if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
-                                dispatch(updateEmailModal(true))
-                            }
+                            
                         }).finally(() => {
                             setLoad(false)
                             setText('')

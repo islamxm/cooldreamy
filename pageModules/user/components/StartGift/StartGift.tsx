@@ -24,7 +24,6 @@ const StartGift:FC<startGiftPropsType> = ({
     useEffect(() => {
         if(token) {
             service.getGifts(token).then(res => {
-                
                 setGift(res?.find((i: any) => i.id == 12))
             })
         }
@@ -58,10 +57,11 @@ const StartGift:FC<startGiftPropsType> = ({
                     //     dispatch(updateUserData({...userData, credits}))
                     // })
                     notify('You send a gift', 'SUCCESS')
+                    if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
+                        dispatch(updateEmailModal(true))
+                    }
                 }
-                if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
-                    dispatch(updateEmailModal(true))
-                }
+                
             }).finally(() => setLoad(false))
         }
     }
