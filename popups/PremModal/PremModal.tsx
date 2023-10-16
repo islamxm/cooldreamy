@@ -28,7 +28,7 @@ const PremModal:FC<ModalFuncProps> = (props) => {
       <Row gutter={[15,15]}>
         <Col span={24}>
           <div className={styles.title}>
-          Required: Premium Status
+          Required: VIP Status
           </div>
         </Col>
         <Col span={24}>
