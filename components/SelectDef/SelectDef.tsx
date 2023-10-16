@@ -1,7 +1,7 @@
 import styles from './SelectDef.module.scss';
-import {Select} from 'antd';
+import {RefSelectProps, Select} from 'antd';
 
-import {FC, useRef} from 'react';
+import {FC, useEffect, useRef} from 'react';
 import { selectDefType } from './types';
 
 interface test {
@@ -26,7 +26,13 @@ const SelectDef:FC<selectDefType & test> = ({
     customIcon
 }) => {
 
-    const ref = useRef<any>()
+    const ref = useRef<RefSelectProps>(null)
+
+    const test = () => {
+        if(ref?.current) {
+            ref?.current?.blur()
+        }
+    }
 
     
 
@@ -47,7 +53,10 @@ const SelectDef:FC<selectDefType & test> = ({
                         style={{width: '100%'}}
                         placeholder={placeholder}
                         defaultValue={value}
-                        onChange={onChange}
+                        onChange={(e,v) => {
+                            onChange && onChange(e,v)
+                            test()
+                        }}
                         onClear={onClear}
                         options={list}
                         value={value}
@@ -55,6 +64,7 @@ const SelectDef:FC<selectDefType & test> = ({
                         className={`${isRound ? 'round' : ''} ${customIcon ? 'custom-icon' : ''}`}
                         virtual={false}
                         showSearch={false}
+                        
                         />
                 ) : (
                     <Select
@@ -64,7 +74,10 @@ const SelectDef:FC<selectDefType & test> = ({
                         style={{width: '100%'}}
                         placeholder={placeholder}
                         defaultValue={value}
-                        onChange={onChange}
+                        onChange={(e,v) => {
+                            onChange && onChange(e,v)
+                            test()
+                        }}
                         onClear={onClear}
                         options={list}
                         showSearch={false}

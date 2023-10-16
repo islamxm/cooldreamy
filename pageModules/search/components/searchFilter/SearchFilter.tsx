@@ -133,6 +133,7 @@ const SearchFilter:FC<searchFilterType> = ({
                                             onClear={() => {
                                                 setState('')
                                             }}
+                                            value={state?.value || null}
                                             />
                                     </div>
                                    

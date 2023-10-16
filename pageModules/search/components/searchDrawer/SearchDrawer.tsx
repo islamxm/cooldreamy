@@ -95,6 +95,7 @@ const SearchDrawer:FC<I> = ({
                                         setState(null)
                                     }}
                                     list={countries}
+                                    value={country?.value}
                                     />
                             </Col>
                             <Col span={12}>
@@ -129,6 +130,7 @@ const SearchDrawer:FC<I> = ({
                                         onClear={() => {
                                             setState('')
                                         }}
+                                        value={state?.value || null}
                                         />
                                 </div>
                             </Col>
