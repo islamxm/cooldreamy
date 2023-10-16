@@ -68,6 +68,8 @@ const SearchFilter:FC<searchFilterType> = ({
         }
     }, [age_range_start, age_range_end])
 
+
+
     return (
         <div className={styles.wrapper}>
             <PremModal
@@ -144,7 +146,6 @@ const SearchFilter:FC<searchFilterType> = ({
                                             setprompt_target_id && setprompt_target_id(e)
                                         } else {
                                             setLimitModal(true)
-                                            setprompt_target_id && setprompt_target_id([])
                                         }
                                     }}
                                     placeholder={'Not specified'}
@@ -163,14 +164,14 @@ const SearchFilter:FC<searchFilterType> = ({
                                             setprompt_finance_state_id && setprompt_finance_state_id(e)
                                         } else {
                                             setLimitModal(true)
-                                            setprompt_finance_state_id && setprompt_finance_state_id([])
                                         }
+                                     
                                     }}
-                                    value={prompt_finance_state_id}
                                     placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_finance.label}
                                     width={230}
                                     multiple
+                                    value={prompt_finance_state_id}
                                     customIcon={true}
                                     />  
                             </div>

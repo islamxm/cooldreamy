@@ -141,7 +141,7 @@ const SearchBody = () => {
         }
     }, [token, country, age_range_end, age_range_start, filter_type, state, prompt_finance_states, prompt_targets])
 
-    
+    useEffect(() => console.log(prompt_finance_states), [prompt_finance_states])
 
     useEffect(() => {
         getCountries()
@@ -170,6 +170,7 @@ const SearchBody = () => {
                         targetList={targetList}
                         financeList={financeList}
                         prompt_target_id={prompt_targets}
+                        prompt_finance_state_id={prompt_finance_states}
                         age_range_end={age_range_end}
                         age_range_start={age_range_start}
                         setage_range_start={setage_range_start}
@@ -255,6 +256,10 @@ const SearchBody = () => {
                 clearFilter={clearFilter}
                 onToggleDrawer={() => setIsDrawerOpen(s => !s)}
                 setCurrentPage={setCurrentPage}
+                prompt_finance_state_id={prompt_finance_states}
+                prompt_target_id={prompt_targets}
+                setprompt_finance_state_id={setprompt_finance_states}
+                setprompt_target_id={setprompt_targets}
                 />
         </div>  
     )

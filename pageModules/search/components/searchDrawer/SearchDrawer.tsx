@@ -7,8 +7,7 @@ import SelectDef from '@/components/SelectDef/SelectDef';
 import Button from '@/components/Button/Button';
 import { searchFilterType } from '../searchFilter/types';
 import { useAppSelector } from '@/hooks/useTypesRedux';
-import LimitModal from '@/popups/LimitModal/LimitModal';
-import defCountryList from '@/helpers/defCountryList';
+import PremModal from '@/popups/PremModal/PremModal';
 import getClassNames from '@/helpers/getClassNames';
 
 interface I extends searchFilterType {
@@ -65,11 +64,9 @@ const SearchDrawer:FC<I> = ({
 
     return (
         <div data-layer onClick={onLayerClick} className={`${styles.wrapper} ${isOpen ? styles.active : ''}`}>
-             <LimitModal
+                <PremModal
                 open={limitModal}
                 onCancel={() => setLimitModal(false)}
-                head="Limitation"
-                text="Functionality available only in 'Premium subscription'"
                 />
             <div className={styles.in}>
                 <div className={styles.head}>
@@ -144,7 +141,6 @@ const SearchDrawer:FC<I> = ({
                                             setprompt_target_id && setprompt_target_id(e)
                                         } else {
                                             setLimitModal(true)
-                                            setprompt_target_id && setprompt_target_id([])
                                         }
                                     }}
                                     placeholder={'Not specified'}
@@ -162,7 +158,6 @@ const SearchDrawer:FC<I> = ({
                                             setprompt_finance_state_id && setprompt_finance_state_id(e)
                                         } else {
                                             setLimitModal(true)
-                                            setprompt_finance_state_id && setprompt_finance_state_id([])
                                         }
                                     }}
                                     value={prompt_finance_state_id}
