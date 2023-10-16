@@ -49,25 +49,20 @@ const Credits:FC<I> = ({
     if (token) {
       setListLoad(true)
       service.getPayPlans(token).then(res => {
-        setList(res)
+        
+        const findPromo = res?.find((i:any) => i?.is_one_time == 1)
+        if(findPromo) {
+          setPromo(findPromo)
+          setList([])
+        } else {
+          setList(res)
+          setPromo(null)
+        }
         setType('credit')
       }).finally(() => setListLoad(false))
     }
   }
 
-  const getPromo = () => {
-    if (token) {
-      service.getPromo(token).then(res => {
-        if (res?.data?.length > 0) {
-          setPromo(res?.data[0]?.promotion)
-          setType('credit')
-        } else {
-          getPlans()
-          setType('credit')
-        }
-      })
-    }
-  }
 
   useEffect(() => {
     setSecretKey('')
@@ -87,13 +82,8 @@ const Credits:FC<I> = ({
   }
 
   useEffect(() => {
-    if (userData && userData?.is_donate === 1) {
-      getPlans()
-    }
-    if (userData && userData?.is_donate === 0) {
-      getPromo()
-    }
-  }, [token, userData])
+    getPlans()
+  }, [token])
 
   // const onAccept = (plan: any) => {
   //   if (token) {
@@ -109,18 +99,14 @@ const Credits:FC<I> = ({
   //   }
   // }
 
-  useEffect(() => console.log(list), [list])
-  
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>
-        {/* {
+        {
           promo && (
             <div className={`${styles.list} ${styles.one}`}>
               <div className={`${styles.item_wr} ${selectedPlan?.id == promo?.id ? styles?.active : ''}`}>
                 <div className={styles.item}>
-
                   <div className={styles.kl}>
                     <div className={styles.badge}>{locale?.depositPage?.card?.spec_offer}!</div>
                     <div className={styles.discount}>
@@ -140,11 +126,9 @@ const Credits:FC<I> = ({
                       <div className={styles.actual}>${promo?.price}</div>
                     </div>
                   </div>
-                      
                   <div className={styles.action}>
                     <Button
                       onClick={() => {
-                        // onAccept && onAccept(promo)
                         onSelect && onSelect({value: promo?.id, type: 'credit'})
                         onAccept && onAccept({value: promo?.id, type: 'credit'})
                         goToPayment()
@@ -154,12 +138,11 @@ const Credits:FC<I> = ({
                       text='Buy' 
                       variant={'black'}/>
                   </div>
-
                 </div>
               </div>
             </div>
           )
-        } */}
+        }
         {
           list?.length > 0 && (
             <div className={styles.list}>
@@ -298,7 +281,6 @@ const Credits:FC<I> = ({
                             )
                           }
                           <div className={styles.adds}>
-
                             <div className={styles.badge}>
                               {locale?.depositPage?.card?.spec_offer}
                             </div>
@@ -316,7 +298,6 @@ const Credits:FC<I> = ({
                                 </div>
                               )
                             }
-
                             <div className={styles.part}>
                               <div className={styles.label}>{locale?.depositPage?.card?.discount}</div>
                               <div className={styles.value}>{i?.price}$</div>
@@ -340,31 +321,10 @@ const Credits:FC<I> = ({
                   }
                 })
               }
-
             </div>
           )
         }
       </div>
-      {/* <div className={styles.main}>
-        <div ref={payRef} className={styles.field}>
-          {
-            load ? (
-              <div className={styles.load}>
-                <PulseLoader color='var(--violet)' />
-              </div>
-            ) : (
-              (secretKey && stripePromise && selectedPlan) && (
-                <Elements
-                  stripe={stripePromise}
-                  options={{ clientSecret: secretKey, locale: 'en' }}
-                >
-                  <PayForm secretKey={secretKey} type={type} plan={selectedPlan} />
-                </Elements>
-              )
-            )
-          }
-        </div>
-      </div> */}
     </div>
   )
 }
