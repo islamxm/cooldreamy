@@ -200,6 +200,8 @@ const UserMain:FC<IUser> = (props) => {
             setRegionModal(true)
         }
     }
+
+    
     
 
     return (
@@ -228,8 +230,8 @@ const UserMain:FC<IUser> = (props) => {
                 editItemType={editItemType}
                 open={regionModal}
                 onCancel={closeEditModal}
-                state={state}
-                country={country}
+                stateInit={state}
+                countryInit={country}
                 />
 
             <Row gutter={[10,10]}>
@@ -304,7 +306,16 @@ const UserMain:FC<IUser> = (props) => {
                             </button>
                         </div>
                         <div className={styles.text} style={{color: about_self ? 'var(--text)' : 'var(--red)'}}>
-                            {state ? `${state}/${country}` : locale?.global?.placeholders?.nd}
+                            
+                            {
+                                country && country
+                            }
+                            {
+                                state && `/${state}`
+                            }
+                            {
+                                (!country && !state) && locale?.global?.placeholders?.nd
+                            }
                         </div>
                     </div>
                 </Col>

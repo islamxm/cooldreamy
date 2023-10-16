@@ -13,17 +13,17 @@ import { updateUserData } from '@/store/actions';
 const service = new ApiService()
 
 interface I extends IEditModal {
-    state?: string,
-    country?: string
+    stateInit?: string
+    countryInit?: string
 }
 
 
 const EditModalRegion:FC<I> = (props) => {
     const dispatch = useAppDispatch()
-    const {onCancel, head} = props
+    const {onCancel, head, stateInit, countryInit} = props
     const {token, locale} = useAppSelector(s => s)
     const [load, setLoad] = useState(false)
-    const [country, setCountry] = useState<selectOptionType | null>({value: '2', label: 'USA'})
+    const [country, setCountry] = useState<selectOptionType | null>(null)
     const [state, setState] = useState<selectOptionType>()
 
 
@@ -35,9 +35,9 @@ const EditModalRegion:FC<I> = (props) => {
         onCancel && onCancel()
     }
 
+
     useEffect(() => {
         service.getCountries().then(res => {
-            console.log(res)
             setCountryList(res?.map((i: any) => ({value: i?.id, label: i?.title})))
         })
     }, [])
@@ -111,8 +111,23 @@ const EditModalRegion:FC<I> = (props) => {
                 setLoad(false)
             })
         }
-        
     }
+
+    useEffect(() => {
+        if(countryList?.length > 0 && countryInit && !country) {
+            const findInitCountry = countryList?.find(i => i?.label === countryInit)
+            console.log(findInitCountry)
+            if(findInitCountry) {
+                setCountry(findInitCountry)
+            } else setCountry(null)
+        }
+        if(stateInit && countryList?.length > 0 && stateList?.length > 0) {
+            const findInitState = stateList?.find(i => i?.label === stateInit)
+            if(findInitState) {
+                setState(findInitState)
+            } else setState(undefined)
+        }
+    }, [countryList, countryInit, stateInit, stateList, country])
 
 
 
