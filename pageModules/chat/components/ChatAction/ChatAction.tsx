@@ -14,6 +14,7 @@ import { setCredits, setFreeCredits, updateEmailModal, updateLimit, updateSubsMo
 import { useAppDispatch } from '@/hooks/useTypesRedux';
 import OutsideClickHandler from 'react-outside-click-handler';
 import CompReg from '@/popups/CompReg/CompReg';
+import useUpdateBalance from '@/hooks/useUpdateBalance';
 
 const service = new ApiService()
 
@@ -30,6 +31,7 @@ const ChatAction = ({
     getGifts: (type: 'gift') => any,
     updateDialogsList?: (...args: any[]) => any
 }) => {
+    const updateBalance = useUpdateBalance()
     const dispatch = useAppDispatch()
     const [cr, setCr] = useState(false)
 
@@ -81,13 +83,7 @@ const ChatAction = ({
                             // service.getCredits(token).then(credits => {
                             //     dispatch(updateUserData({...userData, credits}))
                             // })
-                            service.getCredits(token).then(credits => {
-                                dispatch(updateUserData({...userData, credits}))
-                            })
-                            service.getMyProfile(token).then(res => {
-                                const {credits} = res
-                                dispatch(setFreeCredits(credits))
-                            })
+                            updateBalance()
                             if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                                 dispatch(updateEmailModal(true))
                             }
@@ -157,13 +153,7 @@ const ChatAction = ({
                             //     const {credits} = res
                             //     dispatch(setFreeCredits(credits))
                             // })
-                            service.getCredits(token).then(credits => {
-                                dispatch(updateUserData({...userData, credits}))
-                            })
-                            service.getMyProfile(token).then(res => {
-                                const {credits} = res
-                                dispatch(setFreeCredits(credits))
-                            })
+                            updateBalance()
                             if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                                 dispatch(updateEmailModal(true))
                             }

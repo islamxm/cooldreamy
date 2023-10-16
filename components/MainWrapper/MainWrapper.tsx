@@ -312,16 +312,17 @@ const MainWrapper = ({
 	// }, [socketChannel])
 
 
-	useEffect(() => {
-		let displayMode = 'browser tab';
-		if (window.matchMedia('(display-mode: standalone)').matches) {
-			displayMode = 'standalone';
-		}
-		if(displayMode === 'standalone') {
+	// useEffect(() => {
+	// 	let displayMode = 'browser tab';
+	// 	if (window.matchMedia('(display-mode: standalone)').matches) {
+	// 		displayMode = 'standalone';
+	// 	}
+	// 	if(displayMode === 'standalone') {
 			
-		}
+	// 	}
 		
-	}, [])
+	// }, [])
+
 
     return (
         <>
@@ -362,8 +363,6 @@ const MainWrapper = ({
 					open={emailEditModal}
 					head='Edit e-mail'
 					/>
-			
-				
         <div className={styles.wrapper}>
 				{children}
 			</div>

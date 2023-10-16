@@ -66,6 +66,8 @@ const UserMain:FC<IUser> = (props) => {
                 setPrompt_interests_list(res?.prompt_interests?.map((i:any) => ({...i, icon: setIconsSg('intersets', i?.id)})))
                 setPrompt_want_kids_list(res?.prompt_want_kids?.map((i:any) => ({...i, icon: setIconsSg('want_kids', i?.id)})))
                 setPrompt_relationships_list(res?.prompt_relationships?.map((i:any) => ({...i, icon: setIconsSg('rl', i?.id)})))
+
+                console.log(res?.prompt_relationships)
                 // setPrompt_targets_list(res?.prompt_targets)
                 // setPrompt_careers_list(res?.prompt_careers)
                 // setPrompt_finance_states_list(res?.prompt_finance_states)
@@ -118,24 +120,10 @@ const UserMain:FC<IUser> = (props) => {
 
     const switchPlList = (type: editItemT | '') => {
         switch(type) {
-            case 'career':
-                return {
-                    list: prompt_careers_list,
-                    maxSelect: 1
-                }
+            
             case 'finance':
                 return {
                     list: prompt_finance_states_list,
-                    maxSelect: 1
-                }
-            case 'kids':
-                return {
-                    list: prompt_want_kids_list,
-                    maxSelect: 1
-                }
-            case 'rl':
-                return {
-                    list: prompt_relationships_list,
                     maxSelect: 1
                 }
             case 'target':
@@ -147,6 +135,21 @@ const UserMain:FC<IUser> = (props) => {
                 return {
                     list: prompt_interests_list,
                     maxSelect: 5
+                }
+            case 'career':
+                return {
+                    list: prompt_careers_list,
+                    maxSelect: 1
+                }
+            case 'rl':
+                return {
+                    list: prompt_relationships_list,
+                    maxSelect: 1
+                }
+            case 'kids':
+                return {
+                    list: prompt_want_kids_list,
+                    maxSelect: 1
                 }
             default:
                 return {

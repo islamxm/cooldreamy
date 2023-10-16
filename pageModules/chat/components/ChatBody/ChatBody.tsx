@@ -34,6 +34,8 @@ import ChatMenu from './components/ChatMenu/ChatMenu';
 import ReportModal from '@/popups/ReportModal/ReportModal';
 import { updateUserData } from '@/store/actions';
 import CompReg from '@/popups/CompReg/CompReg';
+import useUpdateBalance from '@/hooks/useUpdateBalance';
+
 const service = new ApiService()
 const VH = '(var(--vh, 1vh) * 100)'
 
@@ -87,6 +89,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
     const {width} = useWindowSize()
     const {query: {id}} = useRouter()
     const {token, actionsPricing, locale, userData, userId} = useAppSelector(s => s)
+    const updateBalance = useUpdateBalance()
     const [pb, setPb] = useState<number>(70)
     const [promptModal, setPromptModal] = useState(false)
     const [reportModal, setReportModal] = useState(false)
@@ -132,13 +135,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         // service.getCredits(token).then(credits => {
                         //     dispatch(updateUserData({...userData, credits}))
                         // })
-                        service.getCredits(token).then(credits => {
-                            dispatch(updateUserData({...userData, credits}))
-                        })
-                        service.getMyProfile(token).then(res => {
-                            const {credits} = res
-                            dispatch(setFreeCredits(credits))
-                        })
+                        updateBalance()
                         if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                             dispatch(updateEmailModal(true))
                         }
@@ -197,13 +194,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         }
                     } else {
                         // onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
-                        service.getCredits(token).then(credits => {
-                            dispatch(updateUserData({...userData, credits}))
-                        })
-                        service.getMyProfile(token).then(res => {
-                            const {credits} = res
-                            dispatch(setFreeCredits(credits))
-                        })
+                        updateBalance()
                         if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                             dispatch(updateEmailModal(true))
                         }

@@ -10,6 +10,7 @@ import ApiService from '@/service/apiService';
 import { updateLimit, updateEmailModal, updateSubsModal } from '@/store/actions';
 import CompReg from '@/popups/CompReg/CompReg';
 import notify from '@/helpers/notify';
+import useUpdateBalance from '@/hooks/useUpdateBalance';
 
 const service = new ApiService()
 const StartGift:FC<startGiftPropsType> = ({
@@ -17,6 +18,7 @@ const StartGift:FC<startGiftPropsType> = ({
 }) => {
     const dispatch = useAppDispatch()
     const {locale, token, userData} = useAppSelector(s => s)
+    const updateBalance = useUpdateBalance()
     const [gift, setGift] = useState<any>(null)
     const [load, setLoad] = useState(false)
     const [cr, setCr] = useState(false)
@@ -47,9 +49,7 @@ const StartGift:FC<startGiftPropsType> = ({
                                 }
                             }
                         }))
-                        if(userData?.free_credits && userData?.free_credits < 3) {
-                            dispatch(updateSubsModal(true))
-                        }
+                        updateBalance()
                     }
                 } else {
                     // onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
