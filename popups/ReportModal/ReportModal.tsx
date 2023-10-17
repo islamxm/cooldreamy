@@ -48,6 +48,7 @@ const ReportModal:FC<I & ModalFuncProps> = (props) => {
             {...props}
             footer={null}
             className={`${styles.wrapper} modal`}
+            centered
             >
             <Row gutter={[15,15]}>
                 <Col span={24}>

@@ -17,6 +17,7 @@ const CompReg:FC<ModalFuncProps> = (props) => {
       width={width <= 768 ? 340 : 510}
       footer={false}
       className={getClassNames([styles.wrapper, 'modal'])}
+      centered
       >
       <Row gutter={[20,20]}>
         <Col span={24}>

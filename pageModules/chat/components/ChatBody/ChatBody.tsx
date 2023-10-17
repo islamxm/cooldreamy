@@ -35,6 +35,7 @@ import ReportModal from '@/popups/ReportModal/ReportModal';
 import { updateUserData } from '@/store/actions';
 import CompReg from '@/popups/CompReg/CompReg';
 import useUpdateBalance from '@/hooks/useUpdateBalance';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const service = new ApiService()
 const VH = '(var(--vh, 1vh) * 100)'
@@ -96,6 +97,8 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
     const [mockType, setMockType] = useState<'wink' | 'gift' | 'text' | ''>('')
     const [cr, setCr] = useState(false)
+
+    const [chatMenu, setChatMenu] = useState(false)
 
 
 
@@ -467,26 +470,31 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                                         />
                                                 </div>
                                                 <div className={styles.body_action_item}>
-                                                    <Dropdown
-                                                        overlay={
-                                                            <ChatMenu
-                                                                onWink={onWink}
-                                                                onGetAllMedia={onGetAllMedia}
-                                                                onFav={onFav}
-                                                                onIgnore={onIgnore}
-                                                                onReport={onReport}
-                                                                />
-                                                        }
-                                                        trigger={['click']}
+                                                    <OutsideClickHandler
+                                                        onOutsideClick={() => setChatMenu(false)}
                                                         >
+                                                        <>
                                                         <IconButton
                                                             icon={<VscListSelection/>}
+                                                            onClick={() => setChatMenu(s => !s)}
                                                             size={35}
                                                             style={{borderRadius: '11px', borderColor: 'rgba(104, 98, 237, 0.21)'}}
                                                             variant={'bordered'}
                                                             />
-                                                    </Dropdown>
-
+                                                        {
+                                                            chatMenu && (
+                                                                <ChatMenu
+                                                                    onCloseMenu={() => setChatMenu(false)}
+                                                                    onWink={onWink}
+                                                                    onGetAllMedia={onGetAllMedia}
+                                                                    onFav={onFav}
+                                                                    onIgnore={onIgnore}
+                                                                    onReport={onReport}
+                                                                    />
+                                                            )
+                                                        }
+                                                        </>
+                                                    </OutsideClickHandler>
                                                 </div>
                                             </div>
                                         )

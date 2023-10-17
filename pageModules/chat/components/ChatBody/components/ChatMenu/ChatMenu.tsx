@@ -11,7 +11,8 @@ interface I {
     onWink?: (...args: any) => any,
     onFav?: (...args: any) => any,
     onIgnore?: (...args: any) => any,
-    onReport?: (...args: any) => any
+    onReport?: (...args: any) => any,
+    onCloseMenu: (...args:any) => any
 }
 
 
@@ -20,7 +21,8 @@ const ChatMenu:FC<I> = ({
     onWink,
     onFav,
     onIgnore,
-    onReport
+    onReport,
+    onCloseMenu
 }) => {
     const {locale} = useAppSelector(s => s)
 
@@ -33,25 +35,37 @@ const ChatMenu:FC<I> = ({
                 <div className={styles.label}>Все медиа файлы</div>
             </div> */}
             <div 
-                onClick={onWink}
+                onClick={() => {
+                    onWink && onWink()
+                    onCloseMenu()
+                }}
                 className={styles.item}>
                 <div className={styles.icon}><FaRegSmileWink/></div>
                 <div className={styles.label}>{locale?.chatPage?.menu?.wink}</div>
             </div>
             <div 
-                onClick={onFav}
+                onClick={() => {
+                    onFav && onFav()
+                    onCloseMenu()
+                }}
                 className={styles.item}>
                 <div className={styles.icon}><AiOutlineStar/></div>
                 <div className={styles.label}>{locale?.chatPage?.menu?.fav}</div>
             </div>
             <div 
-                onClick={onIgnore}
+                onClick={() => {
+                    onIgnore && onIgnore()
+                    onCloseMenu()
+                }}
                 className={styles.item}>
                 <div className={styles.icon}><HiOutlineMinusCircle/></div>
                 <div className={styles.label}>{locale?.chatPage?.menu?.ignore}</div>
             </div>
             <div 
-                onClick={onReport}
+                onClick={() => {
+                    onReport && onReport()
+                    onCloseMenu()
+                }}
                 className={styles.item}>
                 <div className={styles.icon}><IoCloseCircleOutline/></div>
                 <div className={styles.label}>{locale?.chatPage?.menu?.report}</div>

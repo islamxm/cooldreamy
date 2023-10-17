@@ -26,6 +26,7 @@ const PromptModal:FC<I> = (props) => {
             width={600}
             onCancel={onClose}
             className={`${styles.wrapper} modal`}
+            centered
             >
             <Row gutter={[50, 50]}>
                 <Col span={24}>
