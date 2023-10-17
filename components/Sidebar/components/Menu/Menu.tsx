@@ -53,7 +53,7 @@ const Menu = () => {
             link: '/sympathy?type=views',
             root: '/sympathy',
             icon: <FiHeart/>,
-            badge: (count_likes + count_mutual + count_watches) > 0 ? (count_likes + count_mutual + count_watches) : 0,
+            badge: (count_likes + count_watches) > 0 ? (count_likes + count_watches) : 0,
             onClick: () => {},
         },
         // {
