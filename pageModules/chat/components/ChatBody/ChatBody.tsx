@@ -195,6 +195,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                     } else {
                         // onUpdateChat({messageBody: res?.chat?.last_message, dialogBody: res?.chat})
                         updateBalance()
+                        
                         if(userData?.is_email_verified === 0 && userData?.prompt_careers?.length > 0) {
                             dispatch(updateEmailModal(true))
                         }
