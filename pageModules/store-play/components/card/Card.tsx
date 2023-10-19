@@ -89,6 +89,7 @@ const Card: FC<any> = () => {
 
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', getInstallEvent)
+
     return () => {
       window.removeEventListener('beforeinstallprompt', getInstallEvent)
     }
@@ -111,7 +112,7 @@ const Card: FC<any> = () => {
           setStatus('INIT')
         }
         setInstall(null)
-      });
+      })
     }
   }
 

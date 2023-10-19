@@ -143,10 +143,6 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         }
     }
 
-    useEffect(() => {
-        console.log(profile_photo)
-    }, [profile_photo])
-
     return (
         <Modal
             {...props}
