@@ -139,17 +139,19 @@ const SearchDrawer:FC<I> = ({
                                     // disabled={premiumData?.is_premium === 1}
                                     list={targetList}
                                     onChange={(e, v) => {
-                                        if(premiumData?.is_premium === true) {
-                                            setprompt_target_id && setprompt_target_id(e)
-                                        } else {
-                                            setLimitModal(true)
-                                        }
+                                        // if(premiumData?.is_premium === true) {
+                                        //     setprompt_target_id && setprompt_target_id(e)
+                                        // } else {
+                                        //     setLimitModal(true)
+                                        // }
+                                        setprompt_target_id && setprompt_target_id(e)
                                     }}
                                     placeholder={'Not specified'}
                                     label={locale?.searchPage.filter.list.filter_target.label}
                                     value={prompt_target_id}
                                     multiple
                                     customIcon={true}
+                                    
                                     />
                             </Col>
                             <Col span={12}>

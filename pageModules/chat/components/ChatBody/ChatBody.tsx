@@ -269,6 +269,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
 
     const onFav = () => {
         if(token && currentUser?.id) {
+            console.log(currentUser)
             service.addUserToFav({user_id: Number(currentUser?.id)}, token).then(res => {
                 if(res?.status === 200) {
                     notify(locale?.global?.notifications?.success_add_chat_to_fav, 'SUCCESS')
