@@ -85,6 +85,7 @@ const ChatItem = ({
                             return [...m]
                         } else return s;
                     })
+                    notify(locale?.global?.notifications?.success_add_chat_to_fav, 'SUCCESS')
                 } else {
                     notify(locale?.global?.notifications?.error_default, 'ERROR')
                 }
@@ -163,21 +164,23 @@ const ChatItem = ({
                     <div className={styles.ex}>
                         <div className={styles.item}>
                             {
-                                favorite ? (
-                                    <IconButton
-                                        onClick={deleteFromFav}
-                                        size={20}
-                                        variant={'transparent'}
-                                        icon={<AiFillStar color='var(--violet)'/>}
-                                        />
-                                    
-                                ) : (
-                                    <IconButton
-                                        onClick={addToFav}
-                                        size={20}
-                                        variant={'transparent'}
-                                        icon={<AiOutlineStar color='var(--violet)'/>}
-                                        />
+                                !(is_ignored_by_first_user || is_ignored_by_second_user) && (
+                                    favorite ? (
+                                        <IconButton
+                                            onClick={deleteFromFav}
+                                            size={20}
+                                            variant={'transparent'}
+                                            icon={<AiFillStar color='var(--violet)'/>}
+                                            />
+                                        
+                                    ) : (
+                                        <IconButton
+                                            onClick={addToFav}
+                                            size={20}
+                                            variant={'transparent'}
+                                            icon={<AiOutlineStar color='var(--violet)'/>}
+                                            />
+                                    )
                                 )
                             }
                         </div>
@@ -247,28 +250,6 @@ const ChatItem = ({
                         </Col>
                     </Row>
                 </Link>    
-                <div className={styles.ex}>
-                    {/* <div className={styles.item}>
-                        {
-                            isFavourite ? (
-                                <AiFillStar/>
-                            ) : (
-                                <AiOutlineStar/>
-                            )
-                        }
-                    </div> */}
-                    {/* <div className={styles.item}>
-                        {
-                            status === 'unread' ? (
-                                <Badge
-                                    value={unreadMesssageCount}
-                                    />
-                            ) : (
-                                <BiCheckDouble/>
-                            )
-                        }
-                    </div> */}
-                </div>
             </div> 
         </div>
     )
