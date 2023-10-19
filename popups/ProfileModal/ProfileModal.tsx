@@ -143,6 +143,10 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
         }
     }
 
+    useEffect(() => {
+        console.log(profile_photo)
+    }, [profile_photo])
+
     return (
         <Modal
             {...props}
@@ -177,6 +181,7 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                             {
                                 (profile_photo && profile_photo?.length > 0) && (
                                     <div className={styles.main}>
+                                        Slider
                                         {
                                             thumbsSwiper && (
                                                 <div className={styles.slider}>
@@ -221,8 +226,8 @@ const ProfileModal:FC<ModalFuncProps> = (props) => {
                                             ) 
                                         }
                                         {
-                                            profile_photo && profile_photo?.length > 1 ? (
-                                                <div className={getClassNames([styles.thumbs, profile_photo?.length === loadedImages && styles.show])}>
+                                            profile_photo && profile_photo?.length > 0 ? (
+                                                <div className={getClassNames([styles.thumbs, (profile_photo?.length === loadedImages && profile_photo?.length > 1) && styles.show])}>
                                                     <SwiperWrap
                                                         modules={[Thumbs, Navigation]}
                                                         className={styles.thumbs_body}

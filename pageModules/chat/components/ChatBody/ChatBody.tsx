@@ -25,7 +25,7 @@ import SkeletonMail from '../Mail/components/SkeletonMail/SkeletonMail';
 import SkeletonChatList from '../ChatList/components/SkeletonChatList/SkeletonChatList';
 import { PulseLoader } from 'react-spinners';
 import getPrice from '@/helpers/getPrice';
-import { setFreeCredits, updateEmailModal, updateLimit, updateSubsModal } from '@/store/actions';
+import { updateEmailModal, updateLimit } from '@/store/actions';
 import { BsTrash } from 'react-icons/bs';
 import PromptModal from '@/popups/PromptModal/PromptModal';
 import notify from '@/helpers/notify';

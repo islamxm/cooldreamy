@@ -117,6 +117,7 @@
                 opacity: 1;
                 pointer-events: all;
                 touch-action: auto;
+                display: block;
             }
 
             .thumbs {
@@ -126,6 +127,7 @@
                 transition: all .3s ease;
                 pointer-events: none;
                 touch-action: none;
+                display: none;
 
                 .thumbs_item {
                     height: 80px;
