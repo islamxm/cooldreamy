@@ -81,8 +81,8 @@ const MainWrapper = ({
 		if(process?.browser) {
 			if('getInstalledRelatedApps' in navigator && typeof navigator?.getInstalledRelatedApps === 'function') {
 				const result = await navigator?.getInstalledRelatedApps()
+				console.log('APP', result)
 				if(result && result?.length > 1) {
-					console.log(result)
 					alert('APP IS INSTALLED')
 				}
 			}

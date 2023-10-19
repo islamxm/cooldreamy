@@ -5,7 +5,7 @@
     "start_url": "/",
     "related_applications": {
       "platform": "webapp",
-      "url": "https://cooldreamy.com/manifest.json"
+      "url": "https://cooldreamytest.site/manifest.json"
     },
     "name": "Cool Dreamy",
     "scope": "/",
