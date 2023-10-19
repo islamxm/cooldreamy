@@ -5,7 +5,8 @@ import {FC, useEffect, useRef} from 'react';
 import { selectDefType } from './types';
 
 interface test {
-    open?: boolean
+    open?: boolean,
+    onFocus?:(...args:any[]) => any
 }
 
 const SelectDef:FC<selectDefType & test> = ({
@@ -23,7 +24,8 @@ const SelectDef:FC<selectDefType & test> = ({
 
     open,
 
-    customIcon
+    customIcon,
+    onFocus
 }) => {
 
     const ref = useRef<RefSelectProps>(null)
@@ -64,6 +66,8 @@ const SelectDef:FC<selectDefType & test> = ({
                         className={`${isRound ? 'round' : ''} ${customIcon ? 'custom-icon' : ''}`}
                         virtual={false}
                         showSearch={false}
+                        onFocus={onFocus}
+                        open={open}
                         
                         />
                 ) : (
@@ -85,6 +89,8 @@ const SelectDef:FC<selectDefType & test> = ({
                         disabled={disabled}
                         className={isRound ? 'round' : ''}
                         virtual={false}
+                        onFocus={onFocus}
+                        open={open}
                         />
                 )
             }

@@ -9,6 +9,7 @@ import { searchFilterType } from '../searchFilter/types';
 import { useAppSelector } from '@/hooks/useTypesRedux';
 import PremModal from '@/popups/PremModal/PremModal';
 import getClassNames from '@/helpers/getClassNames';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 interface I extends searchFilterType {
     isOpen: boolean,
@@ -55,6 +56,9 @@ const SearchDrawer:FC<I> = ({
 }) => {
     const {locale, premiumData} = useAppSelector(s => s)
     const [limitModal, setLimitModal] = useState(false)
+
+    const [targetIsOpen, setTargetIsOpen] = useState(false)
+    const [financeIsOpen, setFinanceIsOpen] = useState(false)
 
     const onLayerClick = (e: any) => {
         if(e.target.dataset.layer === 'true') {
@@ -135,42 +139,54 @@ const SearchDrawer:FC<I> = ({
                                 </div>
                             </Col>
                             <Col span={12}>
-                                <SelectDef
-                                    // disabled={premiumData?.is_premium === 1}
-                                    list={targetList}
-                                    onChange={(e, v) => {
-                                        // if(premiumData?.is_premium === true) {
-                                        //     setprompt_target_id && setprompt_target_id(e)
-                                        // } else {
-                                        //     setLimitModal(true)
-                                        // }
-                                        setprompt_target_id && setprompt_target_id(e)
-                                    }}
-                                    placeholder={'Not specified'}
-                                    label={locale?.searchPage.filter.list.filter_target.label}
-                                    value={prompt_target_id}
-                                    multiple
-                                    customIcon={true}
-                                    
-                                    />
+                                <OutsideClickHandler
+                                    onOutsideClick={() => setTargetIsOpen(false)}
+                                    >
+                                    <SelectDef
+                                        // disabled={premiumData?.is_premium === 1}
+                                        list={targetList}
+                                        onChange={(e, v) => {
+                                            if(premiumData?.is_premium === true) {
+                                                setprompt_target_id && setprompt_target_id(e)
+                                            } else {
+                                                setLimitModal(true)
+                                            }
+                                            setTargetIsOpen(false)
+                                        }}
+                                        placeholder={'Not specified'}
+                                        label={locale?.searchPage.filter.list.filter_target.label}
+                                        value={prompt_target_id}
+                                        multiple
+                                        customIcon={true}
+                                        onFocus={() => setTargetIsOpen(true)}
+                                        open={targetIsOpen}
+                                        />
+                                </OutsideClickHandler>
                             </Col>
                             <Col span={12}>
-                                <SelectDef
-                                    list={financeList}
-                                    onChange={(e, v) => {
-                                        if(premiumData?.is_premium === true) {
-                                            setprompt_finance_state_id && setprompt_finance_state_id(e)
-                                        } else {
-                                            setLimitModal(true)
-                                        }
-                                    }}
-                                    value={prompt_finance_state_id}
-                                    placeholder={'Not specified'}
-                                    label={locale?.searchPage.filter.list.filter_finance.label}
-                                    // width={230}
-                                    multiple
-                                    customIcon={true}
-                                    /> 
+                                <OutsideClickHandler
+                                    onOutsideClick={() => setFinanceIsOpen(false)}
+                                    >
+                                    <SelectDef
+                                        list={financeList}
+                                        onChange={(e, v) => {
+                                            if(premiumData?.is_premium === true) {
+                                                setprompt_finance_state_id && setprompt_finance_state_id(e)
+                                            } else {
+                                                setLimitModal(true)
+                                            }
+                                            setFinanceIsOpen(false)
+                                        }}
+                                        value={prompt_finance_state_id}
+                                        placeholder={'Not specified'}
+                                        label={locale?.searchPage.filter.list.filter_finance.label}
+                                        // width={230}
+                                        multiple
+                                        customIcon={true}
+                                        open={financeIsOpen}
+                                        onFocus={() => setFinanceIsOpen(false)}
+                                        /> 
+                                </OutsideClickHandler>
                             </Col>
                         </Row>
                     </div>
