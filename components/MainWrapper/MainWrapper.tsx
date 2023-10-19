@@ -77,6 +77,21 @@ const MainWrapper = ({
 	const [pusherConfig, setPusherConfig] = useState<pusherConfigType | null>(null)
 	const [emailEditModal, setEmailEditModal] = useState(false)
 
+	const isAppInstalled = async () => {
+		if(process?.browser) {
+			if('getInstalledRelatedApps' in navigator && typeof navigator?.getInstalledRelatedApps === 'function') {
+				const result = await navigator?.getInstalledRelatedApps()
+				if(result !== false) {
+					alert('APP IS INSTALLED')
+				}
+			}
+		}
+	}
+
+	useEffect(() => {
+		isAppInstalled()
+	}, [])
+
 	const idle = useIdleTimer({
 		onIdle: () => window.location.reload(),
 		timeout: 7200000,

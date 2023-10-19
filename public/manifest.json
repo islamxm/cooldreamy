@@ -3,6 +3,10 @@
     "background_color": "#7d5eec",
     "display": "standalone",
     "start_url": "/",
+    "related_applications": {
+      "platform": "webapp",
+      "url": "https://cooldreamy.com/manifest.json"
+    },
     "name": "Cool Dreamy",
     "scope": "/",
     "short_name": "Cool Dreamy",
