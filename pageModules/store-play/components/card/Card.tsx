@@ -16,12 +16,13 @@ import { updateConversData } from '@/store/actions';
 import { useAppDispatch, useAppSelector } from '@/hooks/useTypesRedux';
 import FancyboxWrapper from '@/components/FancyboxWrapper/FancyboxWrapper';
 import LOCAL_STORAGE from '@/helpers/localStorage';
-
+import ApiService from '@/service/apiService';
+const service = new ApiService()
 type statusType = 'INIT' | 'WAIT' | 'LOADING' | 'INSTALL' | 'DONE';
 
 const Card: FC<any> = () => {
   const dispatch = useAppDispatch()
-  const {conversData} = useAppSelector(s => s)
+  const {conversData, token} = useAppSelector(s => s)
   const [status, setStatus] = useState<statusType>('INIT')
   const {query} = useRouter()
   const { width } = useWindowSize()
@@ -106,6 +107,11 @@ const Card: FC<any> = () => {
       install?.prompt()
       install?.userChoice.then((choiceResult: any) => {
         if (choiceResult?.outcome === 'accepted') {
+          LOCAL_STORAGE?.setItem('isPwaInstalled', '1')
+          if(token) {
+            service.setPwa(token)
+          }
+          alert('PWA INSTALLED')
           setPwaPermission(true)
         } else {
           setInstall(null)

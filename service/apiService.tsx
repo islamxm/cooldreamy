@@ -1390,6 +1390,20 @@ class ApiService {
             return
         }
     }
+
+    setPwa = async (token:any) => {
+        try {
+            let res = await fetch(endpoints.setPwa, {
+                method: "POST",
+                headers: {
+                    ...headers,
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+        } catch(err) {
+            return;
+        }
+    }
 }
 
 

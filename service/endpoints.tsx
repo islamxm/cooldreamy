@@ -155,7 +155,9 @@ const endpoints = {
     getPremiumStatus: `${API_PATH}payments/premium`,
     getCurrentVip: `${API_PATH}payments/premium`,
 
-    deleteProfileImage: `${API_PATH}store/image/delete`
+    deleteProfileImage: `${API_PATH}store/image/delete`,
+
+    setPwa: `${API_PATH}set/pwa`
 }
 
 export default endpoints;
