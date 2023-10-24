@@ -88,11 +88,8 @@ const StepEx:FC<IStepEx> = ({
                                     isRound
                                     value={country?.value}
                                     list={countryList}
-                                    
                                     placeholder='Country'
                                     onChange={(e, v) => setCountry && setCountry(v)}
-
-                                    open
                                     />    
                             </Col>    
                         )
