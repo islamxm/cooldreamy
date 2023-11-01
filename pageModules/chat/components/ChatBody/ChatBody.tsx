@@ -36,6 +36,7 @@ import { updateUserData } from '@/store/actions';
 import CompReg from '@/popups/CompReg/CompReg';
 import useUpdateBalance from '@/hooks/useUpdateBalance';
 import OutsideClickHandler from 'react-outside-click-handler';
+import ChatCountAvilableMessages from './components/ChatCountAvilableMessages/ChatCountAvilableMessages';
 
 const service = new ApiService()
 const VH = '(var(--vh, 1vh) * 100)'
@@ -420,6 +421,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                         )
                 ) : (
                     <div className={styles.main}>
+                        <ChatCountAvilableMessages/>
                         {
                             (!id && loadedDialogs && dialogsList?.length === 0) && (
                                 <DialogEmpty absolute height={width <= 768 ? `calc(${VH} - 42px - ${pb}px - 20px)` : `calc(100vh - 165px - 75px - 50px - ${pb}px) + 50px`}/>
@@ -433,6 +435,7 @@ const ChatBody:FC<IDialogs & IChat & ChatBodyComponentType> = ({
                                     `calc(${VH} - 42px - ${pb}px - 20px)` : 
                                     `calc(100vh - 165px - 75px - 50px - ${pb}px + 50px)`
                                 }}>
+                                    
                                     {
                                         id && (
                                             <div className={styles.body_action}>

@@ -12,7 +12,6 @@ const useUpdateBalance = () => {
   
   const updateBalance = () => {
     if(token && userData) {
-      console.log('UPDATE BALANCE')
       service.getCredits(token).then(credits => {
         // dispatch(updateUserData({...userData, credits}))
         dispatch(setCredits(credits))
