@@ -9,7 +9,6 @@ import { useAppSelector } from "@/hooks/useTypesRedux";
 import UserCardMob from "@/pageModules/profile/components/UserCardMob/UserCardMob";
 import { useWindowSize } from "usehooks-ts";
 import {Row, Col} from 'antd';
-
 import PrivateRoute from "@/hoc/PrivateRoute";
 import { 
     StatusCredits, 
@@ -17,6 +16,8 @@ import {
     StatusVip 
 } from "@/components/donateStatus/donateStatus";
 import Router from "next/router";
+
+
 
 const Profile = () => {
     const {userData, locale} = useAppSelector(s => s)

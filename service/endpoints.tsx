@@ -1,8 +1,11 @@
 export const BASE_WS_HOST = 'api2.cooldreamy.com'
 export const TEST_WS_HOST = 'admin.soultri.site'
-export const BASE_DOMAIN = `https://api2.cooldreamy.com/`;
-export const TEST_DOMAIN = `http://admin.soultri.site/`;
+
+
+export const BASE_DOMAIN:any = process ? (process?.env?.NODE_ENV === 'production' ? process?.env?.NEXT_PUBLIC_API_HOST : process?.env?.NEXT_PUBLIC_API_HOST_DEV) : 'https://api.cooldreamytest.site/';
 export const API_PATH = `${BASE_DOMAIN}api/`;
+
+
 
 const endpoints = {
     //auth

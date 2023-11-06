@@ -1,0 +1,21 @@
+.wrapper {
+  .img {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 204px;
+      height: 204px;
+      object-fit: contain;
+      display: flex;
+    }
+  }
+  .title {  
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: 700;
+  } 
+  .text {
+    
+  }
+  
+}
